@@ -1,0 +1,16 @@
+/* MegaMenu.css */
+.mega-menu {
+  display: block;
+  top: auto !important;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-radius: 0;
+  background-color: white;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.nav-link.active {
+  font-weight: bold;
+  background-color: #f8f9fa;
+}
