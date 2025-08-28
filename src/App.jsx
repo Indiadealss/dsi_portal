@@ -16,9 +16,6 @@ function App() {
   return (
     <>
       <Navbar />   {/* 👈 always visible */}
-      {/* <Property /> */}
-      {/* <Postproperty /> */}
-      {/* <Postpropertyform /> */}
       {routes}
       <Footer />
     </>
