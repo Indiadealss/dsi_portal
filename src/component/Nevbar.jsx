@@ -18,6 +18,7 @@ import {
   UserOutlined,
   DownOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router";
 
 const { Header } = Layout;
 
@@ -579,10 +580,8 @@ export default function Navbar() {
 
         <Button
           className="menu-btn default-btn bg-[#011638] postPropertyNavbtn"
-          target="_blank"
-          href="/post-property"
         >
-          Post Property
+          <Link target="_blank" to="/post-property" className="px-5" Post Property>Post Property</Link>
         </Button>
 
         <Button type="text" aria-label="Notifications" className="navBtn postPropertyNavbtn" icon={<BellOutlined />} />
@@ -615,11 +614,13 @@ export default function Navbar() {
       {/* Drawer for mobile */}
       <Drawer
         title="Navigation"
-        placement="right"
+        placement="bottom"
         closable
         open={open}
         onClose={() => setOpen(false)}
         bodyStyle={{ padding: 0 }}
+        height="100%"
+        width="100%"
       >
         <Menu
           mode="inline"

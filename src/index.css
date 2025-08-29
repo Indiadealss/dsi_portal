@@ -14,6 +14,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.darkVoilet{
+  color: #011638 !important;
+  outline: #011638 !important;
+  outline: 2cm !important;
+  outline-offset: 2cm !important;
+}
+
+
 input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance: none;
   width: 16px;
@@ -96,6 +104,16 @@ h1 {
   border: 1px solid !important;
   border-image-slice: 1;
   border-image-source: linear-gradient(90deg, #F40076, #FF512F, #FF9966);
+  padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-1v28nim).ant-card .ant-card-body {
+    padding: 2px !important;
+    border-radius: 0 0 8px 8px;
+}
+
+.shadow-none{
+  border: none;
 }
 
 a{
@@ -122,4 +140,7 @@ a{
   .postPropertyNavbtn{
     display: none !important;
   }
+  .mobileDisplay{
+  display: none !important;
+}
 }

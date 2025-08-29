@@ -45,7 +45,7 @@ const Searchbox = () => {
   ]
   return (
     <>
-      <div class="shadow-xl ... bg-white rounded-lg w-auto lg:w-[max-content] mx-auto z-11">
+      <div class="shadow-xl ... bg-white rounded-xl w-auto lg:w-[max-content] mx-auto z-11">
         <div className='hidden lg:block lg:flex '>
           {button.map((item) => {
             return (

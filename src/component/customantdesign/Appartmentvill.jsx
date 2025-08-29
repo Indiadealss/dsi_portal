@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Carousel, Button } from "antd";
 import { LeftOutlined, RightOutlined,HeartOutlined  } from "@ant-design/icons";
 
-const Customimagebar = () => {
+const Appartmentvill = () => {
   const carouselRef = useRef(null);
 
   const goPrev = () => carouselRef.current.prev();
@@ -35,27 +35,21 @@ const Customimagebar = () => {
   };
 
   const images = [
-    "https://picsum.photos/400/250?random=1",
-    "https://picsum.photos/400/250?random=2",
-    "https://picsum.photos/400/250?random=3",
-    "https://picsum.photos/400/250?random=4",
-    "https://picsum.photos/400/250?random=5",
+    {src:"https://picsum.photos/400/250?random=1",title:"Independent/Builder Floor",subTitle:"13000+ Properties"},
+    {src:"https://picsum.photos/400/250?random=2",title:"Independent/Builder Floor",subTitle:"13000+ Properties"},
+    {src:"https://picsum.photos/400/250?random=3",title:"Independent/Builder Floor",subTitle:"13000+ Properties"},
+    {src:"https://picsum.photos/400/250?random=4",title:"Independent/Builder Floor",subTitle:"13000+ Properties"},
+    {src:"https://picsum.photos/400/250?random=5",title:"Independent/Builder Floor",subTitle:"13000+ Properties"},
   ];
 
   return (
     <>
-    <div className='flex mt-[15%] justify-between mb-0' style={{width: "97%" }}>
-            <div>
-              <h2 className='font-bold text-xl'>Recommended Projects</h2>
-              <p className='text-sm text-gray-500'>The most search project in location</p>
-            </div>
-            <div>
-              <button type="button" class="py-2.5 px-5 me-2  text-sm font-medium text-[#00307c] focus:outline-none bg-white rounded-lg border border-[#00307c] cursor-pointer   focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                View all Insights
-                </button>
-            </div>
+    <div className='mt-[10%]'>
+        <h2 className='font-bold text-xl'>Apartments, Villas and more</h2>
+              <p className='text-sm text-gray-500'>In location</p>
+            
           </div>
-    <div  style={{ position: "relative",width: "97%" }}>
+    <div className="my-4" style={{ position: "relative", width: "100%" }}>
       {/* Left Button */}
       <Button
         shape="circle"
@@ -73,48 +67,37 @@ const Customimagebar = () => {
 
       {/* Carousel */}
       <Carousel ref={carouselRef} {...settings} style={{ padding: "20px 0" }}>
-        {images.map((src, index) => (
+        {images.map((item, index) => (
           <div key={index} style={{ padding: "0 10px" }}>
             <div
               style={{
                 borderRadius: 12,
                 overflow: "hidden",
                 margin: "2px",
+                width:"90%",
                 position:"relative" // parent must be relative for overlay
               }}
             >
               <img
-                src={src}
+                src={item.src}
                 alt={`Slide ${index}`}
                 style={{
                   width: "100%",
-                  height: "200px",
+                  height: "400px",
                   objectFit: "cover",
                 }}
               />
 
               {/* Overlay Content */}
-              <div className="absolute top-2 left-0 right-0 flex justify-between items-center px-3"
+              <div className="mx-5 absolute top-10 left-0 right-0  items-center px-3"
               style={{
-                color:"white",
-                fontWeight:"bold",
                 textShadow:"0 1px 3px rgba(0,0,0,0,0.8)", // better readability
               }}
               >
-                <span className="px-2 py-1 bg-[#3d3d3d63] rounded-2xl text-xs">RERA</span>
-                <HeartOutlined className="text-xl cursor-pointer hover:text-red-500" />
+                <span className=" pt-10 font-bold text-[#011638]  rounded-2xl text-xl">{item.title}</span>
+                <p className="text-gray-500  rounded-2xl text-xm">{item.subTitle}</p>
               </div>
-              <div className="absolute bottom-2 left-0"
-              style={{
-                color:"white",
-                fontWeight:"bold",
-                fontSize:"10px",
-                padding:"1px",
-                textShadow:"0 1px 3px rgba(0,0,0,00.8)",
-              }}
-              >
-                <span>Ready To Move</span>
-              </div>
+              
             </div>
           </div>
         ))}
@@ -129,7 +112,7 @@ const Customimagebar = () => {
         style={{
           position: "absolute",
           top: "50%",
-          right: "-15px",
+          right: "15px",
           transform: "translateY(-50%)",
           zIndex: 1,
         }}
@@ -139,4 +122,4 @@ const Customimagebar = () => {
   );
 };
 
-export default Customimagebar;
+export default Appartmentvill;
