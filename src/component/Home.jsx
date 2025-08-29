@@ -21,19 +21,17 @@ const Home = () => {
           </div>
         </div>
       </div>
-     <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 mt-10 lg:mt-40">
-  {/* Left side (2 cols wide) */}
-  <div className="lg:col-span-2 space-y-10 ms-8">
-    {/* Row 1 content */}
+     <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 mt-40">
+  {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
+  <div className="lg:col-span-8 ms-8 space-y-10">
     <Customcardcrousal />
     <Customimagebar />
 
-    {/* Row 2 full width but still inside left column */}
     <div>
       <Appartmentvill />
       <Card
         style={{
-          width: "97%",
+          width: "100%",
           borderRadius: 12,
           background: "#0019432b",
           padding: "20px",
@@ -45,13 +43,14 @@ const Home = () => {
     </div>
   </div>
 
-  {/* Right side sticky (sidebar spans both rows) */}
-  <div className="hidden lg:block lg:col-span-1">
+  {/* Right sidebar = 4/12 (≈33.3% ≈ 30%) */}
+  <div className="lg:col-span-4">
     <div className="sticky top-20">
       <Customcard />
     </div>
   </div>
 </div>
+
 
           
     </div>

@@ -62,7 +62,7 @@ const Customcardcrousal = () => {
         className="mobileDisplay"
         style={{
           position: "absolute",
-          top: "30%",
+          top: "40%",
           left: "-15px",
           transform: "translateY(-50%)",
           zIndex: 1,
@@ -101,7 +101,7 @@ const Customcardcrousal = () => {
         className="mobileDisplay"
         style={{
           position: "absolute",
-          top: "30%",
+          top: "40%",
           right: "-15px",
           transform: "translateY(-50%)",
           zIndex: 1,
