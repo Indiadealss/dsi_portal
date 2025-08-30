@@ -13,7 +13,7 @@ const Custominputserchbox = () => {
         <Space size={16}>
           <AimOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} />
           <AudioOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} />
-          <Button type="primary" icon={<SearchOutlined />}>
+          <Button className="buttonStyle" type="primary" icon={<SearchOutlined />}>
             Search
           </Button>
         </Space>

@@ -74,7 +74,7 @@ const Appartmentvill = () => {
                 borderRadius: 12,
                 overflow: "hidden",
                 margin: "2px",
-                width:"90%",
+                width:"94s%",
                 position:"relative" // parent must be relative for overlay
               }}
             >
@@ -112,7 +112,7 @@ const Appartmentvill = () => {
         style={{
           position: "absolute",
           top: "50%",
-          right: "15px",
+          right: "10px",
           transform: "translateY(-50%)",
           zIndex: 1,
         }}

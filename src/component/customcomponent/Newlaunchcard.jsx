@@ -5,11 +5,12 @@ import img from "../../Images/gzyg5sq_1744807099_587259907_med.jpg"
 import Antdcrousal from "../customantdesign/Antdcrousal";
 import line from "../../Images/Dashed_Line.png";
 import nl from "../../Images/NL_Tag.png";
+import leftTagEnd from "../../Images/LeftTagEnd.png";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-const Newlaunchcard = () => {
+const Newlaunchcard = ({colu}) => {
   const carouselRef = useRef(null);
 
   const goPrev = () => {
@@ -65,7 +66,7 @@ const Newlaunchcard = () => {
     dots: false,
     infinite: true,
     arrows: false,
-    slidesToShow: 3, // Desktop default
+    slidesToShow: colu, // Desktop default
     slidesToScroll: 1,
     centerMode: true,
     centerPadding: "250px",
@@ -73,9 +74,9 @@ const Newlaunchcard = () => {
       {
       breakpoint: 1440, // Large screens
       settings: {
-        slidesToShow: 2,
+        slidesToShow: colu,
         centerMode: true,
-        centerPadding: "10px",
+        centerPadding: "20px",
       },
     },
       {
@@ -125,11 +126,18 @@ const Newlaunchcard = () => {
                 className="shadow-none"
               bordered={true}
               style={{
-                width: "95%",
+                width: "97%",
                 boxShadow: "none",
-                padding:"10px"
+                
               }}
             >
+              <div className="my-3 flex items-center">
+  <span className="relative bg-[#9d484b87] px-5 text-sm ">
+    New Launch
+    <span className="absolute right-[0px] top-0 h-full w-3 bg-gray-200 clip-slant"></span>
+  </span>
+</div>
+
                 <div className="flex justify-evenly">
                     <div className="rounded-full w-15 h-15  bg-gray-500">
                       <img src={item.image} alt="..." className="w-15 h-15 rounded-full" />

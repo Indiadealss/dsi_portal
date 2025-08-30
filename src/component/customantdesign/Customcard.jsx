@@ -9,7 +9,7 @@ const Customcard = () => {
    <Card
       
       style={{
-        width: 350,
+        marginRight:"2px",
         borderRadius: 12,
         boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
       }}
