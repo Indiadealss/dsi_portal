@@ -100,7 +100,7 @@ const Newlaunchcard = ({ colu }) => {
         settings: {
           slidesToShow: 1,
           centerMode: true,
-          centerPadding: "60px", // adjust to show partial next
+          centerPadding: "10px", // adjust to show partial next
         },
       },
     ],
@@ -146,9 +146,9 @@ const Newlaunchcard = ({ colu }) => {
                   </span>
                 </div>
 
-                <div className="flex justify-evenly">
-                  <div className="rounded-full w-15 h-15  bg-gray-500">
-                    <img src={item.image} alt="..." className="w-18 h-15  rounded-full" />
+                <div className="flex justify-evenly flex-col md:flex-row">
+                  <div className="rounded-full w-auto md:w-15 md:h-15  bg-gray-500">
+                    <img src={item.image} alt="..." className=" md:w-18 md:h-15 rounded-lg  md:rounded-full" />
                   </div>
                   <div className="px-2">
                     <h3>{item.title}</h3>
