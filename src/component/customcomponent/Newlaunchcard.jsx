@@ -69,14 +69,22 @@ const Newlaunchcard = ({colu}) => {
     slidesToShow: colu, // Desktop default
     slidesToScroll: 1,
     centerMode: true,
-    centerPadding: "250px",
+    centerPadding: "50px",
     responsive: [
+      {
+       breakpoint: 1800, // Large screens
+      settings: {
+        slidesToShow: 2,
+        centerMode: true,
+        centerPadding: "120px", 
+      },
+    },
       {
       breakpoint: 1440, // Large screens
       settings: {
         slidesToShow: colu,
         centerMode: true,
-        centerPadding: "20px",
+        centerPadding: "100px",
       },
     },
       {

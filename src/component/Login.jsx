@@ -16,7 +16,7 @@ export const Login = () => {
         
               {/* Modal */}
               {isModalOpen && (
-                <div className="fixed z-10 inset-0 overflow-y-auto">
+                <div className="fixed z-101 pt-[5%] bg-[#f6f8fa85] inset-0 overflow-y-auto">
                   <div id="modal-overlay" className="flex flex-col lg-flex-row webkitHeightFillAvailable items-end sm:h-screen justify-center text-center sm:block sm:p-0 bg-[#0000008f]  z-23">
                     {/* This span helps center the modal */}
                     <div className='text-white float-right py-10 pe-10'>

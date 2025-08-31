@@ -19,12 +19,12 @@ const Home = () => {
       <div>
         <div className='relative'>
           <Banner image={banner} />
-          <div className='block lg:absolute top  top-50 object-cover w-[-webkit-fill-available]'>
+          <div className='block lg:absolute   top-[88%] object-cover w-[-webkit-fill-available]'>
             <Searchbox />
           </div>
         </div>
       </div>
-     <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden">
+     <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1800px] mx-auto">
   {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
   <div className="lg:col-span-8 ms-3 space-y-10">
     <Customcardcrousal />
@@ -53,7 +53,7 @@ const Home = () => {
     </div>
   </div>
 </div>
-<div className='hidden lg:block ms-3  mt-40'>
+<div className='hidden lg:block  mt-40 w-full max-w-[1800px] mx-auto'>
   <Smallmain />
   <div style={{ padding: "40px" }}>
   <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>
@@ -70,7 +70,7 @@ const Home = () => {
           boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
         }}
       >
-        <Newlaunchcard colu={3} />
+        <Newlaunchcard colu={2} />
       </Card>
       <div style={{ padding: "40px" }}>
   <h3 className=' font-bold text-black text-xl '>Handpicked Residential Projects</h3>
