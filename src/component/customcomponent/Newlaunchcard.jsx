@@ -76,7 +76,7 @@ const Newlaunchcard = ({ colu }) => {
         settings: {
           slidesToShow: 2,
           centerMode: true,
-          centerPadding: "250px",
+          centerPadding: "100px",
         },
       },
       {
@@ -84,7 +84,7 @@ const Newlaunchcard = ({ colu }) => {
         settings: {
           slidesToShow: colu,
           centerMode: true,
-          centerPadding: "100px",
+          centerPadding: "120px",
         },
       },
       {

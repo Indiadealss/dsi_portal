@@ -24,7 +24,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-     <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1800px] mx-auto">
+     <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
   {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
   <div className="lg:col-span-8 ms-3 space-y-10">
     <Customcardcrousal />
@@ -53,7 +53,7 @@ const Home = () => {
     </div>
   </div>
 </div>
-<div className='hidden lg:block  mt-40 w-full max-w-[1800px] mx-auto'>
+<div className='hidden lg:block  mt-40 w-full max-w-[1265px] mx-auto'>
   <Smallmain />
   <div style={{ padding: "40px" }}>
   <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>

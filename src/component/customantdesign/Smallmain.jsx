@@ -39,6 +39,7 @@ const Smallmain = () => {
     infinite: true,
     arrows: false,
     slidesToShow: 6, // Desktop default
+    centerPadding: "100px", 
     slidesToScroll: 1,
     responsive: [
       {
