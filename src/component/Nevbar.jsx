@@ -481,7 +481,7 @@ export default function Navbar() {
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   {activeChild.subChildren.map((sub) => (
                     <li key={sub.key} style={{ padding: "2px 0" }}>
-                      {sub.label}
+                      <Link to="/property">{sub.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -505,7 +505,7 @@ export default function Navbar() {
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   {activeChild.subChildren2.map((sub) => (
                     <li key={sub.key} style={{ padding: "2px 0" }}>
-                      {sub.label}
+                      <Link target="_blank" to="/property">{sub.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -568,7 +568,7 @@ export default function Navbar() {
                 trigger={["hover"]}
               >
                 <Button type="text" className="menu-btn">
-                  {item.label}
+                   {item.label}
                 </Button>
               </Dropdown>
             ) : (

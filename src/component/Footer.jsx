@@ -11,7 +11,7 @@ import {
 
 function Footer() {
   return (
-    <footer className="bg-[#011638] text-white p-6  md:py-10">
+    <footer className="bg-[#011638] text-white p-6 footerA  md:py-10">
       {/* Top Section with Logo and Social */}
       <div className="container mx-auto border-b border-gray-700 pb-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">

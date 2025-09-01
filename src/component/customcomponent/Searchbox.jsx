@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dropdown, Menu, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Custominputserchbox from '../customantdesign/Custominputserchbox';
@@ -29,6 +29,8 @@ const Searchbox = () => {
     { key: "PostProperty", label: "Post Property" }
   ]
 
+  const [active,setActive] = useState('buy')
+
   const menu = (
     <Menu
       items={menuItems.map((item) => ({
@@ -49,13 +51,13 @@ const Searchbox = () => {
         <div className='hidden lg:block lg:flex '>
           {button.map((item) => {
             return (
-              <button type='text' className='px-10 py-5 text-gray-500 font-medium border-b-1 border-gray-300' key={item.key}>{item.label}</button>
+              <button type='text' className={`${active === item.key ? 'px-10 py-5 text-black-500 font-bold border-b-1 border-gray-300 underline underline-offset-22 decoration-3 decoration-[#022c6f]':'px-10 py-5 text-gray-500 font-medium border-b-1 border-gray-300'}`} key={item.key} name={item.key} onClick={(e) => setActive(e.currentTarget.name)}>{item.label}</button>
             )
           })}
         </div>
-        <div className='flex'>
-          <div className='py-3 border-e border-gray-300 w-[min-content] hidden lg:block'>
-            <Dropdown overlay={menu} trigger={["click"]} className='serchboxDropDown border-e-1 border-gray-100'>
+        <div className='flex z-0'>
+          <div className='py-5 border-e border-gray-300 w-[min-content] hidden lg:block'>
+            <Dropdown overlay={menu} trigger={["click"]} getPopupContainer={(triggerNode) => triggerNode.parentNode} overlayStyle={{ width: "40vw",zIndex: 2 }} className='serchboxDropDown border-e-1 border-gray-100'>
               <Button>
                 All Residential <DownOutlined />
               </Button>

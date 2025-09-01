@@ -32,12 +32,12 @@ export const PropertiesData = () => {
         <div className=''>
             {propertyData.map((item, index) => {
                 return (
-                    <div key={index} className="flex w-full flex-col lg:flex-row  bg-white border border-gray-200 rounded-lg shadow-sm sm:p-2 dark:bg-gray-800 dark:border-gray-700 mt-5">
+                    <div key={index} className="flex w-full propertyListingHeight flex-col lg:flex-row  bg-white border border-gray-200 rounded-lg shadow-sm sm:p-2 dark:bg-gray-800 dark:border-gray-700 mt-5">
                         <div className=''>
                             {item.images.map((item, index) => {
                                 return (
                                     <div key={index}>
-                                        <img className='webkitFillAvailable lg:w-[36vw]  h-auto lg:h-[21vw]' src={item.src} alt='' />
+                                        <img className='webkitFillAvailable lg:w-[max-content]  h-auto propertyListingImage lg:h-[24vw] ' src={item.src} alt='' />
                                     </div>
                                 )
                             })}

@@ -188,7 +188,7 @@ export default function Propertyfilter() {
   return (
     <div className="flex">
       {/* Desktop Sidebar */}
-      <aside className="w-[28vw] hidden md:block  p-4 space-y-6 bg-white">
+      <aside className=" propertyListingFilter hidden md:block  p-2 space-y-6 bg-white">
         {/* <div>
           <h2 className="font-semibold text-lg mb-2">Type of property</h2>
           <div className="space-y-2">

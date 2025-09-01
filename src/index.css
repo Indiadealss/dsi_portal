@@ -14,6 +14,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.footerA a {
+  color: white;
+  text-decoration: none; /* optional, removes underline */
+}
+.footerA h4 {
+  color: white;
+  cursor: default;
+  text-decoration: underline;
+  text-underline-position: under; /* 'under' works better cross-browser */
+}
+
 
 :where(.css-1v28nim).ant-card .ant-card-body {
   padding: 0 !important;
@@ -171,6 +182,9 @@ h3 {
   font-size: 1.125rem; /* ~18px */
 }
 
+section{
+  max-width: 1865px !important;
+}
 p {
   font-size: 0.9rem;   /* ~14px */
   line-height: 1.5rem;
@@ -205,9 +219,20 @@ a {
 /* ====== Laptop (≥1024px) ====== */
 @media screen and (min-width: 1024px) {
   h1 { font-size: 2.25rem; line-height: 2.6rem; }
-  h3 { font-size: 1.4rem; }
-  p  { font-size: 1.05rem; line-height: 1.7rem; }
-  a  { font-size: 1.05rem; }
+  h3 { font-size: 0.9rem; }
+  p  { font-size: 0.8rem; line-height: 1.7rem; }
+  Link{font-size: 0.9rem; }
+  a  { font-size: 0.9rem; line-height: 1.7rem; font-weight: 500; color: #011c47e3;}
+  .propertyListingFilter{
+    width: 25vw;
+  }
+  .propertyListingHeight{
+    height: 24vw !important;
+  }
+
+  .propertyListingDatamain{
+    width: 70% !important;
+  }
 
   .ant-btn {
     font-size: 16px;
@@ -221,7 +246,18 @@ a {
   h3 { font-size: 1.5rem; }
   p  { font-size: 1.1rem; line-height: 1.8rem; }
   a  { font-size: 1.1rem; }
-
+  .propertyListingDatamain{
+    width: 70% !important;
+  }
+  .propertyListingFilter{
+    width: max-content !important;
+  }
+  .propertyListingHeight{
+    height: max-content !important;
+  }
+  .propertyListingImage{
+    height: 14vw !important;
+  }
   .ant-btn {
     font-size: 17px;
     padding: 12px 26px;

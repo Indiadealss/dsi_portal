@@ -11,6 +11,7 @@ import Footer from "./component/Footer";
 function App() {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    { path: "/property",element:<Property />},
     {path:"/post-property", element:<Postproperty />},
     {path:"/postproperty", element:<Postpropertyform />}
   ]);

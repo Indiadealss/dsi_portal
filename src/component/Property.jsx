@@ -144,13 +144,13 @@ export const Property = () => {
   ]
 
   return (
-    <section>
-      <div className='relative block lg:flex'>
-
+    <section className='mx-auto'>
+      <div className='relative block lg:flex justify-evenly'>
+        
         <Propertyfilter />
-        <div className='w-full lg:w-[70vw]'>
+        <div className=' propertyListingDatamain '>
 
-          <div className='overflow-auto'>
+          <div >
             <div className='flex justify-between my-5 overflow-hidden'>
               <div className='overscroll-none overflow-auto'>
                 <div className="hidden lg:block  lg:relative">
