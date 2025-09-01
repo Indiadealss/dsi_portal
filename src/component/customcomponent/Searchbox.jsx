@@ -51,7 +51,7 @@ const Searchbox = () => {
         <div className='hidden lg:block lg:flex '>
           {button.map((item) => {
             return (
-              <button type='text' className={`${active === item.key ? 'px-10 py-5 text-black-500 font-bold border-b-1 border-gray-300 underline underline-offset-22 decoration-3 decoration-[#022c6f]':'px-10 py-5 text-gray-500 font-medium border-b-1 border-gray-300'}`} key={item.key} name={item.key} onClick={(e) => setActive(e.currentTarget.name)}>{item.label}</button>
+              <button type='text' className={`${active === item.key ? 'px-10 py-5 text-black-500 font-bold border-b-1 border-gray-300 underline underline-offset-22 decoration-3 decoration-[#022c6f] cursor-pointer':'px-10 py-5 text-gray-500 font-medium border-b-1 border-gray-300 cursor-pointer'}`} key={item.key} name={item.key} onClick={(e) => setActive(e.currentTarget.name)}>{item.label}</button>
             )
           })}
         </div>

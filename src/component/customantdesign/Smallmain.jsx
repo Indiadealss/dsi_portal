@@ -91,12 +91,12 @@ const Smallmain = () => {
                 className="shadow-none"
               bordered={true}
               style={{
-                width: "100%",
+                width: "97%",
                 borderRadius: 12,
                 boxShadow: "none",
               }}
             >
-              <img src={item.img} alt={item.label} className="rounded-lg w-full" />
+              <img src={item.img} alt={item.label} className="rounded-xl w-full" />
               <div className="p-3 bg-transparent">
                 <p className="font-medium text-xs">{item.label}</p>
               </div>
