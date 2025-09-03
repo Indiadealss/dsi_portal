@@ -1,38 +1,64 @@
-import React from "react";
-import { Typography, Button, Card, Tabs, List, Avatar } from "antd";
+import React, { useRef } from "react";
+import {Carousel, Typography, Button, Card, Tabs, List, Avatar } from "antd";
+import Antddobluecardcrousal from "./Antddobluecardcrousal";
 
 const { Title, Paragraph, Text } = Typography;
 
 const Handpickherosection = () => {
-  const articles = {
-    News: [
-      {
-        title: "UP women homebuyers get 1% stamp duty rebate",
-        date: "Jul 28, 2025",
-        img: "https://via.placeholder.com/80",
-      },
-      {
-        title: "Oberoi Realty to enter Gurgaon market",
-        date: "May 20, 2025",
-        img: "https://via.placeholder.com/80",
-      },
-    ],
-    "Tax & Legal": [
-      {
-        title: "New stamp duty in Greater Noida",
-        date: "Apr 25, 2025",
-        img: "https://via.placeholder.com/80",
-      },
-    ],
-    "Help Guides": [],
-    Investment: [
-      {
-        title: "Prestige Group's new launch in Ghaziabad",
-        date: "May 08, 2025",
-        img: "https://via.placeholder.com/80",
-      },
-    ],
-  };
+  const carouselRef = useRef(null);
+
+  const articles = [
+    {
+      title: "UP women homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Oberoi Realty to enter Gurgaon market",
+      date: "May 20, 2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+    {
+      title: "UP women homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Oberoi Realty to enter Gurgaon market",
+      date: "May 20, 2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+  ];
+
+ const chunkArray = (arr, size) => {
+  return arr.reduce((acc, _, i) => {
+    if (i % size === 0) acc.push(arr.slice(i, i + size));
+    return acc;
+  }, []);
+};
+
+  const articleSlides = chunkArray(articles, 4);
+
 
   return (
     <div >
@@ -56,16 +82,16 @@ const Handpickherosection = () => {
         </div>
 
         {/* Right Content */}
-        <div className="w-[80%]">
-          <Text type="secondary" strong>
+        <div className="w-[50%]">
+          <p type="secondary" className="font-medium ms-2" strong>
             BUY A HOME
-          </Text>
-          <Title level={2} style={{ paddingRight:"10%",paddingLeft:"10px" }}>
+          </p>
+          <h1 level={2} style={{ paddingRight:"10%" }}>
             Find, Buy & Own Your Dream Home
-          </Title>
-          <Paragraph>
+          </h1>
+          <p>
             Explore from Apartments, land, builder floors, villas and more
-          </Paragraph>
+          </p>
           <Button type="primary" size="large">
             Explore Buying
           </Button>
@@ -98,27 +124,39 @@ const Handpickherosection = () => {
           </div>
 
           {/* Right Side Tabs */}
-          <div>
-            <Tabs defaultActiveKey="News">
-              {Object.keys(articles).map((tab) => (
-                <Tabs.TabPane tab={tab} key={tab}>
-                  <List
-                    itemLayout="horizontal"
-                    dataSource={articles[tab]}
-                    renderItem={(item) => (
-                      <List.Item>
-                        <List.Item.Meta
-                          avatar={<Avatar shape="square" size={64} src={item.img} />}
-                          title={<a href="#">{item.title}</a>}
-                          description={item.date}
-                        />
-                      </List.Item>
-                    )}
-                  />
-                </Tabs.TabPane>
-              ))}
-            </Tabs>
-          </div>
+        <div>
+  {/* <Carousel ref={carouselRef} {...settings}>
+    {articleSlides.map((slide, idx) => (
+      <div
+        key={idx}
+        className="grid grid-cols-2 gap-4 px-4" // 2 cols → with 4 items = 2 rows
+      >
+        {slide.map((item, i) => (
+          <Card
+            key={i}
+            bordered
+            className="rounded-lg"
+            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
+          >
+            <div className="flex items-start gap-2">
+              <img
+                src={item.img}
+                alt={item.title}
+                className="rounded-lg w-10 h-10"
+              />
+              <div>
+                <p className="font-medium text-sm">{item.title}</p>
+                <span className="text-xs text-gray-500">{item.date}</span>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    ))}
+  </Carousel> */}
+  <Antddobluecardcrousal />
+</div>
+
         </div>
       </Card>
     </div>
