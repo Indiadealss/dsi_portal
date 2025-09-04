@@ -221,7 +221,7 @@ a {
   h3 { font-size: 0.9rem; }
   p  { font-size: 0.8rem; }
   Link{font-size: 0.9rem; }
-  a  { font-size: 0.9rem; line-height: 1.7rem; font-weight: 500; color: #011c47e3;}
+  a  { font-size: 0.9rem;  font-weight: 500; color: #011c47e3;}
   .propertyListingFilter{
     width: 25vw;
   }

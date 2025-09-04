@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Carousel,Button } from "antd";
 
-const Antddobluecardcrousal = ({articles}) => {
+const Antdcitiescardcrousal = ({articles}) => {
   const carouselRef = useRef(null);
 const [current, setCurrent] = useState(0);
   
@@ -91,9 +91,9 @@ const [current, setCurrent] = useState(0);
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="rounded-lg w-15 h-15 object-cover"
+                  className="rounded-lg w-20 h-20 object-cover"
                 />
-                <div className="border-b border-gray-300 pb-4">
+                <div className=" pb-4">
                   <p className="font-medium text-sm">{item.title}</p>
                   <span className="text-xs text-gray-500">{item.date}</span>
                 </div>
@@ -106,4 +106,4 @@ const [current, setCurrent] = useState(0);
   );
 };
 
-export default Antddobluecardcrousal;
+export default Antdcitiescardcrousal;

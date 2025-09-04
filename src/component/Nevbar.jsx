@@ -19,6 +19,7 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router";
+import { Login } from "./Login";
 
 const { Header } = Layout;
 
@@ -421,14 +422,17 @@ const menuItems = [
   },
 ];
 
-const profileItems = [
-  { key: "profile", label: "Profile" },
+
+
+export default function Navbar() {
+  const [showLogin, setShowLogin] = useState(false);
+  const profileItems = [
+  { key: "profile", label: <Link onClick={() => setShowLogin(true)}>Login/Register</Link> },
   { key: "settings", label: "Settings" },
   { type: "divider" },
   { key: "logout", danger: true, label: "Log out" },
 ];
 
-export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeParent, setActiveParent] = useState(null);
   const screens = Grid.useBreakpoint();
@@ -441,6 +445,7 @@ export default function Navbar() {
     const activeChild = item.children.find((c) => c.key === activeParent);
 
     return (
+      <>
       <div
         style={{
           background: "#f5f5f5",
@@ -448,6 +453,8 @@ export default function Navbar() {
           display: "flex",
         }}
       >
+
+        
         {/* Left Column */}
         <div className="py-5 px-10">
           <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
@@ -526,10 +533,13 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      
+      </>
     );
   };
 
   return (
+    <>
     <Header
       style={{
         position: "sticky",
@@ -599,6 +609,7 @@ export default function Navbar() {
             </Space>
           </Button>
         </Dropdown>
+        
 
         {/* Mobile Drawer */}
         {isMobile && (
@@ -610,6 +621,7 @@ export default function Navbar() {
           />
         )}
       </div>
+      
 
       {/* Drawer for mobile */}
       <Drawer
@@ -630,5 +642,7 @@ export default function Navbar() {
         />
       </Drawer>
     </Header>
+    <Login open={showLogin} onClose={() => setShowLogin(false)} />
+    </>
   );
 }

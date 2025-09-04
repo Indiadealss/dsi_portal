@@ -4,6 +4,8 @@ import { Phoneinput } from './Phoneinput';
 import { Login } from './Login';
 
 export const Postproperty = () => {
+
+    const [showLogin, setShowLogin] = useState(false);
     const lokingButton = [
         { title: 'Sell', name: 'sell' },
         { title: 'Rent / Lease', name: 'rent' },
@@ -129,7 +131,9 @@ export const Postproperty = () => {
                             </div>
                             <h4 className='font-semibold my-5'>Your Contact details for the buyer to reach you</h4>
                             <div className='flex justify-center w-auto'>
-                                <Login />
+                                {/* <Login /> */}
+                                <button type='button'  className='bg-[#011638] text-white font-bold text-xl rounded-sm px-25 cursor-pointer my-2 py-2' onClick={() => setShowLogin(true)}>Start Now</button>
+                                <Login open={showLogin} onClose={() => setShowLogin(false)} />
                             </div>
                         </div>
                     </div>

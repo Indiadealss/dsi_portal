@@ -16,6 +16,9 @@ import Smallmain from './customantdesign/Smallmain';
 import Handpickherosection from './customantdesign/Handpickherosection';
 import Antdpropertycard from './customantdesign/Antdpropertycard';
 import Antdcardcrousal from './customantdesign/Antdcardcrousal';
+import Customantservicecard from './customantdesign/Customantservicecard';
+import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
+import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
 const Home = () => {
 
  const handpickherosection = {
@@ -133,6 +136,49 @@ const Home = () => {
     {image:"https://picsum.photos/830/464?random=4"},
     {image:"https://picsum.photos/830/464?random=5"},
   ]
+
+  const cities = [
+    {
+      title: "Delhi / NCR",
+      date: "231,000+ Properties",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Bangalore",
+      date: "62,000+ Properties",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "Pune",
+      date: "64,000+ Properties",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+    {
+      title: "UP women homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Oberoi Realty to enter Gurgaon market",
+      date: "May 20, 2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+  ]
   return (
     <div className='mb-10'>
       <div>
@@ -232,6 +278,15 @@ const Home = () => {
         <div style={{padding:"40px",marginTop:"60px"}}>
           <h2>Our Services for owners</h2>
           <p>Make your life easier with our service</p>
+          <Customantservicecard />
+        </div>
+        <div style={{padding:"40px",marginTop:"60px"}}>
+          < Handpickherosection content={handpickherosection.rentHome} />
+        </div>
+        <div style={{padding:"40px",marginTop:"60px"}}>
+          <p><span className='font-bold text-gray-400 '>TOP CITIES</span></p>
+          <h1 className=' font-bold text-black text-xl my-3 '>Explore Real Estate in Popular Indian Cities</h1>
+          <Antdcitiescardcrousal articles={cities} />
         </div>
       </div>
     </div>
