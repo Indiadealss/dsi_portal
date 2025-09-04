@@ -1,4 +1,5 @@
 import React from 'react';
+import { WhatsAppOutlined,ArrowRightOutlined } from "@ant-design/icons";
 import { Card, Avatar, Typography } from "antd";
 import banner from '../Images/1366-banner-1.jpg';
 import Banner from './customcomponent/Banner';
@@ -16,6 +17,114 @@ import Handpickherosection from './customantdesign/Handpickherosection';
 import Antdpropertycard from './customantdesign/Antdpropertycard';
 import Antdcardcrousal from './customantdesign/Antdcardcrousal';
 const Home = () => {
+
+ const handpickherosection = {
+  rentHome:[{
+    img : "https://picsum.photos/700/450?random=1",
+    title:"BUY PLOTS/LAND",
+    subtitle:"Residential & Commerical Plots/Land",
+    subtitleDesc:"Explore Residential,Agricultural, Industrial and Commerical Plots/Land",
+    buttonName:"Explore Plots/Land",
+    bannercontenttitle:"Best articles on Plots/land",
+    articles : [
+    {
+      title: "UP women homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Oberoi Realty to enter Gurgaon market",
+      date: "May 20, 2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+    {
+      title: "UP women homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Oberoi Realty to enter Gurgaon market",
+      date: "May 20, 2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+  ]
+
+  }
+  ],
+  postPropertyViaWhatsapp:[{
+    img : "https://picsum.photos/700/450?random=7",
+    title:`Post via  Whatsapp`,
+    subtitle:"Sell or rent faster at the right price!",
+    subtitleDesc:"List your property now",
+    buttonName:"Post Property,It's Free",
+    bannercontenttitle:"Articles & guides for property Owners",
+    articles : [
+    {
+      title: "Kolkata Tower Demolition Impact on Buyers",
+      date: "Sep 02,2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "No stamp duty on husing plots in Harya",
+      date: "Aug 28,2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+    {
+      title: "UP women homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2025",
+      img: "https://picsum.photos/200/140?random=1",
+    },
+    {
+      title: "Oberoi Realty to enter Gurgaon market",
+      date: "May 20, 2025",
+      img: "https://picsum.photos/200/140?random=2",
+    },
+    {
+      title: "UP w homebuyers get 1% stamp duty rebate",
+      date: "Jul 28, 2026",
+      img: "https://picsum.photos/200/140?random=3",
+    },
+    {
+      title: "Oberoi Real to enter Gurgaon market",
+      date: "May 20, 2026",
+      img: "https://picsum.photos/200/140?random=4",
+    },
+  ]
+
+  }
+  ]
+
+ }
 
   const  crousalData = [
     {image:"https://picsum.photos/830/464?random=1"},
@@ -115,7 +224,14 @@ const Home = () => {
           < Dreamherosection />
         </div>
         <div style={{padding:"40px",marginTop:"60px"}}>
-          < Handpickherosection />
+          < Handpickherosection content={handpickherosection.rentHome} />
+        </div>
+        <div style={{padding:"40px",marginTop:"60px"}}>
+          < Handpickherosection content={handpickherosection.postPropertyViaWhatsapp} />
+        </div>
+        <div style={{padding:"40px",marginTop:"60px"}}>
+          <h2>Our Services for owners</h2>
+          <p>Make your life easier with our service</p>
         </div>
       </div>
     </div>

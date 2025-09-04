@@ -1,52 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Carousel, Card,Button } from "antd";
 
-const Antddobluecardcrousal = () => {
+const Antddobluecardcrousal = ({articles}) => {
   const carouselRef = useRef(null);
-
-  const articles = [
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-  ];
+const [current, setCurrent] = useState(0);
+  
 
   // Helper to chunk array
   const chunkArray = (arr, size) =>
@@ -67,23 +26,27 @@ const Antddobluecardcrousal = () => {
   }
 
   const articlePairs = chunkArray(articles, chunkSize);
+   const totalSlides = articlePairs.length;
 
     // 👉 custom arrows
-  const CustomPrevArrow = ({ onClick }) => (
-    <Button
-      onClick={onClick}
-      className="!absolute !left-2 !top-1/2 !-translate-y-1/2 bg-black/60 text-white rounded-full z-10"
-      icon={<LeftOutlined />}
-    />
-  );
+  const CustomPrevArrow = ({ onClick }) =>
+    current === 0 ? null : (
+      <Button
+        onClick={onClick}
+        className="!absolute !left-2 !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"
+        icon={<LeftOutlined />}
+      />
+    );
 
-  const CustomNextArrow = ({ onClick }) => (
-    <Button
-      onClick={onClick}
-      className="!absolute !right-2 !top-1/2 !-translate-y-1/2 bg-black/60 text-white rounded-full z-10"
-      icon={<RightOutlined />}
-    />
-  );
+  const CustomNextArrow = ({ onClick }) =>
+    current === totalSlides - 1 ? null : (
+      <Button
+        onClick={onClick}
+        className="!absolute !right-2 !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"
+        icon={<RightOutlined />}
+      />
+    );
+
 
   const settings = {
     dots: false,
@@ -93,6 +56,7 @@ const Antddobluecardcrousal = () => {
     slidesToScroll: 1,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
+    beforeChange: (_, next) => setCurrent(next),
     responsive: [
       {
         breakpoint: 1024,

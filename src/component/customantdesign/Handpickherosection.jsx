@@ -1,64 +1,13 @@
 import React, { useRef } from "react";
+import { WhatsAppOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import {Carousel, Typography, Button, Card, Tabs, List, Avatar } from "antd";
 import Antddobluecardcrousal from "./Antddobluecardcrousal";
 
 const { Title, Paragraph, Text } = Typography;
 
-const Handpickherosection = () => {
-  const carouselRef = useRef(null);
-
-  const articles = [
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-  ];
-
- const chunkArray = (arr, size) => {
-  return arr.reduce((acc, _, i) => {
-    if (i % size === 0) acc.push(arr.slice(i, i + size));
-    return acc;
-  }, []);
-};
-
-  const articleSlides = chunkArray(articles, 4);
-
+const Handpickherosection = ({content}) => {
+  const propcontent = content[0];
+  
 
   return (
     <div >
@@ -75,25 +24,31 @@ const Handpickherosection = () => {
         {/* Left Image */}
         <div>
           <img
-            src="https://picsum.photos/700/450?random=1"
+            src={propcontent.img}
             alt="Home Banner"
             style={{ width: "100%", borderRadius: "12px" }}
           />
         </div>
 
         {/* Right Content */}
-        <div className="w-[50%]">
+        <div className="w-[90%]">
           <p type="secondary" className="font-medium ms-2" strong>
-            BUY A HOME
+           {propcontent.title.includes("Whatsapp") ? (
+              <>
+                Post via <WhatsAppOutlined />  Whatsapp <ArrowRightOutlined />
+              </>
+            ) : (
+              propcontent.title
+            )}
           </p>
           <h1 level={2} style={{ paddingRight:"10%" }}>
-            Find, Buy & Own Your Dream Home
+            {propcontent.subtitle}
           </h1>
           <p>
-            Explore from Apartments, land, builder floors, villas and more
+            {propcontent.subtitleDesc}
           </p>
           <Button type="primary" size="large">
-            Explore Buying
+            {propcontent.buttonName}
           </Button>
         </div>
       </div>
@@ -117,7 +72,7 @@ const Handpickherosection = () => {
         >
           {/* Left Side */}
           <div className="p-5">
-            <h2  className="text-3xl font-bold">Top articles on home buying</h2>
+            <h2  className="text-3xl font-bold">{propcontent.bannercontenttitle}</h2>
             <Paragraph type="secondary">
               Read from Beginners check-list to Pro Tips
             </Paragraph>
@@ -154,7 +109,7 @@ const Handpickherosection = () => {
       </div>
     ))}
   </Carousel> */}
-  <Antddobluecardcrousal />
+  <Antddobluecardcrousal articles={propcontent.articles} />
 </div>
 
         </div>
