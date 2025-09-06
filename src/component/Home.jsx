@@ -189,6 +189,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {/* small */}
       <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
         {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
         <div className="lg:col-span-8 ms-3 space-y-10">
@@ -218,11 +219,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className='hidden lg:block  mt-40 w-full homeContainer max-w-[1265px] mx-auto'>
+
+      {/* main */}
+      <div className='mt-40 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
         <Smallmain />
-        <div style={{ padding: "40px" }}>
+        <div className='p-0 lg:p-[40px]'>
           <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>
-          <h1 className='text-center font-bold text-black text-xl my-3'>Find Better Places to Live, Work<br /> and Wonder...</h1>
+          <h1 className='text-start lg:max-w-xl mx-auto lg:text-center font-bold text-black text-lg lg:text-xl my-3'>Find Better Places to Live, Work and Wonder...</h1>
           <Dreamherosection />
         </div>
         <Card

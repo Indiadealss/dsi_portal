@@ -3,7 +3,7 @@ import { Carousel,Card, Button } from 'antd'
 import { PauseOutlined } from '@ant-design/icons';  
 import { FaPlay } from "react-icons/fa6";
 
-const Antdcardcrousal = ({crousal}) => {
+const Antdcardcrousal = ({crousal,images}) => {
     const [progress,setProgress] = useState(0)
     const [autoplay,setAutoplay] = useState(true)
     const [currentSlide, setCurrentSlide] = useState(0);

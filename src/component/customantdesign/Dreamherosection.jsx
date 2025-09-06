@@ -37,17 +37,9 @@ const Dreamherosection = () => {
   return (
     <div >
       {/* Hero Section */}
-      <div
-        style={{
-            width:"100%",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "32px",
-          alignItems: "center",
-        }}
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
         {/* Left Image */}
-        <div>
+        <div className="order-2 md:order-1">
           <img
             src="https://picsum.photos/700/450?random=1"
             alt="Home Banner"
@@ -56,7 +48,7 @@ const Dreamherosection = () => {
         </div>
 
         {/* Right Content */}
-        <div className="w-[80%]">
+        <div className="w-[80%] order-1 md:order-2">
           <p type="secondary" className="font-medium ms-2" strong>
             BUY A HOME
           </p>
@@ -73,7 +65,7 @@ const Dreamherosection = () => {
       </div>
 
       {/* Articles Section */}
-      <Card
+      <Card  className="mt-3 md:mt-[-40px] w-full md:w-[90%] ms-0 md:ms-[5%]"
   style={{
     marginTop: "-40px", // 👈 overlap upwards
     width:"90%",
@@ -82,10 +74,8 @@ const Dreamherosection = () => {
     boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
   }}
 >
-        <div
+        <div className="grid grid-cols-1 md:grid-cols-2"
           style={{
-            display: "grid",
-            gridTemplateColumns: "30% 65%",
             gap: "32px",
           }}
         >

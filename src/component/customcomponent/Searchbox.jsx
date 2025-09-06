@@ -6,15 +6,17 @@ import Custominputserchbox from '../customantdesign/Custominputserchbox';
 const Searchbox = () => {
   const [active, setActive] = useState('buy');
   const [showDropdown, setShowDropdown] = useState(false);
+  const [filtername,setFiltername] = useState('All Residental');
+  const [secondfiltername,setSecondFiltername] = useState('');
 
   const button = [
     { key: "buy", label: "Buy" },
-    { key: "Rent", label: "Rent" },
-    { key: "Newlaunch", label: "New Launch" },
-    { key: "Commercial", label: "Commercial" },
-    { key: "Plots/Land", label: "Plots/Land" },
-    { key: "Projects", label: "Projects" },
-    { key: "PostProperty", label: "Post Property" }
+    { key: "rent", label: "Rent" },
+    { key: "newlaunch", label: "New Launch" },
+    { key: "commercial", label: "Commercial" },
+    { key: "plots/Land", label: "Plots/Land" },
+    { key: "projects", label: "Projects" },
+    { key: "postProperty", label: "Post Property" }
   ];
 
   const menuItems = [
@@ -28,13 +30,39 @@ const Searchbox = () => {
   ];
 
   function serchBtn(e){
-    setActive(e.currentTarget.name)
+    
+    // console.log(e.currentTarget.name);
+    if(e.currentTarget.name === 'buy' || e.currentTarget.name === 'rent'){
+      setActive(e.currentTarget.name);
+      setFiltername('All Residental');
+      setSecondFiltername('');
+    }else if(e.currentTarget.name === 'newlaunch'){
+      setActive(e.currentTarget.name);
+      setFiltername('Residental');
+      setSecondFiltername('');
+    }else if(e.currentTarget.name === 'commercial'){
+      setActive(e.currentTarget.name);
+      setFiltername('BUY');
+      setSecondFiltername('All Commerical');
+    }else if(e.currentTarget.name === 'plots/Land'){
+      setActive(e.currentTarget.name);
+      setFiltername('Residental');
+      setSecondFiltername('');
+    }else if(e.currentTarget.name === 'projects'){
+      setActive(e.currentTarget.name);
+      setFiltername('Residential Project');
+      setSecondFiltername('');
+    }
+    else if(e.currentTarget.name === 'postProperty'){
+      console.log(e.currentTarget.name);
+    }
+    
   }
   return (
     <>
       <div className="shadow-xl bg-white rounded-xl w-auto lg:w-[max-content] mx-auto z-11 relative">
         {/* Top Nav Buttons */}
-        <div className='hidden lg:block lg:flex'>
+        <div className='hidden lg:block lg:flex border-b border-b-gray-300'>
           {button.map((item) => (
             <button
               type='text'
@@ -42,8 +70,8 @@ const Searchbox = () => {
               name={item.key}
               onClick={serchBtn}
               className={`${active === item.key
-                ? 'px-10 py-5 text-black font-bold border-b border-gray-300 underline underline-offset-23 decoration-2 decoration-[#022c6f] cursor-pointer'
-                : 'px-10 py-5 text-gray-500 font-medium border-b border-gray-300 cursor-pointer'}`}
+                ? 'mx-10 py-5 text-black font-bold border-b-4 border-[#022c6f] rounded cursor-pointer'
+                : 'px-10 py-5 text-gray-500 font-medium  border-gray-300 cursor-pointer'}`}
             >
               {item.label}
             </button>
