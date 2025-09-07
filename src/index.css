@@ -36,6 +36,9 @@
   outline-offset: 2cm !important;
 }
 
+.perdetdacaabsolute{
+  position: static;
+}
 
 input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance: none;
@@ -218,6 +221,7 @@ a {
   p  { font-size: 1rem; }
   a  { font-size: 1rem; }
 
+ 
   .ant-btn {
     font-size: 15px;
     padding: 8px 20px;
@@ -234,6 +238,12 @@ a {
   .propertyListingFilter{
     width: 25vw;
   }
+
+   .perdetdacaabsolute{
+  position: absolute;
+  right: 70px;
+  top: 340px;
+}
   .propertyListingHeight{
     height: 24vw !important;
   }

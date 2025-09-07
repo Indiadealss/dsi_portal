@@ -6,7 +6,7 @@ export const Loginform = () => {
 
 
     const loginData = [
-        { email: '1998keshavyadav.com', password: 'kapil98yadaV@', userName: 'Keshav Yadav', city: 'Gajraula', dirstict: 'Amroha' }
+        { email: '1998keshavyadav@gmail.com', password: 'kapil98yadaV@', userName: 'Keshav Yadav', city: 'Gajraula', dirstict: 'Amroha' }
     ]
 
     const [form, setForm] = useState('Register')

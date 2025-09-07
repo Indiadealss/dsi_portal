@@ -2,6 +2,7 @@ import React from 'react'
 import img1 from '../Images/noImageBg.svg';
 import { IoIosAdd } from 'react-icons/io';
 import { MdCurrencyRupee } from "react-icons/md";
+import { Link } from "react-router";
 import Ownerdetails from './Ownerdetails';
 export const PropertiesData = () => {
 
@@ -44,7 +45,7 @@ export const PropertiesData = () => {
                         </div>
                         <div className='md:webkitFillAvailable lg:w-[36vw] '>
                             <div className="px-6">
-                                <h5 className='text-base font-bold' >{item.title}</h5>
+                                <Link to="/propertyDetails"><h5 className='text-base font-bold' >{item.title}</h5></Link>
                                 <h6 className='text-base font-samibold'>{item.bedroom} Flat for rent {item.location}</h6>
                             </div>
                             <div className='flex m-2 py-2'>

@@ -82,7 +82,7 @@ const Propertydetailscarddata = () => {
         price: '4 Crore'
     }]
     return (
-        <div className='block max-w-2xl h-[35vw] p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700'>
+        <div className='block max-w-3xl h-auto  lg:max-w-2xl lg:h-[35vw] p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700'>
             <table >
                 <tbody>
                     <tr className=' border-b border-gray-100'>

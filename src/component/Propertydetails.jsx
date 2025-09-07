@@ -3,6 +3,8 @@ import Propertydetailsstickcard from './customcomponent/Propertydetailsstickcard
 import Antdcardcrousal from './customantdesign/Antdcardcrousal';
 import Antdpropertydetailsimgcroul from './customantdesign/Antdpropertydetailsimgcroul';
 import Propertydetailscarddata from './customcomponent/Propertydetailscarddata';
+import Placesnearby from './customcomponent/placesNearby';
+import Propertytransation from './customcomponent/Propertytransation';
 
 const Propertydetails = () => {
     
@@ -19,15 +21,21 @@ const Propertydetails = () => {
   return (
    <>
    <Propertydetailsstickcard />
-   <div className='mx-10'>
+   <div className='m-0 lg:mx-10'>
    <div className='relative'>
    <Antdpropertydetailsimgcroul crousal={crousalData} video={video}  />
    </div>
-   <div className='propertydetails' style={{position:'absolute',right:70,top:'340px'}}>
+   <div className='perdetdacaabsolute' >
    <Propertydetailscarddata  />
    </div>
-   <div>
-        
+   <div className='mt-10'>
+      <Placesnearby />
+   </div>
+   <div className='mt-10'>
+    <Propertytransation />
+   </div>
+   <div className='mt-10'>
+      
    </div>
    </div>
    </>

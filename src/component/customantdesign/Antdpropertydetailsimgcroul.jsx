@@ -9,7 +9,7 @@ const Antdpropertydetailsimgcroul = ({crousal,video}) => {
 
   return (
     <>
-        <Card className='w-[48%] bg-gray-500 relative'>
+        <Card className='w-[100%] lg:w-[48%] bg-gray-500 relative'>
             <div className={`${video === null ? 'hidden' : ''}`}>
             <video src=""></video>
             </div>
