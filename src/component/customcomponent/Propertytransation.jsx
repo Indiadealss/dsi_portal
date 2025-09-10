@@ -18,9 +18,9 @@ const Propertytransation = () => {
 
   return (
     <div className='py-4 border-y border-gray-300'>
-            <div className='grid grid-cols-3'>
+            <div className='grid grid-cols-2 mx-2 lg:grid-cols-3'>
                 {Object.entries(fullDetails).map(([key,value]) => (
-                    <p key={key} className='flex gap-2'>
+                    <p key={key} className='flex gap-2 flex-col lg:flex-row'>
                         <span className='font-medium capitalize'>{key}</span>
                         <span>{value}</span>
                     </p>
@@ -30,4 +30,4 @@ const Propertytransation = () => {
   )
 }
 
-export default Propertytransation
+export default Propertytransation;

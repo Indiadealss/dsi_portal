@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Phoneinput = () => {
+function Phoneinput() {
     return (
         <div>
 
@@ -36,3 +36,4 @@ export const Phoneinput = () => {
         </div>
     )
 }
+export default Phoneinput;

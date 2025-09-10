@@ -512,7 +512,7 @@ export default function Navbar() {
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   {activeChild.subChildren2.map((sub) => (
                     <li key={sub.key} style={{ padding: "2px 0" }}>
-                      <Link target="_blank" to="/property">{sub.label}</Link>
+                      <Link  to="/property">{sub.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -591,7 +591,7 @@ export default function Navbar() {
         <Button
           className="menu-btn default-btn bg-[#011638] postPropertyNavbtn"
         >
-          <Link target="_blank" to="/post-property" className="px-5" Post Property>Post Property</Link>
+          <Link  to="/post-property" className="px-5" Post Property>Post Property</Link>
         </Button>
 
         <Button type="text" aria-label="Notifications" className="navBtn postPropertyNavbtn" icon={<BellOutlined />} />

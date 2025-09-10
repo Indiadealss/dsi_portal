@@ -222,7 +222,7 @@ const Home = () => {
 
       {/* main */}
       <div className='mt-40 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
-        <Smallmain />
+        <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS'/>
         <div className='p-0 lg:p-[40px]'>
           <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>
           <h1 className='text-start lg:max-w-xl mx-auto lg:text-center font-bold text-black text-lg lg:text-xl my-3'>Find Better Places to Live, Work and Wonder...</h1>

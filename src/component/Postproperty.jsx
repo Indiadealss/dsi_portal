@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import postPropery from '../Images/Desktop_Animation_compress.gif'
-import { Phoneinput } from './Phoneinput';
 import { Login } from './Login';
 
 export const Postproperty = () => {

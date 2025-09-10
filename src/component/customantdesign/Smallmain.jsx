@@ -3,7 +3,7 @@ import { Carousel, Card, Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import img1 from "../../Images/cardBander.jpg";
 
-const Smallmain = () => {
+const Smallmain = ({title}) => {
   const carouselRef = useRef(null);
 
   const goPrev = () => {
@@ -67,7 +67,7 @@ const Smallmain = () => {
     <>
     <div className="mx-auto" style={{ position: "relative", width: "90%"}}>
       
-     <h2 className='font-bold text-xs text-gray-500 my-5 text-center'>GET STARTED WITH EXPLORING REAL ESTATE OPTIONS</h2>
+     <h2 className="text-center my-5"><span className='font-bold text-xs text-gray-500  '>{title}</span></h2>
       {/* Left button */}
       <Button
         shape="circle"
