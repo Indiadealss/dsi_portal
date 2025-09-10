@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../Images/logo.png";
+import { useLocation } from "react-router-dom";
 import inheight from "../Images/deskIn.png";
 import {
   Layout,
@@ -20,8 +21,12 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router";
 import { Login } from "./Login";
+import Custominputserchbox from "./customantdesign/Custominputserchbox";
 
 const { Header } = Layout;
+
+
+
 
 // Menu Data
 const menuItems = [
@@ -425,6 +430,29 @@ const menuItems = [
 
 
 export default function Navbar() {
+
+  const location = useLocation();
+
+  const [scroll,setScroll] = useState(false);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if(window.scrollY > 257 || location.pathname !== '/'){
+        setScroll(true);
+      }else{
+        setScroll(false)
+      }
+    };
+
+    handleScroll();
+
+    window.addEventListener('scroll',handleScroll);
+    return () => window.removeEventListener('scroll',handleScroll);
+  },[location.pathname])
+  
+  
+  
   const [showLogin, setShowLogin] = useState(false);
   const profileItems = [
   { key: "profile", label: <Link onClick={() => setShowLogin(true)}>Login/Register</Link> },
@@ -568,59 +596,75 @@ export default function Navbar() {
       </a>
 
       {/* Right side */}
-      <div style={{ display: "flex", alignItems: "center",  }}>
-        {!isMobile &&
-          menuItems.map((item) =>
-            item.children ? (
-              <Dropdown
-                key={item.key}
-                dropdownRender={() => getDropdownRender(item)}
-                trigger={["hover"]}
-              >
-                <Button type="text" className="menu-btn">
-                   {item.label}
-                </Button>
-              </Dropdown>
-            ) : (
-              <Button key={item.key} type="text" className="menu-btn">
-                {item.label}
-              </Button>
-            )
-          )}
-
-        <Button
-          className="menu-btn default-btn bg-[#011638] postPropertyNavbtn"
-        >
-          <Link  to="/post-property" className="px-5" Post Property>Post Property</Link>
-        </Button>
-
-        <Button type="text" aria-label="Notifications" className="navBtn postPropertyNavbtn" icon={<BellOutlined />} />
-
-        <Dropdown
-          placement="bottomRight"
-          menu={{ items: profileItems }}
-          trigger={["click"]}
-          className="navBtn"
-        >
-          <Button type="text">
-            <Space>
-              <Avatar size="small" className="navBtn" icon={<UserOutlined  />} />
-              <DownOutlined className="navBtn postPropertyNavbtn" />
-            </Space>
+      <div style={{ display: "flex", alignItems: "center" }}>
+  {!scroll ? (
+    // Show nav menu items before scrolling
+    !isMobile &&
+      menuItems.map((item) =>
+        item.children ? (
+          <Dropdown
+            key={item.key}
+            dropdownRender={() => getDropdownRender(item)}
+            trigger={["hover"]}
+          >
+            <Button type="text" className="menu-btn">
+              {item.label}
+            </Button>
+          </Dropdown>
+        ) : (
+          <Button key={item.key} type="text" className="menu-btn">
+            {item.label}
           </Button>
-        </Dropdown>
-        
+        )
+      )
+  ) : (
+    // After scrolling past banner -> show search input
+    <div className={`${location.pathname === '/post-property' ? "hidden postHiddn" : "hidden lg:block lg:w-[50vw] me-10"}`}>
+      <Custominputserchbox />
+    </div>
+  )}
 
-        {/* Mobile Drawer */}
-        {isMobile && (
-          <Button
-            type="text"
-            aria-label="Open navigation"
-            icon={<MenuOutlined />}
-            onClick={() => setOpen(true)}
-          />
-        )}
-      </div>
+  {/* Post Property button */}
+  <Button className={`${location.pathname === '/post-property'? "hidden postHiddn" : "menu-btn default-btn bg-[#011638] postPropertyNavbtn"}`}>
+    <Link to="/post-property" className="px-5">
+      Post Property
+    </Link>
+  </Button>
+
+  {/* Notification Icon */}
+  <Button
+    type="text"
+    aria-label="Notifications"
+    className="navBtn postPropertyNavbtn"
+    icon={<BellOutlined />}
+  />
+
+  {/* Profile Dropdown */}
+  <Dropdown
+    placement="bottomRight"
+    menu={{ items: profileItems }}
+    trigger={["click"]}
+    className="navBtn"
+  >
+    <Button type="text">
+      <Space>
+        <Avatar size="small" className="navBtn" icon={<UserOutlined />} />
+        <DownOutlined className="navBtn postPropertyNavbtn" />
+      </Space>
+    </Button>
+  </Dropdown>
+
+  {/* Mobile Drawer */}
+  {isMobile && (
+    <Button
+      type="text"
+      aria-label="Open navigation"
+      icon={<MenuOutlined />}
+      onClick={() => setOpen(true)}
+    />
+  )}
+</div>
+
       
 
       {/* Drawer for mobile */}

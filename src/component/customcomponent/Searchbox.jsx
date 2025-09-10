@@ -85,7 +85,7 @@ const Searchbox = () => {
               All Residential <DownOutlined className='px-2' />
             </button>
           </div>
-          <Custominputserchbox />
+          <Custominputserchbox search='search' />
         </div>
 
         {/* Full-width Dropdown inside Searchbox */}

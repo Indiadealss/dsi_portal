@@ -25,6 +25,9 @@
   text-underline-position: under; /* 'under' works better cross-browser */
 }
 
+.postHiddn{
+  display: none;
+}
 
 :where(.css-1v28nim).ant-card .ant-card-body {
   padding: 0 !important;
@@ -106,6 +109,8 @@ h2 {
   letter-spacing: 0.05rem;
   background: #011638 !important;
 }
+
+
 
 .navBtn{
   color: white !important;
