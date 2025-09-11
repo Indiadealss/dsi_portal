@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import FloorSelector from './customcomponent/Floorseclector';
 
 export const Profileproperty = ({setValidator}) => {
    const [coverdParking,setCoverdParking] = useState(0);
@@ -31,12 +32,18 @@ export const Profileproperty = ({setValidator}) => {
     "arce",
     "hactare"
   ]
+
+ const handleFloorChange = (val) => {
+    // val might be "unknown", "G", "B1", "15", "-1" (if you used negative for basement), or free text
+    console.log("floor:", val);
+  };
   const [dropdown, setDropdown] = useState(false)
   const [buildUpdropdown, setBuildUpDropdown] = useState(false)
   const [carpetArea, setCarpetArea] = useState(false)
   const [plotarea,setPloatarea] = useState('sq.ft');
   const [buildarea,setBuildarea] = useState('sq.ft');
   const [carpet,setCarpet] = useState('sq.ft');
+  const [totalFloor,setTotalFloor] = useState(0);
 
   const handleSelect = (value) =>{
     setPloatarea(value);
@@ -360,7 +367,12 @@ export const Profileproperty = ({setValidator}) => {
 
       <p className="font-medium text-lg">Floor Details</p>
       <p className='font-medium text-xs text-gray-500'>Total no of floors and your floor details.</p>
-      <div><input type='text' className='outline-none border border-1 border-gray-200 my-4 p-4 w-full' placeholder='Total Floor' /></div>
+      <div>
+        <input type='text' className='outline-none border border-1 border-gray-200 my-4 p-4 w-full' value={totalFloor} onChange={(e) => setTotalFloor(e.target.value)} placeholder='Total Floor' />
+        <div className={`${totalFloor > 1 ? 'block mb-5':'hidden'}`}>
+        <FloorSelector maxPreset={totalFloor} onChange={handleFloorChange} />
+        </div>
+      </div>
       <p className='font-medium text-lg'>Availability Status</p>
       <div className="flex">
       {availabilityStatus.map((item,index) => {
