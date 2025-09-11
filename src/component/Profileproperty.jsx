@@ -1,6 +1,12 @@
 import React, { useState,useEffect } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import FloorSelector from './customcomponent/Floorseclector';
+import { useSelector } from 'react-redux';
+import { DatePicker, Space } from 'antd';
+import { Postpropertyform } from './Postpropertyform';
+const onChange = (date, dateString) => {
+  console.log(date, dateString);
+};
 
 export const Profileproperty = ({setValidator}) => {
    const [coverdParking,setCoverdParking] = useState(0);
@@ -10,6 +16,11 @@ export const Profileproperty = ({setValidator}) => {
     const [noBathroom,setNoBathroom] = useState('');
     const [ageProperty,setAgeProperty] = useState('');
     const [ownership,setOwnership] = useState('');
+    const [availablef,setAvailablef] = useState('');
+    
+    const propertyDataFirst = useSelector((state) => state.property.data);
+
+    console.log('purpose :',propertyDataFirst.purpose,'Property:',propertyDataFirst.property,'property type:',propertyDataFirst.propertyType);
     
   const noOfBedroom = [
     { name: 'one', title: 1 },
@@ -132,6 +143,20 @@ export const Profileproperty = ({setValidator}) => {
 
   
 
+  const availblefor = [
+    {
+      name:'Boys',
+      label:'Boys'
+    },
+    {
+      name:'Girls',
+      label:'Girls'
+    },
+    {
+      name:'Any',
+      label:'Any'
+    }
+  ]
   const ownershipDetails = [
     {
       name:'Freehold',
@@ -373,6 +398,7 @@ export const Profileproperty = ({setValidator}) => {
         <FloorSelector maxPreset={totalFloor} onChange={handleFloorChange} />
         </div>
       </div>
+      <div className={`${propertyDataFirst.purpose === 'pg' ? 'hidden':'block'}`}>
       <p className='font-medium text-lg'>Availability Status</p>
       <div className="flex">
       {availabilityStatus.map((item,index) => {
@@ -382,6 +408,26 @@ export const Profileproperty = ({setValidator}) => {
           >{item.label}</button>
         )
       })}
+      </div>
+      </div>
+      <div className={`${propertyDataFirst.purpose === 'pg' ? 'block' : 'hidden'}`}>
+        <p className='font-medium text-lg my-3'>Availability From</p>
+        <Space direction="vertical">
+    <DatePicker onChange={onChange} />
+  </Space>
+        <p className='font-medium text-lg my-3'>Available For</p>
+        <div className="flex  my-5">
+      {availblefor.map((item,index) => {
+        return(
+          <button name={item.name} key={index} 
+          className={`${availablef === item.name ? 'text-sm text-gray-500 font-normal   p-2 mx-3 rounded-full cursor-pointer bg-gray-100' :'mx-3 text-sm text-gray-500 font-normal  border p-2 rounded-full cursor-pointer border-1 border-gray-200'}`}
+          onClick={(e) => setAvailablef(e.currentTarget.name)}
+          >
+            {item.label}
+            </button>
+        )
+      })}
+      </div>
       </div>
       <p className={`${choiseProperty === 'Ready to move' ? 'font-medium text-lg my-5' : 'hidden'}`}>Age of Property</p>
       <div className="flex my-5">
@@ -412,6 +458,7 @@ export const Profileproperty = ({setValidator}) => {
 </form>
 
       </div>
+      <div className={`${propertyDataFirst.purpose === 'pg' ? 'hidden' : 'block'}`}>
       <p className='font-medium text-lg '>Ownership</p>
       <div className="flex justify-around my-5">
       {ownershipDetails.map((item,index) => {
@@ -424,6 +471,7 @@ export const Profileproperty = ({setValidator}) => {
             </button>
         )
       })}
+      </div>
       </div>
       <h3 className='text-xl font-medium my-5'>Reserved Parking <span className="font-light text-sm text-gray-400">(Optional)</span></h3>
         <div className='flex flex-wrap my-5'>

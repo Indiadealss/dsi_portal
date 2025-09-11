@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { WhatsAppOutlined,ArrowRightOutlined } from "@ant-design/icons";
 import { Card, Avatar, Typography } from "antd";
 import banner from '../Images/1366-banner-1.jpg';
@@ -20,6 +20,22 @@ import Customantservicecard from './customantdesign/Customantservicecard';
 import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
 import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
 const Home = () => {
+
+   const [hideBanner, setHideBanner] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 240) {
+        setHideBanner(true);
+      } else {
+        setHideBanner(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
 
  const handpickherosection = {
   rentHome:[{
@@ -181,7 +197,7 @@ const Home = () => {
   ]
   return (
     <div className='mb-10'>
-      <div>
+      <div className={`${hideBanner ? 'hidden':'block'}`}>
         <div className='relative'>
           <Banner image={banner} />
           <div className='block lg:absolute   top-[88%] object-cover w-[-webkit-fill-available]'>

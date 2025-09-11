@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateField } from './Redux/propertySlice';
 
 export const Postbasicdetailsform = ({ setValidator }) => {
          const lokingButton = [
@@ -118,23 +119,24 @@ export const Postbasicdetailsform = ({ setValidator }) => {
         const resCom = (event) => {
             setCommericalSpace([])
             setSelection(event.target.value);
-            console.log("Selected:", event.target.value);
-             dispatch(updateField({ category: event.target.value }))
-             console.log("Updated category:", category,selection);
+             dispatch(updateField({ property: event.target.value }))
         };
         // handle property type click
         function redintalTypes(event) {
             const name = event.target.name;
-            console.log(commericalMap[name]);
+            dispatch(updateField({propertyType:event.target.name}));
     
             setItsType(name);
-            dispatch(setError({ general: "Please fill all required fields" }));
             if (selection === "commercial") {
                 setSelectedMainType(name);
                 setCommericalSpace(commericalMap[name] || []);
             }
         }
 
+        function wkcpisit(e){
+            setSelectedMainType(e.target.name)
+            dispatch(updateField({commercialType:e.target.name}))
+        }
 
   // Register validation with parent
   useEffect(() => {
@@ -188,7 +190,7 @@ export const Postbasicdetailsform = ({ setValidator }) => {
                                         )
                                     })}
                                 </div>
-                                <div className={`${commericalSpace.length > 0 ? 'my-5' : 'hidden'}`}>
+                                <div className={`${commericalSpace.length > 0 ? 'my-5 block' : 'hidden'}`}>
                                     <h3 className='font-medium'>What Kind of office is it</h3>
                                     <div className='flex flex-wrap'>
                                         {commericalSpace.map((item, index) => {
@@ -200,7 +202,7 @@ export const Postbasicdetailsform = ({ setValidator }) => {
                                                             ? "bg-gray-100 border border-blue-300 font-normal text-gray-500 cursor-pointer px-2 py-1 m-1 rounded-full text-sm mx-1"
                                                             : "bg-white border border-gray-300 font-normal text-gray-500 cursor-pointer px-2 py-1 m-1 rounded-full text-sm mx-1"
                                                         }`}
-                                                    onClick={redintalTypes}
+                                                    onClick={wkcpisit}
                                                 >
                                                     {item.title}
                                                 </button>

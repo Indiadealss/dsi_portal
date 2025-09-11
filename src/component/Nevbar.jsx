@@ -437,8 +437,12 @@ export default function Navbar() {
 
 
   useEffect(() => {
+    
+    
     const handleScroll = () => {
-      if(window.scrollY > 257 || location.pathname !== '/'){
+      console.log(window.scrollY);
+      
+       if(window.scrollY > 257 || location.pathname !== '/' ){
         setScroll(true);
       }else{
         setScroll(false)
@@ -456,6 +460,7 @@ export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
   const profileItems = [
   { key: "profile", label: <Link onClick={() => setShowLogin(true)}>Login/Register</Link> },
+  {key:"myactivty",label:<Link to='/' >My activity</Link>},
   { key: "settings", label: "Settings" },
   { type: "divider" },
   { key: "logout", danger: true, label: "Log out" },
@@ -619,13 +624,13 @@ export default function Navbar() {
       )
   ) : (
     // After scrolling past banner -> show search input
-    <div className={`${location.pathname === '/post-property' ? "hidden postHiddn" : "hidden lg:block lg:w-[50vw] me-10"}`}>
+    <div className={`${location.pathname === '/post-property' || location.pathname === '/postproperty' ? "hidden postHiddn" : "hidden lg:block lg:w-[50vw] me-10"}`}>
       <Custominputserchbox />
     </div>
   )}
 
   {/* Post Property button */}
-  <Button className={`${location.pathname === '/post-property'? "hidden postHiddn" : "menu-btn default-btn bg-[#011638] postPropertyNavbtn"}`}>
+  <Button className={`${location.pathname === '/post-property' || location.pathname === '/postproperty' ? "hidden postHiddn" : "menu-btn default-btn bg-[#011638] postPropertyNavbtn"}`}>
     <Link to="/post-property" className="px-5">
       Post Property
     </Link>

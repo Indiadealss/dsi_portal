@@ -45,6 +45,21 @@ export const Anenimies = () => {
             label:'Un-furnished'
         }
     ]
+
+    const amenities = [
+      {
+        name:'',
+        label:''
+      },
+      {
+        name:'',
+        label:'',
+      },
+      {
+        name:'',
+        
+      }
+    ]
   return (
     <>
         <h3 className='text-xl font-medium my-2'>Add amenities/unique features</h3>
