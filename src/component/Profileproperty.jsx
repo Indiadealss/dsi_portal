@@ -9,6 +9,7 @@ export const Profileproperty = ({setValidator}) => {
     const [noBathroom,setNoBathroom] = useState('');
     const [ageProperty,setAgeProperty] = useState('');
     const [ownership,setOwnership] = useState('');
+    
   const noOfBedroom = [
     { name: 'one', title: 1 },
     { name: 'two', title: 2 },
@@ -24,9 +25,33 @@ export const Profileproperty = ({setValidator}) => {
     { name: 'four', title: 'More than 3' }
   ]
 
+  const sizeDropdown = [
+    "sq.ft",
+    "sq.m",
+    "arce",
+    "hactare"
+  ]
   const [dropdown, setDropdown] = useState(false)
   const [buildUpdropdown, setBuildUpDropdown] = useState(false)
   const [carpetArea, setCarpetArea] = useState(false)
+  const [plotarea,setPloatarea] = useState('sq.ft');
+  const [buildarea,setBuildarea] = useState('sq.ft');
+  const [carpet,setCarpet] = useState('sq.ft');
+
+  const handleSelect = (value) =>{
+    setPloatarea(value);
+    setDropdown(false);
+  }
+
+  const handleBuild = (value) => {
+    setBuildarea(value);
+    setBuildUpDropdown(false);
+  }
+
+  const handleCarpet = (value) => {
+      setCarpet(value);
+      setCarpetArea(false);
+  }
 
   function dropDownFun() {
     setDropdown(prev => !prev);
@@ -226,48 +251,25 @@ export const Profileproperty = ({setValidator}) => {
                   outline-none  font-medium 
                  rounded-lg text-sm px-4 py-2 cursor-pointer"
         >
-          sq.ft <ChevronDownIcon className="w-5 h-5" />
+          {plotarea} <ChevronDownIcon className="w-5 h-5" />
         </button>
 
         {/* Dropdown Menu */}
         {dropdown && (
           <div className="absolute right-0 mt-2 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
             <ul
-              className="py-2 text-sm text-gray-700"
+              className="py-2 text-sm text-gray-700 ps-3 py-2 text-medium"
               aria-labelledby="unitDropdownButton"
             >
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  sq.ft
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  sq.m
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  acre
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  hectare
-                </a>
-              </li>
+              {sizeDropdown.map((item)=>(
+                <li key={item} >
+                  <button type='button' 
+                  onClick={() => handleSelect(item)}
+                  className='w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer'>
+                    {item}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         )}
@@ -290,7 +292,7 @@ export const Profileproperty = ({setValidator}) => {
                  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium 
                  rounded-lg text-sm px-4 py-2 cursor-pointer"
         >
-          sq.ft <ChevronDownIcon className="w-5 h-5" />
+          {buildarea} <ChevronDownIcon className="w-5 h-5" />
         </button>
 
         {/* Dropdown Menu */}
@@ -300,38 +302,15 @@ export const Profileproperty = ({setValidator}) => {
               className="py-2 text-sm text-gray-700"
               aria-labelledby="unitDropdownButton"
             >
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  sq.ft
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  sq.m
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  acre
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  hectare
-                </a>
-              </li>
+              {sizeDropdown.map((item)=>(
+                <li key={item} >
+                  <button type='button' 
+                  onClick={() => handleBuild(item)}
+                  className='w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer'>
+                    {item}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         )}
@@ -354,7 +333,7 @@ export const Profileproperty = ({setValidator}) => {
                  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium 
                  rounded-lg text-sm px-4 py-2 cursor-pointer"
         >
-          sq.ft <ChevronDownIcon className="w-5 h-5" />
+          {carpet}<ChevronDownIcon className="w-5 h-5" />
         </button>
 
         {/* Dropdown Menu */}
@@ -364,38 +343,15 @@ export const Profileproperty = ({setValidator}) => {
               className="py-2 text-sm text-gray-700"
               aria-labelledby="unitDropdownButton"
             >
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  sq.ft
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  sq.m
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  acre
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  hectare
-                </a>
-              </li>
+             {sizeDropdown.map((item)=>(
+                <li key={item} >
+                  <button type='button' 
+                  onClick={() => handleCarpet(item)}
+                  className='w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer'>
+                    {item}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         )}
