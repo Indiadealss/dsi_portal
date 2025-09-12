@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 240) {
+      if (window.scrollY > 290) {
         setHideBanner(true);
       } else {
         setHideBanner(false);
@@ -197,7 +197,7 @@ const Home = () => {
   ]
   return (
     <div className='mb-10'>
-      <div className={`${hideBanner ? 'hidden':'block'}`}>
+      <div className='block'>
         <div className='relative'>
           <Banner image={banner} />
           <div className='block lg:absolute   top-[88%] object-cover w-[-webkit-fill-available]'>
