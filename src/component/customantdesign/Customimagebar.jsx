@@ -44,7 +44,7 @@ const Customimagebar = () => {
 
   return (
     <>
-    <div className='flex mt-[15%] justify-between mb-0' style={{width: "97%" }}>
+    <div className='flex flex-col md:flex-row mt-[15%] justify-between mb-0' style={{width: "97%" }}>
             <div>
               <h2 className='font-bold text-xl'>Recommended Projects</h2>
               <p className='text-sm text-gray-500'>The most search project in location</p>

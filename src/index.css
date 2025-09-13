@@ -1,4 +1,67 @@
 @import "tailwindcss";
+
+
+
+/* Modal container at bottom with no scroll */
+.modal-slide-up .ant-modal {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100% !important;
+  max-width: 100%;
+  border-radius: 16px 16px 0 0;
+  animation: slideUp 0.3s ease-out;
+  transform: translateY(100%);
+  height: auto;            /* modal adjusts only to content */
+  max-height: none;        /* disable internal scroll */
+}
+
+/* When open → slide into place */
+.modal-slide-up .ant-modal-open .ant-modal {
+  transform: translateY(0);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/* 
+/* Slide-up effect for Ant Design modal */
+.modal-slide-up .ant-modal {
+  transition: transform 0.3s ease-in-out !important;
+  transform: translateY(100%);
+}
+
+.modal-slide-up .ant-modal.ant-modal-open {
+  transform: translateY(0) !important;
+}
+
+@media (max-width: 640px) {
+  .custom-mobile-modal .ant-modal-content {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    padding: 0;
+  }
+
+   .custom-mobile-modal .ant-modal {
+    margin: 0;
+    bottom: 0;
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .costom-mobile-model .ant-modal-content{
+    padding: 1.5rem;
+  }
+
+} */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,6 +76,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+
 
 .footerA a {
   color: white;

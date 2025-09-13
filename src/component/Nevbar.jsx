@@ -22,6 +22,7 @@ import {
 import { Link } from "react-router";
 import { Login } from "./Login";
 import Custominputserchbox from "./customantdesign/Custominputserchbox";
+import Mobileloginmodal from "./Mobileloginmodal";
 
 const { Header } = Layout;
 
@@ -691,7 +692,11 @@ export default function Navbar() {
         />
       </Drawer>
     </Header>
-    <Login open={showLogin} onClose={() => setShowLogin(false)} />
+    {isMobile ? (
+  <Mobileloginmodal open={showLogin} onClose={() => setShowLogin(false)} />
+) : (
+  <Login open={showLogin} onClose={() => setShowLogin(false)} />
+)}
     </>
   );
 }
