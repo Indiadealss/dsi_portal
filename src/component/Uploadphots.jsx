@@ -1,10 +1,11 @@
 import React from 'react'
 
-export const Uploadfile = ({ handleupload, accept, multiple }) => {
+export const Uploadphots = ({ handleuploadphoto, accept, multiple }) => {
+    const uniqueId = "dropzone-photos";
   return (
     <div className="flex items-center justify-center w-full">
       <label
-        htmlFor="dropzone-file"
+        htmlFor={uniqueId}
         className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 
                    border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 
                    dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-600"
@@ -28,19 +29,19 @@ export const Uploadfile = ({ handleupload, accept, multiple }) => {
             />
           </svg>
           <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-            <span className="font-semibold">Click to upload</span> or drag and drop
+            <span className="font-semibold">Click to upload</span> or drag and dro
           </p>
           <p className="text-xs text-gray-500 dark:text-gray-400">
             Supports Images & Videos
           </p>
         </div>
        <input
-  id="dropzone-file"
+   id={uniqueId}
   type="file"
   className="hidden"
   accept={accept}
   multiple={multiple}
-  onChange={handleupload}  // ✅ FIXED
+  onChange={handleuploadphoto}  // ✅ FIXED
 />
       </label>
     </div>
