@@ -8,10 +8,12 @@ import Navbar from "./component/Nevbar";
 import Home from "./component/Home";
 import Footer from "./component/Footer";
 import Propertydetails from "./component/Propertydetails";
+import Userlogin from "./component/Userlogin";
 
 function App() {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
     {path: "/propertyDetails",element:<Propertydetails />},
     {path:"/post-property", element:<Postproperty />},
