@@ -33,7 +33,7 @@ const Propertypostresponse = ({ propertyIds, selectedId, onChange }) => {
                         </select>
                     </p>
                 </div>
-                <button type='button' className='text-xl text-medium text-blue-500'>View all</button>
+                <button type='button' className='hidden lg:block text-xl text-medium text-blue-500'>View all</button>
 
             </div>
 
@@ -72,11 +72,11 @@ const Propertypostresponse = ({ propertyIds, selectedId, onChange }) => {
                         </select>
                     </p>
                 </div>
-                <button type='button' className='text-xl text-medium text-blue-500'>View all Responses</button>
+                <button type='button' className='text-xl hidden lg:block text-medium text-blue-500'>View all Responses</button>
 
             </div>
 
-            <div className="flex justify-around">
+            <div className="flex flex-col lg:flex-row justify-around">
                 <Prbuderesponsis responses={buyerRes} resposerName='Buyer Responses' />
                 <Prbuderesponsis responses={dealerRes} resposerName='Dealer Responses' />
             </div>

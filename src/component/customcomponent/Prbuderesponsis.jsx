@@ -3,8 +3,8 @@ import React from 'react'
 const Prbuderesponsis = ({responses,resposerName}) => {
   return (
     <>
-        <div className="flex items-center bg-white border border-gray-200 rounded-xl  p-4 w-[40%] max-w-md">
-                    <div className="flex items-center justify-center text-gray-500 w-10">
+        <div className="flex items-center bg-white border border-gray-200 rounded-xl my-2 lg:my-0  p-4 lg:w-[40%] max-w-md">
+                    <div className=" items-center  justify-center text-gray-500 w-10">
                         <span className="text-5xl">
                             {responses > 1 ? 
                                 responses
