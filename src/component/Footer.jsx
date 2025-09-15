@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "../Images/logo.png";
+import { CiLocationOn } from "react-icons/ci";
+import { MdOutlineAttachEmail } from "react-icons/md";
 import {
   FacebookFilled,
   TwitterOutlined,
@@ -7,40 +9,27 @@ import {
   YoutubeFilled,
   RedditCircleFilled,
   DribbbleCircleFilled,
+  PhoneOutlined
 } from "@ant-design/icons";
 
 function Footer() {
   return (
     <footer className="bg-[#011638] text-white p-6 footerA  md:py-10">
+      <div className="text-right">
+        
+      </div>
       {/* Top Section with Logo and Social */}
       <div className="container mx-auto border-b border-gray-700 pb-6">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
           {/* Logo */}
           <a href="/" className="flex-shrink-0">
             <img src={logo} alt="..." width={150} />
           </a>
-
-          {/* Social Media */}
-          <div className="flex gap-3 text-white text-lg">
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <FacebookFilled />
-            </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <TwitterOutlined />
-            </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <LinkedinFilled />
-            </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <YoutubeFilled />
-            </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <RedditCircleFilled />
-            </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <DribbbleCircleFilled />
-            </a>
-          </div>
+          <div className="">
+            <p><span className="pt-2 px-2 text-xl"><PhoneOutlined className="rotate-90" /></span><span className="font-medium text-xl ">+91 9818763100</span></p>
+            <p className="flex"><span className="pt-2 px-2 text-xl"><MdOutlineAttachEmail  /></span><span className="font-medium text-xl ">info@indiadealss.com</span></p>
+            </div>
+          
         </div>
       </div>
 
@@ -77,15 +66,10 @@ function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="mb-3 font-semibold">Insights</h4>
-          <ul className="space-y-2">
-            <li><a href="#!" className="hover:text-gray-300">Contributions</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Community Engagement</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Donate</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Volunteer Opportunities</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Local Initiatives</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Community Partnerships</a></li>
-          </ul>
+          <h4 className="mb-3 font-semibold text-center">Address</h4>
+          <div className="">
+            <p className="flex"><span className="text-lg pt-2"><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium">Rise shoplex SF-30, and 31 second floor ,Sector Techzone 4,Grater Noida West 201306</span></p>
+          </div>
         </div>
       </div>
 
@@ -94,6 +78,28 @@ function Footer() {
         <div className="text-gray-400 text-center lg:text-left">
           © 2025. All Rights Reserved.
         </div>
+
+        {/* Social Media */}
+          <div className="flex gap-3 text-white text-lg">
+            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+              <FacebookFilled />
+            </a>
+            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+              <TwitterOutlined />
+            </a>
+            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+              <LinkedinFilled />
+            </a>
+            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+              <YoutubeFilled />
+            </a>
+            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+              <RedditCircleFilled />
+            </a>
+            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+              <DribbbleCircleFilled />
+            </a>
+          </div>
       </div>
     </footer>
   );

@@ -462,7 +462,6 @@ export default function Navbar() {
   const profileItems = [
   { key: "profile", label: <Link onClick={() => setShowLogin(true)}>Login/Register</Link> },
   {key:"myactivty",label:<Link to='/' >My activity</Link>},
-  { key: "settings", label: "Settings" },
   { type: "divider" },
   { key: "logout", danger: true, label: "Log out" },
 ];
