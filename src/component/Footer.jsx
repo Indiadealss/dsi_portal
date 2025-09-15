@@ -26,17 +26,17 @@ function Footer() {
             <img src={logo} alt="..." width={150} />
           </a>
           <div className="">
-            <p><span className="pt-2 px-2 text-xl"><PhoneOutlined className="rotate-90" /></span><span className="font-medium text-xl ">+91 9818763100</span></p>
-            <p className="flex"><span className="pt-2 px-2 text-xl"><MdOutlineAttachEmail  /></span><span className="font-medium text-xl ">info@indiadealss.com</span></p>
+            <p><span className="pt-2 px-2 text-xl text-blue-600"><PhoneOutlined className="rotate-90" /></span><span className="font-medium text-xl ">+91 9818763100</span></p>
+            <p className="flex"><span className="pt-2 text-blue-600 px-2 text-xl"><MdOutlineAttachEmail  /></span><span className="font-medium text-xl ">info@indiadealss.com</span></p>
             </div>
           
         </div>
       </div>
 
       {/* Widgets Section */}
-      <div className="container mx-auto py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
-        <div>
-          <h4 className="mb-3 font-semibold">Land/Plots</h4>
+      <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
+        <div className="mx-auto hidden lg:block">
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Land/Plots</h4>
           <ul className="space-y-2">
             <li><a href="#!" className="hover:text-gray-300">Accessibility Statement</a></li>
             <li><a href="#!" className="hover:text-gray-300">ADA Compliance</a></li>
@@ -46,8 +46,8 @@ function Footer() {
             <li><a href="#!" className="hover:text-gray-300">Design Guidelines</a></li>
           </ul>
         </div>
-        <div>
-          <h4 className="mb-3 font-semibold">Home</h4>
+        <div className="mx-auto hidden lg:block">
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Home</h4>
           <ul className="space-y-2">
             <li><a href="#!" className="hover:text-gray-300">Shop Now</a></li>
             <li><a href="#!" className="hover:text-gray-300">Product Categories</a></li>
@@ -56,8 +56,8 @@ function Footer() {
             <li><a href="#!" className="hover:text-gray-300">Exclusive Deals</a></li>
           </ul>
         </div>
-        <div>
-          <h4 className="mb-3 font-semibold">Commercials</h4>
+        <div className="mx-auto hidden lg:block">
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Commercials</h4>
           <ul className="space-y-2">
             <li><a href="#!" className="hover:text-gray-300">Partners</a></li>
             <li><a href="#!" className="hover:text-gray-300">Affiliates</a></li>
@@ -66,9 +66,9 @@ function Footer() {
           </ul>
         </div>
         <div>
-          <h4 className="mb-3 font-semibold text-center">Address</h4>
+          <h4 className="mb-3 font-semibold text-center ">Address</h4>
           <div className="">
-            <p className="flex"><span className="text-lg pt-2"><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium">Rise shoplex SF-30, and 31 second floor ,Sector Techzone 4,Grater Noida West 201306</span></p>
+            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium">Rise shoplex SF-30, and 31 second floor ,Sector Techzone 4,Grater Noida West 201306</span></p>
           </div>
         </div>
       </div>
