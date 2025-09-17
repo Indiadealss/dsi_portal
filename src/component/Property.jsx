@@ -168,7 +168,7 @@ export const Property = () => {
                 </div>
               </div>
               <div>
-                <div className='flex w-[10vw] justify-around'>
+                <div className='flex w-[10vw] justify-around hidden'>
                   <h5>Short By</h5>
                   <GoChevronDown className='mt-2' />
                 </div>

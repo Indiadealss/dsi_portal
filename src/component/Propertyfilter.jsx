@@ -3,6 +3,7 @@ import Filterbutton from './Filterbutton'
 import { GoChevronDown } from "react-icons/go";
 import { Rangeslider } from './Rangeslider';
 import { Addfilterbutton } from './Addfilterbutton';
+import { MdFilterAlt } from "react-icons/md";
 import { Checkfilter } from './Checkfilter';
 import { Propertyfilterbutton } from './Propertyfilterbutton';
 import { PropertiesData } from './PropertiesData';
@@ -426,10 +427,10 @@ export default function Propertyfilter() {
 
       {/* Mobile Button */}
       <button
-        className="md:hidden h-10  p-0 m-5  bg-blue-600 text-white rounded-lg shadow-lg"
+        className="md:hidden h-[fit-content]  px-2 py-1 m-5 text-sm bg-blue-600 text-white rounded-lg shadow-lg"
         onClick={() => setIsMobileOpen(true)}
       >
-        Filters
+        <MdFilterAlt />
       </button>
       <div className='md:hidden flex justify-between my-5 overflow-hidden'>
         <div className='overscroll-none overflow-auto'>
@@ -438,7 +439,7 @@ export default function Propertyfilter() {
               {propertyFilterData.map((item, index) => {
                 return (
                   <div key={index}>
-                    <button type="button" data-key={index} name={item.name} onClick={mobilFilterOpen} className="text-gray flex justify-between px-3 py-1  me-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-[40px] border border-gray-300 outline-none">
+                    <button type="button" data-key={index} name={item.name} onClick={mobilFilterOpen} className="text-gray w-[max-content] flex justify-between px-3 py-1  me-2 mb-2 text-xs font-medium text-gray-900 bg-white rounded-xl border border-gray-300 outline-none">
                       {item.title}
                     </button>
                   </div>
@@ -448,7 +449,7 @@ export default function Propertyfilter() {
           </div>
         </div>
         <div>
-          <div className='flex w-[10vw] justify-around'>
+          <div className='flex w-[10vw] justify-around hidden'>
             <h5>Short By</h5>
 
           </div>
@@ -459,7 +460,7 @@ export default function Propertyfilter() {
       {/* Mobile Overlay */}
       {isMobileOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-40 z-50">
-          <div className="bg-white w-full h-full p-4 overflow-y-auto">
+          <div className="bg-white w-full h-full p-0 overflow-y-auto">
             <div className="flex justify-between items-center border-b pb-2 mb-4">
               <h2 className="text-lg font-semibold">Filters</h2>
               <button onClick={() => setIsMobileOpen(false)}>✕</button>
@@ -468,8 +469,8 @@ export default function Propertyfilter() {
             {/* Under Construction Filter */}
             <div className="flex">
               {/* LEFT SIDE LIST */}
-              <div className="mb-6 size-fit flex bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-                <div className="w-full max-w-md p-4">
+              <div className="mb-6 size-fit w-[35vw] flex bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-full max-w-md p-2">
                   <div className="flow-root">
                     <div className="flex">
                       <ul
@@ -484,7 +485,7 @@ export default function Propertyfilter() {
                             onClick={() => setMobileOpenIndex(item.name)}
                           >
                             <div className="flex justify-between">
-                              <h3 className="">{item.title}</h3>
+                              <h3 ><span className="text-xs font-normal">{item.title}</span></h3>
                             </div>
                           </li>
                         ))}
