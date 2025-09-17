@@ -1,12 +1,14 @@
-import React, { Children, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-const Scrooltop = () => {
-const location = useLocation()
-    useEffect(() => {
-        window.scrollTo({top:0,behavior:"smooth"})
-    },[location.pathname])
-  return Children;
+const Scrooltop = ({ children }) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // 👈 Scroll to top on route change
+  }, [pathname]);
+
+  return children;
 };
 
 export default Scrooltop;

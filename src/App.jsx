@@ -9,6 +9,7 @@ import Home from "./component/Home";
 import Footer from "./component/Footer";
 import Propertydetails from "./component/Propertydetails";
 import Userlogin from "./component/Userlogin";
+import Scrooltop from "./component/customcomponent/Scrooltop";
 
 function App() {
   let routes = useRoutes([
@@ -22,9 +23,11 @@ function App() {
 
   return (
     <>
+    <Scrooltop>
       <Navbar />   {/* 👈 always visible */}
       {routes}
       <Footer />
+      </Scrooltop>
     </>
   );
 }
