@@ -45,7 +45,7 @@ const Propertydetailsstickcard = () => {
   return (
     <div className='mb-5'>
     <div className='border-b border-gray-300'>
-        <div className='mx-10'>
+        <div className='mx-10 hidden lg:block'>
             <button className='text-white text-[10px] font-bold px-1 bg-[#814883fc]'>Featured</button>
         <div className='flex'>
             <div className='flex pe-[20px]'>
@@ -59,7 +59,7 @@ const Propertydetailsstickcard = () => {
             </div>
 
             {/* details */}
-            <div className='bg-white shadow-md max-w-sm absolute right-5 rounded-lg border border-gray-300'>
+            <div className='hidden lg:block lg:absolute bg-white shadow-md max-w-sm  right-5 rounded-lg border border-gray-300'>
                 <div className='flex  px-3 pt-3'>
                     <img src={user} alt='...' className='w-15 h-15 me-2 rounded-full' />
                     <div>
