@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Loginform } from './Loginform';
+import { Loginform } from './Login_2';
 import { RxCross1 } from "react-icons/rx";
 
 export const Login = ({ open, onClose  }) => {
