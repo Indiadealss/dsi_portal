@@ -10,10 +10,12 @@ import Footer from "./component/Footer";
 import Propertydetails from "./component/Propertydetails";
 import Userlogin from "./component/Userlogin";
 import Scrooltop from "./component/customcomponent/Scrooltop";
+import Emicomponent from "./component/customantdesign/Emicomponent";
 
 function App() {
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
     {path: "/propertyDetails",element:<Propertydetails />},

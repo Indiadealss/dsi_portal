@@ -9,15 +9,17 @@ import {
   Button,
   Drawer,
   Grid,
+  Input, 
+  Space,
   Dropdown,
   Avatar,
-  Space,
 } from "antd";
 import {
   MenuOutlined,
   BellOutlined,
   UserOutlined,
   DownOutlined,
+  
 } from "@ant-design/icons";
 import { Link } from "react-router";
 import { Login } from "./Login";
@@ -218,7 +220,7 @@ const menuItems = [
   },
   {
     key: "ForTalents",
-    label: "For Talents",
+    label: "For Tenants",
     children: [
       { key: "RENTAHOME",
         label: "RENT A HOME",
@@ -430,11 +432,99 @@ const menuItems = [
 
 
 
+
 export default function Navbar() {
+  
+  const [search, setSearch] = useState("");
+    const [query, setQuery] = useState("");
+    const [results, setResults] = useState([]);
+
+
+    const fetchLocations = async (value, setData) => {
+    if (value.length > 2) {
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
+        );
+        const data = await res.json();
+        console.log(data);
+        
+        setData(data);
+      } catch (error) {
+        console.log("Error fetching location:", error);
+      }
+    } else {
+      setData([]);
+    }
+  };
+
+    const handleSearch = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    fetchLocations(value, setResults);
+  };
+
+   const handleSelect = (place) => {
+    if (place.address.village || place.address.city || place.address.town) {
+      setQuery(
+        place.address.village ||
+          place.address.city ||
+          place.address.town ||
+          place.display_name
+      );
+      setLocationNav(
+      place.address.village ||
+          place.address.city ||
+          place.address.town ||
+          place.display_name
+    );
+    }
+    
+    setResults([]);
+    setShowLocality(true);
+  };
+  
+
+  const dropdownContent = (
+    <div className=" bg-white w-100 rounded-lg">
+      {/* Search box */}
+      <div className="p-3">
+
+      
+      <h2><span className="text-xl font-medium text-gray-600"> Explore Real state in...</span></h2>
+
+      {/* Custom component */}
+      <div className="p-2 bg-gray-100 rounded border border-gray-300 my-4 ">
+        <input className="text-sm w-full border-none outline-none" value={query} onChange={handleSearch} id="city" placeholder="Your City" />
+        
+      </div>
+      {results.length > 0 && (
+        <ul className="border border-gray-200 mt-2 rounded-lg shadow-md bg-white max-h-48 overflow-y-auto">
+          {results.map((item) => (
+            <li
+              key={item.place_id}
+              onClick={() => handleSelect(item)}
+              className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+            >
+              
+              {item.address.city}
+            </li>
+          ))}
+        </ul>
+      )}
+      </div>
+      <div className="w-full border-t border-gray-300 "></div>
+      <div className="p-3 flex">
+      <span className="text-gray-500 cursor-pointer" onClick={() => setLocationNav('All India')}>All India</span>
+      <div className="h-6 w-1 border-e border-gray-300 mx-5"></div>
+      </div>
+    </div>
+  );
 
   const location = useLocation();
 
   const [scroll,setScroll] = useState(false);
+  const [locationNav,setLocationNav] = useState('All India')
 
 
   useEffect(() => {
@@ -588,6 +678,7 @@ export default function Navbar() {
       }}
     >
       {/* Logo */}
+      <div className="flex">
       <a
         href="/"
         style={{
@@ -599,6 +690,22 @@ export default function Navbar() {
       >
         <img src={logo} alt="logo" width={150} />
       </a>
+
+{/* <!-- Dropdown menu --> */}
+ <Dropdown
+      trigger={["click", "hover"]}
+      dropdownRender={() => dropdownContent} // 👈 full control
+      placement="bottomLeft"
+    >
+      <a onClick={(e) => e.preventDefault()}>
+        <Space className="text-white  px-3 py-1 rounded-md cursor-pointer">
+          {locationNav}
+          <DownOutlined />
+        </Space>
+      </a>
+    </Dropdown>
+
+      </div>
 
       {/* Right side */}
       <div style={{ display: "flex", alignItems: "center" }}>

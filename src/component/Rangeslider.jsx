@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const Rangeslider = () => {
+export const Rangeslider = ({lethid}) => {
   const MIN = 1000;
   const MAX = 100000;
 
@@ -59,7 +59,7 @@ export const Rangeslider = () => {
       </div>
 
       {/* Budget Display or Dropdowns */}
-      <div className="flex justify-between mt-6">
+      <div className={`${!lethid ? "flex justify-between mt-6" : 'hidden'}`}>
         <div>
           <select
             value={minValue}

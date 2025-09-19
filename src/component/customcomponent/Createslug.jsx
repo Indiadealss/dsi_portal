@@ -14,7 +14,6 @@ const Createslug = () => {
     switch (slug) {
         case "user":
             return <Userlogin />;
-
          case "property":
       return <Property />;
     case "post-property":

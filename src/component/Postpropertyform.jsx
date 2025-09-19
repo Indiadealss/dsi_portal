@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Postbasicdetailsform } from './Postbasicdetailsform';
 import { Locationbutton } from './Locationbutton';
 import { Profileproperty } from './Profileproperty';

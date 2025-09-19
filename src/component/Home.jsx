@@ -200,7 +200,7 @@ const Home = () => {
       <div className='block'>
         <div className='relative'>
           <Banner image={banner} />
-          <div className='block lg:absolute   top-[88%] object-cover w-[-webkit-fill-available]'>
+          <div className='block lg:absolute  topSearchbox  object-cover w-[-webkit-fill-available]'>
             <Searchbox />
           </div>
         </div>

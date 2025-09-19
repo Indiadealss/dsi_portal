@@ -324,11 +324,15 @@ a {
   }
 
   .ant-btn {
-    font-size: 16px;
-    padding: 10px 22px;
+    font-size: 0.9rem;
+    padding: 0px 18px;
+    font-weight:600;
   }
   .homeContainer{
     max-width: 1200px !important;
+  }
+  .topSearchbox{
+    top:73%;
   }
 }
 
@@ -336,6 +340,9 @@ a {
 @media screen and (min-width: 1400px) {
   .homeContainer{
     max-width: 1270px !important;
+  }
+  .topSearchbox{
+    top:77%;
   }
 }
 
@@ -364,6 +371,21 @@ a {
   }
 }
 
+/* ====== Ultra-wide 4K (≥1650px) ====== */
+@media screen and (min-width: 1650px) {
+  .topSearchbox{
+    top:80%;
+  }
+}
+
+/* ====== Ultra-wide 4K (≥1999px) ====== */
+@media screen and (min-width: 1999px) {
+  .topSearchbox{
+    top:86%;
+  }
+}
+
+
 /* ====== Ultra-wide 4K (≥2560px) ====== */
 @media screen and (min-width: 2560px) {
   h1 { font-size: 3rem; line-height: 3.2rem; }
@@ -376,6 +398,10 @@ a {
     font-size: 20px;
     padding: 14px 32px;
     border-radius: 12px;
+  }
+
+  .topSearchbox{
+    top:88%;
   }
 
   .top {
