@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { Loginform } from "./Loginform";
+//import { Loginform } from "./Loginform";
+import { Loginform } from './Login_2';
 
 const Mobileloginmodal = ({ open, onClose }) => {
     // Close modal when pressing ESC
