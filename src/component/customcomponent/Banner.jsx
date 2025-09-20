@@ -3,7 +3,7 @@ const Banner = ({image}) => {
   return (
     <>
         <div className=''>
-           <img src={image} alt='...' className='banerImage' />
+           <img src={image} alt='...' className='banerImage w-[100%]' />
         </div>
     </>
   )

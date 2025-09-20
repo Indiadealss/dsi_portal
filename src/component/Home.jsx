@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { WhatsAppOutlined,ArrowRightOutlined } from "@ant-design/icons";
 import { Card, Avatar, Typography } from "antd";
-import banner from '../Images/1366-banner-1.jpg';
+import banner from '../Images/banner.jpg';
 import Banner from './customcomponent/Banner';
 import Searchbox from './customcomponent/Searchbox';
 import Customcardcrousal from './customantdesign/Customcardcrousal';

@@ -5,6 +5,7 @@ import Custominputserchbox from '../customantdesign/Custominputserchbox';
 import { IoIosAdd, IoIosArrowDown } from "react-icons/io";
 import { Rangeslider } from '../Rangeslider';
 import { Addfilterbutton } from '../Addfilterbutton';
+import { Link } from 'react-router';
 
 const Searchbox = () => {
   const [active, setActive] = useState('buy');
@@ -121,12 +122,35 @@ const Searchbox = () => {
     }
 
   }
+
+  function ShowDropDrown(){
+    setShowDropdown(!showDropdown);
+    setsearButton(true);
+    setButtonName('')
+  }
+
+  function ShowDropDrown2(){
+    setShowDropdown2(!showDropdown2)
+  }
   return (
     <>
       <div className="shadow-xl bg-white rounded-xl w-auto lg:w-[max-content] mx-auto z-11 relative">
         {/* Top Nav Buttons */}
         <div className='hidden lg:block lg:flex border-b border-b-gray-100'>
           {button.map((item) => (
+            item.key === "postProperty" ? (
+               <Link
+        key={item.key}
+        to="/post-property" // <-- put your route here
+        className='py-6'
+      >
+        <span  className={`${active === item.key
+          ? 'px-10 py-5 text-gray-500 font-medium  border-gray-300 cursor-pointer '
+          : 'px-10 py-5 text-gray-500 font-medium  border-gray-300 cursor-pointer '}`}>
+            {item.label}
+            </span>
+      </Link> 
+            ): (
             <button
               type='text'
               key={item.key}
@@ -138,18 +162,19 @@ const Searchbox = () => {
             >
               {item.label}
             </button>
+            )
           ))}
         </div>
 
         {/* Search Bar */}
         <div className="flex relative z-10">
           <div className=" border-e border-gray-100 hidden lg:block">
-            <button onClick={() => { setShowDropdown(!showDropdown); setsearButton(true); setButtonName('') }} className='cursor-pointer border-none flex text-sm w-[max-content] font-medium text-gray-500 p-3'>
+            <button onClick={ShowDropDrown} className='cursor-pointer border-none flex text-sm w-[max-content] font-medium text-gray-500 p-3'>
               {filtername} <span className={`${active === 'newlaunch' ? 'hidden' : ''}`}><DownOutlined className='px-2' /></span>
             </button>
           </div>
           <div className={`${secondfiltername !== '' ? " border-e border-gray-100 hidden lg:block" : 'hidden'}`}>
-            <button onClick={() => setShowDropdown2(!showDropdown2)} className='cursor-pointer border-none flex text-sm w-[max-content] font-medium text-gray-500 p-3'>
+            <button onClick={ShowDropDrown2} className='cursor-pointer border-none flex text-sm w-[max-content] font-medium text-gray-500 p-3'>
               {secondfiltername} <DownOutlined className='px-2' />
             </button>
           </div>
