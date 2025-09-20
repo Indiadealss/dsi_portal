@@ -1,7 +1,13 @@
 import React, { useRef } from "react";
 import { Carousel, Card, Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import img1 from "../../Images/cardBander.jpg";
+import img1 from "../../Images/Bhutani.497cb9c2.png";
+import img2 from "../../Images/Gaurs.85564924.png";
+import img3 from "../../Images/m3m.aa9e165b.png";
+import img4 from "../../Images/Prestige.76918ca7.png";
+import img5 from "../../Images/Irish.ac2de9f3.png";
+import img6 from "../../Images/Dlf.6cb4c42a.png";
+import img7 from "../../Images/Group108o.ee6a8587.png"
 
 const Smallmain = ({title}) => {
   const carouselRef = useRef(null);
@@ -18,18 +24,18 @@ const Smallmain = ({title}) => {
   
   const card = [
     { img: img1, label: "ATS Kingston Heath", description: "2, 3, 4 BHK Apartment in Sector 110, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
+    { img: img2, label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
+    { img: img3, label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
+    { img: img4, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img5, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img6, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img7, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
     { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img2, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img3, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img4, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img5, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img6, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
   ];
 
     
@@ -76,7 +82,7 @@ const Smallmain = ({title}) => {
         className="mobileDisplay"
         style={{
           position: "absolute",
-          top: "50%",
+          top: "75%",
           left: "-15px",
           transform: "translateY(-50%)",
           zIndex: 1,
@@ -96,10 +102,10 @@ const Smallmain = ({title}) => {
                 boxShadow: "none",
               }}
             >
-              <img src={item.img} alt={item.label} className="rounded-xl w-full" />
-              <div className="p-3 bg-transparent">
+              <img src={item.img} alt={item.label} className="rounded-xl w-[9vw] h-[8vw]" />
+              {/* <div className="p-3 bg-transparent">
                 <p className="font-medium text-xs">{item.label}</p>
-              </div>
+              </div> */}
             </Card>
           </div>
         ))}
@@ -113,7 +119,7 @@ const Smallmain = ({title}) => {
         className="mobileDisplay"
         style={{
           position: "absolute",
-          top: "50%",
+          top: "75%",
           right: "-15px",
           transform: "translateY(-50%)",
           zIndex: 1,

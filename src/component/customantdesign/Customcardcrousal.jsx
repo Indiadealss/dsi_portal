@@ -2,6 +2,10 @@ import React, { useRef } from "react";
 import { Carousel, Card, Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import img1 from "../../Images/cardBander.jpg";
+import img2 from "../../Images/Gaurs.85564924.png";
+import img3 from "../../Images/m3m.aa9e165b.png";
+import img4 from "../../Images/Prestige.76918ca7.png";
+import img5 from "../../Images/Irish.ac2de9f3.png";
 
 const Customcardcrousal = () => {
   const carouselRef = useRef(null);
@@ -15,10 +19,10 @@ const Customcardcrousal = () => {
   };
 
   const card = [
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3, 4 BHK Apartment in Sector 110, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: img5, label: "ATS Kingston Heath", description: "2, 3, 4 BHK Apartment in Sector 110, Noida", price: "₹ 36,000 onwards" },
+    { img: img2, label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
+    { img: img3, label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
+    { img: img4, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
   ];
 
   // ✅ react-slick settings

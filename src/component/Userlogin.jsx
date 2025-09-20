@@ -4,7 +4,7 @@ import Customimagebar from './customantdesign/Customimagebar'
 import Appartmentvill from './customantdesign/Appartmentvill'
 import Newlaunchcard from './customcomponent/Newlaunchcard'
 import Banner from './customcomponent/Banner';
-import banner from '../Images/1366-banner-1.jpg';
+import banner from '../Images/logoi.png';
 import Customcard from './customantdesign/Customcard'
 import { Card } from 'antd'
 import Propertypostresponse from './customcomponent/Propertypostresponse'
