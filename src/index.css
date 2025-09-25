@@ -2,6 +2,10 @@
 
 
 
+.hidsit{
+  display: none;
+}
+
 /* Modal container at bottom with no scroll */
 .modal-slide-up .ant-modal {
   margin: 0;
@@ -276,7 +280,7 @@ a {
 
 .ant-btn {
   font-size: 14px;
-  padding: 6px 16px;
+  padding: 6px 0px;
   border-radius: 8px;
 }
 
@@ -284,7 +288,41 @@ a {
   font-size: 24px;
 }
 
+.cutit{
+  display: none;
+}
 
+
+/* ===== Mobile (≥425px) ===== */
+@media screen and (min-width: 320px) {
+  .topSearchbox{
+    top:86%;
+  }
+
+  .banerImage{
+    margin-left: auto;
+    margin-right: auto;
+    width: 98%;
+    height: 40vw !important;
+    border-radius: 0.5vw;
+  }
+
+  .searchBar{
+    width:80vw;
+  }
+
+  .searchBoxes{
+    width: 100%;
+  }
+  .buttonStyle{
+    display: none;
+  }
+
+  .loctate{
+    display: none;
+  }
+  
+}
 /* ====== Tablet (≥768px) ====== */
 @media screen and (min-width: 768px) {
   h1 { font-size: 2rem; line-height: 2.3rem; }
@@ -292,10 +330,20 @@ a {
   p  { font-size: 1rem; }
   a  { font-size: 1rem; }
 
- 
+ .topSearchbox{
+    top:86%;
+  }
   .ant-btn {
     font-size: 15px;
     padding: 8px 20px;
+  }
+
+  .banerImage{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 20vw !important;
+    border-radius: 0;
   }
 }
 

@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Uploadfile } from './Uploadfile'
 import { Uploadphots } from './Uploadphots';
+import { useDispatch } from 'react-redux';
+import { updateField } from './Redux/propertySlice';
 
 export const Photovideo = () => {
   const [videoFile, setVideoFile] = useState([]);
   const [images, setImages] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      console.log(images,"Images are");
+      console.log(videoFile,"videos are");
+      
+      dispatch(updateField({images:images,video:videoFile}))
+  },[videoFile,images])
 
   // Handle video upload
   function videoUp(e) {

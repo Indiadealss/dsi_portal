@@ -19,6 +19,7 @@ import Antdcardcrousal from './customantdesign/Antdcardcrousal';
 import Customantservicecard from './customantdesign/Customantservicecard';
 import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
 import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
+import Contiunebrowser from './customcomponent/Contiunebrowser';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -200,12 +201,17 @@ const Home = () => {
       <div className='block'>
         <div className='relative'>
           <Banner image={banner} />
-          <div className='block lg:absolute  topSearchbox  object-cover w-[-webkit-fill-available]'>
+          <div className='absolute  topSearchbox  object-cover w-[-webkit-fill-available] flex '>
             <Searchbox />
           </div>
         </div>
       </div>
-      {/* small */}
+
+      <div className='mt-20'>
+        {/* <Smallmain title='Continue browsing...' /> */}
+        <Contiunebrowser title='Continue browsing...' />
+      </div>
+      {/* small {'GET STARTED WITH EXPLORING REAL ESTATE OPTIONS'} */}
       <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
         {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
         <div className="lg:col-span-8 ms-3 space-y-10">

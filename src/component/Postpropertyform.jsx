@@ -5,8 +5,10 @@ import { Profileproperty } from './Profileproperty';
 import { Photovideo } from './Photovideo';
 import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { useSelector } from 'react-redux';
 
 export const Postpropertyform = () => {
+  const propertyFirstData = useSelector((state) => state.property.data);
   const [continueNO, setContinueNo] = useState(0);
   const [steps, setSteps] = useState([
     { id: 1, label: "Basic Details", status: true, currentForm: Postbasicdetailsform },
@@ -29,6 +31,9 @@ export const Postpropertyform = () => {
   }
 
   function continueButton() {
+    
+    console.log(propertyFirstData);
+    
     if (validateRef.current) {
       const isValid = validateRef.current(); // call child validation
       if (!isValid) {

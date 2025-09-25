@@ -14,6 +14,7 @@ import {
   Dropdown,
   Avatar,
 } from "antd";
+import { CgMenuLeft } from "react-icons/cg";
 import {
   MenuOutlined,
   BellOutlined,
@@ -431,6 +432,111 @@ const menuItems = [
 ];
 
 
+const MobilemenuItems = [
+  {
+    key: "ForBuyers",
+    label: "For Buyers",
+    children: [
+      {
+        key: "BuyAHome",
+        label: "Buy A Home",
+        children: [
+          { key: "flats", label: <Link to='/property'>Flats</Link>,path:'/property'},
+          { key: "builderFloors", label: <Link to='/property'>Builder Floors</Link>,path:'/property' },
+          { key: "independenthouse", label: <Link to='/property'>Independent House</Link>,path:'/property' },
+          { key: "PlotsinGreaterNoida", label: <Link to='/property'>"Plots in Greater Noida"</Link>,path:'/property' },
+          { key: "ServicedApartment", label: <Link to='/property'>Serviced Apartment</Link>,path:'/property' },
+          { key: "studioapartments", label: <Link to='/property'>Studio Apartments / 1 RK flats</Link>,path:'/property' },
+          { key: "propertyingraternoida", label: <Link to='/property'>Property in Greater Noida</Link>, path:'/property' },
+          { key: "verified", label: <Link to='/property'>Verified Property</Link>,path:'/property' },
+          { key: "newprojectsingraternoida", label: <Link to='/property'>New Projects in Greater Noida</Link>,path:'/property' },
+          { key: "imageBuyHome", label: <img src={inheight} alt="menu" /> },
+        ],
+      },
+      {
+        key: "LandPlot",
+        label: "Land/Plot",
+        children: [
+          { key: "GatedCommunityPlots", label: <Link to='/property'>Gated Community Plots in Greater Noida</Link> },
+          { key: "CornerPlots", label: <Link to='/property'>Corner Plots in Greater Noida</Link> },
+          { key: "EastFacingPlots", label: <Link to='/property'>East Facing Plots in Greater Noida</Link> },
+          { key: "FreeholdPlots", label: <Link to='/property'>Freehold Plots in Greater Noida</Link> },
+          { key: "AuthorityPlots", label: <Link to='/property'>Authority Plots in Greater Noida</Link> },
+          { key: "UPAVPPlots", label: <Link to='/property'>UPAVP Authority Plots in Greater Noida</Link> },
+          { key: "GNIDAPlots", label: <Link to='/property'>GNIDA Authority Plots in Greater Noida</Link> },
+          { key: "imageLandPlot", label: <img src={inheight} alt="menu" /> },
+        ],
+      },
+      {
+        key: "commercial",
+        label: "Commercial",
+        children: [
+          { key: "readyOffice", label: <Link to='/property'>Ready to Move Office Spaces</Link> },
+          { key: "bareShell", label: <Link to='/property'>Bare Shell Office Spaces</Link> },
+          { key: "coworking", label: <Link to='/property'>Co-working Office Spaces</Link> },
+          { key: "shops", label: <Link to='/property'>Shops</Link> },
+          { key: "factory", label: <Link to='/property'>Factory</Link> },
+          { key: "warehouses", label: <Link to='/property'>Warehouses</Link> },
+          { key: "showrooms", label: <Link to='/property'>Showrooms</Link> },
+          { key: "industrialLand", label: <Link to='/property'>Industrial Lands/Plots</Link> },
+          { key: "agriLand", label: <Link to='/property'>Agricultural/Farm Land</Link> },
+          { key: "commercialProperty", label: <Link to='/property'>Commercial Property for Sale in Greater Noida</Link> },
+          { key: "verifiedCommercial", label: <Link to='/property'>Verified Commercial Property in Greater Noida</Link> },
+          { key: "newCommercialProjects", label: <Link to='/property'>New Commercial Projects in Greater Noida</Link> },
+          { key: "imageCommercial", label: <img src={inheight} alt="menu" /> },
+        ],
+      },
+      {
+        key: "popularareas",
+        label: "Popular Areas",
+        children: [
+          { key: "PropertyinSector1GreaterNoidaWest", label: <Link to='/property'>Property in Sector 1 Greater Noida West</Link> },
+          { key: "PropertyinTechzone4GreaterNoidaWest", label: <Link to='/property'>Property in Techzone 4 Greater Noida West</Link> },
+          { key: "PropertyinSector16CGreaterNoida", label: <Link to='/property'>Property in Sector 16C Greater Noida</Link> },
+          { key: "PropertyinSector4GreaterNoida", label: <Link to='/property'>Property in Sector 4 Greater Noida</Link> },
+          { key: "PropertyinNoidaExtension", label: <Link to='/property'>Property in Noida Extension</Link> },
+          { key: "PropertyinSector16GreaterNoida", label: <Link to='/property'>Property in Sector 16 Greater Noida</Link> },
+          { key: "PropertyinSector16BGreaterNoida", label: <Link to='/property'>Property in Sector 16B Greater Noida</Link> },
+          { key: "PropertyinSectorChi5GreaterNoida", label: <Link to='/property'>Property in Sector Chi 5 Greater Noida</Link> },
+          { key: "PropertyinSector10GreaterNoidaWest", label: <Link to='/property'>Property in Sector 10 Greater Noida West</Link> },
+          { key: "imagePopular", label: <img src={inheight} alt="menu" /> },
+        ],
+      },
+      {
+        key: "insights",
+        label: "Insights",
+        children: [
+          { key: "GreaterNoidaOverview", label: <Link to='/property'>Greater Noida Overview</Link> },
+          { key: "LocalitiesinGreaterNoida", label: <Link to='/property'>Localities in Greater Noida</Link> },
+          { key: "ReviewsofGreaterNoida", label: <Link to='/property'>Reviews of Greater Noida</Link> },
+          { key: "TransactionPricesinGreaterNoida", label: <Link to='/property'>Transaction Prices in Greater Noida</Link> },
+          { key: "PropertyRatesinGreaterNoida", label: "Property Rates in Greater Noida" },
+          { key: "HomeLoanTools", label: "Home Loan Tools & More" },
+          { key: "AreaUnitConverter", label: "Area Unit Converter" },
+          { key: "BuildersinIndia", label: "Builders in India" },
+          { key: "ViewAllInsights", label: "View All Insights" },
+          { key: "imageInsights", label: <img src={inheight} alt="menu" /> },
+        ],
+      },
+      {
+        key: "articlesnews",
+        label: "Articles & News",
+        children: [
+          { key: "articlesforbuyers", label: "Articles For Buyers" },
+          { key: "realestatenews", label: "Real Estate News" },
+          { key: "buyerguide", label: "Buyer Guide" },
+          { key: "homeinteriorguides", label: "Home Interior Guides" },
+          { key: "Policies", label: "Policies (GST, RERA, PMAY, Budget)" },
+          { key: "imageArticles", label: <img src={inheight} alt="menu" /> },
+        ],
+      },
+    ],
+  },
+  // ⬇️ Repeat same merging for "ForTalents", "ForOwners", "ForDealers", "Insights2"
+];
+
+
+
 
 
 export default function Navbar() {
@@ -515,7 +621,7 @@ export default function Navbar() {
       </div>
       <div className="w-full border-t border-gray-300 "></div>
       <div className="p-3 flex">
-      <span className="text-gray-500 cursor-pointer" onClick={() => setLocationNav('All India')}>All India</span>
+      <span className="text-gray-500 cursor-pointer " onClick={() => setLocationNav('All India')}>All India</span>
       <div className="h-6 w-1 border-e border-gray-300 mx-5"></div>
       </div>
     </div>
@@ -557,9 +663,12 @@ export default function Navbar() {
 ];
 
   const [open, setOpen] = useState(false);
+  const [openWeb, setOpenWeb] = useState(false);
   const [activeParent, setActiveParent] = useState(null);
   const screens = Grid.useBreakpoint();
   const isMobile = !screens.md;
+  const isTablet = !screens.lg;
+  
 
   // Custom dropdown
   const getDropdownRender = (item) => {
@@ -677,10 +786,22 @@ export default function Navbar() {
         borderBottom: "1px solid #f0f0f0",
       }}
     >
-      {/* Logo */}
       <div className="flex">
+      {/* Mobile Drawer */}
+  {isTablet && (
+    <Button
+      type="text"
+      aria-label="Open navigation"
+      style={{color:"whitesmoke", textAlign:'left'}}
+      icon={<CgMenuLeft />}
+      onClick={() => setOpen(true)}
+    />
+  )}
+      {/* Logo */}
+      <div className={`${scroll && isMobile ? 'cutit flex' : 'flex' }`}>
       <a
         href="/"
+        
         style={{
           display: "inline-flex",
           alignItems: "center",
@@ -691,11 +812,14 @@ export default function Navbar() {
         <img src={logo} alt="logo" width={150} />
       </a>
 
+      </div>
+
 {/* <!-- Dropdown menu --> */}
  <Dropdown
       trigger={["click", "hover"]}
       dropdownRender={() => dropdownContent} // 👈 full control
       placement="bottomLeft"
+      className={`${scroll ? 'hidden':'hidden lg:block'}`}
     >
       <a onClick={(e) => e.preventDefault()}>
         <Space className="text-white  px-3 py-1 rounded-md cursor-pointer">
@@ -711,7 +835,7 @@ export default function Navbar() {
       <div style={{ display: "flex", alignItems: "center" }}>
   {!scroll ? (
     // Show nav menu items before scrolling
-    !isMobile &&
+    !isTablet &&
       menuItems.map((item) =>
         item.children ? (
           <Dropdown
@@ -731,7 +855,7 @@ export default function Navbar() {
       )
   ) : (
     // After scrolling past banner -> show search input
-    <div className={`${location.pathname === '/post-property' || location.pathname === '/postproperty' ? "hidden postHiddn" : "hidden lg:block lg:w-[50vw] me-10"}`}>
+    <div className={`${location.pathname === '/post-property' || location.pathname === '/postproperty' ? "hidden postHiddn" : " w-[67vw] lg:w-[50vw] mx-2 lg:me-10"}`}>
       <Custominputserchbox />
     </div>
   )}
@@ -766,15 +890,17 @@ export default function Navbar() {
     </Button>
   </Dropdown>
 
-  {/* Mobile Drawer */}
-  {isMobile && (
-    <Button
+  
+
+  {!isTablet &&(
+  <Button
       type="text"
       aria-label="Open navigation"
-      icon={<MenuOutlined />}
-      onClick={() => setOpen(true)}
+      icon={<CgMenuLeft />}
+      style={{color:"white"}}
+      onClick={() => setOpenWeb(true)}
     />
-  )}
+    )}
 </div>
 
       
@@ -794,6 +920,24 @@ export default function Navbar() {
           mode="inline"
           items={menuItems}
           onClick={() => setOpen(false)}
+          selectedKeys={[]}
+        />
+      </Drawer>
+
+      <Drawer
+        title="Navigation"
+        placement="right"
+        closable
+        open={openWeb}
+        onClose={() => setOpenWeb(false)}
+        bodyStyle={{ padding: 0 }}
+        height="100%"
+        width="30%"
+      >
+        <Menu
+          mode="inline"
+          items={MobilemenuItems}
+          onClick={() => setOpenWeb(false)}
           selectedKeys={[]}
         />
       </Drawer>

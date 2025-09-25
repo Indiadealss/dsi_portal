@@ -8,10 +8,10 @@ const Custominputserchbox = ({search}) => {
     <Input
       placeholder="Search location..."
       bordered={false} // removes border
-      prefix={<SearchOutlined style={{ color: "gray", fontSize: 18 }} />}
+      prefix={<SearchOutlined style={{ color: "gray", fontSize: 18 }} className="searchBoxes" />}
       suffix={
         <Space size={16}>
-          <AimOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} />
+          <AimOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} className="loctate" />
           <AudioOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} />
           <Button className="buttonStyle" type="primary" icon={<SearchOutlined />}>
             {search}

@@ -3,7 +3,9 @@ import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import FloorSelector from './customcomponent/Floorseclector';
 import { useSelector } from 'react-redux';
 import { DatePicker, Space } from 'antd';
+import { useDispatch } from 'react-redux';
 import { Postpropertyform } from './Postpropertyform';
+import { updateField } from './Redux/propertySlice';
 const onChange = (date, dateString) => {
   console.log(date, dateString);
 };
@@ -17,24 +19,39 @@ export const Profileproperty = ({setValidator}) => {
     const [ageProperty,setAgeProperty] = useState('');
     const [ownership,setOwnership] = useState('');
     const [availablef,setAvailablef] = useState('');
+    const [description,setDescription] = useState('');
+    const [paPlotArea,setPlotArea] = useState(0);
+    const [buArea,setBuArea] = useState(0);
+    const [caArea,setCaArea] = useState(0);
+    const [possession,setPossession] = useState('');
+
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+      const tf = Number(totalFloor)
+      dispatch(updateField({bedroom:noBedroom,bathroom:noBathroom,balconies:noBalconies,plotarea:paPlotArea,buildarea:buArea,carpetarea:caArea,
+        totalfloor:totalFloor,availabestatus:choiseProperty,ownership:ownership,propertyage:ageProperty,coveredparking:coverdParking,uncoveredparking:uncoverdParking,description:description,Possession:possession 
+      }))
+    },[description])
     
     const propertyDataFirst = useSelector((state) => state.property.data);
 
     console.log('purpose :',propertyDataFirst.purpose,'Property:',propertyDataFirst.property,'property type:',propertyDataFirst.propertyType);
     
   const noOfBedroom = [
-    { name: 'one', title: 1 },
-    { name: 'two', title: 2 },
-    { name: 'three', title: 3 },
-    { name: 'four', title: 4 }
+    { name: '1', title: 1 },
+    { name: '2', title: 2 },
+    { name: '3', title: 3 },
+    { name: '4', title: 4 }
   ]
 
   const balconies = [
-    { name: 'none', title: 0 },
-    { name: 'one', title: 1 },
-    { name: 'two', title: 2 },
-    { name: 'three', title: 3 },
-    { name: 'four', title: 'More than 3' }
+    { name: '0', title: 0 },
+    { name: '1', title: 1 },
+    { name: '2', title: 2 },
+    { name: '3', title: 3 },
+    { name: '4', title: 'More than 3' }
   ]
 
   const sizeDropdown = [
@@ -267,8 +284,10 @@ export const Profileproperty = ({setValidator}) => {
       {/* Input with Dropdown */}
       <div className="relative w-full my-5">
         <input
-          type="text"
+          type="number"
           id="searchInput"
+          value={paPlotArea}
+          onChange={(e) => setPlotArea(e.currentTarget.value)}
           placeholder="Ploat Area"
           required
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
@@ -308,10 +327,12 @@ export const Profileproperty = ({setValidator}) => {
       </div>
       <div className="relative w-full my-5">
         <input
-          type="text"
+          type="number"
+          value={buArea}
           id="searchInput"
           placeholder="Built-up Area"
           required
+          onChange={(e) => setBuArea(e.currentTarget.value)}
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
                  bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
         />
@@ -349,8 +370,10 @@ export const Profileproperty = ({setValidator}) => {
       </div>
       <div className="relative w-full my-5">
         <input
-          type="text"
+          type="number"
+          value={caArea}
           id="searchInput"
+          onChange={(e) => setCaArea(e.currentTarget.value)}
           placeholder="Carpet Area"
           required
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
@@ -447,7 +470,7 @@ export const Profileproperty = ({setValidator}) => {
       
 <form class={`${choiseProperty === 'Under construction' ? 'w-full mx-auto' : 'hidden'}`}>
   <label for="countries" class="block mb-2  font-medium text-gray-900 dark:text-white">Possession By</label>
-  <select id="countries" class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  <select id="countries" value={possession} onChange={(e) => setPossession(e.currentTarget.value)} class="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
     <option selected>Expected by</option>
     {underConcetraction.map((item,index) => {
       return(
@@ -498,7 +521,7 @@ export const Profileproperty = ({setValidator}) => {
         <h3 className='font-medium text-xl'>What makes your property unique</h3>
         <p className='text-xs font-medium  text-gray-500'>Adding description will increase your listing visibility</p>
       <div>
-        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.."></textarea>
+        <textarea id="message" rows="4" value={description} onInput={(e) => setDescription(e.currentTarget.value)} class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.." />
         </div>
     </>
   )

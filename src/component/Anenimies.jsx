@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { updateField } from './Redux/propertySlice';
 
 
 export const Anenimies = () => {
@@ -14,8 +16,14 @@ export const Anenimies = () => {
     const [addFeature,setAddFeature] = useState([]);
     const [prppertyF,setProppertyF] = useState([]);
     const [watersource,setWatersource] = useState([]);
-    const [overlo,setOverlo] = useState([])
-    const [locatadvance,setLocatadavance] = useState([])
+    const [overlo,setOverlo] = useState([]);
+    const [locatadvance,setLocatadavance] = useState([]);
+    const [price,setPrice] = useState('');
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,selectbulding:selectbulding,pobackup:pobackup,addFeature:addFeature,prppertyF:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price}))
+    },[price])
 
 
    const pricingDetails = [
@@ -538,7 +546,7 @@ export const Anenimies = () => {
         </div>
         <p className='font-medium text-lg'>Price Details</p>
       <div className='flex '>
-        <input type='number' className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
+        <input type='number' value={price} onChange={(e) => setPrice(e.currentTarget.value)} className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
         <input type='text' disabled className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-30 text-xs' placeholder='Price per sq.ft' />
         </div>
         <div className='flex flex-wrap my-5'>

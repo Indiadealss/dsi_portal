@@ -1,5 +1,7 @@
 // FloorSelector.jsx
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateField } from "../Redux/propertySlice";
 
 /**
  * FloorSelector props:
@@ -9,6 +11,13 @@ import React, { useState, useEffect } from "react";
 export default function FloorSelector({ maxPreset = 50, onChange }) {
   const [mode, setMode] = useState("select"); // "select" or "manual" or "other"
   const [value, setValue] = useState(""); // actual returned value
+  const [yourfloor,setYourFloor] = useState();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    
+    dispatch(updateField({floor:yourfloor}))
+  },[yourfloor])
 
   // Build options: basements, ground, 1..maxPreset
   const presets = [
@@ -24,19 +33,7 @@ export default function FloorSelector({ maxPreset = 50, onChange }) {
 
   function handleSelect(e) {
     const v = e.target.value;
-    if (v === "more") {
-      setMode("manual");
-      setValue("");
-    } else if (v === "unknown") {
-      setMode("select");
-      setValue("unknown");
-    } else if (v === "other") {
-      setMode("other");
-      setValue("");
-    } else {
-      setMode("select");
-      setValue(v);
-    }
+   setYourFloor(v);
   }
 
 
@@ -49,11 +46,11 @@ export default function FloorSelector({ maxPreset = 50, onChange }) {
 
       <select
         id="floor-select"
-        value={mode === "manual" ? "more" : mode === "other" ? "other" : value}
+        value={yourfloor} 
         onChange={handleSelect}
         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-300"
       >
-        <option value="">Select floor</option>
+        <option >Select floor</option>
 
         {presets.map((p) => (
           <option key={p} value={p}>

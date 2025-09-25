@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { updateField } from "./Redux/propertySlice";
+import { useDispatch } from "react-redux";
 
 export const Locationbutton = ({ setValidator }) => {
   const [query, setQuery] = useState("");
@@ -7,6 +9,11 @@ export const Locationbutton = ({ setValidator }) => {
   const [localityResults, setLocalityResults] = useState([]);
   const [showLocality, setShowLocality] = useState(false);
   const [showAdditional,setShowAdditional] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(updateField({ location: [{"City":query,"Address":locality}] }));
+  },[query,locality])
 
   // Generic search handler
   const fetchLocations = async (value, setData) => {
