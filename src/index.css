@@ -345,6 +345,10 @@ a {
     height: 20vw !important;
     border-radius: 0;
   }
+  .projectsPhotos{
+    width: 10vw;
+    height: 5vw;
+  }
 }
 
 /* ====== Laptop (≥1024px) ====== */

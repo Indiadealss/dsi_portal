@@ -44,7 +44,7 @@ const Customcardcrousal = () => {
       {
         breakpoint: 768, // Mobile
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           centerMode: true,
           centerPadding: "60px", // adjust to show partial next
         },
@@ -56,7 +56,7 @@ const Customcardcrousal = () => {
     <>
     <div style={{ position: "relative", width: "95%", margin: "0" }}>
       
-     <h2 className='font-bold text-xl'>Recommended Projects</h2>
+     <h2 className='font-bold text-xl hidden'>Recommended Projects</h2>
      <p className='text-sm text-gray-500'>The most search project in location</p>
       {/* Left button */}
       <Button
@@ -86,12 +86,15 @@ const Customcardcrousal = () => {
                 boxShadow: "none",
               }}
             >
-              <img src={item.img} alt={item.label} className="rounded-lg w-full" />
-              <div className="p-3 bg-transparent">
+              <div className="p-2 shadow-sm rounded-lg mx-1">
+              <img src={item.img} alt={item.label} className=" projectsPhotos" />
+              </div>
+              <p className="font-medium text-center"><span className="text-[10px]">{item.label}</span></p>
+              {/* <div className="p-3 bg-transparent">
                 <p className="font-medium">{item.label}</p>
                 <p className="text-xs text-gray-500">{item.description}</p>
                 <p className="font-semibold">{item.price}</p>
-              </div>
+              </div> */}
             </Card>
           </div>
         ))}

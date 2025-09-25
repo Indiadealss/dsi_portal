@@ -207,7 +207,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='mt-20'>
+      <div className='mt-20 hidden lg:block'>
         {/* <Smallmain title='Continue browsing...' /> */}
         <Contiunebrowser title='Continue browsing...' />
       </div>

@@ -1,129 +1,97 @@
-import React, { useRef } from "react";
-import { Carousel, Card, Button } from "antd";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import React, { useRef, useState } from "react";
+import Slider from "react-slick";
 import { GiCarKey } from "react-icons/gi";
 import { MdOutlineAddLocation } from "react-icons/md";
+import { FaSign } from "react-icons/fa";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons"; // can swap with react-icons
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const Contiunebrowser = ({title}) => {
+const Contiunebrowser = ({ title }) => {
 
-    const carouselRef = useRef(null);
-    
-      const goPrev = () => {
-        carouselRef.current.prev();
-      };
-    
-      const goNext = () => {
-        carouselRef.current.next();
-      };
-    
-      const noofProperties = 59;
-    
-      
-      const card = [
-            {icon:'',name:'Myproperties', label:`My properties ${noofProperties}`},
-            {icon:'',name:'Buydelhi', label:`My properties ${noofProperties}`},
-            {icon:'',name:'BuyNoida', label:`My properties ${noofProperties}`},
-            {icon:'',name:'BuyGraternoida', label:`My properties ${noofProperties}`},
-            {icon:'',name:'Buyinlansdowne', label:`My properties ${noofProperties}`},
-            {icon:GiCarKey,name:'rentinGraterNoida', label:`My properties ${noofProperties}`},
-            {icon:'',name:'rentinNorthDelhi', label:`My properties ${noofProperties}`},
-            {icon:'',name:'BuyCommercialRishikesh', label:`My properties ${noofProperties}`},
-            {icon:'',name:'BuyinGurgoan',label:'Buy in Gurgaon'},
-            {icon:'',name:'RentinNoida',label:'Rent in Noida'},
-            {icon:'',name:'Buy Commercial in Greater Noida'},
-            {icon:'',name:'Buy Commercial in Dehradun'},
-            {icon:MdOutlineAddLocation,name:'Explore New City'}
+  const [active,setActive] = useState('Myproperties');
+  const sliderRef = useRef(null);
+
+  const goPrev = () => sliderRef.current.slickPrev();
+  const goNext = () => sliderRef.current.slickNext();
+
+  const noofProperties = 59;
+
+  const card = [
+            {icon:<FaSign/>,name:'Myproperties', label:`My properties ${noofProperties}`},
+            {icon:<FaSign />,name:'Buydelhi', label:`Buy in Delhi South West`},
+            {icon:<FaSign />,name:'BuyNoida', label:`Buy in Noida`},
+            {icon:<FaSign />,name:'BuyGraternoida', label:`Buy in Graternoida`},
+            {icon:<FaSign />,name:'Buyinlansdowne', label:`Buy in Landowne`},
+            {icon:<GiCarKey />,name:'rentinGraterNoida', label:`Rent in GraterNoida`},
+            {icon:<GiCarKey />,name:'rentinNorthDelhi', label:`Rent in North Delhi`},
+            {icon:<FaSign />,name:'BuyCommercialRishikesh', label:`Buy Commercial in Rishikesh`},
+            {icon:<FaSign />,name:'BuyinGurgoan',label:'Buy in Gurgaon'},
+            {icon:<GiCarKey />,name:'RentinNoida',label:'Rent in Noida'},
+            {icon:<FaSign />,name:'Buy Commercial in Greater Noida', label:'Buy Commercial in Greater Noida'},
+            {icon:<FaSign />,name:'Buy Commercial in Dehradun',label:'Buy Commercial in Dehradun'},
+            {icon:<MdOutlineAddLocation />,name:'Explore New City',label:'Explore New City'}
         ];
-    
-        
-      // ✅ react-slick settings
-       const settings = {
-        dots: false,
-        infinite: false,
-        arrows: false,
-        slidesToShow: 6, // Desktop default
-        centerPadding: "100px", 
-        slidesToScroll: 1,
-        responsive: [
-          {
-            breakpoint: 1024, // Tablet
-            settings: {
-              slidesToShow: 1,
-              centerMode: true,
-              centerPadding: "80px", // show half of next card
-            },
-          },
-          {
-            breakpoint: 768, // Mobile
-            settings: {
-              slidesToShow: 1,
-              centerMode: true,
-              centerPadding: "60px", // adjust to show partial next
-            },
-          },
-        ],
-      };
-    
-    
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    arrows: false,
+    slidesToShow: 4,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024, // Tablet
+        settings: { slidesToShow: 2 },
+      },
+      {
+        breakpoint: 768, // Mobile
+        settings: { slidesToShow: 1 },
+      },
+    ],
+  };
+
   return (
-    <>
-        <div className="mx-auto" style={{ position: "relative", width: "90%"}}>
-      
-     <h2 className="text-start ms-4 mb-5"><span className='font-bold text-sm text-gray-500  '>{title}</span></h2>
-      {/* Left button */}
-      <Button
-        shape="circle"
-        icon={<LeftOutlined />}
-        onClick={goPrev}
-        className="mobileDisplay"
-        style={{
-          position: "absolute",
-          top: "90%",
-          left: "-15px",
-          transform: "translateY(-50%)",
-          zIndex: 1,
-        }}
-      />
+    <div className="relative w-[80%] ms-5">
+      {/* Title */}
+      <h2 className="text-start mb-5 ms-10">
+        <span className="font-bold text-sm text-gray-500">{title}</span>
+      </h2>
 
-      {/* Carousel */}
-      <Carousel ref={carouselRef} {...settings} style={{border: '0.5px solid gray', borderColor:'gray', borderRadius:'37px', padding:'2px'}}>
+      {/* Left Button */}
+      <button
+  onClick={goPrev}
+  className="absolute top-[85px]  transform -translate-y-1/2 
+             bg-gray-100 text-gray-700 rounded-full shadow p-2 
+             hover:bg-gray-200 z-10 cursor-pointer -left-2"
+>
+  <LeftOutlined />
+</button>
+
+      {/* Slider */}
+      <Slider ref={sliderRef} {...settings} className=" shadow-sm rounded-full">
         {card.map((item, i) => (
-          <div key={i} style={{ padding: "0 10px" }}>
-            <Card
-                className="shadow-none"
-              bordered={true}
-              style={{
-                width: "97%",
-                boxShadow: "none",
-              }}
-            >
-              <div className="">
-
-                {item.label}
+          <div key={i} onClick={() => setActive(item.name)}>
+            <div className={`${active === item.name ? 'flex items-center  p-2 bg-white cursor-pointer rounded-full shadow-md hover:shadow-md transition' : "flex items-center  p-2 bg-white cursor-pointer rounded-full hover:shadow-md transition"}`}>
+              <div className="text-blue-500 bg-blue-100 rounded-full p-2 mr-3">
+                {item.icon}
               </div>
-            </Card>
+              <span className="text-gray-700 text-sm">{item.label}</span>
+            </div>
           </div>
         ))}
-      </Carousel>
+      </Slider>
 
-      {/* Right button */}
-      <Button
-        shape="circle"
-        icon={<RightOutlined />}
+      {/* Right Button */}
+      <button
         onClick={goNext}
-        className="mobileDisplay"
-        style={{
-          position: "absolute",
-          top: "90%",
-          right: "-15px",
-          transform: "translateY(-50%)",
-          zIndex: 1,
-        }}
-      />
+        className="absolute top-[85px] cursor-pointer -right-4 transform -translate-y-1/2 bg-gray-100 text-gray-700 rounded-full shadow p-2 hover:bg-gray-200"
+      >
+        <RightOutlined />
+      </button>
     </div>
-    </>
-  )
-}
+  );
+};
 
-export default Contiunebrowser
+export default Contiunebrowser;
