@@ -3,10 +3,11 @@ import Inputforotp from './customcomponent/Inputforotp';
 import { MdEdit } from "react-icons/md";
 import { verifyOtp } from '../api/api';
 
-const Verify = ({mobile}) => {
+const Verify = ({mobile, changeotpsend,redirectTo,resmobilef }) => {
     const [timer,setTimer] = useState(30); //30 seconds countdown
     const [canResend,setCanResend] = useState(false);
     const [otp, setOtp] = useState("");
+    const [foundit,setFounded] = useState(false);
 
     useEffect(() => {
         if(timer > 0){
@@ -26,6 +27,14 @@ const Verify = ({mobile}) => {
     const handleVerify = async () => {
             try{
                 const res = await verifyOtp(mobileNo,otp);
+
+                if(res.status === 200){
+                  redirectTo(res.data.redirect);
+                  resmobilef(res.data.mobile)
+                  if(!res.data.redirect){
+                    alert("Login Sucessfully");
+                  }
+                }
             }catch(err){
                 console.error('Error verify OTP:',err);
                 
@@ -37,7 +46,7 @@ const Verify = ({mobile}) => {
         <div>
             <div >
         <h2><span className="text-2xl font-bold text-gray-700" style={{fontFamily:"sans-serif"}}>Verify your number</span></h2>
-        <div className='mb-10 flex'><span className="text-2xl font-medium text-gray-700" style={{fontFamily:"sans-serif"}}>+91-{mobile}</span> <MdEdit className='m-1 text-xl text-blue-500 cursor-pointer' /></div>
+        <div className='mb-10 flex'><span className="text-2xl font-medium text-gray-700" style={{fontFamily:"sans-serif"}}>+91-{mobile}</span> <MdEdit className='m-1 text-xl text-blue-500 cursor-pointer' onClick={changeotpsend} /></div>
 
       </div>
 
@@ -52,7 +61,7 @@ const Verify = ({mobile}) => {
 
           {canResend ? (
             <p>
-          Haven't recived yet? <button  className='text-blue-600 cursor-pointer hover:unerline'>Resend OTP</button>
+          Haven't recived yet? <button  className='text-blue-600 cursor-pointer hover:unerline' onClick={handleVerify}>Resend OTP</button>
         </p>
           ) : (
             <p className="text-gray-500 text-sm">
@@ -61,7 +70,7 @@ const Verify = ({mobile}) => {
           )}
 
           <div className="flex justify-center mt-10">
-          <button type="button" onClick={handleVerify} className={`${mobile.length > 9 ? "cursor-pointer w-full text-xl text-white font-medium bg-blue-500 shadow-lg shadow-blue-500/50 p-2 rounded" : "cursor-not-allowed w-full text-xl text-white font-medium bg-blue-200 shadow-lg shadow-blue-100 p-2 rounded"}`}>
+          <button type="button" onClick={handleVerify} className="cursor-not-allowed w-full text-xl text-white font-medium bg-blue-200 shadow-lg shadow-blue-100 p-2 rounded">
             Verify & Continue
           </button>
           </div>

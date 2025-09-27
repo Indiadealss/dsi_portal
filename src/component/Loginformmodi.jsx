@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
 import Verify from "./Verify";
 import {sentOtp} from "../../src/api/api"
+import Registration from "./Registration";
 
 const Loginformmodi = () => {
-    const [email, setEmail] = useState("");
+    
       const [mobile, setMobile] = useState('');
       const [password, setPassword] = useState("");
+      const [regmobile,setRegmobile] = useState("");
       const [confirmPassword, setConfirmPassword] = useState("");
       const [name, setName] = useState("");
+      const [registration,setRegistration] = useState(false);
       
       const [otpSent, setOtpSent] = useState(false);
       let mobileNo = `+91${mobile}`
@@ -29,7 +32,7 @@ const Loginformmodi = () => {
       
   return (
     <>
-    <div className={`${otpSent ? 'hidden' : 'block'}`}>
+    <div className={`${otpSent || registration ? 'hidden' : 'block'}`}>
       <div className="flex">
         <h2><span className="text-2xl font-bold text-gray-700" style={{fontFamily:"sans-serif"}}>Login/Register</span></h2>
       </div>
@@ -58,8 +61,11 @@ const Loginformmodi = () => {
           </button>
           </div>
           </div>
-          <div className={`${!otpSent ? 'hidden': 'block'}`}>
-            <Verify mobile={mobile}/>
+          <div className={`${!otpSent || registration ? 'hidden': 'block'}`}>
+            <Verify mobile={mobile} changeotpsend={() => setOtpSent(false)} redirectTo={(e) => setRegistration(e)} resmobilef={(e) => setRegmobile(e)}/>
+          </div>
+          <div className={`${registration ? 'block': 'hidden'}`}>
+              <Registration resMobile={regmobile} />
           </div>
     </>
   )

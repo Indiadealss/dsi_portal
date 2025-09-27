@@ -15,3 +15,7 @@ export const sentOtp = (mobile) =>
 
 export const verifyOtp = (mobile,otp) =>
     API.post("/auth/verify-otp", {mobile,otp});
+
+
+export const register = (name,email,mobile) => 
+    API.post("/auth/register",{name,email,mobile})
