@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Inputforotp from './customcomponent/Inputforotp';
 import { MdEdit } from "react-icons/md";
 import { verifyOtp } from '../api/api';
+import { useNavigate } from "react-router-dom";
 
 const Verify = ({mobile, changeotpsend,redirectTo,resmobilef }) => {
     const [timer,setTimer] = useState(30); //30 seconds countdown
@@ -29,10 +30,16 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef }) => {
                 const res = await verifyOtp(mobileNo,otp);
 
                 if(res.status === 200){
-                  redirectTo(res.data.redirect);
-                  resmobilef(res.data.mobile)
+                  console.log(!res.data.redirect);
+                  
+                  
                   if(!res.data.redirect){
+                    resmobilef(res.data.user.mobile);
+                    redirectTo(res.data.redirect);
                     alert("Login Sucessfully");
+                  }else{
+                  resmobilef(res.data.mobile);
+                  redirectTo(res.data.redirect);
                   }
                 }
             }catch(err){
@@ -70,7 +77,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef }) => {
           )}
 
           <div className="flex justify-center mt-10">
-          <button type="button" onClick={handleVerify} className="cursor-not-allowed w-full text-xl text-white font-medium bg-blue-200 shadow-lg shadow-blue-100 p-2 rounded">
+          <button type="button" onClick={handleVerify} className="cursor-pointer w-full text-xl text-white font-medium bg-blue-200 bg-blue-500 shadow-lg shadow-blue-500/50 p-2 rounded">
             Verify & Continue
           </button>
           </div>
