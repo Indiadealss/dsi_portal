@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { register } from '../api/api';
 
-const Registration = ({resMobile}) => {
+const Registration = ({resMobile,closeModal}) => {
     const [name,setName] = useState("")
     const [email, setEmail] = useState("");
 
