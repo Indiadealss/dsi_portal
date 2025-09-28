@@ -11,8 +11,31 @@ import Propertydetails from "./component/Propertydetails";
 import Userlogin from "./component/Userlogin";
 import Scrooltop from "./component/customcomponent/Scrooltop";
 import Emicomponent from "./component/customantdesign/Emicomponent";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser, setUser } from "./component/Redux/userSlice";
+import { useEffect } from "react";
+import { getUserDetatils } from "./api/api";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+   useEffect(() => {
+    getUserDetatils()
+      .then(res => {
+        if (res.status === 200) {
+          // console.log(res.data.usedetails);
+         const { name, email, mobile } = res.data.usedetails;
+          
+          dispatch(setUser({name,email,mobile})); // populate Redux
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(clearUser);
+      });
+  }, [dispatch]);
+  
   let routes = useRoutes([
     { path: "/", element: <Home /> },
     {path:"/emicomponent",element: <Emicomponent />},

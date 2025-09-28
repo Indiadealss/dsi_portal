@@ -26,6 +26,9 @@ import { Link } from "react-router";
 import { Login } from "./Login";
 import Custominputserchbox from "./customantdesign/Custominputserchbox";
 import Mobileloginmodal from "./Mobileloginmodal";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from "./Redux/userSlice";
+import { getLogout } from "../api/api";
 
 const { Header } = Layout;
 
@@ -655,11 +658,31 @@ export default function Navbar() {
   
   
   const [showLogin, setShowLogin] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const profileLabel = user.loggedIn ? (
+    <span>{user.name}</span> //show user name
+  ):(
+    <Link onClick={() => setShowLogin(true)}>Login/Register</Link>
+  )
+
+  //logout api
+  const handleLogout = async () => {
+    try{
+      await getLogout();
+      dispatch(clearUser());
+    }catch(err){
+      console.error("Logout failed",err);
+      
+    }
+  };
+
+
   const profileItems = [
-  { key: "profile", label: <Link onClick={() => setShowLogin(true)}>Login/Register</Link> },
+  { key: "profile", label: profileLabel },
   {key:"myactivty",label:<Link to='/' >My activity</Link>},
   { type: "divider" },
-  { key: "logout", danger: true, label: "Log out" },
+  { key: "logout", danger: true, label: <span onClick={handleLogout}>Log out</span> },
 ];
 
   const [open, setOpen] = useState(false);

@@ -7,10 +7,11 @@ const Registration = ({resMobile}) => {
 
     const handleSend = async () => {
             try{
-                const res = await register(name,email,resMobile);
+                const res = await register(name,email,resMobile,closeModal);
                 console.log("otp sent:",res.status);
                 if(res.status === 200) {
                   alert("You have Register Succesfully");
+                    if (closeModal) closeModal();
                 }
                 
             }catch(err) {

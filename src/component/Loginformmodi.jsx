@@ -3,14 +3,16 @@ import { MdEmail } from "react-icons/md";
 import Verify from "./Verify";
 import {sentOtp} from "../../src/api/api"
 import Registration from "./Registration";
+import Emailregistration from "./Emailregistration";
 
-const Loginformmodi = () => {
+const Loginformmodi = ({ closeModal }) => {
     
       const [mobile, setMobile] = useState('');
       const [password, setPassword] = useState("");
       const [regmobile,setRegmobile] = useState("");
       const [confirmPassword, setConfirmPassword] = useState("");
       const [name, setName] = useState("");
+      const [emailreg,setEmailreg] = useState(false);
       const [registration,setRegistration] = useState(false);
       
       const [otpSent, setOtpSent] = useState(false);
@@ -32,7 +34,7 @@ const Loginformmodi = () => {
       
   return (
     <>
-    <div className={`${otpSent || registration ? 'hidden' : 'block'}`}>
+    <div className={`${otpSent || registration || emailreg ? 'hidden' : 'block'}`}>
       <div className="flex">
         <h2><span className="text-2xl font-bold text-gray-700" style={{fontFamily:"sans-serif"}}>Login/Register</span></h2>
       </div>
@@ -56,16 +58,19 @@ const Loginformmodi = () => {
           </div>
 
           <div className="flex justify-center my-5">
-          <button type="button" className="flex justify-center cursor-pointer w-full text-sm my-auto font-medium text-gray-700 border border-gray-300 font-normal bg-white p-2 rounded">
+          <button type="button" onClick={() => setEmailreg(true)} className="flex justify-center cursor-pointer w-full text-sm my-auto font-medium text-gray-700 border border-gray-300 font-normal bg-white p-2 rounded">
             <MdEmail className=" mx-4 text-3xl text-gray-500"/> <span className="my-auto">Continue With Email/Username</span>
           </button>
           </div>
           </div>
           <div className={`${!otpSent || registration ? 'hidden': 'block'}`}>
-            <Verify mobile={mobile} changeotpsend={() => setOtpSent(false)} redirectTo={(e) => setRegistration(e)} resmobilef={(e) => setRegmobile(e)}/>
+            <Verify mobile={mobile} changeotpsend={() => setOtpSent(false)} redirectTo={(e) => setRegistration(e)} resmobilef={(e) => setRegmobile(e)} closeModal={closeModal}/>
           </div>
           <div className={`${registration ? 'block': 'hidden'}`}>
-              <Registration resMobile={regmobile} />
+              <Registration resMobile={regmobile} closeModal={closeModal}/>
+          </div>
+          <div className={`${emailreg  ? 'block' : 'hidden'}`}>
+              <Emailregistration />
           </div>
     </>
   )

@@ -19,3 +19,15 @@ export const verifyOtp = (mobile,otp) =>
 
 export const register = (name,email,mobile) => 
     API.post("/auth/register",{name,email,mobile})
+
+export const getUserDetatils = () => {
+    return axios.get("/api/auth/me",
+    { withCredentials: true ,
+    headers: { "Cache-Control": "no-cache" }
+    }
+    )
+}
+
+export const getLogout = async () => {
+    return axios.post("/api/auth/logout",{},{ withCredentials: true })
+}

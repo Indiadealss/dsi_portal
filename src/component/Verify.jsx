@@ -3,12 +3,20 @@ import Inputforotp from './customcomponent/Inputforotp';
 import { MdEdit } from "react-icons/md";
 import { verifyOtp } from '../api/api';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from './Redux/userSlice';
 
-const Verify = ({mobile, changeotpsend,redirectTo,resmobilef }) => {
+const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
     const [timer,setTimer] = useState(30); //30 seconds countdown
     const [canResend,setCanResend] = useState(false);
     const [otp, setOtp] = useState("");
     const [foundit,setFounded] = useState(false);
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+  console.log("Updated user:", user);
+}, [user]);
 
     useEffect(() => {
         if(timer > 0){
@@ -36,7 +44,12 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef }) => {
                   if(!res.data.redirect){
                     resmobilef(res.data.user.mobile);
                     redirectTo(res.data.redirect);
+                    console.log(res.data.user);
+                    dispatch(setUser(res.data.user));
+                    console.log(user);
+                    
                     alert("Login Sucessfully");
+                     if (closeModal) closeModal();
                   }else{
                   resmobilef(res.data.mobile);
                   redirectTo(res.data.redirect);
