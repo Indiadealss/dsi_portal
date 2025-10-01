@@ -5,7 +5,8 @@ import { Profileproperty } from './Profileproperty';
 import { Photovideo } from './Photovideo';
 import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { submitProperty } from '../api/api';
 
 export const Postpropertyform = () => {
   const propertyFirstData = useSelector((state) => state.property.data);
@@ -18,6 +19,7 @@ export const Postpropertyform = () => {
     { id: 5, label: "Pricing & Others", status: false, currentForm: Anenimies }
   ]);
 
+  const dispatch = useDispatch();
   const validateRef = useRef(null); // stores child validate function
   let FormComponent = steps[continueNO].currentForm;
 
@@ -49,9 +51,13 @@ export const Postpropertyform = () => {
       );
       setContinueNo(prev => prev + 1);
     } else {
+      dispatch(submitProperty(propertyFirstData));
       alert('You have successfully listed the property');
     }
   }
+
+  
+  
 
   return (
     <div className='bg-[#d1dede] min-h-screen'>

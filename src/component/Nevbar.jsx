@@ -666,6 +666,9 @@ export default function Navbar() {
     <Link onClick={() => setShowLogin(true)}>Login/Register</Link>
   )
 
+
+  
+
   //logout api
   const handleLogout = async () => {
     try{
@@ -677,12 +680,18 @@ export default function Navbar() {
     }
   };
 
+  const logout = user.loggedIn ? (
+     <span onClick={handleLogout}>Log out</span>//show user name
+  ):(
+    ''
+  )
+
 
   const profileItems = [
   { key: "profile", label: profileLabel },
   {key:"myactivty",label:<Link to='/' >My activity</Link>},
   { type: "divider" },
-  { key: "logout", danger: true, label: <span onClick={handleLogout}>Log out</span> },
+  { key: "logout", danger: true, label:  logout}
 ];
 
   const [open, setOpen] = useState(false);

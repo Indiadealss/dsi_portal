@@ -1,18 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { submitProperty } from "../../api/api";
 
 // ✅ Async thunk for API posting
-export const submitProperty = createAsyncThunk(
-  "property/submitProperty", // changed from "from/submitProperty"
-  async (formData, { rejectWithValue }) => {
-    try {
-      const response = await axios.post("http://localhost:5000/property", formData);
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response?.data || err.message);
-    }
-  }
-);
+
+
+
 
 const initialState = {
   step: 0,
@@ -53,6 +46,8 @@ const initialState = {
     description: "",
     images: [],
     video: [],
+    owner_type:'',
+    owner:''
   },
   errors: {},
   isSubmitting: false,
@@ -80,17 +75,18 @@ const propertySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(submitProperty.pending, (state) => {
-        state.isSubmitting = true;
-        state.success = null;
-        state.errors = {};
+        state.loading = true;
+        state.error = null;
+        state.success = false;
       })
-      .addCase(submitProperty.fulfilled, (state, action) => { // ✅ fixed spelling
-        state.isSubmitting = false;
-        state.success = action.payload.message || "Property submitted successfully!";
+      .addCase(submitProperty.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = true;
+        state.data = action.payload; // update with server response
       })
       .addCase(submitProperty.rejected, (state, action) => {
-        state.isSubmitting = false;
-        state.errors = action.payload || { general: "Something went wrong" };
+        state.loading = false;
+        state.error = action.payload?.message || "Failed to submit";
       });
   },
 });

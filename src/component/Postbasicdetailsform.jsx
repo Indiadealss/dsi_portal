@@ -163,7 +163,7 @@ export const Postbasicdetailsform = ({ setValidator }) => {
 
   return (
     <>
-      <h3 ><span className='text-2xl font-medium'> Welcome back kapil,<br />Fill out basic details</span></h3>
+      <h3 ><span className='text-2xl font-medium'> Welcome back ,<br />Fill out basic details</span></h3>
       <div className='my-5'><p className='font-medium '>I'm looking to</p>
                             <div className='flex my-3'>
                                 {lokingButton.map((item, index) => {

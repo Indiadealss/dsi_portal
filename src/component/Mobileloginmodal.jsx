@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 //import { Loginform } from "./Loginform";
 import { Loginform } from './Login_2';
+import Loginformmodi from './Loginformmodi';
+
 
 const Mobileloginmodal = ({ open, onClose }) => {
     // Close modal when pressing ESC
@@ -32,7 +34,8 @@ const Mobileloginmodal = ({ open, onClose }) => {
                     <h3 className='text-2xl font-semibold'>Login/Register</h3>
                 </div>
                 <div>
-                    <Loginform />
+                    {/* <Loginform /> */}
+                    <Loginformmodi closeModal={onClose} />
                 </div>
                 </div>
             </div>

@@ -15,19 +15,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser, setUser } from "./component/Redux/userSlice";
 import { useEffect } from "react";
 import { getUserDetatils } from "./api/api";
+import { updateField } from "./component/Redux/propertySlice";
 
 function App() {
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  console.log(user);
+  
 
    useEffect(() => {
     getUserDetatils()
       .then(res => {
         if (res.status === 200) {
           // console.log(res.data.usedetails);
-         const { name, email, mobile } = res.data.usedetails;
+         const { name, email, mobile,_id } = res.data.usedetails;
+         
           
           dispatch(setUser({name,email,mobile})); // populate Redux
+          dispatch(updateField({owner:_id,}))
         }
       })
       .catch(err => {
@@ -42,7 +48,9 @@ function App() {
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
     {path: "/propertyDetails",element:<Propertydetails />},
-    {path:"/post-property", element:<Postproperty />},
+    {path:"/post-property",
+       element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
+    },
     {path:"/postproperty", element:<Postpropertyform />}
   ]);
 

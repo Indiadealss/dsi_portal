@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const API = axios.create({
     baseURL: "/api",
@@ -31,3 +32,55 @@ export const getUserDetatils = () => {
 export const getLogout = async () => {
     return axios.post("/api/auth/logout",{},{ withCredentials: true })
 }
+
+export const submitProperty = createAsyncThunk(
+  "property/submitProperty",
+  async (propertyData, { rejectWithValue }) => {
+    try {
+      const formData = new FormData;
+      // Append all normal fields
+      Object.keys(propertyData).forEach((key) => {
+        if(!["images","video"].includes(key)){
+            const value = propertyData[key];
+            if(Array.isArray(value)){
+                value.forEach((item) => formData.append(key,item));
+            }else{
+                formData.append(key,value);
+            }
+        }
+      });
+
+      // Append images
+      propertyData.images.forEach((file) => {
+        formData.append("images",file);
+      });
+
+      // Append videos
+      propertyData.video.forEach((file) => {
+        formData.append("video",file);
+      })
+      const res = await axios.post("/api/property/createProperty", formData,{
+        headers:{"content-Type":"multipart/form-data"},
+        withCredentials:true,
+      });
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err.response?.data || { message: "Server error" });
+    }
+  }
+);
+
+// export const submitProperty = createAsyncThunk(
+//   "property/submitProperty",
+//   async (propertyData, { rejectWithValue }) => {
+//     try {
+//       const res = await axios.post("/property/createProperty", propertyData, {
+//         headers: { "Content-Type": "application/json" },
+//         withCredentials: true, // if you need cookies/session
+//       });
+//       return res.data;
+//     } catch (err) {
+//       return rejectWithValue(err.response?.data || { message: "Server error" });
+//     }
+//   }
+// );
