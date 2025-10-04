@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
 
 
-export const Anenimies = () => {
+export const Anenimies = ({setValidator}) => {
 
     
-    const [otherRooms,setOtherRooms] = useState('');
+    const [otherRooms,setOtherRooms] = useState([]);
     const [furnishing,setFurnishing] = useState('');
     const [proptyFacing,setProptyFacing] = useState('');
     const [pobackup,setPobackup] = useState('');
@@ -25,6 +25,31 @@ export const Anenimies = () => {
       dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,selectbulding:selectbulding,pobackup:pobackup,addFeature:addFeature,prppertyF:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price}))
     },[price])
 
+     useEffect(() => {
+              if (setValidator) {
+                setValidator(validateForm);
+              }
+            }, [otherRooms,furnishing,proptyFacing,pobackup,amenitie,selectbulding,addFeature,prppertyF,watersource,overlo,locatadvance,price]);
+
+            function validateForm(){
+              if(!furnishing){
+                alert('add furnishing');
+                return false;
+              }
+              if(!proptyFacing){
+                alert('add Property Facing');
+                return false;
+              }
+              if(!pobackup){
+                alert('add Details about Power Backup');
+                return false;
+              }
+              if(!price){
+                alert('Add price');
+                return false;
+              }
+          return true;
+        }
 
    const pricingDetails = [
     {name:'All inclusive Price',label:'All inclusive Price'},
@@ -263,11 +288,24 @@ export const Anenimies = () => {
         <h3 className='text-xl font-medium my-5'>Other rooms<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
         <div className='flex flex-wrap '>
             {OtherRoom.map((item,index) => {
+              const isSelected = otherRooms.includes(item.name)
                 return(
                     <button key={index} name={item.name} 
-                    className={`${otherRooms === item.name ? " mx-2 my-1 p-2 rounded-full cursor-pointer bg-gray-100 text-sm text-gray-500 font-normal" :"border mx-2 my-1 p-2 rounded-full cursor-pointer border-1 border-gray-400 text-sm text-gray-400 font-normal"}`}
-            onClick={(e) => setOtherRooms(e.currentTarget.name)}
+                    className={`${isSelected ? " mx-2 my-1 p-2 rounded-full cursor-pointer bg-gray-100 text-sm text-gray-500 font-normal" :"border mx-2 my-1 p-2 rounded-full cursor-pointer border-1 border-gray-400 text-sm text-gray-400 font-normal"}`}
+            onClick={() =>{ 
+              if(isSelected){
+                //removes if already selected
+                setOtherRooms(prev => prev.filter(name => name !== item.name));
+              }else{
+                setOtherRooms(prev => [...prev, item.name]);
+              }
+            }}
           >
+            {isSelected ? (
+              <CheckOutlined />
+            ) : (
+              <PlusOutlined />
+            )}
                         {item.label}
                         </button>
                 )

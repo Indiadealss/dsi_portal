@@ -40,7 +40,7 @@ const Home = () => {
 
  const handpickherosection = {
   rentHome:[{
-    img : "https://picsum.photos/700/450?random=1",
+    img : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bulding_2.jpeg",
     title:"BUY PLOTS/LAND",
     subtitle:"Residential & Commerical Plots/Land",
     subtitleDesc:"Explore Residential,Agricultural, Industrial and Commerical Plots/Land",
@@ -92,7 +92,7 @@ const Home = () => {
   }
   ],
   postPropertyViaWhatsapp:[{
-    img : "https://picsum.photos/700/450?random=7",
+    img : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bulding_3.jpeg",
     title:`Post via  Whatsapp`,
     subtitle:"Sell or rent faster at the right price!",
     subtitleDesc:"List your property now",

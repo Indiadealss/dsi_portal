@@ -7,10 +7,12 @@ import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { submitProperty } from '../api/api';
+import { Creaditmodel } from './Creaditmodel';
 
 export const Postpropertyform = () => {
   const propertyFirstData = useSelector((state) => state.property.data);
   const [continueNO, setContinueNo] = useState(0);
+  const [showLogin, setShowLogin] = useState(false);
   const [steps, setSteps] = useState([
     { id: 1, label: "Basic Details", status: true, currentForm: Postbasicdetailsform },
     { id: 2, label: "Location Details", status: false, currentForm: Locationbutton },
@@ -50,9 +52,12 @@ export const Postpropertyform = () => {
         )
       );
       setContinueNo(prev => prev + 1);
+    //  setShowLogin(true);
+
     } else {
-      dispatch(submitProperty(propertyFirstData));
-      alert('You have successfully listed the property');
+     setShowLogin(true);
+      // dispatch(submitProperty(propertyFirstData));
+      // alert('You have successfully listed the property');
     }
   }
 
@@ -107,6 +112,9 @@ export const Postpropertyform = () => {
           </div>
         </div>
       </div>
+      {showLogin && (
+  <Creaditmodel open={showLogin} onClose={() => setShowLogin(false)} />
+)}
     </div>
   );
 };

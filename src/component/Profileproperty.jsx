@@ -221,7 +221,7 @@ export const Profileproperty = ({setValidator}) => {
   return (
     <>
       <h2 className="text-2xl font-medium mb-5">Tell us your property</h2>
-
+      <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : ''}`}>
       <p className="text-sm font-medium">No of Bedrooms</p>
       <div className="my-3">
         {noOfBedroom.map((item, index) => (
@@ -265,6 +265,7 @@ export const Profileproperty = ({setValidator}) => {
             {item.title}
           </button>
         ))}
+      </div>
       </div>
 
       <p className="font-medium">Add Area Details</p>

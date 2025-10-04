@@ -9,7 +9,7 @@ const Dreamherosection = () => {
       {
         title: "UP women homebuyers get 1% stamp duty rebate",
         date: "Jul 28, 2025",
-        img: "https://via.placeholder.com/80",
+        img: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/bulding.jpeg",
       },
       {
         title: "Oberoi Realty to enter Gurgaon market",
@@ -41,7 +41,7 @@ const Dreamherosection = () => {
         {/* Left Image */}
         <div className="order-2 md:order-1">
           <img
-            src="https://picsum.photos/700/450?random=1"
+            src="https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/bulding.jpeg"
             alt="Home Banner"
             style={{ width: "100%", borderRadius: "12px" }}
           />
