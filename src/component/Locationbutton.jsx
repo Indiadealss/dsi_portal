@@ -11,10 +11,11 @@ export const Locationbutton = ({ setValidator }) => {
   const [showAdditional,setShowAdditional] = useState(false);
   const [projectname,setProjectname] = useState('');
   const dispatch = useDispatch();
+  const [apartment,setApartment] = useState('')
 
   useEffect(() => {
-    dispatch(updateField({ location: [{"City":query,"Address":locality}] }));
-  },[query,locality])
+    dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}] }));
+  },[query,locality,apartment])
 
   // Generic search handler
   const fetchLocations = async (value, setData) => {
@@ -87,11 +88,15 @@ export const Locationbutton = ({ setValidator }) => {
     if (setValidator) {
       setValidator(validateForm);
     }
-  }, [locality]);
+  }, [locality,apartment]);
 
   function validateForm() {
     if (!locality) {
       alert("Enter your city name");
+      return false;
+    }
+    if(!apartment){
+      alert("Enter the Apartment name");
       return false;
     }
     return true;
@@ -185,11 +190,28 @@ export const Locationbutton = ({ setValidator }) => {
        id="House_No"
        value={projectname}
        onChange={(e) => setProjectname(e.target.value)}
-      placeholder="House No(optional)"
+      placeholder="Enter the Project name"
       className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
             focus:ring-blue-500 focus:border-blue-500 block p-2.5 
             dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
             dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+
+            <label
+            htmlFor="locality"
+            className="block my-5 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Apartment/Socity
+          </label>
+      <input type="text" 
+       id="House_No"
+       value={apartment}
+       onChange={(e) => setApartment(e.target.value)}
+      placeholder="Enter the Project name"
+      className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+            focus:ring-blue-500 focus:border-blue-500 block p-2.5 
+            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+        
         <label
             htmlFor="locality"
             className="block my-5 text-sm font-medium text-gray-900 dark:text-white"

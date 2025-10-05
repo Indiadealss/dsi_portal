@@ -20,9 +20,9 @@ export const Profileproperty = ({setValidator}) => {
     const [ownership,setOwnership] = useState('');
     const [availablef,setAvailablef] = useState('');
     const [description,setDescription] = useState('');
-    const [paPlotArea,setPlotArea] = useState(0);
-    const [buArea,setBuArea] = useState(0);
-    const [caArea,setCaArea] = useState(0);
+    const [paPlotArea,setPlotArea] = useState(null);
+    const [buArea,setBuArea] = useState(null);
+    const [caArea,setCaArea] = useState(null);
     const [possession,setPossession] = useState('');
 
     const dispatch = useDispatch();
@@ -275,16 +275,22 @@ export const Profileproperty = ({setValidator}) => {
 
       {/* Input with Dropdown */}
       <div className="relative w-full my-5">
+        
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={`${!paPlotArea ? 'hidden': 'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'} `}
+        >
+          <span>Plot Area</span>
+        </div>
+
         <input
           type="number"
-          id="searchInput"
           value={paPlotArea}
           onChange={(e) => setPlotArea(e.currentTarget.value)}
-          placeholder="Ploat Area"
-          required
-          className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
-                 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='Enter the Super Biuld up Area'
         />
+      </div>
 
         <button
           type="button"
@@ -318,16 +324,22 @@ export const Profileproperty = ({setValidator}) => {
         )}
       </div>
       <div className="relative w-full my-5">
+        
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!buArea ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>Build Up Area</span>
+        </div>
+
         <input
           type="number"
           value={buArea}
-          id="searchInput"
-          placeholder="Built-up Area"
-          required
           onChange={(e) => setBuArea(e.currentTarget.value)}
-          className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
-                 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='Enter the Build up area'
         />
+      </div>
 
         <button
           type="button"
@@ -361,16 +373,22 @@ export const Profileproperty = ({setValidator}) => {
         )}
       </div>
       <div className="relative w-full my-5">
+        
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!caArea ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>Carpet Area</span>
+        </div>
+
         <input
           type="number"
           value={caArea}
-          id="searchInput"
           onChange={(e) => setCaArea(e.currentTarget.value)}
-          placeholder="Carpet Area"
-          required
-          className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg 
-                 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='Enter the Carpet Area'
         />
+      </div>
 
         <button
           type="button"

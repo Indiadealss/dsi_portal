@@ -116,4 +116,4 @@ const Listingboost = () => {
   )
 }
 
-export default Listingboost
+export default Listingboost;

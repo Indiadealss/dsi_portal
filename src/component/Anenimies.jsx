@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
+
 
 
 export const Anenimies = ({setValidator}) => {
@@ -19,11 +21,20 @@ export const Anenimies = ({setValidator}) => {
     const [overlo,setOverlo] = useState([]);
     const [locatadvance,setLocatadavance] = useState([]);
     const [price,setPrice] = useState('');
+    const [roadWidth,setRoadWidth] = useState('');
+    const [plotarea,setPloatarea] = useState('sq.ft');
     const dispatch = useDispatch();
+    const [dropdown, setDropdown] = useState(false)
 
     useEffect(() => {
       dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,selectbulding:selectbulding,pobackup:pobackup,addFeature:addFeature,prppertyF:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price}))
     },[price])
+
+    const handleSelect = (value) =>{
+    setPloatarea(value);
+    setDropdown(false);
+  }
+  
 
      useEffect(() => {
               if (setValidator) {
@@ -50,6 +61,18 @@ export const Anenimies = ({setValidator}) => {
               }
           return true;
         }
+
+
+        const sizeDropdown = [
+    "sq.ft",
+    "sq.m",
+    "arce",
+    "hactare"
+  ]
+
+   function dropDownFun() {
+    setDropdown(prev => !prev);
+  }
 
    const pricingDetails = [
     {name:'All inclusive Price',label:'All inclusive Price'},
@@ -136,8 +159,8 @@ export const Anenimies = ({setValidator}) => {
         label:'Water Storage',
       },
       {
-        name:'security/Fire/Alarm',
-        label:'security/Fire/Alarm'  
+        name:'security/Fire Alarm',
+        label:'security/Fire Alarm'  
       },
       {
         name:'visitor prarking',
@@ -150,6 +173,14 @@ export const Anenimies = ({setValidator}) => {
       {
         name:'Park',
         label:'Park'
+      },
+      {
+        name:'Security',
+        label:'Security'
+      },
+      {
+        name:'Lifts',
+        label:'Lifts'
       },
       {
         name:'Intercorm Facility',
@@ -173,6 +204,10 @@ export const Anenimies = ({setValidator}) => {
       {
         name:'Swimming Pool',
         label:'Swimming Pool'
+      },
+      {
+        name:'club house/Community center',
+        label:'club house/Community center'
       }
     ]
 
@@ -184,6 +219,22 @@ export const Anenimies = ({setValidator}) => {
       {
         name:'Waste Disposal',
         label:'Waste Disposal'
+      },
+      {
+        name:'No open drrawne around',
+        label:'No open drrawne around'
+      },
+      {
+        name:'Rain water Harvesting',
+        label:'Rain water Harvesting'
+      },
+      {
+        name:'Bank Atteched Property',
+        label:'Bank Atteched Property'
+      },
+      {
+        name:'Low Density Society',
+        label:'Low Density Society'
       }
     ]
 
@@ -203,6 +254,34 @@ export const Anenimies = ({setValidator}) => {
       {
         name:'Internet/wi-fi connectivity',
         label:'Internet/wi-fi connectivity'
+      },
+      {
+        name:'Connectivity',
+        label:'Connectivity'
+      },
+      {
+        name:'Centerally Air Conditioneal',
+        label:'Centerally Air Conditioneal'
+      },
+      {
+        name:'Water Purifier',
+        label:'Water Purifier'
+      },
+      {
+        name:'Recently Renovated',
+        label:'Recently Renovated'
+      },
+      {
+        name: 'Private Garden/Tarrace',
+        label:'Private Garden/Tarrace'
+      },
+      {
+        name:'Natural Light',
+        label:'Natural Light'
+      },
+      {
+        name:'Spacious Interiors',
+        label:'Spacious Interiors'
       }
     ]
 
@@ -279,6 +358,18 @@ export const Anenimies = ({setValidator}) => {
       {
         name:'Close to Railway Station',
         label:'Close to Railway Station'
+      },
+      {
+        name:'Close to Airport',
+        label:'Close to Airport'
+      },
+      {
+        name:'Close to Mall',
+        label:'Close to Mall'
+      },
+      {
+        name:'Close to Highway',
+        label:'Close to Highway'
       }
     ]
   return (
@@ -582,6 +673,56 @@ export const Anenimies = ({setValidator}) => {
             )
         })}
         </div>
+
+         <div className="relative w-full my-5">
+        
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={`${!roadWidth ? 'hidden': 'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'} `}
+        >
+          <span>Width of facing road</span>
+        </div>
+
+        <input
+          type="number"
+          value={roadWidth}
+          onChange={(e) => setRoadWidth(e.currentTarget.value)}
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='Enter the Width of Road facing'
+        />
+      </div>
+
+        <button
+          type="button"
+          id="unitDropdownButton"
+          onClick={dropDownFun}
+          className="flex items-center gap-1 text-white absolute end-2.5 bottom-2.5 bg-blue-700 
+                  outline-none  font-medium 
+                 rounded-lg text-sm px-4 py-2 cursor-pointer"
+        >
+          {plotarea} <ChevronDownIcon className="w-5 h-5" />
+        </button>
+
+        {/* Dropdown Menu */}
+        {dropdown && (
+          <div className="absolute right-0 mt-2 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+            <ul
+              className="py-2 text-sm text-gray-700 ps-3 py-2 text-medium"
+              aria-labelledby="unitDropdownButton"
+            >
+              {sizeDropdown.map((item)=>(
+                <li key={item} >
+                  <button type='button' 
+                  onClick={() => handleSelect(item)}
+                  className='w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer'>
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
         <p className='font-medium text-lg'>Price Details</p>
       <div className='flex '>
         <input type='number' value={price} onChange={(e) => setPrice(e.currentTarget.value)} className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
