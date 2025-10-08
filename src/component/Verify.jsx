@@ -5,6 +5,7 @@ import { verifyOtp } from '../api/api';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './Redux/userSlice';
+import { updateField } from './Redux/propertySlice';
 
 const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
     const [timer,setTimer] = useState(30); //30 seconds countdown
