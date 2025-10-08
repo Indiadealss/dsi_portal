@@ -27,7 +27,7 @@ export const Anenimies = ({setValidator}) => {
     const [dropdown, setDropdown] = useState(false)
 
     useEffect(() => {
-      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,selectbulding:selectbulding,pobackup:pobackup,addFeature:addFeature,prppertyF:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price}))
+      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price,road_width:roadWidth}))
     },[price])
 
     const handleSelect = (value) =>{

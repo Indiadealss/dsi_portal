@@ -2,35 +2,40 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const API = axios.create({
-    baseURL: "/api",
-    headers:{
-        "Content-Type" : "application/json",
-    },
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 
 // Auth APIs
-export const sentOtp = (mobile) => 
-    API.post("/auth/send-otp", {mobile});
+export const sentOtp = (mobile) =>
+  API.post("/auth/send-otp", { mobile });
 
 
-export const verifyOtp = (mobile,otp) =>
-    API.post("/auth/verify-otp", {mobile,otp});
+export const verifyOtp = (mobile, otp) =>
+  API.post("/auth/verify-otp", { mobile, otp });
 
 
-export const register = (name,email,mobile) => 
-    API.post("/auth/register",{name,email,mobile})
+export const register = (name, email, mobile) =>
+  API.post("/auth/register", { name, email, mobile })
 
 export const getUserDetatils = () => {
-    return axios.get("/api/auth/me",
-    { withCredentials: true ,
-    headers: { "Cache-Control": "no-cache" }
+  return axios.get("/api/auth/me",
+    {
+      withCredentials: true,
+      headers: { "Cache-Control": "no-cache" }
     }
-    )
+  )
 }
 
 export const getLogout = async () => {
-    return axios.post("/api/auth/logout",{},{ withCredentials: true })
+  return axios.post("/api/auth/logout", {}, { withCredentials: true })
+}
+
+export const getSearch = async (city) => {
+  return API.get(`/cities/search?query=${city}`)
 }
 
 export const submitProperty = createAsyncThunk(
@@ -40,28 +45,32 @@ export const submitProperty = createAsyncThunk(
       const formData = new FormData;
       // Append all normal fields
       Object.keys(propertyData).forEach((key) => {
-        if(!["images","video"].includes(key)){
-            const value = propertyData[key];
-            if(Array.isArray(value)){
-                value.forEach((item) => formData.append(key,item));
-            }else{
-                formData.append(key,value);
-            }
+        if (!["images", "video"].includes(key)) {
+          const value = propertyData[key];
+
+          if (key === "location" && typeof value === "object") {
+            value = JSON.stringify(value);
+          }
+          if (Array.isArray(value)) {
+            value.forEach((item) => formData.append(key, item));
+          } else {
+            formData.append(key, value);
+          }
         }
       });
 
       // Append images
       propertyData.images.forEach((file) => {
-        formData.append("images",file);
+        formData.append("images", file);
       });
 
       // Append videos
       propertyData.video.forEach((file) => {
-        formData.append("video",file);
+        formData.append("video", file);
       })
-      const res = await axios.post("/api/property/createProperty", formData,{
-        headers:{"content-Type":"multipart/form-data"},
-        withCredentials:true,
+      const res = await axios.post("/api/property/createProperty", formData, {
+        headers: { "content-Type": "multipart/form-data" },
+        withCredentials: true,
       });
       return res.data;
     } catch (err) {

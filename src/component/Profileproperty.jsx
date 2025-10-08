@@ -280,7 +280,7 @@ export const Profileproperty = ({setValidator}) => {
         <div
           className={`${!paPlotArea ? 'hidden': 'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'} `}
         >
-          <span>Plot Area</span>
+          <span>Super Build UP Area</span>
         </div>
 
         <input

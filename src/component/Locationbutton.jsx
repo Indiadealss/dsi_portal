@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { updateField } from "./Redux/propertySlice";
 import { useDispatch } from "react-redux";
+import { getSearch } from "../api/api";
 
 export const Locationbutton = ({ setValidator }) => {
   const [query, setQuery] = useState("");
@@ -12,6 +13,7 @@ export const Locationbutton = ({ setValidator }) => {
   const [projectname,setProjectname] = useState('');
   const dispatch = useDispatch();
   const [apartment,setApartment] = useState('')
+  const [detailData,setDetailData] = useState('');
 
   useEffect(() => {
     dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}] }));
@@ -20,17 +22,37 @@ export const Locationbutton = ({ setValidator }) => {
   // Generic search handler
   const fetchLocations = async (value, setData) => {
     if (value.length > 2) {
-      try {
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
-        );
-        const data = await res.json();
-        console.log(data);
+      // try {
+      //   const res = await fetch(
+      //     `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
+      //   );
+      //   const data = await res.json();
+      //   console.log(data);
         
-        setData(data);
-      } catch (error) {
-        console.log("Error fetching location:", error);
-      }
+      //   setData(data);
+      // } catch (error) {
+      //   console.log("Error fetching location:", error);
+      // }
+       try{
+            getSearch(value)
+                  .then(res => {
+                    if (res.status === 200) {
+                      // console.log(res.data.usedetails);
+                      console.log(res.data);
+                      const data = res.data.data;
+                      console.log(data);
+                      
+                     setData(res.data.data);     
+                     setDetailData(res.data)    
+                    }
+                  })
+                  .catch(err => {
+                    console.error(err);
+                  });
+          }catch(err){
+            console.error("Logout failed",err);
+            
+          }
     } else {
       setData([]);
     }
@@ -65,14 +87,15 @@ export const Locationbutton = ({ setValidator }) => {
   };
 
   const handleSelect = (place) => {
-    if (place.address.village || place.address.city || place.address.town) {
-      setQuery(
-        place.address.village ||
-          place.address.city ||
-          place.address.town ||
-          place.display_name
-      );
-    }
+    // if (place.address.village || place.address.city || place.address.town) {
+    //   setQuery(
+    //     place.address.village ||
+    //       place.address.city ||
+    //       place.address.town ||
+    //       place.display_name
+    //   );
+    // }
+    setQuery(place.city)
     setResults([]);
     setShowLocality(true);
   };
@@ -135,7 +158,7 @@ export const Locationbutton = ({ setValidator }) => {
               onClick={() => handleSelect(item)}
               className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
             >
-              {item.display_name}
+              {item.city}
             </li>
           ))}
         </ul>
