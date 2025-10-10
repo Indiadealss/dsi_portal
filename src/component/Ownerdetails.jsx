@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import { FaPhoneAlt } from "react-icons/fa";
 
-const Ownerdetails = () => {
+const Ownerdetails = ({details}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -16,31 +16,31 @@ const Ownerdetails = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed z-10 inset-0 overflow-y-auto"
+          className="fixed z-10 inset-0 overflow-y-hidden  bg-[#011638a3]"
           onClick={(e) => {
             if (e.target.id === 'modal-overlay') {
               closeModal(); // close when clicking outside modal
             }
           }}
         >
-          <div id="modal-overlay" className="flex flex-col lg-flex-row webkitHeightFillAvailable items-end sm:h-screen justify-center text-center sm:block sm:p-0 bg-gray-500 bg-opacity-75">
+          <div id="modal-overlay" className="flex flex-col lg-flex-row webkitHeightFillAvailable items-end sm:h-screen mt-[10vw] justify-center text-center sm:block sm:p-0 bg-opacity-75">
             {/* This span helps center the modal */}
             <p className='font-bold text-white'>You are requesting to view advertiser details.</p>
             {/* <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span> */}
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-3xl transform transition-all sm:align-middle sm:max-w-lg md:max-w-2xl sm:w-full">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <div className="sm:flex sm:items-start justify-between">
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                     
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
                         POSTED BY DEALER:
                       </p>
-                      <div className='flex'>
+                      <div className='flex justify-around'>
                         <div>
-                            <p className='text-green-500'>+91-8800727604,91-9910740860</p>
-                            <p className='text-sm font-bold text-green-500'>ankit.niki.1988@gmail.com</p>
-                            <p className='text-xs text-gray-500 pt-4'>Ankit Goeal</p>
+                            <p className='text-green-500'>{details.mobile}</p>
+                            <p className='text-sm font-bold text-green-500'>{details.email}</p>
+                            <p className='text-xs text-gray-500 pt-4'>{details.name}</p>
                         </div>
                         <div className='px-10'>
                             <p className="text-sm text-gray-500">

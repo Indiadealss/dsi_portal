@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import landmark from '../../Images/landmarkGroup.png'
 import Antplanerbycus from '../customantdesign/Antplanerbycus'
+import { useSelector } from 'react-redux';
 
 const Placesnearby = () => {
+
+  const property = useSelector((state) => state.propertyid.data);
+  let locationData = null;
+
+  try{
+    if(property?.location){
+      locationData = JSON.parse(property.location);
+    }
+  }catch(er){
+    console.error(er);
+    
+  }
+
+  console.log(locationData,"hello");
+  
+
+  
+
 
   const placeNearby = {
     location:'H-01,Sector27,Greater Noida',
@@ -17,16 +36,24 @@ const Placesnearby = () => {
       {title:"Boraki station"},
     ]
 }
+
+if (!property || !property.location) {
+    return (
+      <div className="text-center py-4 text-gray-500">
+        Loading nearby places...
+      </div>
+    );
+  }
   return (
-    <div className='block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700'>
-        <div className='flex my-2 max-w-[270px] justify-between'>
+    <div className='block max-w-full p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700'>
+        <div className='flex my-2 max-w-[-webkit-fill-available] my-3'>
             <img className='' src={landmark} alt="..." />
             <div>
             <h2>Place nearby</h2>
-            <p>{placeNearby.location}</p>
+            <p>{`${locationData[0].apartment_name}  ${locationData[0].Address}`}</p>
             </div>
         </div>
-        <Antplanerbycus  articles={placeNearby.nearlocations} />
+        <Antplanerbycus  />
     </div>
   )
 }

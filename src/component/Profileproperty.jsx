@@ -30,7 +30,7 @@ export const Profileproperty = ({setValidator}) => {
 
     useEffect(() => {
       const tf = Number(totalFloor)
-      dispatch(updateField({bedroom:noBedroom,bathroom:noBathroom,balconies:noBalconies,plotarea:paPlotArea,buildarea:buArea,carpetarea:caArea,
+      dispatch(updateField({bedroom:noBedroom,bathroom:noBathroom,balconies:noBalconies,plotarea:paPlotArea+plotarea,buildarea:buArea+buildarea,carpetarea:caArea+carpet,
         totalfloor:totalFloor,availabestatus:choiseProperty,ownership:ownership,propertyage:ageProperty,coveredparking:coverdParking,uncoveredparking:uncoverdParking,description:description,Possession:possession 
       }))
     },[description])
@@ -200,15 +200,17 @@ export const Profileproperty = ({setValidator}) => {
         }, [noBedroom,noBalconies,noBathroom,ageProperty,ownership,choiseProperty,description]);
         
         function validateForm(){
-          if(!noBedroom){
+          if(propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom){
               alert("Please select Number of Bedroom");
+              console.log(propertyDataFirst.property != 'commercial',propertyDataFirst.property);
+              
               return false;
           }
-          if(!noBalconies){
+          if(propertyDataFirst.propertyType != 'plotLand' && !noBalconies){
               alert("Please select Number of Balconies");
               return false;
           }
-          if(!noBathroom){
+          if(propertyDataFirst.propertyType != 'plotLand' && !noBathroom){
               alert("Please select Number of Bathroom");
               return false;
           }
@@ -221,9 +223,9 @@ export const Profileproperty = ({setValidator}) => {
   return (
     <>
       <h2 className="text-2xl font-medium mb-5">Tell us your property</h2>
-      <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : ''}`}>
-      <p className="text-sm font-medium">No of Bedrooms</p>
-      <div className="my-3">
+      <div className={`${propertyDataFirst.propertyType === 'plotLand' ? 'hidden' : ''}`}>
+      <p className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : "text-sm font-medium"}`}>No of Bedrooms</p>
+      <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : "my-3"}`}>
         {noOfBedroom.map((item, index) => (
           <button
             type="button"

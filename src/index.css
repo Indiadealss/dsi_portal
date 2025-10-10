@@ -333,6 +333,11 @@ a {
  .topSearchbox{
     top:86%;
   }
+
+  .propertyListingImage{
+    height: 50vw !important;
+    width: 100%;
+  }
   .ant-btn {
     font-size: 15px;
     padding: 8px 20px;
@@ -368,11 +373,17 @@ a {
   top: 340px;
 }
   .propertyListingHeight{
-    height: 24vw !important;
+    height: max-content !important;
+    width: min-content !important;
   }
 
   .propertyListingDatamain{
-    width: 70% !important;
+    width: 66% !important;
+  }
+  .propertyListingImage{
+    height: 16vw !important;
+     width: 30vw;
+     border-radius: 12px;
   }
 
   .ant-btn {
@@ -406,7 +417,7 @@ a {
   p  { font-size: 1.1rem; }
   a  { font-size: 1.1rem; }
   .propertyListingDatamain{
-    width: 70% !important;
+    width: 66% !important;
   }
   .propertyListingFilter{
     width: max-content !important;
@@ -415,7 +426,7 @@ a {
     height: max-content !important;
   }
   .propertyListingImage{
-    height: 14vw !important;
+    height: 20vw !important;
   }
   .ant-btn {
     font-size: 17px;
@@ -428,6 +439,7 @@ a {
   .topSearchbox{
     top:80%;
   }
+  
 }
 
 /* ====== Ultra-wide 4K (≥1999px) ====== */

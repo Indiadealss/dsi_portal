@@ -38,6 +38,14 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
+export const getallProperty = async (page,limit) => {
+  return API.get(`/property/getAllProperties?page=${page}&limit=${limit}`);
+}
+
+export const getproperty = async(id) => {
+  return API.get(`/property/getProperty/${id}`);
+}
+
 export const submitProperty = createAsyncThunk(
   "property/submitProperty",
   async (propertyData, { rejectWithValue }) => {
@@ -46,7 +54,7 @@ export const submitProperty = createAsyncThunk(
       // Append all normal fields
       Object.keys(propertyData).forEach((key) => {
         if (!["images", "video"].includes(key)) {
-          const value = propertyData[key];
+          let value = propertyData[key];
 
           if (key === "location" && typeof value === "object") {
             value = JSON.stringify(value);

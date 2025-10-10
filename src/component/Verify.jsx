@@ -48,7 +48,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
                     console.log(res.data.user);
                     dispatch(setUser(res.data.user));
                     console.log(user);
-                    dispatch(updateField({owner:_id,}))
+                     window.location.reload();
                     alert("Login Sucessfully");
                      if (closeModal) closeModal();
                   }else{

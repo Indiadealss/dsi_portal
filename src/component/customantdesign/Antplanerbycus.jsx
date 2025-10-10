@@ -4,11 +4,22 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector } from "react-redux";
 
-const Antplanerbycus = ({ articles }) => {
+const Antplanerbycus = () => {
 
     
   const sliderRef = useRef(null);
+  
+
+  const property = useSelector((state) => state.propertyid.data);
+
+    const locationData = JSON.parse(property.location);
+    console.log(locationData);
+    
+
+  
+  
 
   const settings = {
     dots: false,
@@ -22,21 +33,29 @@ const Antplanerbycus = ({ articles }) => {
     ],
   };
 
+  if (!property || !property.locatadvance) {
+    return (
+      <div className="text-center py-4 text-gray-500">
+        Loading nearby places...
+      </div>
+    );
+  }
+
   return (
     <div className="relative">
       {/* Left Button */}
       <Button
         onClick={() => sliderRef.current?.slickPrev()}
-        className="!absolute !left-[-2px] !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"
+        className={`${property.locatadvance.length <= 8 ? "!hidden" :"!absolute !left-[-2px] !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"}`}
         icon={<LeftOutlined />}
       />
 
       {/* Carousel */}
       <Slider ref={sliderRef} {...settings}>
-        {articles.map((item, idx) => (
-          <div key={idx} className="px-2">
-        <button className="bg-white w-full px-4 py-2 rounded  shadow text-sm">
-              {item.title}
+        {property.locatadvance.map((item, idx) => (
+          <div  className="px-2">
+        <button key={idx} className="bg-white w-full px-4 py-2 rounded  shadow text-sm">
+              {item}
             </button>
           </div>
         ))}
@@ -45,7 +64,7 @@ const Antplanerbycus = ({ articles }) => {
       {/* Right Button */}
       <Button
         onClick={() => sliderRef.current?.slickNext()}
-        className="!absolute !right-0 !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"
+        className={`${property.locatadvance.length <= 8 ? "!hidden":"!absolute !right-0 !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"}`}
         icon={<RightOutlined />}
       />
     </div>

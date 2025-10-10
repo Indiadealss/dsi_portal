@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Propertydetailsstickcard from './customcomponent/Propertydetailsstickcard';
 import Antdcardcrousal from './customantdesign/Antdcardcrousal';
 import Antdpropertydetailsimgcroul from './customantdesign/Antdpropertydetailsimgcroul';
@@ -12,10 +12,53 @@ import Simllarpropertites from './customcomponent/Simllarpropertites';
 import Newlaunchcard from './customcomponent/Newlaunchcard';
 import Appartmentvill from './customantdesign/Appartmentvill';
 import { Card } from 'antd';
+import { useParams } from 'react-router-dom';
+import { getproperty } from '../api/api';
+import { useDispatch } from 'react-redux';
+import { setProperty } from './Redux/propertyidSlice';
 
 const Propertydetails = () => {
+
+   const { id } = useParams();
+   const dispatch = useDispatch();
+
+   const [propertys,setPropertys] = useState(null);
+   const [crousalData, setCrousalData] = useState([]);
+   const [video,setVideo] = useState([]);
+
+   useEffect(() => {
+      fetchproperty()
+   },[id])
+
+   const fetchproperty = async () => {
+      try{
+         const res = await getproperty(id);
+         const data = res.data
+         setPropertys(data);
+         dispatch(setProperty(res.data));
+
+         if(data){
+            if(data.images && data.images.length > 0){
+               setCrousalData(data.images.map((img)=>({
+                  image:img.src
+               }))
+            );
+            }
+         }
+         if(data.video && data.video.length > 0){
+                  setVideo(data.video.map((video) => ({
+                     video:video.src
+                  }))
+               );
+               }
+         
+      }catch(err){
+         console.error(err);
+         
+      }
+   }
     
- const  crousalData = [
+ const  crousalDaata = [
     {image:"https://picsum.photos/530/364?random=1"},
     {image:"https://picsum.photos/530/364?random=2"},
     {image:"https://picsum.photos/530/364?random=3"},
@@ -52,7 +95,7 @@ const Propertydetails = () => {
    'Waste Disposal'
   ]
 
-  const video = null;
+  
     
   return (
    <>
@@ -62,10 +105,10 @@ const Propertydetails = () => {
    <Antdpropertydetailsimgcroul crousal={crousalData} video={video}  />
    </div>
    <div className='perdetdacaabsolute' >
-   <Propertydetailscarddata  />
+   <Propertydetailscarddata property={propertys} />
    </div>
    <div className='mt-10'>
-      <Placesnearby />
+      <Placesnearby property={propertys} />
    </div>
    <div className='mt-10'>
     <Propertytransation />

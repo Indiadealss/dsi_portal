@@ -25,9 +25,24 @@ export const Anenimies = ({setValidator}) => {
     const [plotarea,setPloatarea] = useState('sq.ft');
     const dispatch = useDispatch();
     const [dropdown, setDropdown] = useState(false)
+     const [selectedPricing, setSelectedPricing] = useState(""); // will store like "500_inputCheck,1000_inputCheck"
+
+  const handleToggle = (value) => {
+    const items = selectedPricing ? selectedPricing.split(",") : [];
+
+    if (items.includes(value)) {
+      // Remove item if unchecked
+      const newItems = items.filter(item => item !== value);
+      setSelectedPricing(newItems.join(","));
+    } else {
+      // Add item if checked
+      const newItems = [...items, value];
+      setSelectedPricing(newItems.join(","));
+    }
+  };
 
     useEffect(() => {
-      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price,road_width:roadWidth}))
+      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price+selectedPricing,road_width:roadWidth + plotarea}))
     },[price])
 
     const handleSelect = (value) =>{
@@ -732,7 +747,7 @@ export const Anenimies = ({setValidator}) => {
           {pricingDetails.map((item,index) =>{
             return(
               <div className='flex mb-4 item-center flex-wrap mx-2 my-1'>
-                <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm outline-none" />
+                <input id="default-checkbox" type="checkbox" onChange={() => handleToggle(value)} value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm outline-none" />
     <label for="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{item.label}</label>
               </div>
             )

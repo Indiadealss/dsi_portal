@@ -1,27 +1,42 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 const Propertytransation = () => {
 
-    const fullDetails = {
-        transational:'Resale',
-        width:'45.0 Feet',
-        powerbackup:'full',
-        propertyOwnership:'Leasehold',
-        gatedCommunity:'yes',
-        propertyCode:'E34398',
-        flooring:'Vitrified',
-        parking:'2 Covered',
-        furnshing:'Semifurnished',
-        watersource:'Borewell/Tank'
+  const property = useSelector((state) => state.propertyid.data);
+
+  console.log(property,'okkk');
+  
+
+    
+
+    if(!property || !property.road_width || !property.purpose){
+        return(
+            <div className="text-center py-4 text-gray-500">
+                Loading...
+            </div>
+        )
     }
 
+    const fullDetails = {
+        transational:property.purpose,
+        Road:property.road_width,
+        powerbackup:property.pobackup,
+        Ownership:property.ownership,
+        // gatedCommunity:'yes',
+        // propertyCode:'E34398',
+        flooring:'Vitrified',
+    parking:property.coveredparking+' Coverd '+ property.uncoveredparking+' Uncoverd',
+        furnshing:property.furnishing,
+        watersource:property.watersource,
+    }
 
   return (
     <div className='py-4 border-y border-gray-300'>
             <div className='grid grid-cols-2 mx-2 lg:grid-cols-3'>
                 {Object.entries(fullDetails).map(([key,value]) => (
                     <p key={key} className='flex gap-2 flex-col lg:flex-row'>
-                        <span className='font-medium capitalize'>{key}</span>
+                        <span className='font-medium capitalize'>{key} :</span>
                         <span>{value}</span>
                     </p>
                 ))}
