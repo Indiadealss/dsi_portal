@@ -30,7 +30,7 @@ export const Profileproperty = ({setValidator}) => {
 
     useEffect(() => {
       const tf = Number(totalFloor)
-      dispatch(updateField({bedroom:noBedroom,bathroom:noBathroom,balconies:noBalconies,plotarea:paPlotArea+plotarea,buildarea:buArea+buildarea,carpetarea:caArea+carpet,
+      dispatch(updateField({bedroom:noBedroom,bathroom:noBathroom,balconies:noBalconies,plotarea:paPlotArea,plotSizein:plotarea,buildarea:buArea,buildSizein:buildarea,carpetarea:caArea, carpetSizein:carpet,
         totalfloor:totalFloor,availabestatus:choiseProperty,ownership:ownership,propertyage:ageProperty,coveredparking:coverdParking,uncoveredparking:uncoverdParking,description:description,Possession:possession 
       }))
     },[description])
@@ -481,8 +481,8 @@ export const Profileproperty = ({setValidator}) => {
       </div>
       
 <form className={`${choiseProperty === 'Under construction' ? 'w-full mx-auto' : 'hidden'}`}>
-  <label for="countries" className="block mb-2  font-medium text-gray-900 dark:text-white">Possession By</label>
-  <select id="countries" value={possession} onChange={(e) => setPossession(e.currentTarget.value)} className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  <label for="countries" className="block mb-2  font-medium text-gray-900 ">Possession By</label>
+  <select id="countries" value={possession} onChange={(e) => setPossession(e.currentTarget.value)} className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5    ">
     <option selected>Expected by</option>
     {underConcetraction.map((item,index) => {
       return(
@@ -533,7 +533,7 @@ export const Profileproperty = ({setValidator}) => {
         <h3 className='font-medium text-xl'>What makes your property unique</h3>
         <p className='text-xs font-medium  text-gray-500'>Adding description will increase your listing visibility</p>
       <div>
-        <textarea id="message" rows="4" value={description} onInput={(e) => setDescription(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.." />
+        <textarea id="message" rows="4" value={description} onInput={(e) => setDescription(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.." />
         </div>
     </>
   )

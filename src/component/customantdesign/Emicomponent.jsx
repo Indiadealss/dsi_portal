@@ -52,7 +52,7 @@ const styles = {
       <input
         type="number"
         placeholder="Loan Amount (₹)"
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full border border-gray-300 rounded-lg px-3 py-2  focus:ring-blue-500 focus:outline-none"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
@@ -64,7 +64,7 @@ const styles = {
       <input
         type="number"
         placeholder="Annual Interest Rate (%)"
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full border border-gray-300 rounded-lg px-3 py-2  focus:ring-blue-500 focus:outline-none"
         value={rate}
         onChange={(e) => setRate(e.target.value)}
       />
@@ -76,7 +76,7 @@ const styles = {
       <input
         type="number"
         placeholder="Loan Tenure (Months)"
-        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full border border-gray-300 rounded-lg px-3 py-2  focus:ring-blue-500 focus:outline-none"
         value={tenure}
         onChange={(e) => setTenure(e.target.value)}
       />

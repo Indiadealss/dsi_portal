@@ -17,9 +17,21 @@ const Propertydetailsstickcard = () => {
         )
     }
 
+    function formatNumber(num) {
+  if (num >= 10000000) {
+    return (num / 10000000).toFixed(1).replace(/\.0$/, "") + "Cr";
+  } else if (num >= 100000) {
+    return (num / 100000).toFixed(1).replace(/\.0$/, "") + " Lakh";
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, "") + " Thousand";
+  } else {
+    return num.toString();
+  }
+}
+
     const propertyDetails = {
-        price: "7 Cr",
-        size: "2,33,333 per sq.m",
+        price: formatNumber(property.price),
+        size: `${property.buildarea} per sq.m`,
         bedrooms: "8",
         bathrooms: "8",
         propertyType: "Independent House/Villa for Sale",

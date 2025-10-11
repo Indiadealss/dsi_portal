@@ -101,7 +101,7 @@ export const Postproperty = () => {
                         <img src={postPropery} alt='...' />
                     </div>
                     <div>
-                        <div className="w-[-webkit-fill-available] lg:w-[35vw] p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                        <div className="w-[-webkit-fill-available] lg:w-[35vw] p-6 bg-white border border-gray-200 rounded-lg shadow-sm  ">
                             <h3 className='text-2xl font-semibold py-2'>Start posting your property,it's free</h3>
                             <h3 className='text-xs font-semibold py-2 px-1'>Add Basic details</h3>
                             <h4 className='font-semibold'>You're looking to...</h4>
@@ -116,11 +116,11 @@ export const Postproperty = () => {
                             <div className='flex'>
                                 <div className="flex items-center" onChange={resCom}>
                                     <input id="default-radio-1" checked={selection === "residential"} type="radio" value="residential" name="default-radio" className="w-4 h-4 text-blue-600 bg-blue-100 border-gray-300 " />
-                                    <label for="default-radio-1" className="m-2 text-sm  text-gray-500 dark:text-gray-300">Residential </label>
+                                    <label for="default-radio-1" className="m-2 text-sm  text-gray-500 ">Residential </label>
                                 </div>
                                 <div className="flex items-center" onChange={resCom}>
                                     <input checked={selection === "commercial"} disabled={lookSelection === 'pg'} id="default-radio-2" type="radio" value="commercial" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 " />
-                                    <label for="default-radio-2" className="m-2 text-sm  text-gray-500 dark:text-gray-300">Commerical</label>
+                                    <label for="default-radio-2" className="m-2 text-sm  text-gray-500 ">Commerical</label>
                                 </div>
                             </div>
                             <div className="flex flex-wrap">

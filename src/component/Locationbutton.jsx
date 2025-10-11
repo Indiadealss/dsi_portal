@@ -134,7 +134,7 @@ export const Locationbutton = ({ setValidator }) => {
       {/* City */}
       <label
         htmlFor="city"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="block mb-2 text-sm font-medium text-gray-900 "
       >
         City
       </label>
@@ -145,8 +145,8 @@ export const Locationbutton = ({ setValidator }) => {
         id="city"
         className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
         focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-        dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          
+         "
         placeholder="Enter City"
         required
       />
@@ -169,7 +169,7 @@ export const Locationbutton = ({ setValidator }) => {
         <>
           <label
             htmlFor="locality"
-            className="block my-5 text-sm font-medium text-gray-900 dark:text-white"
+            className="block my-5 text-sm font-medium text-gray-900 "
           >
             Locality
           </label>
@@ -180,8 +180,8 @@ export const Locationbutton = ({ setValidator }) => {
             id="locality"
             className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
             focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              
+             "
             placeholder="Enter Locality"
             required
           />
@@ -205,7 +205,7 @@ export const Locationbutton = ({ setValidator }) => {
         <>
         <label
             htmlFor="locality"
-            className="block my-5 text-sm font-medium text-gray-900 dark:text-white"
+            className="block my-5 text-sm font-medium text-gray-900 "
           >
             Project Name <span className="font-light text-sm text-gray-400">(Optional)</span>
           </label>
@@ -216,12 +216,12 @@ export const Locationbutton = ({ setValidator }) => {
       placeholder="Enter the Project name"
       className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
             focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              
+             " />
 
             <label
             htmlFor="locality"
-            className="block my-5 text-sm font-medium text-gray-900 dark:text-white"
+            className="block my-5 text-sm font-medium text-gray-900 "
           >
             Apartment/Socity
           </label>
@@ -232,12 +232,12 @@ export const Locationbutton = ({ setValidator }) => {
       placeholder="Enter the Project name"
       className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
             focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              
+             " />
         
         <label
             htmlFor="locality"
-            className="block my-5 text-sm font-medium text-gray-900 dark:text-white"
+            className="block my-5 text-sm font-medium text-gray-900 "
           >
             House No <span className="font-light text-sm text-gray-400">(Optional)</span>
           </label>
@@ -246,8 +246,8 @@ export const Locationbutton = ({ setValidator }) => {
       placeholder="House No(optional)"
       className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
             focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
-            dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              
+             " />
       </>
       )}
     </div>

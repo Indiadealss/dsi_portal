@@ -48,7 +48,7 @@ export default function FloorSelector({ maxPreset = 50, onChange }) {
         id="floor-select"
         value={yourfloor} 
         onChange={handleSelect}
-        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 focus:outline-none  focus:ring-indigo-300"
       >
         <option >Select floor</option>
 

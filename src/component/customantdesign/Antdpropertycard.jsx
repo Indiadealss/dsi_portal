@@ -22,7 +22,7 @@ const Antdpropertycard = ({ image, logo, title, description, price, featured }) 
                     <div className="absolute top-2 right-2 bg-white p-1 rounded-full shadow">
                         <StarOutlined className="text-gray-700 text-lg" />
                     </div>
-                    <div className="absolute top-40 left-10 right-10 w-10px p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                    <div className="absolute top-40 left-10 right-10 w-10px p-6 bg-white border border-gray-200 rounded-lg shadow-sm  ">
                         <div className="absolute -top-6 left-4 bg-transparent p-2 rounded-full shadow-md">
                             <img src={logo} alt="logo" className="h-10 w-10 object-contain rounded-full" />
                         </div>

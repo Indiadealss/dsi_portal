@@ -222,16 +222,16 @@ export default function Propertyfilter() {
           </div>
         </div> */}
         <div className=' size-fit lg:flex'>
-          <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8  ">
             <div className="flex items-center justify-between mb-4">
-              <h5 className=" font-samibold leading-none text-gray-900 dark:text-white">Apply Filters</h5>
-              <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+              <h5 className=" font-samibold leading-none text-gray-900 ">Apply Filters</h5>
+              <a href="#" className="text-sm font-medium text-blue-600 hover:underline ">
                 Clear all
               </a>
             </div>
             <Filterbutton btname="1bhk" />
             <div className="flow-root">
-              <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
+              <ul role="list" className="divide-y divide-gray-200 ">
                 {propertyFilterData.map((item, index) => {
                   return (
                     <li key={index} className="py-3 sm:py-4">
@@ -242,7 +242,7 @@ export default function Propertyfilter() {
                           {/* toggle switch */}
                           <label className="inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" className="sr-only peer" />
-                            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                            <div className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300  rounded-full peer  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-blue-600 "></div>
                           </label>
                         </div>
                       ) : (
@@ -322,13 +322,13 @@ export default function Propertyfilter() {
             {/* Under Construction Filter */}
             <div className="flex">
               {/* LEFT SIDE LIST */}
-              <div className="mb-6 size-fit w-[35vw] flex bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+              <div className="mb-6 size-fit w-[35vw] flex bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8  ">
                 <div className="w-full max-w-md p-2">
                   <div className="flow-root">
                     <div className="flex">
                       <ul
                         role="list"
-                        className="divide-y divide-gray-200 dark:divide-gray-700 w-30"
+                        className="divide-y divide-gray-200  w-30"
                       >
                         {propertyFilterData.map((item, index) => (
                           <li

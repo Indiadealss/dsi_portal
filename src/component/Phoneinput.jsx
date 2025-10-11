@@ -6,7 +6,7 @@ function Phoneinput() {
 
             <form class="max-w-sm mx-auto">
                 <div class="flex items-center">
-                    <button id="dropdown-phone-button" data-dropdown-toggle="dropdown-phone" class="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" type="button">
+                    <button id="dropdown-phone-button" data-dropdown-toggle="dropdown-phone" class="shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100     " type="button">
                         <img
                             src="https://flagcdn.com/w40/in.png"
                             alt="India Flag"
@@ -17,7 +17,7 @@ function Phoneinput() {
                         +91
                     </button>
 
-                    <label for="phone-input" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Phone number:</label>
+                    <label for="phone-input" class="mb-2 text-sm font-medium text-gray-900 sr-only ">Phone number:</label>
                     <div class="relative w-full">
 
                         <input

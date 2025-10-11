@@ -176,11 +176,11 @@ export const Postbasicdetailsform = ({ setValidator }) => {
                                 <div className='flex my-3'>
                                     <div className="flex items-center" onChange={resCom}>
                                         <input id="default-radio-1" checked={selection === "residential"} type="radio" value="residential" name="default-radio" className="w-4 h-4 text-blue-600 bg-blue-100 border-gray-300 " />
-                                        <label for="default-radio-1" className="m-2 text-sm  text-gray-500 dark:text-gray-300">Residential </label>
+                                        <label for="default-radio-1" className="m-2 text-sm  text-gray-500 ">Residential </label>
                                     </div>
                                     <div className="flex items-center" onChange={resCom}>
                                         <input checked={selection === "commercial"} disabled={lookSelection === 'pg'} id="default-radio-2" type="radio" value="commercial" name="default-radio" className={`${lookSelection === 'pg' ? 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  cursor-not-allowed':'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer'}` }/>
-                                        <label for="default-radio-2" className="m-2 text-sm  text-gray-500 dark:text-gray-300">Commerical</label>
+                                        <label for="default-radio-2" className="m-2 text-sm  text-gray-500 ">Commerical</label>
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap">

@@ -66,10 +66,10 @@ export const Postpropertyform = () => {
 
   return (
     <div className='bg-[#d1dede] min-h-screen'>
-      <div className='max-w-4xl min-h-screen p-6 bg-white border border-gray-200 shadow-sm dark:bg-gray-800 dark:border-gray-700'>
+      <div className='max-w-4xl min-h-screen p-6 bg-white border border-gray-200 shadow-sm  '>
         <div className='flex justify-around flex-col lg:flex-row'>
           {/* Steps sidebar */}
-          <div className='w-[max-content] hidden lg:block h-[max-content] p-6 bg-[#d1dede] border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 sticky top-10'>
+          <div className='w-[max-content] hidden lg:block h-[max-content] p-6 bg-[#d1dede] border border-gray-200 rounded-lg shadow-sm   sticky top-10'>
             <div className='flex flex-col space-y-10'>
               {steps.map((step, index) =>
                 <div key={step.id} className='relative flex items-start'>
@@ -105,7 +105,7 @@ export const Postpropertyform = () => {
 
             <button
               type="button"
-              className="m-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 cursor-pointer"
+              className="m-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2   focus:outline-none  cursor-pointer"
               onClick={continueButton}>
               Continue
             </button>

@@ -3,6 +3,8 @@ import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { MdAddCircleOutline } from "react-icons/md";
+import { GrSubtractCircle } from "react-icons/gr";
 
 
 
@@ -22,10 +24,57 @@ export const Anenimies = ({setValidator}) => {
     const [locatadvance,setLocatadavance] = useState([]);
     const [price,setPrice] = useState('');
     const [roadWidth,setRoadWidth] = useState('');
-    const [plotarea,setPloatarea] = useState('sq.ft');
+    const [roadSizein,setRoadSizein] = useState('sq.ft');
     const dispatch = useDispatch();
     const [dropdown, setDropdown] = useState(false)
      const [selectedPricing, setSelectedPricing] = useState(""); // will store like "500_inputCheck,1000_inputCheck"
+    const [light,setLight] = useState(0);
+    const [fans,setFans] = useState(0);
+    const [ac,setAc] = useState(0);
+    const [tv,setTv] = useState(0);
+    const [beds,setBeds] = useState(0);
+    const [wardrobe,setWardrobe] = useState(0);
+    const [geyser,setGeyser] = useState(0);
+    const [sofa,setSofa] = useState(false);
+    const [washingMachine,setWashingMachine] = useState(false);
+    const [fridge,setFridge] = useState(false);
+    const [waterPurifer,setWaterPurifer] = useState(false);
+    const [microwave,setMicrowave] = useState(false);
+    const [modularKitchen,setModularKitchen] = useState(false);
+    const [chimeny,setChimeny] = useState(false);
+    const [dinning,setDinning] = useState(false);
+    const [curtains,setCurtains] = useState(false);
+    const [exhaust,setExhaust] = useState(false);
+    const [stove,setStove] = useState(false);
+    const [furnisherAvailable,setFurnisherAvailable] = useState([])
+
+
+    useEffect(() => {
+
+      const selectedItems = [];
+
+      if(light > 0) selectedItems.push({key:'Light',value:light});
+      if(ac > 0) selectedItems.push({key:'AC',value:ac});
+      if(fans > 0) selectedItems.push({key:'Fans',value:fans});
+      if(tv > 0) selectedItems.push({key:'TV',value:tv});
+      if(beds > 0) selectedItems.push({key:'Beds',value:beds});
+      if(wardrobe > 0) selectedItems.push({key:'Wardrobe',value:wardrobe});
+      if(geyser) selectedItems.push({key:'Gysere',value:geyser});
+      if (sofa) selectedItems.push({ key: "sofa", value: sofa });
+  if (washingMachine) selectedItems.push({ key: "washingMachine", value: washingMachine });
+  if (fridge) selectedItems.push({ key: "fridge", value: fridge });
+  if (waterPurifer) selectedItems.push({ key: "waterPurifer", value: waterPurifer });
+  if (microwave) selectedItems.push({ key: "microwave", value: microwave });
+  if (modularKitchen) selectedItems.push({ key: "modularKitchen", value: modularKitchen });
+  if (chimeny) selectedItems.push({ key: "chimeny", value: chimeny });
+  if (dinning) selectedItems.push({ key: "dinning", value: dinning });
+  if (stove) selectedItems.push({ key: "stove", value: stove });
+  if (curtains) selectedItems.push({ key: "curtains", value: curtains });
+  if (exhaust) selectedItems.push({ key: "exhaust", value: exhaust });
+
+  setFurnisherAvailable(selectedItems);
+
+    },[light,ac,tv,fans,fridge,stove,exhaust,curtains,dinning,microwave,modularKitchen,waterPurifer,washingMachine,sofa,geyser,beds,wardrobe])
 
   const handleToggle = (value) => {
     const items = selectedPricing ? selectedPricing.split(",") : [];
@@ -42,11 +91,11 @@ export const Anenimies = ({setValidator}) => {
   };
 
     useEffect(() => {
-      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price+selectedPricing,road_width:roadWidth + plotarea}))
+      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,available_furniture:furnisherAvailable,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price+selectedPricing,road_width:roadWidth ,roadWidthSize:roadSizein}))
     },[price])
 
     const handleSelect = (value) =>{
-    setPloatarea(value);
+    setRoadSizein(value);
     setDropdown(false);
   }
   
@@ -196,6 +245,30 @@ export const Anenimies = ({setValidator}) => {
       {
         name:'Lifts',
         label:'Lifts'
+      },
+      {
+        name:'Power Back-up',
+        label:'Power Back-up'
+      },
+      {
+        name:'ATM',
+        label:'ATM'
+      },
+      {
+        name:'DG Avvailability',
+        label:'DG Avvailability'
+      },
+      {
+        name:'Cafeteria/Food Court',
+        label:'Carfeteria/Food Court'
+      },
+      {
+        name:'Visitor Parking',
+        label:'Visitor Parking'
+      },
+      {
+        name:'CCTV Survellance',
+        label:'CCTV Survellance'
       },
       {
         name:'Intercorm Facility',
@@ -431,7 +504,89 @@ export const Anenimies = ({setValidator}) => {
                 )
             })}
         </div>
-        <h3 className='text-xl font-medium my-5'>Property Facing<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
+        <div className={`${furnishing === 'Semi-furnished' || furnishing === 'Furnished' ? 'shadow-2xl p-4 mt-2 rounded-xl': 'hidden'}`}>
+          <p><span className='text-xs text-gray-500 font-medium'>At least three furnishings are mandatory for furnished</span></p>
+          <table className="w-full">
+  <tbody className="w-full">
+    {/* 🔹 Counter rows */}
+    <tr className='flex justify-between my-4'>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!light}><GrSubtractCircle  onClick={() => setLight(light - 1)} /></button><span> {light} </span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setLight(light + 1)} /></span><span className='text-sm mt-1'> Light</span></p>
+                </td>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!fans}><GrSubtractCircle  onClick={() => setFans(fans - 1)} /></button><span>  {fans}</span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setFans(fans + 1)} /></span><span className='text-sm mt-1'> Fans</span></p>
+                </td>
+              </tr>
+              <tr className='flex justify-between my-4'>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!ac}><GrSubtractCircle  onClick={() => setAc(ac - 1)} /></button><span> {ac} </span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setAc(ac + 1)} /></span><span className='text-sm mt-1'> AC</span></p>
+                </td>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!tv}><GrSubtractCircle  onClick={() => setTv(tv - 1)} /></button><span> {tv} </span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setTv(tv + 1)} /></span><span className='text-sm mt-1'> TV</span></p>
+                </td>
+              </tr>
+              <tr className='flex justify-between my-4'>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!beds}><GrSubtractCircle  onClick={() => setBeds(beds - 1)} /></button><span> {beds} </span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setBeds(beds + 1)} /></span><span className='text-sm mt-1'> Beds</span></p>
+                </td>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!wardrobe}><GrSubtractCircle  onClick={() => setWardrobe(wardrobe - 1)} /></button><span> {wardrobe} </span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setWardrobe(wardrobe + 1)} /></span><span className='text-sm mt-1'> Wardrobe</span></p>
+                </td>
+              </tr>
+              <tr className='flex justify-between my-4'>
+                <td className='w-[12vw]'>
+                  <p className='flex'><button className='px-2 text-gray-500 mt-1 text-xl cursor-pointer' disabled={!geyser}><GrSubtractCircle  onClick={() => setGeyser(geyser - 1)} /></button><span> {geyser} </span><span className='px-1 text-gray-600 text-xl  mt-1 cursor-pointer'><MdAddCircleOutline onClick={() => setGeyser(geyser + 1)} /></span><span className='text-sm mt-1'> Geyser</span></p>
+                </td>
+              </tr>
+    {[
+      ["Sofa", sofa, setSofa],
+      ["Washing Machine", washingMachine, setWashingMachine],
+      ["Fridge", fridge, setFridge],
+      ["Water Purifier", waterPurifer, setWaterPurifer],
+      ["Microwave", microwave, setMicrowave],
+      ["Modular Kitchen", modularKitchen, setModularKitchen],
+      ["Chimney", chimeny, setChimeny],
+      ["Dinning Table", dinning, setDinning],
+      ["Stove", stove, setStove],
+      ["Curtains", curtains, setCurtains],
+      ["Exhaust Fan", exhaust, setExhaust],
+    ]
+      // Group every 2 items per row
+      .reduce((rows, item, i) => {
+        if (i % 2 === 0) rows.push([item]);
+        else rows[rows.length - 1].push(item);
+        return rows;
+      }, [])
+      .map((pair, rowIndex) => (
+        <tr key={rowIndex} className="flex justify-between my-4">
+          {pair.map(([label, state, setter], i) => (
+            <td key={i} className="w-[12vw]">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="w-6 font-bold cursor-pointer"
+                  checked={state}
+                  onChange={() => setter((prev) => !prev)}
+                />
+                <span
+                  className="mx-2 cursor-pointer select-none"
+                  onClick={() => setter((prev) => !prev)}
+                >
+                  {label}
+                </span>
+              </div>
+            </td>
+          ))}
+
+          {/* Fill second cell if odd number */}
+          {pair.length === 1 && <td className="w-[12vw]" />}
+        </tr>
+      ))}
+  </tbody>
+</table>
+
+        </div>
+        <h3 className='text-xl font-medium my-5'>Property Facing<span className="font-light text-sm text-gray-400"></span></h3>
         <div className='flex flex-wrap '>
             {Propetyfacing.map((item,index) => {
                 return(
@@ -445,7 +600,7 @@ export const Anenimies = ({setValidator}) => {
                 )
             })}
         </div>
-        <h3 className='text-xl font-medium my-5'>Power Back up<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
+        <h3 className='text-xl font-medium my-5'>Power Back up<span className="font-light text-sm text-gray-400"></span></h3>
         <div className='flex flex-wrap '>
             {powerBackup.map((item,index) => {
                 return(
@@ -459,7 +614,7 @@ export const Anenimies = ({setValidator}) => {
                 )
             })}
         </div>
-        <h3 className='text-xl font-medium my-5'>Amenities<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
+        <h3 className='text-xl font-medium my-5'>Amenities</h3>
         <div className='flex flex-wrap '>
             {amenities.map((item,index) => {
               const isSelected = amenitie.includes(item.name);
@@ -715,7 +870,7 @@ export const Anenimies = ({setValidator}) => {
                   outline-none  font-medium 
                  rounded-lg text-sm px-4 py-2 cursor-pointer"
         >
-          {plotarea} <ChevronDownIcon className="w-5 h-5" />
+          {roadSizein} <ChevronDownIcon className="w-5 h-5" />
         </button>
 
         {/* Dropdown Menu */}
@@ -748,7 +903,7 @@ export const Anenimies = ({setValidator}) => {
             return(
               <div className='flex mb-4 item-center flex-wrap mx-2 my-1'>
                 <input id="default-checkbox" type="checkbox" onChange={() => handleToggle(value)} value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm outline-none" />
-    <label for="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{item.label}</label>
+    <label for="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 ">{item.label}</label>
               </div>
             )
           })}

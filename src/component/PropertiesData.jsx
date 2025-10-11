@@ -123,7 +123,7 @@ export const PropertiesData = () => {
         <div className=''>
             {properties.map((item, index) => {
                 return (
-                    <div key={index} className="flex w-full propertyListingHeight flex-col lg:flex-row  bg-white border border-gray-200 rounded-lg shadow-sm sm:p-2 dark:bg-gray-800 dark:border-gray-700 mt-5">
+                    <div key={index} className="flex w-full propertyListingHeight flex-col lg:flex-row  bg-white border border-gray-200 rounded-lg shadow-sm sm:p-2   mt-5">
                         <div className=''>
                             <Custompropertycrousal images={item.images} />
                         </div>

@@ -253,7 +253,7 @@ const Searchbox = () => {
                   />
                   <label
                     htmlFor="Buy"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Buy
                   </label>
@@ -271,7 +271,7 @@ const Searchbox = () => {
                   />
                   <label
                     htmlFor="Lease"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Lease
                   </label>
@@ -289,7 +289,7 @@ const Searchbox = () => {
                   />
                   <label
                     htmlFor="Invest"
-                    className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                    className="ms-2 text-sm font-medium text-gray-900 "
                   >
                     Invest
                   </label>
@@ -321,12 +321,12 @@ const Searchbox = () => {
             <div className={`${active === 'plots/Land' ? 'block' : 'hidden'}`}>
               <div className='flex'>
                 <div class="flex items-center mx-4">
-                  <input checked id="default-radio-4" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 outline-none  border-gray-300   dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="default-radio-4" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Residential Plots/Land</label>
+                  <input checked id="default-radio-4" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 outline-none  border-gray-300      " />
+                  <label for="default-radio-4" class="ms-2 text-sm font-medium text-gray-900 ">Residential Plots/Land</label>
                 </div>
                 <div class="flex items-center mx-4">
-                  <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lease</label>
+                  <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 " />
+                  <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 ">Lease</label>
                 </div>
               </div>
               <div>
@@ -425,7 +425,7 @@ const Searchbox = () => {
                       return (
                         <div class="flex items-center p-3 outline-none">
                           <input checked id={item.name} type="radio" value="" name="default-radio" class="outline-none w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 " />
-                          <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{item.label}</label>
+                          <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 ">{item.label}</label>
                         </div>
                       )
                     })}
@@ -438,7 +438,7 @@ const Searchbox = () => {
                       return (
                         <div class="flex items-center p-3 outline-none">
                           <input checked id={item.name} type="radio" value="" name="default-radio" class="outline-none w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 " />
-                          <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{item.label}</label>
+                          <label for="default-radio-3" class="ms-2 text-sm font-medium text-gray-900 ">{item.label}</label>
                         </div>
                       )
                     })}

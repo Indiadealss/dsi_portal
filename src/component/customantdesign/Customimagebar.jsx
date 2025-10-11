@@ -50,7 +50,7 @@ const Customimagebar = () => {
               <p className='text-sm text-gray-500'>The most search project in location</p>
             </div>
             <div>
-              <button type="button" class="py-2.5 px-5 me-2  text-sm font-medium text-[#00307c] focus:outline-none bg-white rounded-lg border border-[#00307c] cursor-pointer   focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+              <button type="button" class="py-2.5 px-5 me-2  text-sm font-medium text-[#00307c] focus:outline-none bg-white rounded-lg border border-[#00307c] cursor-pointer   focus:z-10 focus:ring-4 focus:ring-gray-100 ">
                 View all Insights
                 </button>
             </div>

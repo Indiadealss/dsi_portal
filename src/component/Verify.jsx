@@ -72,8 +72,8 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
       </div>
 
       {/* <div className="mb-3">
-            <label className="block my-2 mb-5 text-sm font-normal text-gray-500 dark:text-white">Please enter your Phone Number</label>
-            <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" placeholder="Enter your phone number" />
+            <label className="block my-2 mb-5 text-sm font-normal text-gray-500 ">Please enter your Phone Number</label>
+            <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     outline-none" placeholder="Enter your phone number" />
           </div> */}
           <p className='my-2'>
           <span className='font-medium'>Enter your 4 digit OTP</span>

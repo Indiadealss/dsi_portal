@@ -7,7 +7,7 @@ const Customantservicecard = () => {
   return (
     <div className='mt-5'>
         
-<a href="#" class="block max-w-xl p-6  bg-orange-100 border border-gray-200 rounded-lg shadow-sm hover:bg-orange-100 hover:shadow-lg dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+<a href="#" class="block max-w-xl p-6  bg-orange-100 border border-gray-200 rounded-lg shadow-sm hover:bg-orange-100 hover:shadow-lg  ">
 
 <Image src={dhpowner} alt='...' width={200} />
 <h2 className='mt-10'>Get assistance in selling faster</h2>
