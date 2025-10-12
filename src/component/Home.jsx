@@ -200,7 +200,7 @@ const Home = () => {
     <div className='mb-10'>
       <div className='block'>
         <div className='relative'>
-          <Banner image={banner} />
+          <Banner image={'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/banner.jpg'} />
           <div className='absolute  topSearchbox  object-cover w-[-webkit-fill-available] flex '>
             <Searchbox />
           </div>

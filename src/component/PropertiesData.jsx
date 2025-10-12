@@ -51,9 +51,14 @@ export const PropertiesData = () => {
       highlights.push({ helight: item });
     });
   }
+
+            const validImages =
+    Array.isArray(p.images) && p.images.length > 0
+      ? p.images.filter((img) => img.src && img.src !== "No image uploaded")
+      : [];
             return{
                 id:p._id,
-      images: p.images?.length ? p.images : [{ src: img1, alt: "No image" }],
+      images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
       title: locationData[0]?.apartment_name || "Untitled Property",
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
       subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData[0]?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${p.City}`}`,

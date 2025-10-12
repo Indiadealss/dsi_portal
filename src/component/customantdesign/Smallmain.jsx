@@ -23,19 +23,19 @@ const Smallmain = ({title}) => {
 
   
   const card = [
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3, 4 BHK Apartment in Sector 110, Noida", price: "₹ 36,000 onwards" },
-    { img: img2, label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
-    { img: img3, label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
-    { img: img4, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img5, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img6, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img7, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img1, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img2, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img3, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img4, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img5, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: img6, label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bhutani.497cb9c2.png', label: "ATS Kingston Heath", description: "2, 3, 4 BHK Apartment in Sector 110, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Gaurs.85564924.png', label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/m3m.aa9e165b.png', label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Prestige.76918ca7.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Irish.ac2de9f3.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Dlf.6cb4c42a.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Group108o.ee6a8587.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bhutani.497cb9c2.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Gaurs.85564924.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/m3m.aa9e165b.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Prestige.76918ca7.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Irish.ac2de9f3.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
+    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Dlf.6cb4c42a.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
   ];
 
     

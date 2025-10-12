@@ -23,7 +23,7 @@ const Newlaunchcard = ({ colu }) => {
 
   const newlaunchProject = [
     {
-      image: img,
+      image: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/gzyg5sq_1744807099_587259907_med.jpg',
       title: "Signature Global",
       subtitle: "Sohna, Gurgaon",
       price: '2.1 Cr',
@@ -31,28 +31,28 @@ const Newlaunchcard = ({ colu }) => {
       increasedRate: '16.2 price increased in last 1 year in ...'
     },
     {
-      image: img,
+      image: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/gzyg5sq_1744807099_587259907_med.jpg',
       title: "ROF Pravasa",
       subtitle: "Sector 88A, Gurgaon",
       price: '2.1 Cr',
       flatdetils: '3 BHK Independent Floor',
       increasedRate: '5.6 price increased in last 1 year in'
     }, {
-      image: img,
+      image: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/gzyg5sq_1744807099_587259907_med.jpg',
       title: "Signature Global",
       subtitle: "Sohna, Gurgaon",
       price: '2.1 Cr',
       flatdetils: '3 BHK Independent Floor',
       increasedRate: '16.2 price increased in last 1 year in ...'
     }, {
-      image: img,
+      image: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/gzyg5sq_1744807099_587259907_med.jpg',
       title: "ROF Pravasa",
       subtitle: "Sector 88A, Gurgaon",
       price: '2.1 Cr',
       flatdetils: '3 BHK Independent Floor',
       increasedRate: '5.6 price increased in last 1 year in'
     }, {
-      image: img,
+      image: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/gzyg5sq_1744807099_587259907_med.jpg',
       title: "ROF Pravasa",
       subtitle: "Sector 88A, Gurgaon",
       price: '2.1 Cr',
