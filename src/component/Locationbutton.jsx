@@ -15,6 +15,8 @@ export const Locationbutton = ({ setValidator }) => {
   const dispatch = useDispatch();
   const [apartment,setApartment] = useState('')
   const [detailData,setDetailData] = useState('');
+  console.log('what happned');
+  
 
   useEffect(() => {
     dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}] }));
