@@ -31,7 +31,7 @@ const Propertydetailsstickcard = () => {
 
     const propertyDetails = {
         price: formatNumber(property.price),
-        size: `${property.buildarea} per sq.m`,
+        size: `${property.price/property.buildarea} per sq.ft`,
         bedrooms: "8",
         bathrooms: "8",
         propertyType: "Independent House/Villa for Sale",
