@@ -77,7 +77,7 @@ const Propertydetailscarddata = ({ property }) => {
                     </tr>
 
                     <tr>
-                        <td style={{paddingBottom:'1rem'}}>
+                        <td className={`${!detail.overlo ? 'hidden': ''}`} style={{paddingBottom:'1rem'}}>
                             <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Overlooking</span></p>
                             <p>{detail.overlo?.join(', ') || 'N/A'}</p>
                         </td>
