@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { updateField } from "./Redux/propertySlice";
 import { useDispatch } from "react-redux";
 import { getSearch } from "../api/api";
+import Locationsearch from "./customcomponent/Locationsearch";
 
 export const Locationbutton = ({ setValidator }) => {
   const [query, setQuery] = useState("");
@@ -125,6 +126,12 @@ export const Locationbutton = ({ setValidator }) => {
     return true;
   }
 
+
+  const handleSelec = (place) => {
+    console.log("Selected place:", place);
+    setShowAdditional(true);
+  };
+
   return (
     <div className="p-4">
       <h2 className="text-xl font-medium mb-5">
@@ -173,31 +180,12 @@ export const Locationbutton = ({ setValidator }) => {
           >
             Locality
           </label>
-          <input
-            type="text"
-            value={locality}
-            onChange={handleSearchLocation}
-            id="locality"
-            className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-            focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-              
-             "
-            placeholder="Enter Locality"
-            required
-          />
-          {localityResults.length > 0 && (
-            <ul className="border border-gray-200 mt-2 rounded-lg shadow-md bg-white max-h-48 overflow-y-auto">
-              {localityResults.map((item) => (
-                <li
-                  key={item.place_id}
-                  onClick={() => handleSelects(item)}
-                  className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                >
-                  {item.display_name}
-                </li>
-              ))}
-            </ul>
-          )}
+         <Locationsearch cityName={query} 
+  onSelect={(place) => {
+    handleSelec(place); 
+    setLocality(place.formatted_address || place.name);
+  }} />
+          
         </>
       )}
       {/* Locality */}
