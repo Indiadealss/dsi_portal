@@ -841,7 +841,7 @@ export default function Navbar() {
           fontSize: 18,
         }}
       >
-        <img src={'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/newLogo.png'} alt="logo" width={150} />
+        <img src={'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/real_estate-removebg-preview.png'} alt="logo" width={150} />
       </a>
 
       </div>

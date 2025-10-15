@@ -22,7 +22,7 @@ function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center">
           {/* Logo */}
           <a href="/" className="flex-shrink-0">
-            <img src={'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/newLogo.png'} alt="..." width={150} />
+            <img src={'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/real_estate-removebg-preview.png'} alt="..." width={150} />
           </a>
           <div className="">
             <p><span className="pt-2 px-2 text-xl text-blue-600"><PhoneOutlined className="rotate-90" /></span><span className="font-medium text-xl ">+91 9818763100</span></p>
