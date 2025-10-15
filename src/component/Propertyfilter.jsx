@@ -187,7 +187,7 @@ export default function Propertyfilter() {
   };
 
   return (
-    <div className="flex">
+    <div className="sticky top-0">
       {/* Desktop Sidebar */}
       <aside className=" propertyListingFilter hidden md:block  p-2 space-y-6 bg-white">
         {/* <div>

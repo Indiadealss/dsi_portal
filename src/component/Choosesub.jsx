@@ -3,6 +3,7 @@ import Subscriptioncreadits from './Subscriptioncreadits';
 import Listingboost from './Listingboost';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitProperty } from '../api/api';
+import { resetForm } from './Redux/propertySlice';
 
 const Choosesub = () => {
 
@@ -16,6 +17,8 @@ const Choosesub = () => {
         }else{
             dispatch(submitProperty(propertyFirstData));
       alert('You have successfully listed the property');
+      window.location.reload();
+      dispatch(resetForm());
         }
         
     }

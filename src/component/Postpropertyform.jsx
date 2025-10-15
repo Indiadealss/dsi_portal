@@ -51,7 +51,13 @@ export const Postpropertyform = () => {
           index === continueNO + 1 ? { ...step, status: true } : step
         )
       );
+      
+      const currentScroll = window.scrollY;
       setContinueNo(prev => prev + 1);
+
+      setTimeout(() =>{
+        window.scrollTo({top: currentScroll, behavior:'instant'});
+      },0);
     //  setShowLogin(true);
 
     } else {

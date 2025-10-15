@@ -146,8 +146,10 @@ export const Property = () => {
   return (
     <section className='mx-auto'>
       <div className='relative block lg:flex justify-evenly'>
-        
+          <div className='sticky top-10 h-[calc(90vh-1rem)] overflow-y-auto scrollbar-hide'>
         <Propertyfilter />
+          </div>
+        
         <div className=' propertyListingDatamain '>
 
           <div >
