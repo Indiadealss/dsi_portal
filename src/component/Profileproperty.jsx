@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux';
 import { DatePicker, Space } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Postpropertyform } from './Postpropertyform';
+import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
 import { updateField } from './Redux/propertySlice';
+import { MdAddCircleOutline } from 'react-icons/md';
+import { GrSubtractCircle } from 'react-icons/gr';
 const onChange = (date, dateString) => {
   console.log(date, dateString);
 };
@@ -13,6 +16,7 @@ const onChange = (date, dateString) => {
 export const Profileproperty = ({setValidator}) => {
    const [coverdParking,setCoverdParking] = useState(0);
     const [uncoverdParking,setUncoverdParking] = useState(0);
+    const [addsuperBuild,setAddSuperBuild] = useState(false);
     const [noBedroom,setNoBedroom] = useState('');
     const [noBalconies,setNoBalconies] = useState('');
     const [noBathroom,setNoBathroom] = useState('');
@@ -24,6 +28,10 @@ export const Profileproperty = ({setValidator}) => {
     const [buArea,setBuArea] = useState(null);
     const [caArea,setCaArea] = useState(null);
     const [possession,setPossession] = useState('');
+    const [numCabin,setNumCabin] = useState(null);
+    const [numSets,setNumSeats] = useState(null);
+    const [maxnumSets,setMaxnumSets] = useState(null);
+    const [mettingRoom,setMettingRoom] = useState(null)
 
     const dispatch = useDispatch();
 
@@ -111,6 +119,32 @@ export const Profileproperty = ({setValidator}) => {
     }
   ]
 
+  const washroomAvailable = [
+    {
+      name:'Available',
+      label:'Available'
+    },
+    {
+      name:'Not Available',
+      label:'Not Available'
+    }
+  ]
+
+   const pantryAvalible = [
+    {
+      name:'Private',
+      label:'Private'
+    },
+    {
+      name:'Shared',
+      label:'Shared'
+    },
+    {
+      name:'Not-Available',
+      label:'Not-Available'
+    }
+  ]
+
   const underConcetraction = [
     {
       name:'within 3 Months',
@@ -157,7 +191,41 @@ export const Profileproperty = ({setValidator}) => {
   ]
 
   const [choiseProperty,setChoiseProperty] = useState('underConcetraction');
+  const [choiseWashroom,setChoiseWashroom] = useState('');
+  const [choiseConfrance,setChoiseConfrance] = useState('');
+  const [recptionarea ,setRecptionArea] = useState('');
+  const [parking,setParking] = useState('');
+  const [pantry,setPantry] = useState('')
+  const [privateWashroom,setPrivateWashroom] = useState(0);
+  const [publicWashroom,setPublicWashroom] = useState(0);
+  const [saftyFeature,setSaftyFeature] = useState(0)
 
+  const [facilities, setFacilities] = useState({
+    furnishing: "",
+    centralAirConditioning: "",
+    oxygenDuct: "",
+    ups: "",
+  });
+
+  const handleFacilityChange = (key, value) => {
+    setFacilities({ ...facilities, [key]: value });
+  };
+
+    const [parkingsA,setParkingsA] = useState([])
+    const parkingAvailable = [
+      {
+        name:'Private Parking in Basement',
+        label:'Private Parking in Basement'
+      },
+      {
+        name:'Private Parking in Outside',
+        label:'Private Parking in Outside'
+      },
+      {
+        name:'Public Parking',
+        label:'Public Parking'
+      }
+    ]
   
 
   const availblefor = [
@@ -193,6 +261,44 @@ export const Profileproperty = ({setValidator}) => {
     }
   ] 
 
+  const faclities = [
+    {
+      label:'Furnishing',
+      name:'Furnishing'
+    },
+    {
+      label:'Central Air Conditioning',
+      name:'Central Air Conditioning'
+    },
+    {
+      label:'Oxygen Duct',
+      name:'Oxygen Duct'
+    },
+    {
+      label:'UPS',
+      name:'UPS'
+    },
+  ]
+  
+  const safetyMeasures = [
+    {
+      name:'Fire Extinguisher',
+      label:'Fire Extinguisher'
+    },
+    {
+      name:'Fire Sensor',
+      label:'Fire Sensor'
+    },
+    {
+      name:'Sprinklers',
+      label:'Sprinklers'
+    },
+    {
+      name:'Fire House',
+      label:'Fire House'
+    }
+  ]
+
   useEffect(() => {
           if (setValidator) {
             setValidator(validateForm);
@@ -224,6 +330,7 @@ export const Profileproperty = ({setValidator}) => {
     <>
       <h2 className="text-2xl font-medium mb-5">Tell us your property</h2>
       <div className={`${propertyDataFirst.propertyType === 'plotLand' ? 'hidden' : ''}`}>
+        <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden': ''}`}>
       <p className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : "text-sm font-medium"}`}>No of Bedrooms</p>
       <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : "my-3"}`}>
         {noOfBedroom.map((item, index) => (
@@ -269,6 +376,7 @@ export const Profileproperty = ({setValidator}) => {
         ))}
       </div>
       </div>
+      </div>
 
       <p className="font-medium">Add Area Details</p>
       <p className="font-light text-gray-500 text-sm">
@@ -276,7 +384,7 @@ export const Profileproperty = ({setValidator}) => {
       </p>
 
       {/* Input with Dropdown */}
-      <div className="relative w-full my-5">
+      <div className={`${addsuperBuild ? "relative w-full my-5" : "hidden"}`}>
         
         <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
         <div
@@ -374,7 +482,7 @@ export const Profileproperty = ({setValidator}) => {
           </div>
         )}
       </div>
-      <div className="relative w-full my-5">
+      <div className="relative w-full mt-5">
         
         <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
         <div
@@ -422,6 +530,235 @@ export const Profileproperty = ({setValidator}) => {
             </ul>
           </div>
         )}
+      </div>
+
+      <div className='mb-5'>
+        <p onClick={() => setAddSuperBuild(true)}><span className={`${addsuperBuild ? 'hidden' : 'font-bold text-blue-400 cursor-pointer text-[15px] ms-2'}`}>+ Add Super-Build Area</span></p>
+      </div>
+
+      <div className={`${propertyDataFirst.propertyType === 'office' ? '' : 'hidden'}`}>
+        <p ><span className='font-medium text-lg'>Describe your office setup</span></p>
+        <div className='flex justify-between my-2'>
+        <div className="rounded border w-[49%] border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!numSets ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>Mini. no. of Seats</span>
+        </div>
+
+        <input
+          type="number"
+          value={numSets}
+          onInput={(e) => setNumSeats(e.currentTarget.value)}
+         
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='Enter the Build up area'
+        />
+      </div>
+
+      <div className="rounded border w-[48%] border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!maxnumSets ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>Mini. no. of Seats</span>
+        </div>
+
+        <input
+          type="number"
+          value={maxnumSets}
+         onInput={(e) => setMaxnumSets(e.currentTarget.value)}
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='Enter the Build up area'
+        />
+      </div>
+        </div>
+
+        <div className="rounded border w-[49%] border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!numCabin ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>Number of Cabin</span>
+        </div>
+
+        <input
+          type="number"
+          value={numCabin}
+          onInput={(e) => setNumCabin(e.currentTarget.value)}
+         
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='No of cabin'
+        />
+      </div>
+      <div className='my-5'>
+        <p className='my-2'><span className="font-medium text-lg my-5">No. of Meeting Rooms</span></p>
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!mettingRoom ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>No of Meating Room</span>
+        </div>
+
+        <input
+          type="number"
+          value={mettingRoom}
+          onInput={(e) => setMettingRoom(e.currentTarget.value)}
+         
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder='No of Metting Rooms'
+        />
+      </div>
+      </div>
+
+      <div className="my-5">
+        <p className="my-2"><span className="font-medium text-lg">Washrooms</span></p>
+        <div className="flex">
+      {washroomAvailable.map((item,index) => {
+        return(
+          <button name={item.name} key={index} onClick={(e) => setChoiseWashroom(e.currentTarget.name)} 
+           className={`${choiseWashroom === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" :"text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
+          >{item.label}</button>
+        )
+      })}
+      </div>
+
+      <div className={`${choiseWashroom === 'Available' ? '' : 'hidden'}`}>
+        
+      <p className='flex'><span className='text-sm mt-1 font-medium text-gray-600'> No. of Private Washrooms</span><button className='px-2 text-gray-500 mt-1 text-2xl cursor-pointer' disabled={!privateWashroom}><GrSubtractCircle  onClick={() => setPrivateWashroom(privateWashroom - 1)} /></button><span className='mt-1'>  {privateWashroom}</span><span className='px-1 text-gray-600 text-2xl  mt-2 cursor-pointer'><MdAddCircleOutline onClick={() => setPrivateWashroom(privateWashroom + 1)} /></span></p>
+      <p className='flex'><span className='text-sm mt-1 font-medium text-gray-600'> No. of Public Washrooms</span><button className='px-2 text-gray-500 mt-1 text-2xl cursor-pointer' disabled={!publicWashroom}><GrSubtractCircle  onClick={() => setPublicWashroom(publicWashroom - 1)} /></button><span className='mt-1'>  {publicWashroom}</span><span className='px-1 text-gray-600 text-2xl  mt-2 cursor-pointer'><MdAddCircleOutline onClick={() => setPublicWashroom(publicWashroom + 1)} /></span></p>
+        
+      </div>
+
+
+      </div>
+
+      <div className="my-5">
+        <p className="my-2"><span className="font-medium text-lg">Conference Room</span></p>
+        <div className="flex">
+      {washroomAvailable.map((item,index) => {
+        return(
+          <button name={item.name} key={index} onClick={(e) => setChoiseConfrance(e.currentTarget.name)} 
+           className={`${choiseConfrance === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" :"text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
+          >{item.label}</button>
+        )
+      })}
+      </div>
+      </div>
+
+      <div className="my-5">
+        <p className="my-2"><span className="font-medium text-lg">Recption Area</span></p>
+        <div className="flex">
+      {washroomAvailable.map((item,index) => {
+        return(
+          <button name={item.name} key={index} onClick={(e) => setRecptionArea(e.currentTarget.name)} 
+           className={`${recptionarea === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" :"text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
+          >{item.label}</button>
+        )
+      })}
+      </div>
+      </div>
+
+      <div className="my-5">
+        <p className="my-2"><span className="font-medium text-lg">Pantry Type</span></p>
+        <div className="flex">
+      {pantryAvalible.map((item,index) => {
+        return(
+          <button name={item.name} key={index} onClick={(e) => setPantry(e.currentTarget.name)} 
+           className={`${pantry === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" :"text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
+          >{item.label}</button>
+        )
+      })}
+      </div>
+      </div>
+
+      <div>
+        <p className="my-2"><span className="font-medium text-lg">Please Select the facilities available</span></p>
+        {faclities.map((item,index) => (
+          <div key={index} className="flex items-center justify-between mb-2">
+            <span className="text-gray-700">
+              {item.label}
+            </span>
+            <div className="flex gap-4"><label className="flex item-center gap-1 cursor-pointer">
+              <input type="radio"
+              name={item.name}
+              value="Avalible"
+              checked={facilities[item.name] === "Available"}
+              onChange={() => handleFacilityChange(item.name,"Available")}
+               className="accent-blue-500"
+                />
+              <span>Available</span>
+              </label>
+
+              <label className="flex items-center gap-1 cursor-pointer">
+              <input
+                type="radio"
+                name={item.name}
+                value="Not Available"
+                checked={facilities[item.name] === "Not Available"}
+                onChange={() => handleFacilityChange(item.name, "Not Available")}
+                className="accent-blue-500"
+              />
+              <span>Not Available</span>
+            </label>
+              </div>
+          </div>
+        ))}
+
+      </div>
+      
+       <h3 className='text-xl font-medium my-5'>Fire Safety measure include</h3>
+              <div className='flex flex-wrap '>
+                  {safetyMeasures.map((item,index) => {
+                    const isSelected = safetyMeasures.includes(item.name);
+                      return(
+                          <button key={index} 
+                          name={item.name}
+                          className={`${isSelected ? "bg-gray-100 mx-2 my-1 p-2 rounded-full cursor-pointer text-sm text-gray-500 font-normal" :"border mx-2 my-1 p-2 rounded-full cursor-pointer border-1 border-gray-400 text-sm text-gray-400 font-normal"}`}
+                  onClick={() =>{
+                    if(isSelected){
+                      // removes if already selected
+                      setSaftyFeature(prev => 
+                        prev.filter(name => name !== item.name)
+                      )
+                    }else{
+                      setSaftyFeature(prev => [...prev,item.name]);
+                    }
+                  }}
+                >
+                             {isSelected ? (
+                                <CheckOutlined />
+                             )
+                             :
+                            (
+                                <PlusOutlined />
+                            )
+                            }{item.label}
+                              </button>
+                      )
+                  })}
+              </div>
+
+       <div className="my-5">
+        <p className="my-2"><span className="font-medium text-lg">Parking</span></p>
+        <div className="flex">
+      {washroomAvailable.map((item,index) => {
+        return(
+          <button name={item.name} key={index} onClick={(e) => setParking(e.currentTarget.name)} 
+           className={`${parking === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" :"text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
+          >{item.label}</button>
+        )
+      })}
+      </div>
+
+      <div className={`${parking === 'Available' ? 'my-4' : 'hidden'}`}>
+      {parkingAvailable.map((item,index) => (
+        <label key={index} className='flex items-center gap-2 cursor-pointer' onChange={() => setParkingsA((prev) => prev.includes(item.name) ? prev.filter((p) => p !== item.name) : [...prev,item.name])}>
+          <input type="checkbox" checked={parkingsA.includes(item.name)}   className="w-4 h-4 accent-blue-600" />
+          <span>{item.label}</span>
+        </label>
+      ))}
+      </div>
+      </div>
+            
       </div>
 
 
@@ -508,6 +845,7 @@ export const Profileproperty = ({setValidator}) => {
       })}
       </div>
       </div>
+      <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : ''}`}>
       <h3 className='text-xl font-medium my-5'>Reserved Parking <span className="font-light text-sm text-gray-400">(Optional)</span></h3>
         <div className='flex flex-wrap my-5'>
             <div className='mx-3'>
@@ -528,6 +866,7 @@ export const Profileproperty = ({setValidator}) => {
                 </div>
                 </p>
                 </div>
+        </div>
         </div>
 
         <h3 className='font-medium text-xl'>What makes your property unique</h3>

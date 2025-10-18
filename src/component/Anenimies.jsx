@@ -46,7 +46,8 @@ export const Anenimies = ({setValidator}) => {
     const [curtains,setCurtains] = useState(false);
     const [exhaust,setExhaust] = useState(false);
     const [stove,setStove] = useState(false);
-    const [furnisherAvailable,setFurnisherAvailable] = useState([])
+    const [furnisherAvailable,setFurnisherAvailable] = useState([]);
+    const [brokerageCharge,setBrokerageCharge] = useState('');
 
 
     useEffect(() => {
@@ -907,6 +908,31 @@ export const Anenimies = ({setValidator}) => {
               </div>
             )
           })}
+        </div>
+
+        <div className=''>
+        <p className='font-medium text-lg'>Do you charge brokerage?</p>
+        <div class="flex items-center my-4">
+        <input id="default-radio-1" type="radio" value="yes" name="default-radio" onClick={(e) => setBrokerageCharge(e.currentTarget.value)} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300" />
+        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+        <input id="default-radio-2" type="radio" value="no" name="default-radio" onClick={(e) => setBrokerageCharge(e.currentTarget.value)} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ms-4" />
+        <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+        </div>
+
+        <div className={brokerageCharge === 'yes' ? 'flex items-center my-4' : 'hidden' }>
+        <input id="fixed-radio-1" type="radio" value="fixed" name="fixed-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300" />
+        <label for="fixed-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Fixed</label>
+        <input id="fixed-radio-2" type="radio" value="negocible" name="fixed-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ms-4" />
+        <label for="fixed-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Negotiable</label>
+        </div>
+          <div className={brokerageCharge === 'yes' ? 'flex items-center my-4' : 'hidden' }>
+        <input type="Number" className='bg-gray-50 w-[50%] border outline-none p-2 border-gray-300 h-10 rounded-lg' />
+        <input id="price-radio-1" type="radio" value="Price" name="price-radio"  className="w-4 h-4 ms-2 text-blue-600 bg-gray-100 border-gray-300" />
+        <label for="price-radio-1" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Price</label>
+        <input id="percentage-radio-2" type="radio" value="Percentage" name="price-radio"  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 ms-4" />
+        <label for="percentage-radio-2" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Percentage</label>
+        
+        </div>
         </div>
         
     </>

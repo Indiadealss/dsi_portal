@@ -142,7 +142,7 @@ export const PropertiesData = () => {
                                 <div className='px-2 border-e border-gray-300'>
                                     <div className='flex '>
                                         <span className='text-sm'><MdCurrencyRupee className="mt-2 text-[15px] font-bold" /></span>
-                                        <p ><span className='text-[15px] font-medium'>{item.price}/month </span></p>
+                                        <p ><span className='text-[15px] font-medium'>{item.price} </span></p>
                                     </div>
                                     <div className='flex'>
                                         <span className='text-sm'><IoIosAdd className="mt-1  text-lg" /></span>
