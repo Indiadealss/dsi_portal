@@ -80,35 +80,35 @@ export const Postbasicdetailsform = ({ setValidator }) => {
     
         const commericalMap = {
             office: [
-                { title: 'Ready to move office space', name: 'redyOfficeSpace' },
-                { title: 'Bare Shell office space', name: 'bsOfficeSpace' },
-                { title: 'Co-working Office space', name: 'coOffice' },
+                { title: 'Ready to move office space', name: 'Office Space' },
+                { title: 'Bare Shell office space', name: 'Bare Shell office space' },
+                { title: 'Co-working Office space', name: 'Co-working Office space' },
             ],
     
             retail: [
-                { title: 'Commercial Shops', name: 'comShops' },
-                { title: 'Commercial Showrooms', name: 'comShowrooms' }
+                { title: 'Commercial Shops', name: 'Commercial Shops' },
+                { title: 'Commercial Showrooms', name: 'Commercial Showrooms' }
             ],
     
             plotLand: [
-                { title: 'Commerical Land/Inst.Land', name: 'comerLand' },
-                { title: 'Agricultural/Farm Land', name: 'agriLand' },
-                { title: 'Industrial Lands/Plots', name: 'induLands' }
+                { title: 'Commerical Land/Inst.Land', name: 'Commerical Land/Inst.Land' },
+                { title: 'Agricultural/Farm Land', name: 'Agricultural/Farm Land' },
+                { title: 'Industrial Lands/Plots', name: 'Industrial Lands/Plots' }
             ],
     
             storage: [
-                { title: 'Storage', name: 'storeStorage' },
-                { title: 'Cold Storage', name: 'coldStorage' }
+                { title: 'Store Storage', name: 'Store Storage' },
+                { title: 'Cold Storage', name: 'Cold Storage' }
             ],
     
             industry: [
-                { title: 'Factory', name: 'factory' },
-                { title: 'Manufacturing', name: 'manufacturing' }
+                { title: 'Factory', name: 'Factory' },
+                { title: 'Manufacturing', name: 'Manufacturing' }
             ],
     
             hospitality: [
-                { title: 'Hotel/Resorts', name: 'hotelResorts' },
-                { title: 'Guest-House/Banquet-Halls', name: 'guestHouseBanquet' }
+                { title: 'Hotel/Resorts', name: 'Hotel/Resorts' },
+                { title: 'Guest-House/Banquet-Halls', name: 'Guest-House/Banquet-Halls' }
             ],
     
             other: []

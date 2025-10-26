@@ -1,10 +1,28 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Carousel, Card, Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import img1 from "../../Images/cardBander.jpg";
 
-const Simllarpropertites = ({title}) => {
+const Simllarpropertites = ({title, onDealerPosition}) => {
   const carouselRef = useRef(null);
+
+  const dealerRef = useRef(null);
+  
+      useEffect(() => {
+          // wait for layout to stabilize before measuring
+  
+          const timer = setTimeout(() => {
+              if(dealerRef.current) {
+                  const rect = dealerRef.current.getBoundingClientRect();;
+                  const scrollY = window.scrollY + rect.top;
+                  console.log('Dealer Details:',scrollY);
+                  onDealerPosition?.(scrollY);
+              }
+          },100);
+  
+          return () => clearTimeout(timer);
+      },[]);
+  
 
   const goPrev = () => {
     carouselRef.current.prev();
@@ -65,7 +83,7 @@ const Simllarpropertites = ({title}) => {
 
   return (
     <>
-    <div className="" style={{ position: "relative", width: "100%"}}>
+    <div className="" style={{ position: "relative", width: "100%"}} ref={dealerRef}>
       
      <h2 className="my-5"><span className='font-medium text-sm text-gray-700 my-5'>{title}</span></h2>
       {/* Left button */}

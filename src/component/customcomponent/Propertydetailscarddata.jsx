@@ -31,12 +31,12 @@ const Propertydetailscarddata = ({ property }) => {
                             <div>
                                 <p className='flex'><HomeOutlined className='myCustomIcon' /><span className='font-medium m-2 text-sm text-gray-500'>Area</span></p>
                                 <p>
-                                    Super Build up area: {detail.superbuilduparea || 'N/A'}
+                                    Super Build up area: {detail.superbuilduparea || detail.buildarea}
                                     <Dropdown menu={{ items: units }} trigger={['click']}>
                                         <Space>Options <DownOutlined /></Space>
                                     </Dropdown>
                                 </p>
-                                <p>Build Up area: {detail.buildarea || 'N/A'}</p>
+                                {/* <p>Build Up area: {detail.buildarea || 'N/A'}</p> */}
                                 <p>Carpet area: {detail.carpetarea || 'N/A'}</p>
                             </div>
                         </td>

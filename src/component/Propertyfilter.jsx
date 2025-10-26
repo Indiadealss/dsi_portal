@@ -31,10 +31,8 @@ export default function Propertyfilter() {
   const noBedroom = [
     { name: '1RK' },
     { name: '2 BHK' },
-    { name: '2 BHK' },
-    { name: '2 BHK' },
-    { name: '2 BHK' },
-    { name: '2 BHK' },
+    {name:'3 BHK'},
+    {name:'4 BHK'}
   ]
   const propertyType = [
     { name: 'Residential Apartment' },

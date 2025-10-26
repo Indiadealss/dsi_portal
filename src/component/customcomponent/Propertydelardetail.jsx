@@ -1,13 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Propertydetailscarddata from './Propertydetailscarddata'
 import user from '../../Images/fd-default.webp';
 import Phoneinput from '../Phoneinput';
 import { useSelector } from 'react-redux';
 
-const Propertydelardetail = () => {
+const Propertydelardetail = ({onDealerPosition }) => {
 
     const [intrested, setIntrested] = useState(400);
     const property = useSelector((state) => state.propertyid.data);
+
+    const dealerRef = useRef(null);
+
+    useEffect(() => {
+        // wait for layout to stabilize before measuring
+
+        const timer = setTimeout(() => {
+            if(dealerRef.current) {
+                const rect = dealerRef.current.getBoundingClientRect();;
+                const scrollY = window.scrollY + rect.top;
+                console.log('Dealer Details:',scrollY);
+                onDealerPosition?.(scrollY);
+            }
+        },100);
+
+        return () => clearTimeout(timer);
+    },[]);
 
      if (!property || !property.owner) {
         return (
@@ -19,7 +36,7 @@ const Propertydelardetail = () => {
 
 
     return (
-        <div>
+        <div ref={dealerRef}>
             <p><span className=''>Dealer Details</span></p>
             <div className='flex flex-col lg:flex-row lg:justify-around mt-3'>
                 <div>

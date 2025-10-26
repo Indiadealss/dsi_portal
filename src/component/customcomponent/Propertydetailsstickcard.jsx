@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaRupeeSign } from "react-icons/fa";
 import user from '../../Images/fd-default.webp';
 import homeLogo from '../../Images/homelogo.png'
 import Antcustom from '../customantdesign/Antcustom';
 import { useSelector } from 'react-redux';
 
-const Propertydetailsstickcard = () => {
+const Propertydetailsstickcard = ({buttonNames}) => {
 
+    let locationData = null;
     const property = useSelector((state) => state.propertyid.data);
+    console.log(property);
+    
+
+    
 
     if (!property || !property.owner) {
         return (
@@ -28,49 +33,26 @@ const Propertydetailsstickcard = () => {
     return num.toString();
   }
 }
+locationData = JSON.parse(property.location);
+
 
     const propertyDetails = {
         price: formatNumber(property.price),
         size: `${property.price/property.buildarea} per sq.ft`,
-        bedrooms: "8",
-        bathrooms: "8",
-        propertyType: "Independent House/Villa for Sale",
-        location: "Sector 33,Noida",
+        bedrooms: property.bedroom,
+        bathrooms: property.bathroom,
+        propertyType: property.availabestatus + ' ' + property.commercialType+ ' for ' + property.purpose,
+        location: locationData[0].City,
         memberSince: new Date(property.updatedAt).toLocaleDateString()
     }
 
 
 
-    const buttonNames = [
-        {
-            title: 'Overview',
-            to: ''
-        },
-        {
-            title: 'Dealer Details',
-            to: ''
-        },
-        {
-            title: 'Registry Record',
-            to: ''
-        },
-        {
-            title: 'Explore Locality',
-            to: ''
-        },
-        {
-            title: 'Recommendations',
-            to: ''
-        },
-        {
-            title: 'Articles',
-            to: ''
-        }
-    ]
+    
 
 
     return (
-        <div className='mb-5'>
+        <div className='mb-5' style={{position:'sticky', top:0,zIndex:101,background:'white'}}>
             <div className='border-b border-gray-300'>
                 <div className='mx-10 hidden lg:block'>
                     <button className='text-white text-[10px] font-bold px-1 bg-[#814883fc]'>Featured</button>

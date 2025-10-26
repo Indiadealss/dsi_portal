@@ -16,6 +16,7 @@ import { clearUser, setUser } from "./component/Redux/userSlice";
 import { useEffect } from "react";
 import { getUserDetatils } from "./api/api";
 import { updateField } from "./component/Redux/propertySlice";
+import Buyservice from "./component/Buyservice";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
+    {path:"/do/buyservie", element:<Buyservice />},
     {path:"/postproperty", element:<Postpropertyform />}
   ]);
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Carousel,Button } from "antd";
 import { Link } from "react-router-dom";
@@ -8,7 +8,16 @@ const Antcustom  = ({articles}) => {
     const [activebtn,setActivebtn] = useState('Overview');
   const carouselRef = useRef(null);
 const [current, setCurrent] = useState(0);
-  
+const [y,setY] = useState(0)
+
+
+
+const handleScrollToDealer = (y) => {
+  window.scrollTo({
+    top: y, // whatever position "Dealer Details" is located
+    behavior: 'smooth',
+  });
+};  
 
   // Helper to chunk array
   const chunkArray = (arr, size) =>
@@ -27,6 +36,8 @@ const [current, setCurrent] = useState(0);
   } else if (width < 1024) {
     chunkSize = 1; // Tablet
   }
+
+ 
 
   const articlePairs = chunkArray(articles, chunkSize);
    const totalSlides = articlePairs.length;
@@ -72,6 +83,11 @@ const [current, setCurrent] = useState(0);
     ],
   };
 
+   const changeBtn =(e) => {
+    setActivebtn(e.currentTarget.name)
+    handleScrollToDealer(e.currentTarget.dataset.scroll - 250)
+  }
+
 
   return (
     <Carousel ref={carouselRef} {...settings} dots arrows infinite={false}>
@@ -92,7 +108,7 @@ const [current, setCurrent] = useState(0);
             >
               <div className="">
                 <div>
-                  <button className={`${activebtn === item.title ? "font-medium  text-sm border-b-4 pb-2 rounded cursor-pointer" : "font-medium  text-sm pb-2 rounded cursor-pointer"}`} name={item.title} onClick={(e) => setActivebtn(e.currentTarget.name)}>{item.title}</button>
+                  <button className={`${activebtn === item.title ? "font-medium  text-sm border-b-4 pb-2 rounded cursor-pointer" : "font-medium  text-sm pb-2 rounded cursor-pointer"}`} name={item.title} data-scroll={item.to} onClick={changeBtn}>{item.title}</button>
                 </div>
               </div>
             </div>

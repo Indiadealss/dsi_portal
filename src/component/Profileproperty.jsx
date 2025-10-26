@@ -312,11 +312,11 @@ export const Profileproperty = ({setValidator}) => {
               
               return false;
           }
-          if(propertyDataFirst.propertyType != 'plotLand' && !noBalconies){
+          if(propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBalconies){
               alert("Please select Number of Balconies");
               return false;
           }
-          if(propertyDataFirst.propertyType != 'plotLand' && !noBathroom){
+          if(propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBathroom){
               alert("Please select Number of Bathroom");
               return false;
           }

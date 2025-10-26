@@ -19,6 +19,46 @@ import { setProperty } from './Redux/propertyidSlice';
 
 const Propertydetails = () => {
 
+   const [dealer,setDealer] = useState(null);
+   const [smilarProper,setSmilarProper] = useState(null);
+
+const handleDealerPosition = (y) => {
+     setDealer(y) 
+   }
+
+   const handleSimalerPosition = (y) => {
+      setSmilarProper(y)
+   }
+   const buttonNames = [
+           {
+               title: 'Overview',
+               to: 61
+               
+           },
+           {
+               title: 'Dealer Details',
+               to: dealer
+           },
+           {
+               title: 'Registry Record',
+               to: ''
+           },
+           {
+               title: 'Explore Locality',
+               to: ''
+           },
+           {
+               title: 'Recommendations',
+               to: smilarProper
+           },
+           {
+               title: 'Articles',
+               to: ''
+           }
+       ]
+
+   
+
    const { id } = useParams();
    const dispatch = useDispatch();
 
@@ -99,7 +139,7 @@ const Propertydetails = () => {
     
   return (
    <>
-   <Propertydetailsstickcard />
+   <Propertydetailsstickcard buttonNames={buttonNames} />
    <div className='m-0 lg:mx-10'>
    <div className='relative'>
    <Antdpropertydetailsimgcroul crousal={crousalData} video={video}  />
@@ -129,12 +169,12 @@ const Propertydetails = () => {
    </div> */}
    <div className='m-0 lg:mx-10'>
       <div className='my-4'>
-         <Propertydelardetail />
+         <Propertydelardetail  onDealerPosition={handleDealerPosition}/>
    </div>
    </div>
    <div className='m-0 lg:mx-10'>
       <div className='my-4'>
-         <Simllarpropertites title={'Similar Properties'} />
+         <Simllarpropertites title={'Similar Properties'} onDealerPosition={handleSimalerPosition} />
    </div>
    </div>
    <div className='m-0 lg:mx-10'>
