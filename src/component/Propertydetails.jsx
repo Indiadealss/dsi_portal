@@ -24,10 +24,14 @@ const Propertydetails = () => {
 
 const handleDealerPosition = (y) => {
      setDealer(y) 
+     console.log(y);
+     
    }
 
    const handleSimalerPosition = (y) => {
       setSmilarProper(y)
+      console.log(y,"let's see");
+      
    }
    const buttonNames = [
            {

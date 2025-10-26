@@ -17,6 +17,9 @@ const handleScrollToDealer = (y) => {
     top: y, // whatever position "Dealer Details" is located
     behavior: 'smooth',
   });
+  console.log(y);
+  
+  
 };  
 
   // Helper to chunk array
