@@ -14,11 +14,11 @@ const [y,setY] = useState(0)
 
 const handleScrollToDealer = (y) => {
   window.scrollTo({
-    top: y, // whatever position "Dealer Details" is located
+    top: Number(y), // whatever position "Dealer Details" is located
     behavior: 'smooth',
   });
   console.log(y);
-  
+
   
 };  
 

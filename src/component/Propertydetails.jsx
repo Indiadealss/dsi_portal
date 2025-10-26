@@ -45,11 +45,11 @@ const handleDealerPosition = (y) => {
            },
            {
                title: 'Registry Record',
-               to: ''
+               to: 0
            },
            {
                title: 'Explore Locality',
-               to: ''
+               to: 400
            },
            {
                title: 'Recommendations',
@@ -57,7 +57,7 @@ const handleDealerPosition = (y) => {
            },
            {
                title: 'Articles',
-               to: ''
+               to: 1800
            }
        ]
 
