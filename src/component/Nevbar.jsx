@@ -29,6 +29,7 @@ import Mobileloginmodal from "./Mobileloginmodal";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "./Redux/userSlice";
 import { getLogout } from "../api/api";
+import { updateFilter } from "./Redux/filterSlice";
 
 const { Header } = Layout;
 
@@ -635,6 +636,8 @@ export default function Navbar() {
   const [scroll,setScroll] = useState(false);
   const [locationNav,setLocationNav] = useState('All India')
 
+  
+
 
   useEffect(() => {
     
@@ -667,7 +670,9 @@ export default function Navbar() {
   )
 
 
-  
+  useEffect(() => {
+    dispatch(updateFilter({location:locationNav}));
+  })
 
   //logout api
   const handleLogout = async () => {
