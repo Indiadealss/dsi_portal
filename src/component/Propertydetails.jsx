@@ -30,7 +30,7 @@ const handleDealerPosition = (y) => {
 
    const handleSimalerPosition = (y) => {
       setSmilarProper(Number(y))
-      console.log(y,"let's see");
+      console.log(Number(y),"let's see");
       
    }
    const buttonNames = [
