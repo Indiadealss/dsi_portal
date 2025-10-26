@@ -23,13 +23,13 @@ const Propertydetails = () => {
    const [smilarProper,setSmilarProper] = useState(null);
 
 const handleDealerPosition = (y) => {
-     setDealer(y) 
+     setDealer(Number(y)) 
      console.log(y);
      
    }
 
    const handleSimalerPosition = (y) => {
-      setSmilarProper(y)
+      setSmilarProper(Number(y))
       console.log(y,"let's see");
       
    }
