@@ -39,8 +39,8 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
-export const getallProperty = async (page,limit) => {
-  return API.get(`/property/getAllProperties?page=${page}&limit=10`);
+export const getallProperty = async (page,filter) => {
+  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}`);
 }
 
 export const getproperty = async(id) => {

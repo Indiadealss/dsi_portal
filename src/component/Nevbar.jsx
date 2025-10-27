@@ -670,9 +670,12 @@ export default function Navbar() {
   )
 
 
+  
+
   useEffect(() => {
     dispatch(updateFilter({location:locationNav}));
-  })
+  },[locationNav])
+
 
   //logout api
   const handleLogout = async () => {

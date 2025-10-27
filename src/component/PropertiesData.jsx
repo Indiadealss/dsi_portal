@@ -8,6 +8,7 @@ import { getallProperty } from '../api/api';
 import { Carousel } from 'antd';
 import Custompropertycrousal from './customantdesign/Custompropertycrousal';
 import { formatDistanceToNow } from 'date-fns';
+import { useSelector } from 'react-redux';
 export const PropertiesData = () => {
 
     let timeStamp = Date.now();
@@ -21,10 +22,13 @@ export const PropertiesData = () => {
   console.log("Updated properties:", properties);
 }, [properties]);
 
-    const fetchProperties = async (pageNumber) => {
-       try{
 
-        const res = await getallProperty(pageNumber,10);
+  const location = useSelector((state) => state.filterSlice.location);
+    const fetchProperties = async (pageNumber) => {
+        
+       try{
+         
+        const res = await getallProperty(pageNumber,location);
         const result = res.data;
 
         if(result.data.length === 0){
