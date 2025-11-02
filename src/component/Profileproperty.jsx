@@ -31,7 +31,8 @@ export const Profileproperty = ({setValidator}) => {
     const [numCabin,setNumCabin] = useState(null);
     const [numSets,setNumSeats] = useState(null);
     const [maxnumSets,setMaxnumSets] = useState(null);
-    const [mettingRoom,setMettingRoom] = useState(null)
+    const [mettingRoom,setMettingRoom] = useState(null);
+    const [numFlats,setNumFlats] = useState(null);
 
     const dispatch = useDispatch();
 
@@ -39,7 +40,7 @@ export const Profileproperty = ({setValidator}) => {
     useEffect(() => {
       const tf = Number(totalFloor)
       dispatch(updateField({bedroom:noBedroom,bathroom:noBathroom,balconies:noBalconies,plotarea:paPlotArea,plotSizein:plotarea,buildarea:buArea,buildSizein:buildarea,carpetarea:caArea, carpetSizein:carpet,
-        totalfloor:totalFloor,availabestatus:choiseProperty,ownership:ownership,propertyage:ageProperty,coveredparking:coverdParking,uncoveredparking:uncoverdParking,description:description,Possession:possession 
+        totalfloor:totalFloor,availabestatus:choiseProperty,ownership:ownership,propertyage:ageProperty,coveredparking:coverdParking,uncoveredparking:uncoverdParking,description:description,Possession:possession,saftyFeature:saftyFeature,choiseWashroom:choiseWashroom,choiseConfrance:choiseConfrance,recptionarea:recptionarea,parking:parking,pantry:pantry,privateWashroom:privateWashroom,publicWashroom:publicWashroom
       }))
     },[description])
     
@@ -80,6 +81,7 @@ export const Profileproperty = ({setValidator}) => {
   const [buildarea,setBuildarea] = useState('sq.ft');
   const [carpet,setCarpet] = useState('sq.ft');
   const [totalFloor,setTotalFloor] = useState(0);
+  const [projectTotalFloor,setProjectTotalFloor] = useState(null);
 
   const handleSelect = (value) =>{
     setPloatarea(value);
@@ -198,7 +200,7 @@ export const Profileproperty = ({setValidator}) => {
   const [pantry,setPantry] = useState('')
   const [privateWashroom,setPrivateWashroom] = useState(0);
   const [publicWashroom,setPublicWashroom] = useState(0);
-  const [saftyFeature,setSaftyFeature] = useState(0)
+  const [saftyFeature,setSaftyFeature] = useState([])
 
   const [facilities, setFacilities] = useState({
     furnishing: "",
@@ -303,22 +305,31 @@ export const Profileproperty = ({setValidator}) => {
           if (setValidator) {
             setValidator(validateForm);
           }
-        }, [noBedroom,noBalconies,noBathroom,ageProperty,ownership,choiseProperty,description]);
+        }, [noBedroom,noBalconies,noBathroom,ageProperty,ownership,choiseProperty,description,numFlats,projectTotalFloor]);
         
         function validateForm(){
-          if(propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom){
+          if(propertyDataFirst.purpose != 'Project' &&propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom){
               alert("Please select Number of Bedroom");
               console.log(propertyDataFirst.property != 'commercial',propertyDataFirst.property);
               
               return false;
           }
-          if(propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBalconies){
+          if(propertyDataFirst.purpose != 'Project' && propertyDataFirst.propertyType != 'plotLand' && !noBalconies){
               alert("Please select Number of Balconies");
               return false;
           }
-          if(propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBathroom){
+          if(propertyDataFirst.purpose != 'Project' && propertyDataFirst.propertyType != 'plotLand' && !noBathroom){
               alert("Please select Number of Bathroom");
               return false;
+          }
+          if(propertyDataFirst.purpose === 'Project' && !numFlats){
+            alert('Enter the total number of Flats')
+          }
+          if(propertyDataFirst.purpose === 'Project' && !projectTotalFloor){
+            alert('Enter the total number of Floors')
+          }
+          if(propertyDataFirst.purpose === 'Project' && !ownership){
+            alert('Enter the ownership')
           }
           if(description === ''){
             alert("Please specify the unique aspect of your property.")
@@ -331,8 +342,8 @@ export const Profileproperty = ({setValidator}) => {
       <h2 className="text-2xl font-medium mb-5">Tell us your property</h2>
       <div className={`${propertyDataFirst.propertyType === 'plotLand' ? 'hidden' : ''}`}>
         <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden': ''}`}>
-      <p className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : "text-sm font-medium"}`}>No of Bedrooms</p>
-      <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : "my-3"}`}>
+      <p className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project' ? 'hidden' : "text-sm font-medium"}`}>No of Bedrooms</p>
+      <div className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project'  ? 'hidden' : "my-3"}`}>
         {noOfBedroom.map((item, index) => (
           <button
             type="button"
@@ -345,9 +356,27 @@ export const Profileproperty = ({setValidator}) => {
           </button>
         ))}
       </div>
+      
+      
+      <div className="my-2 rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div
+          className={!numFlats ? 'hidden':' text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+        >
+          <span>Number of Flat's</span>
+        </div>
 
-      <p className="text-sm font-medium">No of Bathrooms</p>
-      <div className="my-3">
+        <input
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
+          value={numFlats}
+          onChange={(e) => setNumFlats(e.currentTarget.value)}
+          className="w-full py-2 ps-6 rounded-b outline-none"
+          placeholder="Number of Flat's"
+        />
+      </div>
+      <p className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project'? 'hidden' :"text-sm font-medium"}`}>No of Bathrooms</p>
+      <div className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project'? 'hidden' :"my-3"}`}>
         {noOfBedroom.map((item, index) => (
           <button
             type="button"
@@ -361,8 +390,8 @@ export const Profileproperty = ({setValidator}) => {
         ))}
       </div>
 
-      <p className="text-sm font-medium">Balconies</p>
-      <div className="my-3">
+      <p className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project'? 'hidden' :"text-sm font-medium"}`}>Balconies</p>
+      <div className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project'? 'hidden' :"my-3"}`}>
         {balconies.map((item, index) => (
           <button
             type="button"
@@ -378,15 +407,15 @@ export const Profileproperty = ({setValidator}) => {
       </div>
       </div>
 
-      <p className="font-medium">Add Area Details</p>
-      <p className="font-light text-gray-500 text-sm">
+      <p className={`${propertyDataFirst.purpose === 'Project'? 'hidden' :"font-medium"}`}>Add Area Details</p>
+      <p className={`${propertyDataFirst.purpose === 'Project'? 'hidden' :"font-light text-gray-500 text-sm"}`}>
         At least one area type is mandatory
       </p>
 
       {/* Input with Dropdown */}
       <div className={`${addsuperBuild ? "relative w-full my-5" : "hidden"}`}>
         
-        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div className={`${propertyDataFirst.purpose != 'Project'? "hidden":"rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2"}`}>
         <div
           className={`${!paPlotArea ? 'hidden': 'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'} `}
         >
@@ -394,10 +423,12 @@ export const Profileproperty = ({setValidator}) => {
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={paPlotArea}
           onChange={(e) => setPlotArea(e.currentTarget.value)}
-          className="w-full py-2 ps-6 rounded-b outline-none"
+          className={`${propertyDataFirst.purpose != 'Project'? "hidden": "w-full py-2 ps-6 rounded-b outline-none"}`}
           placeholder='Enter the Super Biuld up Area'
         />
       </div>
@@ -433,7 +464,7 @@ export const Profileproperty = ({setValidator}) => {
           </div>
         )}
       </div>
-      <div className="relative w-full my-5">
+      <div className={`${propertyDataFirst.purpose === 'Project' ? 'hidden' :"relative w-full my-5"}`}>
         
         <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
         <div
@@ -443,7 +474,9 @@ export const Profileproperty = ({setValidator}) => {
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={buArea}
           onChange={(e) => setBuArea(e.currentTarget.value)}
           className="w-full py-2 ps-6 rounded-b outline-none"
@@ -482,9 +515,9 @@ export const Profileproperty = ({setValidator}) => {
           </div>
         )}
       </div>
-      <div className="relative w-full mt-5">
+      <div className={`${propertyDataFirst.purpose === 'Project' ? "hidden":"relative w-full mt-5"}`}>
         
-        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2">
+        <div className={`${propertyDataFirst.purpose === 'Project' ? "hidden":"rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2"}`}>
         <div
           className={!caArea ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
         >
@@ -492,7 +525,9 @@ export const Profileproperty = ({setValidator}) => {
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={caArea}
           onChange={(e) => setCaArea(e.currentTarget.value)}
           className="w-full py-2 ps-6 rounded-b outline-none"
@@ -543,16 +578,18 @@ export const Profileproperty = ({setValidator}) => {
         <div
           className={!numSets ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
         >
-          <span>Mini. no. of Seats</span>
+          <span>Min. no. of Seats</span>
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={numSets}
           onInput={(e) => setNumSeats(e.currentTarget.value)}
          
           className="w-full py-2 ps-6 rounded-b outline-none"
-          placeholder='Enter the Build up area'
+          placeholder='Min. no. of Seats'
         />
       </div>
 
@@ -560,15 +597,17 @@ export const Profileproperty = ({setValidator}) => {
         <div
           className={!maxnumSets ? 'hidden':'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
         >
-          <span>Mini. no. of Seats</span>
+          <span>Max. no. of Seats</span>
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={maxnumSets}
          onInput={(e) => setMaxnumSets(e.currentTarget.value)}
           className="w-full py-2 ps-6 rounded-b outline-none"
-          placeholder='Enter the Build up area'
+          placeholder='Max. no. of Seats'
         />
       </div>
         </div>
@@ -581,12 +620,14 @@ export const Profileproperty = ({setValidator}) => {
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={numCabin}
           onInput={(e) => setNumCabin(e.currentTarget.value)}
          
           className="w-full py-2 ps-6 rounded-b outline-none"
-          placeholder='No of cabin'
+          placeholder='Number of cabin'
         />
       </div>
       <div className='my-5'>
@@ -599,7 +640,9 @@ export const Profileproperty = ({setValidator}) => {
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={mettingRoom}
           onInput={(e) => setMettingRoom(e.currentTarget.value)}
          
@@ -708,7 +751,7 @@ export const Profileproperty = ({setValidator}) => {
        <h3 className='text-xl font-medium my-5'>Fire Safety measure include</h3>
               <div className='flex flex-wrap '>
                   {safetyMeasures.map((item,index) => {
-                    const isSelected = safetyMeasures.includes(item.name);
+                    const isSelected = saftyFeature.includes(item.name);
                       return(
                           <button key={index} 
                           name={item.name}
@@ -763,9 +806,10 @@ export const Profileproperty = ({setValidator}) => {
 
 
       <p className="font-medium text-lg">Floor Details</p>
-      <p className='font-medium text-xs text-gray-500'>Total no of floors and your floor details.</p>
+      <p className='font-medium text-xs text-gray-500'><span className={`${propertyDataFirst.purpose != 'Project'? "hidden":''}`}>Total no of floors in this Project</span><span className={`${propertyDataFirst.purpose === 'Project'? "hidden":''}`}>Total no of floors and your floor details.</span></p>
       <div>
-        <input type='text' className='outline-none border border-1 border-gray-200 my-4 p-4 w-full' value={totalFloor} onChange={(e) => setTotalFloor(e.target.value)} placeholder='Total Floor' />
+        <input type='text' className={`${propertyDataFirst.purpose === 'Project'? "hidden":'outline-none border border-1 border-gray-200 my-4 p-4 w-full'}`} value={totalFloor} onChange={(e) => setTotalFloor(e.target.value)} placeholder='Total Floor' />
+        <input type='text' className='outline-none border border-1 border-gray-200 my-4 p-4 w-full' value={projectTotalFloor} onChange={(e) => setProjectTotalFloor(e.target.value)} placeholder='Total Floor' />
         <div className={`${totalFloor > 1 ? 'block mb-5':'hidden'}`}>
         <FloorSelector maxPreset={totalFloor} onChange={handleFloorChange} />
         </div>

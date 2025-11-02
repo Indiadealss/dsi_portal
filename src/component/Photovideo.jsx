@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { Uploadfile } from './Uploadfile'
+import React, { useEffect, useState } from 'react';
+import { Uploadfile } from './Uploadfile';
 import { Uploadphots } from './Uploadphots';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
 
 export const Photovideo = () => {
@@ -10,78 +10,162 @@ export const Photovideo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      console.log(images,"Images are");
-      console.log(videoFile,"videos are");
-      
-      dispatch(updateField({images:images,video:videoFile}))
-  },[videoFile,images])
+    dispatch(updateField({ images, video: videoFile }));
+  }, [videoFile, images]);
 
   // Handle video upload
   function videoUp(e) {
-    const videoFile = Array.from(e.target.files)
-    setVideoFile(prev => [...prev,...videoFile]);
-    console.log(e.target,videoFile);
-    
+    const videoFile = Array.from(e.target.files);
+    setVideoFile((prev) => [...prev, ...videoFile]);
   }
 
-  // Handle multiple image upload
+    const propertyDataFirst = useSelector((state) => state.property.data);
+
+
+  // Handle multiple image/pdf upload
   function imageUp(e) {
-    const file = Array.from(e.target.files)
-    setImages(prev => [...prev,...file]); // ✅ store as array
-    console.log(images);
+    const files = Array.from(e.target.files).map((file) => ({
+      file,
+      type: file.type === 'application/pdf' ? 'pdf' : '',
+      Fields: propertyDataFirst.purpose === 'Project' ? [{ key: '', value: '' }] : [],
+    }));
+    setImages((prev) => [...prev, ...files]);
+  }
+
+  function handleTypeChange(index, newType) {
+    setImages((prev) =>
+      prev.map((img, i) =>
+        i === index ? { ...img, type: newType } : img
+      )
+    );
+  }
+
+  // Add new key-value field for PDF
+  function addPdfField(index) {
+    setImages((prev) =>
+      prev.map((img, i) =>
+        i === index
+          ? { ...img, Fields: [...img.Fields, { key: '', value: '' }] }
+          : img
+      )
+    );
+  }
+
+  // Update specific key/value in PDF
+  function handlePdfFieldChange(imgIndex, fieldIndex, name, newValue) {
+    setImages((prev) =>
+      prev.map((img, i) => {
+        if (i !== imgIndex) return img;
+        const updatedPdfFields = img.Fields.map((field, j) =>
+          j === fieldIndex ? { ...field, [name]: newValue } : field
+        );
+        return { ...img, Fields: updatedPdfFields };
+      })
+    );
   }
 
   return (
     <>
-      <h3 className='text-xl font-medium'>Add one Video of Property</h3>
-      <p className='text-sm font-medium text-gray-400 my-3'>
+      <h3 className="text-xl font-medium">Add one Video of Property</h3>
+      <p className="text-sm font-medium text-gray-400 my-3">
         A video is worth a thousand picture with video get higher page views.
       </p>
 
-      <label className='font-medium my-3'>Upload Video</label>
-      <Uploadfile handleupload={videoUp} accept="video/*"  multiple/>
+      <label className="font-medium my-3">Upload Video</label>
+      <Uploadfile handleupload={videoUp} accept="video/*" multiple />
 
       {videoFile.map((file, index) => (
-  <video
-    key={index}
-    src={URL.createObjectURL(file)}
-    controls
-    className="w-48 h-32 rounded my-2"
-  />
-))}
+        <video
+          key={index}
+          src={URL.createObjectURL(file)}
+          controls
+          className="w-48 h-32 rounded my-2"
+        />
+      ))}
 
       {/* Photos Section */}
-      <p className='text-xl font-medium mt-5'>
-        Add photos of your Property
-        <span className='text-sm font-normal text-gray-400'>(optional)</span>
-      </p>
-      <p className='text-sm font-normal text-gray-400 my-1'>
-        A picture is worth a thousand words. 87% of buyers look at photos before buying
+      <p className="text-xl font-medium mt-5">
+        Add photos or PDFs of your Property
       </p>
 
-      <div className='mt-5'>
-        <label className='font-medium'>Upload Photos</label>
-        <Uploadphots handleuploadphoto={imageUp} accept="image/*" multiple />
+      <div className="mt-5">
+        <label className="font-medium">Upload Photos / PDFs</label>
+        <Uploadphots
+          handleuploadphoto={imageUp}
+          accept="image/*,application/pdf"
+          multiple
+        />
 
-        {/* Show image previews */}
+        {/* Show image/pdf previews */}
         {images.length > 0 && (
-
           <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
             {images.map((img, idx) => (
               <div key={idx} className="border rounded-lg p-2 bg-gray-50">
-                <img
-                  src={URL.createObjectURL(img)}
-                  alt={img.name}
-                  className="w-full h-32 object-cover rounded"
-                />
-                <p className="mt-1 text-xs font-medium text-gray-600 truncate">
-                  🖼️ {img.name}
-                </p>
+                {/* Show image or pdf name */}
+                {img.file.type.startsWith('image/') ? (
+                  <img
+                    src={URL.createObjectURL(img.file)}
+                    alt={img.file.name}
+                    className="w-full h-32 object-cover rounded"
+                  />
+                ) : (
+                  <p className="text-xs text-red-500">
+                    📄 PDF File: {img.file.name}
+                  </p>
+                )}
+
+                <select
+                  value={img.type}
+                  onChange={(e) => handleTypeChange(idx, e.target.value)}
+                  className="mt-2 w-full text-xs border border-gray-300 rounded p-1"
+                >
+                  <option value="">Select Type</option>
+                  <option value="layout">Layout Image</option>
+                  <option value="cover">Cover Image</option>
+                  <option value="banner">Banner Image</option>
+                  <option value="pdf">PDF File</option>
+                </select>
+
+                {/* For PDF type only → show dynamic key-value inputs */}
+                
+                  <div className="mt-2 space-y-2">
+                    {img.Fields.map((field, fieldIdx) => (
+                      <div key={fieldIdx} className="flex gap-2">
+                        <input
+                          type="text"
+                          value={field.key}
+                          onChange={(e) =>
+                            handlePdfFieldChange(idx, fieldIdx, 'key', e.target.value)
+                          }
+                          placeholder="Key"
+                          className="border text-xs p-1 w-1/2 rounded"
+                        />
+                        <input
+                          type="text"
+                          value={field.value}
+                          onChange={(e) =>
+                            handlePdfFieldChange(idx, fieldIdx, 'value', e.target.value)
+                          }
+                          placeholder="Value"
+                          className="border text-xs p-1 w-1/2 rounded"
+                        />
+                      </div>
+                    ))}
+
+                    <button
+                      type="button"
+                      onClick={() => addPdfField(idx)}
+                      className="text-blue-500 text-xs mt-1"
+                    >
+                      + Add Field
+                    </button>
+                  </div>
+                
               </div>
             ))}
           </div>
         )}
       </div>
     </>
-  )
-}
+  );
+};

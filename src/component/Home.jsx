@@ -20,9 +20,15 @@ import Customantservicecard from './customantdesign/Customantservicecard';
 import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
 import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
 import Contiunebrowser from './customcomponent/Contiunebrowser';
+import { getallProperty } from '../api/api';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
+   const [page,setPage] = useState(1)
+  const [hasMore,setHasMore]  = useState(true)
+  const [loading,setLoading] = useState(false)
+  const location = 'All India';
+  const [data,setData] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,6 +43,107 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+ 
+
+  const fetchProperties = async (pageNumber,purpose) => {
+          
+         try{
+           
+          const res = await getallProperty(pageNumber,location,purpose);
+          const resultsAre = res.data?.data;
+          const result = resultsAre.filter((p) => p.purpose === 'Project')
+
+          if(result.length === 0){
+            setHasMore(false);
+            return;
+          }
+
+          const formattedData = result.map((p) => {
+            let locationData = [];
+            try{
+                locationData = JSON.parse(p.location);
+                console.log(p);
+                
+            }catch(err){
+                locationData = [];
+            }
+
+            let highlights = [];
+  if (p.propertyfacing) highlights.push({ helight: p.propertyfacing });
+  if (p.pobackup) highlights.push({ helight: p.pobackup });
+  if (p.watersource) highlights.push({ helight: p.watersource });
+  if (Array.isArray(p.overlo)) {
+    p.overlo.forEach((item) => {
+      highlights.push({ helight: item });
+    });
+  }
+
+            const validImages =
+  Array.isArray(p.images) && p.images.length > 0
+    ? p.images
+        .filter(
+          (img) =>
+            img &&
+            (img.src || img.fields?.src) &&
+            (img.src || img.fields?.src) !== "No image uploaded"
+        )
+        .map((img) => ({
+          type: img.type || img.fields?.type || "unknown",
+          src: img.src || img.fields?.src || "",
+          image: img, // store full original image object too
+        }))
+    : [];
+
+            return{
+                id:p._id,
+      images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
+      title: locationData[0]?.apartment_name || p.projectname,
+      heilights:highlights.length ? highlights : [{ helight: "N/A" }],
+      subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData[0]?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${p.City}`}`,
+      bathroom: p.bathroom ? `${p.bathroom} Baths` : "N/A",
+      bedroom:p.bedroom ? p.bedroom : '',
+      location: p.location || "Unknown",
+      price: p.price || 0,
+      deposit: p.deposit || "N/A",
+      size: p.plotarea || 0,
+      area: p.areaType || "Built-up",
+      description: p.description || "No description available",
+      time: new Date(p.updatedAt).toLocaleDateString() || "N/A",
+      owner: p.owner || "Owner",
+       };
+    });
+    // console.log(formattedData);
+    
+          
+          setData((prev) => [...prev, ...formattedData])
+          
+      }catch(err){
+          console.error(err);
+      }finally{
+          setLoading(false);
+      }
+      };
+
+
+      useEffect(() => {
+              const handleScroll = ()  => {
+                  if(
+                      window.innerHeight + document.documentElement.scrollTop >=
+                       document.documentElement.offsetHeight - 100 && 
+                       hasMore && 
+                       !loading
+                  ) {
+                      setPage(prev => prev + 1);
+                  }
+              };
+              window.addEventListener("scroll",handleScroll);
+              return () => window.removeEventListener("scroll",handleScroll);
+          },[hasMore,loading])
+      
+          useEffect(() => {
+              fetchProperties(page,'Project')
+          },[page,location]);
+      
 
  const handpickherosection = {
   rentHome:[{
@@ -196,6 +303,16 @@ const Home = () => {
       img: "https://picsum.photos/200/140?random=4",
     },
   ]
+
+  if (!data) {
+    console.log(data);
+    
+        return (
+            <div className='mb-5'>
+                Loding...
+            </div>
+        )
+    }
   return (
     <div className='mb-10'>
       <div className='block'>
@@ -244,7 +361,7 @@ const Home = () => {
 
       {/* main */}
       <div className='mt-40 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
-        <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS'/>
+        <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/>
         <div className='p-0 lg:p-[40px]'>
           <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>
           <h1 className='text-start lg:max-w-xl mx-auto lg:text-center font-bold text-black text-lg lg:text-xl my-3'>Find Better Places to Live, Work and Wonder...</h1>

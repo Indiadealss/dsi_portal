@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { updateField } from "./Redux/propertySlice";
-import { useDispatch } from "react-redux";
-import { getSearch } from "../api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { getSearch, searchaddress } from "../api/api";
 
 export const Locationbutton = ({ setValidator }) => {
   const [query, setQuery] = useState("");
@@ -12,12 +12,12 @@ export const Locationbutton = ({ setValidator }) => {
   const [showAdditional,setShowAdditional] = useState(false);
   const [projectname,setProjectname] = useState('');
   const dispatch = useDispatch();
-  const [apartment,setApartment] = useState('')
+  const [apartment,setApartment] = useState('');
   const [detailData,setDetailData] = useState('');
 
   useEffect(() => {
-    dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}] }));
-  },[query,locality,apartment])
+    dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}],projectname:projectname,apartment_name:apartment }));
+  },[query,locality,apartment,projectname])
 
   // Generic search handler
   const fetchLocations = async (value, setData) => {
@@ -61,11 +61,16 @@ export const Locationbutton = ({ setValidator }) => {
   const fetchLocation = async (value, setData) => {
     if (value.length > 2) {
       try {
-        const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
-        );
-        const data = await res.json();
-        setData(data);
+        searchaddress(value,query)
+      .then(res => {
+        if(res.status === 200){
+          console.log(res.data.results);
+          setData(res.data.results)
+        }
+      })
+        // setData(data);
+        // console.log(data);
+        
       } catch (error) {
         console.log("Error fetching location:", error);
       }
@@ -101,27 +106,35 @@ export const Locationbutton = ({ setValidator }) => {
   };
 
   const handleSelects = (place) => {
-  setLocality(place.display_name);  // ✅ full location
+  setLocality(place.address);  // ✅ full location
   setLocalityResults([]);
   setShowAdditional(true);
 };
 
+  const propertyFirstData = useSelector((state) => state.property.data);
 
   useEffect(() => {
     if (setValidator) {
       setValidator(validateForm);
     }
-  }, [locality,apartment]);
+  }, [locality,apartment,projectname]);
 
   function validateForm() {
     if (!locality) {
       alert("Enter your city name");
       return false;
     }
-    if(!apartment){
-      alert("Enter the Apartment name");
+    if(propertyFirstData.purpose !== 'Project' &&  !apartment && !projectname){
+      alert("Enter the Apartment name or project name");
       return false;
     }
+    if(propertyFirstData.purpose === 'Project' && !projectname){
+      alert("Enter the Project Name")
+      console.log(propertyFirstData.purpose === 'Project',!projectname);
+      
+      return false;
+    }
+   
     return true;
   }
 
@@ -193,7 +206,7 @@ export const Locationbutton = ({ setValidator }) => {
                   onClick={() => handleSelects(item)}
                   className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                 >
-                  {item.display_name}
+                  {item.address}
                 </li>
               ))}
             </ul>
@@ -207,7 +220,7 @@ export const Locationbutton = ({ setValidator }) => {
             htmlFor="locality"
             className="block my-5 text-sm font-medium text-gray-900 "
           >
-            Project Name <span className="font-light text-sm text-gray-400">(Optional)</span>
+            Project Name <span className={`${propertyFirstData.purpose === 'Project' ? 'hidden' : "font-light text-sm text-gray-400"}`}>(Optional)</span>
           </label>
       <input type="text" 
        id="House_No"
@@ -221,7 +234,7 @@ export const Locationbutton = ({ setValidator }) => {
 
             <label
             htmlFor="locality"
-            className="block my-5 text-sm font-medium text-gray-900 "
+            className={`${propertyFirstData.purpose === 'Project' ? 'hidden': "block my-5 text-sm font-medium text-gray-900 "}`}
           >
             Apartment/Socity
           </label>
@@ -230,24 +243,19 @@ export const Locationbutton = ({ setValidator }) => {
        value={apartment}
        onChange={(e) => setApartment(e.target.value)}
       placeholder="Enter the Project name"
-      className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-            focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-              
-             " />
+      className={`${propertyFirstData.purpose === 'Project' ? 'hidden' : "w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"}`} />
         
         <label
             htmlFor="locality"
-            className="block my-5 text-sm font-medium text-gray-900 "
+            className={`${propertyFirstData.purpose === 'Project' ? 'hidden': "block my-5 text-sm font-medium text-gray-900 "}`}
           >
             House No <span className="font-light text-sm text-gray-400">(Optional)</span>
           </label>
       <input type="text" 
        id="House_No"
       placeholder="House No(optional)"
-      className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-            focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-              
-             " />
+      className={`${propertyFirstData.purpose === 'Project' ? 'hidden' : "w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 "}`}
+      />
       </>
       )}
     </div>

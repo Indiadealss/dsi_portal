@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   location:'All India',
+  purpose:'sell',
+  projectname:'',
   hideAlreadySeen: false,
   budget: "",
   noOfBedroom: 0,

@@ -39,8 +39,8 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
-export const getallProperty = async (page,filter) => {
-  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}`);
+export const getallProperty = async (page,filter,purpose='') => {
+  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}`);
 }
 
 export const getproperty = async(id) => {
@@ -69,8 +69,10 @@ export const submitProperty = createAsyncThunk(
       });
 
       // Append images
-      propertyData.images.forEach((file) => {
-        formData.append("images", file);
+      propertyData.images.forEach((imgObj,idx) => {
+        formData.append("images", imgObj.file);
+        formData.append("imageTypes", imgObj.type);
+        formData.append(`fields_${idx}`, JSON.stringify(imgObj.Fields));
       });
 
       // Append videos
@@ -87,6 +89,10 @@ export const submitProperty = createAsyncThunk(
     }
   }
 );
+
+export const searchaddress = async (address,city) => {
+  return API.get(`/searchaddress?query=${address}&$city=${city}`);
+}
 
 // export const submitProperty = createAsyncThunk(
 //   "property/submitProperty",

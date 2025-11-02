@@ -6,7 +6,8 @@ export const Postbasicdetailsform = ({ setValidator }) => {
          const lokingButton = [
         { title: 'Sell', name: 'sell' },
         { title: 'Rent / Lease', name: 'rent' },
-        { title: 'PG', name: 'pg' }
+        { title: 'PG', name: 'pg' },
+        { title:'Project', name: 'Project'}
     ]
      const pg = [
             { title: 'Flat/Apartment', name: 'flatApartment' },
@@ -161,12 +162,20 @@ export const Postbasicdetailsform = ({ setValidator }) => {
     return true;
   }
 
+  const user = useSelector(state => state.user);
+  console.log(user.mobile);
+  
+  
+
   return (
     <>
       <h3 ><span className='text-2xl font-medium'> Welcome back ,<br />Fill out basic details</span></h3>
       <div className='my-5'><p className='font-medium '>I'm looking to</p>
                             <div className='flex my-3'>
-                                {lokingButton.map((item, index) => {
+                                
+                                {lokingButton
+                                .filter(item => user.mobile === "+917906518272" ?  true : item.name !== "Project" )
+                                .map((item, index) => {
                                     return (
                                         <button key={index} name={item.name} className={`${lookSelection === item.name ? 'bg-gray-100     font-normal text-gray-900  cursor-pointer px-3 rounded-full text-sm mx-1' : 'bg-white border border-gray-300 font-normal text-gray-500  cursor-pointer px-3 rounded-full text-sm mx-1'} ${item.name === 'pg' && selection === 'commercial' ? 'hidden' : 'block'}`} onClick={lookButton}>{item.title}</button>
                                     )

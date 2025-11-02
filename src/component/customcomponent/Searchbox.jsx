@@ -153,7 +153,7 @@ const Searchbox = () => {
     <>
       <div className="shadow-xl bg-white rounded-xl w-auto lg:w-[max-content] mx-auto z-11 relative">
         {/* Top Nav Buttons */}
-        <div className='hidden lg:block lg:flex border-b border-b-gray-100'>
+        <div className='hidden lg:block lg:flex border-b justify-between border-b-gray-100'>
           {button.map((item) => (
             item.key === "postProperty" ? (
               <Link

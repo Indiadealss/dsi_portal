@@ -12,12 +12,14 @@ const userSlice = createSlice({
     initialState,
     reducers:{      // functions to modify state
         setUser: (state,action) => {
+            state.id = action.payload.id;
             state.name = action.payload.name;
             state.email = action.payload.email;
             state.mobile = action.payload.mobile;
             state.loggedIn = true;
         },
         clearUser:(state) => {
+            state.id = ""
             state.name = "",
             state.email = "",
             state.mobile = "",

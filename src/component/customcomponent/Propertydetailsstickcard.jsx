@@ -59,7 +59,7 @@ locationData = JSON.parse(property.location);
                     <div className='flex'>
                         <div className='flex pe-[20px]'>
                             <FaRupeeSign className='mt-3 text-xl' />
-                            <h1>{propertyDetails.price}<span className='text-lg font-normal text-gray-400'>@ {propertyDetails.size}</span></h1>
+                            <h1>{propertyDetails.price}<span className='text-lg font-normal text-gray-400'>@ {parseInt(propertyDetails.size)}</span></h1>
                         </div>
                         <div className='ps-[20px] border-s border-gray-300'>
                             <h2><span className='font-light text-gray-400'>{propertyDetails.bedrooms}Bedrooms {propertyDetails.bathrooms}Baths</span></h2>

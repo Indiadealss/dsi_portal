@@ -75,7 +75,9 @@ const Listingboost = () => {
         </div>
 
         <input
-          type="number"
+          type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
           value={creadits}
           onChange={(e) => setCreadits(e.currentTarget.value)}
           className="w-full p-2 rounded-b outline-none"

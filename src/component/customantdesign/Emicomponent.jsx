@@ -50,7 +50,9 @@ const styles = {
     <div>
       <label className="block text-gray-700 font-medium mb-1">Amount</label>
       <input
-        type="number"
+        type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
         placeholder="Loan Amount (₹)"
         className="w-full border border-gray-300 rounded-lg px-3 py-2  focus:ring-blue-500 focus:outline-none"
         value={amount}
@@ -62,7 +64,9 @@ const styles = {
     <div>
       <label className="block text-gray-700 font-medium mb-1">Interest Rate</label>
       <input
-        type="number"
+        type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
         placeholder="Annual Interest Rate (%)"
         className="w-full border border-gray-300 rounded-lg px-3 py-2  focus:ring-blue-500 focus:outline-none"
         value={rate}
@@ -74,7 +78,9 @@ const styles = {
     <div>
       <label className="block text-gray-700 font-medium mb-1">Tenure</label>
       <input
-        type="number"
+        type='number' onKeyDown={(e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+  }} onWheel={(e) => e.target.blur()}
         placeholder="Loan Tenure (Months)"
         className="w-full border border-gray-300 rounded-lg px-3 py-2  focus:ring-blue-500 focus:outline-none"
         value={tenure}

@@ -13,6 +13,17 @@
   display: none;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance: none;
+  margin:0;
+}
+
+/* Hide  arrows for Firefox*/
+input[type=number]{
+  -moz-appearance: textfield;
+}
+
 /* Modal container at bottom with no scroll */
 .modal-slide-up .ant-modal {
   margin: 0;
@@ -321,9 +332,9 @@ a {
   .searchBoxes{
     width: 100%;
   }
-  .buttonStyle{
+  /* .buttonStyle{
     display: none;
-  }
+  } */
 
   .loctate{
     display: none;

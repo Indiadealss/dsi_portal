@@ -13,6 +13,10 @@ const store = configureStore({
      slug:slugReducer,
      user:userReducer
   },
+   middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, // ⚠️ turns off the warning
+    }),
 });
 
 export default store;

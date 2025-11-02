@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { getUserDetatils } from "./api/api";
 import { updateField } from "./component/Redux/propertySlice";
 import Buyservice from "./component/Buyservice";
+import Projectdetail from "./component/Projectdetail";
 
 function App() {
 
@@ -29,11 +30,11 @@ function App() {
     getUserDetatils()
       .then(res => {
         if (res.status === 200) {
-          // console.log(res.data.usedetails);
+          console.log(res.data.usedetails);
          const { name, email, mobile,_id } = res.data.usedetails;
          
           
-          dispatch(setUser({name,email,mobile})); // populate Redux
+          dispatch(setUser({name,email,mobile,_id})); // populate Redux
           dispatch(updateField({owner:_id,}))
         }
       })
@@ -49,6 +50,7 @@ function App() {
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
     {path: "/propertyDetails/:id",element:<Propertydetails />},
+    {path: "/projectDetails/:id",element:<Projectdetail />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
