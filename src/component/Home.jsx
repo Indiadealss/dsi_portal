@@ -48,7 +48,6 @@ const Home = () => {
   const fetchProperties = async (pageNumber,purpose) => {
           
          try{
-           
           const res = await getallProperty(pageNumber,location,purpose);
           const resultsAre = res.data?.data;
           const result = resultsAre.filter((p) => p.purpose === 'Project')
@@ -62,7 +61,7 @@ const Home = () => {
             let locationData = [];
             try{
                 locationData = JSON.parse(p.location);
-                console.log(p);
+                // console.log(p);
                 
             }catch(err){
                 locationData = [];
@@ -112,7 +111,7 @@ const Home = () => {
       owner: p.owner || "Owner",
        };
     });
-    // console.log(formattedData);
+    // // console.log(formattedData);
     
           
           setData((prev) => [...prev, ...formattedData])
@@ -305,7 +304,7 @@ const Home = () => {
   ]
 
   if (!data) {
-    console.log(data);
+    // console.log(data);
     
         return (
             <div className='mb-5'>

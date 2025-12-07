@@ -18,7 +18,7 @@ const Propertydelardetail = ({onDealerPosition }) => {
             if(dealerRef.current) {
                 const rect = dealerRef.current.getBoundingClientRect();;
                 const scrollY = window.scrollY + rect.top;
-                console.log('Dealer Details:',scrollY);
+                // console.log('Dealer Details:',scrollY);
                 onDealerPosition?.(scrollY);
             }
         },100);
@@ -76,12 +76,12 @@ const Propertydelardetail = ({onDealerPosition }) => {
                         <div className='flex'>
                             <p className='font-medium text-gray-500 p-2'>You are</p>
                             <div className="flex items-center">
-                                <input id="default-radio-1" type="radio" value="Individual" name="default-radio" className="w-4 h-4 text-blue-600 bg-blue-100 border-gray-300 " />
-                                <label for="default-radio-1" className="m-2 text-sm  text-gray-500 ">Individual </label>
+                                <input id="Individual" type="radio" value="Individual" name="Individual" className="w-4 h-4 text-blue-600 bg-blue-100 border-gray-300 " />
+                                <label for="Individual" className="m-2 text-sm  text-gray-500 ">Individual </label>
                             </div>
                             <div className="flex items-center" >
-                                <input id="default-radio-2" type="radio" value="Dealer" name="default-radio" className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer' />
-                                <label for="default-radio-2" className="m-2 text-sm  text-gray-500 ">Dealer</label>
+                                <input id="Individual" type="radio" value="Dealer" name="Individual" className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer' />
+                                <label for="Individual" className="m-2 text-sm  text-gray-500 ">Dealer</label>
                             </div>
                         </div>
                     </div>
@@ -89,19 +89,19 @@ const Propertydelardetail = ({onDealerPosition }) => {
                         <div className='flex '>
                             <p className='font-medium text-gray-500 p-2'>You are reason to buy is</p>
                             <div className="flex items-center">
-                                <input id="default-radio-1" type="radio" value="Investment" name="default-radio" className="w-4 h-4 text-blue-600 bg-blue-100 border-gray-300 " />
-                                <label for="default-radio-1" className="m-2 text-sm  text-gray-500 ">Investment </label>
+                                <input id="reson" type="radio" value="Investment" name="default-radio" className="w-4 h-4 text-blue-600 bg-blue-100 border-gray-300 " />
+                                <label for="reson" className="m-2 text-sm  text-gray-500 ">Investment </label>
                             </div>
                             <div className="flex items-center" >
-                                <input id="default-radio-2" type="radio" value="Selfuse" name="default-radio" className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer' />
-                                <label for="default-radio-2" className="m-2 text-sm  text-gray-500 ">Self use</label>
+                                <input id="reson" type="radio" value="Selfuse" name="default-radio" className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 cursor-pointer' />
+                                <label for="reson" className="m-2 text-sm  text-gray-500 ">Self use</label>
                             </div>
                         </div>
                     </div>
                     <div className='flex flex-col lg:flex-row'>
                         <div>
                             <div className='my-1'>
-                                <input type="text" id="first_name" class='w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5    ' placeholder="Enter City" required />
+                                <input type="text" id="first_name" class='w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5    ' placeholder="Name" required />
                             </div>
                             <div className='my-1'>
                                 <Phoneinput />

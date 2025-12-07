@@ -1,22 +1,48 @@
 import { IoIosAdd } from "react-icons/io";
 import React from 'react';
+import { RxCross2 } from "react-icons/rx";
 
-export const Addfilterbutton = (props) => {
-    
+export const Addfilterbutton = ({ filterButtonname, filterKey, selectedFilters, setSelectedFilters }) => {
 
-    let filterData = props.filterButtonname;
-    
+      // console.log(filterButtonname);
+
+  function handleSelect(name) {
+    setSelectedFilters(prev => {
+      const current = prev[filterKey] || [];
+
+      
+
+      return {
+        ...prev,
+        [filterKey]: current.includes(name)
+          ? current.filter(i => i !== name)   // remove
+          : [...current, name]                // add
+      };
+    });
+  }
+
   return (
     <div className="flex flex-wrap my-5">
-      {filterData.map((item,index) => {
-        return(
-            <div key={index}>
-      <button type="button"  name={item.name} className="text-gray flex justify-between px-3 py-1  me-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-[40px] border border-gray-300 outline-none">
-        <span className="text-blue"><IoIosAdd className="mt-1 me-2 text-lg" /></span>
-        {item.name}
+      {filterButtonname.map((item, index) => (
+        <button
+          key={index}
+          onClick={() => handleSelect(item.name)}
+          className={`px-3 py-1 me-2 mb-2 text-sm rounded-[40px] border flex items-center
+            ${selectedFilters[filterKey]?.includes(item.name)
+              ? "bg-blue-600 text-white border-blue-600 cursor-pointer"
+              : "bg-white text-gray-900 border-gray-300 cursor-pointer"
+            }`
+          }
+        >
+          {selectedFilters[filterKey]?.includes(item.name)
+          ? 
+          <RxCross2 className="mr-2 text-lg" /> 
+          :
+          <IoIosAdd className="mr-2 text-lg" />
+          }
+          {item.name}
         </button>
-        </div>
-        )})}
-        </div>
-  )
-}
+      ))}
+    </div>
+  );
+};

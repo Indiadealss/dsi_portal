@@ -16,13 +16,13 @@ export const PropertiesData = () => {
 
     let dispatch = useDispatch();
 
-    console.log(timeStamp);
+    // console.log(timeStamp);
     const [properties, setProperties] = useState([]);
     const [page,setPage] = useState(1);
     const [hasMore,setHasMore]  = useState(true)
     const [loading,setLoading] = useState(false)
     useEffect(() => {
-  console.log("Updated properties:", properties);
+  // console.log("Updated properties:", properties);
 }, [properties]);
 
 
@@ -47,13 +47,14 @@ export const PropertiesData = () => {
             let locationData = [];
             try{
                 locationData = JSON.parse(p.location);
-                console.log(p);
+                // console.log(p);
                 
             }catch(err){
                 locationData = [];
             }
 
             let highlights = [];
+            
   if (p.propertyfacing) highlights.push({ helight: p.propertyfacing });
   if (p.pobackup) highlights.push({ helight: p.pobackup });
   if (p.watersource) highlights.push({ helight: p.watersource });
@@ -70,14 +71,14 @@ export const PropertiesData = () => {
             return{
                 id:p._id,
       images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
-      title: locationData[0]?.apartment_name || "Untitled Property",
+      title: locationData?.apartment_name || "Untitled Property",
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
-      subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData[0]?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${p.City}`}`,
+      subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${locationData.City}`}`,
       bathroom: p.bathroom ? `${p.bathroom} Baths` : "N/A",
       bedroom:p.bedroom ? p.bedroom : '',
       location: p.location || "Unknown",
       price: p.price || 0,
-      deposit: p.deposit || "N/A",
+      deposit: Number(p.price) * 0.3 || "N/A",
       size: p.plotarea || 0,
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
@@ -88,7 +89,7 @@ export const PropertiesData = () => {
 
     
         setProperties(prev => [...prev, ...formattedData]);
-        console.log(result.data);
+        // console.log(result.data);
         
     }catch(err){
         console.error(err);
@@ -107,7 +108,7 @@ export const PropertiesData = () => {
                  !loading
             ) {
                 setPage(prev => prev + 1);
-          console.log('check',page);
+          // console.log('check',page);
             }
         };
         window.addEventListener("scroll",handleScroll);
@@ -122,28 +123,28 @@ export const PropertiesData = () => {
     function clearFilter() {
         dispatch(updateFilter({location:'All India'}));
         setLocation('All India')
-        setProjectname((state) => state.filterSlice.projectname)
+        // setProjectname((state) => state.filterSlice.projectname)
     }
 
     
-    const propertyData = [
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
-        { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43 ', time: '08/08/2025', owner: 'Rohit' }
-    ]
+    // const propertyData = [
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43  ', time: '08/08/2025', owner: 'Rohit' },
+    //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43 ', time: '08/08/2025', owner: 'Rohit' }
+    // ]
     return (
         <div>
   {properties.length > 0 ? (
@@ -178,16 +179,16 @@ export const PropertiesData = () => {
                 <p className="text-[15px] font-medium">{item.price}</p>
               </div>
               <div className="flex items-center">
-                <IoIosAdd className="text-lg" />
-                <p className="text-[15px] font-medium px-1">Deposit</p>
+                {/* <IoIosAdd className="text-lg" /> */}
+                {/* <p className="text-[15px] font-medium px-1">Deposit</p> */}
                 <MdCurrencyRupee className="text-[15px]" />
-                <p>{item.deposit}</p>
+                <p>{(item.price / item.size).toFixed(0)}/sqft</p>
               </div>
             </div>
 
             <div className="px-5 border-e border-gray-300">
               <p className="text-[15px] font-medium">
-                {Math.round(item.size * 10.7639)} Sqft ({item.size})
+                {Math.round(item.size)} Sqft ({(item.size * 0.092903).toFixed(0)} sqm)
               </p>
               <p className="text-[15px] font-medium">{item.area} Area</p>
             </div>

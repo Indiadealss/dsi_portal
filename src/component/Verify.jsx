@@ -16,7 +16,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-  console.log("Updated user:", user);
+  // console.log("Updated user:", user);
 }, [user]);
 
     useEffect(() => {
@@ -39,15 +39,15 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
                 const res = await verifyOtp(mobileNo,otp);
 
                 if(res.status === 200){
-                  console.log(!res.data.redirect);
+                  // console.log(!res.data.redirect);
                   
                   
                   if(!res.data.redirect){
                     resmobilef(res.data.user.mobile);
                     redirectTo(res.data.redirect);
-                    console.log(res.data.user);
+                    // console.log(res.data.user);
                     dispatch(setUser(res.data.user));
-                    console.log(user);
+                    // console.log(user);
                      window.location.reload();
                     alert("Login Sucessfully");
                      if (closeModal) closeModal();

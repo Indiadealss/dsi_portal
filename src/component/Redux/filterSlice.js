@@ -3,6 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   location:'All India',
   purpose:'sell',
+  budget:'',
+  selectedFilters:{},
+  AriaringSlider:{},
+  MINPRICE:0,
+  MAXPRICE:10000000,
+  propertyType:[],
   projectname:'',
   hideAlreadySeen: false,
   budget: "",

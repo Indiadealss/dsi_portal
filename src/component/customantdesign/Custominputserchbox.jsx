@@ -21,13 +21,13 @@ const Custominputserchbox = ({search}) => {
       searchaddress(value,location)
       .then(res => {
         if(res.status === 200){
-          console.log(res);
+          // console.log(res);
           setLocation(res.data.results);
         }
       })
 
     }catch(err){
-      console.log(err);
+      // console.log(err);
       
     }
   }
@@ -60,7 +60,7 @@ const Custominputserchbox = ({search}) => {
   }
 
   const handleSelect = (item) => {
-    console.log(item.name == inputValue);
+    // console.log(item.name == inputValue);
     
      if(item.name === item.city){
       setInputValue(`${item.name}`)

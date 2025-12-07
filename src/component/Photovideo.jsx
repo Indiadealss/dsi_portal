@@ -121,9 +121,12 @@ export const Photovideo = () => {
                 >
                   <option value="">Select Type</option>
                   <option value="layout">Layout Image</option>
+                  <option value="Photos">Photos</option>
+                  <option value="Construction Status">Construction Status</option>
                   <option value="cover">Cover Image</option>
                   <option value="banner">Banner Image</option>
                   <option value="pdf">PDF File</option>
+                  <option value="brouser">Brochure</option>
                 </select>
 
                 {/* For PDF type only → show dynamic key-value inputs */}

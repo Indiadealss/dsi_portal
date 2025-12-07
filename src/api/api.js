@@ -14,7 +14,6 @@ const API = axios.create({
 export const sentOtp = (mobile) =>
   API.post("/auth/send-otp", { mobile });
 
-
 export const verifyOtp = (mobile, otp) =>
   API.post("/auth/verify-otp", { mobile, otp });
 
@@ -51,44 +50,82 @@ export const submitProperty = createAsyncThunk(
   "property/submitProperty",
   async (propertyData, { rejectWithValue }) => {
     try {
-      const formData = new FormData;
-      // Append all normal fields
+      const formData = new FormData();
+
       Object.keys(propertyData).forEach((key) => {
         if (!["images", "video"].includes(key)) {
           let value = propertyData[key];
 
-          if (key === "location" && typeof value === "object") {
-            value = JSON.stringify(value);
-          }
+          // ✅ Fix: Handle arrays of objects (unitData, offices, amenities, etc.)
           if (Array.isArray(value)) {
-            value.forEach((item) => formData.append(key, item));
-          } else {
+            value.forEach((item) => {
+              if (typeof item === "object") {
+                formData.append(key, JSON.stringify(item)); // ✅ always stringify objects
+              } else {
+                formData.append(key, item);
+              }
+            });
+          }
+          else if (typeof value === "object") {
+            formData.append(key, JSON.stringify(value)); // ✅ stringify single object
+          }
+          else {
             formData.append(key, value);
           }
         }
       });
 
-      // Append images
-      propertyData.images.forEach((imgObj,idx) => {
+      // ✅ IMAGES
+      propertyData.images.forEach((imgObj, idx) => {
         formData.append("images", imgObj.file);
         formData.append("imageTypes", imgObj.type);
         formData.append(`fields_${idx}`, JSON.stringify(imgObj.Fields));
       });
 
-      // Append videos
+      // ✅ VIDEOS
       propertyData.video.forEach((file) => {
         formData.append("video", file);
-      })
+      });
+
       const res = await axios.post("/api/property/createProperty", formData, {
         headers: { "content-Type": "multipart/form-data" },
         withCredentials: true,
       });
+
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response?.data || { message: "Server error" });
     }
   }
 );
+
+export const createLead = async (formData) => {
+  return API.post(`/lead/lead`,formData,{
+    headers:{
+      "Content-Type": "multipart/form-data",
+    },
+  })
+}
+
+export const createFeature = async (formData) => {
+  return API.post(`/feature/create`,formData);
+};
+
+export const createLocalAdvantages = async (formData) => {
+  return API.post(`/feature/localAdvantages`,formData,{
+    headers:{
+      "Content-Type":"multipart/form-data",
+    },
+  });
+};
+
+export const getLocalAdvantages = async (name) => {
+  return API.get(`/feature/getlocationAdvantages?name=${name}`)
+}
+
+export const getAllFeature = async ()=> {
+  return API.get(`/feature/getFeatures`);
+} 
 
 export const searchaddress = async (address,city) => {
   return API.get(`/searchaddress?query=${address}&$city=${city}`);

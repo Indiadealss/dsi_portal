@@ -4,6 +4,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaCircleCheck } from "react-icons/fa6";
 import { WiDirectionRight } from "react-icons/wi";
 import { Drawer } from 'antd';
+import { Modal } from "antd";
 import { IoMdInformationCircle } from "react-icons/io";
 const Buyservice = () => {
     const numberOfListingPack = 25;
@@ -14,6 +15,10 @@ const Buyservice = () => {
     const [open,setOpen] = useState(false);
     const [isModelOpen,setIsModelOpen] = useState(false)
 
+
+    const showModel = () => {
+  setIsModelOpen(true);
+};
     const showDrawer = () => {
         setOpen(true)
     }
@@ -64,6 +69,10 @@ const Buyservice = () => {
   return (
     <>
     <div className='flex justify-center my-10'>
+        <Modal open={isModelOpen} onCancel={() => setIsModelOpen(false)} footer={null}>
+        <h3>Proceed to purchase</h3>
+    </Modal>
+
         <div className='max-w-lg p-6 bg-white border border-blue-200 shadow-lg'>
             <img src="https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/planpack.png" alt="..." />
             <h3>Sachet Pack</h3>

@@ -5,12 +5,12 @@ const Propertytransation = () => {
 
   const property = useSelector((state) => state.propertyid.data);
 
-  console.log(property,'okkk');
   
 
+//   console.log(property.road_width,'okk');
     
 
-    if(!property || !property.road_width || !property.purpose){
+    if(!property || !property.purpose){
         return(
             <div className="text-center py-4 text-gray-500">
                 Loading...
@@ -18,9 +18,11 @@ const Propertytransation = () => {
         )
     }
 
+
+
     const fullDetails = {
         transational:property.purpose,
-        Road:property.road_width,
+        Road:property.road_width ? property.road_width : 'j',
         powerbackup:property.pobackup,
         Ownership:property.ownership,
         // gatedCommunity:'yes',
@@ -32,7 +34,7 @@ const Propertytransation = () => {
     }
 
   return (
-    <div className='py-4 border-y border-gray-300'>
+    <div className='py-4 border-b border-gray-300'>
             <div className='grid grid-cols-2 mx-2 lg:grid-cols-3'>
                 {Object.entries(fullDetails).map(([key,value]) => (
                     <p key={key} className='flex gap-2 flex-col lg:flex-row'>

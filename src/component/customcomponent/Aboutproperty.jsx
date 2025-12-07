@@ -19,12 +19,12 @@ const Aboutproperty = () => {
     )
   }
   locationData = JSON.parse(property.location);
-  console.log(locationData);
+  // console.log(locationData);
   
 
   const aboutDetaild = {
     title:'About Property',
-    Address:locationData[0].Address,
+    Address:locationData.Address,
     addressDetails:property.description
   }
   

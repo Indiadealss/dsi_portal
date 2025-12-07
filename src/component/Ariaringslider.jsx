@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFilter } from './Redux/filterSlice';
 
-export const Rangeslider = ({ MIN, MAX, filterKey }) => {
+export const Ariaringslider = ({ MIN, MAX, filterKey }) => {
 
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export const Rangeslider = ({ MIN, MAX, filterKey }) => {
   // Update Redux on slider change
   const updateRedux = (newMin, newMax) => {
     dispatch(updateFilter({
-      selectedFilters: {
+      AriaringSlider: {
         ...selectedFilters,
         [filterKey]: [newMin, newMax]
       }

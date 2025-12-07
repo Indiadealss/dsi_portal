@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useSelector } from "react-redux";
 
-const Antplanerbycus = () => {
+const Considerpropety = () => {
 
     
   const sliderRef = useRef(null);
@@ -14,12 +14,7 @@ const Antplanerbycus = () => {
 
   const property = useSelector((state) => state.propertyid.data);
 
-    const locationData = JSON.parse(property.location);
-    // console.log(locationData);
 
-    // console.log(property.locatadvance.map(item => JSON.parse(item)),'hello');
-
-    const locAdvan = property.locatadvance.map(item => JSON.parse(item))
     
     
 
@@ -46,8 +41,17 @@ const Antplanerbycus = () => {
     );
   }
 
+    const locAdvan = property.locatadvance.map(item => JSON.parse(item))
+
   return (
-    <div className="relative">
+    <div className='block max-w-full p-6  border-b border-gray-300 '>
+        <div className='flex my-2 max-w-[-webkit-fill-available] my-3'>
+            <div>
+            {/* <h2>Place nearby</h2> */}
+            <p> <span className="font-medium text-sm">Why you should consider this property?</span></p>
+            </div>
+        </div>
+       <div className="relative">
       {/* Left Button */}
       <Button
         onClick={() => sliderRef.current?.slickPrev()}
@@ -59,8 +63,8 @@ const Antplanerbycus = () => {
       <Slider ref={sliderRef} {...settings}>
         {locAdvan.map((item, idx) => (
           <div  className="px-2">
-        <button key={idx} className="bg-white w-full px-4 py-2 rounded  shadow text-sm">
-              {item.propertyName}
+        <button key={idx} className="bg-emerald-400 font-medium  text-white  border border-gray-500 w-full px-4 py-2 rounded-full text-sm">
+              {item.name}
             </button>
           </div>
         ))}
@@ -73,7 +77,8 @@ const Antplanerbycus = () => {
         icon={<RightOutlined />}
       />
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default Antplanerbycus;
+export default Considerpropety;

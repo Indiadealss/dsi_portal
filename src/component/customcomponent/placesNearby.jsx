@@ -17,7 +17,7 @@ const Placesnearby = () => {
     
   }
 
-  console.log(locationData,"hello");
+  // console.log(locationData,"hello");
   
 
   
@@ -50,7 +50,7 @@ if (!property || !property.location) {
             <img className='' src={landmark} alt="..." />
             <div>
             <h2>Place nearby</h2>
-            <p>{`${locationData[0].apartment_name}  ${locationData[0].Address}`}</p>
+            <p>{`${locationData.apartment_name}  ${locationData.Address}`}</p>
             </div>
         </div>
         <Antplanerbycus  />

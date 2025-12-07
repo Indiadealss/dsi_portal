@@ -7,9 +7,13 @@ import { MdFilterAlt } from "react-icons/md";
 import { Checkfilter } from './Checkfilter';
 import { Propertyfilterbutton } from './Propertyfilterbutton';
 import { PropertiesData } from './PropertiesData';
+import { FaXmark } from "react-icons/fa6";
+
 
 export default function Propertyfilter() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState({});
+ 
 
   const budgetRef = useRef(null);
   const bedroom = useRef(null);
@@ -31,9 +35,88 @@ export default function Propertyfilter() {
   const noBedroom = [
     { name: '1RK' },
     { name: '2 BHK' },
-    {name:'3 BHK'},
-    {name:'4 BHK'}
+    { name: '3 BHK' },
+    { name: '4 BHK' }
   ]
+
+  const commercialPropertyType = [
+    { name: 'Ready to move offices'},
+    { name: 'Bare shell offices'},
+    {name: 'Shops & Retail'},
+    { name: 'Commerical/Institutional Land'},
+    { name: 'Agricultural/Farm Land'},
+    { name:'Industrial Land/Plots'},
+    { name: 'Ware House'},
+    { name:'Cold Storage'},
+    { name:'Facotory'},
+    { name: 'Manufacturing'},
+    { name: 'Hotel/Resorts'},
+    { name:'Guest-House/Banquet-Halls'}
+  ]
+
+  const Situated = [
+    { name: 'Commerical Project'},
+    { name: 'Market/High Street'},
+    { name: 'Residential Project'},
+    { name: 'Retail Complex/Bulding'}
+  ]
+
+  const BusinessTypes = [
+    { name: 'Clothes'},
+    { name: 'Fast Food'},
+    { name: 'Bakery'},
+    { name: 'Coffee'},
+    { name: 'Grocey'},
+    { name: 'Boutique'},
+    { name:'Footwear'}
+  ]
+
+  const investOption = [
+    { name: 'Pre-leased Spaces'},
+    { name:'Food Court'},
+    { name: 'Co-working'}
+  ]
+  const investmentType = [
+    {name:'Assured Returns'},
+    {name:'Rental Yeild'},
+    {name:'Lease Guarantee'},
+    {name: 'ROI'}
+  ]
+
+  const Localities = [
+    {name:'Sector'}
+  ]
+
+  const floorPreference = [
+    {name:'Basement'},
+    {name:'Ground floor'},
+    {name:'Terrace/Roof top'},
+    {name:'1st and above'}
+  ]
+
+  const purchaseType = [
+    {name:'Resale'},
+    {name:'New Booking'}
+  ]
+// Backend
+
+  // const newProjectsSocities = [
+  //   {name:'Specturm Metro'},
+  //   {name:'CRC The Flagship'},
+  //   {name:''}
+  // ]
+
+
+  const Amenities = [
+    {name:'Waste disposal'},
+    {name:'ATM'},
+    {name:'Near Bank'},
+    {name:'Power Backup'},
+    {name:'Parking'},
+    {name:'DG Availability'},
+    {name:'Wheelchair Accessibility'}
+  ]
+
   const propertyType = [
     { name: 'Residential Apartment' },
     { name: 'Independent/Bulder Floor' },
@@ -127,6 +210,20 @@ export default function Propertyfilter() {
     { name: 'With Videoes' }
   ]
 
+  const NewProjectSocity = [
+    { name:'Spectrum Metro'},
+    { name: 'CRC The Flagship'},
+    { name: 'Fairfox EON'},
+    { name: 'Bhutani Cyberthum'},
+    { name: 'Bhutani City Center'}
+  ]
+
+  const constructionStatus = [
+    { name:'New Launch'},
+    { name:'Under Construction'},
+    { name:'Ready to move'}
+  ]
+
   const MobilepropertyFileterButton = [
     { name: 'Budget' },
     { name: 'No of Bedrooms' },
@@ -141,9 +238,97 @@ export default function Propertyfilter() {
     { name: 'With Videoes' }
   ]
 
-  const propertyFilterData = [
+  const RentofficeSpaceType = [
+    { name:'Ready to move Office space'},
+    { name:'Bare shell office space'}
+  ]
+
+  const RentOffeceSpaceLooking = [
+    { name: 'Immediately'},
+    { name: 'Within 1 Month'},
+    { name: 'After 1 Month'}
+  ]
+
+  const RentkeyOfficeSpace = [
+    { name: 'With Pantry'},
+    { name: 'With meeting Rooms'},
+    { name: 'With Conference room'}
+  ]
+
+  const RentnumberCabin = [
+    { name:'1'},
+    { name:'2'},
+    { name:'3'},
+    { name:'4'},
+    { name:'5'},
+    { name:'6'}
+  ]
+
+  const RentnumberWashroom = [
+    { name:'1'},
+    { name:'2'},
+    { name:'3'},
+    { name:'4'},
+    { name:'5'},
+    { name:'6'}
+  ]
+
+  const Rentparking = [
+    {name:'Avalble'}
+  ]
+
+  const RentFacilities = [
+    {name:'Fire Safety'},
+    {name:'Centralized AC'},
+    {name:'Reception Area'},
+    {name:'Oxygen Duct'},
+    {name:'UPS'}
+  ]
+
+  const RentAmenties = [
+    {name:'Power Backup'},
+    {name:'Lift'},
+    {name:'Security Personnel'},
+    {name:'Vaastu Compliant'},
+    {name:'Parking'},
+    {name:'Gymasium'},
+    {name:'Park'},
+    {name:'Cub house'},
+    {name:'Swimming Pool'},
+    {name:'Gas Pipeline'}
+  ]
+
+  const RentFloorPrefrence = [
+    {name:'Basement'},
+    {name:'Ground floor'},
+    {name:'Terrace/Roof top'},
+    {name:'1st and above'}
+  ]
+
+  const RentLocated = [
+    {name:'Basement'},
+    {name:'Ground floor'},
+    {name:'Terrace/Roof top'},
+    {name:'1st and above'}
+  ]
+
+  const RentSperadOver = [
+    {name:'1 floor'},
+    {name:'2 floor'},
+    {name:'2 + floor'},
+  ]
+
+  const RentAgeofProperty = [
+    {name:'0-1 years old'},
+    {name:'1-5 years old'},
+    {name:'5-10 years old'},
+    {name:'10+ years old'},
+    {name:'20+ years old'}
+  ]
+
+  const ResidentalAppartment = [
     { title: 'Hide already seen', data: 'input', name: 'alreadySeen' },
-    { title: 'Budget', data: 'Rangeslider', name: 'budget', useref: useRef(null) },
+    { title: 'Budget', data: 'Rangeslider',min:0, max:10000000, name: 'budget', useref: useRef(null) },
     { title: 'No. of Bedrooms', data: noBedroom, name: 'noOfBedroom', useref: useRef(null) },
     { title: 'Types of Property', data: propertyType, name: 'typesOfProperty', useRef: useRef(null) },
     { title: 'Avalable For', data: availableFor, name: 'avalableFor', useref: useRef(null) },
@@ -154,17 +339,68 @@ export default function Propertyfilter() {
     { title: 'No of Bathrooms', data: noBathroom, name: 'noBathroom', useref: useRef(null) },
     { title: 'Anemate', data: amenitiesFilter, name: 'anemateFilter', useref: useRef(null) },
     { title: 'Properties With Photos', data: 'input' },
-    { title: 'Area', data: 'Rangeslider', name: 'area', useref: useRef(null) },
+    { title: 'Area', data: 'Rangeslider',min:0, max:10000, name: 'area', useref: useRef(null) },
     { title: 'Availblefrom', data: availableFrom, name: 'availblefrom', useref: useRef(null) },
     { title: 'Verified Properties', data: 'input', name: 'verified properties' },
     { title: 'Age of Property', data: propertyAge, name: 'Age of Property', useref: useRef(null) },
   ]
 
-  function mobilFilterOpen(e){
-    if(propertyFilterData[e.currentTarget.dataset.key].data != 'input' ){
-    setIsMobileOpen(true);
-    setMobileOpenIndex(e.currentTarget.name);
-    } else{
+  const commercialPropertyFilter = [
+    { title: 'Hide already seen', data: 'input', name: 'alreadySeen' },
+    { title: 'Budget', data: 'Rangeslider',min:0, max:10000000, name: 'budget', useref: useRef(null) },
+    { title: 'Type of Property', data:commercialPropertyType,name:'Type of Property'},
+    { title: 'Situated in',data:Situated,name:'Situated'},
+    { title: 'Business Type',data:BusinessTypes,name:'Business Type'},
+    { title: 'Investment Options',data:investOption,name:'Invest Option'},
+    { title: 'Investment Type',data:investmentType,name:'Invest Option'},
+    { title: 'Localities',data:Localities,name:'Localities'},
+    { title: 'Area', data: 'Rangeslider',min:0, max:10000, name: 'area', useref: useRef(null) },
+    { title: 'Construction Status',data:constructionStatus,name:'Construction Status'},
+    { title: 'Floor preference',data:floorPreference,name:'Floor preference'},
+    { title:'Purchase type',data:purchaseType,name:'Purchase type'},
+    { title:'New projects/Societies',data:NewProjectSocity,name:'New Project/Societies'},
+    { title:'Amenities',data:Amenities,name:'Amenities'},
+    { title: 'Verified Properties', data: 'input', name: 'verified properties' },
+    { title: 'Properties with Photos', data: 'input', name: 'Photo' },
+    { title: 'Properties with Videos', data: 'input', name: 'verified properties' },
+    { title: 'View Pre-Leased property', data: 'input', name: 'verified properties' },
+    { title: 'Posted by',data:postedBy, name:'Posted'}
+  ]
+
+
+  const RentCommercial = [
+    { title: 'Hide already seen', data: 'input', name: 'alreadySeen' },
+    { title: 'Show Grade A offices only', data: 'input', name: 'Grade' },
+    { title:'Office Space types',data:RentofficeSpaceType,name:'Office Space types'},
+    { title: 'Include coworking options', data: 'input', name: 'Coworking' },
+    { title: 'Budget', data: 'Rangeslider',min:0, max:10000000, name: 'budget', useref: useRef(null) },
+    { title: 'Area', data: 'Rangeslider',min:0, max:10000, name: 'area', useref: useRef(null) },
+    { title: 'Localities',data:Localities,name:'Localities'},
+    { title:'New projects/Societies',data:NewProjectSocity,name:'New Project/Societies'},
+    { title:'When are you looking to rent',data:RentOffeceSpaceLooking,name:'looking'},
+    { title:'Key office specifications',data:RentkeyOfficeSpace,name:'Office'},
+    { title:'Number of cabins',data:RentnumberCabin,name:'Number of cabin'},
+    { title:'Number of washrooms',data:RentnumberWashroom,name:'Washroom'},
+    { title:'Parking',data:Rentparking,name:'Parking'},
+    {title:'Facilities',data:RentFacilities,name:'Facilities'},
+    {title:'Amenities',data:RentAmenties,name:'Amenities'},
+    {title:'Floor Preference',data:RentFloorPrefrence,name:'floor'},
+    {title:'Located on',data:RentLocated,name:'Rent Located'},
+    {title:'Office spread over',data:RentSperadOver,name:'Spred over'},
+    { title: 'Verified Properties', data: 'input', name: 'verified properties' },
+    { title: 'Properties with photos', data: 'input', name: 'verified properties' },
+    { title: 'Properties with videos', data: 'input', name: 'verified properties' },
+    { title: 'Posted by',data:postedBy, name:'Posted'},
+    { title: 'Age of Property', data: propertyAge, name: 'Age of Property', useref: useRef(null) },
+  ]
+
+   const [propertyFilterData,setPropertyFilterData] = useState(ResidentalAppartment);
+
+  function mobilFilterOpen(e) {
+    if (propertyFilterData[e.currentTarget.dataset.key].data != 'input') {
+      setIsMobileOpen(true);
+      setMobileOpenIndex(e.currentTarget.name);
+    } else {
       setMobileOpenIndex('');
     }
   }
@@ -188,46 +424,60 @@ export default function Propertyfilter() {
     <div className="sticky top-0">
       {/* Desktop Sidebar */}
       <aside className=" propertyListingFilter hidden md:block  p-2 space-y-6 bg-white">
-        {/* <div>
-          <h2 className="font-semibold text-lg mb-2">Type of property</h2>
-          <div className="space-y-2">
-            <label className="block">
-              <input type="radio" name="type" defaultChecked /> Residential Apartment
-            </label>
-            <label className="block">
-              <input type="radio" name="type" /> Residential Land
-            </label>
-            <label className="block">
-              <input type="radio" name="type" /> Independent House/Villa
-            </label>
-            <label className="block">
-              <input type="radio" name="type" /> Builder Floor
-            </label>
-          </div>
-        </div>
 
-        <div>
-          <h2 className="font-semibold text-lg mb-2">No. of Bedrooms</h2>
-          <div className="flex flex-wrap gap-2">
-            {["1 BHK", "2 BHK", "3 BHK", "4 BHK", "5 BHK"].map((b, i) => (
-              <button
-                key={i}
-                className="px-3 py-1 border rounded hover:bg-gray-100"
-              >
-                {b}
-              </button>
-            ))}
-          </div>
-        </div> */}
         <div className=' size-fit lg:flex'>
           <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8  ">
             <div className="flex items-center justify-between mb-4">
               <h5 className=" font-samibold leading-none text-gray-900 ">Apply Filters</h5>
-              <a href="#" className="text-sm font-medium text-blue-600 hover:underline ">
+              <a href="#" className={`${selectedFilters == {} ? 'hidden' : "text-sm font-medium text-blue-600 hover:underline "}`} onClick={() => setSelectedFilters({})}>
                 Clear all
               </a>
+
+
             </div>
-            <Filterbutton btname="1bhk" />
+            <div className="flex flex-wrap gap-2 mt-4">
+              {Object.keys(selectedFilters).map(key => {
+                const value = selectedFilters[key];
+
+                // Range filter chip
+                if (Array.isArray(value) && value.length === 2 && typeof value[0] === "number") {
+                  return (
+                    <button
+                      key={key}
+                      className="flex items-center gap-2 bg-blue-100 text-blue-700 px-3 py-1 rounded-full border"
+                      onClick={() =>
+                        setSelectedFilters(prev => {
+                          const copy = { ...prev };
+                          delete copy[key];
+                          return copy;
+                        })
+                      }
+                    >
+                      {key}: ₹{value[0].toLocaleString()} - ₹{value[1].toLocaleString()}
+                      <FaXmark className="text-xs" />
+                    </button>
+                  );
+                }
+
+                // Normal filter chips
+                return value.map((v, i) => (
+                  <button
+                    key={`${key}-${i}`}
+                    className="flex items-center gap-2 bg-blue-100 text-blue-700 px-3 py-1 rounded-full border"
+                    onClick={() =>
+                      setSelectedFilters(prev => ({
+                        ...prev,
+                        [key]: prev[key].filter(x => x !== v),
+                      }))
+                    }
+                  >
+                    {v}
+                    <FaXmark className="text-xs" />
+                  </button>
+                ));
+              })}
+
+            </div>
             <div className="flow-root">
               <ul role="list" className="divide-y divide-gray-200 ">
                 {propertyFilterData.map((item, index) => {
@@ -259,9 +509,15 @@ export default function Propertyfilter() {
                       {/* BODY SECTION (all open initially, toggle individually) */}
                       {openItems[index] && (
                         <div className="mt-2">
-                          {item.data === "Rangeslider" && <Rangeslider />}
+                          {item.data === "Rangeslider" && <Rangeslider MIN={item.min} MAX={item.max} filterKey={item.name} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />}
                           {Array.isArray(item.data) && (
-                            <Addfilterbutton filterButtonname={item.data} />
+                            <Addfilterbutton
+                              filterButtonname={item.data}
+                              filterKey={item.name}
+                              selectedFilters={selectedFilters}
+                              setSelectedFilters={setSelectedFilters}
+                            />
+
                           )}
                         </div>
                       )}
@@ -277,34 +533,38 @@ export default function Propertyfilter() {
       </aside>
 
       {/* Mobile Button */}
-      <button
-        className="md:hidden h-[fit-content]  px-2 py-1 m-5 text-sm bg-blue-600 text-white rounded-lg shadow-lg"
-        onClick={() => setIsMobileOpen(true)}
-      >
-        <MdFilterAlt />
-      </button>
-      <div className='md:hidden flex justify-between my-5 overflow-hidden'>
-        <div className='overscroll-none overflow-auto'>
-          <div className='static lg:hidden'>
-            <div className="flex">
-              {propertyFilterData.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <button type="button" data-key={index} name={item.name} onClick={mobilFilterOpen} className="text-gray w-[max-content] flex justify-between px-3 py-1  me-2 mb-2 text-xs font-medium text-gray-900 bg-white rounded-xl border border-gray-300 outline-none">
-                      {item.title}
-                    </button>
-                  </div>
-                )
-              })}
+
+      <div className="flex">
+        <button
+          className="md:hidden h-[fit-content]  px-2 py-1 m-5 text-sm bg-blue-600 text-white rounded-lg shadow-lg"
+          onClick={() => setIsMobileOpen(true)}
+        >
+          <MdFilterAlt />
+        </button>
+        <div className='md:hidden flex justify-between my-5 overflow-hidden'>
+          <div className='overscroll-none overflow-auto'>
+            <div className='static lg:hidden'>
+              <div className="flex">
+                {propertyFilterData.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <button type="button" data-key={index} name={item.name} onClick={mobilFilterOpen} className="text-gray w-[max-content] flex justify-between px-3 py-1  me-2 mb-2 text-xs font-medium text-gray-900 bg-white rounded-xl border border-gray-300 outline-none">
+                        {item.title}
+                      </button>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className='flex w-[10vw] justify-around hidden'>
+              <h5>Short By</h5>
+
             </div>
           </div>
         </div>
-        <div>
-          <div className='flex w-[10vw] justify-around hidden'>
-            <h5>Short By</h5>
 
-          </div>
-        </div>
       </div>
 
 
@@ -357,9 +617,14 @@ export default function Propertyfilter() {
                     <h3 className="text-lg font-semibold">{item.title}</h3>
 
                     {/* You can render details here */}
-                    {item.data === "Rangeslider" && <Rangeslider />}
+                    {item.data === "Rangeslider" && <Rangeslider MIN={0} MAX={100} filterKey={item.name} selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />}
                     {Array.isArray(item.data) && (
-                      <Addfilterbutton filterButtonname={item.data} />
+                      <Addfilterbutton
+                        filterButtonname={item.data}
+                        filterKey={item.name}
+                        selectedFilters={selectedFilters}
+                        setSelectedFilters={setSelectedFilters}
+                      />
                     )}
                   </div>
                 ))}

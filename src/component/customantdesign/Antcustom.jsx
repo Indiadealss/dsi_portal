@@ -17,7 +17,7 @@ const handleScrollToDealer = (y) => {
     top: Number(y), // whatever position "Dealer Details" is located
     behavior: 'smooth',
   });
-  console.log(y);
+  // console.log(y);
 
   
 };  

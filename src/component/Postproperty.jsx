@@ -57,7 +57,7 @@ export const Postproperty = () => {
     const [itsType,setItsType] = useState('');
 
     useEffect(() => {
-        console.log(selection);
+        // console.log(selection);
         
         if(selection === 'residential'){
             if(lookSelection === "sell"){
@@ -75,21 +75,21 @@ export const Postproperty = () => {
 
 
     function lookButton(e) {
-        // console.log(e.currentTarget.name);
+        // // console.log(e.currentTarget.name);
         setLookSelection(e.currentTarget.name)
        
     }
 
     const resCom = (event) => {
         setSelection(event.target.value);
-        console.log("Selected:", event.target.value);
+        // console.log("Selected:", event.target.value);
      
     };
 
     function redintalTypes  (event) {
-        console.log('hello',event.target.name);
+        // console.log('hello',event.target.name);
         setItsType(event.target.name);
-        console.log(itsType);
+        // console.log(itsType);
         
     }
     return (

@@ -16,6 +16,8 @@ import { useParams } from 'react-router-dom';
 import { getproperty } from '../api/api';
 import { useDispatch } from 'react-redux';
 import { setProperty } from './Redux/propertyidSlice';
+import Featuredetails from './customcomponent/Features';
+import Considerpropety from './customcomponent/Considerproperty';
 
 const Propertydetails = () => {
 
@@ -24,13 +26,13 @@ const Propertydetails = () => {
 
 const handleDealerPosition = (y) => {
      setDealer(Number(y)) 
-     console.log(y);
+     // console.log(y);
      
    }
 
    const handleSimalerPosition = (y) => {
       setSmilarProper(Number(y))
-      console.log(Number(y),"let's see");
+      // console.log(Number(y),"let's see");
       
    }
    const buttonNames = [
@@ -155,16 +157,19 @@ const handleDealerPosition = (y) => {
       <Placesnearby property={propertys} />
    </div>
    <div className='mt-10'>
+      <Considerpropety property={propertys} />
+   </div>
+   <div className='mt-10'>
     <Propertytransation />
    </div>
    <div className='my-5'>
       <Aboutproperty />
    </div>
-   <div className='my-4'>
+   {/* <div className='my-4'>
       <Furnshingdetails furnshingdetails={furnshingdetails} title={'Semifurnished'} subtitle={'Furnishing Details'} rows={6} />
-   </div>
+   </div> */}
    <div className='my-4'>
-      <Furnshingdetails furnshingdetails={features} title={'Semifurnished'} rows={6}/>
+      <Featuredetails furnshingdetails={features} title={'Semifurnished'} rows={6}/>
    </div>
    </div>
    

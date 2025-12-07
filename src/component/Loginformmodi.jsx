@@ -21,7 +21,7 @@ const Loginformmodi = ({ closeModal }) => {
       const handleSend = async () => {
         try{
             const res = await sentOtp(mobileNo);
-            console.log("otp sent:",res.status);
+            // console.log("otp sent:",res.status);
             if(res.status === 200) {
               setOtpSent(true)
             }

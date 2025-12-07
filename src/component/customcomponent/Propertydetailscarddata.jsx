@@ -57,10 +57,10 @@ const Propertydetailscarddata = ({ property }) => {
                                 <p>{detail.price || 'N/A'} + Govt Charges & Tax</p>
                             </div>
                         </td>
-                        <td style={{ paddingBottom: '1rem' }}>
+                        <td style={{ paddingBottom: '1rem' , paddingLeft:'1rem' }}>
                             <div>
                                 <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Address</span></p>
-                                <p>{JSON.parse(detail.location)[0]?.Address || 'N/A'}</p>
+                                <p>{JSON.parse(detail.location)?.Address || 'N/A'}</p>
                             </div>
                         </td>
                     </tr>
@@ -70,7 +70,7 @@ const Propertydetailscarddata = ({ property }) => {
                             <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Floor Number</span></p>
                             <p>{detail.floor || 'N/A'} / {detail.totalfloor || 'N/A'} Floors</p>
                         </td>
-                        <td style={{ paddingBottom: '1rem' }}>
+                        <td style={{ paddingBottom: '1rem', paddingLeft: '1rem' }}>
                             <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Facing</span></p>
                             <p>{detail.propertyfacing || 'N/A'}</p>
                         </td>
@@ -90,7 +90,7 @@ const Propertydetailscarddata = ({ property }) => {
                                 </p>
                             </td>
                         )}
-                        <td style={{ paddingBottom: '1rem' }}>
+                        <td style={{ paddingBottom: '1rem',paddingLeft:'1rem' }}>
                             <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Property Age</span></p>
                             <p>{detail.propertyage || 'N/A'}</p>
                         </td>

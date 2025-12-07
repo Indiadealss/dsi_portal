@@ -557,11 +557,11 @@ export default function Navbar() {
           `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
         );
         const data = await res.json();
-        console.log(data);
+        // console.log(data);
         
         setData(data);
       } catch (error) {
-        console.log("Error fetching location:", error);
+        // console.log("Error fetching location:", error);
       }
     } else {
       setData([]);
@@ -643,7 +643,7 @@ export default function Navbar() {
     
     
     const handleScroll = () => {
-      console.log(window.scrollY);
+      // console.log(window.scrollY);
       
        if(window.scrollY > 257 || location.pathname !== '/' ){
         setScroll(true);
@@ -907,6 +907,8 @@ export default function Navbar() {
     </Link>
   </Button>
 
+    
+  
   {/* Notification Icon */}
   <Button
     type="text"

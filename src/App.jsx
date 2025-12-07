@@ -18,23 +18,25 @@ import { getUserDetatils } from "./api/api";
 import { updateField } from "./component/Redux/propertySlice";
 import Buyservice from "./component/Buyservice";
 import Projectdetail from "./component/Projectdetail";
+import Addsomething from "./component/customantdesign/Addsomething";
 
 function App() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
   
 
    useEffect(() => {
     getUserDetatils()
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data.usedetails);
+          // console.log(res.data.usedetails);
          const { name, email, mobile,_id } = res.data.usedetails;
          
+          console.log(_id);
           
-          dispatch(setUser({name,email,mobile,_id})); // populate Redux
+          dispatch(setUser({name,email,mobile,id:_id})); // populate Redux
           dispatch(updateField({owner:_id,}))
         }
       })
@@ -54,6 +56,7 @@ function App() {
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
+    {path:"/addSomething-9890",element:<Addsomething />},
     {path:"/do/buyservie", element:<Buyservice />},
     {path:"/postproperty", element:<Postpropertyform />}
   ]);

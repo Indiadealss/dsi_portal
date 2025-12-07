@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Custominputserchbox from '../customantdesign/Custominputserchbox';
@@ -6,6 +6,9 @@ import { IoIosAdd, IoIosArrowDown } from "react-icons/io";
 import { Rangeslider } from '../Rangeslider';
 import { Addfilterbutton } from '../Addfilterbutton';
 import { Link } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateFilter } from '../Redux/filterSlice';
+import { Ariaringslider } from '../Ariaringslider';
 
 const Searchbox = () => {
   const [active, setActive] = useState('buy');
@@ -13,14 +16,41 @@ const Searchbox = () => {
   const [showDropdown2, setShowDropdown2] = useState(false);
   const [filtername, setFiltername] = useState('All Residental');
   const [buyCommercialtype, setBuyCommercialtype] = useState('Buy')
-
+  const [selectedFilters,setSelectedFilters] = useState({});
   const [searButton, setsearButton] = useState(true)
   const [secondfiltername, setSecondFiltername] = useState('');
-
+  const [selectFilter,setSelectFilter] = useState([])
   const [buttonName, setButtonName] = useState('');
 
+  const dispatch = useDispatch();
+
+  const propertyType = useSelector((state) => state.filterSlice)
+
+  useEffect(() => {
+    dispatch(updateFilter({propertyType:selectFilter}))
+  },[selectFilter])
+
+  useEffect(() => {
+    dispatch(updateFilter({selectedFilters}))
+  },[selectedFilters])
 
 
+  useEffect(() => {
+    setSelectFilter([])
+    setSelectedFilters({})
+  },[active])
+
+
+const selectPropertyType = (label) => {
+  setSelectFilter((prev) =>
+      prev.includes(label)
+        ? prev.filter((item) => item !== label) // uncheck
+        : [...prev, label] // check
+    );
+    console.log(selectFilter,'j');
+    console.log(propertyType);
+    
+}
 
   const button = [
     { key: "buy", label: "Buy" },
@@ -35,10 +65,10 @@ const Searchbox = () => {
   const noBedroom = [
     { name: '1RK' },
     { name: '2 BHK' },
-    { name: '2 BHK' },
-    { name: '2 BHK' },
-    { name: '2 BHK' },
-    { name: '2 BHK' },
+    { name: '3 BHK' },
+    { name: '4 BHK' },
+    { name: '5 BHK' },
+    { name: '6 BHK' },
   ]
 
   const constructionStatus = [
@@ -120,7 +150,7 @@ const Searchbox = () => {
       setSecondFiltername('');
     }
     else if (e.currentTarget.name === 'postProperty') {
-      console.log(e.currentTarget.name);
+      // console.log(e.currentTarget.name);
     }
 
   }
@@ -203,13 +233,13 @@ const Searchbox = () => {
         {(active === 'buy' || active === 'rent' || active === 'commercial' || active === 'plots/Land' || active === 'projects') && showDropdown && (
           <div className=" top-full left-0 w-full bg-white shadow-lg opacity-100 rounded-xl p-5 z-0">
             <div className={`${active === 'buy' || active === 'rent' ? '' : 'hidden'}`}>
-              <div className="text-right me-6 cursor-pointer">
-                <button className='text-[#022c6f] font-bold' onClick={() => setShowDropdown(false)}>Clear</button>
+              <div className="text-right me-6 ">
+                <button className='text-[#022c6f] font-bold cursor-pointer' onClick={() => setShowDropdown(false)}>Clear</button>
               </div>
               <div className={`${!searButton ? 'hidden' : "grid grid-cols-3 gap-4 my-4"}`}>
                 {menuItems.map((label, i) => (
                   <label key={i} className="flex items-center gap-2">
-                    <input type="checkbox" />
+                    <input type="checkbox" checked={selectFilter.includes(label)} onChange={() => selectPropertyType(label)} />
                     <span className='text-xs font-medium text-gray-500'>{label}</span>
                   </label>
                 ))}
@@ -225,18 +255,18 @@ const Searchbox = () => {
                 <button type='button' name='postedby' onClick={(e) => { setsearButton(false); setButtonName(e.target.name) }} className='border border-gray-300 bg-none rounded-xl cursor-pointer px-3 mx-2  flex h-[max-content]'>Posted By <span className='my-[4px] ms-[4px] text-xl font-normal'><IoIosArrowDown /></span></button>
               </div>
               <div className={`${buttonName === 'budget' ? 'block mt-5' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Rangeslider filterKey='bud' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={propertyType.MAXPRICE} MIN={0} />
               </div>
               <div className={`${buttonName === 'bedroom' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={noBedroom} />
+                <Addfilterbutton filterButtonname={noBedroom} filterKey='Bedroom' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
 
               <div className={`${buttonName === 'constructionstatus' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={constructionStatus} />
+                <Addfilterbutton filterButtonname={constructionStatus} filterKey='construction Status' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
 
               <div className={`${buttonName === 'postedby' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={postedBy} />
+                <Addfilterbutton filterButtonname={postedBy} filterKey='postedBy' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
             </div>
             <div className={`${active === 'commercial' ? 'block' : 'hidden'}`}>
@@ -304,18 +334,18 @@ const Searchbox = () => {
                 <button type='button' name='postedby' onClick={(e) => { setsearButton(false); setButtonName(e.target.name) }} className={`${buyCommercialtype === 'invest' ? 'hidden':'border border-gray-300 bg-none rounded-xl cursor-pointer px-3 mx-2  flex h-[max-content]'}`}>Posted By <span className='my-[4px] ms-[4px] text-xl font-normal'><IoIosArrowDown /></span></button>
               </div>
               <div className={`${buttonName === 'budget' ? 'block mt-5' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Rangeslider filterKey='bud' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={propertyType.MAXPRICE} MIN={0} />
               </div>
               <div className={`${buttonName === 'area' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Ariaringslider filterKey='aria' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={10000} MIN={0} />
               </div>
 
               <div className={`${buttonName === 'constructionstatus' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={constructionStatus} />
+                <Addfilterbutton filterButtonname={constructionStatus}  filterKey='construction Status' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
 
               <div className={`${buttonName === 'postedby' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={postedBy} />
+                <Addfilterbutton filterButtonname={postedBy}  filterKey='postedBy' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
             </div>
             <div className={`${active === 'plots/Land' ? 'block' : 'hidden'}`}>
@@ -346,14 +376,14 @@ const Searchbox = () => {
                 <button type='button' name='postedby' onClick={(e) => { setsearButton(false); setButtonName(e.target.name) }} className='border border-gray-300 bg-none rounded-xl cursor-pointer px-3 mx-2  flex h-[max-content]'>Posted By <span className='my-[4px] ms-[4px] text-xl font-normal'><IoIosArrowDown /></span></button>
               </div>
               <div className={`${buttonName === 'budget' ? 'block mt-5' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Rangeslider filterKey='bud' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={propertyType.MAXPRICE} MIN={0} />
               </div>
               <div className={`${buttonName === 'area' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Ariaringslider filterKey='aria' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={10000} MIN={0} />
               </div>
 
               <div className={`${buttonName === 'postedby' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={postedBy} />
+                <Addfilterbutton filterButtonname={postedBy} filterKey='postedBy' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
 
 
@@ -376,10 +406,10 @@ const Searchbox = () => {
                 <button type='button' name='bedroom' onClick={(e) => { setButtonName(e.target.name); setsearButton(false); }} className='border border-gray-300 bg-none rounded-xl cursor-pointer px-3 mx-2  flex h-[max-content]'>Bedroom <span className='my-[4px] ms-[4px] text-xl font-normal'><IoIosArrowDown /></span></button>
               </div>
               <div className={`${buttonName === 'budget' ? 'block mt-5' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Rangeslider filterKey='bud' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={propertyType.MAXPRICE} MIN={0} />
               </div>
               <div className={`${buttonName === 'bedroom' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={noBedroom} />
+                <Addfilterbutton filterButtonname={noBedroom} filterKey='noBedroom' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
 
             </div>
@@ -394,7 +424,7 @@ const Searchbox = () => {
               <div className={`${buyCommercialtype !== 'buy' ? 'hidden' : "grid grid-cols-2 gap-4 my-4 w-[50%]"}`}>
                 {secondmenuItems.map((label, i) => (
                   <label key={i} className="flex items-center gap-2">
-                    <input type="checkbox" />
+                    <input type="checkbox" checked={selectFilter.includes(label)} onChange={() => selectPropertyType(label)} />
                     <span className='text-xs font-medium text-gray-500'>{label}</span>
                   </label>
                 ))}
@@ -405,7 +435,7 @@ const Searchbox = () => {
                   <div className={`${!searButton ? 'hidden' : "grid grid-cols-1 gap-4 my-4 h-[10vw] overflow-auto"}`}>
                     {investOptions.map((label, i) => (
                       <label key={i} className="flex items-center gap-2">
-                        <input type="checkbox" />
+                        <input type="checkbox" checked={selectFilter.includes(label)} onChange={() => selectPropertyType(label)}/>
                         <span className='text-xs font-medium text-gray-500'>{label}</span>
                       </label>
                     ))}
@@ -460,14 +490,14 @@ const Searchbox = () => {
                 <button type='button' name='postedby' onClick={(e) => { setsearButton(false); setButtonName(e.target.name) }} className='border border-gray-300 bg-none rounded-xl cursor-pointer px-3 mx-2  flex h-[max-content]'>Posted By <span className='my-[4px] ms-[4px] text-xl font-normal'><IoIosArrowDown /></span></button>
               </div>
               <div className={`${buttonName === 'budget' ? 'block mt-5' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Rangeslider filterKey='bud' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={propertyType.MAXPRICE} MIN={0} />
               </div>
               <div className={`${buttonName === 'area' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Rangeslider lethid={true} />
+                <Ariaringslider filterKey='Aria' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} MAX={10000} MIN={0} />
               </div>
 
               <div className={`${buttonName === 'postedby' ? 'flex mt-5 mx-10' : 'hidden'}`}>
-                <Addfilterbutton filterButtonname={postedBy} />
+                <Addfilterbutton filterButtonname={postedBy} filterKey='postedBy' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
               </div>
             </div>
              </div>

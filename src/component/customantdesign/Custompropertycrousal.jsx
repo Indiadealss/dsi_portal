@@ -2,7 +2,7 @@ import React from 'react'
 import { Carousel } from 'antd'
 
 const Custompropertycrousal = ({images}) => {
-    console.log(images);
+    // console.log(images);
     const contentStyle = {
         height: '160px',
         color:'#fff',

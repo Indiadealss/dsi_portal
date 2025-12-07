@@ -37,6 +37,27 @@ export const Postbasicdetailsform = ({ setValidator }) => {
             { title: 'farmhouse', name: 'farmhouse' },
             { title: 'other', name: 'other' }
         ]
+
+        const projectResidental = [
+            {title:'1 Bhk', name:'1 Bhk'},
+            {title:'2Bhk', name:'2 Bhk'},
+            {title:'3 Bhk', name:'3 Bhk'},
+            {title:'4 Bhk', name:'4 Bhk'},
+            {title:'5 Bhk', name:'5 Bhk'},
+            {title:'1 RK', name:'1 Rk'},
+            {title:'Studio', name:'Studio Appartment'},
+            {title:'Independent House/Villa', name:'Independent House/Villa'},
+            {title:'Farmhouse',name:'Farmhouse'}
+
+        ]
+
+        const commericalProject = [
+            {title:'Office',name:'Office'},
+            {title:'Ploat/Land',name:'Ploat/Land'},
+            {title:'Retail',name:'Retail'},
+            {title:'Storage',name:'Storage'},
+            {title:'Industry',name:'Industry'}
+        ]
     
         const commercialButton = [
             { title: 'Office', name: 'office' },
@@ -51,19 +72,40 @@ export const Postbasicdetailsform = ({ setValidator }) => {
         const [selection, setSelection] = useState("");
         const [propertyTypes, setPropertyTypes] = useState(sell);
         const [itsType, setItsType] = useState('');
+
+        const [units, setUnits] = useState([
+  { bhk: "", areaMin: "", areaMax: "", priceMin: "", priceMax: "" }
+]);
+
+
+const handleUnitChange = (index, field, value) => {
+  const updated = [...units];
+  updated[index][field] = value;
+  setUnits(updated);
+  dispatch(updateField({ unitData: updated }));
+};
+
+const addUnitRow = () => {
+  setUnits([
+    ...units,
+    { bhk: "", areaMin: "", areaMax: "", priceMin: "", priceMax: "" }
+  ]);
+};
+
     
         const dispatch = useDispatch();
         const category = useSelector((state) => state.property.data.category);
         const { data, errors } = useSelector((state) => state.property);
         function lookButton(e) {
-            // console.log(e.currentTarget.name);
+            // // console.log(e.currentTarget.name);
             setLookSelection(e.currentTarget.name)
               dispatch(updateField({ purpose: e.currentTarget.name }));
         }
+        
     
     
         useEffect(() => {
-            console.log(selection);
+            // console.log(selection);
     
             if (selection === 'residential') {
                 if (lookSelection === "sell") {
@@ -73,10 +115,20 @@ export const Postbasicdetailsform = ({ setValidator }) => {
                 } else if (lookSelection === "pg") {
                     setPropertyTypes(pg)
                 }
+                else if(lookSelection === 'Project'){
+                    setPropertyTypes(projectResidental)
+                }
             }
             else if (selection === 'commercial') {
-                setPropertyTypes(commercialButton)
+                if(lookSelection === "sell" || lookSelection === "rent"){
+                    setPropertyTypes(commercialButton)
+                }
+                else if(lookSelection === 'Project'){
+                    setPropertyTypes(commericalProject)
+                }
             }
+
+            
         }, [selection, lookSelection])
     
         const commericalMap = {
@@ -163,7 +215,7 @@ export const Postbasicdetailsform = ({ setValidator }) => {
   }
 
   const user = useSelector(state => state.user);
-  console.log(user.mobile);
+  // console.log(user.mobile);
   
   
 
@@ -193,12 +245,54 @@ export const Postbasicdetailsform = ({ setValidator }) => {
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap">
-                                    {propertyTypes.map((item, index) => {
-                                        return (
-                                            <button key={index} name={item.name} className={`${itsType === item.name ? 'bg-gray-100 font-normal text-gray-500  cursor-pointer px-2 py-1 m-1  rounded-full text-sm mx-1' : 'bg-white border border-gray-300 font-normal text-gray-500  cursor-pointer px-2 py-1 m-1  rounded-full text-sm mx-1'}`} onClick={redintalTypes} >{item.title}</button>
-                                        )
-                                    })}
-                                </div>
+
+    {lookSelection === "Project" ? (
+        // ✅ CHECKBOX MODE — user can select multiple property types
+        propertyTypes.map((item, index) => (
+            <label
+                key={index}
+                className="flex items-center bg-white border border-gray-300 px-3 py-1 m-1 rounded-full text-sm cursor-pointer"
+            >
+                <input
+                    type="checkbox"
+                    name={item.name}
+                    value={item.name}
+                    checked={Array.isArray(itsType) && itsType.includes(item.name)}
+                    onChange={(e) => {
+                        let updated = Array.isArray(itsType) ? [...itsType] : [];
+
+                        if (e.target.checked) {
+                            updated.push(item.name);
+                        } else {
+                            updated = updated.filter((x) => x !== item.name);
+                        }
+
+                        setItsType(updated);
+                        dispatch(updateField({ propertyType: updated }));
+                    }}
+                    className="mr-2"
+                />
+                {item.title}
+            </label>
+        ))
+    ) : (
+        // ✅ BUTTON MODE — normal behavior
+        propertyTypes.map((item, index) => (
+            <button
+                key={index}
+                name={item.name}
+                className={`${itsType === item.name
+                    ? 'bg-gray-100 font-normal text-gray-500 cursor-pointer px-2 py-1 m-1 rounded-full text-sm'
+                    : 'bg-white border border-gray-300 font-normal text-gray-500 cursor-pointer px-2 py-1 m-1 rounded-full text-sm'
+                }`}
+                onClick={redintalTypes}
+            >
+                {item.title}
+            </button>
+        ))
+    )}
+</div>
+
                                 <div className={`${commericalSpace.length > 0 ? 'my-5 block' : 'hidden'}`}>
                                     <h3 className='font-medium'>What Kind of office is it</h3>
                                     <div className='flex flex-wrap'>

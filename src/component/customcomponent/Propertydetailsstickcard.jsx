@@ -9,7 +9,7 @@ const Propertydetailsstickcard = ({buttonNames}) => {
 
     let locationData = null;
     const property = useSelector((state) => state.propertyid.data);
-    console.log(property);
+    // console.log(property);
     
 
     
@@ -35,6 +35,9 @@ const Propertydetailsstickcard = ({buttonNames}) => {
 }
 locationData = JSON.parse(property.location);
 
+// console.log(locationData);
+
+
 
     const propertyDetails = {
         price: formatNumber(property.price),
@@ -42,7 +45,7 @@ locationData = JSON.parse(property.location);
         bedrooms: property.bedroom,
         bathrooms: property.bathroom,
         propertyType: property.availabestatus + ' ' + property.commercialType+ ' for ' + property.purpose,
-        location: locationData[0].City,
+        location: locationData.City,
         memberSince: new Date(property.updatedAt).toLocaleDateString()
     }
 

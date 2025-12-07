@@ -33,7 +33,7 @@ const Smallmain = ({ title, data }) => {
 
     const newCards = data.map((item) => {
       const coverImages = item.images?.filter((img) => img.type === "cover") || [];
-      console.log(item._id);
+      // console.log(item._id);
       
       const coverSrc =
         coverImages.length > 0

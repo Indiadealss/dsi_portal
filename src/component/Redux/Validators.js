@@ -71,9 +71,9 @@ function validateProfileProperty(data = {}) {
     errors.noBedroom = "Please select number of bedrooms.";
   }
 
-  if (!data.noBathroom) {
-    errors.noBathroom = "Please select number of bathrooms.";
-  }
+  // if (!data.noBathroom) {
+  //   errors.noBathroom = "Please select number of bathrooms.";
+  // }
 
   // Balconies optional, no check
 

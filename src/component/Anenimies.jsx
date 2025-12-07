@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import { MdAddCircleOutline } from "react-icons/md";
 import { GrSubtractCircle } from "react-icons/gr";
+import { getLocalAdvantages } from '../api/api';
 
 
 
@@ -48,6 +49,17 @@ export const Anenimies = ({setValidator}) => {
     const [stove,setStove] = useState(false);
     const [furnisherAvailable,setFurnisherAvailable] = useState([]);
     const [brokerageCharge,setBrokerageCharge] = useState('');
+
+
+    const  getLocationIcon =  async (name) => {
+      try {
+      const response = await getLocalAdvantages(name)
+      // // console.log(response.data);
+      
+      } catch (error) {
+        // console.log(error);
+      }
+  }
 
 
     useEffect(() => {
@@ -100,6 +112,32 @@ export const Anenimies = ({setValidator}) => {
     setDropdown(false);
   }
   
+    const numberToWords = (num) => {
+  if (!num) return "";
+
+  const a = [
+    "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+    "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+    "Eighteen", "Nineteen"
+  ];
+
+  const b = [
+    "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
+    "Eighty", "Ninety"
+  ];
+
+  const convert = (n) => {
+    if (n < 20) return a[n];
+    if (n < 100) return b[Math.floor(n / 10)] + " " + a[n % 10];
+    if (n < 1000) return a[Math.floor(n / 100)] + " Hundred " + convert(n % 100);
+    if (n < 100000) return convert(Math.floor(n / 1000)) + " Thousand " + convert(n % 1000);
+    if (n < 10000000) return convert(Math.floor(n / 100000)) + " Lakh " + convert(n % 100000);
+    return convert(Math.floor(n / 10000000)) + " Crore " + convert(n % 10000000);
+  };
+
+  return convert(num).trim();
+};
+
 
      useEffect(() => {
               if (setValidator) {
@@ -277,7 +315,7 @@ export const Anenimies = ({setValidator}) => {
       },
     ]
 
-    const sobufeature = [
+    const sobufeatur = [
       {
         name:'Water softening plant',
         label:'water softening plant'
@@ -300,6 +338,80 @@ export const Anenimies = ({setValidator}) => {
       }
     ]
 
+    const location = useSelector((state) => state.property.data.location)
+
+    // console.log(location,'k');
+    
+
+   const autoFillNearbyPlace = async (selected) => {
+  if (!window.google) return;
+
+  // Get property coordinates first
+  const geocodeRes = await fetch(
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${location[0].Address}&key=AIzaSyDWULr4OlxjUlSpoTR8_haquhxRJx0ynEo`
+  );
+  const geocodeData = await geocodeRes.json();
+  const { lat, lng } = geocodeData.results[0].geometry.location;
+
+  // console.log("Coordinates:", lat, lng);
+
+  // Search nearest place by type (school, metro, hospital, etc.)
+  const service = new window.google.maps.places.PlacesService(document.createElement("div"));
+
+  
+
+  service.nearbySearch(
+    {
+      location: { lat, lng },
+      radius: 3000, // 3km radius (adjust)
+      keyword: selected.name, // better than type sometimes
+      type: selected.type
+    },
+    (results, status) => {
+      if (status !== "OK" || !results.length) {
+        // console.log("No nearby match found.");
+        return;
+      }
+
+      const nearest = results[0];
+
+      // console.log("Nearest:", nearest.name);
+
+      // Now calculate actual road distance
+      const distanceService = new window.google.maps.DistanceMatrixService();
+
+      distanceService.getDistanceMatrix(
+        {
+          origins: [{ lat, lng }],
+          destinations: [nearest.geometry.location],
+          travelMode: "DRIVING"
+        },
+        (response, status) => {
+          if (status === "OK") {
+            const distanceText = response.rows[0].elements[0].distance.text;
+
+            // console.log("Distance:", distanceText);
+
+            // Update state entry
+            setLocatadavance(prev =>
+              prev.map(item =>
+                item.type === selected.type
+                  ? { ...item, propertyName: nearest.name, distance: distanceText }
+                  : item
+              )
+            );
+          }
+        }
+      );
+    }
+  );
+};
+
+
+    const sobufeature = useSelector((state) => state.feature.sobufeature);
+   
+    // console.log(typeof(sobufeature),sobufeatur,sobufeature,typeof(sobufeature));
+    
     const adfeature = [
       {
         name:'Separate entry for servant room',
@@ -430,35 +542,59 @@ export const Anenimies = ({setValidator}) => {
     const locationAdvantages = [
       {
         name:'Close to Metro Station',
-        label:'Close to Metro Station'
+        label:'Close to Metro Station',
+        type: 'metro',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to School',
-        label:'Close to School'
+        label:'Close to School',
+        type:'school',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to Hospital',
-        label:'Close to Hospital'
+        label:'Close to Hospital',
+        type:'hospital',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to Market',
-        label:'Close to Market'
+        label:'Close to Market',
+        type:'market',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to Railway Station',
-        label:'Close to Railway Station'
+        label:'Close to Railway Station',
+        type:'railway station',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to Airport',
-        label:'Close to Airport'
+        label:'Close to Airport',
+        type:'airport',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to Mall',
-        label:'Close to Mall'
+        label:'Close to Mall',
+        type:'mall',
+        propertyName: "",
+  distance: ""
       },
       {
         name:'Close to Highway',
-        label:'Close to Highway'
+        label:'Close to Highway',
+        type:'highway',
+        propertyName: "",
+  distance: ""
       }
     ]
   return (
@@ -812,38 +948,72 @@ export const Anenimies = ({setValidator}) => {
         })}
         </div>
         <h3 className='text-xl font-medium my-5'>Location Advantages<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
-        <div
-        className='flex flex-wrap'>
-          {locationAdvantages.map((item,index) => {
-            
-            const isSelected = locatadvance.includes(item.name);
-            return(
-            <button
-            key={index}
-            className={`${isSelected ? "bg-gray-100 mx-2 my-1 p-2 rounded-full cursor-pointer text-sm text-gray-500 font-normal" :"border mx-2 my-1 p-2 rounded-full cursor-pointer border-1 border-gray-400 text-sm text-gray-400 font-normal"}`}
-            onClick={() => {
-              if(isSelected){
-                setLocatadavance(prev => 
-                  prev.filter(name => name !== item.name)
-                )
-              }else{
-                setLocatadavance(prev => [...prev, item.name])
-              }
-            }}
-            >
-              {isSelected 
-                ? (
-                  <CheckOutlined />
-                ) :
-                (
-                  <PlusOutlined />
-                )
-              }
-              {item.name}
-            </button>
-            )
-        })}
-        </div>
+        <div className="flex flex-wrap">
+  {locationAdvantages.map((item, index) => {
+    const existing = locatadvance.find(x => x.name === item.name);
+    const isSelected = Boolean(existing);
+
+    return (
+      <div key={index}>
+        <button
+          className={`${isSelected ? "bg-gray-100 text-gray-500" : "border text-gray-500"} mx-2 my-1 p-2 rounded-full`}
+          onClick={() => {
+  if (isSelected) {
+    // remove if deselected
+    setLocatadavance(prev => prev.filter(x => x.name !== item.name));
+  } else {
+    const newItem = { 
+      name: item.name, 
+      type: item.type, 
+      icon:getLocationIcon(item.type),
+      propertyName: "", 
+      distance: "" 
+    };
+
+    // Add to state
+    setLocatadavance(prev => [...prev, newItem]);
+
+    // Auto detect nearest location & fill input
+    autoFillNearbyPlace(newItem);
+  }
+}}
+
+        >
+          {isSelected ? <CheckOutlined /> : "+"} {item.label}
+        </button>
+
+        {isSelected && (
+          <div className="ml-10 mt-2 space-y-2">
+            <input 
+              type="text" 
+              placeholder={`Nearby ${item.type} name`}
+              className="border p-1 rounded w-[250px]"
+              value={existing.propertyName}
+              onChange={(e) => {
+                setLocatadavance(prev =>
+                  prev.map(x => x.name === item.name ? { ...x, propertyName: e.target.value } : x)
+                );
+              }}
+            />
+
+            <input 
+              type="text" 
+              placeholder="Distance (ex: 4.3 km)"
+              className="border p-1 rounded w-[250px]"
+              value={existing.distance}
+              onChange={(e) => {
+                setLocatadavance(prev =>
+                  prev.map(x => x.name === item.name ? { ...x, distance: e.target.value } : x)
+                );
+              }}
+            />
+          </div>
+        )}
+      </div>
+    );
+  })}
+</div>
+
 
          <div className="relative w-full my-5">
         
@@ -901,7 +1071,10 @@ export const Anenimies = ({setValidator}) => {
         <input type='number' onKeyDown={(e) => {
     if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
   }} onWheel={(e) => e.target.blur()} value={price} onChange={(e) => setPrice(e.currentTarget.value)} className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
-        <input type='text' disabled className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-30 text-xs' placeholder='Price per sq.ft' />
+        <input type='text' disabled className='mx-2  outline-none border border-1 border-gray-200  px-4 my-4 w-30 text-xs' placeholder='Price per sq.ft' />
+        </div>
+        <div>
+          <p><span className='font-medium text-lg'>{numberToWords(Number(price))}</span></p>
         </div>
         <div className='flex flex-wrap my-5'>
           {pricingDetails.map((item,index) =>{

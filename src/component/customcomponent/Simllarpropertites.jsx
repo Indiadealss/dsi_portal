@@ -15,7 +15,7 @@ const Simllarpropertites = ({title, onDealerPosition}) => {
               if(dealerRef.current) {
                   const rect = dealerRef.current.getBoundingClientRect();;
                   const scrollY = window.scrollY + rect.top;
-                  console.log('Dealer Details:',scrollY);
+                  // console.log('Dealer Details:',scrollY);
                   onDealerPosition?.(scrollY);
               }
           },100);

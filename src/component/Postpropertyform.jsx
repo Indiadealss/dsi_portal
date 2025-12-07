@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Postbasicdetailsform } from './Postbasicdetailsform';
 import { Locationbutton } from './Locationbutton';
 import { Profileproperty } from './Profileproperty';
@@ -6,12 +6,15 @@ import { Photovideo } from './Photovideo';
 import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { submitProperty } from '../api/api';
+import { getAllFeature, submitProperty } from '../api/api';
 import { Creaditmodel } from './Creaditmodel';
+import { updateFeatures } from './Redux/featureSlice';
 
 export const Postpropertyform = () => {
+  const dispatch = useDispatch();
   const propertyFirstData = useSelector((state) => state.property.data);
   const [continueNO, setContinueNo] = useState(0);
+  const [sobufeature, setSobuFeature] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [steps, setSteps] = useState([
     { id: 1, label: "Basic Details", status: true, currentForm: Postbasicdetailsform },
@@ -21,7 +24,29 @@ export const Postpropertyform = () => {
     { id: 5, label: "Pricing & Others", status: false, currentForm: Anenimies }
   ]);
 
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const featchFeature = async () => {
+      const getFeature = await getAllFeature();
+      const data = getFeature.data;
+      const datas = getFeature.data.data.map((item,index) => {
+        return(
+          {
+            name:item._id,
+            label:item.name
+          }
+      )})
+  
+      setSobuFeature(datas)
+          
+   }
+   featchFeature()
+  },[])
+
+  useEffect(() => {
+    dispatch(updateFeatures(sobufeature))
+  },[sobufeature])
+
   const validateRef = useRef(null); // stores child validate function
   let FormComponent = steps[continueNO].currentForm;
 
@@ -33,6 +58,9 @@ export const Postpropertyform = () => {
     );
     setContinueNo(prev => prev - 1);
   }
+
+  // const sobufeature = useSelector((state) => state.feature);
+  //         console.log(sobufeature);
 
   function continueButton() {
     

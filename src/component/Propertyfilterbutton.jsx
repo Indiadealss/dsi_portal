@@ -3,7 +3,7 @@ import React from 'react';
 
 export const Propertyfilterbutton = (props) => {
     
-    console.log(props.propertyFilterButtonname);
+    // console.log(props.propertyFilterButtonname);
 
     let filterData = props.propertyFilterButtonname;
     

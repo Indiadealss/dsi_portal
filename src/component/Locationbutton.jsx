@@ -19,6 +19,89 @@ export const Locationbutton = ({ setValidator }) => {
     dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}],projectname:projectname,apartment_name:apartment }));
   },[query,locality,apartment,projectname])
 
+
+
+useEffect(() => {
+  if (!locality) return;
+
+  let isMounted = true;
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${locality}&key=AIzaSyDWULr4OlxjUlSpoTR8_haquhxRJx0ynEo`
+      );
+
+      const data = await res.json();
+      if (!isMounted) return;
+
+      const { lat, lng } = data.results[0].geometry.location;
+
+      // console.log("Coordinates:", lat, lng);
+
+      // ---- FIX: Use PlacesService instead of fetch ----
+      const service = new window.google.maps.places.PlacesService(
+        document.createElement("div")
+      );
+
+      service.nearbySearch(
+        {
+          location: { lat, lng },
+          radius: 1000,
+          type:'road'
+        },
+        (results, status) => {
+          if (status === "OK") {
+            // // console.log("Nearby", results[2].name);
+
+            for (let index = 0; index < results.length; index++) {
+              const element = results[index].name
+              // console.log(element);
+              
+              
+            }
+            const nearest = results[0];
+            const distanceService = new window.google.maps.DistanceMatrixService();
+
+distanceService.getDistanceMatrix(
+  {
+    origins: [{ lat, lng }], // property location
+    destinations: [nearest.geometry.location], // selected place location
+    travelMode: "DRIVING"
+  },
+  (response, status) => {
+    if (status === "OK") {
+      const distanceText = response.rows[0].elements[0].distance.text;
+      const durationText = response.rows[0].elements[0].duration.text;
+
+      // console.log("Distance:", distanceText); // e.g. "2.3 km"
+      // console.log("Travel time:", durationText); // e.g. "10 mins"
+    } else {
+      // console.log("Distance calculation error:", status);
+    }
+  }
+);
+          } else {
+            // console.log("Places Error:", status);
+          }
+        }
+      );
+
+
+      
+
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData();
+  return () => (isMounted = false);
+}, [locality]);
+
+
+
   // Generic search handler
   const fetchLocations = async (value, setData) => {
     if (value.length > 2) {
@@ -27,20 +110,20 @@ export const Locationbutton = ({ setValidator }) => {
       //     `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
       //   );
       //   const data = await res.json();
-      //   console.log(data);
+      //   // console.log(data);
         
       //   setData(data);
       // } catch (error) {
-      //   console.log("Error fetching location:", error);
+      //   // console.log("Error fetching location:", error);
       // }
        try{
             getSearch(value)
                   .then(res => {
                     if (res.status === 200) {
-                      // console.log(res.data.usedetails);
-                      console.log(res.data);
+                      // // console.log(res.data.usedetails);
+                      // console.log(res.data);
                       const data = res.data.data;
-                      console.log(data);
+                      // console.log(data);
                       
                      setData(res.data.data);     
                      setDetailData(res.data)    
@@ -64,15 +147,15 @@ export const Locationbutton = ({ setValidator }) => {
         searchaddress(value,query)
       .then(res => {
         if(res.status === 200){
-          console.log(res.data.results);
+          // console.log(res.data.results);
           setData(res.data.results)
         }
       })
         // setData(data);
-        // console.log(data);
+        // // console.log(data);
         
       } catch (error) {
-        console.log("Error fetching location:", error);
+        // console.log("Error fetching location:", error);
       }
     } else {
       setData([]);
@@ -130,7 +213,7 @@ export const Locationbutton = ({ setValidator }) => {
     }
     if(propertyFirstData.purpose === 'Project' && !projectname){
       alert("Enter the Project Name")
-      console.log(propertyFirstData.purpose === 'Project',!projectname);
+      // console.log(propertyFirstData.purpose === 'Project',!projectname);
       
       return false;
     }
