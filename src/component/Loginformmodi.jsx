@@ -40,7 +40,7 @@ const Loginformmodi = ({ closeModal }) => {
       </div>
           <div className="mb-3">
             <label className="block my-2 mb-5 text-sm font-normal text-gray-500 ">Please enter your Phone Number</label>
-            <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     outline-none" placeholder="Enter your phone number" />
+            <input type="tel" value={mobile} maxLength={10} minLength={10} onChange={(e) => setMobile(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     outline-none" placeholder="Enter your phone number" />
           </div>
           <div className="flex justify-center mt-20">
           <button type="button" onClick={handleSend} disabled={mobile.length < 10} className={`${mobile.length > 9 ? "cursor-pointer w-full text-xl text-white font-medium bg-blue-500 shadow-lg shadow-blue-500/50 p-2 rounded" : "cursor-not-allowed w-full text-xl text-white font-medium bg-blue-200 shadow-lg shadow-blue-100 p-2 rounded"}`}>
