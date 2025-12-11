@@ -41,7 +41,11 @@ const Registration = ({resMobile,closeModal}) => {
                 const res = await register(name,email,resMobile,closeModal);
                 // console.log("otp sent:",res.status);
                 if(res.status === 200) {
-                  alert("You have Register Succesfully");
+                  // alert("You have Register Succesfully");
+                  // window.location.reload();
+                  // dispatch(setUser(res.data.user));
+                  console.log(res);
+                  
                     if (closeModal) closeModal();
                 }
                 

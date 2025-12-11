@@ -10,6 +10,7 @@ import {
   DribbbleCircleFilled,
   PhoneOutlined
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -33,7 +34,7 @@ function Footer() {
       </div>
 
       {/* Widgets Section */}
-      <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
+      <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-5 gap-6 text-sm">
         <div className="mx-auto hidden lg:block">
           <h4 className="mb-3 font-semibold text-center lg:text-start">Land/Plots</h4>
           <ul className="space-y-2">
@@ -62,6 +63,18 @@ function Footer() {
             <li><a href="#!" className="hover:text-gray-300">Affiliates</a></li>
             <li><a href="#!" className="hover:text-gray-300">Collaborations</a></li>
             <li><a href="#!" className="hover:text-gray-300">Strategic Alliances</a></li>
+          </ul>
+        </div>
+        <div className="mx-auto hidden lg:block">
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Company</h4>
+          <ul className="space-y-2">
+            <li className="pt-1"><a href="" className="hover:text-gray-300"><Link to='/info/privacy'>Privacy Policy</Link></a></li>
+          </ul>
+          <ul className="space-y-2">
+            <li className="pt-1"><a href="" className="hover:text-gray-300"><Link to='/info/terms-and-conditions'>Terms & Conditions</Link></a></li>
+          </ul>
+          <ul className="space-y-2">
+            <li className="pt-1"><a href="" className="hover:text-gray-300"><Link to='/info/Channel-Partner-Policy'>Channel Partner Policy</Link></a></li>
           </ul>
         </div>
         <div>

@@ -21,6 +21,8 @@ import PdfSlider from './customcomponent/PdfSlider';
 import { RxCross2 } from "react-icons/rx";
 import NearbySlide from './customantdesign/Sweaper';
 import { FaHeart } from "react-icons/fa6";
+import Investmentoption from './customcomponent/Investmentoption';
+import Unitsavailble from './customcomponent/Unitsavailble';
 
 const Projectdetail = () => {
   const [propertys, setPropertys] = useState(null)
@@ -194,6 +196,9 @@ const Projectdetail = () => {
     }
   }
 
+const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
+console.log(brochurePdf);
+
 
 
   if (!propertys || !layoutData) {
@@ -341,7 +346,7 @@ const leadGenration = () => {
           />
 
           {/* project charges */}
-          <div className="flex justify-between mt-10">
+          <div className={propertys.property === 'commercial' ? 'hidden' : "flex justify-between mt-10"}>
             <div>
               <p><span className='flex'><FaRupeeSign className='mt-2 ' /><span className='font-bold text-2xl'>{propertys.price} </span> <span className='font-medium text-blue-500 ms-1 mt-1'> + charges</span></span></p><span className='text-xs text-gray-500 ms-5 font-normal'>PRICE RANGE</span>
             </div>
@@ -349,12 +354,20 @@ const leadGenration = () => {
 
           </div>
           {/* Apartment Layout */}
-          <div className='mt-2'><p><span className="font-medium text-gray-500 mt-5">{propertys.propertyType.map(p => p.replace(" Bhk", "")).join(", ")} BHK Apartment</span></p></div>
+          <div className={`${propertys.property === 'commercial' ? 'hidden' : 'mt-2'}`}><p><span className="font-medium text-gray-500 mt-5">{Array.isArray(propertys?.propertyType) ? propertys.propertyType.map(p => p.replace(" Bhk", "")).join(", ") : ''} BHK Apartment</span></p></div>
           <div className='mb-5'>
             <BhkCards data={unitData} />
           </div>
+
+          <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
+              <Investmentoption propertys={propertys} />
+          </div>
+
+          <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
+              <Unitsavailble propertys={propertys} />
+          </div>
           <div className='my-5'>
-            <FloorPlans layoutData={layoutData} />
+            <FloorPlans layoutData={layoutData} propertys={propertys} />
           </div>
 
           {/* property sellers  */}
@@ -378,7 +391,7 @@ const leadGenration = () => {
                 <h2><span className='font-medium'>Top Facilities</span></h2>
               </div>
               <div>
-                <button className='text-blue-500 cursor-pointer font-medium'>View All</button>
+                {/* <button className='text-blue-500 cursor-pointer font-medium'>View All</button> */}
               </div>
             </div>
             <div className='flex flex-wrap my-10'>
@@ -410,7 +423,7 @@ const leadGenration = () => {
                   
                 </div>
                 <div>
-                  <button className='text-blue-500 font-medium'>View All</button>
+                  {/* <button className='text-blue-500 font-medium'>View All</button> */}
                 </div>
               </div>
 
@@ -443,7 +456,7 @@ const leadGenration = () => {
                 <IoIosInformationCircle className='text-3xl text-gray-500' />
               </div>
             </div>
-            <PdfSlider pdfUrl='https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/1762597271495-583527751O-1743760643687.pdf' />
+            <PdfSlider pdfUrl={brochurePdf} />
           </div>
         </div>
 

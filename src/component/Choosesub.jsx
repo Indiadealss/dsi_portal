@@ -11,14 +11,24 @@ const Choosesub = () => {
     const propertyFirstData = useSelector((state) => state.property.data);
     const [activeCom,setActiveCom] = useState("Subscriptioncreadits")
     const subDescription = 'By clicking on submit,I confirm that the property details including price, photos are correct And this property is available for sell/reNT. In case of any discreperncies Indiadealss can take strict action including deleting this listing. I also accept terms and conditions.';
-    function handleSumit() {
+    async function handleSumit() {
         if(activeCom === "Subscriptioncreadits"){
             setActiveCom("Listingboost")
-        }else{
-            dispatch(submitProperty(propertyFirstData));
-      alert('You have successfully listed the property');
-      window.location.reload();
-      dispatch(resetForm());
+        }
+        else{
+           try {
+      const result = await dispatch(submitProperty(propertyFirstData)).unwrap();
+
+      console.log("✅ API Success:", result);
+      alert("✅ You have successfully listed the property");
+
+      // dispatch(resetForm());
+      // window.location.reload();
+
+    } catch (error) {
+      console.error("❌ API Failed:", error);
+      alert("❌ Something went wrong while submitting");
+    }
         }
         
     }

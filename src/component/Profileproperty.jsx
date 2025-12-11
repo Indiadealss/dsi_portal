@@ -369,7 +369,7 @@ useEffect(() => {
     //   alert("Please select Number of Bathroom");
     //   return false;
     // }
-    if (propertyDataFirst.purpose === 'Project' && !numFlats) {
+    if (propertyDataFirst.purpose != 'Project' && !numFlats) {
       alert('Enter the total number of Flats')
       return false;
     }

@@ -19,6 +19,9 @@ import { updateField } from "./component/Redux/propertySlice";
 import Buyservice from "./component/Buyservice";
 import Projectdetail from "./component/Projectdetail";
 import Addsomething from "./component/customantdesign/Addsomething";
+import Privacy from "./component/privacy/Privacy";
+import Termsconditions from "./component/privacy/Termsconditions";
+import Chanel from "./component/privacy/Chanel";
 
 function App() {
 
@@ -58,6 +61,9 @@ function App() {
     },
     {path:"/addSomething-9890",element:<Addsomething />},
     {path:"/do/buyservie", element:<Buyservice />},
+    {path:"/info/privacy",element:<Privacy />},
+    {path:"/info/terms-and-conditions",element:<Termsconditions />},
+    {path:"/info/Channel-Partner-Policy",element:<Chanel />},
     {path:"/postproperty", element:<Postpropertyform />}
   ]);
 

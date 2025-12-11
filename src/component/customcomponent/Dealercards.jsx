@@ -2,19 +2,9 @@ import React from "react";
 
 const dealers = [
   {
-    name: "Mayra Homes",
+    name: "INDIADEALSS",
     logo: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/299496974O-1622789292915.jpeg",
     badges: ["RERA Registered", "Property Advisor"],
-  },
-  {
-    name: "HOUZEE",
-    logo: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/299496974O-1622789292915.jpeg",
-    badges: ["RERA Registered", "Property Advisor"],
-  },
-  {
-    name: "Abrade Realty",
-    logo: "/abrade.png",
-    badges: ["RERA Registered", "Builder Approved"],
   },
 ];
 
@@ -52,9 +42,9 @@ const DealerCards = () => {
 
           {/* Name */}
           <div className="relative">
-          <h2 className="text-center absolute object-cover top-12 left-2 text-lg font-semibold text-gray-800 mb-4">
+          <h4 className="text-center absolute object-cover top-14 left-2 text-SM font-semibold text-gray-800 mb-4">
             {d.name}
-          </h2>
+          </h4>
           </div>
 
           {/* Button */}

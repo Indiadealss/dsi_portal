@@ -31,6 +31,9 @@ const BhkCards = ({ data = [] }) => {
     setUnitData(parsed);
   }, [data]); // ✅ Correct dependency
 
+  console.log(unitData);
+  
+
   return (
     <div className="flex gap-4">
       {unitData.map((item, index) => (
@@ -50,7 +53,7 @@ const BhkCards = ({ data = [] }) => {
           <p ><span className="text-lg font-bold text-gray-800 mt-4">
             ₹ {formatPrice(item.priceMin)} - {formatPrice(item.priceMax)}
             <span className="text-blue-500 text-sm ml-1 cursor-pointer">
-              + Charges
+              + Charges 
             </span>
           </span></p>
           </div>

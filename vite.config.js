@@ -9,7 +9,11 @@ export default defineConfig({
     tailwindcss()
   ],
   server:{
-    host:true,
+    host: true,              // ✅ allow network & ngrok access
+    port: 5173,
+    strictPort: true,
+
+    allowedHosts: "all",
      proxy:{
       "/api":{
         target:"http://localhost:5001",

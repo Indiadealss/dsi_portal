@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Inputforotp from './customcomponent/Inputforotp';
 import { MdEdit } from "react-icons/md";
-import { verifyOtp } from '../api/api';
+import { sentOtp, verifyOtp } from '../api/api';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './Redux/userSlice';
@@ -14,6 +14,8 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
     const [foundit,setFounded] = useState(false);
     const user = useSelector(state => state.user);
     const dispatch = useDispatch();
+
+
 
     useEffect(() => {
   // console.log("Updated user:", user);
@@ -62,6 +64,22 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
             }
     }
 
+
+    const handleSend = async () => {
+      setOtp(0)
+            try{
+                const res = await sentOtp(mobileNo);
+                // console.log("otp sent:",res.status);
+                if(res.status === 200) {
+                  setOtpSent(true)
+                }
+                
+            }catch(err) {
+              console.error("Error sending OTP:", err);
+              
+            }
+          };
+
   return (
     <>
         <div>
@@ -82,7 +100,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
 
           {canResend ? (
             <p>
-          Haven't recived yet? <button  className='text-blue-600 cursor-pointer hover:unerline' onClick={handleVerify}>Resend OTP</button>
+          Haven't recived yet? <button  className='text-blue-600 cursor-pointer hover:unerline' onClick={handleSend}>Resend OTP</button>
         </p>
           ) : (
             <p className="text-gray-500 text-sm">

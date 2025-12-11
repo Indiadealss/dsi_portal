@@ -97,6 +97,7 @@ export const Loginform = () => {
         });
         if (res.data.success) {
           alert("✅ Registration successful! Please login.");
+          window.location.reload();
           setMode("login");
         } else {
           setError(res.data.message || "Registration failed");

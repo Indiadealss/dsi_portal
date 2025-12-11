@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import Leadgentaionform from "./Leadgentaionform";
 
-const FloorPlanSlider = ({ layoutData }) => {
+const FloorPlanSlider = ({ layoutData,propertys }) => {
   const bhkTypes = Object.keys(layoutData);
   const [activeBhk, setActiveBhk] = useState(bhkTypes[0] || "");
-  const [leadModel, setLeadModel] = useState(false)
+  const [leadModel, setLeadModel] = useState(false);
+
+  console.log(propertys,"propertys project");
+  
 
   // console.log(layoutData);
   
@@ -35,8 +38,8 @@ const FloorPlanSlider = ({ layoutData }) => {
   }
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-3">Floor Plans & Pricing</h2>
+    <div className={propertys.property === 'commercial' ? 'hidden' :'p-4'}>
+      <h2 className="text-xl font-bold mb-3">Floor Plans <span className={propertys.property === 'commercial' ?  'hidden' : ''}> & Pricing </span></h2>
 
       {/* Tabs */}
       <div className="flex gap-3 mb-5">
@@ -50,7 +53,7 @@ const FloorPlanSlider = ({ layoutData }) => {
                 : "bg-gray-100 text-gray-500"
             }`}
           >
-            {bhk} Apartment
+            {bhk} Layout
           </button>
         ))}
       </div>
