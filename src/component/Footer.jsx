@@ -77,6 +77,15 @@ function Footer() {
             <li className="pt-1"><a href="" className="hover:text-gray-300"><Link to='/info/Channel-Partner-Policy'>Channel Partner Policy</Link></a></li>
           </ul>
         </div>
+
+        <div className="block lg:hidden">
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Commercials</h4>
+          <div className="flex text-center">
+            <Link to='/info/privacy'>Privacy Policy</Link>
+            <Link to='/info/terms-and-conditions'>Terms & Conditions</Link>
+            <Link to='/info/Channel-Partner-Policy'>Channel Partner Policy</Link>
+          </div>
+        </div>
         <div>
           <h4 className="mb-3 font-semibold text-center ">Address</h4>
           <div className="">

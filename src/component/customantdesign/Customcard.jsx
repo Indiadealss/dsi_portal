@@ -19,7 +19,7 @@ const Customcard = () => {
       <Avatar size={35} icon={<UserOutlined />} />
         <div className="mx-2">
           <Title level={5} style={{ margin: 0 }}>
-            Keshav Yadav
+           
           </Title>
           <Text type="secondary">Dealer</Text>
         </div>
