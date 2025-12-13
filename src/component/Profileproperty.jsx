@@ -9,6 +9,8 @@ import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
 import { updateField } from './Redux/propertySlice';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { GrSubtractCircle } from 'react-icons/gr';
+import computerTable from '../Images/computerTable.avif';
+import shop from '../Images/shop.jpeg'
 const onChange = (date, dateString) => {
   // console.log(date, dateString);
 };
@@ -37,8 +39,18 @@ export const Profileproperty = ({ setValidator }) => {
   const [selectedKey, setSelectedKey] = useState("");
   const [value, setValue] = useState("");
 
+  const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
+const [entries, setEntries] = useState([]);    // stores size + price pairs
+const [officeunit, setOfficeunit] = useState([]);        // final output
+
+
   const [units, setUnits] = useState([]);
 
+
+  useEffect(() => {
+    console.log(officeunit);
+    
+  },[officeunit])
 
   const [reraStatus, setReraStatus] = useState("Not Available");
   const [reraNumber, setReraNumber] = useState("");
@@ -56,6 +68,16 @@ export const Profileproperty = ({ setValidator }) => {
     setReraNumber(value);
   };
 
+// saved officeUnits want to delete
+  const handleDeleteUnit = (index) => {
+  setOfficeunit(prev => prev.filter((_, i) => i !== index));
+};
+
+
+// delete the inputs office units
+const handleDeleteEntry = (index) => {
+  setEntries(prev => prev.filter((_, i) => i !== index));
+};
 
 
 
@@ -70,6 +92,26 @@ export const Profileproperty = ({ setValidator }) => {
   ];
 
 
+ const generateEntries = (count) => {
+  if (count <= 0) return;
+
+  setEntries(prev => {
+    let arr = [...prev];
+
+    if (count > arr.length) {
+      let addCount = count - arr.length;
+      for (let i = 0; i < addCount; i++) {
+        arr.push({ size: "0", price: "0" });
+      }
+    } else if (count < arr.length) {
+      arr = arr.slice(0, count);
+    }
+
+    return arr;
+  });
+};
+
+
 
   const dispatch = useDispatch();
 
@@ -78,7 +120,7 @@ export const Profileproperty = ({ setValidator }) => {
     const tf = Number(totalFloor)
     dispatch(updateField({
       bedroom: noBedroom, bathroom: noBathroom, balconies: noBalconies, plotarea: paPlotArea, plotSizein: plotarea, buildarea: buArea, buildSizein: buildarea, carpetarea: caArea, carpetSizein: carpet,rera:reraNumber,
-      totalfloor: totalFloor, availabestatus: choiseProperty, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,
+      totalfloor: totalFloor, availabestatus: choiseProperty, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,officeUnits:officeunit,
     }))
   }, [description])
 
@@ -178,6 +220,28 @@ useEffect(() => {
       label: 'Not Available'
     }
   ]
+
+
+  // convert to count the price
+   const formatToCr = (value, decimals = 2, suffix = "cr onwards") => {
+        if (value == null || isNaN(value)) return "";
+
+        const num = Number(value);
+        const ONE_CRORE = 1e7;
+        const ONE_LAKH = 1e5;
+
+        if (num >= ONE_CRORE) {
+            const val = +(num / ONE_CRORE).toFixed(decimals);
+            return `${val} ${suffix}`;
+        }
+
+        if (num >= ONE_LAKH) {
+            const val = +(num / ONE_LAKH).toFixed(decimals);
+            return `${val} L onwards`;
+        }
+
+        return num.toLocaleString("en-IN");
+    };
 
   const pantryAvalible = [
     {
@@ -966,91 +1030,164 @@ useEffect(() => {
 
 {/* ✅✅ FIXED: DYNAMIC OFFICES */}
 <div className={`${propertyDataFirst.purpose === 'Project' && propertyDataFirst.property !== 'residential' ? '' : 'hidden'}`}>
+  <select
+  className="border p-2 rounded"
+  value={unitType}
+  onChange={(e) => setUnitType(e.target.value)}
+>
+  <option value="">Select Unit Type</option>
+  <option value="Offices">Offices</option>
+  <option value="Shop">Shop</option>
+</select>
 
-  <button
-    onClick={() =>
-      setOffices(prev => [
-        ...prev,
-        { id: Date.now(), specs: {}, selectedKey: "", value: "" }
-      ])
-    }
-    className="bg-green-500 text-white px-4 py-2 rounded"
-  >
-    Add Office
-  </button>
+<input
+  type="number"
+  className="border p-2 rounded mt-4 mx-2"
+  placeholder="How many units you want to add?"
+  onChange={(e) => generateEntries(Number(e.target.value))}
+  min="1"
+/>
 
-  {offices.map((office, index) => (
-    <div key={office.id} className="border p-4 my-4 rounded">
-      <h2 className="text-lg font-bold">Office {index + 1}</h2>
 
-      {/* ✅ SELECT FIELD FIX */}
-      <select
-        className="border p-2 my-2 rounded"
-        value={office.selectedKey}
-        onChange={(e) =>
-          setOffices(prev =>
-            prev.map((o, i) =>
-              i === index ? { ...o, selectedKey: e.target.value } : o
-            )
+<button
+  onClick={() =>
+    setEntries(prev => [...prev, { size: "", price: "" }])
+  }
+  className="bg-green-500 text-white px-4 py-2 rounded mt-4 mx-4 hidden"
+>
+  Add Unit Entry
+</button>
+
+
+{entries.map((item, index) => (
+  <div key={index} className="flex gap-2 mt-2 items-center">
+
+    {/* SIZE INPUT */}
+    <div>
+    <input
+      className="border p-2"
+      placeholder="Size"
+      value={item.size}
+      onChange={(e) =>
+        setEntries(prev =>
+          prev.map((x, i) =>
+            i === index ? { ...x, size: e.target.value } : x
           )
-        }
-      >
-        <option value="">Select Field</option>
-        <option value="size">Size</option>
-        <option value="price">Price</option>
-        <option value="priceRange">Price Range</option>
-        <option value="location">Location</option>
-        <option value="furnished">Furnished</option>
-      </select>
-
-      {/* ✅ VALUE INPUT FIX */}
-      <input
-        className="border p-2 ml-2 rounded"
-        placeholder="Enter value"
-        value={office.value}
-        onChange={(e) =>
-          setOffices(prev =>
-            prev.map((o, i) =>
-              i === index ? { ...o, value: e.target.value } : o
-            )
+        )
+      }
+      onBlur={() =>
+        setEntries(prev =>
+          prev.map((x, i) =>
+            i === index
+              ? { ...x, size: x.size === "" ? "0" : x.size }
+              : x
           )
-        }
-      />
+        )
+      }
+    />
+    <span className='text-xs font-medium'>sq.ft.</span>
+    </div>
 
-      {/* ✅ ADD FIELD FIX */}
-      <button
-        className="bg-blue-500 text-white px-3 py-1 ml-2 rounded"
-        onClick={() => {
-          if (!office.selectedKey || !office.value) return;
+    {/* PRICE INPUT */}
+    <div >
+    <input
+      className="border p-2"
+      placeholder="Price"
+      value={item.price}
+      onChange={(e) =>
+        setEntries(prev =>
+          prev.map((x, i) =>
+            i === index ? { ...x, price: e.target.value } : x
+          )
+        )
+      }
+      onBlur={() =>
+        setEntries(prev =>
+          prev.map((x, i) =>
+            i === index
+              ? { ...x, price: x.price === "" ? "0" : x.price }
+              : x
+          )
+        )
+      }
+    />
 
-          setOffices(prev =>
-            prev.map((o, i) =>
-              i === index
-                ? {
-                    ...o,
-                    specs: { ...o.specs, [o.selectedKey]: o.value },
-                    selectedKey: "",
-                    value: ""
-                  }
-                : o
-            )
-          );
-        }}
-      >
-        Add
-      </button>
+    {/* PRICE FORMATTED */}
+    <span className='text-xs font-medium'>{formatToCr(item.price)}</span>
+    </div>
 
-      {/* SHOW SPECS */}
-      <div className="mt-3">
-        <h3 className="font-semibold">Specifications:</h3>
-        {Object.entries(office.specs).map(([k, v]) => (
-          <p key={k}>
-            <strong>{k}:</strong> {v}
+    {/* DELETE BUTTON */}
+    <button
+      className="text-red-500 font-bold px-2"
+      onClick={() => handleDeleteEntry(index)}
+    >
+      Delete
+    </button>
+
+  </div>
+))}
+
+
+
+
+
+
+<button
+  className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
+  onClick={() => {
+    if (!unitType || entries.length === 0) return;
+
+    const formattedItems = entries.map(e => ({
+      area: Number(e.size),
+      price: Number(e.price)
+    }));
+
+    setOfficeunit(prev => [
+      ...prev,
+      {
+        name: unitType,
+        icon: unitType === "Offices" ? computerTable : shop,
+        items: formattedItems
+      }
+    ]);
+
+    // Reset form after save
+    setUnitType("");
+    setEntries([]);
+  }}
+>
+  Save Unit
+</button>
+
+
+<div className='my-10'>
+  {officeunit.length > 0 &&
+    officeunit.map((unit, i) => (
+      <div key={i} className="border p-3 my-2">
+        <div className="flex justify-between items-center">
+          <h3 className="font-bold">{unit.name}</h3>
+
+          {/* Delete Button */}
+          <button
+            className="text-red-500 font-bold"
+            onClick={() => handleDeleteUnit(i)}
+          >
+            Delete
+          </button>
+        </div>
+
+        {unit.items.map((item, idx) => (
+          <p key={idx}>
+            Area: {item.area} | Price: {item.price}
           </p>
         ))}
       </div>
-    </div>
-  ))}
+    ))
+  }
+</div>
+
+
+
 </div>
 
 

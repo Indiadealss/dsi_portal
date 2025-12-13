@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ImFolderDownload } from 'react-icons/im';
 import Leadgentaionform from './Leadgentaionform';
 import computerTable from '../../Images/computerTable.avif';
@@ -13,18 +13,26 @@ const Investmentoption = ({ propertys }) => {
         setOpen(false);
     }
 
-    const investmentOptions = [
-        {
-            name: 'Offices',
-            icon: computerTable,
-            price: 13900000
-        },
-        {
-            name: 'Shop',
-            icon: shop,
-            price: 13900000
-        }
-    ]
+    
+
+   const [units,setUnits] = useState([]);
+   
+     
+   
+   
+   
+     useEffect(() => {
+         const uni = JSON.parse(propertys.officeUnits);
+   
+     setUnits([uni])
+     console.log(units.map((u) => u));
+     },[])
+
+      const getLowestPrice = (items) => {
+  if (!items || items.length === 0) return null;
+  return Math.min(...items.map(i => i.price));
+};
+
 
     const formatToCr = (value, decimals = 2, suffix = "cr onwards") => {
         if (value == null || isNaN(value)) return "";
@@ -47,7 +55,7 @@ const Investmentoption = ({ propertys }) => {
     };
 
     return (
-        <div>
+        <div className='my-20'>
             <div className="flex justify-between">
                 <div className={propertys.invest ? 'hidden' : ''}>
                     <h2>Investment Options In {propertys.projectname}</h2>
@@ -59,13 +67,13 @@ const Investmentoption = ({ propertys }) => {
 
             <div className='flex my-5'>
                 
-                    {investmentOptions.map((item, index) => (
+                    {units.map((item, index) => (
                         <div key={index} className='py-3 px-10 mx-2 border border-gray-300 rounded'>
                             <div className='flex'>
                             <img src={item.icon} alt="" className='w-10  me-3'  />
                             <div>
                             <h4>{item.name}</h4>
-                            <p><span className='text-gray-500 font-normal text-xs'>{formatToCr(item.price)} </span></p>
+                            <p><span className='text-gray-500 font-normal text-xs'>{formatToCr(getLowestPrice(item.items))} </span></p>
                             </div>
                             </div>
                         </div>

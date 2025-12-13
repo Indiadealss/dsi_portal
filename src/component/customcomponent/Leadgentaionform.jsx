@@ -12,7 +12,39 @@ const Leadgentaionform = ({ setLeadModel }) => {
   const [id, setId] = useState('');
   const [propertyid, setPropertyid] = useState('');
   const [loading, setLoading] = useState(false);
-  const [ready,setReady] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  const [errors, setErrors] = useState({});
+  const [agreeTerms, setAgreeTerms] = useState(false);
+
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!Name.trim()) {
+      newErrors.Name = "Name is required";
+    }
+
+    if (!phoneNumber.trim()) {
+      newErrors.phoneNumber = "Phone number is required";
+    } else if (!/^[0-9]{10}$/.test(phoneNumber)) {
+      newErrors.phoneNumber = "Phone number must be 10 digits";
+    }
+
+    if (!selected) {
+      newErrors.selected = "Please select when you plan to buy";
+    }
+
+    if (!agreeTerms) {
+      newErrors.agreeTerms = "You must agree to Terms & Conditions";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0; // no errors → form valid
+  };
+
+
 
 
   const user = useSelector((state) => state.user);
@@ -37,14 +69,14 @@ const Leadgentaionform = ({ setLeadModel }) => {
     } finally {
       setLoading(false); // stop loader
       setReady(true);
-      
+
     }
 
 
   }
 
   const setLeadFunction = () => {
-        setLeadModel(false); // 3. close Lead modal lage
+    setLeadModel(false); // 3. close Lead modal lage
   }
 
   useEffect(() => {
@@ -96,6 +128,14 @@ const Leadgentaionform = ({ setLeadModel }) => {
 
 
 
+  const handleSubmit = () => {
+    if (!validateForm()) return;
+
+    console.log('hello');
+
+    // setLoading(true);
+    // createLeads(id, propertyid);
+  };
   return (
     <div className="fixed inset-0 flex  justify-center bg-black/90 z-50">
       <div className='mt-[10vw]'>
@@ -145,7 +185,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
               {/* name of the user */}
               <label className='text-xs font-bold text-gray-500'>Name</label>
               <input type='text' value={Name} onInput={(e) => setName(e.currentTarget.value)} className='w-full border-b border-gray-200 outline-none' placeholder='Enter your Name' />
-
+              {errors.Name && <p className="text-red-500 text-xs">{errors.Name}</p>}
               {/* Mobile Number of the user */}
               <div className='my-5'>
                 <label className='text-xs font-bold text-gray-500 ms-10'>Phone</label>
@@ -163,7 +203,11 @@ const Leadgentaionform = ({ setLeadModel }) => {
                   </select>
 
                   <input type='tel' value={phoneNumber} onInput={(e) => setPhoneNumber(e.currentTarget.value)} className='w-full outline-none' maxLength='10' minLength='10' placeholder='Enter your Phone Number' />
+                  
                 </div>
+                {errors.phoneNumber && (
+                    <p className="text-red-500 text-xs">{errors.phoneNumber}</p>
+                  )}
               </div>
 
             </div>
@@ -191,6 +235,9 @@ const Leadgentaionform = ({ setLeadModel }) => {
                       <span className="text-gray-400 ">{option.label}</span>
                     </label>
                   ))}
+
+                  {errors.selected && <p className="text-red-500 text-xs">{errors.selected}</p>}
+
                 </div>
 
 
@@ -214,7 +261,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
                 {/* Download Bauher */}
 
                 <div className='mt-10'>
-                  <button className='font-bold  text-blue-500 border shadow-sm p-2 rounded cursor-pointer flex h-10' onClick={() => setLeadModel(true)}><ImFolderDownload className='m-1' />Download Brochure</button>
+                  <button className='font-bold  text-blue-500 border shadow-sm p-2 rounded cursor-pointer flex h-10' onClick={handleSubmit}><ImFolderDownload className='m-1' />Download Brochure</button>
                 </div>
               </div>
             </div>
@@ -226,13 +273,13 @@ const Leadgentaionform = ({ setLeadModel }) => {
           </div>
         )}
         {ready && (
-              <div>
-                <Afterlead setReadyModal={setReady} setLeadfunction={setLeadFunction} />
-              </div>
-            )}
+          <div>
+            <Afterlead setReadyModal={setReady} setLeadfunction={setLeadFunction} />
+          </div>
+        )}
       </div>
 
-      
+
     </div>
   )
 }

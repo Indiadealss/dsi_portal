@@ -29,7 +29,7 @@ const BhkCards = ({ data = [] }) => {
     });
 
     setUnitData(parsed);
-  }, [data]); // ✅ Correct dependency
+  }, []); // ✅ Correct dependency
 
   console.log(unitData);
   

@@ -23,13 +23,15 @@ import NearbySlide from './customantdesign/Sweaper';
 import { FaHeart } from "react-icons/fa6";
 import Investmentoption from './customcomponent/Investmentoption';
 import Unitsavailble from './customcomponent/Unitsavailble';
+import Reracollapse from './customcomponent/Reracollapse';
+import Investdetails from './customcomponent/Investdetails';
 
 const Projectdetail = () => {
   const [propertys, setPropertys] = useState(null)
   const [image, setImage] = useState([])
   const [video, setVideo] = useState([])
   const [showModal, setShowModal] = useState(false);
-  const [leadModel, setLeadModel] = useState(false)
+  const [leadModel, setLeadModel] = useState(false);
   const { id } = useParams()
   const dispatch = useDispatch()
   const [layoutData, setLayoutData] = useState({});
@@ -339,11 +341,18 @@ const leadGenration = () => {
           </div>
 
           {/* collapse faq */}
+          <div className={`${propertys.property === 'commercial' ? 'hidden': ''}`}>
           <Divider orientation='center'>CONSTRUCTION STATUS</Divider>
           <Collapse
             expandIconPosition='end'
             items={[{ key: '1', label: `${propertys.availabestatus}`, children: <p>Completion in Jan, 2028</p> }]}
           />
+          </div>
+
+          {/* commercial projects */}
+          <div className={`${propertys.property === 'commercial' ? '' : 'hidden'}`}>
+              <Reracollapse propertys={propertys} />
+          </div>
 
           {/* project charges */}
           <div className={propertys.property === 'commercial' ? 'hidden' : "flex justify-between mt-10"}>
@@ -357,6 +366,10 @@ const leadGenration = () => {
           <div className={`${propertys.property === 'commercial' ? 'hidden' : 'mt-2'}`}><p><span className="font-medium text-gray-500 mt-5">{Array.isArray(propertys?.propertyType) ? propertys.propertyType.map(p => p.replace(" Bhk", "")).join(", ") : ''} BHK Apartment</span></p></div>
           <div className='mb-5'>
             <BhkCards data={unitData} />
+          </div>
+
+          <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
+            <Investdetails propertys={propertys} />
           </div>
 
           <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
