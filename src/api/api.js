@@ -119,6 +119,14 @@ export const createLocalAdvantages = async (formData) => {
   });
 };
 
+export const createAminities = async (formData) => {
+  return API.post(`/aminities/create`,formData);
+}
+
+export const getAminities = async () => {
+  return API.get(`/aminities/getAminities`);
+}
+
 export const getLocalAdvantages = async (name) => {
   return API.get(`/feature/getlocationAdvantages?name=${name}`)
 }

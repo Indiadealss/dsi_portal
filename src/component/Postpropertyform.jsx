@@ -6,7 +6,7 @@ import { Photovideo } from './Photovideo';
 import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllFeature, submitProperty } from '../api/api';
+import { getAllFeature, getAminities, submitProperty } from '../api/api';
 import { Creaditmodel } from './Creaditmodel';
 import { updateFeatures } from './Redux/featureSlice';
 
@@ -40,6 +40,14 @@ export const Postpropertyform = () => {
       setSobuFeature(datas)
           
    }
+
+   const featchAnimities = async () => {
+    const getallAnimities = await getAminities();
+    const data = getallAnimities.data;
+    console.log(data,"data ok");
+    
+   }
+   featchAnimities()
    featchFeature()
   },[])
 

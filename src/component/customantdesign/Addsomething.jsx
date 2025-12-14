@@ -12,6 +12,9 @@ const Addsomething = () => {
   const [advName, setAdvName] = useState("");
   const [advIcon, setAdvIcon] = useState(null);
 
+  const [anName,setAnName] = useState("");
+  const [anIcon,setAnIcon] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -67,6 +70,33 @@ const Addsomething = () => {
     }
   };
 
+  const handleCreaAnimities = async (e) => {
+    e.preventDefault();
+
+    if (!anName || !anIcon) {
+      setMessage("❌ Please provide both name and icon.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", anName);
+    formData.append("icon", anIcon);
+
+    try {
+      setLoading(true);
+      await createLocalAdvantages(formData);
+      setMessage("✅ Animities added successfully!");
+      setAdvName("");
+      setAdvIcon(null);
+      e.target.reset();
+    } catch {
+      setMessage("❌ Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  
+  }
+
   return (
     <div className='w-[30%] shadow-md mx-auto my-10 p-4'>
       <div className='flex justify-center gap-4 mb-5'>
@@ -82,6 +112,12 @@ const Addsomething = () => {
           className={`px-4 py-2 rounded text-white ${activeTab === "advantage" ? "bg-blue-600" : "bg-gray-400"}`}
         >
           Advantage
+        </button>
+        <button 
+          onClick={() => setActiveTab("animities")}
+          className={`px-4 py-2 rounded text-white ${activeTab === "animities" ? "bg-blue-600" : "bg-gray-400"}`}
+        >
+          Animities
         </button>
       </div>
 
@@ -137,6 +173,33 @@ const Addsomething = () => {
             className="bg-blue-500 text-white w-[80%] mx-auto mt-4 rounded py-2 disabled:bg-gray-400"
           >
             {loading ? "Uploading..." : "Add Advantage"}
+          </button>
+        </form>
+      )}
+
+      {activeTab === "animities" && (
+        <form onSubmit={handleCreaAnimities} className='flex flex-col'>
+          <input 
+            type="text" 
+            placeholder="Animities name"
+            className="border p-2 rounded mx-auto w-[80%] my-3"
+            value={anName}
+            onChange={(e) => setAnName(e.target.value)}
+          />
+
+          <input
+            type="file"
+            accept="image/*"
+            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            onChange={(e) => setAnIcon(e.target.files[0])}
+          />
+
+          <button 
+            type="submit"
+            disabled={loading}
+            className="bg-blue-500 text-white w-[80%] mx-auto mt-4 rounded py-2 disabled:bg-gray-400"
+          >
+            {loading ? "Uploading..." : "Add Animities"}
           </button>
         </form>
       )}
