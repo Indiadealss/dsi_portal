@@ -3,287 +3,213 @@ import React from 'react'
 const Cancellation = () => {
   return (
     <div>
-      <p>USER AGREEMENT
+      Refund & Cancellation Policy
 
 DSI Indiadealss Real Estate Pvt. Ltd.
 
 Last Updated: [Add Date]
 
-This User Agreement (“Agreement”) governs your access to and use of the website, digital platforms, and services offered by DSI Indiadealss Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”).
-By accessing or using any part of our services, you (“User”, “you”, “your”) agree to be legally bound by this Agreement.
-
-If you do not agree, please discontinue use immediately.
+This Refund & Cancellation Policy outlines the terms under which payments, bookings, or service charges made through DSI Indiadealss Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) may be cancelled or refunded. By using our services, you agree to the conditions mentioned below.
 
 
 ---
 
-1. Acceptance of Agreement
+1. General Policy
 
-By using the Platform, you confirm that:
+All refunds and cancellations are processed based on:
 
-You are at least 18 years old.
+The type of service availed
 
-You have read and understood this Agreement.
+Developer/Builder policies
 
-You agree to comply with all terms, policies, and rules.
+Company’s internal guidelines
+
+Applicable legal regulations
 
 
-This Agreement includes our:
-
-Privacy Policy
-
-Terms of Use
-
-Cookie Policy
-
-Refund & Cancellation Policy
-
-Disclaimer
-
+Each project or service may have different refund conditions, and those specific terms shall prevail where applicable.
 
 
 ---
 
-2. Services Provided
+2. Booking Amount / EOI (Expression of Interest)
 
-The Company provides various real estate–related services, including:
+A. Non-Refundable Situations
 
-Project listings and information
+In most real estate transactions:
 
-Property advisory and consultation
+EOI,
 
-Lead submission forms
+Token amount, or
 
-Booking assistance
-
-Channel partner coordination
-
-Marketing and promotional services
+Initial booking payments
 
 
-The Company may modify, suspend, or discontinue any service without prior notice.
+are non-refundable, unless otherwise specified by the developer or the Company.
+
+B. Refund in Special Cases
+
+A refund may be considered only if:
+
+The project or unit becomes unavailable after payment
+
+The developer cancels or significantly alters the project
+
+Company or developer agrees in writing to process a refund
 
 
----
-3. User Responsibilities
-
-You agree to:
-
-Provide accurate and updated information
-
-Use the Platform only for lawful purposes
-
-Not interfere with the functioning of the Platform
-
-Not submit fraudulent or misleading inquiries
-
-Not impersonate another person or entity
-
-
-You are solely responsible for the accuracy of the data you submit.
+All such refunds are processed strictly according to developer policies.
 
 
 ---
 
-4. Prohibited Activities
+3. Cancellation by Customer
 
-Users are strictly prohibited from:
+If a customer chooses to cancel a booking:
 
-Copying or scraping website content
+The Company is not liable to provide a refund for booking amounts or tokens already paid.
 
-Attempting unauthorized access to systems
+All cancellation terms and refund amounts (if any) will depend on the respective developer’s policy.
 
-Uploading malware, viruses, or harmful scripts
+Any refund (if approved) may be subject to deductions such as:
 
-Using the Platform to defame, harass, or harm others
+Processing fees
 
-Circumventing security features
+Administrative charges
 
-Misusing project information for personal gain
+Developer cancellation penalties
 
-
-Violation may result in access termination and possible legal action.
-
-
----
-
-5. User Data & Communication Consent
-
-By submitting your details, you consent to the Company contacting you through:
-
-Call
-
-SMS
-
-WhatsApp
-
-Email
-
-Notifications
-
-
-Your data will be handled according to our Privacy Policy.
-
-
----
-
-6. Accuracy of Information
-
-The Company strives for accurate project information but does not guarantee:
-
-Pricing accuracy
-
-Availability of units
-
-Project timelines
-
-Developer policies
-
-Completeness of content
-
-
-You agree to verify all information independently.
-
-
----
-
-7. Third-Party Links and Services
-
-The Platform may contain links to external websites, tools, or developers.
-The Company is not responsible for:
-
-Third-party service quality
-
-External privacy practices
-
-Content accuracy
-
-Any transactions you enter with third parties
 
 
 
 ---
 
-8. Intellectual Property Rights
+4. Cancellation by Developer / Third Parties
 
-All content on the Platform is protected by copyright and trademark laws.
-You may not:
+If the developer cancels the project or alters the offering in a major way:
 
-Copy
+Refunds will be issued as per the developer’s official guidelines.
 
-Reproduce
+The Company will assist in coordination but is not responsible for delays caused by developers or payment gateways.
 
-Republish
+5. Service Charges / Consultation Fees
 
-Distribute
+Any service charges paid to the Company for:
 
-Modify
+Consultancy
+
+Documentation
+
+Marketing services
+
+Administrative support
 
 
-any content without written permission from the Company.
+are non-refundable, unless explicitly stated in writing.
 
 
 ---
 
-9. Booking, Payments & Transactions
+6. Transaction Failures
 
-All bookings or payments facilitated through the Company are subject to:
+In case of:
 
-Verification
+Payment gateway failures
+
+Double payments
+
+Technical errors
+
+
+refunds will be processed only after receiving confirmation from the payment processor.
+
+Refund timeline: 5–14 working days, depending on the bank/payment channel.
+
+
+---
+
+7. Mode of Refund
+
+If a refund is approved:
+
+It will be issued only to the original payment method (bank transfer, UPI, card, etc.).
+
+No cash refunds will be provided.
+
+The customer must provide accurate bank details for processing.
+
+
+
+---
+
+8. Processing Time
+
+Refund processing time depends on:
+
+Verification of the transaction
 
 Developer approval
 
-Project availability
-
-Applicable terms and conditions
+Bank and payment gateway timelines
 
 
-The Company is not liable for:
-
-Payment gateway issues
-
-Refund delays
-
-
-Developer policy changes
-
+Typical processing time: 7–21 working days (may vary by project or developer policy).
 
 
 ---
 
-10. Limitation of Liability
+9. No Refund for Change of Mind
 
-To the fullest extent permitted by law, the Company is not liable for:
+Refunds will not be issued for:
 
-Financial losses
+Loss of interest in the property
 
-Misinterpretation of information
+Personal financial issues
 
-Business losses
+Delayed site visits or documentation
 
-Damages caused by third-party developers
+Customers changing their preference after booking
 
-Website downtime or technical issues
+10. Documentation Required for Refund Requests
 
+Customers must submit:
 
-Use of the Platform is strictly at your own risk.
+Payment receipt
 
+Booking form or EOI document
 
----
+Bank details for refund
 
-11. Indemnification
+Identity proof
 
-You agree to indemnify and hold harmless the Company, its directors, employees, and partners from any claims, losses, damages, or liabilities arising from:
-
-Your misuse of the Platform
-
-Your violation of this Agreement
-
-Your infringement of any rights
+Written request for cancellation
 
 
-12. Termination of Access
-
-We may suspend or terminate your access if:
-
-You violate this Agreement
-
-You engage in fraudulent activity
-
-You misuse services or submit false leads
-
-Required by law or regulatory authority
-
-
-Upon termination, you must stop using the Platform immediately.
+Without required documents, refund cannot be initiated.
 
 
 ---
 
-13. Updates to the Agreement
+11. Company Liability
 
-We may revise this Agreement periodically.
-Continued use of the Platform signifies acceptance of the updated terms.
+DSI Indiadealss Real Estate Pvt. Ltd. acts as an intermediary between customers and developers.
+Therefore:
 
+We do not hold responsibility for developer-approved deductions or refund delays.
 
----
+Our liability is limited to the extent of services provided directly by us.
 
-14. Governing Law & Jurisdiction
-
-This Agreement is governed by the laws of India.
-Any dispute shall fall under the exclusive jurisdiction of courts in [Add City/State].
 
 
 ---
-
 <br />
                     <br />
                     <div>
                         <br />
-                        <span className='text-lg font-medium'>11. Contact Us</span>
+                        <span className='text-lg font-medium'>12. Contact Us</span>
                        <div className='ms-4'>
                         <span>
-                                For questions or concerns regarding these Terms, contact:
+                                For refund-related queries, reach us at:
                             </span>
                             <br />
                         <span>
@@ -302,7 +228,7 @@ Any dispute shall fall under the exclusive jurisdiction of courts in [Add City/S
                         </ul>
                        </div>
                     </div>
-</p>
+
     </div>
   )
 }
