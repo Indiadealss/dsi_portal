@@ -108,7 +108,11 @@ export const createLead = async (formData) => {
 }
 
 export const createFeature = async (formData) => {
-  return API.post(`/feature/create`,formData);
+  return API.post(`/feature/create`,formData, {
+    headers:{
+      "Content-Type":"multipart/form-data",
+    },
+  });
 };
 
 export const createLocalAdvantages = async (formData) => {
