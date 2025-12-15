@@ -62,6 +62,16 @@ export const Anenimies = ({setValidator}) => {
   }
 
 
+  const amenities = useSelector((state) => state.feature.amenities);
+  const OtherRoom = useSelector((state) => state.feature.otherroom);
+  const propertyFeature = useSelector((state) => state.feature.propertyfeature);
+  const adfeature = useSelector((state) => state.feature.additionalfeature);
+  const overlooking = useSelector((state) => state.feature.overlooking)
+
+  console.log(OtherRoom,propertyFeature,adfeature,overlooking,"hello sir");
+  
+
+  
     useEffect(() => {
 
       const selectedItems = [];
@@ -182,7 +192,7 @@ export const Anenimies = ({setValidator}) => {
     {name:'Tax and Govt. Charges excluded',label:'Tax and Govt. Charges excluded'},
     {name:'Price Negotiable',label:'Price Negotiable'}
   ]
-    const OtherRoom = [
+    const Otherroom = [
         {
             name:'Pooja Room',
             label:'Pooja Room'
@@ -252,7 +262,7 @@ export const Anenimies = ({setValidator}) => {
       
     ]
 
-    const amenities = [
+    const ameniti = [
       {
         name:'Maintandce Staff',
         label:'Maintandce Staff'
@@ -408,11 +418,11 @@ export const Anenimies = ({setValidator}) => {
 };
 
 
-    const sobufeature = useSelector((state) => state.feature.sobufeature);
+    const features = useSelector((state) => state.feature.features);
    
-    // console.log(typeof(sobufeature),sobufeatur,sobufeature,typeof(sobufeature));
+    // console.log(typeof(features),sobufeatur,features,typeof(features));
     
-    const adfeature = [
+    const adfeatu = [
       {
         name:'Separate entry for servant room',
         label:'Separate entry for servant room'
@@ -439,7 +449,7 @@ export const Anenimies = ({setValidator}) => {
       }
     ]
 
-    const propertyFeature = [
+    const propertyFe = [
       {
         name:'High Ceilling Height',
         label:'High Ceilling Height'
@@ -516,7 +526,7 @@ export const Anenimies = ({setValidator}) => {
       }
     ]
 
-    const overlooking = [
+    const overlookings = [
       {
         name:'Pool',
         label:'Pool'
@@ -815,7 +825,7 @@ export const Anenimies = ({setValidator}) => {
         </div>
         <h3 className='text-xl font-medium my-5'>Society/Bullding feature <span className="font-light text-sm text-gray-400">(Optional)</span></h3>
         <div className='flex flex-wrap'>
-            {sobufeature.map((item,index) => {
+            {features.map((item,index) => {
               const isSelected = selectbulding.includes(item.name);
               return (
                 <button
@@ -876,7 +886,7 @@ export const Anenimies = ({setValidator}) => {
                   <PlusOutlined />
                 )
               }
-              {item.name}
+              {item.label}
             </button>
             )
         })}
@@ -942,7 +952,7 @@ export const Anenimies = ({setValidator}) => {
                   <PlusOutlined />
                 )
               }
-              {item.name}
+              {item.label}
             </button>
             )
         })}

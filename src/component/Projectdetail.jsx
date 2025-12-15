@@ -367,21 +367,26 @@ const leadGenration = () => {
           <div className='mb-5'>
             <BhkCards data={unitData} />
           </div>
+          {propertys.property === 'commercial' && (
+  <div>
+    <div className="mt-2">
+      <Investdetails propertys={propertys} />
+    </div>
 
-          <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
-            <Investdetails propertys={propertys} />
-          </div>
+    <div className="mt-2">
+      <Investmentoption propertys={propertys} />
+    </div>
 
-          <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
-              <Investmentoption propertys={propertys} />
-          </div>
+    <div className="mt-2">
+      <Unitsavailble propertys={propertys} />
+    </div>
 
-          <div className={propertys.property === 'commercial' ? 'mt-2' : 'hidden'}>
-              <Unitsavailble propertys={propertys} />
-          </div>
-          <div className='my-5'>
-            <FloorPlans layoutData={layoutData} propertys={propertys} />
-          </div>
+    <div className="my-5">
+      <FloorPlans layoutData={layoutData} propertys={propertys} />
+    </div>
+  </div>
+)}
+
 
           {/* property sellers  */}
           <div>

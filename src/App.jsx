@@ -23,6 +23,7 @@ import Privacy from "./component/privacy/Privacy";
 import Termsconditions from "./component/privacy/Termsconditions";
 import Chanel from "./component/privacy/Chanel";
 import Contactus from "./component/customantdesign/Contactus";
+import Cancellation from "./component/privacy/Cancellation";
 
 function App() {
 
@@ -65,6 +66,7 @@ function App() {
     {path:"/do/buyservie", element:<Buyservice />},
     {path:"/info/privacy",element:<Privacy />},
     {path:"/info/terms-and-conditions",element:<Termsconditions />},
+    {path:"/info/cancellation-policy",element: <Cancellation />},
     {path:"/info/Channel-Partner-Policy",element:<Chanel />},
     {path:"/postproperty", element:<Postpropertyform />}
   ]);

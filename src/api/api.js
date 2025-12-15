@@ -120,12 +120,67 @@ export const createLocalAdvantages = async (formData) => {
 };
 
 export const createAminities = async (formData) => {
-  return API.post(`/aminities/create`,formData);
-}
+  return API.post(`/aminities/create`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
 export const getAminities = async () => {
   return API.get(`/aminities/getAminities`);
 }
+
+export const createroom = async (formData) => {
+  return API.post(`/otherroom/create`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const getotheroom = async () => {
+  return API.get(`/otherroom/getotheroom`);
+}
+
+export const createpropertyfeature = async (formData) => {
+  return API.post(`/propertyfeature/create`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const getpropertyfeature = async () => {
+  return API.get(`/propertyfeature/getpropertyFeature`);
+}
+
+export const createadditionalfeature = async (formData) => {
+  return API.post(`/additionalfeature/create`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const getadditionalfeature = async () => {
+  return API.get(`/additionalfeature/getadditionalfeature`);
+}
+
+
+export const createoverlookingfeature = async (formData) => {
+  return API.post(`/overlookingfeature/create`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const getoverlookingfeature = async () => {
+  return API.get(`/overlookingfeature/getoverlookingFeature`);
+}
+
+
 
 export const getLocalAdvantages = async (name) => {
   return API.get(`/feature/getlocationAdvantages?name=${name}`)

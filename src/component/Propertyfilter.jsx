@@ -425,7 +425,7 @@ export default function Propertyfilter() {
       {/* Desktop Sidebar */}
       <aside className=" propertyListingFilter hidden md:block  p-2 space-y-6 bg-white">
 
-        <div className=' size-fit lg:flex'>
+        <div className=' size-fit lg:flex w-[24vw]'>
           <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8  ">
             <div className="flex items-center justify-between mb-4">
               <h5 className=" font-samibold leading-none text-gray-900 ">Apply Filters</h5>
@@ -486,7 +486,7 @@ export default function Propertyfilter() {
                       {/* HEADER SECTION */}
                       {item.data === "input" ? (
                         <div className="mt-2 flex justify-between items-center" >
-                          <h3 className="font-semibold">{item.title}</h3>
+                          <h3 className="font-medium"><span className="font-medium">{item.title}</span></h3>
                           {/* toggle switch */}
                           <label className="inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" className="sr-only peer" />
@@ -498,7 +498,7 @@ export default function Propertyfilter() {
                           className="mt-2 flex justify-between items-center cursor-pointer"
                           onClick={() => handleToggle(index)}
                         >
-                          <h3 className="font-semibold">{item.title}</h3>
+                          <h3 className="font-semibold"><span className="font-medium">{item.title}</span></h3>
                           <GoChevronDown
                             className={`transform transition-transform duration-300 ${openItems[index] ? "rotate-180" : ""
                               }`}

@@ -6,15 +6,20 @@ import { Photovideo } from './Photovideo';
 import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllFeature, getAminities, submitProperty } from '../api/api';
+import { getadditionalfeature, getAllFeature, getAminities, getotheroom, getpropertyfeature, submitProperty } from '../api/api';
 import { Creaditmodel } from './Creaditmodel';
-import { updateFeatures } from './Redux/featureSlice';
+import { updateFeatures,updateAmenities, updatepropertyfeature, updateadditionalfeature, updateoverlookingfeature, updateotheroom } from './Redux/featureSlice';
 
 export const Postpropertyform = () => {
   const dispatch = useDispatch();
   const propertyFirstData = useSelector((state) => state.property.data);
   const [continueNO, setContinueNo] = useState(0);
-  const [sobufeature, setSobuFeature] = useState([]);
+  const [features, setSobuFeature] = useState([]);
+  const [amenities,setAnimitis] = useState([]);
+  const [otheroom,setOtheroom] = useState([]);
+  const [propertyfeature,setPropertyfeature] = useState([]);
+  const [additionalfeature,setAdditionalfeature] = useState([]);
+  const [overlooking,setoverlookingfeature] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [steps, setSteps] = useState([
     { id: 1, label: "Basic Details", status: true, currentForm: Postbasicdetailsform },
@@ -43,17 +48,143 @@ export const Postpropertyform = () => {
 
    const featchAnimities = async () => {
     const getallAnimities = await getAminities();
-    const data = getallAnimities.data;
-    console.log(data,"data ok");
+    const data = getallAnimities.data.data.map((item,index) => {
+      return(
+        {
+          name:item._id,
+          label:item.name,
+        }
+      )
+    })
+
+    console.log(data,'hdfsh');
+    
+
+    setAnimitis(data);
+
+
     
    }
+
+   const featchotheroom = async () => {
+    const getallAnimities = await getotheroom();
+    const data = getallAnimities.data.data.map((item,index) => {
+      return(
+        {
+          name:item._id,
+          label:item.name,
+        }
+      )
+    })
+
+    console.log(data,'featchotheroom');
+    
+
+    setOtheroom(data);
+
+
+    
+   }
+
+   const featchotherpropertyfeature = async () => {
+    const getallAnimities = await getpropertyfeature();
+    const data = getallAnimities.data.data.map((item,index) => {
+      return(
+        {
+          name:item._id,
+          label:item.name,
+        }
+      )
+    })
+
+    console.log(data,'featchotherpropertyfeature');
+    
+
+    setPropertyfeature(data);
+
+
+    
+   }
+
+   const featcadditionalfeature = async () => {
+    const getallAnimities = await getadditionalfeature();
+    const data = getallAnimities.data.data.map((item,index) => {
+      return(
+        {
+          name:item._id,
+          label:item.name,
+        }
+      )
+    })
+
+    console.log(data,'featcadditionalfeature');
+    
+
+    setAdditionalfeature(data);
+
+
+    
+   }
+
+   const featchoverlookingfeature = async () => {
+    const getallAnimities = await getadditionalfeature();
+    const data = getallAnimities.data.data.map((item,index) => {
+      return(
+        {
+          name:item._id,
+          label:item.name,
+        }
+      )
+    })
+
+    console.log(data,'featchoverlookingfeature');
+    
+
+    setoverlookingfeature(data);
+
+
+    
+   }
+
+   featchotheroom()
+   featchotherpropertyfeature()
+   featcadditionalfeature()
+   featchoverlookingfeature()
    featchAnimities()
    featchFeature()
   },[])
 
   useEffect(() => {
-    dispatch(updateFeatures(sobufeature))
-  },[sobufeature])
+    dispatch(updateFeatures(features))
+  },[features])
+
+  useEffect(() => {
+    dispatch(updateAmenities(amenities))
+  },[amenities])
+
+  useEffect(() => {
+    dispatch(updateotheroom(otheroom))
+  },[otheroom])
+
+  useEffect(() => {
+    dispatch(updatepropertyfeature(propertyfeature))
+  },[propertyfeature])
+
+  useEffect(() => {
+    dispatch(updateadditionalfeature(additionalfeature))
+  },[additionalfeature])
+
+  useEffect(() => {
+    dispatch(updateoverlookingfeature(overlooking))
+  },[overlooking])
+   const amenitie = useSelector((state) => state.feature.amenities);
+
+  
+    
+
+  useEffect(() => {
+    console.log(amenitie);
+  },[amenities,features])
 
   const validateRef = useRef(null); // stores child validate function
   let FormComponent = steps[continueNO].currentForm;
@@ -67,8 +198,8 @@ export const Postpropertyform = () => {
     setContinueNo(prev => prev - 1);
   }
 
-  // const sobufeature = useSelector((state) => state.feature);
-  //         console.log(sobufeature);
+  // const features = useSelector((state) => state.feature);
+  //         console.log(features);
 
   function continueButton() {
     
