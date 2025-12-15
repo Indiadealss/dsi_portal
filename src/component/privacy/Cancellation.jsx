@@ -5,11 +5,10 @@ const Cancellation = () => {
     <div>
       Refund & Cancellation Policy
 
-DSI Indiadealss Real Estate Pvt. Ltd.
+INDIADEALSS Real Estate Pvt. Ltd.
 
-Last Updated: [Add Date]
 
-This Refund & Cancellation Policy outlines the terms under which payments, bookings, or service charges made through DSI Indiadealss Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) may be cancelled or refunded. By using our services, you agree to the conditions mentioned below.
+This Refund & Cancellation Policy outlines the terms under which payments, bookings, or service charges made through INDIADEALSS Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) may be cancelled or refunded. By using our services, you agree to the conditions mentioned below.
 
 
 ---
@@ -192,7 +191,7 @@ Without required documents, refund cannot be initiated.
 
 11. Company Liability
 
-DSI Indiadealss Real Estate Pvt. Ltd. acts as an intermediary between customers and developers.
+INDIADEALSS Real Estate Pvt. Ltd. acts as an intermediary between customers and developers.
 Therefore:
 
 We do not hold responsibility for developer-approved deductions or refund delays.
