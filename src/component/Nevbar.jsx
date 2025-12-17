@@ -697,7 +697,15 @@ export default function Navbar() {
 
   const profileItems = [
   { key: "profile", label: profileLabel },
-  {key:"myactivty",label:<Link to='/' >My activity</Link>},
+  {key:"myactivty",label:<Link to='/' ><span className="text-sm">My activity</span></Link>},
+  {key:"recently",label:<Link to='/'><span className="text-sm">Recently Viewed</span></Link>},
+  {key:"shortlisted",label:<Link to='/shortlisted'><span className="text-sm">Shortlisted</span></Link>},
+  {key:"contacted",label:<Link to='/contacted'><span className="text-sm">Contacted</span></Link>},
+  {type:"divider"},
+  {key:"myindiadealss",label:<Link to='/'><span className="text-sm">MyINDIALDEALSS</span></Link>},
+  {key:"",label:<Link to='/'><span className="text-sm">Manage Listings</span></Link>},
+  {type:"View All Responses",label:<Link to='/responses'><span className="text-sm">View All Resposes</span></Link>},
+  {type:'Manage Boss',label:<Link to='/'><span className="text-sm">Manage BOSS</span></Link>},
   { type: "divider" },
   { key: "logout", danger: true, label:  logout}
 ];

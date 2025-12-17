@@ -389,7 +389,7 @@ const leadGenration = () => {
 
 
           {/* property sellers  */}
-          <div>
+          <div className=''>
             <div className="flex justify-between">
               <h2><span className='text-lg'>Sellers you may contact for more details</span></h2>
               <button className='text-lg text-blue-500 font-medium me-4'>View All Sellers</button>

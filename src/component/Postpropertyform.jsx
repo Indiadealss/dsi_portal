@@ -203,7 +203,7 @@ export const Postpropertyform = () => {
 
   function continueButton() {
     
-    console.log(propertyFirstData);
+    console.log(propertyFirstData,'hello');
     
     if (validateRef.current) {
       const isValid = validateRef.current(); // call child validation
