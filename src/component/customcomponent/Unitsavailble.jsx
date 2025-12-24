@@ -39,7 +39,25 @@ export default function Unitsavailble({ propertys }) {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [activeUnit, setActiveUnit] = useState(null);
 
-  const formatCr = (n) => `${(n / 1e7).toFixed(2)} Cr`;
+      const formatCr = (value, decimals = 2, suffix = "cr onwards") => {
+        if (value == null || isNaN(value)) return "";
+
+        const num = Number(value);
+        const ONE_CRORE = 1e7;
+        const ONE_LAKH = 1e5;
+
+        if (num >= ONE_CRORE) {
+            const val = +(num / ONE_CRORE).toFixed(decimals);
+            return `${val} ${suffix}`;
+        }
+
+        if (num >= ONE_LAKH) {
+            const val = +(num / ONE_LAKH).toFixed(decimals);
+            return `${val} L onwards`;
+        }
+
+        return num.toLocaleString("en-IN");
+    };
 
   const openOptions = (unit) => {
     setActiveUnit(unit);
@@ -54,7 +72,7 @@ export default function Unitsavailble({ propertys }) {
       <div className={`flex  gap-6`}>
 
         {units.map((u, idx) => (
-          <div key={idx} className="p-5 w-[35%] rounded shadow">
+          <div key={idx} className="p-5 w-[100%] md:w-[35%] rounded shadow">
             <div className="flex items-center gap-3">
               <img src={u.icon} className="w-10 h-10" />
               <h4 className="font-normal text-lg"><span className="font-medium text-sm">{u.name}</span></h4>

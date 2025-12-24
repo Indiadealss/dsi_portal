@@ -103,6 +103,7 @@ const Home = () => {
       bedroom:p.bedroom ? p.bedroom : '',
       location: p.location || "Unknown",
       price: p.price || 0,
+      npxid:p.npxid? p.npxid : "N/A",
       deposit: p.deposit || "N/A",
       size: p.plotarea || 0,
       area: p.areaType || "Built-up",

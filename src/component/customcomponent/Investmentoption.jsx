@@ -56,7 +56,7 @@ const Investmentoption = ({ propertys }) => {
 
     return (
         <div className='my-20'>
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-col-reverse md:flex-row">
                 <div className={propertys.invest ? 'hidden' : ''}>
                     <h2>Investment Options In {propertys.projectname}</h2>
                 </div>
@@ -65,7 +65,7 @@ const Investmentoption = ({ propertys }) => {
                 </div>
             </div>
 
-            <div className='flex my-5'>
+            <div className='flex flex-col md:flex-row my-5'>
                 
                     {units.map((item, index) => (
                         <div key={index} className='py-3 px-10 mx-2 border border-gray-300 rounded'>

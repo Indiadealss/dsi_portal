@@ -21,8 +21,8 @@ const Custominputserchbox = ({search}) => {
       searchaddress(value,location)
       .then(res => {
         if(res.status === 200){
-          // console.log(res);
-          setLocation(res.data.results);
+          console.log(res,'hello where are you');
+          setLocation(res.data.existingAddresses);
         }
       })
 
@@ -39,10 +39,18 @@ const Custominputserchbox = ({search}) => {
   const dispatch = useDispatch();
 
   const [prLocation,setPrLocation] = useState('');
+  const [np,setNp] = useState('');
+  const [projectid,setProjectId] = useState('')
   const [projectname,setProjectname] = useState('');
   
   function handleClick (){
-   dispatch(updateFilter({location:prLocation}));
+   
+  if(np !== 'N/A'){
+    dispatch(updateFilter({projectNpxid:np}));
+  }
+  else{
+    dispatch(updateFilter({location:prLocation}));
+  }
   }
 
   const handleSearchlocation = (e) => {
@@ -61,18 +69,42 @@ const Custominputserchbox = ({search}) => {
 
   const handleSelect = (item) => {
     // console.log(item.name == inputValue);
+
+    console.log(item.npxid ? item.npxid: item,"let do it");
+    
     
      if(item.name === item.city){
       setInputValue(`${item.name}`)
       setLocation([])
-      setPrLocation(item.city);
+      setPrLocation(inputValue);
       setProjectname(item.name);
+      setProjectId(item)
      }
      else{
-      setInputValue(`${item.name} , ${item.city}`)
+      setInputValue(`${item.name} , ${item.sector}, ${item.city}`)
       setLocation([])
-      setPrLocation(item.city)
+      setPrLocation(inputValue)
+      setNp(item.npxid ? item.npxid : 'N/A')
+      setProjectId(item)
      }
+
+  }
+
+  const createSlug = (item) => {
+    if (!item?.npxid) return "";
+
+
+    return `${item.name}-${item.city}-${item.sector}-npxid-${item.npxid}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
+
+  const createSlugs = (item) => {
+    return `${item.name}-${item.city}-ffid`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
   }
 
   
@@ -89,7 +121,7 @@ const Custominputserchbox = ({search}) => {
         <Space size={16}>
           <AimOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} className="loctate" />
           <AudioOutlined style={{ color: "gray", fontSize: 18, cursor: "pointer" }} />
-         <Link to="/property" className={`${!prLocation ? 'hidden' : ''}`} onClick={handleClick}>
+         <Link to={np !== 'N/A' && np.length === 5 ? createSlug(projectid) : createSlugs(projectid)} className={`${!prLocation ? 'hidden' : ''}`} onClick={handleClick}>
          <Button className="buttonStyle"  type="primary" icon={<SearchOutlined />}>
             {search}
           </Button>
@@ -112,7 +144,7 @@ const Custominputserchbox = ({search}) => {
           className="p-2 cursor-pointer  text-gray-500"
           onClick={() => handleSelect(item)}
           >
-            {item.name === inputValue ? item.city : `${item.name}, ${item.city}`}
+            {item.name === inputValue ? item.city : `${item.name},${item.sector}, ${item.city}`}
           </li>
           <div>
             <p className="text-gray-600 flex p-2"><span className="text-xl p-1"><FiExternalLink /></span></p>

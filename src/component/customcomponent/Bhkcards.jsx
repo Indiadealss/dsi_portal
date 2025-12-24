@@ -35,7 +35,7 @@ const BhkCards = ({ data = [] }) => {
   
 
   return (
-    <div className="flex gap-4">
+    <div className="flex md:gap-4 flex-col md:flex-row">
       {unitData.map((item, index) => (
         <div
           key={index}

@@ -38,12 +38,20 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
-export const getallProperty = async (page,filter,purpose='') => {
-  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}`);
+export const getallProperty = async (page,filter,purpose='',propertyType='') => {
+  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&propertyType=${propertyType}`);
 }
 
 export const getproperty = async(id) => {
   return API.get(`/property/getProperty/${id}`);
+}
+
+export const getPropertyByRera = async(rera) => {
+  return API.get(`/property/getPropertyByRera/${rera}`);
+}
+
+export const getPropertyByspid = async(sipid) => {
+  return API.get(`/property/getPropertyByspid/${sipid}`);
 }
 
 export const submitProperty = createAsyncThunk(

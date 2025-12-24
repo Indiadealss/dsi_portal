@@ -27,24 +27,32 @@ const Smallmain = ({ title, data }) => {
   ];
 
   useEffect(() => {
-    if (!data || !data.length){
+    if (!data || !data.length) {
       setCard(elCard)
-    }else{
+    } else {
 
-    const newCards = data.map((item) => {
-      const coverImages = item.images?.filter((img) => img.type === "cover") || [];
-      // console.log(item._id);
+      console.log(data);
       
-      const coverSrc =
-        coverImages.length > 0
-          ? coverImages[0].src
-          : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
+      const newCards = data.map((item) => {
+        const coverImages = item.images?.filter((img) => img.type === "cover") || [];
 
-      return { img: coverSrc, label: item.title,id:item.id };
-    });
-    setCard(newCards);
-  }
-    
+        const coverSrc =
+          coverImages.length > 0
+            ? coverImages[0].src
+            : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
+
+        return {
+          img: coverSrc,
+          label: item.title,   // or item.title
+          location: item.location,
+          city: item.city,
+          npxid: item.npxid,
+        };
+      });
+
+      setCard(newCards);
+    }
+
 
   }, [data]);
 
@@ -73,6 +81,19 @@ const Smallmain = ({ title, data }) => {
   const goNext = () => sliderRef.current.slickNext();
   const goPrev = () => sliderRef.current.slickPrev();
 
+  const createSlug = (item) => {
+    if (!item?.npxid) return "";
+
+    const location = JSON.parse(item.location)
+
+    return `${item.label}-${location.City}-npxid-${item.npxid}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
+
+
+
   if (!card.length) return <p className="text-center py-5">Loading...</p>;
 
   return (
@@ -98,7 +119,12 @@ const Smallmain = ({ title, data }) => {
                 alt={item.label}
                 className="w-full h-32 rounded-lg object-cover rounded-t-xl"
               />
-              <Link to={`/projectDetails/${item.id}`}><p className="py-2 text-sm font-medium cursor-pointer" >{item.label}</p></Link>
+              <Link to={`/${createSlug(item)}?preference=S`}>
+                <p className="py-2 text-sm font-medium cursor-pointer">
+                  {item.label}
+                </p>
+              </Link>
+
             </div>
           </div>
         ))}

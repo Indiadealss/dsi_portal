@@ -189,7 +189,7 @@ distanceService.getDistanceMatrix(
   };
 
   const handleSelects = (place) => {
-  setLocality(place.address);  // ✅ full location
+  setLocality(`${place.name}, ${place.address}`);  // ✅ full location
   setLocalityResults([]);
   setShowAdditional(true);
 };
@@ -289,7 +289,7 @@ distanceService.getDistanceMatrix(
                   onClick={() => handleSelects(item)}
                   className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
                 >
-                  {item.address}
+                  {item.name},{item.address}
                 </li>
               ))}
             </ul>

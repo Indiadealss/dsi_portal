@@ -27,12 +27,16 @@ export const PropertiesData = () => {
 
 
   const [location,setLocation] = useState(useSelector((state) => state.filterSlice.location))
+  const [selectedFilters,setSelectedFilters]  = useState(useSelector((state) => state.filterSlice))
   const [projectname,setProjectname] = useState(useSelector((state) => state.filterSlice.projectname))
     const fetchProperties = async (pageNumber) => {
         
        try{
+
+        const propertyType = selectedFilters.propertyType;
+        
          
-        const res = await getallProperty(pageNumber,location,projectname);
+        const res = await getallProperty(pageNumber,location,projectname,propertyType);
         const resultsAre = res.data?.data || [];
 
         const result = resultsAre.filter((p) => p.purpose != 'Project')
@@ -70,6 +74,7 @@ export const PropertiesData = () => {
       : [];
             return{
                 id:p._id,
+                spid:p.spid,
       images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
       title: locationData?.apartment_name || "Untitled Property",
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
@@ -126,6 +131,19 @@ export const PropertiesData = () => {
         // setProjectname((state) => state.filterSlice.projectname)
     }
 
+    const createSlug = (item) => {
+    if (!item?.spid) return "";
+
+    console.log(item.spid);
+    
+    const location = JSON.parse(item.location)
+
+    return `${item.subtitle}-spid-${item.spid}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
+
     
     // const propertyData = [
     //     { images: [{ src: img1, alt: '...' }], title: 'Supertech Eco Village', heilights: [{ helight: '1 BHK' }, { helight: 'North-East Facing' }, { helight: 'Full Power Backup' }], bedroom: '2 BHK', bathroom: '1 Baths', location: 'Grater Noida', price: 20000, deposit: '11000', size: 117, area: 'Build up', description: 'Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 Find this 2 bhk apartment for rent in sector 43 ', time: '08/08/2025', owner: 'Rohit' },
@@ -161,12 +179,12 @@ export const PropertiesData = () => {
         {/* Property Details */}
         <div className="md:webkitFillAvailable lg:w-[max-content]">
           <div className="px-6">
-            <Link to={`/propertyDetails/${item.id}`}>
+            <Link to={`/${createSlug(item)}`}>
               <h5 className="text-base font-base">
                 <span className="font-bold text-xl text-gray-700">{item.title}</span>
               </h5>
             </Link>
-            <Link to={`/propertyDetails/${item.id}`}>
+            <Link to={`/${createSlug(item)}`}>
               <h6 className="text-base font-medium text-gray-700">{item.subtitle}</h6>
             </Link>
           </div>
@@ -200,7 +218,7 @@ export const PropertiesData = () => {
           </div>
 
           {/* Highlights Section */}
-          <div className="flex py-2 relative group cursor-pointer">
+          <div className="flex flex-wrap py-2 relative group cursor-pointer">
             <p className="text-sm font-bold ps-5 text-[18px]">Highlights:</p>
 
             {Array.isArray(item.heilights) &&

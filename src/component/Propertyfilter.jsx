@@ -41,7 +41,7 @@ export default function Propertyfilter() {
 
   const commercialPropertyType = [
     { name: 'Ready to move offices'},
-    { name: 'Bare shell offices'},
+    { name: 'office'},
     {name: 'Shops & Retail'},
     { name: 'Commerical/Institutional Land'},
     { name: 'Agricultural/Farm Land'},

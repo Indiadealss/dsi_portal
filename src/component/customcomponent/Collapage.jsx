@@ -40,8 +40,18 @@ const Collapage = ({ images = [], video = [], columns = 2, gap = 4 }) => {
 
   const fallbackImage = "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
 
-  const coverImages = images.filter((i) => i.type === "cover");
+  const onlyImages = images.filter(i => !i.src.toLowerCase().endsWith(".pdf"));
+  console.log(onlyImages,'onlyImages');
+  
+
+
+  const coverImages = onlyImages.filter((i) => i.type === "cover");
   const outdoorImg = coverImages.length > 0 ? coverImages[0].src : fallbackImage;
+
+  const bannerImage = onlyImages.filter((i) => i.type === "banner");
+  console.log(bannerImage);
+  const bannerImg = bannerImage.length > 0 ? bannerImage[0].src : fallbackImage;
+  
 
   const videoImg = video && video.length > 0 ? video[0].src : fallbackImage;
   console.log(videoImg, 'video');
@@ -51,8 +61,8 @@ const Collapage = ({ images = [], video = [], columns = 2, gap = 4 }) => {
   const items = [
     {
       title: "All Photos & Videos",
-      count: images.length + videoCount,
-      img: images.length > 0 ? images[0].src : fallbackImage,
+      count: onlyImages.length + videoCount,
+      img: bannerImg,
       large: true,
     },
     {
@@ -248,11 +258,11 @@ const Collapage = ({ images = [], video = [], columns = 2, gap = 4 }) => {
           </button>
 
           {/* LEFT BUTTON */}
-          {images.length > 1 && (
+          {onlyImages.length > 1 && (
             <button
               onClick={() =>
                 setActiveImageIndex((prev) =>
-                  prev === 0 ? images.length - 1 : prev - 1
+                  prev === 0 ? onlyImages.length - 1 : prev - 1
                 )
               }
               className="absolute left-5 text-white text-4xl bg-black/50 rounded-full w-12 h-12 flex items-center justify-center"
@@ -263,17 +273,17 @@ const Collapage = ({ images = [], video = [], columns = 2, gap = 4 }) => {
 
           {/* FULLSCREEN IMAGE */}
           <img
-            src={images[activeImageIndex]?.src}
+            src={onlyImages[activeImageIndex]?.src}
             className="w-full max-w-5xl max-h-[90vh] object-contain rounded"
             alt="fullscreen"
           />
 
           {/* RIGHT BUTTON */}
-          {images.length > 1 && (
+          {onlyImages.length > 1 && (
             <button
               onClick={() =>
                 setActiveImageIndex((prev) =>
-                  prev === images.length - 1 ? 0 : prev + 1
+                  prev === onlyImages.length - 1 ? 0 : prev + 1
                 )
               }
               className="absolute right-5 text-white text-4xl bg-black/50 rounded-full w-12 h-12 flex items-center justify-center"

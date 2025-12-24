@@ -47,7 +47,7 @@ const Investdetails = ({propertys}) => {
     // Find the lowest price
     const lowestPrice = Math.min(...allPrices)
     return (
-        <div className='my-20 w-[40%]'>
+        <div className='my-20 w-[100%] md:w-[40%]'>
             <div className="flex justify-around">
                 <div className="flex">
                     <div className='p-2 bg-[#fff7e7] rounded-full'>
@@ -55,7 +55,7 @@ const Investdetails = ({propertys}) => {
                     </div>
                     <div className='ms-1'>
                         <div className='flex'><FaRupeeSign className='text-sm  mt-2 font-bold' /><span className='text-medium'>{formatToCr(lowestPrice)}</span></div>
-                        <span className='text-xs text-gray-500 float-right font-medium'>Onwards</span>
+                        <span className='text-xs text-gray-500 float-left md:float-right font-medium'>Onwards</span>
                     </div>
                 </div>
                 <div className="flex ">

@@ -95,7 +95,7 @@ const closeFullscreen = () => setIsFullscreen(false);
   };
 
   return (
-    <div ref={wrapperRef} className={`${fullScreen ? "w-full relative max-w-4xl mx-auto bg-neutral-800 shadow-lg rounded-xl ": "w-full relative  mx-auto bg-neutral-800 shadow-lg rounded-xl"}`}>
+    <div ref={wrapperRef} className={`${fullScreen ? "w-full relative max-w-4xl mx-auto bg-neutral-800 shadow-lg rounded-xl ": "w-full  relative h-[10%]  mx-auto bg-neutral-800 shadow-lg rounded-xl"}`}>
       <div className=" absolute right-4 top-4 z-20">
                     {
   fullScreen ? (

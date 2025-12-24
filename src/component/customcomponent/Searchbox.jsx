@@ -27,7 +27,7 @@ const Searchbox = () => {
   const propertyType = useSelector((state) => state.filterSlice)
 
   useEffect(() => {
-    dispatch(updateFilter({propertyType:selectFilter}))
+    dispatch(updateFilter({propertyType:selectFilter,}))
   },[selectFilter])
 
   useEffect(() => {
@@ -47,9 +47,6 @@ const selectPropertyType = (label) => {
         ? prev.filter((item) => item !== label) // uncheck
         : [...prev, label] // check
     );
-    console.log(selectFilter,'j');
-    console.log(propertyType);
-    
 }
 
   const button = [
@@ -95,7 +92,7 @@ const selectPropertyType = (label) => {
 
   const secondmenuItems = [
     "Ready to move",
-    "Bare shell offices",
+    "office",
     "Shops & Retail",
     "Commercial/Inst.Land",
     "Agricultural/Farm Land",

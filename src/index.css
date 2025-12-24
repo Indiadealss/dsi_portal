@@ -339,7 +339,11 @@ a {
   .loctate{
     display: none;
   }
+
   
+  .LoginHideMobile{
+  display: none  !important;
+}
 }
 /* ====== Tablet (≥768px) ====== */
 @media screen and (min-width: 768px) {
@@ -351,6 +355,10 @@ a {
  .topSearchbox{
     top:86%;
   }
+
+  .LoginHideMobile{
+  display: flex !important;
+}
 
   .propertyListingImage{
     height: 50vw !important;

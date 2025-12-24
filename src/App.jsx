@@ -24,6 +24,8 @@ import Termsconditions from "./component/privacy/Termsconditions";
 import Chanel from "./component/privacy/Chanel";
 import Contactus from "./component/customantdesign/Contactus";
 import Cancellation from "./component/privacy/Cancellation";
+import Propertypageslug from "./Propertypageslug";
+import Recentactivity from "./component/Recentactivity";
 
 function App() {
 
@@ -53,11 +55,11 @@ function App() {
   
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
-    {path: "/propertyDetails/:id",element:<Propertydetails />},
-    {path: "/projectDetails/:id",element:<Projectdetail />},
+    {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },

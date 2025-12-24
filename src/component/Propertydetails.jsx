@@ -13,7 +13,7 @@ import Newlaunchcard from './customcomponent/Newlaunchcard';
 import Appartmentvill from './customantdesign/Appartmentvill';
 import { Card } from 'antd';
 import { useParams } from 'react-router-dom';
-import { getproperty } from '../api/api';
+import { getproperty, getPropertyByspid } from '../api/api';
 import { useDispatch } from 'react-redux';
 import { setProperty } from './Redux/propertyidSlice';
 import Featuredetails from './customcomponent/Features';
@@ -65,7 +65,15 @@ const handleDealerPosition = (y) => {
 
    
 
-   const { id } = useParams();
+   const  { slug }  = useParams();
+
+   console.log(slug.slug,'spid');
+
+   const  spid  = slug.slice(-5)
+
+   console.log(spid,'slug');
+
+   
    const dispatch = useDispatch();
 
    const [propertys,setPropertys] = useState(null);
@@ -74,11 +82,11 @@ const handleDealerPosition = (y) => {
 
    useEffect(() => {
       fetchproperty()
-   },[id])
+   },[spid])
 
    const fetchproperty = async () => {
       try{
-         const res = await getproperty(id);
+         const res = await getPropertyByspid(spid);
          const data = res.data
          setPropertys(data);
          dispatch(setProperty(res.data));

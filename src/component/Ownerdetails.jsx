@@ -16,7 +16,7 @@ const Ownerdetails = ({details}) => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="fixed z-10 inset-0 overflow-y-hidden  bg-[#011638a3]"
+          className="fixed z-150 inset-0 overflow-y-hidden  bg-[#011638a3]"
           onClick={(e) => {
             if (e.target.id === 'modal-overlay') {
               closeModal(); // close when clicking outside modal

@@ -10,7 +10,7 @@ const dealers = [
 
 const DealerCards = () => {
   return (
-    <div className="w-full h-[30vw] py-6 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="w-full h-[136vw] md:h-[57vw] lg:h-[45vw] xl:h-[30vw]  py-6 px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {dealers.map((d, i) => (
         <div
           key={i}

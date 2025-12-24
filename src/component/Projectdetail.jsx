@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getproperty } from '../api/api';
+import { getproperty, getPropertyByRera } from '../api/api';
 import { setProperty } from './Redux/propertyidSlice';
 import Collapage from './customcomponent/Collapage';
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -25,6 +24,10 @@ import Investmentoption from './customcomponent/Investmentoption';
 import Unitsavailble from './customcomponent/Unitsavailble';
 import Reracollapse from './customcomponent/Reracollapse';
 import Investdetails from './customcomponent/Investdetails';
+import { useParams, useLocation } from "react-router-dom";
+
+
+
 
 const Projectdetail = () => {
   const [propertys, setPropertys] = useState(null)
@@ -32,7 +35,8 @@ const Projectdetail = () => {
   const [video, setVideo] = useState([])
   const [showModal, setShowModal] = useState(false);
   const [leadModel, setLeadModel] = useState(false);
-  const { id } = useParams()
+  const { slug  } = useParams();
+  const location = useLocation();
   const dispatch = useDispatch()
   const [layoutData, setLayoutData] = useState({});
   const [unitData, setUnitData] = useState();
@@ -42,6 +46,8 @@ const Projectdetail = () => {
 
 
  
+  const npxid = slug.split("npxid-")[1];
+
   
   const faq = [
     {
@@ -172,11 +178,11 @@ const Projectdetail = () => {
 
   useEffect(() => {
     fetchproperty()
-  }, [id])
+  }, [npxid])
 
   const fetchproperty = async () => {
     try {
-      const res = await getproperty(id)
+      const res = await getPropertyByRera(npxid)
       const data = res.data
       setPropertys(data)
       // console.log(data);
@@ -198,6 +204,7 @@ const Projectdetail = () => {
     }
   }
 
+  
 const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
 console.log(brochurePdf);
 
@@ -318,6 +325,7 @@ const leadGenration = () => {
     setOpen(false);
   }
 
+  
 
   return (
     <>
@@ -355,7 +363,7 @@ const leadGenration = () => {
           </div>
 
           {/* project charges */}
-          <div className={propertys.property === 'commercial' ? 'hidden' : "flex justify-between mt-10"}>
+          <div className={propertys.property === 'commercial' ? 'hidden' : "flex flex-col md:flex-row justify-between mt-10"}>
             <div>
               <p><span className='flex'><FaRupeeSign className='mt-2 ' /><span className='font-bold text-2xl'>{propertys.price} </span> <span className='font-medium text-blue-500 ms-1 mt-1'> + charges</span></span></p><span className='text-xs text-gray-500 ms-5 font-normal'>PRICE RANGE</span>
             </div>
@@ -390,7 +398,7 @@ const leadGenration = () => {
 
           {/* property sellers  */}
           <div className=''>
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-col md:flex-row">
               <h2><span className='text-lg'>Sellers you may contact for more details</span></h2>
               <button className='text-lg text-blue-500 font-medium me-4'>View All Sellers</button>
             </div>

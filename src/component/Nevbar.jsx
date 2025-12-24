@@ -36,6 +36,7 @@ const { Header } = Layout;
 
 
 
+
 // Menu Data
 const menuItems = [
   {
@@ -436,6 +437,7 @@ const menuItems = [
 ];
 
 
+
 const MobilemenuItems = [
   {
     key: "ForBuyers",
@@ -548,6 +550,36 @@ export default function Navbar() {
   const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
+
+    const MLocation = useSelector((state) => state.filterSlice.location)
+
+    // useEffect(() => {
+
+    // },[MLocation])
+
+
+    const createSlug = (item) => {
+    if (!item?.label) return "";
+
+
+    console.log(MLocation,'mlo');
+    
+
+    if(MLocation === "All India"){
+      return `${item.label}-ffid-`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+    }
+    else{
+      return `${item.label}-in-${MLocation}-ffid-`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+    }
+    
+  };
+
 
 
     const fetchLocations = async (value, setData) => {
@@ -697,15 +729,19 @@ export default function Navbar() {
 
   const profileItems = [
   { key: "profile", label: profileLabel },
-  {key:"myactivty",label:<Link to='/' ><span className="text-sm">My activity</span></Link>},
+  {key:"myactivty",label:<Link to='/recent-activity' ><span className="text-sm">My activity</span></Link>},
+  {key:'recentlysearch',label:<Link to='/'><span className="text-sm">Recently Search</span></Link>},
   {key:"recently",label:<Link to='/'><span className="text-sm">Recently Viewed</span></Link>},
   {key:"shortlisted",label:<Link to='/shortlisted'><span className="text-sm">Shortlisted</span></Link>},
   {key:"contacted",label:<Link to='/contacted'><span className="text-sm">Contacted</span></Link>},
   {type:"divider"},
-  {key:"myindiadealss",label:<Link to='/'><span className="text-sm">MyINDIALDEALSS</span></Link>},
-  {key:"",label:<Link to='/'><span className="text-sm">Manage Listings</span></Link>},
-  {type:"View All Responses",label:<Link to='/responses'><span className="text-sm">View All Resposes</span></Link>},
-  {type:'Manage Boss',label:<Link to='/'><span className="text-sm">Manage BOSS</span></Link>},
+  {key:"myindiadealss",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">MyINDIALDEALSS</span></Link>},
+  {key:"",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link>},
+  {type:"View All Responses",label:<Link to='/responses' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link>},
+  {type:'Manage Boss',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link>},
+  {type:'leadsearch',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Lead Search</span></Link>},
+  {type:'modifyprofile',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Modify Profile</span></Link>},
+  {type:'changepassward',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Change Passward</span></Link>},
   { type: "divider" },
   { key: "logout", danger: true, label:  logout}
 ];
@@ -768,7 +804,7 @@ export default function Navbar() {
                 <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
                   {activeChild.subChildren.map((sub) => (
                     <li key={sub.key} style={{ padding: "2px 0" }}>
-                      <Link to="/property">{sub.label}</Link>
+                      <Link to={createSlug(sub)}>{sub.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -931,14 +967,16 @@ export default function Navbar() {
     menu={{ items: profileItems }}
     trigger={["click"]}
     className="navBtn"
+    
   >
-    <Button type="text">
+    <Button type="text LoginHideMobile" >
       <Space>
-        <Avatar size="small" className="navBtn" icon={<UserOutlined />} />
+        <Avatar size="small" className="navBtn"  icon={<UserOutlined />} />
         <DownOutlined className="navBtn postPropertyNavbtn" />
       </Space>
     </Button>
   </Dropdown>
+  
 
   
 
