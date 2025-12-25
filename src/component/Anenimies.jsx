@@ -62,6 +62,8 @@ export const Anenimies = ({setValidator}) => {
   }
 
 
+   const propertyDataFirst = useSelector((state) => state.property.data);
+
   const amenities = useSelector((state) => state.feature.amenities);
   const OtherRoom = useSelector((state) => state.feature.otherroom);
   const propertyFeature = useSelector((state) => state.feature.propertyfeature);
@@ -1077,12 +1079,17 @@ export const Anenimies = ({setValidator}) => {
         )}
       </div>
         <p className='font-medium text-lg'>Price Details</p>
-      <div className='flex '>
+      <div className={propertyDataFirst.purpose === 'Project' ?  'flex' : 'flex'}>
         <input type='number' onKeyDown={(e) => {
     if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
   }} onWheel={(e) => e.target.blur()} value={price} onChange={(e) => setPrice(e.currentTarget.value)} className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
         <input type='text' disabled className='mx-2  outline-none border border-1 border-gray-200  px-4 my-4 w-30 text-xs' placeholder='Price per sq.ft' />
         </div>
+
+        {/* residental */}
+        {/* <div>
+
+        </div> */}
         <div>
           <p><span className='font-medium text-lg'>{numberToWords(Number(price))}</span></p>
         </div>

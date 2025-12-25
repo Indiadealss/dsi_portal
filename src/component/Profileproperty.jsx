@@ -38,6 +38,10 @@ export const Profileproperty = ({ setValidator }) => {
   const [offices, setOffices] = useState([]);
   const [selectedKey, setSelectedKey] = useState("");
   const [value, setValue] = useState("");
+  const [manualPossession, setManualPossession] = useState(false);
+const [manualMonth, setManualMonth] = useState("");
+const [manualYear, setManualYear] = useState("");
+
 
   const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
 const [entries, setEntries] = useState([]);    // stores size + price pairs
@@ -45,6 +49,25 @@ const [officeunit, setOfficeunit] = useState([]);        // final output
 
 
   const [units, setUnits] = useState([]);
+
+  const formatPriceLabel = (value) => {
+  if (!value || isNaN(value)) return "";
+
+  const num = Number(value);
+  const CRORE = 10000000;
+  const LAKH = 100000;
+
+  if (num >= CRORE) {
+    return `${(num / CRORE).toFixed(2)} Cr`;
+  }
+
+  if (num >= LAKH) {
+    return `${(num / LAKH).toFixed(2)} L`;
+  }
+
+  return num.toLocaleString("en-IN");
+};
+
 
   
   
@@ -116,6 +139,11 @@ const handleDeleteEntry = (index) => {
 
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+  console.log("POSSESSION SAVED:", possession);
+}, [possession]);
+
 
 
   useEffect(() => {
@@ -977,17 +1005,97 @@ useEffect(() => {
           })}
         </div>
 
+        {/* possession section */}
+
         <form className={`${choiseProperty === 'Under construction' ? 'w-full mx-auto' : 'hidden'}`}>
-          <label for="countries" className="block mb-2  font-medium text-gray-900 ">Possession By</label>
-          <select id="countries" value={possession} onChange={(e) => setPossession(e.currentTarget.value)} className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5    ">
-            <option selected>Expected by</option>
-            {underConcetraction.map((item, index) => {
-              return (
-                <option value={item.name}>{item.label}</option>
-              )
-            })}
-          </select>
-        </form>
+  <label className="block mb-2 font-medium text-gray-900">
+    Possession By
+  </label>
+
+  {/* DROPDOWN MODE */}
+  {!manualPossession && (
+    <>
+      <select
+        value={possession}
+        onChange={(e) => setPossession(e.target.value)}
+        className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+      >
+        <option value="">Expected by</option>
+        {underConcetraction.map((item, index) => (
+          <option key={index} value={item.name}>
+            {item.label}
+          </option>
+        ))}
+      </select>
+
+      <button
+        type="button"
+        onClick={() => setManualPossession(true)}
+        className="mt-2 text-sm text-blue-600 hover:underline"
+      >
+        + Add manually
+      </button>
+    </>
+  )}
+
+  {/* MANUAL MODE */}
+  {manualPossession && (
+    <>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          placeholder="Month (e.g. March)"
+          value={manualMonth}
+          onChange={(e) => setManualMonth(e.target.value)}
+          className="border p-2 rounded w-1/2"
+        />
+
+        <input
+          type="number"
+          placeholder="Year (e.g. 2027)"
+          value={manualYear}
+          onChange={(e) => setManualYear(e.target.value)}
+          className="border p-2 rounded w-1/2"
+        />
+      </div>
+
+      <div className="flex gap-3 mt-3">
+        <button
+          type="button"
+          className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+          onClick={() => {
+            if (!manualMonth || !manualYear) return;
+            setPossession(`${manualMonth} ${manualYear}`);
+            setManualPossession(false);
+          }}
+        >
+          Save
+        </button>
+
+        <button
+          type="button"
+          className="text-sm text-gray-600"
+          onClick={() => {
+            setManualPossession(false);
+            setManualMonth("");
+            setManualYear("");
+          }}
+        >
+          Cancel
+        </button>
+      </div>
+    </>
+  )}
+
+  {/* possession MANUAL MODE */}
+  {possession && !manualPossession && (
+  <p className="text-sm text-green-600 mt-1">
+    Selected: {possession}
+  </p>
+)}
+
+</form>
+
 
       </div>
       <div className={`${propertyDataFirst.purpose === 'pg' ? 'hidden' : 'block'}`}>
@@ -1246,6 +1354,14 @@ useEffect(() => {
         }
       />
 
+       {/* PRICE PREVIEW */}
+  {(unit.selectedKey === "priceMin" || unit.selectedKey === "priceMax") &&
+    unit.value && (
+      <span className="text-xs text-gray-500 mt-1">
+        {formatPriceLabel(unit.value)}
+      </span>
+    )}
+
       {/* ✅ ADD FIELD FIX */}
       <button
         className="bg-green-500 text-white px-3 py-1 ml-2 rounded"
@@ -1270,14 +1386,61 @@ useEffect(() => {
       </button>
 
       {/* SHOW SPECS */}
-      <div className="mt-3">
-        <h3 className="font-semibold">Specifications:</h3>
-        {Object.entries(unit.specs).map(([k, v]) => (
-          <p key={k}>
-            <strong>{k}:</strong> {v}
-          </p>
-        ))}
+<div className="mt-3">
+  <h3 className="font-semibold mb-2">Specifications:</h3>
+
+  {Object.entries(unit.specs).map(([k, v]) => (
+    <div
+      key={k}
+      className="flex items-center justify-between bg-white border rounded px-3 py-2 mb-2"
+    >
+      <p className="text-sm">
+        <strong>{k}:</strong> {v}
+      </p>
+
+      <div className="flex gap-2">
+        {/* EDIT */}
+        <button
+          className="text-blue-600 text-sm"
+          onClick={() => {
+            setUnits(prev =>
+              prev.map((u, i) =>
+                i === index
+                  ? { ...u, selectedKey: k, value: v }
+                  : u
+              )
+            );
+          }}
+        >
+          Edit
+        </button>
+
+        {/* DELETE */}
+        <button
+          className="text-red-600 text-sm"
+          onClick={() => {
+            setUnits(prev =>
+              prev.map((u, i) =>
+                i === index
+                  ? {
+                      ...u,
+                      specs: Object.fromEntries(
+                        Object.entries(u.specs).filter(
+                          ([key]) => key !== k
+                        )
+                      )
+                    }
+                  : u
+              )
+            );
+          }}
+        >
+          Delete
+        </button>
       </div>
+    </div>
+  ))}
+</div>
     </div>
   ))}
 </div>

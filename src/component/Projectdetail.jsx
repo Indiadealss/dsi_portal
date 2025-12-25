@@ -353,7 +353,7 @@ const leadGenration = () => {
           <Divider orientation='center'>CONSTRUCTION STATUS</Divider>
           <Collapse
             expandIconPosition='end'
-            items={[{ key: '1', label: `${propertys.availabestatus}`, children: <p>Completion in Jan, 2028</p> }]}
+            items={[{ key: '1', label: `${propertys.availabestatus}`, children: <p className={`${propertys.availabestatus === "Ready to move" ? 'hidden': ''}`}>Completion in Jan, 2028</p> }]}
           />
           </div>
 

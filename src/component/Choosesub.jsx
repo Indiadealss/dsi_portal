@@ -22,8 +22,8 @@ const Choosesub = () => {
       console.log("✅ API Success:", result);
       alert("✅ You have successfully listed the property");
 
-      // dispatch(resetForm());
-      // window.location.reload();
+      window.location.reload();
+      dispatch(resetForm());
 
     } catch (error) {
       console.error("❌ API Failed:", error);
