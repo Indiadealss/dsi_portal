@@ -35,20 +35,20 @@ const Projectdetail = () => {
   const [video, setVideo] = useState([])
   const [showModal, setShowModal] = useState(false);
   const [leadModel, setLeadModel] = useState(false);
-  const { slug  } = useParams();
+  const { slug } = useParams();
   const location = useLocation();
   const dispatch = useDispatch()
   const [layoutData, setLayoutData] = useState({});
   const [unitData, setUnitData] = useState();
   const [amenities, setAmenities] = useState([]);
   const [open, setOpen] = useState(false);
-  const [favurate,setFavurate] = useState(false);
+  const [favurate, setFavurate] = useState(false);
 
 
- 
+
   const npxid = slug.split("npxid-")[1];
 
-  
+
   const faq = [
     {
       question: 'Why you should consider Godrej Nature Plus?',
@@ -83,15 +83,15 @@ const Projectdetail = () => {
   ];
 
 
-   const  getLocationIcon =  async (name) => {
-        try {
-        const response = await getLocalAdvantages(name)
-        // console.log(response.data);
-        
-        } catch (error) {
-          // console.log(error);
-        }
+  const getLocationIcon = async (name) => {
+    try {
+      const response = await getLocalAdvantages(name)
+      // console.log(response.data);
+
+    } catch (error) {
+      // console.log(error);
     }
+  }
 
   const interstedOption = [
     {
@@ -122,6 +122,8 @@ const Projectdetail = () => {
     if (!propertys) return;
 
     const layoutImages = propertys.images?.filter(img => img.type === "layout") || [];
+    console.log(propertys.images, propertys.images?.filter(img => img.type === "layout"), '125');
+
 
     let answerArray = [];
 
@@ -148,15 +150,26 @@ const Projectdetail = () => {
     layoutImages.forEach(img => {
       const obj = {};
 
+      console.log(img, '153');
+
+
       img.fields.forEach(f => {
+        console.log(f, '157');
+
         obj[f.key.toLowerCase()] = f.value; // ✅ make all keys lowercase
       });
 
       const bhk = (obj["floor_plan"] || "").toUpperCase(); // "2 BHK"
+      console.log(bhk, 163);
+
 
       if (!grouped[bhk]) grouped[bhk] = [];
+      console.log(grouped[bhk], '167');
+
 
       const areaValue = obj["carpet_aria"]?.split(" ")[0] || "0";
+      console.log(areaValue, '171');
+
 
       // console.log(obj, "hello");
 
@@ -171,6 +184,9 @@ const Projectdetail = () => {
         possession: obj["possession"] || "—"
       });
     });
+
+    console.log(grouped, '188');
+
 
 
     setLayoutData(grouped);
@@ -204,9 +220,9 @@ const Projectdetail = () => {
     }
   }
 
-  
-const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
-console.log(brochurePdf);
+
+  const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
+  console.log(brochurePdf);
 
 
 
@@ -320,12 +336,12 @@ console.log(brochurePdf);
   };
 
 
-const leadGenration = () => {
+  const leadGenration = () => {
     setLeadModel(true);
     setOpen(false);
   }
 
-  
+
 
   return (
     <>
@@ -338,28 +354,28 @@ const leadGenration = () => {
               <h2 className=''>{propertys.projectname}</h2>
               <div onClick={() => setFavurate((prev) => !prev)}>
                 {favurate ? (
-                    <CiHeart className='text-2xl mt-1 mx-2 text-red-500 cursor-pointer' />
-                ): (
+                  <CiHeart className='text-2xl mt-1 mx-2 text-red-500 cursor-pointer' />
+                ) : (
                   <FaHeart className='text-xl mt-2 mx-2 text-red-500 cursor-pointer' />
                 )}
-              {/* <CiHeart className='text-2xl mt-1 mx-2 text-red-500' /> */}
-              {/* <FaHeart className='text-2xl mt-1 mx-2 text-red-500' /> */}
+                {/* <CiHeart className='text-2xl mt-1 mx-2 text-red-500' /> */}
+                {/* <FaHeart className='text-2xl mt-1 mx-2 text-red-500' /> */}
               </div>
             </div>
           </div>
 
           {/* collapse faq */}
-          <div className={`${propertys.property === 'commercial' ? 'hidden': ''}`}>
-          <Divider orientation='center'>CONSTRUCTION STATUS</Divider>
-          <Collapse
-            expandIconPosition='end'
-            items={[{ key: '1', label: `${propertys.availabestatus}`, children: <p className={`${propertys.availabestatus === "Ready to move" ? 'hidden': ''}`}>Completion in Jan, 2028</p> }]}
-          />
+          <div className={`${propertys.property === 'commercial' ? 'hidden' : ''}`}>
+            <Divider orientation='center'>CONSTRUCTION STATUS</Divider>
+            <Collapse
+              expandIconPosition='end'
+              items={[{ key: '1', label: `${propertys.availabestatus}`, children: <p className={`${propertys.availabestatus === "Ready to move" ? 'hidden' : ''}`}>Completion in Jan, 2028</p> }]}
+            />
           </div>
 
           {/* commercial projects */}
           <div className={`${propertys.property === 'commercial' ? '' : 'hidden'}`}>
-              <Reracollapse propertys={propertys} />
+            <Reracollapse propertys={propertys} />
           </div>
 
           {/* project charges */}
@@ -376,25 +392,26 @@ const leadGenration = () => {
             <BhkCards data={unitData} />
           </div>
           {propertys.property === 'commercial' && (
-  <div>
-    <div className="mt-2">
-      <Investdetails propertys={propertys} />
-    </div>
+            <div>
+              <div className="mt-2">
+                <Investdetails propertys={propertys} />
+              </div>
 
-    <div className="mt-2">
-      <Investmentoption propertys={propertys} />
-    </div>
+              <div className="mt-2">
+                <Investmentoption propertys={propertys} />
+              </div>
 
-    <div className="mt-2">
-      <Unitsavailble propertys={propertys} />
-    </div>
+              <div className="mt-2">
+                <Unitsavailble propertys={propertys} />
+              </div>
+            </div>
+          )}
 
-    <div className="my-5">
-      <FloorPlans layoutData={layoutData} propertys={propertys} />
-    </div>
-  </div>
-)}
-
+          {propertys.property === 'residential' && (
+            <div className="my-5">
+              <FloorPlans layoutData={layoutData} propertys={propertys} />
+            </div>
+          )}
 
           {/* property sellers  */}
           <div className=''>
@@ -440,22 +457,22 @@ const leadGenration = () => {
           </div>
 
 
-          {/* Localities */} 
+          {/* Localities */}
 
           <div>
-              <div className="flex justify-between">
-                <div>
-                  <h2><span>Location Advantages</span></h2>
-                  
-                </div>
-                <div>
-                  {/* <button className='text-blue-500 font-medium'>View All</button> */}
-                </div>
-              </div>
+            <div className="flex justify-between">
+              <div>
+                <h2><span>Location Advantages</span></h2>
 
-              <div className='my-3'>
-                <NearbySlide data={propertys.locatadvance} />
               </div>
+              <div>
+                {/* <button className='text-blue-500 font-medium'>View All</button> */}
+              </div>
+            </div>
+
+            <div className='my-3'>
+              <NearbySlide data={propertys.locatadvance} />
+            </div>
           </div>
 
           {/* about Project */}
@@ -533,11 +550,11 @@ const leadGenration = () => {
             }}
 
             styles={{
-    header: {
-      borderBottom: "none",
-      display:"none"
-    },
-  }}
+              header: {
+                borderBottom: "none",
+                display: "none"
+              },
+            }}
           >
             <div className="bg-white rounded-xl max-w-lg w-full">
 

@@ -10,7 +10,7 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
   console.log(propertys,"propertys project");
   
 
-  // console.log(layoutData);
+  console.log(layoutData);
   
 
 
