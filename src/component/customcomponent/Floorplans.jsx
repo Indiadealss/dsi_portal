@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Leadgentaionform from "./Leadgentaionform";
 
 const FloorPlanSlider = ({ layoutData,propertys }) => {
   const bhkTypes = Object.keys(layoutData);
-  const [activeBhk, setActiveBhk] = useState(bhkTypes[0] || "");
+
+  if (!layoutData || !propertys || !bhkTypes) {
+    return (
+      <div className='my-3'>
+        <p>Loading...</p>
+      </div>
+    )
+  }
+
+  const [activeBhk, setActiveBhk] = useState(bhkTypes[0]);
   const [leadModel, setLeadModel] = useState(false);
 
-  console.log(propertys,"propertys project");
-  
+useEffect(() => {
+console.log(activeBhk,bhkTypes,bhkTypes[0],'12');
+setActiveBhk(bhkTypes[0])
 
-  console.log(layoutData);
+},[])
   
 
 

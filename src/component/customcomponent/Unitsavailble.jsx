@@ -23,41 +23,41 @@ export default function Unitsavailble({ propertys }) {
     }
   ];
 
-  const [units,setUnits] = useState([]);
+  const [units, setUnits] = useState([]);
 
-  
+
 
 
 
   useEffect(() => {
-      const uni = JSON.parse(propertys.officeUnits);
+    const uni = JSON.parse(propertys.officeUnits);
 
-  setUnits([uni])
-  console.log(units.map((u) => u));
-  },[])
-  
+    setUnits([uni])
+    console.log(units.map((u) => u));
+  }, [])
+
   const [openDrawer, setOpenDrawer] = useState(false);
   const [activeUnit, setActiveUnit] = useState(null);
 
-      const formatCr = (value, decimals = 2, suffix = "cr onwards") => {
-        if (value == null || isNaN(value)) return "";
+  const formatCr = (value, decimals = 2, suffix = "cr onwards") => {
+    if (value == null || isNaN(value)) return "";
 
-        const num = Number(value);
-        const ONE_CRORE = 1e7;
-        const ONE_LAKH = 1e5;
+    const num = Number(value);
+    const ONE_CRORE = 1e7;
+    const ONE_LAKH = 1e5;
 
-        if (num >= ONE_CRORE) {
-            const val = +(num / ONE_CRORE).toFixed(decimals);
-            return `${val} ${suffix}`;
-        }
+    if (num >= ONE_CRORE) {
+      const val = +(num / ONE_CRORE).toFixed(decimals);
+      return `${val} ${suffix}`;
+    }
 
-        if (num >= ONE_LAKH) {
-            const val = +(num / ONE_LAKH).toFixed(decimals);
-            return `${val} L onwards`;
-        }
+    if (num >= ONE_LAKH) {
+      const val = +(num / ONE_LAKH).toFixed(decimals);
+      return `${val} L onwards`;
+    }
 
-        return num.toLocaleString("en-IN");
-    };
+    return num.toLocaleString("en-IN");
+  };
 
   const openOptions = (unit) => {
     setActiveUnit(unit);
@@ -84,22 +84,22 @@ export default function Unitsavailble({ propertys }) {
                   <div>
 
                   </div>
-                <div key={i} className="pt-3  flex justify-between">
-                  
-                  <div className="text-xs">
-                    <p className="font-medium"><span className="text-sm">{item.area} sq.ft.</span></p>
-                    <p className="text-gray-500"><span className="text-xs">{toSqm(item.area)} sq.m.</span></p>
+                  <div key={i} className="pt-3  flex justify-between">
+
+                    <div className="text-xs">
+                      <p className="font-medium"><span className="text-sm">{item.area} sq.ft.</span></p>
+                      <p className="text-gray-500"><span className="text-xs">{toSqm(item.area)} sq.m.</span></p>
+                    </div>
+
+
+                    <div className="text-right text-xs">
+                      <p className="font-semibold"><span className="text-xs">₹ {formatCr(item.price)}</span></p>
+                      <span className="text-gray-500 text-xs">Onwards</span>
+                    </div>
+
+
                   </div>
-
-
-                  <div className="text-right text-xs">
-                    <p className="font-semibold"><span className="text-xs">₹ {formatCr(item.price)}</span></p>
-                    <span className="text-gray-500 text-xs">Onwards</span>
-                  </div>
-
-
-                </div>
-                    <p className="text-gray-500 mb-5"><span className="text-xs font-medium">Possession from Aug, 2028</span></p>
+                  <p className="text-gray-500 mb-5"><span className="text-xs font-medium">Possession from Aug, 2028</span></p>
                 </div>
               ))}
             </div>
@@ -108,8 +108,8 @@ export default function Unitsavailble({ propertys }) {
               onClick={() => openOptions(u)}
               className="text-blue-600 mt-4 hover:underline cursor-pointer"
             >
-              <span className={`${u.items.length -2 > 0 ? '' : 'hidden'}`}>+ {u.items.length - 2}  More options</span> View all unit options
-
+              <span className={`${u.items.length - 2 > 0 ? '' : 'hidden'}`}>+ {u.items.length - 2}  More options</span>
+              <span className={`${u.items.length - 2 > 0 ? 'hidden' : ''}`}> View all unit options</span>
             </button>
           </div>
         ))}

@@ -25,6 +25,8 @@ import Unitsavailble from './customcomponent/Unitsavailble';
 import Reracollapse from './customcomponent/Reracollapse';
 import Investdetails from './customcomponent/Investdetails';
 import { useParams, useLocation } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
+import Seo from './Seo';
 
 
 
@@ -192,6 +194,13 @@ const Projectdetail = () => {
     setLayoutData(grouped);
   }, [propertys]);
 
+  
+  useEffect(() => {
+  if (propertys?.projectname) {
+    document.title = `${propertys.projectname}`;
+  }
+}, [propertys?.projectname]);
+
   useEffect(() => {
     fetchproperty()
   }, [npxid])
@@ -343,8 +352,18 @@ const Projectdetail = () => {
 
 
 
+
   return (
     <>
+    <Seo
+  title={`${propertys?.projectname || "Project"}`}
+  description={
+    propertys?.projectDescription
+      ? propertys.projectDescription.slice(0, 160)
+      : "Explore premium residential and commercial projects in India."
+  }
+  canonical={`https://www.indiadealss.com/project/${slug}`}
+/>
       <div className="flex justify-center flex-col md:flex-row mx-6">
         <div className="w-full md:w-[60%] m-2">
           <Collapage images={image} video={video} />

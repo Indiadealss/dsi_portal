@@ -107,6 +107,14 @@ export const submitProperty = createAsyncThunk(
   }
 );
 
+export const createGestLead = async (formatData) => {
+  return API.post(`/leaduser/genrate`,formatData,{
+    headers:{
+      "Content-Type":"multipart/form-data",
+    }
+  })
+}
+
 export const createLead = async (formData) => {
   return API.post(`/lead/lead`,formData,{
     headers:{

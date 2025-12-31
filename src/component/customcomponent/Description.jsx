@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Drawer } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import Leadgentaionform from "./Leadgentaionform";
+import ReactMarkdown from "react-markdown";
 
 export default function Description({ text }) {
   const [open, setOpen] = useState(false);
@@ -79,7 +80,7 @@ export default function Description({ text }) {
     marginTop: 64,
   }}
 >
-  <p className={`${aboutSpecifications ? 'hidden':"mt-4 leading-relaxed "}`}><span className="text-xs">{text}</span></p>
+  <span className={`${aboutSpecifications ? 'hidden':"mt-4 leading-relaxed text-xs"}`} style={{ whiteSpace: "pre-line" }}><ReactMarkdown >{text}</ReactMarkdown></span>
 </Drawer>
 
     {leadModel && (
