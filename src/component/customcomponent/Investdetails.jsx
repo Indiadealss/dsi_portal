@@ -18,9 +18,16 @@ const Investdetails = ({propertys}) => {
     }
     
       useEffect(() => {
-          const uni = JSON.parse(propertys.officeUnits);
+
+        if(typeof(propertys.officeUnits) === 'string'){
+            const uni = JSON.parse(propertys.officeUnits);
+            setUnits([uni])
+        }else{
+            setUnits([propertys.officeUnits])
+        }
+          
     
-      setUnits([uni])
+      
       console.log(units.map((u) => u));
       },[])
 
