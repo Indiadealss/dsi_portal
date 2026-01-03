@@ -4,7 +4,11 @@ const dealers = [
   {
     name: "INDIADEALSS",
     logo: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/299496974O-1622789292915.jpeg",
+    video: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/299496974O-1622789292915.jpeg",
+    reranumber:'',
+    member:'Property Advisor',
     badges: ["RERA Registered", "Property Advisor"],
+    number: '+91-7906518272'
   },
 ];
 
@@ -19,18 +23,21 @@ const DealerCards = () => {
         >
           {/* badges */}
           <div className="flex flex-col mb-4">
-            {d.badges.map((b, j) => (
-              <span
-                key={j}
-                className="bg-yellow-600 w-40 text-white text-xs font-semibold px-3 py-1 my-2 whitespace-nowrap"
+            <span
+                className={d.reranumber ? "bg-yellow-600 w-40 text-white text-xs font-semibold px-3 py-1 my-2 whitespace-nowrap" : "hidden"}
               >
-                {b}
+                RERA Registered
               </span>
-            ))}
+              <span
+                className={d.member ? "bg-yellow-600 w-40 text-white text-xs font-semibold px-3 py-1 my-2 whitespace-nowrap" : "hidden"}
+              >
+                {d.member}
+              </span>
+    
           </div>
 
           {/* Illustration */}
-          <div className="relative mb-4">
+          <div className="relative ">
             <div className="w-16 h-16 absolute object-cover top-20 left-5 rounded-full bg-white shadow-md flex items-center justify-center">
               <img
                 src={d.logo}

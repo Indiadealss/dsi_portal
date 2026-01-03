@@ -123,6 +123,18 @@ export const createLead = async (formData) => {
   })
 }
 
+export const createCampain = async (formData) => {
+  return API.post(`/adddealer/adddelear`,formData,{
+    headers:{
+      "Content-Type": "multipart/form-data",
+    },
+  })
+}
+
+export const getCampain = async () => {
+  return API.get(`/adddealer/geddealer`)
+}
+
 export const createFeature = async (formData) => {
   return API.post(`/feature/create`,formData, {
     headers:{

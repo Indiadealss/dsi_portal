@@ -11,7 +11,11 @@ const Investdetails = ({propertys}) => {
     
       
     
-    
+    if(!propertys.officeUnits){
+        return <div className='hidden'>
+            <p>loading</p>
+        </div>
+    }
     
       useEffect(() => {
           const uni = JSON.parse(propertys.officeUnits);

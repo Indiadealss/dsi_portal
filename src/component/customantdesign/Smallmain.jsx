@@ -35,6 +35,7 @@ const Smallmain = ({ title, data }) => {
       
       const newCards = data.map((item) => {
         const coverImages = item.images?.filter((img) => img.type === "cover") || [];
+        const bannerImages = item.images?.filter((img) => img.type === "cover") || [];
 
         const coverSrc =
           coverImages.length > 0

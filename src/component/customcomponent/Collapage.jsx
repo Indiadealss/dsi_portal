@@ -139,7 +139,7 @@ const Collapage = ({ images = [], video = [], columns = 2, gap = 4 }) => {
                   playsInline
                 />
               ) : (
-                <div onClick={() => setActiveImageIndex(index)}>
+                <div onClick={() => setActiveImageIndex(index)} className={item.img ? '': 'hidden'}>
                 <img
                   src={item.img}
                   alt={item.title}
