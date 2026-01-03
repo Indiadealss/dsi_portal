@@ -22,9 +22,12 @@ const Investmentoption = ({ propertys }) => {
    
    
      useEffect(() => {
-         const uni = JSON.parse(propertys.officeUnits);
-   
-     setUnits([uni])
+       if(typeof(propertys.officeUnits) === 'string'){
+            const uni = JSON.parse(propertys.officeUnits);
+            setUnits([uni])
+        }else{
+            setUnits([propertys.officeUnits])
+        }
      console.log(units.map((u) => u));
      },[])
 
