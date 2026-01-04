@@ -5,7 +5,8 @@ import slugReducer from './slugSlice';
 import userReducer from './userSlice';
 import filterSlice from "./filterSlice";
 import featureReducer from "./featureSlice";
-import enquireSlice from "./enquireSlice"
+import enquireSlice from "./enquireSlice";
+import titleSlug from './titleSlice';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
      user:userReducer,
      feature:featureReducer,
      enquire:enquireSlice,
+     title:titleSlug
   },
    middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

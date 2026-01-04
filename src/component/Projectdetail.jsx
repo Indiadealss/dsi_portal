@@ -27,6 +27,7 @@ import Investdetails from './customcomponent/Investdetails';
 import { useParams, useLocation } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
 import Seo from './Seo';
+import { setTitle } from './Redux/titleSlice';
 
 
 
@@ -198,6 +199,7 @@ const Projectdetail = () => {
   useEffect(() => {
   if (propertys?.projectname) {
     document.title = `${propertys.projectname}`;
+      dispatch(setTitle(propertys.projectname));
   }
 }, [propertys?.projectname]);
 
@@ -352,17 +354,20 @@ const Projectdetail = () => {
 
 
 
-
   return (
     <>
     <Seo
-  title={`${propertys?.projectname || "Project"}`}
+  title={`${propertys?.projectname || "IndiaDealss"}`}
   description={
     propertys?.projectDescription
       ? propertys.projectDescription.slice(0, 160)
       : "Explore premium residential and commercial projects in India."
   }
-  canonical={`https://www.indiadealss.com/project/${slug}`}
+  canonical={
+    slug
+      ? `https://www.indiadealss.com/project/${slug}`
+      : null
+  }
 />
       <div className="flex justify-center flex-col md:flex-row mx-6">
         <div className="w-full md:w-[60%] m-2">
