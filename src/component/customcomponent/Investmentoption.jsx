@@ -22,15 +22,25 @@ const Investmentoption = ({ propertys }) => {
    
    
      useEffect(() => {
-       if(typeof(propertys.officeUnits) === 'string'){
-            const uni = JSON.parse(propertys.officeUnits);
-            setUnits([uni])
-        }else{
-            setUnits([propertys.officeUnits])
-        }
-     console.log(units.map((u) => u));
-     },[])
+  if (!propertys?.officeUnits) return;
 
+  try {
+    let parsedUnits = [];
+
+    if (Array.isArray(propertys.officeUnits)) {
+      parsedUnits = propertys.officeUnits.map((unit) =>
+        typeof unit === "string" ? JSON.parse(unit) : unit
+      );
+    } else if (typeof propertys.officeUnits === "string") {
+      parsedUnits = [JSON.parse(propertys.officeUnits)];
+    }
+
+    setUnits(parsedUnits);
+  } catch (error) {
+    console.error("Invalid officeUnits data", error);
+    setUnits([]);
+  }
+}, [propertys?.officeUnits]);
       const getLowestPrice = (items) => {
   if (!items || items.length === 0) return null;
   return Math.min(...items.map(i => i.price));
