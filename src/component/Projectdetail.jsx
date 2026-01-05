@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getproperty, getPropertyByRera } from '../api/api';
+import { getCampain, getproperty, getPropertyByRera } from '../api/api';
 import { setProperty } from './Redux/propertyidSlice';
 import Collapage from './customcomponent/Collapage';
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -195,6 +195,32 @@ const Projectdetail = () => {
     setLayoutData(grouped);
   }, [propertys]);
 
+
+  // const npxid = propertys.npxid;
+    
+    console.log(npxid,'npxid');
+    
+    const [campainadd,setCampainadd] = useState(null);
+    useEffect(() => {
+      getcampaindetails(npxid)
+    },[])
+  
+    const getcampaindetails = async (npxid) => {
+          try{
+             const res = await getCampain(npxid);
+          //  console.log(res,'26');
+          //  const data = res.data.data[0];
+          //  console.log(data,'33');
+           
+           setCampainadd(res.data.data)
+            
+          }catch(err){
+             console.error(err);
+             
+          }
+       }
+
+
   
   useEffect(() => {
   if (propertys?.projectname) {
@@ -232,18 +258,24 @@ const Projectdetail = () => {
   }
 
 
+  useEffect(() => {
+    console.log(campainadd,typeof(campainadd),'275');
+    
+  },[campainadd])
   const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
   console.log(brochurePdf);
 
 
 
-  if (!propertys || !layoutData) {
+  if (!propertys || !layoutData || !campainadd) {
     return (
       <div className='my-3'>
         <p>Loading...</p>
       </div>
     )
   }
+  
+  
 
 
   const layoutDat = {
@@ -438,7 +470,7 @@ const Projectdetail = () => {
           )}
 
           {/* property sellers  */}
-          <div className=''>
+          <div className={campainadd.length === 0  ? 'hidden': ''}>
             <div className="flex justify-between flex-col md:flex-row">
               <h2><span className='text-lg'>Sellers you may contact for more details</span></h2>
               <button className='text-lg text-blue-500 font-medium me-4'>View All Sellers</button>
@@ -446,7 +478,7 @@ const Projectdetail = () => {
 
             {/* Sellers Cards */}
 
-            <DealerCards />
+            <DealerCards propertys={propertys} campainadd={campainadd} />
           </div>
 
 

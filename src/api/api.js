@@ -54,6 +54,9 @@ export const getPropertyByspid = async(sipid) => {
   return API.get(`/property/getPropertyByspid/${sipid}`);
 }
 
+export const getCampainbyId = async (npxid) => {
+  return API.get(`/adddealer/getcampainbyid`,npxid);
+}
 export const submitProperty = createAsyncThunk(
   "property/submitProperty",
   async (propertyData, { rejectWithValue }) => {
