@@ -44,8 +44,8 @@ const Antdcardcrousal = ({crousal}) => {
             <Carousel arrows   style={{margin:"auto"}} infinite={false} autoplay={autoplay} afterChange={handleAfterChange}  autoplaySpeed={autoplaySpeed} dots={false}>
                 {crousal.map((item,index) => {
                     return(
-                        <div className='key={index} className="flex justify-center rounded items-center'>
-                        <img src={item.banner} alt={index} className='rounded-t m-auto' />
+                        <div className='key={index} className="flex justify-center rounded items-center w-[54vw] h-[40vw]'>
+                        <img src={item.banner} alt={index} className='rounded-t m-auto w-[54vw] h-[40vw]' />
                 </div>
                     )
                 })}
