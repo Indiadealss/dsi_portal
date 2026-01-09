@@ -6,7 +6,7 @@ const Adddelercard = () => {
 
     const [name,setName] = useState('');
     const [npxid,setNpxid] = useState('');
-    const [logo,setLogo] = useState(null);
+    const [images,setImages] = useState(null);
     const [reranumber,setReranumber] = useState('');
     const [number,setNumber] = useState('');
     const [message,setMessage] = useState('');
@@ -36,11 +36,11 @@ const Adddelercard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(logo);
+        console.log(images,'FOR');
         
 
-        if(!name || !npxid || !number || !logo){
-            setMessage('❌ Please provide me all the details. Name Npxid Mobile Number logo');
+        if(!name || !npxid || !number || !images){
+            setMessage('❌ Please provide me all the details. Name Npxid Mobile Number images');
             return
         }
 
@@ -49,7 +49,13 @@ const Adddelercard = () => {
         formData.append("npxid",npxid);
         formData.append("reranumber",reranumber);
         formData.append("number",number);
-        formData.append("images",logo);
+        formData.append("images",images);
+
+        console.log("images:", images, typeof images);
+       for (const [key, value] of formData.entries()) {
+  console.log(key, value,'for');
+}
+        
 
         try {
             setLoading(true);
@@ -105,7 +111,7 @@ const Adddelercard = () => {
             type="file"
             accept="image/*"
             className="w-[80%] mx-auto border-2 p-2 rounded text-gray-500"
-            onChange={(e) => setLogo(e.target.files[0])}
+            onChange={(e) => setImages(e.target.files[0])}
           />
 
           <button 

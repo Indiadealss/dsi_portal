@@ -134,6 +134,22 @@ export const createCampain = async (formData) => {
   })
 }
 
+// upcoming projects Banners 
+
+export const createProjectBanner = async (formData) => {
+  return API.post(`/upcomingProjects/upcomingProjects`,formData,{
+    headers:{
+      "Content-Type": "multipart/form-data",
+    },
+  })
+}
+
+// get upcoming projects banners
+
+export const getProjectBanner = async () => {
+  return API.get(`/upcomingProjects/get`)
+}
+
 export const getCampain = async () => {
   return API.get(`/adddealer/geddealer`)
 }

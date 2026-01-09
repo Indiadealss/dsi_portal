@@ -27,6 +27,7 @@ import Cancellation from "./component/privacy/Cancellation";
 import Propertypageslug from "./Propertypageslug";
 import Recentactivity from "./component/Recentactivity";
 import Adddelercard from "./component/customcomponent/Adddelercard";
+import UpcomingProjects from "./component/customcomponent/Upcomingprojects";
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
     },
     {path:'/contact-us',element:<Contactus />},
     {path:"/addSomething-9890",element:<Addsomething />},
+    {path:"/addUpcomingProject",element:<UpcomingProjects />},
     {path:"/addDeler-021190",element:<Adddelercard />},
     {path:"/do/buyservie", element:<Buyservice />},
     {path:"/info/privacy",element:<Privacy />},

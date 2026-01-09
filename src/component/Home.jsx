@@ -20,7 +20,7 @@ import Customantservicecard from './customantdesign/Customantservicecard';
 import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
 import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
 import Contiunebrowser from './customcomponent/Contiunebrowser';
-import { getallProperty } from '../api/api';
+import { getallProperty, getProjectBanner } from '../api/api';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -30,6 +30,16 @@ const Home = () => {
   const location = 'All India';
   const [data,setData] = useState([]);
 
+  const [crousalData,setCrousalData] = useState();
+
+    const getcrousal = async  () => {
+      const res =  await  getProjectBanner()
+      console.log(res.data.data,'res 35');
+
+       setCrousalData(res.data.data);
+      
+  }
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 290) {
@@ -38,10 +48,12 @@ const Home = () => {
         setHideBanner(false);
       }
     };
+    getcrousal()
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
 
  
 
@@ -253,7 +265,7 @@ const Home = () => {
 
  }
 
-  const  crousalData = [
+  const  crousalDat = [
     {image:"https://picsum.photos/830/464?random=1"},
     {image:"https://picsum.photos/830/464?random=2"},
     {image:"https://picsum.photos/830/464?random=3"},
@@ -304,7 +316,7 @@ const Home = () => {
     },
   ]
 
-  if (!data) {
+  if (!data || !crousalData) {
     // console.log(data);
     
         return (
@@ -312,6 +324,10 @@ const Home = () => {
                 Loding...
             </div>
         )
+    }
+
+    if(crousalData){
+      console.log(crousalData);
     }
   return (
     <div className='mb-10'>

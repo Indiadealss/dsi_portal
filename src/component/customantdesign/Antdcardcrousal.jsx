@@ -3,12 +3,15 @@ import { Carousel,Card, Button } from 'antd'
 import { PauseOutlined } from '@ant-design/icons';  
 import { FaPlay } from "react-icons/fa6";
 
-const Antdcardcrousal = ({crousal,images}) => {
+const Antdcardcrousal = ({crousal}) => {
     const [progress,setProgress] = useState(0)
     const [autoplay,setAutoplay] = useState(true)
     const [currentSlide, setCurrentSlide] = useState(0);
     const autoplaySpeed = 5000; // 5sec
     const intervel = 50;
+
+    console.log(crousal.map((item) => item.banner));
+    
 
     const handleAfterChange = (index) => {
     setCurrentSlide(index);
@@ -42,7 +45,7 @@ const Antdcardcrousal = ({crousal,images}) => {
                 {crousal.map((item,index) => {
                     return(
                         <div className='key={index} className="flex justify-center rounded items-center'>
-                        <img src={item.image} alt={index} className='rounded-t m-auto' />
+                        <img src={item.banner} alt={index} className='rounded-t m-auto' />
                 </div>
                     )
                 })}
