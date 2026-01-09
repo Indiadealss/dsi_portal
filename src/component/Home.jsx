@@ -419,7 +419,7 @@ const Home = () => {
       />
     </div>
     </div>
-    <div style={{ padding: "40px",marginTop:"60px" }}>
+    <div style={{ padding: "40px",marginTop:"60px" }} className={`${crousalData.length === 0 ? 'hidden' : ''}`}>
           <h2 className=' font-bold text-black text-xl '>Upcoming Projects</h2>
           <p className=' text-xs font-medium text-gray-300 mb-3'>Visit these projects and get early bird benefits</p>
             <Antdcardcrousal  crousal={crousalData}/>
