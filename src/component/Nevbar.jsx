@@ -735,7 +735,7 @@ export default function Navbar() {
   {key:"shortlisted",label:<Link to='/shortlisted'><span className="text-sm">Shortlisted</span></Link>},
   {key:"contacted",label:<Link to='/contacted'><span className="text-sm">Contacted</span></Link>},
   {type:"divider"},
-  {key:"myindiadealss",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">MyINDIALDEALSS</span></Link>},
+  {key:"myindiadealss",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">My INDIADEALSS</span></Link>},
   {key:"",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link>},
   {type:"View All Responses",label:<Link to='/responses' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link>},
   {type:'Manage Boss',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link>},

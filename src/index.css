@@ -378,7 +378,7 @@ a {
   }
   .projectsPhotos{
     width: 10vw;
-    height: 5vw;
+    height: 21vw !important;
   }
 }
 
