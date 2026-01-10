@@ -263,7 +263,7 @@ const Projectdetail = () => {
     
   },[campainadd])
   const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
-  console.log(brochurePdf);
+  console.log(brochurePdf,'266');
 
 
 
@@ -538,14 +538,14 @@ const Projectdetail = () => {
           </div>
 
           {/* Interiors and Other Specifications */}
-          <div>
+          <div className='hidden'>
             <h2 className='flex'><span className='text-sm'>Interiors and Other Specifications </span>  <span className='font-normal mx-3 '><FaLongArrowAltRight /></span></h2>
             <Interdescription text={propertys.description} />
           </div>
 
 
           {/* Official brochure */}
-          <div>
+          <div className={brochurePdf ? '' : 'hidden'}>
             <div className="flex justify-between my-5">
               <div>
                 <h2><span className='text-lg text-gray-800'>View offical brochure</span></h2>
