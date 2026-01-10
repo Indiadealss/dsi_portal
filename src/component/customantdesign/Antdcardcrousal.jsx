@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Carousel,Card, Button } from 'antd'
 import { PauseOutlined } from '@ant-design/icons';  
 import { FaPlay } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
 const Antdcardcrousal = ({crousal}) => {
     const [progress,setProgress] = useState(0)
@@ -10,7 +11,9 @@ const Antdcardcrousal = ({crousal}) => {
     const autoplaySpeed = 5000; // 5sec
     const intervel = 50;
 
-    console.log(crousal.map((item) => item.banner));
+    console.log(crousal.map((item) => item.projecturl), 'project-url');
+
+    const navigate = useNavigate();
     
 
     const handleAfterChange = (index) => {
@@ -44,8 +47,9 @@ const Antdcardcrousal = ({crousal}) => {
             <Carousel arrows   style={{margin:"auto"}} infinite={false} autoplay={autoplay} afterChange={handleAfterChange}  autoplaySpeed={autoplaySpeed} dots={false}>
                 {crousal.map((item,index) => {
                     return(
-                        <div className='key={index} className="flex justify-center rounded items-center w-[54vw] h-[40vw]'>
-                        <img src={item.banner} alt={index} className='rounded-t m-auto w-[54vw] h-[40vw]' />
+                        <div className='key={index} className="flex justify-center rounded items-center w-[54vw] h-[40vw] pointer' onClick={() => navigate(item.projecturl)}
+>
+                        <img src={item.banner} alt={index} className='rounded-t m-auto w-[54vw] h-[40vw] pointer'   />
                 </div>
                     )
                 })}

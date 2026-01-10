@@ -8,6 +8,7 @@ const UpcomingProjects = () => {
     const [images,setImages] = useState(null);
     const [message,setMessage] = useState('');
     const [loading,setLoading] = useState(false);
+    const [projecturl,setProjecturl] = useState('');
     const [campaindetails,setCampainDetails] = useState(null);
 
    
@@ -27,6 +28,7 @@ const UpcomingProjects = () => {
 
         const formData = new FormData();
         formData.append("name",name);
+        formData.append("projecturl",projecturl)
         formData.append("images",images);
 
         console.log("images:", images, typeof images);
@@ -60,6 +62,14 @@ const UpcomingProjects = () => {
             value={name}
             className='border-2 border-gray-400 p-2 rounded mx-auto w-[80%] my-3'
             onChange={(e) => setName(e.target.value)}
+            />
+
+            <input 
+            type="text"
+            placeholder='Project URL'
+            value={projecturl}
+            className='border-2 border-gray-400 p-2 rounded mx-auto w-[80%] my-3'
+            onChange={(e) => setProjecturl(e.target.value)}
             />
 
           <input
