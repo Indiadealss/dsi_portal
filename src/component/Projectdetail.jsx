@@ -266,6 +266,10 @@ const Projectdetail = () => {
   console.log(brochurePdf,'266');
 
 
+  console.log(Object.keys(layoutData).length,'layoutData 269');
+  
+
+
 
   if (!propertys || !layoutData || !campainadd) {
     return (
@@ -464,7 +468,7 @@ const Projectdetail = () => {
           )}
 
           {propertys.property === 'residential' && (
-            <div className="my-5">
+            <div className={Object.keys(layoutData).length === 0 ? "hidden" : "my-5"}>
               <FloorPlans layoutData={layoutData} propertys={propertys} />
             </div>
           )}
