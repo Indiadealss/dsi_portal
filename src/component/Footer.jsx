@@ -89,7 +89,7 @@ function Footer() {
         <div>
           <h4 className="mb-3 font-semibold text-center ">Address</h4>
           <div className="">
-            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium">Rise shoplex SF-30, and 31 second floor ,Sector Techzone 4,Grater Noida West 201306</span></p>
+            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium">Unit No:- 320, 3rd Floor, Block C, Golden I, Techzone 4, Grater Noida West,201304</span></p>
           </div>
         </div>
       </div>

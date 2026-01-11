@@ -107,6 +107,7 @@ const Home = () => {
 
             return{
                 id:p._id,
+                property:p.property,
       images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
       title: locationData[0]?.apartment_name || p.projectname,
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
@@ -117,6 +118,7 @@ const Home = () => {
       price: p.price || 0,
       npxid:p.npxid? p.npxid : "N/A",
       deposit: p.deposit || "N/A",
+      unitData:p.unitData || "N/A",
       size: p.plotarea || 0,
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
@@ -326,6 +328,17 @@ const Home = () => {
         )
     }
 
+    
+    const residential = data.map(item => {
+  return item.property === 'residential' ? item : null;
+});
+
+  console.log(residential,'residential');
+  
+
+
+    
+
     if(crousalData){
       console.log(crousalData);
     }
@@ -404,6 +417,7 @@ const Home = () => {
           <h2 className=' font-bold text-black text-xl '>Handpicked Residential Projects</h2>
           <p className=' text-xs font-medium text-gray-300 mb-3'>Featured Residential projects across India</p>
         <div className="flex justify-evenly w-[85%] ">
+          <div className={!residential[0] ? 'hidden' : ''}>
       <Antdpropertycard
         image="https://picsum.photos/500/450?random=1"
         logo="https://picsum.photos/100/100?random=1"
@@ -411,7 +425,10 @@ const Home = () => {
         description="2,3,4 BHK Apartment, Tellapur, Hyderabad"
         price="₹ 99.71 Lacs - 2.58 Cr"
         featured
+        data={residential[0]}
       />
+      </div>
+      <div className={!residential[1] ? 'hidden' : ''}>
       <Antdpropertycard
         image="https://picsum.photos/500/450?random=1"
         logo="https://picsum.photos/100/100?random=1"
@@ -419,7 +436,9 @@ const Home = () => {
         description="4,5 BHK Independent House/Villa, Hoshangabad Road, Bhopal"
         price="₹ 1.95 Cr"
         featured
+        data={residential[1]}
       />
+      </div>
     </div>
     </div>
     <div style={{ padding: "40px",marginTop:"60px" }} className={`${crousalData.length === 0 ? 'hidden' : ''}`}>

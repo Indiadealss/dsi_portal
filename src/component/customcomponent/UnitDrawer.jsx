@@ -28,7 +28,7 @@ const leadGenration = () => {
             <div key={i} className="flex justify-between border-b pb-4">
               <p className="font-semibold text-lg">
                 {item.area} sq.ft.
-              <p className="text-gray-500">Possession from Aug, 2028</p>
+              {/* <p className="text-gray-500">Possession from Aug, 2028</p> */}
               </p>
 
               <div className="flex justify-between mt-2">

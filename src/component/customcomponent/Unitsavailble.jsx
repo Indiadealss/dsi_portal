@@ -114,7 +114,7 @@ export default function Unitsavailble({ propertys }) {
 
 
                   </div>
-                  <p className="text-gray-500 mb-5"><span className="text-xs font-medium">Possession from Aug, 2028</span></p>
+                  {/* <p className="text-gray-500 mb-5"><span className="text-xs font-medium">Possession from Aug, 2028</span></p> */}
                 </div>
               ))}
             </div>
