@@ -78,7 +78,7 @@ const Customcardcrousal = ({data}) => {
       {
         breakpoint: 1024, // Tablet
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 4,
           centerMode: true,
           centerPadding: "80px", // show half of next card
         },
@@ -86,7 +86,7 @@ const Customcardcrousal = ({data}) => {
       {
         breakpoint: 768, // Mobile
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           centerMode: true,
           centerPadding: "60px", // adjust to show partial next
         },
