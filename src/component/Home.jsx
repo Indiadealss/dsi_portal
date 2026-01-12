@@ -361,9 +361,9 @@ const Home = () => {
       <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
         {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
         <div className="lg:col-span-8 ms-3 space-y-10">
-          <Customcardcrousal data={data} />
+          {/* <Customcardcrousal data={data} /> */}
 
-        {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
+        <Smallmain  title='The most search project in location' data={data}/>
 
           <Customimagebar />
 
