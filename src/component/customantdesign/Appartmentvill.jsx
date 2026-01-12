@@ -18,7 +18,7 @@ const Appartmentvill = () => {
       {
         breakpoint: 1024, // Tablet
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           centerMode: true,
           centerPadding: "80px", // show half of next card
         },
@@ -74,7 +74,8 @@ const Appartmentvill = () => {
                 borderRadius: 12,
                 overflow: "hidden",
                 margin: "2px",
-                width:"94s%",
+                width:"100%",
+                height:"60vw",
                 position:"relative" // parent must be relative for overlay
               }}
             >
@@ -83,7 +84,10 @@ const Appartmentvill = () => {
                 alt={`Slide ${index}`}
                 style={{
                   width: "100%",
-                  height: "400px",
+                  borderRadius: 12,
+                  marginLeft:"2vw",
+                  marginRight:"2vw",
+                  height: "-webkit-fill-available",
                   objectFit: "cover",
                 }}
               />

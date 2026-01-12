@@ -147,8 +147,8 @@ const Newlaunchcard = ({ colu }) => {
                 </div>
 
                 <div className="flex justify-evenly flex-col md:flex-row">
-                  <div className="rounded-full w-auto md:w-15 md:h-15  bg-gray-500">
-                    <img src={item.image} alt="..." className=" md:w-18 md:h-15 rounded-lg  md:rounded-full" />
+                  <div className="rounded-full w-[max-content] md:w-15 md:h-15  bg-gray-500">
+                    <img src={item.image} alt="..." className="w-[20vw] h-[20vw] md:w-[20vw] md:h-[20vw] rounded-lg  md:rounded-full" />
                   </div>
                   <div className="px-2">
                     <h3>{item.title}</h3>
@@ -161,8 +161,8 @@ const Newlaunchcard = ({ colu }) => {
                 <div className="flex justify-evenly">
                   <img src={nl} alt="...." className="w-5 h-5" />
                   <div >
-                    <p className="text-xs">Get Preferred options</p>
-                    <p className="text-xs">@zero brokerage</p>
+                    <p className="text-lg">Get Preferred options</p>
+                    <p className="text-sm">@zero brokerage</p>
                   </div>
                   <div >
                     <button type="button" className="bg-[#022c6f] rounded text-white py-2 px-3">View Number</button>

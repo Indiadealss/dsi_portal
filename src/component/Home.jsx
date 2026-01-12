@@ -31,6 +31,7 @@ const Home = () => {
   const [data,setData] = useState([]);
 
   const [crousalData,setCrousalData] = useState();
+  const [HandpickedProject,setHandpickedProject] = useState();
 
     const getcrousal = async  () => {
       const res =  await  getProjectBanner()
@@ -332,6 +333,7 @@ const Home = () => {
     const residential = data.map(item => {
         if (item.property === 'residential'){
           console.log(item,'item property');
+          
           return item
         }
 });
