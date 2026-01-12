@@ -9,13 +9,15 @@ import { Link } from "react-router-dom";
 const Antdpropertycard = ({ image, logo, title, description, price, featured, data }) => {
 
 
+
+    console.log(data,'data not found 18');
     if (!data) {
         return <div>
             <p>Loading...</p>
         </div>
     }
 
-    console.log(data,'data not found 18');
+    
     
 
     const banner = data.images.find(img => img.type === 'banner')?.src;
