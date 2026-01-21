@@ -271,7 +271,7 @@ const Projectdetail = () => {
 
 
 
-  if (!propertys || !layoutData || !campainadd) {
+  if (!propertys || !layoutData) {
     return (
       <div className='my-3'>
         <p>Loading...</p>
