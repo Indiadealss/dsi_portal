@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCampain, getproperty, getPropertyByRera } from '../api/api';
+import { getCampain, getCampainbyId, getproperty, getPropertyByRera } from '../api/api';
 import { setProperty } from './Redux/propertyidSlice';
 import Collapage from './customcomponent/Collapage';
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -197,37 +197,37 @@ const Projectdetail = () => {
 
 
   // const npxid = propertys.npxid;
-    
-    console.log(npxid,'npxid');
-    
-    const [campainadd,setCampainadd] = useState(null);
-    useEffect(() => {
-      getcampaindetails(npxid)
-    },[])
-  
-    const getcampaindetails = async (npxid) => {
-          try{
-             const res = await getCampain(npxid);
-          //  console.log(res,'26');
-          //  const data = res.data.data[0];
-          //  console.log(data,'33');
-           
-           setCampainadd(res.data.data)
-            
-          }catch(err){
-             console.error(err);
-             
-          }
-       }
 
+  console.log(npxid, 'npxid');
 
-  
+  const [campainadd, setCampainadd] = useState(null);
   useEffect(() => {
-  if (propertys?.projectname) {
-    document.title = `${propertys.projectname}`;
-      dispatch(setTitle(propertys.projectname));
+    getcampaindetails(npxid)
+  }, [])
+
+  const getcampaindetails = async (npxid) => {
+    try {
+      const res = await getCampainbyId(npxid);
+      //  console.log(res,'26');
+      //  const data = res.data.data[0];
+      //  console.log(data,'33');
+
+      setCampainadd(res.data)
+
+    } catch (err) {
+      console.error(err);
+
+    }
   }
-}, [propertys?.projectname]);
+
+
+
+  useEffect(() => {
+    if (propertys?.projectname) {
+      document.title = `${propertys.projectname}`;
+      dispatch(setTitle(propertys.projectname));
+    }
+  }, [propertys?.projectname]);
 
   useEffect(() => {
     fetchproperty()
@@ -259,15 +259,15 @@ const Projectdetail = () => {
 
 
   useEffect(() => {
-    console.log(campainadd,typeof(campainadd),'275');
-    
-  },[campainadd])
+    console.log(campainadd, typeof (campainadd), '275');
+
+  }, [campainadd])
   const brochurePdf = propertys?.images?.find(img => img.type === "brouser")?.src;
-  console.log(brochurePdf,'266');
+  console.log(brochurePdf, '266');
 
 
-  console.log(Object.keys(layoutData).length,'layoutData 269');
-  
+  console.log(Object.keys(layoutData).length, 'layoutData 269');
+
 
 
 
@@ -278,8 +278,8 @@ const Projectdetail = () => {
       </div>
     )
   }
-  
-  
+
+
 
 
   const layoutDat = {
@@ -392,19 +392,19 @@ const Projectdetail = () => {
 
   return (
     <>
-    <Seo
-  title={`${propertys?.projectname || "IndiaDealss"}`}
-  description={
-    propertys?.projectDescription
-      ? propertys.projectDescription.slice(0, 160)
-      : "Explore premium residential and commercial projects in India."
-  }
-  canonical={
-    slug
-      ? `https://www.indiadealss.com/project/${slug}`
-      : null
-  }
-/>
+      <Seo
+        title={`${propertys?.projecttitle || "IndiaDealss"}`}
+        description={
+          propertys?.titleDescription
+            ? propertys.titleDescription
+            : "Explore premium residential and commercial projects in India."
+        }
+        canonical={
+          slug
+            ? `https://www.indiadealss.com/project/${slug}`
+            : null
+        }
+      />
       <div className="flex justify-center flex-col md:flex-row mx-6">
         <div className="w-full md:w-[60%] m-2">
           <Collapage images={image} video={video} />
@@ -428,9 +428,20 @@ const Projectdetail = () => {
           <div className={`${propertys.property === 'commercial' ? 'hidden' : ''}`}>
             <Divider orientation='center'>CONSTRUCTION STATUS</Divider>
             <Collapse
-              expandIconPosition='end'
-              items={[{ key: '1', label: `${propertys.availabestatus}`, children: <p className={`${propertys.availabestatus === "Ready to move" ? 'hidden' : ''}`}>Completion in Jan, 2028</p> }]}
+              expandIconPosition="end"
+              items={[
+                {
+                  key: '1',
+                  label: propertys.availabestatus,
+                  children: propertys.availabestatus === "Ready to move" ? (
+                    <p></p>
+                  ) : (
+                    <p className="text-gray-600">Completion {propertys.Possession}</p>
+                  ),
+                },
+              ]}
             />
+
           </div>
 
           {/* commercial projects */}
@@ -474,7 +485,7 @@ const Projectdetail = () => {
           )}
 
           {/* property sellers  */}
-          <div className={campainadd.length === 0  ? 'hidden': ''}>
+          <div className={campainadd.length === 0 ? 'hidden' : ''}>
             <div className="flex justify-between flex-col md:flex-row">
               <h2><span className='text-lg'>Sellers you may contact for more details</span></h2>
               <button className='text-lg text-blue-500 font-medium me-4'>View All Sellers</button>
@@ -588,7 +599,7 @@ const Projectdetail = () => {
             <div className="flex justify-between">
               <div>
                 <p><span className='text-xs font-bold text-gray-500'>DEVELOPED BY</span></p>
-                <p><span className=' font-bold'>{propertys.projectname}</span></p>
+                <p><span className=' font-bold'>{propertys.projectdeveloper}</span></p>
               </div>
             </div>
           </div>
