@@ -30,6 +30,10 @@ export const getUserDetatils = () => {
   )
 }
 
+export const updateUser = (formatData) => {
+  return axios.post("/api/auth/updateuserprofile",{formatData})
+}
+
 export const getLogout = async () => {
   return axios.post("/api/auth/logout", {}, { withCredentials: true })
 }
@@ -55,7 +59,7 @@ export const getPropertyByspid = async(sipid) => {
 }
 
 export const getCampainbyId = async (npxid) => {
-  return API.get(`/adddealer/getcampainbyid`,npxid);
+  return API.get(`/adddealer/getcampainbyid/${npxid}`);
 }
 export const submitProperty = createAsyncThunk(
   "property/submitProperty",
@@ -150,6 +154,7 @@ export const getProjectBanner = async () => {
   return API.get(`/upcomingProjects/get`)
 }
 
+// get campain by npxid
 export const getCampain = async () => {
   return API.get(`/adddealer/geddealer`)
 }
