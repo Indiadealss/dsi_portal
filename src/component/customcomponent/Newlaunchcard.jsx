@@ -107,7 +107,7 @@ const Newlaunchcard = ({ colu }) => {
   };
 
   return (
-    <>
+    <div className="hidden">
       <h2 className='font-bold text-xl'>Newly launched projects</h2>
       <p className='text-xs text-gray-500 font-medium'><Antdcrousal /></p>
       <div style={{ position: "relative", width: "100%" }} className="my-5" >
@@ -189,7 +189,7 @@ const Newlaunchcard = ({ colu }) => {
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 

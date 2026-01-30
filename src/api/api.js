@@ -42,7 +42,9 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
-export const getallProperty = async (page,filter,purpose='',propertyType='') => {
+export const getallProperty = async (page ='',filter = '',purpose='',propertyType='') => {
+  console.log(purpose,'purpose');
+  
   return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&propertyType=${propertyType}`);
 }
 

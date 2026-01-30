@@ -21,6 +21,7 @@ import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
 import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
 import Contiunebrowser from './customcomponent/Contiunebrowser';
 import { getallProperty, getProjectBanner } from '../api/api';
+import { useSelector } from 'react-redux';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -40,6 +41,11 @@ const Home = () => {
        setCrousalData(res.data.data);
       
   }
+
+  const user = useSelector((state) => state.user);
+
+  
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -358,7 +364,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className='mt-20 hidden lg:block'>
+      <div className={user.loggedIn ?  'mt-20 hidden lg:block' : 'hidden'}>
         {/* <Smallmain title='Continue browsing...' /> */}
         <Contiunebrowser title='Continue browsing...' />
       </div>

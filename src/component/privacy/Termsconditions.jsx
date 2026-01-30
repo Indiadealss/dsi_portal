@@ -60,7 +60,7 @@ export default function Termsconditions() {
                         <span className='text-lg font-medium'>2. Services Provided</span>
                        <div className='ms-4'>
                             <span>
-                                INDIADEALSS Real Estate Pvt. Ltd. provides:
+                                BRANDSDOOR Real Estate Pvt. Ltd. provides:
                             </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>
@@ -406,7 +406,7 @@ export default function Termsconditions() {
                             </span>
                             <br />
                         <span>
-                                INDIADEALSS Real Estate Pvt. Ltd.
+                                BRANDSDOOR Real Estate Pvt. Ltd.
                             </span>
                              <ul className="mt-2   pl-5 text-sm leading-8">
                             <li>

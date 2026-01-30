@@ -10,7 +10,7 @@ export default function Privacy() {
                 <p><span className='text-sm'> Home > About us</span></p>
                 <div className='bg-blue-50  py-5 rounded-lg mt-3'>
                     <img src={privacy} alt='...' className='w-[4%] mx-auto' />
-                    <h2 className='text-center mt-3'><span className='text-center'>INDIADEALSS Policy</span></h2>
+                    <h2 className='text-center mt-3'><span className='text-center'>BRANDSDOOR Policy</span></h2>
                 </div>
 
                 {/* privacy polocy */}
@@ -19,7 +19,7 @@ export default function Privacy() {
                     <h2><span>Privacy Policy</span></h2>
                     <p className='mt-5' style={{ lineHeight: '1.2', fontWeight: '400' }}>
                         <span className='text-sm' style={{ fontWeight: '400', lineHeight: '0' }}>
-                            INDIADEALSS Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
+                            BRANDSDOOR Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
                             <br />
                             <br />
                             <span>
@@ -350,7 +350,7 @@ export default function Privacy() {
                                 Our website or promotional materials may include links to third-party websites.
                             </li>
                             <li>
-                                INDIADEALSS Real Estate Pvt. Ltd. is not responsible for the privacy practices, accuracy, or content of these external platforms.
+                                BRANDSDOOR Real Estate Pvt. Ltd. is not responsible for the privacy practices, accuracy, or content of these external platforms.
                             </li>
                         </ul>
                        </div>
@@ -413,7 +413,7 @@ export default function Privacy() {
                             </span>
                             <br />
                         <span>
-                                INDIADEALSS Real Estate Pvt. Ltd.
+                                BRANDSDOOR Real Estate Pvt. Ltd.
                             </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>

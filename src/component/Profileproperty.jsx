@@ -41,7 +41,9 @@ export const Profileproperty = ({ setValidator }) => {
   const [manualPossession, setManualPossession] = useState(false);
 const [manualMonth, setManualMonth] = useState("");
 const [manualYear, setManualYear] = useState("");
+const [considerfaq, setConsiderFaq] = useState("");
 
+const [faqText, setFaqText] = useState("");
 
   const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
 const [entries, setEntries] = useState([]);    // stores size + price pairs
@@ -49,6 +51,29 @@ const [officeunit, setOfficeunit] = useState([]);        // final output
 
 
   const [units, setUnits] = useState([]);
+
+ const buildFaqFromTextarea = (projectname, faqText) => {
+  const points = faqText
+    .split("\n")
+    .map(p => p.trim())
+    .filter(Boolean);
+
+  const jsonBlock =
+    "```json\n" +
+    JSON.stringify(points, null, 4) +
+    "\n```";
+
+  return [
+    {
+      question: `Why you should consider ${projectname}?`,
+      answer: [jsonBlock]
+    }
+  ];
+};
+
+
+  
+
 
   const formatPriceLabel = (value) => {
   if (!value || isNaN(value)) return "";
@@ -148,11 +173,13 @@ const handleDeleteEntry = (index) => {
 
   useEffect(() => {
     const tf = Number(totalFloor)
+    console.log(considerfaq);
+    
     dispatch(updateField({
       bedroom: noBedroom, bathroom: noBathroom, balconies: noBalconies, plotarea: paPlotArea, plotSizein: plotarea, buildarea: buArea, buildSizein: buildarea, carpetarea: caArea, carpetSizein: carpet,rera:reraNumber,
-      totalfloor: totalFloor, availabestatus: choiseProperty, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,officeUnits:officeunit,
+      totalfloor: totalFloor, availabestatus: choiseProperty, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,officeUnits:officeunit
     }))
-  }, [description])
+  }, [description,considerfaq])
 
   useEffect(() => {
   dispatch(updateField({ offices }));
@@ -446,7 +473,7 @@ useEffect(() => {
     if (setValidator) {
       setValidator(validateForm);
     }
-  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, choiseProperty, description, numFlats, projectTotalFloor]);
+  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, choiseProperty, description, numFlats, projectTotalFloor,faqText]);
 
   function validateForm() {
     if (propertyDataFirst.purpose != 'Project' && propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom) {
@@ -479,6 +506,22 @@ useEffect(() => {
       alert("Please specify the unique aspect of your property.")
       return false;
     }
+
+    if(faqText === '' || !faqText){
+      alert("Please set the Answer")
+      return false;
+    }
+
+if (faqText) {
+  dispatch(updateField({
+    faqanswer: buildFaqFromTextarea(
+      propertyDataFirst.projectname,
+      faqText
+    )
+  }));
+}
+
+    
     return true
   }
   return (
@@ -1488,8 +1531,17 @@ useEffect(() => {
       )}
     </div>
 
+    <h3><span className='text-xl font-medium'>Why You Should Consider {propertyDataFirst.projectname}</span></h3>
+    <div>
+        <textarea id="message" rows="5" value={faqText} onInput={(e) => setFaqText(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder={`Enter FAQ points (one per line)
+Example:
+Prime location in Greater Noida
+Easy access to highways
+Modern amenities`} />
+      </div>
 
-      <h3 className='font-medium text-xl'>What makes your property unique</h3>
+
+      <h3 className='font-medium text-xl'> <span className='text-xl font-medium'>What makes your property unique</span></h3>
       <p className='text-xs font-medium  text-gray-500'>Adding description will increase your listing visibility</p>
       <div>
         <textarea id="message" rows="4" value={description} onInput={(e) => setDescription(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.." />

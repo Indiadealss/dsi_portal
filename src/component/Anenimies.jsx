@@ -49,6 +49,10 @@ export const Anenimies = ({setValidator}) => {
     const [stove,setStove] = useState(false);
     const [furnisherAvailable,setFurnisherAvailable] = useState([]);
     const [brokerageCharge,setBrokerageCharge] = useState('');
+    const [projecttitle , setProjecttitle] = useState('');
+    const [titleDescription,setTitleDescription] = useState('');
+    const [projectdeveloper,setProjectdeveloper] = useState('');
+    const [projectKeyword,setProjectKeyword] = useState('');
 
 
     const  getLocationIcon =  async (name) => {
@@ -116,8 +120,8 @@ export const Anenimies = ({setValidator}) => {
   };
 
     useEffect(() => {
-      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,available_furniture:furnisherAvailable,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price+selectedPricing,road_width:roadWidth ,roadWidthSize:roadSizein}))
-    },[price])
+      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,available_furniture:furnisherAvailable,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price+selectedPricing,road_width:roadWidth ,roadWidthSize:roadSizein,projecttitle:projecttitle,titleDescription:titleDescription,projectdeveloper:projectdeveloper,projectKeyword:projectKeyword}))
+    },[price,projecttitle,projectdeveloper,projectKeyword,titleDescription])
 
     const handleSelect = (value) =>{
     setRoadSizein(value);
@@ -155,7 +159,7 @@ export const Anenimies = ({setValidator}) => {
               if (setValidator) {
                 setValidator(validateForm);
               }
-            }, [otherRooms,furnishing,proptyFacing,pobackup,amenitie,selectbulding,addFeature,prppertyF,watersource,overlo,locatadvance,price]);
+            }, [otherRooms,furnishing,proptyFacing,pobackup,amenitie,selectbulding,addFeature,prppertyF,watersource,overlo,locatadvance,price,projecttitle,projectdeveloper,projectKeyword,titleDescription]);
 
             function validateForm(){
               if(!furnishing){
@@ -173,6 +177,13 @@ export const Anenimies = ({setValidator}) => {
               if(!price){
                 alert('Add price');
                 return false;
+              }
+
+              if(propertyDataFirst.purpose === 'Project'){
+                if(!projecttitle || !titleDescription || !projectdeveloper){
+                  alert('Add Project Title, Add Title Description, Add Project Description');
+                  return false;
+                }
               }
           return true;
         }
@@ -1127,6 +1138,27 @@ export const Anenimies = ({setValidator}) => {
         <label for="percentage-radio-2" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Percentage</label>
         
         </div>
+        </div>
+
+        {/* projecttitle,titleDescription,projectdeveloper */}
+
+        <div className={`${propertyDataFirst.purpose === 'Project' ? 'mt-5 flex flex-col': 'hidden'}`}>
+          <div>
+            <label htmlFor="">Project Title </label>
+            <input type="text" className='border border-gray-400 rounded my-1 outline-none' value={projecttitle} onChange={(e) => setProjecttitle(e.target.value)} />
+            </div>
+            <div>
+              <label htmlFor="">Description </label>
+          <input type="text" className='border border-gray-400 rounded my-1 outline-none' value={titleDescription} onChange={(e) => setTitleDescription(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="">Project Developer </label>
+          <input type="text" className='border border-gray-400 rounded my-1 outline-none outline-none' value={projectdeveloper} onChange={(e) => setProjectdeveloper(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="">Meta Keyword</label>
+            <input type="text" className='border border-gray-400 rounded my-1 outline-none' value={projectKeyword} onChange={(e) => setProjectKeyword(e.target.value)} />
+          </div>
         </div>
         
     </>

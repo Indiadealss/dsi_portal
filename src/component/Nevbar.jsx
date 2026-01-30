@@ -657,7 +657,7 @@ export default function Navbar() {
       </div>
       <div className="w-full border-t border-gray-300 "></div>
       <div className="p-3 flex">
-      <span className="text-gray-500 cursor-pointer " onClick={() => setLocationNav('All India')}>All India</span>
+      <span className="text-gray-500 cursor-pointer mt-[4px]" onClick={() => setLocationNav('All India')}>All India</span>
       <div className="h-6 w-1 border-e border-gray-300 mx-5"></div>
       </div>
     </div>
@@ -735,7 +735,7 @@ export default function Navbar() {
   {key:"shortlisted",label:<Link to='/shortlisted'><span className="text-sm">Shortlisted</span></Link>},
   {key:"contacted",label:<Link to='/contacted'><span className="text-sm">Contacted</span></Link>},
   {type:"divider"},
-  {key:"myindiadealss",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">My INDIADEALSS</span></Link>},
+  {key:"myindiadealss",label:<Link to='/myindiadealss' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">My DOOR</span></Link>},
   {key:"",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link>},
   {type:"View All Responses",label:<Link to='/responses' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link>},
   {type:'Manage Boss',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link>},
@@ -866,8 +866,7 @@ export default function Navbar() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        background: "#011638",
-        borderBottom: "1px solid #f0f0f0",
+        background: "#011638"
       }}
     >
       <div className="flex">
@@ -893,7 +892,7 @@ export default function Navbar() {
           fontSize: 18,
         }}
       >
-        <img src={'https://cdn.indiadealss.com/indiadealss/indiadealss/1766744904714-real_estate-removebg-preview.png'} alt="logo" width={150} />
+        <img src="https://cdn.indiadealss.com/indiadealss/indiadealss/1769755996536-brand.7b1679c8.svg" alt="BRANDSDOOR"  width={120} />
       </a>
 
       </div>

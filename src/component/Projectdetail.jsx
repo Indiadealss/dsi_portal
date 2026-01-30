@@ -369,6 +369,9 @@ const Projectdetail = () => {
   // Convert to actual array
   const result = JSON.parse(answer);
 
+  console.log(answer);
+  
+
 
   const firstThree = result.slice(0, 3);
   const remaining = result.slice(3);
@@ -393,7 +396,7 @@ const Projectdetail = () => {
   return (
     <>
       <Seo
-        title={`${propertys?.projecttitle || "IndiaDealss"}`}
+        title={`${propertys?.projecttitle || "BRANDSDOOR"}`}
         description={
           propertys?.titleDescription
             ? propertys.titleDescription

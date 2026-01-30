@@ -34,6 +34,7 @@ const initialState = {
     description: "",
     images: [],
     video: [],
+    faqanswer: [],
     otherrooms: [],
     furnishing: "",
     propertyfacing:"",

@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+  optimizeDeps:{
+    include : ["mammoth"]
+  },
   server:{
     host: true,              // ✅ allow network & ngrok access
     port: 5173,

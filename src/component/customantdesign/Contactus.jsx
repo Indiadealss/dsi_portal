@@ -58,7 +58,7 @@ const Contactus = () => {
 
             <div className='w-[300px] mx-auto'>
               <input type="checkbox" className='' />
-              <label htmlFor="" className=''>I agree to be contacted by INDIADEALSS for promotions & SMS alerts</label>
+              <label htmlFor="" className=''>I agree to be contacted by BRANDSDOOR for promotions & SMS alerts</label>
             </div>
             
             <button className="rounded bg-blue-600 px-3 m-10 ms-12">Submit</button>

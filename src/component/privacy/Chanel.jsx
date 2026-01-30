@@ -16,7 +16,7 @@ export default function Chanel() {
                 {/* privacy polocy */}
 
                 <div className='mt-5'>
-                    <h4><span>INDIADEALSS Real Estate Pvt. Ltd.</span></h4>
+                    <h4><span>BRANDSDOOR Real Estate Pvt. Ltd.</span></h4>
                     <p className='mt-5' style={{ lineHeight: '1.2', fontWeight: '400' }}>
                         <span className='text-sm' style={{ fontWeight: '400', lineHeight: '0' }}>
                             This Refund & Cancellation Policy outlines the terms under which payments, bookings, or service charges made through DSI Indiadealss Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) may be cancelled or refunded. By using our services, you agree to the conditions mentioned below.
@@ -346,7 +346,7 @@ export default function Chanel() {
                         <span className='text-lg font-medium'>11. Company Liability</span>
                         <br />
                         <span>
-                            INDIADEALSS Real Estate Pvt. Ltd. acts as an intermediary between customers and developers.
+                            BRANDSDOOR Real Estate Pvt. Ltd. acts as an intermediary between customers and developers.
                         </span>
                        <div className='ms-4'>
                         <span>
@@ -387,7 +387,7 @@ export default function Chanel() {
                             </span>
                             <br />
                         <span>
-                                INDIADEALSS Real Estate Pvt. Ltd.
+                                BRANDSDOOR Real Estate Pvt. Ltd.
                             </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>

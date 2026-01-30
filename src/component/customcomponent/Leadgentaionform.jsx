@@ -1,29 +1,63 @@
-import React, { useEffect, useState } from 'react'
-import { IoIosArrowRoundForward } from "react-icons/io";
+import React, { useEffect, useState } from "react";
 import { ImFolderDownload } from "react-icons/im";
-import { useSelector } from 'react-redux';
-import { createLead } from '../../api/api';
-import Afterlead from './Afterlead';
+import { useSelector } from "react-redux";
+import { createLead } from "../../api/api";
+import Afterlead from "./Afterlead";
 
 const Leadgentaionform = ({ setLeadModel }) => {
+  const user = useSelector((state) => state.user);
+  const project = useSelector((state) => state.propertyid);
 
-  const [Name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [id, setId] = useState('');
-  const [propertyid, setPropertyid] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [ready, setReady] = useState(false);
-
-  const [errors, setErrors] = useState({});
+  const [countryCode ,setCountryCode] = useState()
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selected, setSelected] = useState("");
+  const [reason,setReason] = useState("");
+  const [youPropertyDealer,setYouPropertyDealer] = useState("")
   const [agreeTerms, setAgreeTerms] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    let newErrors = {};
+  const planningOption = [
+    { label: "3 Months", value: "3 Months" },
+    { label: "6 Months", value: "6 Months" },
+    { label: "More than 6 months", value: "More than 6 months" }
+  ];
 
-    if (!Name.trim()) {
-      newErrors.Name = "Name is required";
+  const yourReason = [
+    {
+      label: "Investment",
+      value: "Investment"
+    },
+    {
+      label: "Self Use",
+      value: "Self Use"
     }
+  ]
+
+  const countryCodes = [
+    { code: "+91", country: "IND" },
+    { code: "+1", country: "USA" },
+    { code: "+44", country: "UK" },
+    { code: "+971", country: "UAE" },
+    { code: "+61", country: "AUS" }
+  ];
+
+  /* ================= PREFILL USER DATA ================= */
+  useEffect(() => {
+    if (user?.loggedIn && project?.data?._id) {
+      setName(user.name || "");
+      setPhoneNumber(user.mobile?.slice(-10) || "");
+    }
+  }, [user, project]);
+
+  /* ================= VALIDATION ================= */
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!name.trim()) newErrors.name = "Name is required";
 
     if (!phoneNumber.trim()) {
       newErrors.phoneNumber = "Phone number is required";
@@ -31,35 +65,30 @@ const Leadgentaionform = ({ setLeadModel }) => {
       newErrors.phoneNumber = "Phone number must be 10 digits";
     }
 
-    if (!selected) {
-      newErrors.selected = "Please select when you plan to buy";
-    }
+    if (!selected) newErrors.selected = "Please select a buying timeline";
 
-    if (!agreeTerms) {
+    if(!reason) newErrors.reason = "Please select Your Reason";
+
+    if (!agreeTerms)
       newErrors.agreeTerms = "You must agree to Terms & Conditions";
-    }
 
     setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0; // no errors → form valid
+    return Object.keys(newErrors).length === 0;
   };
 
-
-
-
-  const user = useSelector((state) => state.user);
-  const project = useSelector((state) => state.propertyid);
-
-  console.log(user, 'hello');
-
-
+  /* ================= API CALL ================= */
   const createLeads = async (uid, pid) => {
 
     const formdata = new FormData();
-    formdata.append("user_id", uid);
-    formdata.append("property_id", pid)
-    formdata.append("purpose", '')
-    formdata.append("message", '')
+    if(user?.id){
+      formdata.append("user_id", user.id);     
+    }
+    formdata.append("Name",name);
+    formdata.append("PhoneNumber",phoneNumber);
+    formdata.append("property_id", project.data._id);
+    formdata.append("projectname",project.data.projectname);
+    formdata.append("purpose", reason);
+    formdata.append("message", "");
     try {
       const res = await createLead(formdata);
       console.log(res);
@@ -75,66 +104,33 @@ const Leadgentaionform = ({ setLeadModel }) => {
 
   }
 
+
+  /* ================= SUBMIT ================= */
+  const handleSubmit = async () => {
+    console.log('check');
+    
+    if (!validateForm()) return;
+
+    console.log('let');
+    
+
+    try {
+      setLoading(true);
+      await createLeads();
+      setReady(true);
+    } catch (err) {
+      console.error("Lead creation failed", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const setLeadFunction = () => {
     setLeadModel(false); // 3. close Lead modal lage
   }
 
-  useEffect(() => {
-    if (user?.loggedIn) {
-      console.log("User loaded:", user._id);
-      console.log("Project loaded:", project.data._id);
+  const termsCondition = 'I agree to the Terms & Conditions and Privacy Policy'
 
-      setName(user.name);
-      setPhoneNumber(user.mobile.slice(-10));
-      setId(user.id);
-      setPropertyid(project.data._id);
-
-      createLeads(user.id, project.data._id);
-      setLoading(true);
-    }
-  }, []);
-
-
-
-
-  const planningOption = [
-    {
-      name: '3 Months',
-      label: '3 Months',
-      value: '3 Months'
-    },
-    {
-      name: '6 Months',
-      label: '6 Months',
-      value: '6 Months'
-    },
-    {
-      name: 'More than 6 months',
-      label: 'More than 6 months',
-      value: 'More than 6 months'
-    }
-  ];
-
-  const [countryCode, setCountryCode] = useState("+91");
-  const [selected, setSelected] = useState("");
-
-  const countryCodes = [
-    { code: "+91", country: "IND" },
-    { code: "+1", country: "USA" },
-    { code: "+44", country: "UK" },
-    { code: "+971", country: "UAE" },
-    { code: "+61", country: "AUS" }
-  ];
-
-
-
-  const handleSubmit = () => {
-    if (!validateForm()) return;
-    console.log('hello','134');
-
-    // setLoading(true);
-    // createLeads(id, propertyid);
-  };
   return (
     <div className="fixed inset-0 flex  justify-center bg-black/90 z-50">
       <div className='mt-[10vw]'>
@@ -153,38 +149,58 @@ const Leadgentaionform = ({ setLeadModel }) => {
             <div className=" mt-4 w-[25vw]">
               <span className='text-xs font-medium'>BASIC INFORMATION</span>
               {/* reason to buy */}
-              <div className='flex justify-between my-5'>
+                {errors.reason && <p className="text-red-500 text-xs mt-5">{errors.reason}</p>}
+              <div className='flex justify-between mb-5'>
                 Your reason to buy is
 
-                <div class="flex items-center mb-4">
-                  <input id="Investment" type="radio" value="" name="reason" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="Investment" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"> Investment</label>
-                </div>
-                <div class="flex items-center mb-4">
-                  <input  id="self-use" type="radio" value="" name="reason" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="self-use" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"> Self Use</label>
-                </div>
+                {yourReason.map((option, index) => (
+                    <label
+                      key={index}
+                      className="flex items-center gap-3 cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name={option.value}
+                        value={option.value}
+                        checked={reason === option.value}
+                        onChange={() => setReason(option.value)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                      />
+
+                      <span className="text-gray-400 ">{option.label}</span>
+                    </label>
+                  ))}
+
 
               </div>
               {/* property Dealor */}
               <div className='flex justify-between'>
                 Are you a property dealer
 
-                <div class="flex items-center mb-4">
-                  <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
-                </div>
-                <div class="flex items-center mb-4">
-                  <input  id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                  <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
-                </div>
+                {[{label:"Yes",value:"Yes"},{label:"No",value:"No"}].map((option, index) => (
+                    <label
+                      key={index}
+                      className="flex items-center gap-3 cursor-pointer"
+                    >
+                      <input
+                        type="radio"
+                        name={option.value}
+                        value={option.value}
+                        checked={youPropertyDealer === option.value}
+                        onChange={() => setYouPropertyDealer(option.value)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500"
+                      />
+
+                      <span className="text-gray-400 ">{option.label}</span>
+                    </label>
+                  ))}
 
               </div>
 
               {/* name of the user */}
               <label className='text-xs font-bold text-gray-500'>Name</label>
-              <input type='text' value={Name} onInput={(e) => setName(e.currentTarget.value)} className='w-full border-b border-gray-200 outline-none' placeholder='Enter your Name' />
-              {errors.Name && <p className="text-red-500 text-xs">{errors.Name}</p>}
+              <input type='text' value={name} onInput={(e) => setName(e.currentTarget.value)} className='w-full border-b border-gray-200 outline-none' placeholder='Enter your Name' />
+              {errors.Name && <p className="text-red-500 text-xs">{errors.name}</p>}
               {/* Mobile Number of the user */}
               <div className='my-5'>
                 <label className='text-xs font-bold text-gray-500 ms-10'>Phone</label>
@@ -224,7 +240,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
                     >
                       <input
                         type="radio"
-                        name={name}
+                        name={option.value}
                         value={option.value}
                         checked={selected === option.value}
                         onChange={() => setSelected(option.value)}
@@ -251,8 +267,9 @@ const Leadgentaionform = ({ setLeadModel }) => {
                     <label className='text-gray-500 font-medium mx-3'>I am interested in site visits.</label>
                   </div>
                   <div className='flex'>
-                    <input type="checkbox" className='text-gray-500' />
+                    <input type="checkbox" className='text-gray-500' checked={agreeTerms} onChange={(e) => setAgreeTerms(e.target.value)} />
                     <label className='text-gray-500 font-medium mx-3'>I agree to the Terms & Conditions and Privacy Policy</label>
+                    {errors.agreeTerms && <p className="text-red-500 text-xs">{errors.agreeTerms}</p>}
                   </div>
                 </div>
 
@@ -280,7 +297,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
 
 
     </div>
-  )
-}
+  );
+};
 
-export default Leadgentaionform
+export default Leadgentaionform;

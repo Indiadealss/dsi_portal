@@ -76,7 +76,7 @@ export const PropertiesData = () => {
                 id:p._id,
                 spid:p.spid,
       images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
-      title: locationData?.apartment_name || "Untitled Property",
+      title: locationData?.apartment_name || p.projectname,
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
       subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${locationData.City}`}`,
       bathroom: p.bathroom ? `${p.bathroom} Baths` : "N/A",

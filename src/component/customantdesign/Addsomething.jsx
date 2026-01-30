@@ -265,7 +265,7 @@ const handleCreateoverlookingfeature = async (e) => {
 
          <button 
          onClick={activetabFunction}
-         name='otherroom'
+         name='Other Room'
           className={`px-4 py-2 rounded text-white ${activeTab === "otherroom" ? "bg-blue-600 cursor-pointer" : "bg-gray-400 cursor-pointer"}`}
         >
           Other Room
