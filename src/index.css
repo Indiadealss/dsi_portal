@@ -119,7 +119,6 @@ input[type=number]{
 
 :where(.css-1v28nim).ant-card .ant-card-body {
   padding: 0 !important;
-  display: none;
 }
 .darkVoilet{
   color: #011638 !important;

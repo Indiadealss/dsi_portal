@@ -892,7 +892,7 @@ export default function Navbar() {
           fontSize: 18,
         }}
       >
-        <img src="https://cdn.indiadealss.com/indiadealss/indiadealss/1769755996536-brand.7b1679c8.svg" alt="BRANDSDOOR"  width={120} />
+        <img src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1770966675035-BrandDoor%20Logo%20PNG.png" alt="BRANDSDOOR"  width={80} />
       </a>
 
       </div>
