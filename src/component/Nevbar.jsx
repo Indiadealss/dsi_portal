@@ -657,7 +657,7 @@ export default function Navbar() {
       </div>
       <div className="w-full border-t border-gray-300 "></div>
       <div className="p-3 flex">
-      <span className="text-gray-500 cursor-pointer mt-[4px]" onClick={() => setLocationNav('All India')}>All India</span>
+      {/* <span className="text-gray-500 cursor-pointer mt-[4px]" onClick={() => setLocationNav('All India')}>All India</span> */}
       <div className="h-6 w-1 border-e border-gray-300 mx-5"></div>
       </div>
     </div>
@@ -866,7 +866,8 @@ export default function Navbar() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        background: "#011638"
+        background: "#011638",
+        height:'80px'
       }}
     >
       <div className="flex">
@@ -892,13 +893,13 @@ export default function Navbar() {
           fontSize: 18,
         }}
       >
-        <img src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1770966675035-BrandDoor%20Logo%20PNG.png" alt="BRANDSDOOR"  width={80} />
+        <img src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1771509319781-brandsdoorlog.png" alt="BRANDSDOOR"  width={180} height={100} />
       </a>
 
       </div>
 
 {/* <!-- Dropdown menu --> */}
- <Dropdown
+ {/* <Dropdown
       trigger={["click", "hover"]}
       dropdownRender={() => dropdownContent} // 👈 full control
       placement="bottomLeft"
@@ -910,7 +911,7 @@ export default function Navbar() {
           <DownOutlined />
         </Space>
       </a>
-    </Dropdown>
+    </Dropdown> */}
 
       </div>
 

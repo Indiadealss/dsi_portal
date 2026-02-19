@@ -8,7 +8,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
   const user = useSelector((state) => state.user);
   const project = useSelector((state) => state.propertyid);
 
-  const [countryCode ,setCountryCode] = useState()
+  const [countryCode ,setCountryCode] = useState("+91")
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selected, setSelected] = useState("");
@@ -200,7 +200,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
               {/* name of the user */}
               <label className='text-xs font-bold text-gray-500'>Name</label>
               <input type='text' value={name} onInput={(e) => setName(e.currentTarget.value)} className='w-full border-b border-gray-200 outline-none' placeholder='Enter your Name' />
-              {errors.Name && <p className="text-red-500 text-xs">{errors.name}</p>}
+              {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
               {/* Mobile Number of the user */}
               <div className='my-5'>
                 <label className='text-xs font-bold text-gray-500 ms-10'>Phone</label>
@@ -267,7 +267,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
                     <label className='text-gray-500 font-medium mx-3'>I am interested in site visits.</label>
                   </div>
                   <div className='flex'>
-                    <input type="checkbox" className='text-gray-500' checked={agreeTerms} onChange={(e) => setAgreeTerms(e.target.value)} />
+                    <input type="checkbox" className='text-gray-500' checked={agreeTerms} onChange={(e) => setAgreeTerms(e.target.checked)} />
                     <label className='text-gray-500 font-medium mx-3'>I agree to the Terms & Conditions and Privacy Policy</label>
                     {errors.agreeTerms && <p className="text-red-500 text-xs">{errors.agreeTerms}</p>}
                   </div>
