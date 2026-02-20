@@ -21,6 +21,7 @@ import Antddobluecardcrousal from './customantdesign/Antddobluecardcrousal';
 import Antdcitiescardcrousal from './customantdesign/Antdcitiescardcrousal';
 import Contiunebrowser from './customcomponent/Contiunebrowser';
 import { getallProperty, getProjectBanner } from '../api/api';
+import homepageBaner from '../Images/banner.jpg';
 import { useSelector } from 'react-redux';
 const Home = () => {
 
@@ -354,10 +355,10 @@ const Home = () => {
       console.log(crousalData);
     }
   return (
-    <div className='mb-10'>
+    <div>
       <div className='block'>
         <div className='relative'>
-          <Banner image={'https://cdn.brandsdoor.in/indiadealss/indiadealss/1771064306563-brandsdone-home-14-02-26page.jpg.jpeg'} />
+          <Banner image={homepageBaner} />
           <div className='absolute  topSearchbox  object-cover w-[-webkit-fill-available] flex '>
             <Searchbox />
           </div>

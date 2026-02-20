@@ -191,11 +191,15 @@ h2 {
   line-height: 1.1;
 }
 
+.navbackground{
+  background-color: #011638 !important;
+}
+
 .menu-btn{
   font-weight: bold;
-  color: whitesmoke;
+  color: #011638;
   letter-spacing: 0.05rem;
-  background: #011638 !important;
+  background: transparent !important;
 }
 
 
@@ -213,7 +217,6 @@ h2 {
 }
 .menu-btn:hover{
   background-color: transparent !important;
-  color: whitesmoke !important;
   letter-spacing: 0.05rem;
 }
 
@@ -373,7 +376,7 @@ a {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    height: 20vw !important;
+    height: 25vw !important;
     border-radius: 0;
   }
   .projectsPhotos{

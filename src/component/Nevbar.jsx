@@ -677,7 +677,7 @@ export default function Navbar() {
     const handleScroll = () => {
       // console.log(window.scrollY);
       
-       if(window.scrollY > 257 || location.pathname !== '/' ){
+       if(window.scrollY > 79 || location.pathname !== '/' ){
         setScroll(true);
       }else{
         setScroll(false)
@@ -745,13 +745,51 @@ export default function Navbar() {
   { type: "divider" },
   { key: "logout", danger: true, label:  logout}
 ];
-
+  const [scrolled, setScrolled] = useState(false);
+const [visible, setVisible] = useState(true);
   const [open, setOpen] = useState(false);
   const [openWeb, setOpenWeb] = useState(false);
   const [activeParent, setActiveParent] = useState(null);
   const screens = Grid.useBreakpoint();
   const isMobile = !screens.md;
   const isTablet = !screens.lg;
+
+    useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 80) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
+useEffect(() => {
+  let lastScroll = 0;
+
+  const handleScroll = () => {
+    const currentScroll = window.scrollY;
+
+    setScrolled(currentScroll > 80);
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      setVisible(false); // scrolling down
+    } else {
+      setVisible(true); // scrolling up
+    }
+
+    lastScroll = currentScroll;
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
   
 
   // Custom dropdown
@@ -857,8 +895,16 @@ export default function Navbar() {
   return (
     <>
     <Header
+    className={`w-full  left-0 z-50 transition-all duration-50 
+  ${
+    scrolled
+      ? "fixed text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
+      : `absolute text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'bg-transparent' : 'navbackground'}`
+  }
+  ${visible ? "top-0" : "top"}
+  `}
       style={{
-        position: "sticky",
+        position: "",
         top: 0,
         zIndex: 100,
         width: "100%",
@@ -866,7 +912,7 @@ export default function Navbar() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        background: "#011638",
+        background: "transparent",
         height:'80px'
       }}
     >
@@ -945,11 +991,23 @@ export default function Navbar() {
   )}
 
   {/* Post Property button */}
-  <Button className={`${location.pathname === '/post-property' || location.pathname === '/postproperty' ? "hidden postHiddn" : "menu-btn default-btn bg-[#011638] postPropertyNavbtn"}`}>
-    <Link to="/post-property" className="px-5">
-      Post Property
-    </Link>
-  </Button>
+  <Button
+  className={`px-6 py-2 rounded-md border transition-all duration-300
+  ${
+    scrolled
+      ? " text-white border-[#011638]"
+      : "bg-transparent text-white border-white  "
+  }
+  ${
+    location.pathname === '/post-property' || location.pathname === '/postproperty'
+      ? "hidden"
+      : ""
+  }`}
+>
+  <Link to="/post-property">
+    Post Property
+  </Link>
+</Button>
 
     
   
