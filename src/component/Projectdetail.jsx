@@ -408,7 +408,7 @@ const Projectdetail = () => {
             : null
         }
       />
-      <div className="flex justify-center flex-col md:flex-row mx-6">
+      <div className="flex justify-center flex-col mt-7 md:flex-row mx-6">
         <div className="w-full md:w-[60%] m-2">
           <Collapage images={image} video={video} />
           <p><span className='text-xs'>Home > Project in > {propertys.projectname}</span></p>
