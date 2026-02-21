@@ -145,7 +145,7 @@ const Leadgentaionform = ({ setLeadModel }) => {
         </div>
         <div className="bg-white rounded-xl shadow-lg p-6   mt-10">
 
-          <div className='flex justify-between w-[60vw]'>
+          <div className='flex flex-cols justify-between w-[60vw]'>
             <div className=" mt-4 w-[25vw]">
               <span className='text-xs font-medium'>BASIC INFORMATION</span>
               {/* reason to buy */}
