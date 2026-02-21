@@ -898,8 +898,8 @@ useEffect(() => {
     className={`w-full  left-0 z-50 transition-all duration-50 
   ${
     scrolled
-      ? "sticky lg:fixed text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
-      : `sticky lg:absolute text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'navbackground lg:bg-transparent' : 'navbackground'}`
+      ? "fixed text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
+      : `absolute text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'bg-transparent' : 'navbackground'}`
   }
   ${visible ? "top-0" : "top"}
   `}
