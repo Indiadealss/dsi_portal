@@ -992,7 +992,7 @@ useEffect(() => {
 
   {/* Post Property button */}
   <Button
-  className={`px-6 py-2 rounded-md border transition-all duration-300 hidden lg:block postPropertyNavbtn
+  className={`px-6 py-2 rounded-md border transition-all duration-300
   ${
     scrolled
       ? " text-white border-[#011638]"
