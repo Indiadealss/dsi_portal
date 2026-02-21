@@ -899,7 +899,7 @@ useEffect(() => {
   ${
     scrolled
       ? "fixed text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
-      : `absolute text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'bg-transparent' : 'navbackground'}`
+      : `sticky lg:absolute text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'navbackground lg:bg-transparent' : 'navbackground'}`
   }
   ${visible ? "top-0" : "top"}
   `}
@@ -916,15 +916,16 @@ useEffect(() => {
         height:'80px'
       }}
     >
-      <div className="flex">
+      <div className="flex w-[-webkit-fill-available] justify-between">
       {/* Mobile Drawer */}
   {isTablet && (
     <Button
       type="text"
       aria-label="Open navigation"
       style={{color:"whitesmoke", textAlign:'left'}}
-      icon={<CgMenuLeft />}
+      icon={<CgMenuLeft className="text-3xl my-auto" />}
       onClick={() => setOpen(true)}
+      className="my-auto"
     />
   )}
       {/* Logo */}
@@ -941,23 +942,6 @@ useEffect(() => {
       >
         <img src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1771509319781-brandsdoorlog.png" alt="BRANDSDOOR"  width={180} height={100} />
       </a>
-
-      </div>
-
-{/* <!-- Dropdown menu --> */}
- {/* <Dropdown
-      trigger={["click", "hover"]}
-      dropdownRender={() => dropdownContent} // 👈 full control
-      placement="bottomLeft"
-      className={`${scroll ? 'hidden':'hidden lg:block'}`}
-    >
-      <a onClick={(e) => e.preventDefault()}>
-        <Space className="text-white  px-3 py-1 rounded-md cursor-pointer">
-          {locationNav}
-          <DownOutlined />
-        </Space>
-      </a>
-    </Dropdown> */}
 
       </div>
 
@@ -992,7 +976,7 @@ useEffect(() => {
 
   {/* Post Property button */}
   <Button
-  className={`px-6 py-2 rounded-md border transition-all duration-300
+  className={`px-6 py-2 rounded-md border transition-all duration-300 postPropertyNavbtn
   ${
     scrolled
       ? " text-white border-[#011638]"
@@ -1048,6 +1032,41 @@ useEffect(() => {
     />
     )}
 </div>
+
+        {/* Profile Dropdown */}
+  <Dropdown
+    placement="bottomRight"
+    menu={{ items: profileItems }}
+    trigger={["click"]}
+    className=""
+    
+  >
+    <Button type="text" className="my-auto" >
+      <Space>
+        <Avatar size="small" className="navBtn"  icon={<UserOutlined />} />
+        <DownOutlined className="navBtn " />
+      </Space>
+    </Button>
+  </Dropdown>
+
+{/* <!-- Dropdown menu --> */}
+ {/* <Dropdown
+      trigger={["click", "hover"]}
+      dropdownRender={() => dropdownContent} // 👈 full control
+      placement="bottomLeft"
+      className={`${scroll ? 'hidden':'hidden lg:block'}`}
+    >
+      <a onClick={(e) => e.preventDefault()}>
+        <Space className="text-white  px-3 py-1 rounded-md cursor-pointer">
+          {locationNav}
+          <DownOutlined />
+        </Space>
+      </a>
+    </Dropdown> */}
+
+      </div>
+
+      
 
       
 

@@ -256,6 +256,10 @@ a{
   }
 }
 
+.loginBtnForMobile{
+  display: none;
+}
+
 @media only screen and (max-width: 900px) {
   .postPropertyNavbtn{
     display: none !important;
@@ -263,7 +267,11 @@ a{
   .mobileDisplay{
   display: none !important;
 }
+.loginBtnForMobile{
+  display: flex;
 }
+}
+
 
 .clip-slant {
   clip-path: polygon(0 0, 100% 50%, 0 100%);
