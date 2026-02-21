@@ -30,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "./Redux/userSlice";
 import { getLogout } from "../api/api";
 import { updateFilter } from "./Redux/filterSlice";
+import Mobilenavcustombtn from "./customantdesign/Mobilenavcustombtn";
 
 const { Header } = Layout;
 
@@ -985,15 +986,11 @@ useEffect(() => {
       )
     )
 ) : (
-  <div
-    className={`${
-      isMobile
-        ? "w-[50vw] mx-2"
-        : "w-[67vw] lg:w-[50vw] mx-2 lg:me-10"
-    }`}
-  >
-    <Custominputserchbox />
-  </div>
+  !isMobile && (   // 🔥 This line hides search on mobile
+    <div className="w-[67vw] lg:w-[50vw] mx-2 lg:me-10">
+      <Custominputserchbox />
+    </div>
+  )
 )}
 
   
@@ -1061,22 +1058,15 @@ useEffect(() => {
 
       {/* Drawer for mobile */}
       <Drawer
-        title="Navigation"
-        placement="bottom"
-        closable
-        open={open}
-        onClose={() => setOpen(false)}
-        bodyStyle={{ padding: 0 }}
-        height="100%"
-        width="100%"
-      >
-        <Menu
-          mode="inline"
-          items={menuItems}
-          onClick={() => setOpen(false)}
-          selectedKeys={[]}
-        />
-      </Drawer>
+  placement="bottom"
+  closable={false}
+  open={open}
+  onClose={() => setOpen(false)}
+  height="100%"
+  bodyStyle={{ padding: 0 }}
+>
+ <Mobilenavcustombtn setOpen={setOpen} setShowLogin={setShowLogin} />
+</Drawer>
 
       <Drawer
         title="Navigation"

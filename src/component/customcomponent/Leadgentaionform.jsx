@@ -132,9 +132,9 @@ const Leadgentaionform = ({ setLeadModel }) => {
   const termsCondition = 'I agree to the Terms & Conditions and Privacy Policy'
 
   return (
-    <div className="fixed inset-0 flex  justify-center bg-black/90 z-50">
-      <div className='mt-[10vw]'>
-        <div className='flex justify-between'>
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
+  <div className="w-full max-w-5xl">
+        <div className='flex flex-col sm:flex-row sm:justify-between gap-3'>
           <p><span className='text-white font-medium'>Please share your details to download brochure</span></p>
           <button
             onClick={() => setLeadModel(false)}
@@ -145,12 +145,12 @@ const Leadgentaionform = ({ setLeadModel }) => {
         </div>
         <div className="bg-white rounded-xl shadow-lg p-6   mt-10">
 
-          <div className='flex flex-cols justify-between w-[60vw]'>
-            <div className=" mt-4 w-[25vw]">
+          <div className='flex flex-col lg:flex-row gap-10'>
+            <div className="mt-4 w-full lg:w-1/2">
               <span className='text-xs font-medium'>BASIC INFORMATION</span>
               {/* reason to buy */}
                 {errors.reason && <p className="text-red-500 text-xs mt-5">{errors.reason}</p>}
-              <div className='flex justify-between mb-5'>
+              <div className='flex flex-col sm:flex-row sm:justify-between gap-3 mb-5'>
                 Your reason to buy is
 
                 {yourReason.map((option, index) => (
@@ -226,13 +226,13 @@ const Leadgentaionform = ({ setLeadModel }) => {
               </div>
 
             </div>
-            <div className='w-[30vw] mx-5'>
+            <div className='w-full lg:w-1/2'>
               <p><span className='text-xs font-medium my-5'>OPTIONAL INFORMATION</span></p>
               <div className='my-5'>
                 <span className='text-xs font-medium text-gray-500'>By when you are planning to buy the property?</span>
                 {/* Dynamic Radio button */}
 
-                <div className="flex justify-between mt-1">
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mt-2">
                   {planningOption.map((option, index) => (
                     <label
                       key={index}
@@ -277,14 +277,14 @@ const Leadgentaionform = ({ setLeadModel }) => {
                 {/* Download Bauher */}
 
                 <div className='mt-10'>
-                  <button className='font-bold  text-blue-500 border shadow-sm p-2 rounded cursor-pointer flex h-10' onClick={handleSubmit}><ImFolderDownload className='m-1' />Download Brochure</button>
+                  <button className='w-full lg:w-auto font-bold text-blue-500 border shadow-sm p-3 rounded flex items-center justify-center gap-2' onClick={handleSubmit}><ImFolderDownload className='m-1' />Download Brochure</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-50">
+          <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
             <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
