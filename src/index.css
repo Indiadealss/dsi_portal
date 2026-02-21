@@ -208,6 +208,10 @@ h2 {
   color: white !important;
 }
 
+.LoginBtn{
+  color: blue;
+  background-color: white;
+}
 .serchboxDropDown{
   padding: 10px !important;
   border: none;
@@ -260,9 +264,29 @@ a{
   display: none;
 }
 
+.propertyNavbar{
+  position: fixed;
+}
+
+.propertyNavbar2{
+  position: absolute;
+}
+
 @media only screen and (max-width: 900px) {
   .postPropertyNavbtn{
     display: none !important;
+  }
+
+  .propertyNavbar{
+    position: sticky;
+  }
+
+  .propertyNavbar2{
+    position: sticky;
+  }
+
+  .navbackgroundSec{
+     background-color: #011638 !important;
   }
   .mobileDisplay{
   display: none !important;
@@ -317,9 +341,7 @@ a {
   font-size: 24px;
 }
 
-.cutit{
-  display: none;
-}
+
 
 
 /* ===== Mobile (≥425px) ===== */

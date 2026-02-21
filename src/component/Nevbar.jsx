@@ -39,6 +39,7 @@ const { Header } = Layout;
 
 // Menu Data
 const menuItems = [
+
   {
     key: "ForBuyers",
     label: "For Buyers",
@@ -898,8 +899,8 @@ useEffect(() => {
     className={`w-full  left-0 z-50 transition-all duration-50 
   ${
     scrolled
-      ? "fixed text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
-      : `absolute text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'bg-transparent' : 'navbackground'}`
+      ? "propertyNavbar text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
+      : `propertyNavbar2 text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'navbackgroundSec bg-transparent' : 'navbackground'}`
   }
   ${visible ? "top-0" : "top"}
   `}
@@ -923,12 +924,13 @@ useEffect(() => {
       type="text"
       aria-label="Open navigation"
       style={{color:"whitesmoke", textAlign:'left'}}
-      icon={<CgMenuLeft />}
+      icon={<CgMenuLeft  className="text-2xl"/>}
       onClick={() => setOpen(true)}
+      className="mt-3 mx-3"
     />
   )}
       {/* Logo */}
-      <div className={`${scroll && isMobile ? 'cutit flex' : 'flex' }`}>
+      <div className={`${scroll && isMobile ? ' flex' : 'flex' }`}>
       <a
         href="/"
         
@@ -963,36 +965,42 @@ useEffect(() => {
 
       {/* Right side */}
       <div style={{ display: "flex", alignItems: "center" }}>
-  {!scroll ? (
-    // Show nav menu items before scrolling
-    !isTablet &&
-      menuItems.map((item) =>
-        item.children ? (
-          <Dropdown
-            key={item.key}
-            dropdownRender={() => getDropdownRender(item)}
-            trigger={["hover"]}
-          >
-            <Button type="text" className="menu-btn">
-              {item.label}
-            </Button>
-          </Dropdown>
-        ) : (
-          <Button key={item.key} type="text" className="menu-btn">
+ {!scroll ? (
+  !isTablet &&
+    menuItems.map((item) =>
+      item.children ? (
+        <Dropdown
+          key={item.key}
+          dropdownRender={() => getDropdownRender(item)}
+          trigger={["hover"]}
+        >
+          <Button type="text" className="menu-btn">
             {item.label}
           </Button>
-        )
+        </Dropdown>
+      ) : (
+        <Button key={item.key} type="text" className="menu-btn">
+          {item.label}
+        </Button>
       )
-  ) : (
-    // After scrolling past banner -> show search input
-    <div className={`${location.pathname === '/post-property' || location.pathname === '/postproperty' ? "hidden postHiddn" : " w-[67vw] lg:w-[50vw] mx-2 lg:me-10"}`}>
-      <Custominputserchbox />
-    </div>
-  )}
+    )
+) : (
+  <div
+    className={`${
+      isMobile
+        ? "w-[50vw] mx-2"
+        : "w-[67vw] lg:w-[50vw] mx-2 lg:me-10"
+    }`}
+  >
+    <Custominputserchbox />
+  </div>
+)}
+
+  
 
   {/* Post Property button */}
   <Button
-  className={`px-6 py-2 rounded-md border transition-all duration-300
+  className={`px-6 py-2 rounded-md border transition-all duration-300 postPropertyNavbtn
   ${
     scrolled
       ? " text-white border-[#011638]"
@@ -1027,10 +1035,10 @@ useEffect(() => {
     className="navBtn"
     
   >
-    <Button type="text LoginHideMobile" >
+    <Button type="text " >
       <Space>
-        <Avatar size="small" className="navBtn"  icon={<UserOutlined />} />
-        <DownOutlined className="navBtn postPropertyNavbtn" />
+        <Avatar size="small" className="LoginBtn text-3xl"  icon={<UserOutlined />} />
+        <DownOutlined className="" />
       </Space>
     </Button>
   </Dropdown>
