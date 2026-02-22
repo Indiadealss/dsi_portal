@@ -3,6 +3,7 @@ import { ImFolderDownload } from "react-icons/im";
 import { useSelector } from "react-redux";
 import { createLead } from "../../api/api";
 import Afterlead from "./Afterlead";
+import { useNavigate } from "react-router-dom";
 
 const Leadgentaionform = ({ setLeadModel }) => {
   const user = useSelector((state) => state.user);
@@ -19,6 +20,21 @@ const Leadgentaionform = ({ setLeadModel }) => {
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const navigate = useNavigate();
+
+
+    const property = useSelector((state) => state.propertyid.data);
+  
+    const [pdfFile, setPdfFile] = useState(null);
+  
+  
+    useEffect(() => {
+      const pdf = property.images.filter((item) => item.type === 'brouser')
+      setPdfFile(pdf[0].src)
+      console.log(pdf[0].src, "ikl");
+  
+    }, [])
 
   const planningOption = [
     { label: "3 Months", value: "3 Months" },
@@ -91,7 +107,9 @@ const Leadgentaionform = ({ setLeadModel }) => {
     formdata.append("message", "");
     try {
       const res = await createLead(formdata);
-      console.log(res);
+      console.log(res.status);
+     
+      
     } catch (error) {
       console.log(error);
 
@@ -117,7 +135,9 @@ const Leadgentaionform = ({ setLeadModel }) => {
     try {
       setLoading(true);
       await createLeads();
-      setReady(true);
+      window.open(pdfFile, "_blank");
+        navigate("/sucessfullydownload");
+    
     } catch (err) {
       console.error("Lead creation failed", err);
     } finally {
@@ -288,11 +308,11 @@ const Leadgentaionform = ({ setLeadModel }) => {
             <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-        {ready && (
+        {/* {ready && (
           <div>
             <Afterlead setReadyModal={setReady} setLeadfunction={setLeadFunction} />
           </div>
-        )}
+        )} */}
       </div>
 
 

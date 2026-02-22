@@ -1,4 +1,5 @@
 import { useRoutes } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Postproperty } from './component/Postproperty'
@@ -50,13 +51,16 @@ import Emailers from "./component/Projectslead/Emailers";
 import Omniads from "./component/Projectslead/Omniads";
 import Allresponse from "./component/Manageresponse/Allresponse";
 import Editprojectdetails from "./component/myindiadealss/Editprojectdetails";
+import Thankyou from "./component/customcomponent/Thankyou";
 
 function App() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   // console.log(user);
-  
+  const location = useLocation();
+
+  const hideLayout = location.pathname === "/sucessfullydownload";
 
    useEffect(() => {
     getUserDetatils()
@@ -79,6 +83,7 @@ function App() {
   
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    {path:"/sucessfullydownload",element:<Thankyou />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
@@ -130,9 +135,9 @@ function App() {
   return (
     <>
     <Scrooltop>
-      <Navbar />   {/* 👈 always visible */}
+      {!hideLayout && <Navbar />}   {/* 👈 always visible */}
       {routes}
-      <Footer />
+      {!hideLayout && <Footer />}
       </Scrooltop>
     </>
   );

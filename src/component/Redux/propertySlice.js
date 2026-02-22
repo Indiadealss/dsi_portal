@@ -53,7 +53,8 @@ const initialState = {
     size: "",
     higlights: [],
     owner_type:'',
-    owner:''
+    owner:'',
+    currentProjectPdf:''
   },
   errors: {},
   isSubmitting: false,
