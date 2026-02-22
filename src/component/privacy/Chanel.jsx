@@ -394,7 +394,7 @@ export default function Chanel() {
                                info@indiadealss.com
                             </li>
                             <li>
-                                +91 9818763100
+                                +91 9818764200
                             </li>
                             <li>
                                UNIT No: 320, TOWER C, GOLDEN I, TECHZONE 4, Grater Noida, 201009 

@@ -31,12 +31,12 @@ const Contactus = () => {
     {
       icon: <FontAwesomeIcon icon={faPhone} className="text-white text-lg" />,
       title: "CALL US NOW",
-      desc: "Tel : +91–9818763100",
+      desc: "Tel : +91–9818764200",
     },
     {
       icon: <FontAwesomeIcon icon={faPhone} className="text-white text-lg" />,
       title: "BEST – BRANDSDOOR  Experience Satisfaction Team",
-      desc: "Customer Care: +91–9818763100\n7 Days | 8:00 AM – 8:00 PM",
+      desc: "Customer Care: +91–9818764200\n7 Days | 8:00 AM – 8:00 PM",
     },
     // {
     //   icon: <FontAwesomeIcon icon={faEnvelope} className="text-white text-lg" />,

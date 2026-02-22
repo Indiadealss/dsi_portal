@@ -26,7 +26,7 @@ function Footer() {
             <img src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1771509319781-brandsdoorlog.png" alt="..." width={200} />
           </a>
           <div className="">
-            <p><span className="pt-2 px-2 text-xl text-blue-600"><PhoneOutlined className="rotate-90" /></span><span className="font-medium text-xl ">+91 9818763100</span></p>
+            <p><span className="pt-2 px-2 text-xl text-blue-600"><PhoneOutlined className="rotate-90" /></span><span className="font-medium text-xl ">+91 9818764200</span></p>
             <p className="flex"><span className="pt-2 text-blue-600 px-2 text-xl"><MdOutlineAttachEmail  /></span><span className="font-medium text-xl ">info@indiadealss.com</span></p>
             </div>
           
