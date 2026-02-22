@@ -417,7 +417,7 @@ export default function Privacy() {
                             </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>
-                               info@indiadealss.com
+                               brandsdoor.in@gmail.com
                             </li>
                             <li>
                                 +91 9818764200

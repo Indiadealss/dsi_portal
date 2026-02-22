@@ -216,7 +216,7 @@ Our liability is limited to the extent of services provided directly by us.
                             </span>
                              <ul className="mt-2   pl-5 text-sm leading-8">
                             <li>
-                               info@indiadealss.com
+                               brandsdoor.in@gmail.com
                             </li>
                             <li>
                                 +91 9818764200
