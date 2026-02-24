@@ -119,11 +119,11 @@ const coverImages = covers.length
         {card.map((item, i) => (
           <div key={i} className="px-2">
             <div className="bg-white  overflow-hidden text-center">
-              <img
+              <Link to={`/${createSlug(item)}?preference=S`}><img
                 src={item.img}
                 alt={item.label}
                 className="w-full h-32 rounded-lg object-cover rounded-t-xl"
-              />
+              /></Link>
               <Link to={`/${createSlug(item)}?preference=S`}>
                 <p className="py-2 text-sm font-medium cursor-pointer">
                   {item.label}

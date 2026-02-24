@@ -41,7 +41,7 @@ const Dreamherosection = () => {
         {/* Left Image */}
         <div className="order-2 md:order-1">
           <img
-            src="https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/bulding.jpeg"
+            src="https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1771931030939-BUY%20A%20HOME.jpg"
             alt="Home Banner"
             style={{ width: "100%", borderRadius: "12px" }}
           />

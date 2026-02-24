@@ -169,7 +169,7 @@ const Home = () => {
 
  const handpickherosection = {
   rentHome:[{
-    img : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bulding_2.jpeg",
+    img : "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1771931556648-PLOTS.jpg",
     title:"BUY PLOTS/LAND",
     subtitle:"Residential & Commerical Plots/Land",
     subtitleDesc:"Explore Residential,Agricultural, Industrial and Commerical Plots/Land",
@@ -221,7 +221,7 @@ const Home = () => {
   }
   ],
   postPropertyViaWhatsapp:[{
-    img : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bulding_3.jpeg",
+    img : "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1771931807683-Post%20via%20%20Whatsapp.jpg",
     title:`Post via  Whatsapp`,
     subtitle:"Sell or rent faster at the right price!",
     subtitleDesc:"List your property now",
@@ -429,7 +429,7 @@ const Home = () => {
           <h2 className=' font-bold text-black text-xl '>Handpicked Residential Projects</h2>
           <p className=' text-xs font-medium text-gray-300 mb-3'>Featured Residential projects across India</p>
         <div className="flex justify-evenly w-[85%] ">
-          <div className={!residential[0] ? 'hidden' : ''}>
+          <div className={!residential[0] ? '' : ''}>
       <Antdpropertycard
         image="https://picsum.photos/500/450?random=1"
         logo="https://picsum.photos/100/100?random=1"
@@ -458,9 +458,9 @@ const Home = () => {
           <p className=' text-xs font-medium text-gray-300 mb-3'>Visit these projects and get early bird benefits</p>
             <Antdcardcrousal  crousal={crousalData}/>
         </div>
-        <div style={{padding:"40px",marginTop:"60px"}}>
+        {/* <div style={{padding:"40px",marginTop:"60px"}}>
           < Dreamherosection />
-        </div>
+        </div> */}
         <div style={{padding:"40px",marginTop:"60px"}}>
           < Handpickherosection content={handpickherosection.rentHome} />
         </div>
