@@ -21,7 +21,7 @@ export default function Termsconditions() {
                     <h2><span>Introduction</span></h2>
                     <p className='mt-5' style={{ lineHeight: '1.2', fontWeight: '400' }}>
                         <span className='text-sm' style={{ fontWeight: '400', lineHeight: '0' }}>
-                            Welcome to DSI Indiadealss Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”). These Terms & Conditions govern your use of our website, mobile application, services, property listings, promotional activities, and any interactions with our sales team or channel partners (“Platform”).
+                            Welcome to BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED (“Company”, “we”, “our”, “us”). These Terms & Conditions govern your use of our website, mobile application, services, property listings, promotional activities, and any interactions with our sales team or channel partners (“Platform”).
                             <br />
                             <br />
                             <span>
@@ -60,7 +60,7 @@ export default function Termsconditions() {
                         <span className='text-lg font-medium'>2. Services Provided</span>
                        <div className='ms-4'>
                             <span>
-                                BRANDSDOOR Real Estate Pvt. Ltd. provides:
+                                BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED. provides:
                             </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>
@@ -230,7 +230,7 @@ export default function Termsconditions() {
                         <span className='text-lg font-medium'>8. Intellectual Property Rights</span>
                        <div className='ms-4'>
                         <span>
-                            All content on our Platform—including text, images, logos, graphics, brochures, and materials—is the exclusive property of DSI Indiadealss Real Estate Pvt. Ltd.
+                            All content on our Platform—including text, images, logos, graphics, brochures, and materials—is the exclusive property of BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED
                         </span>
                         <br />
                         <span>
@@ -268,7 +268,7 @@ export default function Termsconditions() {
                         <span className='text-lg font-medium'>9. Limitation of Liability</span>
                        <div className='ms-4'>
                         <span>
-                            DSI Indiadealss Real Estate Pvt. Ltd. is not liable for:
+                            BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED is not liable for:
                         </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>
@@ -406,7 +406,7 @@ export default function Termsconditions() {
                             </span>
                             <br />
                         <span>
-                                BRANDSDOOR Real Estate Pvt. Ltd.
+                                BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED.
                             </span>
                              <ul className="mt-2   pl-5 text-sm leading-8">
                             <li>

@@ -19,7 +19,7 @@ export default function Privacy() {
                     <h2><span>Privacy Policy</span></h2>
                     <p className='mt-5' style={{ lineHeight: '1.2', fontWeight: '400' }}>
                         <span className='text-sm' style={{ fontWeight: '400', lineHeight: '0' }}>
-                            BRANDSDOOR Real Estate Pvt. Ltd. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
+                            BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
                             <br />
                             <br />
                             <span>
@@ -350,7 +350,7 @@ export default function Privacy() {
                                 Our website or promotional materials may include links to third-party websites.
                             </li>
                             <li>
-                                BRANDSDOOR Real Estate Pvt. Ltd. is not responsible for the privacy practices, accuracy, or content of these external platforms.
+                                BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED. is not responsible for the privacy practices, accuracy, or content of these external platforms.
                             </li>
                         </ul>
                        </div>
@@ -413,7 +413,7 @@ export default function Privacy() {
                             </span>
                             <br />
                         <span>
-                                BRANDSDOOR Real Estate Pvt. Ltd.
+                                BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED.
                             </span>
                              <ul className="mt-2  list-disc pl-5 text-sm leading-8">
                             <li>

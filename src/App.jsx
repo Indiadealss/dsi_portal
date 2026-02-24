@@ -29,15 +29,15 @@ import Propertypageslug from "./Propertypageslug";
 import Recentactivity from "./component/Recentactivity";
 import Adddelercard from "./component/customcomponent/Adddelercard";
 import UpcomingProjects from "./component/customcomponent/Upcomingprojects";
-import Myindiadealss from "./component/myindiadealss/Myindiadealss";
+import Myindiadealss from "./component/mybrandsdoor/Mybrandsdoor";
 import Leadsearch from "./component/lead/Leadsearch";
 import Allprojects from "./component/Projectslead/Allprojects";
-import Allproject from "./component/myindiadealss/Allproducts";
-import Homepage from "./component/myindiadealss/Homepage";
-import Banner from "./component/myindiadealss/Banner";
-import Fsllistings from "./component/myindiadealss/Fsllistings";
-import Manageboss from "./component/myindiadealss/Manageboss";
-import Modify from "./component/myindiadealss/Modify";
+import Allproject from "./component/mybrandsdoor/Allproducts";
+import Homepage from "./component/mybrandsdoor/Homepage";
+import Banner from "./component/mybrandsdoor/Banner";
+import Fsllistings from "./component/mybrandsdoor/Fsllistings";
+import Manageboss from "./component/mybrandsdoor/Manageboss";
+import Modify from "./component/mybrandsdoor/Modify";
 import Alllistings from "./component/Projectslead/Alllistings";
 import Plainlisting from "./component/Projectslead/Plainlisting";
 import Platinumlisting from "./component/Projectslead/Platinumlisting";
@@ -50,7 +50,7 @@ import Sab from "./component/Projectslead/Sab";
 import Emailers from "./component/Projectslead/Emailers";
 import Omniads from "./component/Projectslead/Omniads";
 import Allresponse from "./component/Manageresponse/Allresponse";
-import Editprojectdetails from "./component/myindiadealss/Editprojectdetails";
+import Editprojectdetails from "./component/mybrandsdoor/Editprojectdetails";
 import Thankyou from "./component/customcomponent/Thankyou";
 
 function App() {
@@ -93,7 +93,7 @@ function App() {
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
     {
-  path: "/myindiadealss",
+  path: "/mybrandsdoor",
   element: <Myindiadealss />,
   children:[
     { index: true, element: <Homepage /> },

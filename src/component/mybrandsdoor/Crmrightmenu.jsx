@@ -9,23 +9,23 @@ const Crmrightmenu = () => {
     const user = useSelector((state) => state.user);
 
     const Listings = [
-            {name:'All Listings', link:'/myindiadealss/all_listings'},
-            {name:'Plan Listings',link:'/myindiadealss/LP-f'},
-            {name:'Basic Listings',link:'/myindiadealss/LP-B'},
-            {name:'Platinum Listings',link:'/myindiadealss/LP-P'},
-            {name:'Premimum Listings',link:'/myindiadealss/LP-R'},
-            {name:'Infinity Listings',link:'/myindiadealss/LP-I'},
-            {name:'AI Listings',link:'/myindiadealss/LP-T'},
+            {name:'All Listings', link:'/mybrandsdoor/all_listings'},
+            {name:'Plan Listings',link:'/mybrandsdoor/LP-f'},
+            {name:'Basic Listings',link:'/mybrandsdoor/LP-B'},
+            {name:'Platinum Listings',link:'/mybrandsdoor/LP-P'},
+            {name:'Premimum Listings',link:'/mybrandsdoor/LP-R'},
+            {name:'Infinity Listings',link:'/mybrandsdoor/LP-I'},
+            {name:'AI Listings',link:'/mybrandsdoor/LP-T'},
         ]
     
         const Projects = [
-            {name: 'All Products',link:'/myindiadealss/all_listings/ALL'},
-            {name:'Super Campaign',link:'/myindiadealss/all_listings/CMT'},
-            {name:'BBC',link:'/myindiadealss/all_listings/BBC'},
-            {name:'SAB',link:'/myindiadealss/all_listings/SAB'},
-            {name:'NP/FP/PG/AP/AS',link:'/myindiadealss/all_listings/ALLNP'},
-            {name:'E-Mailers',link:'/myindiadealss/all_listings/MM'},
-            {name:'Omni Ads',link:'/myindiadealss/all_listings/OA'},
+            {name: 'All Products',link:'/mybrandsdoor/all_listings/ALL'},
+            {name:'Super Campaign',link:'/mybrandsdoor/all_listings/CMT'},
+            {name:'BBC',link:'/mybrandsdoor/all_listings/BBC'},
+            {name:'SAB',link:'/mybrandsdoor/all_listings/SAB'},
+            {name:'NP/FP/PG/AP/AS',link:'/mybrandsdoor/all_listings/ALLNP'},
+            {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
+            {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
         ]
   return (
     <div className='w-[15%] '>

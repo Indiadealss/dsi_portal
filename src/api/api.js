@@ -14,6 +14,11 @@ const API = axios.create({
 export const sentOtp = (mobile) =>
   API.post("/auth/send-otp", { mobile });
 
+
+export const lead = (id) =>
+  API.get(`/mycrmhomepage/getcrmHomepage?id=${id}`)
+
+
 export const verifyOtp = (mobile, otp) =>
   API.post("/auth/verify-otp", { mobile, otp });
 

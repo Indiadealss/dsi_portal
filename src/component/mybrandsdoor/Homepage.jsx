@@ -1,19 +1,46 @@
 import React, { useEffect, useState } from 'react'
+import { lead } from '../../api/api';
+import { useSelector } from 'react-redux';
 
 const Homepage = () => {
     const [range, setRange] = useState("30");
-    const [stats, setStats] = useState(null);
+    const [stats, setStats] = useState({
+  newProjects: 0,
+  expiringSoon: 0,
+  recentlyExpired: 0,
+  enquiry: 0
+});
 
-    const handleFruitChange = {
-  "newProjects": 284,
-  "expiringSoon": 20,
-  "recentlyExpired": 1,
-  "enquiry": 284
-}
+  
+
+
+
+ const user = useSelector((state) => state.user);
+
+
+ 
+ 
 
 useEffect(() => {
-  setStats(handleFruitChange)
-},[])
+      lead(user.id)
+      .then(res => {
+        if (res.status === 200) {
+          // console.log(res.data.usedetails);
+         const properties = res.data.data;
+          setStats({
+        newProjects: properties[0].length,
+        expiringSoon: 0,        // update logic later
+        recentlyExpired: 0,     // update logic later
+        enquiry: properties[1].length              // update logic later
+      });
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(clearUser);
+      });
+  
+},[user.id])
 if (!stats) return <div>Loading...</div>;
   return (
     <div className='mx-5'>

@@ -8,7 +8,7 @@ import Crmrightmenu from './Crmrightmenu';
 import { Modal } from 'antd';
 import Changepasswordmodal from '../customantdesign/Changepasswordmodal';
 
-const Myindiadealss = () => {
+const Mybrandsdoor = () => {
 
     const user = useSelector((state) => state.user);
 
@@ -38,16 +38,16 @@ const Myindiadealss = () => {
 
     const Projects = [
         {name: 'All Products',link:'all_listings/ALL'},
-        {name:'Super Campaign',link:'/myindiadealss/all_listings/CMT'},
-        {name:'BBC',link:'/myindiadealss/all_listings/BBC'},
-        {name:'SAB',link:'/myindiadealss/all_listings/SAB'},
-        {name:'NP/FP/PG/AP/AS',link:'/myindiadealss/all_listings/ALLNP'},
-        {name:'E-Mailers',link:'/myindiadealss/all_listings/MM'},
-        {name:'Omni Ads',link:'/myindiadealss/all_listings/OA'},
+        {name:'Super Campaign',link:'/mybrandsdoor/all_listings/CMT'},
+        {name:'BBC',link:'/mybrandsdoor/all_listings/BBC'},
+        {name:'SAB',link:'/mybrandsdoor/all_listings/SAB'},
+        {name:'NP/FP/PG/AP/AS',link:'/mybrandsdoor/all_listings/ALLNP'},
+        {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
+        {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
     ]
 
     return (
-        <div className='bg-gray-100 '>
+        <div className='bg-gray-100 mt-20'>
             <div className='flex w-[80%] mx-auto'>
                 <div className='w-[15%]'>
                                     <div className='w-[100%]  bg-[#00255d] pt-5 overflow-y-auto'>
@@ -67,7 +67,7 @@ const Myindiadealss = () => {
                                             <Link to={`editProfile`}><p><span className='text-sm text-white'>Modify</span></p></Link>
                                         </div>
                                     </div>
-                                    <div className='w-[100%] bg-black py-5 pb-10 h-[18%]  left-0 overflow-y-auto overflow-x-hidden'>
+                                    <div className='w-[100%] bg-black py-5 pb-10 h-[20%]  left-0 overflow-y-auto overflow-x-hidden'>
                                         <div className='mx-3'>
                                             <Link to={`Homepage`}><span className='text-xs text-gray-500 font-medium'>My DOOR</span></Link>
                                         </div>
@@ -195,4 +195,4 @@ const Myindiadealss = () => {
     )
 }
 
-export default Myindiadealss
+export default Mybrandsdoor
