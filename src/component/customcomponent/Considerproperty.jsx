@@ -15,7 +15,9 @@ const Considerpropety = () => {
   const property = useSelector((state) => state.propertyid.data);
 
 
-    
+    if(!property || !property.locatadvance){
+      return null;
+    }
     
 
   

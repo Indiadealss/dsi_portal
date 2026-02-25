@@ -507,7 +507,7 @@ useEffect(() => {
       return false;
     }
 
-    if(faqText === '' || !faqText){
+    if(propertyDataFirst.purpose === 'Project' && (faqText === '' || !faqText)){
       alert("Please set the Answer")
       return false;
     }
@@ -1530,7 +1530,7 @@ if (faqText) {
         />
       )}
     </div>
-
+      <div className={propertyDataFirst.purpose === 'Project' ? '' : 'hidden'}>
     <h3><span className='text-xl font-medium'>Why You Should Consider {propertyDataFirst.projectname}</span></h3>
     <div>
         <textarea id="message" rows="5" value={faqText} onInput={(e) => setFaqText(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder={`Enter FAQ points (one per line)
@@ -1538,6 +1538,7 @@ Example:
 Prime location in Greater Noida
 Easy access to highways
 Modern amenities`} />
+      </div>
       </div>
 
 

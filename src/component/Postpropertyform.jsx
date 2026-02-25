@@ -239,7 +239,7 @@ export const Postpropertyform = () => {
 
   return (
     <div className='bg-[#d1dede] min-h-screen'>
-      <div className='max-w-4xl min-h-screen p-6 bg-white border border-gray-200 shadow-sm  '>
+      <div className='max-w-4xl min-h-screen mt-[5vw] p-6 bg-white border border-gray-200 shadow-sm  '>
         <div className='flex justify-around flex-col lg:flex-row'>
           {/* Steps sidebar */}
           <div className='w-[max-content] hidden lg:block h-[max-content] p-6 bg-[#d1dede] border border-gray-200 rounded-lg shadow-sm   sticky top-10'>

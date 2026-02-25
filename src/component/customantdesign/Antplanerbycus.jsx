@@ -10,12 +10,16 @@ const Antplanerbycus = () => {
 
     
   const sliderRef = useRef(null);
-  
 
   const property = useSelector((state) => state.propertyid.data);
+  
+  if (!property || !property.locatadvance || property.locatadvance.length === 0) {
+    return null;   // hides component fully
+  }
+  
 
     const locationData = JSON.parse(property.location);
-    // console.log(locationData);
+    console.log(property.locatadvance);
 
     // console.log(property.locatadvance.map(item => JSON.parse(item)),'hello');
 

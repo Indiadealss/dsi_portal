@@ -20,7 +20,7 @@ const Listingboost = () => {
   return (
     <div className='px-10'>
       <div className='border border-gray-300 p-4 rounded mt-5'>
-        <p><span>{head}</span></p>
+        {/* <p><span>{head}</span></p> */}
         <div className="flex justify-around">
             <div>
                 <p><span>No of Listings</span></p>
