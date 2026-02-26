@@ -83,6 +83,7 @@ function App() {
   
   let routes = useRoutes([
     { path: "/", element: <Home /> },
+    {path:"/Home",element:<Home />},
     {path:"/sucessfullydownload",element:<Thankyou />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
