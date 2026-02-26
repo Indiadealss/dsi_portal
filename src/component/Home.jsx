@@ -434,13 +434,11 @@ const Home = () => {
         image="https://picsum.photos/500/450?random=1"
         logo="https://picsum.photos/100/100?random=1"
         title="Bricks Marvella"
-        description="2,3,4 BHK Apartment, Tellapur, Hyderabad"
-        price="₹ 99.71 Lacs - 2.58 Cr"
         featured
         data={residential[0]}
       />
       </div>
-      <div className={!residential[1] ? 'hidden' : ''}>
+      <div className={!residential[1] ? '' : ''}>
       <Antdpropertycard
         image="https://picsum.photos/500/450?random=1"
         logo="https://picsum.photos/100/100?random=1"

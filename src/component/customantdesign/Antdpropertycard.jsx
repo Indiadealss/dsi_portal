@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 
 
 
-const Antdpropertycard = ({ image, logo, title, description, price, featured, data }) => {
+const Antdpropertycard = ({ logo, title, featured, data }) => {
 
 
 
     console.log(data,'data not found 18');
     if (!data) {
         return <div>
-            <p>Loading...</p>
+            {/* <p>Loading...</p> */}
         </div>
     }
 
@@ -22,57 +22,60 @@ const Antdpropertycard = ({ image, logo, title, description, price, featured, da
 
     const banner = data.images.find(img => img.type === 'banner')?.src;
 
-    const unitData = data.unitData
+    const unitData = [data.unitData]
 
     console.log(unitData, 'data');
 
-    const [unit, setUnit] = useState();
+    const [unit, setUnit] = useState([]);
+const [location, setLocation] = useState(null);
 
-    const [location,setLocation] = useState();
+useEffect(() => {
+    console.log(Array.isArray(unitData), unitData,'hello unitData');
+    
+    if (!Array.isArray(unitData)) return;
 
+    const parsed = unitData.map(item => {
+        const obj = typeof item === "string" ? JSON.parse(item) : item;
+        const specs = obj?.specs || {};
 
-    useEffect(() => {
-        if (!Array.isArray(unitData)) return;
+        return {
+            bhk: specs.bhk,
+            areaMin: specs.areaMin,
+            areaMax: specs.areaMax,
+            priceMin: Number(specs.priceMin) || 0,
+            priceMax: Number(specs.priceMax) || 0
+        };
+    });
 
-        const parsed = unitData.map((item) => {
-            const obj = typeof item === "string" ? JSON.parse(item) : item;
-            const specs = obj?.specs || {};
+    console.log(parsed,'parsed');
+    
 
-            return {
-                bhk: specs.bhk,
-                areaMin: specs.areaMin,
-                areaMax: specs.areaMax,
-                priceMin: Number(specs.priceMin) || 0,
-                priceMax: Number(specs.priceMax) || 0
-            };
-        });
+    setUnit(parsed);
 
-        console.log(parsed, '38parsed');
-        setUnit(parsed);
+    if (data?.location) {
+        setLocation(
+            typeof data.location === "string"
+                ? JSON.parse(data.location)
+                : data.location
+        );
+    }
 
-
-
-        console.log(data);
-
-        setLocation(JSON.parse(data.location));
-        
-
-        
-        
-
-    }, [])
-
+}, [data]);
     
 
 
-    const formatPrice = (value) => {
-        value = Number(value);
-        if (value >= 10000000) {
-            return (value / 10000000).toFixed(2) + " Cr";
-        } else {
-            return (value / 100000).toFixed(2) + " L";
-        }
-    };
+   const formatPrice = (value) => {
+    const num = Number(value);
+    if (!num) return "0";
+
+    if (num >= 10000000) {
+        return (num / 10000000).toFixed(2) + " Cr";
+    }
+    return (num / 100000).toFixed(2) + " L";
+};
+
+console.log(unit,!Array.isArray(unit),'unit.length');
+
 
     if (!Array.isArray(unit) || unit.length === 0) {
         return <p>Loading...</p>;
@@ -84,18 +87,24 @@ const Antdpropertycard = ({ image, logo, title, description, price, featured, da
     console.log(unit,'unit');
     
 
-    const numbers = unit.map(item => item.bhk.split(" ")[0]).join(",");
+    const numbers = unit
+    .map(item => item.bhk?.split(" ")[0])
+    .filter(Boolean)
+    .join(",");
 
 
-    const createSlug = (item) => {
-        if(!item?.npxid) return "";
-        const location = JSON.parse(item.location)
+   const createSlug = (item) => {
+    if (!item?.npxid || !item?.location) return "";
 
-        return `${item.title}-${location.City}-npxid-${item.npxid}`
+    const locationObj = typeof item.location === "string"
+        ? JSON.parse(item.location)
+        : item.location;
+
+    return `${item.title}-${locationObj.City}-npxid-${item.npxid}`
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)+/g, "")
-    }
+        .replace(/(^-|-$)+/g, "");
+};
 
 
     return (
