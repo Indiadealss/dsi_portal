@@ -34,28 +34,30 @@ useEffect(() => {
     
     if (!Array.isArray(unitData)) return;
 
-   const parsed = unitData.map(item => {
-    const obj = typeof item === "string"
-        ? JSON.parse(item)
-        : item;
+   const parsed = [];
 
+try {
+    const fixedString = `[${unitData[0]}]`; // wrap inside array
 
-    console.log(typeof item,'kapil');
-console.log(JSON.parse(item),'kapil');
-console.log(typeof JSON.parse(item),'kapil');
-    console.log(obj, 'objtype');
+    const array = JSON.parse(fixedString);
 
-    const specs = obj?.specs || {};
-    console.log(specs, 'specs f');
+    array.forEach(obj => {
+        const specs = obj?.specs || {};
 
-    return {
-        bhk: specs.bhk,
-        areaMin: specs.areaMin,
-        areaMax: specs.areaMax,
-        priceMin: Number(specs.priceMin) || 0,
-        priceMax: Number(specs.priceMax) || 0
-    };
-});
+        parsed.push({
+            bhk: specs.bhk,
+            areaMin: parseInt(specs.areaMin),
+            areaMax: parseInt(specs.areaMax),
+            priceMin: Number(specs.priceMin) || 0,
+            priceMax: Number(specs.priceMax) || 0
+        });
+    });
+
+} catch (err) {
+    console.error("Still broken JSON:", err);
+}
+
+console.log(parsed);
 
 console.log(parsed, "FINAL PARSED");
 
