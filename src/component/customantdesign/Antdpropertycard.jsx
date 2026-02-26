@@ -39,6 +39,10 @@ useEffect(() => {
         ? JSON.parse(item)
         : item;
 
+
+    console.log(typeof item,'kapil');
+console.log(JSON.parse(item),'kapil');
+console.log(typeof JSON.parse(item),'kapil');
     console.log(obj, 'objtype');
 
     const specs = obj?.specs || {};
