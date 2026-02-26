@@ -32,7 +32,7 @@ const [location, setLocation] = useState(null);
 useEffect(() => {
     console.log(Array.isArray(unitData), unitData,'hello unitData');
     
-    if (!Array.isArray(unitData)) return;
+    if (Array.isArray(unitData)) return;
 
     const parsed = unitData.map(item => {
         const obj = typeof item === "string" ? JSON.parse(item) : item;
