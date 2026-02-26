@@ -37,7 +37,15 @@ useEffect(() => {
     const parsed = unitData.map(item => {
         const obj = typeof item === "string" ? JSON.parse(item) : item;
         const specs = obj?.specs || {};
-
+        console.log(specs,'specs f');
+        const specds = [{ bhk: specs.bhk,
+            areaMin: specs.areaMin,
+            areaMax: specs.areaMax,
+            priceMin: Number(specs.priceMin) || 0,
+            priceMax: Number(specs.priceMax) || 0}]
+        console.log(specds,'specds');
+        
+        
         return {
             bhk: specs.bhk,
             areaMin: specs.areaMin,
