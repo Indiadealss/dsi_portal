@@ -34,28 +34,26 @@ useEffect(() => {
     
     if (!Array.isArray(unitData)) return;
 
-    const parsed = unitData.map(item => {
-        const obj = typeof item === "string" ? JSON.parse(item) : item;
-        console.log(obj, 'objtype');
-        
-        const specs = obj?.specs || {};
-        console.log(specs,'specs f');
-        const specds = [{ bhk: specs.bhk,
-            areaMin: specs.areaMin,
-            areaMax: specs.areaMax,
-            priceMin: Number(specs.priceMin) || 0,
-            priceMax: Number(specs.priceMax) || 0}]
-        console.log(specds,'specds');
-        
-        
-        return {
-            bhk: specs.bhk,
-            areaMin: specs.areaMin,
-            areaMax: specs.areaMax,
-            priceMin: Number(specs.priceMin) || 0,
-            priceMax: Number(specs.priceMax) || 0
-        };
-    });
+   const parsed = unitData.map(item => {
+    const obj = typeof item === "string"
+        ? JSON.parse(item)
+        : item;
+
+    console.log(obj, 'objtype');
+
+    const specs = obj?.specs || {};
+    console.log(specs, 'specs f');
+
+    return {
+        bhk: specs.bhk,
+        areaMin: specs.areaMin,
+        areaMax: specs.areaMax,
+        priceMin: Number(specs.priceMin) || 0,
+        priceMax: Number(specs.priceMax) || 0
+    };
+});
+
+console.log(parsed, "FINAL PARSED");
 
     console.log(parsed,'parsed');
     
