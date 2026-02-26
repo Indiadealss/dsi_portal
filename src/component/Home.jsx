@@ -337,13 +337,11 @@ const Home = () => {
     }
 
     
-    const residential = data.map(item => {
-        if (item.property === 'residential'){
-          console.log(item,'item property');
-          
-          return item
-        }
-});
+   const residential = data.filter(item => 
+    item.property === 'residential'
+);
+
+console.log(residential, 'residential');
 
   console.log(residential,'residential');
   
