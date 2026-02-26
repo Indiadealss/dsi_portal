@@ -3,12 +3,10 @@ import { CiLocationOn } from "react-icons/ci";
 import { MdOutlineAttachEmail } from "react-icons/md";
 import {
   FacebookFilled,
-  TwitterOutlined,
   LinkedinFilled,
   YoutubeFilled,
-  RedditCircleFilled,
-  DribbbleCircleFilled,
-  PhoneOutlined
+  PhoneOutlined,
+  InstagramFilled
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -106,7 +104,7 @@ function Footer() {
               <FacebookFilled />
             </a>
             <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <TwitterOutlined />
+              <InstagramFilled />
             </a>
             <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
               <LinkedinFilled />
@@ -114,12 +112,7 @@ function Footer() {
             <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
               <YoutubeFilled />
             </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <RedditCircleFilled />
-            </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
-              <DribbbleCircleFilled />
-            </a>
+            
           </div>
       </div>
     </footer>

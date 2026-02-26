@@ -287,22 +287,22 @@ const Home = () => {
     {
       title: "Delhi / NCR",
       date: "231,000+ Properties",
-      img: "https://picsum.photos/200/140?random=1",
+      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108109320-Delhi.jpg",
     },
     {
       title: "Bangalore",
       date: "62,000+ Properties",
-      img: "https://picsum.photos/200/140?random=2",
+      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108873314-West%20Bengal.jpg",
     },
     {
       title: "Pune",
       date: "64,000+ Properties",
-      img: "https://picsum.photos/200/140?random=3",
+      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108242089-Pune.jpg",
     },
     {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
+      title: "Gurgaon",
+      date: "May 20, 2025",
+      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108523768-Haryana.jpg",
     },
     {
       title: "UP women homebuyers get 1% stamp duty rebate",
