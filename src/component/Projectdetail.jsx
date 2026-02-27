@@ -145,7 +145,7 @@ const Projectdetail = () => {
     // console.log(propertys.faq[0].answer, answerArray, 'hello faq');
 
 
-    // console.log('layoutImages', layoutImages);
+    console.log('layoutImages', layoutImages);
 
 
     const grouped = {};
@@ -170,7 +170,7 @@ const Projectdetail = () => {
       console.log(grouped[bhk], '167');
 
 
-      const areaValue = obj["carpet_aria"]?.split(" ")[0] || "0";
+      const areaValue = obj["carpet_area"]?.split(" ")[0] || "0";
       console.log(areaValue, '171');
 
 
