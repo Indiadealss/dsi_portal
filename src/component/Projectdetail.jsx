@@ -238,7 +238,7 @@ const Projectdetail = () => {
       const res = await getPropertyByRera(npxid)
       const data = res.data
       setPropertys(data)
-      // console.log(data);
+      console.log(data);
 
       dispatch(setProperty(res.data))
       if (data.images?.length) setImage(data.images)
