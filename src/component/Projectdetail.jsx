@@ -170,7 +170,7 @@ const Projectdetail = () => {
       console.log(grouped[bhk], '167');
 
 
-      const areaValue = obj["carpet_area"]?.split(" ")[0] || "0";
+      const areaValue = obj["carpet_aria"]?.split(" ")[0] || obj["super_build_area"]?.split(" ")[0];
       console.log(areaValue, '171');
 
 
