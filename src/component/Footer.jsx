@@ -54,7 +54,7 @@ function Footer() {
             <li><a href="#!" className="hover:text-gray-300">Exclusive Deals</a></li>
           </ul>
         </div>
-        <div className="mx-auto hidden lg:block">
+        {/* <div className="mx-auto hidden lg:block">
           <h4 className="mb-3 font-semibold text-center lg:text-start">Commercials</h4>
           <ul className="space-y-2">
             <li><a href="#!" className="hover:text-gray-300">Partners</a></li>
@@ -62,7 +62,7 @@ function Footer() {
             <li><a href="#!" className="hover:text-gray-300">Collaborations</a></li>
             <li><a href="#!" className="hover:text-gray-300">Strategic Alliances</a></li>
           </ul>
-        </div>
+        </div> */}
         <div className="mx-auto hidden lg:block">
           <h4 className="mb-3 font-semibold text-center lg:text-start">Company</h4>
           <ul className="space-y-2">
@@ -100,16 +100,16 @@ function Footer() {
 
         {/* Social Media */}
           <div className="flex gap-3 text-white text-lg">
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+            <a href="https://facebook.com/profile.php?id=61588169025866" target="_blank" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
               <FacebookFilled />
             </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+            <a href="https://instagram.com/_brandsdoor_?igsh=OGVqeHVtNG1mbjMy" target="_blank" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
               <InstagramFilled />
             </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+            <a href="https://linkedin.com/company/brandsdoor" target="_blank" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
               <LinkedinFilled />
             </a>
-            <a href="#!" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
+            <a href="https://youtube.com/@brandsdoor-f7v?si=6GZAbAPZfsNc85kE" target="_blank" className="p-2 rounded-full border border-white hover:bg-white hover:text-black transition">
               <YoutubeFilled />
             </a>
             

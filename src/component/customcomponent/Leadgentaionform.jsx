@@ -5,7 +5,7 @@ import { createLead } from "../../api/api";
 import Afterlead from "./Afterlead";
 import { useNavigate } from "react-router-dom";
 
-const Leadgentaionform = ({ setLeadModel }) => {
+const Leadgentaionform = ({ setLeadModel,projectOwners }) => {
   const user = useSelector((state) => state.user);
   const project = useSelector((state) => state.propertyid);
 
@@ -105,11 +105,10 @@ const Leadgentaionform = ({ setLeadModel }) => {
     formdata.append("projectname",project.data.projectname);
     formdata.append("purpose", reason);
     formdata.append("message", "");
+    formdata.append("projectOwners",projectOwners);
     try {
       const res = await createLead(formdata);
       console.log(res.status);
-     
-      
     } catch (error) {
       console.log(error);
 

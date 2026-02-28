@@ -46,6 +46,9 @@ const Projectdetail = () => {
   const [amenities, setAmenities] = useState([]);
   const [open, setOpen] = useState(false);
   const [favurate, setFavurate] = useState(false);
+  const [projectOwners,setprojectOwners] = useState('');
+  const [openDrawer, setOpenDrawer] = useState(false);
+
 
 
 
@@ -130,7 +133,7 @@ const Projectdetail = () => {
 
     let answerArray = [];
 
-    const rawAnswer = propertys.faq[0].answer;
+    const rawAnswer = propertys?.faq?.answer;
 
     if (typeof rawAnswer === "string") {
       // clean if wrapped in code block
@@ -238,7 +241,9 @@ const Projectdetail = () => {
       const res = await getPropertyByRera(npxid)
       const data = res.data
       setPropertys(data)
-      console.log(data);
+      setprojectOwners(data.owner.mobile)
+      console.log(data.owner.mobile,'data ownersjjjj');
+      
 
       dispatch(setProperty(res.data))
       if (data.images?.length) setImage(data.images)
@@ -356,20 +361,27 @@ const Projectdetail = () => {
     { name: "Banquet Hall", icon: "/icons/banquet.svg" },
   ];
 
-  let answer = propertys.faq[0].answer;
+  // let answer = propertys.faq[0].answer;
+  let result = [];
+    console.log(propertys?.faq?.answer);
+    
+try {
+  let answer = propertys?.faq?.answer;
 
-  // If it's an array, convert the first item to string
   if (Array.isArray(answer)) {
     answer = answer[0];
   }
 
-  // Now clean markdown syntax
-  answer = answer.replace(/```json|```/g, "").trim();
+  if (typeof answer === "string") {
+    const cleaned = answer.replace(/```json|```/g, "").trim();
+    result = cleaned ? JSON.parse(cleaned) : [];
+  }
+} catch (error) {
+  console.error("FAQ parse error:", error);
+  result = [];
+}
 
-  // Convert to actual array
-  const result = JSON.parse(answer);
 
-  console.log(answer);
   
 
 
@@ -581,7 +593,7 @@ const Projectdetail = () => {
         <div className="w-full md:w-[30%] m-2 sticky top-20 self-start" style={{ position: 'sticky' }}>
           <div className="bg-white shadow-xs rounded p-6 border border-gray-100">
             <h2 className="text-xl font-bold text-gray-800 mb-3">
-              {propertys.faq[0].question}
+              {propertys?.faq?.question}
             </h2>
 
             <ul className="list-disc list-inside text-gray-600 space-y-1">
@@ -636,7 +648,7 @@ const Projectdetail = () => {
                 <span onClick={() => setOpen(false)} className='cursor-pointer text-xl'><RxCross2 /></span>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                {propertys.faq[0].question}
+                {propertys.faq.question}
               </h3>
 
               <ul className="list-disc list-inside text-gray-600 space-y-1 max-h-80 overflow-y-auto">
@@ -682,9 +694,14 @@ const Projectdetail = () => {
       {/* Lead Modal */}
       {leadModel && (
         <div>
-          <Leadgentaionform setLeadModel={setLeadModel} />
+          <Leadgentaionform setLeadModel={setLeadModel} projectOwners={projectOwners}  />
         </div>
       )}
+
+       {/* Drawer */}
+              {openDrawer && (
+                <UnitDrawer unit={activeUnit} close={() => setOpenDrawer(false)} />
+              )}
     </>
   )
 }
