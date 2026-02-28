@@ -49,7 +49,7 @@ const Thankyou = () => {
         </button>
 
         {/* Social Media Icons */}
-        {/* <div className="flex justify-center gap-3 text-black text-lg">
+        <div className="flex justify-center gap-3 text-black text-lg">
           <a href="#!" className="p-2 rounded-full bg-gray-200 hover:bg-black hover:text-white transition">
             <FacebookFilled />
           </a>
@@ -68,7 +68,7 @@ const Thankyou = () => {
           <a href="#!" className="p-2 rounded-full bg-gray-200 hover:bg-black hover:text-white transition">
             <DribbbleCircleFilled />
           </a>
-        </div> */}
+        </div>
 
       </div>
     </div>
