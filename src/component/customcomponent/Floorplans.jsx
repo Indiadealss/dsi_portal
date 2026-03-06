@@ -4,6 +4,8 @@ import Leadgentaionform from "./Leadgentaionform";
 
 const FloorPlanSlider = ({ layoutData,propertys }) => {
   const bhkTypes = Object.keys(layoutData);
+  console.log(layoutData,'layoutData');
+  
 
   console.log(layoutData,'bh8');
   

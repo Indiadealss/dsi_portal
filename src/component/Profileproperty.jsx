@@ -52,21 +52,17 @@ const [officeunit, setOfficeunit] = useState([]);        // final output
 
   const [units, setUnits] = useState([]);
 
- const buildFaqFromTextarea = (projectname, faqText) => {
+const buildFaqFromTextarea = (projectname, faqText) => {
+
   const points = faqText
     .split("\n")
     .map(p => p.trim())
     .filter(Boolean);
 
-  const jsonBlock =
-    "```json\n" +
-    JSON.stringify(points, null, 4) +
-    "\n```";
-
   return [
     {
       question: `Why you should consider ${projectname}?`,
-      answer: [jsonBlock]
+      answer: points
     }
   ];
 };
@@ -514,7 +510,7 @@ useEffect(() => {
 
 if (faqText) {
   dispatch(updateField({
-    faqanswer: buildFaqFromTextarea(
+    faq: buildFaqFromTextarea(
       propertyDataFirst.projectname,
       faqText
     )

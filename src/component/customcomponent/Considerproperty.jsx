@@ -43,7 +43,18 @@ const Considerpropety = () => {
     );
   }
 
-    const locAdvan = property.locatadvance.map(item => JSON.parse(item))
+    const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+
+    const locAdvan = property.locatadvance.map(item => parseLocation(item))
 
   return (
     <div className='block max-w-full p-6  border-b border-gray-300 '>

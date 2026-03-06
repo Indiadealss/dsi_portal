@@ -12,6 +12,17 @@ const units = [
 
 const Propertydetailscarddata = ({ property }) => {
 
+      const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+
     const [detail, setDetail] = useState(null);
 
     useEffect(() => {
@@ -60,7 +71,7 @@ const Propertydetailscarddata = ({ property }) => {
                         <td style={{ paddingBottom: '1rem' , paddingLeft:'1rem' }}>
                             <div>
                                 <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Address</span></p>
-                                <p>{JSON.parse(detail.location)?.Address || 'N/A'}</p>
+                                <p>{parseLocation(detail.location)?.Address || 'N/A'}</p>
                             </div>
                         </td>
                     </tr>

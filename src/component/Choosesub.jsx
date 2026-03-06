@@ -2,36 +2,42 @@ import React, { useState } from 'react'
 import Subscriptioncreadits from './Subscriptioncreadits';
 import Listingboost from './Listingboost';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitProperty } from '../api/api';
+// import { submitProperty } from '../api/api';
 import { resetForm } from './Redux/propertySlice';
 
 const Choosesub = () => {
 
     const dispatch = useDispatch()
-    const propertyFirstData = useSelector((state) => state.property.data);
+    const propertyIdRedux = useSelector((state) => state.property.propertyId);
     const [activeCom,setActiveCom] = useState("Subscriptioncreadits")
     const subDescription = 'By clicking on submit,I confirm that the property details including price, photos are correct And this property is available for sell/reNT. In case of any discreperncies Indiadealss can take strict action including deleting this listing. I also accept terms and conditions.';
     async function handleSumit() {
-        if(activeCom === "Subscriptioncreadits"){
-            setActiveCom("Listingboost")
-        }
-        else{
-           try {
-      const result = await dispatch(submitProperty(propertyFirstData)).unwrap();
+  if (activeCom === "Subscriptioncreadits") {
+    setActiveCom("Listingboost");
+  } else {
+    try {
+      const propertyId = propertyFirstData.propertyId;
+      console.log(propertyId);
+      
 
-      console.log("✅ API Success:", result);
+      if (!propertyId) {
+        alert("Property not found. Please try again.");
+        return;
+      }
+
+      await publishProperty(propertyId);
+
       alert("✅ You have successfully listed the property");
 
-      window.location.reload();
       dispatch(resetForm());
+      window.location.reload();
 
     } catch (error) {
-      console.error("❌ API Failed:", error);
-      alert("❌ Something went wrong while submitting");
+      console.log(error);
+      alert("❌ Something went wrong while publishing");
     }
-        }
-        
-    }
+  }
+}
   return (
     <>
     <div className='flex flex-col w-[100%]'>

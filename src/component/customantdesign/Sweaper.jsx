@@ -9,7 +9,12 @@ export default function NearbySlide({ data }) {
 
   const swiperRef = useRef(null);
 
-  const parsed = data.map(item => JSON.parse(item));
+  console.log(data);
+  
+
+  const parsed = (data || []).map((item) =>
+  typeof item === "string" ? JSON.parse(item) : item
+);
 
    const [icons, setIcons] = useState({}); // store icon results
 

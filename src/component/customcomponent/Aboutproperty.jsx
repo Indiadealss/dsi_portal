@@ -18,7 +18,18 @@ const Aboutproperty = () => {
       </div>
     )
   }
-  locationData = JSON.parse(property.location);
+
+    const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+  locationData = parseLocation(property.location);
   // console.log(locationData);
   
 

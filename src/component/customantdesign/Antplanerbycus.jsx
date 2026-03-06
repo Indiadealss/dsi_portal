@@ -17,13 +17,22 @@ const Antplanerbycus = () => {
     return null;   // hides component fully
   }
   
-
-    const locationData = JSON.parse(property.location);
+    const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+    const locationData = parseLocation(property.location);
     console.log(property.locatadvance);
 
     // console.log(property.locatadvance.map(item => JSON.parse(item)),'hello');
 
-    const locAdvan = property.locatadvance.map(item => JSON.parse(item))
+    const locAdvan = property.locatadvance.map(item => parseLocation(item))
     
     
 

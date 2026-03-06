@@ -40,7 +40,9 @@ const Collapage = ({ images = [], video = [], columns = 2, gap = 4 }) => {
 
   const fallbackImage = "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
 
-  const onlyImages = images.filter(i => !i.src.toLowerCase().endsWith(".pdf"));
+  const onlyImages = images.filter(
+  (i) => i?.src && !i.src.toLowerCase().endsWith(".pdf")
+);
   console.log(onlyImages,'onlyImages');
   
 

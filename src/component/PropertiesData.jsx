@@ -50,7 +50,7 @@ export const PropertiesData = () => {
         const formattedData = result.map((p) => {
             let locationData = [];
             try{
-                locationData = JSON.parse(p.location);
+                locationData = parseLocation(p.location);
                 // console.log(p);
                 
             }catch(err){
@@ -131,18 +131,28 @@ export const PropertiesData = () => {
         // setProjectname((state) => state.filterSlice.projectname)
     }
 
-    const createSlug = (item) => {
-    if (!item?.spid) return "";
+   const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
 
-    console.log(item.spid);
-    
-    const location = JSON.parse(item.location)
+  const createSlug = (item) => {
+  if (!item?.spid) return "";
 
-    return `${item.subtitle}-spid-${item.spid}`
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)+/g, "");
-  };
+  const locationData = parseLocation(item.location);
+  const city = locationData?.[0]?.City || "";
+
+  return `${item.subtitle}-spid-${item.spid}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+};
 
     
     // const propertyData = [

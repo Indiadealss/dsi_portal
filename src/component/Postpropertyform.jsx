@@ -6,9 +6,10 @@ import { Photovideo } from './Photovideo';
 import { Anenimies } from './Anenimies';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { getadditionalfeature, getAllFeature, getAminities, getotheroom, getpropertyfeature, submitProperty } from '../api/api';
+import { createPropertyBasic, getadditionalfeature, getAllFeature, getAminities, getotheroom, getpropertyfeature, updatePropertyStep } from '../api/api';
 import { Creaditmodel } from './Creaditmodel';
 import { updateFeatures,updateAmenities, updatepropertyfeature, updateadditionalfeature, updateoverlookingfeature, updateotheroom } from './Redux/featureSlice';
+import { updateField } from './Redux/propertySlice';
 
 export const Postpropertyform = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const Postpropertyform = () => {
   const [additionalfeature,setAdditionalfeature] = useState([]);
   const [overlooking,setoverlookingfeature] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
+  const [propertyId, setPropertyId] = useState(null);
   const [steps, setSteps] = useState([
     { id: 1, label: "Basic Details", status: true, currentForm: Postbasicdetailsform },
     { id: 2, label: "Location Details", status: false, currentForm: Locationbutton },
@@ -201,18 +203,40 @@ export const Postpropertyform = () => {
   // const features = useSelector((state) => state.feature);
   //         console.log(features);
 
-  function continueButton() {
-    
-    console.log(propertyFirstData,'hello');
-    
-    if (validateRef.current) {
-      const isValid = validateRef.current(); // call child validation
-      if (!isValid) {
-        return; // stop navigation if invalid
-      }
+  async function continueButton() {
+
+  if (validateRef.current) {
+    const isValid = validateRef.current();
+    if (!isValid) return;
+  }
+
+  try {
+
+    // STEP 1 → Create Draft
+    if (continueNO === 0 && !propertyId) {
+      const res = await createPropertyBasic(propertyFirstData);
+      setPropertyId(res.data.propertyId);
     }
 
-    if (continueNO < steps.length - 1) {
+    // STEP 2 → Save Location
+    if (continueNO === 1) {
+      await updatePropertyStep(propertyId, propertyFirstData);
+    }
+
+    // STEP 3 → Save Profile
+    if (continueNO === 2) {
+      await updatePropertyStep(propertyId, propertyFirstData);
+    }
+
+    // STEP 5 → Save Pricing & Others
+    if (continueNO === 4) {
+      dispatch(updateField({propertyId:propertyId,}))
+      await updatePropertyStep(propertyId, propertyFirstData);
+      setShowLogin(true);
+      return;
+    }
+
+       if (continueNO < steps.length - 1) {
       setSteps(prevSteps =>
         prevSteps.map((step, index) =>
           index === continueNO + 1 ? { ...step, status: true } : step
@@ -232,7 +256,12 @@ export const Postpropertyform = () => {
       // dispatch(submitProperty(propertyFirstData));
       // alert('You have successfully listed the property');
     }
+
+
+  } catch (error) {
+    console.error(error);
   }
+}
 
   
   
@@ -274,7 +303,11 @@ export const Postpropertyform = () => {
             </button>
 
             {/* Pass ref setter to child */}
-            <FormComponent setValidator={fn => (validateRef.current = fn)} />
+            {/* Pass propertyId + validator */}
+          <FormComponent 
+              propertyId={propertyId}
+              setValidator={fn => (validateRef.current = fn)} 
+          />
 
             <button
               type="button"

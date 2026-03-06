@@ -68,58 +68,82 @@ export const getPropertyByspid = async(sipid) => {
 export const getCampainbyId = async (npxid) => {
   return API.get(`/adddealer/getcampainbyid/${npxid}`);
 }
-export const submitProperty = createAsyncThunk(
-  "property/submitProperty",
-  async (propertyData, { rejectWithValue }) => {
-    try {
-      const formData = new FormData();
 
-      Object.keys(propertyData).forEach((key) => {
-        if (!["images", "video"].includes(key)) {
-          let value = propertyData[key];
+export const createPropertyBasic = (data) =>
+  API.post("/property/createPropertyBasic", data);
 
-          // ✅ Fix: Handle arrays of objects (unitData, offices, amenities, etc.)
-          if (Array.isArray(value)) {
-            value.forEach((item) => {
-              if (typeof item === "object") {
-                formData.append(key, JSON.stringify(item)); // ✅ always stringify objects
-              } else {
-                formData.append(key, item);
-              }
-            });
-          }
-          else if (typeof value === "object") {
-            formData.append(key, JSON.stringify(value)); // ✅ stringify single object
-          }
-          else {
-            formData.append(key, value);
-          }
-        }
-      });
+export const updatePropertyStep = (id, data) =>
+  API.put(`/property/updateProperty/${id}`, data);
 
-      // ✅ IMAGES
-      propertyData.images.forEach((imgObj, idx) => {
-        formData.append("images", imgObj.file);
-        formData.append("imageTypes", imgObj.type);
-        formData.append(`fields_${idx}`, JSON.stringify(imgObj.Fields));
-      });
+export const uploadImage = (id, formData) =>
+  axios.post(`/api/property/uploadImage/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
-      // ✅ VIDEOS
-      propertyData.video.forEach((file) => {
-        formData.append("video", file);
-      });
+export const uploadVideo = (id, formData) =>
+  axios.post(`/api/property/uploadVideo/${id}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 
-      const res = await axios.post("/api/property/createProperty", formData, {
-        headers: { "content-Type": "multipart/form-data" },
-        withCredentials: true,
-      });
+  export const updateImageMeta = (propertyId, imageId, data) => {
+  return axios.put(`/api/property/updateImageMeta/${propertyId}/${imageId}`, data);
+};
 
-      return res.data;
-    } catch (err) {
-      return rejectWithValue(err.response?.data || { message: "Server error" });
-    }
-  }
-);
+  export const publishProperty = (id) =>
+  API.put(`/property/publishProperty/${id}`);
+
+// export const submitProperty = createAsyncThunk(
+//   "property/submitProperty",
+//   async (propertyData, { rejectWithValue }) => {
+//     try {
+//       const formData = new FormData();
+
+//       Object.keys(propertyData).forEach((key) => {
+//         if (!["images", "video"].includes(key)) {
+//           let value = propertyData[key];
+
+//           // ✅ Fix: Handle arrays of objects (unitData, offices, amenities, etc.)
+//           if (Array.isArray(value)) {
+//             value.forEach((item) => {
+//               if (typeof item === "object") {
+//                 formData.append(key, JSON.stringify(item)); // ✅ always stringify objects
+//               } else {
+//                 formData.append(key, item);
+//               }
+//             });
+//           }
+//           else if (typeof value === "object") {
+//             formData.append(key, JSON.stringify(value)); // ✅ stringify single object
+//           }
+//           else {
+//             formData.append(key, value);
+//           }
+//         }
+//       });
+
+//       // ✅ IMAGES
+//       propertyData.images.forEach((imgObj, idx) => {
+//         formData.append("images", imgObj.file);
+//         formData.append("imageTypes", imgObj.type);
+//         formData.append(`fields_${idx}`, JSON.stringify(imgObj.Fields));
+//       });
+
+//       // ✅ VIDEOS
+//       propertyData.video.forEach((file) => {
+//         formData.append("video", file);
+//       });
+
+//       const res = await axios.post("/api/property/createProperty", formData, {
+//         headers: { "content-Type": "multipart/form-data" },
+//         withCredentials: true,
+//       });
+
+//       return res.data;
+//     } catch (err) {
+//       return rejectWithValue(err.response?.data || { message: "Server error" });
+//     }
+//   }
+// );
 
 export const createGestLead = async (formatData) => {
   return API.post(`/leaduser/genrate`,formatData,{

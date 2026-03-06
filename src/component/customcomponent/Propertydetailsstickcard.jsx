@@ -33,7 +33,18 @@ const Propertydetailsstickcard = ({buttonNames}) => {
     return num.toString();
   }
 }
-locationData = JSON.parse(property.location);
+
+   const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+locationData = parseLocation(property.location);
 
 // console.log(locationData);
 
@@ -55,7 +66,7 @@ locationData = JSON.parse(property.location);
 
 
     return (
-        <div className='mb-5' style={{position:'sticky', top:0,zIndex:101,background:'white'}}>
+        <div className='my-25' style={{position:'sticky', top:0,zIndex:101,background:'white'}}>
             <div className='border-b border-gray-300'>
                 <div className='mx-10 hidden lg:block'>
                     <button className='text-white text-[10px] font-bold px-1 bg-[#814883fc]'>Featured</button>

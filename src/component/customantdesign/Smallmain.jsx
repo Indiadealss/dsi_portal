@@ -86,16 +86,28 @@ const coverImages = covers.length
   const goNext = () => sliderRef.current.slickNext();
   const goPrev = () => sliderRef.current.slickPrev();
 
-  const createSlug = (item) => {
-    if (!item?.npxid) return "";
+  const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
 
-    const location = JSON.parse(item.location)
+const createSlug = (item) => {
+  if (!item?.npxid) return "";
 
-    return `${item.label}-${location.City}-npxid-${item.npxid}`
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)+/g, "");
-  };
+  const locationData = parseLocation(item.location);
+  const city = locationData?.[0]?.City || "";
+
+  return `${item.label}-${city}-npxid-${item.npxid}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+};
 
 
 

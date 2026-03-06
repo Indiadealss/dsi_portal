@@ -133,7 +133,7 @@ const Projectdetail = () => {
 
     let answerArray = [];
 
-    const rawAnswer = propertys?.faq?.answer;
+    const rawAnswer = propertys?.faq[0]?.answer;
 
     if (typeof rawAnswer === "string") {
       // clean if wrapped in code block
@@ -160,10 +160,15 @@ const Projectdetail = () => {
 
 
       img.fields.forEach(f => {
-        console.log(f, '157');
 
-        obj[f.key.toLowerCase()] = f.value; // ✅ make all keys lowercase
-      });
+  if (!f.key || !f.value) return; // 🚀 skip empty values
+
+  obj[f.key.toLowerCase()] = f.value;
+
+});
+
+      console.log(obj,'bhk189');
+      
 
       const bhk = (obj["floor_plan"] || "").toUpperCase(); // "2 BHK"
       console.log(bhk, 163);
@@ -362,7 +367,7 @@ const Projectdetail = () => {
   ];
 
   // let answer = propertys.faq[0].answer;
-  let result = [];
+  let result = propertys?.faq?.[0]?.answer || [];
     console.log(propertys?.faq?.answer);
     
 try {
@@ -564,7 +569,7 @@ try {
           {/* about Project */}
           <div className='my-5'>
             <h2><span className='text-xl'>More about {propertys.projectname}</span></h2>
-            <Description text={propertys.projectDescription} />
+            <Description text={propertys.description} />
           </div>
 
           {/* Interiors and Other Specifications */}
@@ -593,7 +598,7 @@ try {
         <div className="w-full md:w-[30%] m-2 sticky top-20 self-start" style={{ position: 'sticky' }}>
           <div className="bg-white shadow-xs rounded p-6 border border-gray-100">
             <h2 className="text-xl font-bold text-gray-800 mb-3">
-              {propertys?.faq?.question}
+              {propertys?.faq[0]?.question}
             </h2>
 
             <ul className="list-disc list-inside text-gray-600 space-y-1">

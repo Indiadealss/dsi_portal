@@ -8,9 +8,21 @@ const Placesnearby = () => {
   const property = useSelector((state) => state.propertyid.data);
   let locationData = null;
 
+
+     const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+
   try{
     if(property?.location){
-      locationData = JSON.parse(property.location);
+      locationData = parseLocation(property.location);
     }
   }catch(er){
     console.error(er);

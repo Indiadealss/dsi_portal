@@ -1,239 +1,304 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Uploadfile } from './Uploadfile';
-import { Uploadphots } from './Uploadphots';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateField } from './Redux/propertySlice';
+import React, { useEffect, useRef, useState } from "react";
+import { Uploadfile } from "./Uploadfile";
+import { Uploadphots } from "./Uploadphots";
+import { useDispatch, useSelector } from "react-redux";
+import { updateField } from "./Redux/propertySlice";
+import { updateImageMeta, uploadImage, uploadVideo } from "../api/api";
 
-export const Photovideo = () => {
-  const [videoFile, setVideoFile] = useState([]);
-  const [images, setImages] = useState([]);
+export const Photovideo = ({ propertyId }) => {
+
+  const propertyData = useSelector((state) => state.property.data);
+
+  const [videoFile, setVideoFile] = useState(propertyData.video || []);
+  const [images, setImages] = useState(propertyData.images || []);
+
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(updateField({ images, video: videoFile }));
-  }, [videoFile, images]);
 
   const videoInputRef = useRef(null);
   const imageInputRef = useRef(null);
-
 
   const pdfFieldOptions = [
     "Floor_Plan",
     "Price",
     "super_build_area",
-    "carpet_area"
+    "carpet_area",
   ];
 
+  // Sync redux
+  useEffect(() => {
+    dispatch(updateField({ images, video: videoFile }));
+  }, [images, videoFile, dispatch]);
 
-  // ❌ Remove image / pdf
+  // ---------------- REMOVE ----------------
+
   const removeImage = (index) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // ❌ Remove video
   const removeVideo = (index) => {
-    setVideoFile(prev => prev.filter((_, i) => i !== index));
+    setVideoFile((prev) => prev.filter((_, i) => i !== index));
   };
 
+  // ---------------- VIDEO UPLOAD ----------------
 
+  async function videoUp(e) {
+    const files = Array.from(e.target.files);
 
-  // Handle video upload
-  function videoUp(e) {
-    const videoFile = Array.from(e.target.files);
-    setVideoFile((prev) => [...prev, ...videoFile]);
+    setVideoFile((prev) => [...prev, ...files]);
 
-    // ✅ RESET INPUT
+    for (let file of files) {
+      const formData = new FormData();
+      formData.append("video", file);
+      await uploadVideo(propertyId, formData);
+    }
+
     e.target.value = "";
   }
 
-  const propertyDataFirst = useSelector((state) => state.property.data);
+  // ---------------- IMAGE UPLOAD ----------------
 
+  async function imageUp(e) {
+    const files = Array.from(e.target.files);
+    const uploadedImages = [];
 
-  // Handle multiple image/pdf upload
-  function imageUp(e) {
-    const files = Array.from(e.target.files).map((file) => ({
-      file,
-      type: file.type === 'application/pdf' ? 'pdf' : '',
-      Fields: propertyDataFirst.purpose === 'Project' ? [{ key: '', value: '' }] : [],
-    }));
-    setImages((prev) => [...prev, ...files]);
+    for (let file of files) {
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("type", "general");
 
-    // ✅ RESET INPUT
+      const res = await uploadImage(propertyId, formData);
+      const newImage = res.data.image;
+
+      uploadedImages.push({
+        ...newImage,
+        file,
+        fields: newImage.fields || [],
+      });
+    }
+
+    setImages((prev) => [...prev, ...uploadedImages]);
+
     e.target.value = "";
   }
 
-  function handleTypeChange(index, newType) {
-    setImages((prev) =>
-      prev.map((img, i) =>
-        i === index ? { ...img, type: newType } : img
-      )
+  // ---------------- TYPE CHANGE ----------------
+
+  async function handleTypeChange(index, newType) {
+
+    const image = images[index];
+
+    const updated = images.map((img, i) =>
+      i === index ? { ...img, type: newType } : img
     );
+
+    setImages(updated);
+
+    if (image._id) {
+      await updateImageMeta(propertyId, image._id, {
+        type: newType,
+        fields: image.fields || [],
+      });
+    }
   }
 
-  // Add new key-value field for PDF
-  function addPdfField(index) {
-    setImages((prev) =>
-      prev.map((img, i) =>
-        i === index
-          ? { ...img, Fields: [...img.Fields, { key: '', value: '' }] }
-          : img
-      )
+  // ---------------- ADD FIELD ----------------
+
+  async function addPdfField(index) {
+
+    const image = images[index];
+
+    const updatedFields = [...(image.fields || []), { key: "", value: "" }];
+
+    const updatedImages = images.map((img, i) =>
+      i === index ? { ...img, fields: updatedFields } : img
     );
+
+    setImages(updatedImages);
+
+    if (image._id) {
+      await updateImageMeta(propertyId, image._id, {
+        type: image.type,
+        fields: updatedFields,
+      });
+    }
   }
 
-  // Update specific key/value in PDF
-  function handlePdfFieldChange(imgIndex, fieldIndex, name, newValue) {
-    setImages((prev) =>
-      prev.map((img, i) => {
-        if (i !== imgIndex) return img;
-        const updatedPdfFields = img.Fields.map((field, j) =>
-          j === fieldIndex ? { ...field, [name]: newValue } : field
-        );
-        return { ...img, Fields: updatedPdfFields };
-      })
+  // ---------------- UPDATE FIELD ----------------
+
+  async function handlePdfFieldChange(imgIndex, fieldIndex, name, value) {
+
+    const image = images[imgIndex];
+
+    const updatedFields = (image.fields || []).map((field, i) =>
+      i === fieldIndex ? { ...field, [name]: value } : field
     );
+
+    const updatedImages = images.map((img, i) =>
+      i === imgIndex ? { ...img, fields: updatedFields } : img
+    );
+
+    setImages(updatedImages);
+
+    if (image._id) {
+      await updateImageMeta(propertyId, image._id, {
+        type: image.type,
+        fields: updatedFields,
+      });
+    }
   }
+
+  // ---------------- UI ----------------
 
   return (
     <>
       <h3 className="text-xl font-medium">Add one Video of Property</h3>
-      <p className="text-sm font-medium text-gray-400 my-3">
-        A video is worth a thousand picture with video get higher page views.
-      </p>
 
-      <label className="font-medium my-3">Upload Video</label>
-      <Uploadfile ref={videoInputRef} handleupload={videoUp} accept="video/*" multiple />
+      <Uploadfile
+        ref={videoInputRef}
+        handleupload={videoUp}
+        accept="video/*"
+        multiple
+      />
 
       {videoFile.map((file, index) => (
         <div key={index} className="relative inline-block mr-3">
           <video
-            src={URL.createObjectURL(file)}
+            src={file.src || URL.createObjectURL(file)}
             controls
             className="w-48 h-32 rounded"
           />
 
-          {/* FILE NAME */}
-          <p className="text-xs text-gray-600 mt-1 truncate">
-            🎥 {file.name}
-          </p>
-
-
-          {/* DELETE ICON */}
           <button
             type="button"
             onClick={() => removeVideo(index)}
-            className="absolute top-1 right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
+            className="absolute top-1 right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full"
           >
             ✕
           </button>
         </div>
       ))}
 
+      {/* ---------------- IMAGE SECTION ---------------- */}
 
-      {/* Photos Section */}
       <p className="text-xl font-medium mt-5">
         Add photos or PDFs of your Property
       </p>
 
-      <div className="mt-5">
-        <label className="font-medium">Upload Photos / PDFs</label>
-        <Uploadphots
-          ref={imageInputRef}
-          handleuploadphoto={imageUp}
-          accept="image/*,application/pdf"
-          multiple
-        />
+      <Uploadphots
+        ref={imageInputRef}
+        handleuploadphoto={imageUp}
+        accept="image/*,application/pdf"
+        multiple
+      />
 
-        {/* Show image/pdf previews */}
-        {images.map((img, idx) => (
-          <div key={idx} className="relative border rounded-lg p-2 bg-gray-50">
+      {images.map((img, idx) => (
 
-            {/* DELETE ICON */}
-            <button
-              type="button"
-              onClick={() => removeImage(idx)}
-              className="absolute top-1 right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full"
-            >
-              ✕
-            </button>
+        <div key={idx} className="relative border rounded-lg p-2 bg-gray-50">
 
-            {/* IMAGE / PDF PREVIEW */}
-            {img.file.type.startsWith('image/') ? (
+          <button
+            type="button"
+            onClick={() => removeImage(idx)}
+            className="absolute top-1 right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full"
+          >
+            ✕
+          </button>
+
+          {/* preview */}
+
+          {img.file ? (
+            img.file.type.startsWith("image/") ? (
               <img
                 src={URL.createObjectURL(img.file)}
-                alt={img.file.name}
                 className="w-full h-32 object-cover rounded"
               />
             ) : (
-              <p className="text-xs text-red-500">
-                📄 PDF File: {img.file.name}
-              </p>
-            )}
+              <p className="text-xs text-red-500">📄 {img.file.name}</p>
+            )
+          ) : (
+            <img src={img.src} className="w-full h-32 object-cover rounded" />
+          )}
 
-            {/* FILE NAME */}
-            <p className="text-xs text-gray-600 mt-1 truncate">
-              {img.file.name}
-            </p>
+          <p className="text-xs text-gray-600 mt-1 truncate">
+            {img.file?.name || img.src?.split("/").pop()}
+          </p>
 
-            {/* TYPE SELECT */}
-            <select
-              value={img.type}
-              onChange={(e) => handleTypeChange(idx, e.target.value)}
-              className="mt-2 w-full text-xs border border-gray-300 rounded p-1"
-            >
-              <option value="">Select Type</option>
-              <option value="layout">Layout Image</option>
-              <option value="Photos">Photos</option>
-              <option value="Construction Status">Construction Status</option>
-              <option value="cover">Cover Image</option>
-              <option value="banner">Banner Image</option>
-              <option value="pdf">PDF File</option>
-              <option value="brouser">Brochure</option>
-            </select>
+          {/* TYPE */}
 
-            {/* PDF FIELDS */}
-            <div className={propertyDataFirst.purpose === 'Project' ? "mt-2 space-y-2" : 'hidden'}>
-              {img.Fields.map((field, fieldIdx) => (
+          <select
+            value={img.type || ""}
+            onChange={(e) => handleTypeChange(idx, e.target.value)}
+            className="mt-2 w-full text-xs border rounded p-1"
+          >
+            <option value="">Select Type</option>
+            <option value="layout">Layout</option>
+            <option value="Photos">Photos</option>
+            <option value="Construction Status">Construction</option>
+            <option value="cover">Cover</option>
+            <option value="banner">Banner</option>
+            <option value="pdf">PDF</option>
+            <option value="brouser">Brochure</option>
+          </select>
+
+          {/* PDF FIELDS */}
+
+          {propertyData.purpose === "Project" && (
+            <div className="mt-2 space-y-2">
+
+              {(img.fields || []).map((field, fieldIdx) => (
+
                 <div key={fieldIdx} className="flex gap-2">
+
                   <select
                     value={field.key}
                     onChange={(e) =>
-                      handlePdfFieldChange(idx, fieldIdx, 'key', e.target.value)
+                      handlePdfFieldChange(
+                        idx,
+                        fieldIdx,
+                        "key",
+                        e.target.value
+                      )
                     }
-                    className="border text-xs p-1 w-1/2 rounded bg-white"
+                    className="border text-xs p-1 w-1/2 rounded"
                   >
                     <option value="">Select Key</option>
-                    {pdfFieldOptions.map((option, i) => (
-                      <option key={i} value={option}>
-                        {option}
+
+                    {pdfFieldOptions.map((opt, i) => (
+                      <option key={i} value={opt}>
+                        {opt}
                       </option>
                     ))}
+
                   </select>
 
                   <input
                     type="text"
                     value={field.value}
                     onChange={(e) =>
-                      handlePdfFieldChange(idx, fieldIdx, 'value', e.target.value)
+                      handlePdfFieldChange(
+                        idx,
+                        fieldIdx,
+                        "value",
+                        e.target.value
+                      )
                     }
-                    placeholder="Value"
                     className="border text-xs p-1 w-1/2 rounded"
                   />
+
                 </div>
               ))}
 
               <button
                 type="button"
                 onClick={() => addPdfField(idx)}
-                className="text-blue-500 text-xs mt-1 cursor-pointer"
+                className="text-blue-500 text-xs"
               >
                 + Add Field
               </button>
-            </div>
-          </div>
-        ))}
 
-      </div>
+            </div>
+          )}
+        </div>
+      ))}
     </>
   );
 };
