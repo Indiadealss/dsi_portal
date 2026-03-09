@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
+import { useSelector } from 'react-redux';
+import { getAllpropertiesDetailsUser } from '../../api/api';
+import Dynameiclistingallprodects from '../crmCustomcomponents/Dynameiclistingallprodects';
 
 const Alllistings = () => {
 
@@ -19,11 +22,76 @@ const Alllistings = () => {
 
     const [newest, setNewest] = useState('')
     const [category, setCategory] = useState('')
-    const [filter,setFilter] = useState([])
+    const [filter, setFilter] = useState([])
 
-    
+    const [page, setPage] = useState('1');
+    const [limit, setLimit] = useState('2');
 
-    const numberofActiveProduct = 5
+    const user = useSelector((state) => state.user);
+
+
+
+    const [numberofActiveProduct, setNumberofActiveProduct] = useState(0);
+    const [propertiesdata, setPropertiesData] = useState([]);
+
+
+      const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+
+
+  useEffect(() => {
+  if (!user?.id) return;
+
+  const fetchProperties = async () => {
+    try {
+      const res = await getAllpropertiesDetailsUser(user.id, page, limit);
+
+      if (res.status === 200) {
+        const properties = res.data;
+
+        setNumberofActiveProduct(properties.total);
+
+        const formattedData = await Promise.all(
+          properties.properties.map(async (item) => {
+            const location = await parseLocation(item.location);
+
+            return {
+              id: item._id,
+              title: `${item.projectname}` || "",
+              price: item.price || "",
+              spid: item.spid || `npx${item.npxid}`,
+              status: item.status || "",
+              createdAt: item.createdAt || "",
+              expiryDate: item.expiryDate || "",
+              location: location || ""
+            };
+          })
+        );
+
+        setPropertiesData(formattedData);
+        console.log(res, properties);
+      }
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchProperties();
+
+}, [user?.id, page, limit]);
+
+    useEffect(() => {
+
+    }, [propertiesdata])
     return (
         <div>
             <div className='flex justify-between px-5 border-b-2 p-3 border-gray-300'>
@@ -124,15 +192,21 @@ const Alllistings = () => {
             </div>
 
             {/* showing */}
-                <div className='shadow-md w-[96%] m-3 p-2 border border-gray-300 rounded'>
-                    <div className='flex'>
+            <div className='shadow-md w-[96%] m-3 p-2 border border-gray-300 rounded'>
+                <div className='flex'>
                     <p><span>Showing In:</span></p>
-                    {}
+                    { }
                     <div className='flex'>
                         <button className='bg-gray-300 px-2 mx-5'><span className='text-xs text-blue-500'>Clear All Filters</span></button>
                     </div>
-                    </div>
                 </div>
+            </div>
+
+            <Dynameiclistingallprodects properties={propertiesdata} />
+
+            <p className="mt-4 text-gray-700">
+                Displaying 1 - {propertiesdata.length} of {numberofActiveProduct} results
+            </p>
         </div>
     )
 }

@@ -52,6 +52,7 @@ import Omniads from "./component/Projectslead/Omniads";
 import Allresponse from "./component/Manageresponse/Allresponse";
 import Editprojectdetails from "./component/mybrandsdoor/Editprojectdetails";
 import Thankyou from "./component/customcomponent/Thankyou";
+import DynamicresponseallListing from "./component/crmCustomcomponents/DynamicresponseallListing";
 
 function App() {
 
@@ -102,6 +103,7 @@ function App() {
     { path:"all_listings", element:<Allproject /> },
     { path:"homepage", element:<Homepage />},
     { path:"all_listings/LP", element:<Alllistings />},
+    { path:"all_listings/responce/:id",element:<DynamicresponseallListing />},
     { path:"all_listings/LP-f", element:<Plainlisting />},
     { path:"all_listings/BANNER", element:<Banner />},
     { path:"fslMyINDIADEALSS", element:<Fsllistings />},

@@ -18,6 +18,13 @@ export const sentOtp = (mobile) =>
 export const lead = (id) =>
   API.get(`/mycrmhomepage/getcrmHomepage?id=${id}`)
 
+export const getAllpropertiesDetailsUser = async (id,page=1,limit=2) => {
+  return API.get(`/mycrmhomepage/allListing?id=${id}&page=${page}&limit=${limit}`)
+}
+
+export const getresponsebyid = async (id,page=1,limit=2) => {
+  return API.get(`/mycrmhomepage/leadbyid?id=${id}&page=${page}&limit=${limit}`)
+}
 
 export const verifyOtp = (mobile, otp) =>
   API.post("/auth/verify-otp", { mobile, otp });
@@ -152,6 +159,8 @@ export const createGestLead = async (formatData) => {
     }
   })
 }
+
+
 
 export const createLead = async (formData) => {
   return API.post(`/lead/lead`,formData,{
