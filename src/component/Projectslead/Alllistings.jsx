@@ -33,7 +33,7 @@ const Alllistings = () => {
 
 
 
-
+   
 
     const [numberofActiveProduct, setNumberofActiveProduct] = useState(0);
     const [propertiesdata, setPropertiesData] = useState([]);
