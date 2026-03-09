@@ -70,7 +70,7 @@ const Alllistings = () => {
 
             return {
               id: item._id,
-              title: `${item.projectname}` || "",
+              title: `${item.projectname}` || `${item.apartment_name}`,
               price: item.price || "",
               spid: item.spid || `npx${item.npxid}`,
               status: item.status || "",
