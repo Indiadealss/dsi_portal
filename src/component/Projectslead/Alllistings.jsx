@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
+import { FcNext } from "react-icons/fc";
+import { FcPrevious } from "react-icons/fc";
 import { useSelector } from 'react-redux';
 import { getAllpropertiesDetailsUser } from '../../api/api';
 import Dynameiclistingallprodects from '../crmCustomcomponents/Dynameiclistingallprodects';
@@ -24,16 +26,19 @@ const Alllistings = () => {
     const [category, setCategory] = useState('')
     const [filter, setFilter] = useState([])
 
-    const [page, setPage] = useState('1');
-    const [limit, setLimit] = useState('2');
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(2);
 
     const user = useSelector((state) => state.user);
+
+
 
 
 
     const [numberofActiveProduct, setNumberofActiveProduct] = useState(0);
     const [propertiesdata, setPropertiesData] = useState([]);
 
+        const totalPages = Math.ceil(numberofActiveProduct / limit);
 
       const parseLocation = (location) => {
   if (typeof location === "string") {
@@ -205,7 +210,18 @@ const Alllistings = () => {
             <Dynameiclistingallprodects properties={propertiesdata} />
 
             <p className="mt-4 text-gray-700">
-                Displaying 1 - {propertiesdata.length} of {numberofActiveProduct} results
+                Displaying {Array.from({ length: totalPages }, (_, index) => (
+    
+    <button
+      key={index}
+      onClick={() => setPage(index + 1)}
+      className={`px-3 py-1 rounded cursor-pointer 
+      ${page === index + 1 ? "text-blue-500 font-bold" : ""}`}
+    >
+      {index + 1}
+    </button>
+
+  ))} of {numberofActiveProduct}  results
             </p>
         </div>
     )
