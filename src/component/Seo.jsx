@@ -1,26 +1,23 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import { useParams } from 'react-router-dom';
+import { Helmet } from "react-helmet-async";
 
-const Seo = ({title, description,canonical}) => {
-  const { slug } = useParams();
-
-  console.log(title,'title',description,'desctiption',canonical,'canoniacal','9897');
-  
-  
-
+const Seo = ({ title, description, canonical }) => {
   return (
     <Helmet>
       <title>{title}</title>
+
       {description && (
-        <meta name="description" content={description} />
+        <meta
+          name="description"
+          content={description}
+          key="description"
+        />
       )}
 
       {canonical && (
         <link rel="canonical" href={canonical} />
       )}
     </Helmet>
-  )
-}
+  );
+};
 
-export default Seo
+export default Seo;

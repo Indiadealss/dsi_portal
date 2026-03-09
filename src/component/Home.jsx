@@ -23,6 +23,7 @@ import Contiunebrowser from './customcomponent/Contiunebrowser';
 import { getallProperty, getProjectBanner } from '../api/api';
 import homepageBaner from '../Images/banner.jpg';
 import { useSelector } from 'react-redux';
+import Seo from './Seo';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -354,6 +355,11 @@ console.log(residential, 'residential');
     }
   return (
     <div>
+      <Seo
+              title='Residential and Commercial properties in India, Flats, Plots, Villas, Apartments'
+              description="Brandsdoor.in offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
+              canonical={`https://www.indiadealss.com`}
+            />
       <div className='block'>
         <div className='relative'>
           <Banner image={homepageBaner} />
