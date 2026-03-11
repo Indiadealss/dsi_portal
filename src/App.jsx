@@ -22,7 +22,6 @@ import Projectdetail from "./component/Projectdetail";
 import Addsomething from "./component/customantdesign/Addsomething";
 import Privacy from "./component/privacy/Privacy";
 import Termsconditions from "./component/privacy/Termsconditions";
-import Chanel from "./component/privacy/Chanel";
 import Contactus from "./component/customantdesign/Contactus";
 import Cancellation from "./component/privacy/Cancellation";
 import Propertypageslug from "./Propertypageslug";
@@ -131,7 +130,6 @@ function App() {
     {path:"/info/privacy",element:<Privacy />},
     {path:"/info/terms-and-conditions",element:<Termsconditions />},
     {path:"/info/cancellation-policy",element: <Cancellation />},
-    {path:"/info/Channel-Partner-Policy",element:<Chanel />},
     {path:"/postproperty", element:<Postpropertyform />}
   ]);
 
