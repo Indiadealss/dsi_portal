@@ -215,12 +215,12 @@ Our liability is limited to the extent of services provided directly by us.
                                 BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED.
                             </span>
                              <ul className="mt-2   pl-5 text-sm leading-8">
-                            <li>
+                            {/* <li>
                                brandsdoor.in@gmail.com
                             </li>
                             <li>
                                 +91 9818764200
-                            </li>
+                            </li> */}
                             <li>
                                UNIT No: 320, TOWER C, GOLDEN I, TECHZONE 4, Grater Noida, 201009 
                             </li>
