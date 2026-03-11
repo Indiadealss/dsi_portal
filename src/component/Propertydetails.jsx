@@ -25,15 +25,12 @@ const Propertydetails = () => {
    const [smilarProper,setSmilarProper] = useState(null);
 
 const handleDealerPosition = (y) => {
-     setDealer(Number(y)) 
-     // console.log(y);
-     
+     setDealer(Number(y));
    }
 
    const handleSimalerPosition = (y) => {
       setSmilarProper(Number(y))
       // console.log(Number(y),"let's see");
-      
    }
    const buttonNames = [
            {
@@ -92,6 +89,9 @@ const handleDealerPosition = (y) => {
          dispatch(setProperty(res.data));
 
          if(data){
+
+            console.log(data,data.images,'data Responses Done');
+            
             if(data.images && data.images.length > 0){
                setCrousalData(data.images.map((img)=>({
                   image:img.src

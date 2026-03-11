@@ -32,7 +32,7 @@ function Footer() {
       </div>
 
       {/* Widgets Section */}
-      <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-5 gap-6 text-sm">
+      <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
         <div className="mx-auto hidden lg:block">
           <h4 className="mb-3 font-semibold text-center lg:text-start">Land/Plots</h4>
           <ul className="space-y-2">
@@ -87,7 +87,7 @@ function Footer() {
         <div>
           <h4 className="mb-3 font-semibold text-center ">Address</h4>
           <div className="">
-            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium"> C-337 C , 3rd Floor, Block C, Golden I, Techzone 4, Grater Noida West,201304</span></p>
+            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium"> Registered Office:<br /> C-337 C , 3rd Floor, Block C, Golden I, Techzone 4, Grater Noida West,201304</span></p>
           </div>
         </div>
       </div>
