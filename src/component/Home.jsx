@@ -433,28 +433,18 @@ console.log(residential, 'residential');
           <div style={{ padding: "40px" }}>
           <h2 className=' font-bold text-black text-xl '>Handpicked Residential Projects</h2>
           <p className=' text-xs font-medium text-gray-300 mb-3'>Featured Residential projects across India</p>
-        <div className="flex justify-evenly w-[85%] ">
-          <div className={!residential[0] ? '' : ''}>
-      <Antdpropertycard
-        image="https://picsum.photos/500/450?random=1"
-        logo="https://picsum.photos/100/100?random=1"
-        title="Bricks Marvella"
-        featured
-        data={residential[0]}
-      />
-      </div>
-      <div className={!residential[1] ? '' : ''}>
-      <Antdpropertycard
-        image="https://picsum.photos/500/450?random=1"
-        logo="https://picsum.photos/100/100?random=1"
-        title="Rishi Coral Wood Bungalows"
-        description="4,5 BHK Independent House/Villa, Hoshangabad Road, Bhopal"
-        price="₹ 1.95 Cr"
-        featured
-        data={residential[1]}
-      />
-      </div>
-    </div>
+        <div className="flex justify-evenly w-full">
+  {residential.slice(0,2).map((item, index) => (
+    <Antdpropertycard
+      key={index}
+      image="https://picsum.photos/500/450?random=1"
+      logo="https://picsum.photos/100/100?random=1"
+      title={item.title}
+      data={item}
+      featured
+    />
+  ))}
+</div>
     </div>
     <div style={{ padding: "40px",marginTop:"60px" }} className={`${crousalData.length === 0 ? 'hidden' : ''}`}>
           <h2 className=' font-bold text-black text-xl '>Upcoming Projects</h2>
