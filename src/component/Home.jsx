@@ -24,6 +24,7 @@ import { getallProperty, getProjectBanner } from '../api/api';
 import homepageBaner from '../Images/banner.jpg';
 import { useSelector } from 'react-redux';
 import Seo from './Seo';
+import SclatingHomepage from './Loading/SclatingHomepage';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -331,8 +332,8 @@ const Home = () => {
     // console.log(data);
     
         return (
-            <div className='mb-5'>
-                Loding...
+            <div className='mt-[8vw]'>
+                <SclatingHomepage />
             </div>
         )
     }

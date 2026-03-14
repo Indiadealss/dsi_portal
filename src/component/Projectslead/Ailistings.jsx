@@ -36,7 +36,7 @@ const Ailistings = () => {
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Underscreening</span>
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Expired</span>
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Deleted</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span>
+                        {/* <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span> */}
                     </div>
                 </div>
 

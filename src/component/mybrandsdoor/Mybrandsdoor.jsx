@@ -39,9 +39,6 @@ const Mybrandsdoor = () => {
     const Projects = [
         {name: 'All Products',link:'all_listings/ALL'},
         {name:'Super Campaign',link:'/mybrandsdoor/all_listings/CMT'},
-        {name:'BBC',link:'/mybrandsdoor/all_listings/BBC'},
-        {name:'SAB',link:'/mybrandsdoor/all_listings/SAB'},
-        {name:'NP/FP/PG/AP/AS',link:'/mybrandsdoor/all_listings/ALLNP'},
         {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
         {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
     ]

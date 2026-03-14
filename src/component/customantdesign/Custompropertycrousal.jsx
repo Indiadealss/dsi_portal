@@ -20,8 +20,8 @@ const Custompropertycrousal = ({images}) => {
             return(
                 <div key={index} style={contentStyle}>
                     <img
-                    className='w-full h-auto rounded p-2 propertyListingImage'
-                    style={{height:'20vw'}}
+                    className='w-full  rounded p-2 propertyListingImage'
+                    style={{height:'20vw !important'}}
                     src={item.src}
                     />
                 </div>

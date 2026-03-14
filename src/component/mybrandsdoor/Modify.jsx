@@ -56,7 +56,9 @@ const Modify = () => {
             setMessage('Enter the Valid profile')
             return false;
         }
-
+        else{
+            setMessage('')
+        }
 
     }
     

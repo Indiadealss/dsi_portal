@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
+import { useSelector } from 'react-redux';
 
 const Platinumlisting = () => {
 
@@ -19,11 +20,76 @@ const Platinumlisting = () => {
 
     const [newest, setNewest] = useState('')
     const [category, setCategory] = useState('')
-    const [filter,setFilter] = useState([])
+    const [filter, setFilter] = useState([])
 
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(2);
+
+    const user = useSelector((state) => state.user);
+
+
+
+   
+
+    const [numberofActiveProduct, setNumberofActiveProduct] = useState(0);
+    const [propertiesdata, setPropertiesData] = useState([]);
+
+        // const totalPages = Math.ceil(numberofActiveProduct / limit);
+
+      const parseLocation = (location) => {
+  if (typeof location === "string") {
+    try {
+      return JSON.parse(location);
+    } catch {
+      return null;
+    }
+  }
+  return location;
+};
+      useEffect(() => {
+      if (!user?.id) return;
     
+      const fetchProperties = async () => {
+        try {
+          const res = await getAllpropertiesDetailsUser(user.id, page, limit);
+    
+          if (res.status === 200) {
+            const properties = res.data;
+            console.log(properties,'totalhk');
+            
+            setNumberofActiveProduct(properties.total);
+    
+            const formattedData = await Promise.all(
+              properties.properties.map(async (item) => {
+                const location = await parseLocation(item.location);
+    
+                return {
+                  id: item._id,
+                  title: `${item.projectname}` || `${item.apartment_name}`,
+                  price: item.price || "",
+                  spid: item.spid || `npx${item.npxid}`,
+                  status: item.status || "",
+                  createdAt: item.createdAt || "",
+                  expiryDate: item.expiryDate || "",
+                  location: location || ""
+                };
+              })
+            );
+    
+            setPropertiesData(formattedData);
+            console.log(res, properties);
+          }
+    
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    
+      fetchProperties();
+    
+    }, [user?.id, page, limit]);
 
-    const numberofActiveProduct = 5
+    // const numberofActiveProduct = 5
     return (
         <div>
             <div className='flex justify-between px-5 border-b-2 p-3 border-gray-300'>
@@ -36,7 +102,7 @@ const Platinumlisting = () => {
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Underscreening</span>
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Expired</span>
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Deleted</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span>
+                        {/* <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span> */}
                     </div>
                 </div>
 

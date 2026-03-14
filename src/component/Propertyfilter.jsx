@@ -327,7 +327,7 @@ export default function Propertyfilter() {
   ]
 
   const ResidentalAppartment = [
-    { title: 'Hide already seen', data: 'input', name: 'alreadySeen' },
+    // { title: 'Hide already seen', data: 'input', name: 'alreadySeen' },
     { title: 'Budget', data: 'Rangeslider',min:0, max:10000000, name: 'budget', useref: useRef(null) },
     { title: 'No. of Bedrooms', data: noBedroom, name: 'noOfBedroom', useref: useRef(null) },
     { title: 'Types of Property', data: propertyType, name: 'typesOfProperty', useRef: useRef(null) },

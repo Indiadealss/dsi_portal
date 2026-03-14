@@ -5,11 +5,12 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { data, Link } from "react-router";
 import Ownerdetails from './Ownerdetails';
 import { getallProperty } from '../api/api';
-import { Carousel } from 'antd';
+import { Carousel, Skeleton } from 'antd';
 import Custompropertycrousal from './customantdesign/Custompropertycrousal';
 import { formatDistanceToNow } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFilter } from './Redux/filterSlice';
+import SklatingLoding from './Loading/SklatingLoding';
 export const PropertiesData = () => {
 
     let timeStamp = Date.now();
@@ -25,7 +26,6 @@ export const PropertiesData = () => {
   // console.log("Updated properties:", properties);
 }, [properties]);
 
-
   const [location,setLocation] = useState(useSelector((state) => state.filterSlice.location))
   const [selectedFilters,setSelectedFilters]  = useState(useSelector((state) => state.filterSlice))
   const [projectname,setProjectname] = useState(useSelector((state) => state.filterSlice.projectname))
@@ -35,7 +35,7 @@ export const PropertiesData = () => {
 
         const propertyType = selectedFilters.propertyType;
         
-         
+         setLoading(true)
         const res = await getallProperty(pageNumber,location,projectname,propertyType);
         const resultsAre = res.data?.data || [];
 
@@ -153,6 +153,14 @@ export const PropertiesData = () => {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
 };
+
+if(loading){
+  return <div
+        
+      >
+        <SklatingLoding />
+      </div>
+}
 
     
     // const propertyData = [

@@ -61,7 +61,8 @@ const Alllistings = () => {
 
       if (res.status === 200) {
         const properties = res.data;
-
+        console.log(properties,'totalhk');
+        
         setNumberofActiveProduct(properties.total);
 
         const formattedData = await Promise.all(
@@ -94,9 +95,6 @@ const Alllistings = () => {
 
 }, [user?.id, page, limit]);
 
-    useEffect(() => {
-
-    }, [propertiesdata])
     return (
         <div>
             <div className='flex justify-between px-5 border-b-2 p-3 border-gray-300'>
@@ -109,7 +107,7 @@ const Alllistings = () => {
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Underscreening</span>
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Expired</span>
                         <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Deleted</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span>
+                        {/* <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span> */}
                     </div>
                 </div>
 
