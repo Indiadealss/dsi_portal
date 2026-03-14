@@ -900,10 +900,10 @@ useEffect(() => {
     className={`w-full  left-0 z-50 transition-all duration-50 
   ${
     scrolled
-      ? "propertyNavbar text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg"
-      : `propertyNavbar2 text-[#f1e6c8] hover:text-[#f1e6c8]  ${location.pathname === '/' ? 'navbackgroundSec bg-transparent' : 'navbackground'}`
+      ? "propertyNavbar text-[#f1e6c8] hover:text-[#f1e6c8] navbackground  shadow-lg top-0"
+      : `propertyNavbar2 text-[#f1e6c8] hover:text-[#f1e6c8] top-0  ${location.pathname === '/' ? 'navbackgroundSec bg-transparent' : 'navbackground'}`
   }
-  ${visible ? "top-0" : "top"}
+  ${visible ? "top-0" : "top-0"}
   `}
       style={{
         position: "",
