@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
+import { FcNext } from "react-icons/fc";
+import { FcPrevious } from "react-icons/fc";
 import { useSelector } from 'react-redux';
+import {getPlatinumlistingWithleads } from '../../api/api';
+import Dynameiclistingallprodects from '../crmCustomcomponents/Dynameiclistingallprodects';
+import { RxCross2 } from "react-icons/rx";
 
 const Platinumlisting = () => {
 
@@ -12,15 +17,17 @@ const Platinumlisting = () => {
     ];
 
     const categorys = [
+        "All",
+        "BUY",
+        "Sell",
         "PG",
         "RENT",
-        "BUY",
-        "LEASE"
     ]
 
     const [newest, setNewest] = useState('')
     const [category, setCategory] = useState('')
     const [filter, setFilter] = useState([])
+    const [search, setSearch] = useState("");
 
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(2);
@@ -28,88 +35,166 @@ const Platinumlisting = () => {
     const user = useSelector((state) => state.user);
 
 
+    const clearAllFilters = () => {
+        setSearch("");
+        setCategory("All");
+        setNewest("");
+        setStatus("all");
+    };
 
-   
 
     const [numberofActiveProduct, setNumberofActiveProduct] = useState(0);
     const [propertiesdata, setPropertiesData] = useState([]);
 
-        // const totalPages = Math.ceil(numberofActiveProduct / limit);
+    const [status, setStatus] = useState("all");
 
-      const parseLocation = (location) => {
-  if (typeof location === "string") {
-    try {
-      return JSON.parse(location);
-    } catch {
-      return null;
-    }
-  }
-  return location;
-};
-      useEffect(() => {
-      if (!user?.id) return;
-    
-      const fetchProperties = async () => {
-        try {
-          const res = await getAllpropertiesDetailsUser(user.id, page, limit);
-    
-          if (res.status === 200) {
-            const properties = res.data;
-            console.log(properties,'totalhk');
-            
-            setNumberofActiveProduct(properties.total);
-    
-            const formattedData = await Promise.all(
-              properties.properties.map(async (item) => {
-                const location = await parseLocation(item.location);
-    
-                return {
-                  id: item._id,
-                  title: `${item.projectname}` || `${item.apartment_name}`,
-                  price: item.price || "",
-                  spid: item.spid || `npx${item.npxid}`,
-                  status: item.status || "",
-                  createdAt: item.createdAt || "",
-                  expiryDate: item.expiryDate || "",
-                  location: location || ""
-                };
-              })
-            );
-    
-            setPropertiesData(formattedData);
-            console.log(res, properties);
-          }
-    
-        } catch (err) {
-          console.log(err);
+    const totalPages = Math.ceil(numberofActiveProduct / limit);
+
+    const parseLocation = (location) => {
+        if (typeof location === "string") {
+            try {
+                return JSON.parse(location);
+            } catch {
+                return null;
+            }
         }
-      };
-    
-      fetchProperties();
-    
-    }, [user?.id, page, limit]);
+        return location;
+    };
 
-    // const numberofActiveProduct = 5
+    useEffect(() => {
+        let filtered = [...propertiesdata];
+
+        // SEARCH FILTER
+        if (search) {
+            const term = search.toLowerCase();
+
+            filtered = filtered.filter((item) => {
+                let address = "";
+                let city = "";
+
+                if (Array.isArray(item.location)) {
+                    address = item.location[0]?.Address || "";
+                    city = item.location[0]?.City || "";
+                } else {
+                    address = item.location?.Address || "";
+                    city = item.location?.City || "";
+                }
+
+                return (
+                    item.title?.toLowerCase().includes(term) ||
+                    address.toLowerCase().includes(term) ||
+                    city.toLowerCase().includes(term)
+                );
+            });
+        }
+
+        console.log(filtered, 'Filtered');
+
+
+        // CATEGORY FILTER
+        if (category && category !== "All") {
+            filtered = filtered.filter((item) =>
+                item.purpose?.toLowerCase().includes(category.toLowerCase())
+            );
+        }
+
+        // SORT FILTER
+        if (newest === "Newest First") {
+            filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        }
+
+        if (newest === "Oldest First") {
+            filtered.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        }
+
+        if (newest === "Expiring First") {
+            filtered.sort((a, b) => new Date(a.expiryDate) - new Date(b.expiryDate));
+        }
+
+        if (newest === "Expiring Last") {
+            filtered.sort((a, b) => new Date(b.expiryDate) - new Date(a.expiryDate));
+        }
+
+        setFilter(filtered);
+
+    }, [propertiesdata, category, newest, search]);
+
+    useEffect(() => {
+        setFilter(propertiesdata);
+    }, [propertiesdata]);
+
+
+    useEffect(() => {
+        if (!user?.id) return;
+
+        console.log(filter);
+
+        const fetchProperties = async () => {
+            try {
+                const res = await getPlatinumlistingWithleads(user.id, page, limit, status);
+
+                if (res.status === 200) {
+                    const properties = res.data;
+                    console.log(properties, 'totalhk');
+
+                    setNumberofActiveProduct(properties.total);
+
+                    const formattedData = await Promise.all(
+                        properties.properties.map(async (item) => {
+                            const location = await parseLocation(item.location);
+
+                            return {
+                                id: item._id,
+                                title: `${item.projectname}` || `${item.apartment_name}`,
+                                price: item.price || "",
+                                spid: item.spid || `npx${item.npxid}`,
+                                purpose: item.purpose || '',
+                                status: item.status || "",
+                                createdAt: item.createdAt || "",
+                                expiryDate: item.expiryDate || "",
+                                location: location || ""
+                            };
+                        })
+                    );
+
+                    setPropertiesData(formattedData);
+                    console.log(res, properties);
+                }
+
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchProperties();
+
+    }, [user?.id, page, limit, status]);
+
     return (
         <div>
             <div className='flex justify-between px-5 border-b-2 p-3 border-gray-300'>
                 <div className='border-e border-gray-300'>
                     <span className='text-xs cursor-default'>ACTIVATION STATUS</span>
                     <div className='flex'>
-                        <span className='text-xs px-3  border-e cursor-pointer text-gray-600'>ALL</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Active</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Reported</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Underscreening</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Expired</span>
-                        <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>Deleted</span>
-                        {/* <span className='text-xs px-3 border-e cursor-pointer text-gray-600'>On Auto Extend</span> */}
+                        <span onClick={() => setStatus("all")} className='text-xs px-3 border-e cursor-pointer text-gray-600'>ALL</span>
+                        <span onClick={() => setStatus("active")} className='text-xs px-3 border-e cursor-pointer text-gray-600'>Active</span>
+                        <span onClick={() => setStatus("reported")} className='text-xs px-3 border-e cursor-pointer text-gray-600'>Reported</span>
+                        <span onClick={() => setStatus("underscreening")} className='text-xs px-3 border-e cursor-pointer text-gray-600'>Underscreening</span>
+                        <span onClick={() => setStatus("expired")} className='text-xs px-3 border-e cursor-pointer text-gray-600'>Expired</span>
+                        <span onClick={() => setStatus("deleted")} className='text-xs px-3 border-e cursor-pointer text-gray-600'>Deleted</span>
                     </div>
                 </div>
 
                 <div className='border-e pe-2 border-gray-300'>
                     <div className='flex border-b border-gray-300'>
                         <CiSearch className='mt-6 font-bold text-lg' />
-                        <input type="text" className='text-gray-700  mt-2 outline-none' placeholder='Enter Locality' />
+                        <input
+                            type="text"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className='text-gray-700 mt-2 outline-none'
+                            placeholder='Enter Locality'
+                        />
                     </div>
                 </div>
                 <div className='border-e pe-2 border-gray-300'>
@@ -174,9 +259,9 @@ const Platinumlisting = () => {
 
                             {/* Assign to sub user */}
 
-                            <div className='border-e px-5 mb-4'>
+                            {/* <div className='border-e px-5 mb-4'>
                                 <p><span className='text-xs font-medium cursor-pointer'>Assign to sub-user</span></p>
-                            </div>
+                            </div> */}
 
                             {/* Recall */}
 
@@ -190,15 +275,52 @@ const Platinumlisting = () => {
             </div>
 
             {/* showing */}
-                <div className='shadow-md w-[96%] m-3 p-2 border border-gray-300 rounded'>
-                    <div className='flex'>
+            {(search || status !== "all" || category !== "All") && (
+            <div className='shadow-md w-[96%] m-3 p-2 border border-gray-300 rounded'>
+                <div className='flex'>
                     <p><span>Showing In:</span></p>
-                    {}
-                    <div className='flex'>
-                        <button className='bg-gray-300 px-2 mx-5'><span className='text-xs text-blue-500'>Clear All Filters</span></button>
+                    <div className='flex items-center gap-2 ms-10'>
+                        {status !== "all" && (
+                            <button className="text-xs font-bold bg-blue-100 px-2 py-1 rounded-full cursor-pointer flex uppercase" onClick={() => setStatus("all")}>
+                                {status}  <RxCross2 className='m-1 text-sm text-blue-500'/>
+                            </button>
+                        )}
+
+                        {category !== "All" && (
+                            <button className="text-xs bg-blue-100 font-bold px-2 py-1 rounded-full cursor-pointer flex uppercase" onClick={() => setCategory("All")}>
+                                {category} <RxCross2 className='m-1 text-sm text-blue-500'/>
+                            </button>
+                        )}
+
+                        {search && (
+                            <button className="text-xs bg-blue-100 font-bold px-2 py-1 rounded-full cursor-pointer flex uppercase" onClick={() =>  setSearch("")}>
+                                {search} <RxCross2 className='m-1 text-sm text-blue-500'/>
+                            </button>
+                        )}
                     </div>
+                    <div className='flex'>
+                        <button className='bg-gray-300 px-2 mx-5 cursor-pointer' onClick={clearAllFilters}><span className='text-xs text-blue-500'>Clear All Filters</span></button>
                     </div>
                 </div>
+            </div>
+            )}
+
+            <Dynameiclistingallprodects properties={filter} />
+
+            <p className="mt-4 text-gray-700">
+                Displaying {Array.from({ length: totalPages }, (_, index) => (
+
+                    <button
+                        key={index}
+                        onClick={() => setPage(index + 1)}
+                        className={`px-3 py-1 rounded cursor-pointer 
+      ${page === index + 1 ? "text-blue-500 font-bold" : ""}`}
+                    >
+                        {index + 1}
+                    </button>
+
+                ))} of {numberofActiveProduct}  results
+            </p>
         </div>
     )
 }

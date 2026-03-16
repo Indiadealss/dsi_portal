@@ -18,8 +18,26 @@ export const sentOtp = (mobile) =>
 export const lead = (id) =>
   API.get(`/mycrmhomepage/getcrmHomepage?id=${id}`)
 
-export const getAllpropertiesDetailsUser = async (id,page=1,limit=2) => {
-  return API.get(`/mycrmhomepage/allListing?id=${id}&page=${page}&limit=${limit}`)
+export const getAllpropertiesDetailsUser = async (id,page=1,limit=2,status='all') => {
+  return API.get(`/mycrmhomepage/allListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
+}
+
+
+export const getPlainlistingWithleads = async (id,page=1,limit=2,status='all') => {
+  return API.get(`/mycrmhomepage/PlanListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
+}
+
+export const getPlatinumlistingWithleads = async (id,page=1,limit=2,status='all') => {
+  return API.get(`/mycrmhomepage/PlatinumListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
+}
+
+export const getPremimumlistingWithleads = async (id,page=1,limit=2,status='all') => {
+  return API.get(`/mycrmhomepage/PremimumListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
+}
+
+
+export const getInfinitylistingWithleads = async (id,page=1,limit=2,status='all') => {
+  return API.get(`/mycrmhomepage/InfinityListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
 }
 
 export const getAllProjectlistingWithleads = async (id,page=1,limit=2) => {
