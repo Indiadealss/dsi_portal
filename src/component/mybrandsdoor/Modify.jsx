@@ -327,7 +327,7 @@ const Modify = () => {
                                                     className="w-16 h-16 rounded-full object-cover mx-auto"
                                                 />
                                             ) : (
-                                                <FaRegUserCircle />
+                                                <FaRegUserCircle className='text-blue-500 mx-auto text-2xl' />
                                             )}
                                             <p>
                                                 <span className='text-sm text-blue-500'>

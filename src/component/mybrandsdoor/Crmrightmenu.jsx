@@ -21,8 +21,8 @@ const Crmrightmenu = () => {
         const Projects = [
             {name: 'All Products',link:'/mybrandsdoor/all_listings/ALL'},
             {name:'Super Campaign',link:'/mybrandsdoor/all_listings/CMT'},
-            {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
-            {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
+            // {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
+            // {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
         ]
   return (
     <div className='w-[15%] '>

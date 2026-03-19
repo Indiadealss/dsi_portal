@@ -65,12 +65,10 @@ if (!stats) return <div>Loading...</div>;
         <div className={stats.newProjects  ? '' : 'hidden'}>
         <h3 className="font-medium text-gray-700"><span className='text-gray-700 font-medium'>New Projects</span></h3>
         <p className="text-3xl font-semibold mt-1">{stats.newProjects}</p>
-        <p className="text-gray-400 text-sm">responses</p>
         </div>
         <div className={stats.properties  ? '' : 'hidden'}>
         <h3 className="font-medium text-gray-700"><span className='text-gray-700 font-medium'>Properties</span></h3>
         <p className="text-3xl font-semibold mt-1">{stats.properties}</p>
-        <p className="text-gray-400 text-sm">responses</p>
         </div>
         </div>
         <div className="mt-6 flex items-center gap-2">
