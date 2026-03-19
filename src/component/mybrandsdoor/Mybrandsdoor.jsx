@@ -163,7 +163,7 @@ const Mybrandsdoor = () => {
                             <span className='text-xs text-center mx-5 font-medium text-gray-500'>MY PROFILE</span>
                         </div>
                         <div className='mx-3 mt-4'>
-                            <Link to={`/recent-activity`} ><span className='text-sm text-gray-500 font-medium cursor-pointer'>Shortlist</span></Link>
+                            <Link to={`/recent-activity?type=shortlist`} ><span className='text-sm text-gray-500 font-medium cursor-pointer'>Shortlist</span></Link>
                         </div>
                         <div className='mx-3 mt-4'>
                             <span className='text-sm text-gray-500 font-medium cursor-pointer' onClick={() => changeMyprofile('settingMyLead')}>My Lead</span>

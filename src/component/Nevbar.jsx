@@ -741,7 +741,7 @@ export default function Navbar() {
 
   const profileItems = [
   { key: "profile", label: profileLabel },
-  {key:"myactivty",label:<Link to='/recent-activity' ><span className="text-sm">My activity</span></Link>},
+  {key:"myactivty",label:<Link to='/recent-activity?type=viewed' ><span className="text-sm">My activity</span></Link>},
   // {key:'recentlysearch',label:<Link to='/recent-activity?type=recent'><span className="text-sm">Recently Search</span></Link>},
   {key:"recently",label:<Link to='/recent-activity?type=viewed'><span className="text-sm">Recently Viewed</span></Link>},
   {key:"shortlisted",label:<Link to='/recent-activity?type=shortlist'><span className="text-sm">Shortlisted</span></Link>},
