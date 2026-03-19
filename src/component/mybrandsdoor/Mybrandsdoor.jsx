@@ -89,7 +89,7 @@ const Mybrandsdoor = () => {
                             <Link to={`editProfile`}><p><span className='text-sm text-white'>Modify</span></p></Link>
                         </div>
                     </div>
-                    <div className='w-full bg-black pt-5 pb-10 h-[300px] lg:h-[400px] 2xl:h-[850px] overflow-y-auto overflow-x-hidden relative'>
+                    <div className='w-full bg-black pt-5 pb-10 h-[300px] lg:h-[400px] 2xl:h-[440px] overflow-y-auto overflow-x-hidden relative'>
                         <div className='mx-3'>
                             <Link to={`Homepage`}><span className='text-xs text-gray-500 font-medium'>My DOOR</span></Link>
                         </div>
