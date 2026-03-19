@@ -68,7 +68,7 @@ const Buyservice = () => {
     ]
   return (
     <>
-    <div className='flex justify-center my-10'>
+    <div className='flex justify-center my-10 mt-[10vw]'>
         <Modal open={isModelOpen} onCancel={() => setIsModelOpen(false)} footer={null}>
         <h3>Proceed to purchase</h3>
     </Modal>

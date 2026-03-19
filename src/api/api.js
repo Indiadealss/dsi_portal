@@ -64,9 +64,14 @@ export const getUserDetatils = () => {
   )
 }
 
-export const updateUser = (formatData) => {
-  return axios.post("/api/auth/updateuserprofile",{formatData})
-}
+export const updateUser = async (formData) => {
+  return axios.post("/api/auth/updateuserprofile", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    withCredentials: true,
+  });
+};
 
 export const getLogout = async () => {
   return axios.post("/api/auth/logout", {}, { withCredentials: true })
@@ -311,6 +316,43 @@ export const getAllFeature = async ()=> {
 export const searchaddress = async (address,city) => {
   return API.get(`/searchaddress?query=${address}&$city=${city}`);
 }
+
+// ✅ Toggle Shortlist (Add / Remove)
+export const toggleShortlist = async (userId, propertyId) => {
+  return API.post("/shortlist/toggle", {
+    userId,
+    propertyId,
+  });
+};
+
+// ✅ Get User Shortlist
+export const getUserShortlist = async (userId) => {
+  return API.get(`/shortlist/${userId}`);
+};
+
+export const toggleViewed = async (userId, propertyId) => {
+  return API.post("/viewed/toggle", {
+    userId,
+    propertyId,
+  });
+};
+
+// ✅ Get User Shortlist
+export const getUserViewed = async (userId) => {
+  return API.get(`/viewed/${userId}`);
+};
+
+export const toggleConnected = async (userId, propertyId) => {
+  return API.post("/connect/toggle", {
+    userId,
+    propertyId,
+  });
+};
+
+// ✅ Get User Shortlist
+export const getUserConnected = async (userId) => {
+  return API.get(`/connect/${userId}`);
+};
 
 // export const submitProperty = createAsyncThunk(
 //   "property/submitProperty",

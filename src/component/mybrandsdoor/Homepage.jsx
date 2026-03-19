@@ -25,10 +25,11 @@ useEffect(() => {
       lead(user.id)
       .then(res => {
         if (res.status === 200) {
-          // console.log(res.data.usedetails);
+          console.log(res.data,'res.datas');
          const properties = res.data.data;
           setStats({
-        newProjects: properties[0].length,
+        newProjects: properties[0].filter(p => p.npxid).length,
+        properties: properties[0].filter(p => p.spid).length,
         expiringSoon: 0,        // update logic later
         recentlyExpired: 0,     // update logic later
         enquiry: properties[1].length              // update logic later
@@ -45,14 +46,14 @@ if (!stats) return <div>Loading...</div>;
   return (
     <div className='mx-5'>
       <div className='flex'>
-         <select
+         {/* <select
       value={range}
       onChange={(e) => setRange(e.target.value)}
       className="border rounded px-2 py-2 text-sm w-40"
     >
       <option value="30">Last 30 Days</option>
       <option value="90">Last 90 Days</option>
-    </select>
+    </select> */}
     <h4 className='ms-10 mt-2'><span className='font-medium text-gray-700'>Listings</span></h4>
     </div>
 
@@ -60,10 +61,18 @@ if (!stats) return <div>Loading...</div>;
 
     <div className="flex gap-4 mt-5">
       <div className=" shadow-sm p-4 w-60 h-[20vw]">
+        <div className='flex justify-between'>
+        <div className={stats.newProjects  ? '' : 'hidden'}>
         <h3 className="font-medium text-gray-700"><span className='text-gray-700 font-medium'>New Projects</span></h3>
         <p className="text-3xl font-semibold mt-1">{stats.newProjects}</p>
         <p className="text-gray-400 text-sm">responses</p>
-
+        </div>
+        <div className={stats.properties  ? '' : 'hidden'}>
+        <h3 className="font-medium text-gray-700"><span className='text-gray-700 font-medium'>Properties</span></h3>
+        <p className="text-3xl font-semibold mt-1">{stats.properties}</p>
+        <p className="text-gray-400 text-sm">responses</p>
+        </div>
+        </div>
         <div className="mt-6 flex items-center gap-2">
           <div className="bg-gray-100 p-2 rounded-full">
             📣 {/* icon placeholder */}

@@ -52,6 +52,7 @@ import Allresponse from "./component/Manageresponse/Allresponse";
 import Editprojectdetails from "./component/mybrandsdoor/Editprojectdetails";
 import Thankyou from "./component/customcomponent/Thankyou";
 import DynamicresponseallListing from "./component/crmCustomcomponents/DynamicresponseallListing";
+import ShortList from "./component/MyProfile/ShortList";
 
 function App() {
 
@@ -63,23 +64,36 @@ function App() {
   const hideLayout = location.pathname === "/sucessfullydownload";
 
    useEffect(() => {
-    getUserDetatils()
-      .then(res => {
-        if (res.status === 200) {
-          // console.log(res.data.usedetails);
-         const { name, email, mobile,_id } = res.data.usedetails;
-         
-          console.log(_id);
-          
-          dispatch(setUser({name,email,mobile,id:_id})); // populate Redux
-          dispatch(updateField({owner:_id,}))
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        dispatch(clearUser);
-      });
-  }, [dispatch]);
+  getUserDetatils()
+    .then(res => {
+      if (res.status === 200) {
+
+        const usedetails = res.data.usedetails;
+
+        dispatch(setUser({
+          id: usedetails._id,
+          name: usedetails.name,
+          email: usedetails.email,
+          mobile: usedetails.mobile,
+          company_name: usedetails.company_name,
+          company_url: usedetails.company_url,
+          company_profile: usedetails.company_profile,
+          address: usedetails.address,
+          landline: usedetails.landline,
+          you_are: usedetails.you_are,
+          logo: usedetails.logo,
+          profile_photo: usedetails.profile,
+        }));
+
+        dispatch(updateField({ owner: usedetails._id }));
+
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(clearUser()); // ✅ FIX
+    });
+}, [dispatch]);
   
   let routes = useRoutes([
     { path: "/", element: <Home /> },

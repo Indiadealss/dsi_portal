@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { CiSearch } from 'react-icons/ci';
-import { FcNext } from "react-icons/fc";
-import { FcPrevious } from "react-icons/fc";
 import { useSelector } from 'react-redux';
 import {getPlatinumlistingWithleads } from '../../api/api';
 import Dynameiclistingallprodects from '../crmCustomcomponents/Dynameiclistingallprodects';
@@ -28,7 +26,6 @@ const Platinumlisting = () => {
     const [category, setCategory] = useState('')
     const [filter, setFilter] = useState([])
     const [search, setSearch] = useState("");
-
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(2);
 

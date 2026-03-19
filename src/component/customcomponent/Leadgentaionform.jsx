@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ImFolderDownload } from "react-icons/im";
 import { useSelector } from "react-redux";
-import { createLead } from "../../api/api";
+import { createLead, toggleConnected } from "../../api/api";
 import Afterlead from "./Afterlead";
 import { useNavigate } from "react-router-dom";
 
@@ -60,6 +60,20 @@ const Leadgentaionform = ({ setLeadModel,projectOwners }) => {
     { code: "+971", country: "UAE" },
     { code: "+61", country: "AUS" }
   ];
+  
+  const GetShortList = async () => {
+      try {
+      const { data } = await toggleConnected(user?.id, property?._id);
+  
+      if (data.success) {
+        console.log(data.message);
+      }
+  
+    } catch (error) {
+      console.error(error.response?.data || error.message);
+    }
+      
+    }
 
   /* ================= PREFILL USER DATA ================= */
   useEffect(() => {
@@ -128,7 +142,9 @@ const Leadgentaionform = ({ setLeadModel,projectOwners }) => {
     
     if (!validateForm()) return;
 
-    console.log('let');
+    if(user.loggedIn){
+      GetShortList()
+    }
     
 
     try {

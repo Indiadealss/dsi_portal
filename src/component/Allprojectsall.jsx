@@ -22,7 +22,7 @@ const Myindiadealss = () => {
         {name:'Platinum Listings',link:'/mybrandsdoor/LP-P'},
         {name:'Premimum Listings',link:'/mybrandsdoor/LP-R'},
         {name:'Infinity Listings',link:'/mybrandsdoor/LP-I'},
-        {name:'AI Listings',link:'/mybrandsdoor/LP-T'},
+        // {name:'AI Listings',link:'/mybrandsdoor/LP-T'},
     ]
 
     const Projects = [

@@ -66,7 +66,7 @@ locationData = parseLocation(property.location);
 
 
     return (
-        <div className='my-25' style={{position:'sticky', top:0,zIndex:101,background:'white'}}>
+        <div className='mt-25' style={{position:'', top:0,zIndex:101,background:'white'}}>
             <div className='border-b border-gray-300'>
                 <div className='mx-10 hidden lg:block'>
                     <button className='text-white text-[10px] font-bold px-1 bg-[#814883fc]'>Featured</button>
@@ -116,9 +116,9 @@ locationData = parseLocation(property.location);
                         <p><span className='px-2 text-white bg-green-900'>RERA STATUS</span><span className='text-green-500 px-2 bg-gray-300 font-medium'>NOT AVAILABLE <span className='px-2 text-gray-700'>Website:http://up-rera.in/projects</span></span></p>
                     </div>
 
-                    <div className='mt-10 max-w-2xl'>
+                    {/* <div className='mt-10 max-w-2xl'>
                         <Antcustom articles={buttonNames} />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

@@ -439,7 +439,17 @@ const menuItems = [
 ];
 
 
+const getInitials = (name) => {
+  if (!name) return "";
 
+  const words = name.trim().split(" ");
+  
+  if (words.length === 1) {
+    return words[0][0].toUpperCase();
+  }
+
+  return (words[0][0] + words[1][0]).toUpperCase();
+};
 const MobilemenuItems = [
   {
     key: "ForBuyers",
@@ -732,17 +742,17 @@ export default function Navbar() {
   const profileItems = [
   { key: "profile", label: profileLabel },
   {key:"myactivty",label:<Link to='/recent-activity' ><span className="text-sm">My activity</span></Link>},
-  {key:'recentlysearch',label:<Link to='/'><span className="text-sm">Recently Search</span></Link>},
-  {key:"recently",label:<Link to='/'><span className="text-sm">Recently Viewed</span></Link>},
-  {key:"shortlisted",label:<Link to='/shortlisted'><span className="text-sm">Shortlisted</span></Link>},
-  {key:"contacted",label:<Link to='/contacted'><span className="text-sm">Contacted</span></Link>},
+  // {key:'recentlysearch',label:<Link to='/recent-activity?type=recent'><span className="text-sm">Recently Search</span></Link>},
+  {key:"recently",label:<Link to='/recent-activity?type=viewed'><span className="text-sm">Recently Viewed</span></Link>},
+  {key:"shortlisted",label:<Link to='/recent-activity?type=shortlist'><span className="text-sm">Shortlisted</span></Link>},
+  {key:"contacted",label:<Link to='/recent-activity?type=contacted'><span className="text-sm">Contacted</span></Link>},
   {type:"divider"},
   {key:"mybrandsdoor",label:<Link to='/mybrandsdoor' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">My DOOR</span></Link>},
   {key:"",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link>},
   {type:"View All Responses",label:<Link to='/responses' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link>},
   {type:'Manage Boss',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link>},
   {type:'leadsearch',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Lead Search</span></Link>},
-  {type:'modifyprofile',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Modify Profile</span></Link>},
+  {type:'modifyprofile',label:<Link to='/mybrandsdoor/editProfile' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Modify Profile</span></Link>},
   {type:'changepassward',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Change Passward</span></Link>},
   { type: "divider" },
   { key: "logout", danger: true, label:  logout}
@@ -1034,7 +1044,16 @@ useEffect(() => {
   >
     <Button type="text " >
       <Space>
-        <Avatar size="small" className="LoginBtn text-3xl"  icon={<UserOutlined />} />
+       <Avatar
+  size="small"
+  className="LoginBtn bg-blue-500 text-white font-semibold"
+  src={user.loggedIn && user.profile_photo ? user.profile_photo : null}
+  icon={!user.loggedIn ? <UserOutlined /> : null}
+>
+  {user.loggedIn && !user.profile_photo && user.name
+    ? getInitials(user.name)
+    : null}
+</Avatar>
         <DownOutlined className="" />
       </Space>
     </Button>

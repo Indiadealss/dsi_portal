@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCampain, getCampainbyId, getproperty, getPropertyByRera } from '../api/api';
+import { getCampain, getCampainbyId, getproperty, getPropertyByRera, getUserShortlist, toggleShortlist, toggleViewed } from '../api/api';
 import { setProperty } from './Redux/propertyidSlice';
 import Collapage from './customcomponent/Collapage';
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -45,14 +45,65 @@ const Projectdetail = () => {
   const [unitData, setUnitData] = useState();
   const [amenities, setAmenities] = useState([]);
   const [open, setOpen] = useState(false);
-  const [favurate, setFavurate] = useState(false);
+  const [favurate, setFavurate] = useState(true);
   const [projectOwners,setprojectOwners] = useState('');
   const [openDrawer, setOpenDrawer] = useState(false);
 
-
-
-
   const npxid = slug.split("npxid-")[1];
+  const user = useSelector((state) => state.user);
+
+  const fetchShortlist = async () => {
+  try {
+    console.log(user?.id,'user id');
+    
+    const { data } = await getUserShortlist(user?.id);
+
+    if (data.success) {
+
+      const isExist = data.data.some(
+  (item) => item.propertyId === propertys?._id
+);
+      console.log(isExist,data,propertys?._id,'isExist');
+      
+      setFavurate(!isExist)
+
+    }
+
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+   const GetShortList = async () => {
+    try {
+    const { data } = await toggleShortlist(user?.id, propertys?._id);
+
+    if (data.success) {
+      setFavurate((prev) => !prev);
+      console.log(data.message);
+    }
+
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+  }
+    
+  }
+
+  const GetViewed = async () => {
+    try {
+    const { data } = await toggleViewed(user?.id, propertys?._id);
+
+    if (data.success) {
+      
+      console.log(data.message);
+    }
+
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+  }
+    
+  }
+
 
 
   const faq = [
@@ -213,6 +264,13 @@ const Projectdetail = () => {
     getcampaindetails(npxid)
   }, [])
 
+  useEffect(() => {
+    if (propertys && user?.id) {
+    fetchShortlist();
+    GetViewed();
+  }
+  },[propertys, user?.id])
+
   const getcampaindetails = async (npxid) => {
     try {
       const res = await getCampainbyId(npxid);
@@ -276,7 +334,9 @@ const Projectdetail = () => {
   console.log(brochurePdf, '266');
 
 
-  console.log(Object.keys(layoutData).length, 'layoutData 269');
+  // console.log(Object.keys(layoutData).length, 'layoutData 269');
+
+ 
 
 
 
@@ -432,7 +492,7 @@ try {
           <div className="flex">
             <div className="flex">
               <h2 className=''>{propertys.projectname}</h2>
-              <div onClick={() => setFavurate((prev) => !prev)}>
+              <div onClick={GetShortList}>
                 {favurate ? (
                   <CiHeart className='text-2xl mt-1 mx-2 text-red-500 cursor-pointer' />
                 ) : (

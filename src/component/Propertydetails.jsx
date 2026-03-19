@@ -154,7 +154,7 @@ const handleDealerPosition = (y) => {
   return (
    <>
    <Propertydetailsstickcard buttonNames={buttonNames} />
-   <div className='m-0 lg:mx-10'>
+   <div className='m-10 lg:mx-10'>
    <div className='relative'>
    <Antdpropertydetailsimgcroul crousal={crousalData} video={video}  />
    </div>
