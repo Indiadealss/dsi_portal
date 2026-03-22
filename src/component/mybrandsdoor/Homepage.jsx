@@ -3,13 +3,18 @@ import { lead } from '../../api/api';
 import { useSelector } from 'react-redux';
 
 const Homepage = () => {
-    const [range, setRange] = useState("30");
+
+    const [projects, setProjects] = useState([]);
+const [properties, setProperties] = useState([]);
     const [stats, setStats] = useState({
   newProjects: 0,
   expiringSoon: 0,
   recentlyExpired: 0,
   enquiry: 0
 });
+
+
+
 
   
 
@@ -18,31 +23,45 @@ const Homepage = () => {
  const user = useSelector((state) => state.user);
 
 
- 
+
  
 
 useEffect(() => {
       lead(user.id)
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data,'res.datas');
-         const properties = res.data.data;
+          // console.log(res.data,'res.datas');
+         const data = res.data.data;
+
+         const propertyList = data[0] || [];
+        const enquiryList = data[1] || [];
+
+        setProjects(propertyList.filter(p => p.npxid));
+        setProperties(propertyList.filter(p => p.spid));
+
           setStats({
-        newProjects: properties[0].filter(p => p.npxid).length,
-        properties: properties[0].filter(p => p.spid).length,
-        expiringSoon: 0,        // update logic later
-        recentlyExpired: 0,     // update logic later
-        enquiry: properties[1].length              // update logic later
-      });
+  newProjects: propertyList.filter(p => p.npxid).length,
+  properties: propertyList.filter(p => p.spid).length,
+  expiringSoon: 0,
+  recentlyExpired: 0,
+  enquiry: enquiryList.length
+});
+
+console.log("propertyList", propertyList);
+console.log("projects", propertyList.filter(p => p.npxid));
+console.log("properties", propertyList.filter(p => p.spid));
         }
       })
       .catch(err => {
         console.error(err);
-        dispatch(clearUser);
       });
   
 },[user.id])
-if (!stats) return <div>Loading...</div>;
+if (!projects.length && !properties.length) {
+  return <div>Loading...</div>;
+}
+
+
   return (
     <div className='mx-5'>
       <div className='flex'>
@@ -96,14 +115,10 @@ if (!stats) return <div>Loading...</div>;
     </div>
 
 
-    {/*  */}
+    {/*Edit properties*/}
 
-    <div>
-      <div>
-        
-      </div>
-      <div></div>
-    </div>
+
+   
     </div>
   )
 }

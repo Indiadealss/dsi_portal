@@ -28,7 +28,7 @@ import Propertypageslug from "./Propertypageslug";
 import Recentactivity from "./component/Recentactivity";
 import Adddelercard from "./component/customcomponent/Adddelercard";
 import UpcomingProjects from "./component/customcomponent/Upcomingprojects";
-import Myindiadealss from "./component/mybrandsdoor/Mybrandsdoor";
+import Mybrandsdoor from "./component/mybrandsdoor/Mybrandsdoor";
 import Leadsearch from "./component/lead/Leadsearch";
 import Allprojects from "./component/Projectslead/Allprojects";
 import Allproject from "./component/mybrandsdoor/Allproducts";
@@ -53,6 +53,8 @@ import Editprojectdetails from "./component/mybrandsdoor/Editprojectdetails";
 import Thankyou from "./component/customcomponent/Thankyou";
 import DynamicresponseallListing from "./component/crmCustomcomponents/DynamicresponseallListing";
 import ShortList from "./component/MyProfile/ShortList";
+import Editprofileproject from "./component/mybrandsdoor/Editprofileproject";
+import EditPropertyStepper from "./component/mybrandsdoor/EditPropertyProject";
 
 function App() {
 
@@ -107,19 +109,21 @@ function App() {
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
+    { path:"/edit-property/:id", element:<EditPropertyStepper /> },
     {
   path: "/mybrandsdoor",
-  element: <Myindiadealss />,
+  element: <Mybrandsdoor />,
   children:[
     { index: true, element: <Homepage /> },
     { path:"all_listings/ALL", element:<Allprojects /> },
     { path:"all_listings", element:<Allproject /> },
     { path:"homepage", element:<Homepage />},
     { path:"all_listings/LP", element:<Alllistings />},
+    { path:"Edit_Profile/LP", element:<Editprofileproject />},
     { path:"all_listings/responce/:id",element:<DynamicresponseallListing />},
     { path:"all_listings/LP-f", element:<Plainlisting />},
     { path:"all_listings/BANNER", element:<Banner />},
-    { path:"fslMyINDIADEALSS", element:<Fsllistings />},
+    { path:"fslMybrandsdoor", element:<Fsllistings />},
     { path:"manageBoss", element:<Manageboss />},
     {path:"editProfile",element:<Modify />},
     { path:"all_listings/LP-P", element:<Platinumlisting />},
@@ -140,7 +144,6 @@ function App() {
     {path:"/addUpcomingProject",element:<UpcomingProjects />},
     {path:"/addDeler-021190",element:<Adddelercard />},
     {path:"/do/buyservie", element:<Buyservice />},
-    {path:"/lmsSearch",element:<Leadsearch />},
     {path:"/info/privacy",element:<Privacy />},
     {path:"/info/terms-and-conditions",element:<Termsconditions />},
     {path:"/info/cancellation-policy",element: <Cancellation />},

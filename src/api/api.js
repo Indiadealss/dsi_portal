@@ -109,6 +109,9 @@ export const createPropertyBasic = (data) =>
 export const updatePropertyStep = (id, data) =>
   API.put(`/property/updateProperty/${id}`, data);
 
+export const updatePropertyIdStep = (id, data) =>
+  API.put(`/property/updatePropertyById/${id}`, data);
+
 export const uploadImage = (id, formData) =>
   axios.post(`/api/property/uploadImage/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
@@ -119,9 +122,18 @@ export const uploadVideo = (id, formData) =>
     headers: { "Content-Type": "multipart/form-data" },
   });
 
+  export const deleteImage = (id,imageid) => 
+    API.delete(`/property/image/${id}/${imageid}`)
+
+  export const deleteVideo = (id,videoid) => 
+    API.delete(`/property/video/${id}/${videoid}`)
+
+
   export const updateImageMeta = (propertyId, imageId, data) => {
-  return axios.put(`/api/property/updateImageMeta/${propertyId}/${imageId}`, data);
+  return API.put(`/property/updateImageMeta/${propertyId}/${imageId}`, data);
 };
+
+
 
   export const publishProperty = (id) =>
   API.put(`/property/publishProperty/${id}`);

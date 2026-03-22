@@ -149,7 +149,7 @@ const Myindiadealss = () => {
                                 <span className='text-xs text-gray-500 font-medium'>Last Visided: time | date</span>
                             </div>
                             <div className='flex justify-around w-[100%] text-xs'>
-                                <div><Link to='/lmsSearch'><span className=' text-xs'>LEAD SEARCH</span></Link></div>
+                                {/* <div><Link to='/lmsSearch'><span className=' text-xs'>LEAD SEARCH</span></Link></div> */}
                                 <div className='mt-1'><span>|</span></div>
                                 <div><Link to='/do/buyservie'><span className=' text-xs'>BUY OUR SERVICES</span></Link></div>
                                 <div className='mt-1'><span>|</span></div>

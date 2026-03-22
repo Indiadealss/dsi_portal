@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   step: 0,
   propertyId: null,   // ✅ store created draft id
+  isEditMode:false,
   data: {
     purpose: "",
     property: "",
@@ -58,10 +59,38 @@ const propertySlice = createSlice({
     updateField: (state, action) => {
       state.data = { ...state.data, ...action.payload };
     },
+    updateFields: (state, action) => {
+  const isObject = (obj) =>
+    obj && typeof obj === "object" && !Array.isArray(obj);
+
+  const mergeDeep = (target, source) => {
+    for (const key in source) {
+      const sourceValue = source[key];
+      const targetValue = target[key];
+
+      if (isObject(sourceValue)) {
+        // 🔥 FIX: ensure target is object
+        target[key] = mergeDeep(
+          isObject(targetValue) ? targetValue : {},
+          sourceValue
+        );
+      } else {
+        target[key] = sourceValue;
+      }
+    }
+    return target;
+  };
+
+  state.data = mergeDeep({ ...state.data }, action.payload);
+},
 
     setPropertyId: (state, action) => {
       state.propertyId = action.payload;
     },
+
+    setEditMode: (state, action) => {
+  state.isEditMode = action.payload;
+},
 
     nextStep: (state) => {
       state.step += 1;
@@ -75,17 +104,29 @@ const propertySlice = createSlice({
       state.errors = action.payload;
     },
 
+    setPropertyData: (state, action) => {
+  state.data = action.payload; // 🔥 full replace (NO merge)
+},
+
     resetForm: () => initialState,
+
+    resetProperty: (state) => {
+  state.data = initialState.data;
+},
   },
 });
 
 export const {
   updateField,
+  updateFields,
+  setEditMode,
   nextStep,
   prevStep,
   setError,
   resetForm,
-  setPropertyId
+  setPropertyId,
+  resetProperty,
+  setPropertyData
 } = propertySlice.actions;
 
 export default propertySlice.reducer;

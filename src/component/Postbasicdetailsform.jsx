@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
 
 export const Postbasicdetailsform = ({ setValidator }) => {
+
+
+    const propertyData = useSelector((state) => state.property.data);
          const lokingButton = [
         { title: 'Sell', name: 'sell' },
         { title: 'Rent / Lease', name: 'rent' },
@@ -101,6 +104,14 @@ const addUnitRow = () => {
             setLookSelection(e.currentTarget.name)
               dispatch(updateField({ purpose: e.currentTarget.name }));
         }
+
+        useEffect(() => {
+            setLookSelection(propertyData.purpose)
+            setSelection(propertyData.property)
+            setItsType(propertyData.propertyType)
+            console.log(propertyData.purpose,propertyData.property,propertyData.propertyType, 'Debug the propertyData ');
+            
+        },[propertyData])
         
     
     

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import FloorSelector from './customcomponent/Floorseclector';
 import { useSelector } from 'react-redux';
@@ -16,25 +16,30 @@ const onChange = (date, dateString) => {
 };
 
 export const Profileproperty = ({ setValidator }) => {
-  const [coverdParking, setCoverdParking] = useState(0);
-  const [uncoverdParking, setUncoverdParking] = useState(0);
+
+
+   const propertyData = useSelector((state) => state.property.data);
+     const isForedit = useSelector((state) => state.property.isEditMode);
+
+ const [coverdParking, setCoverdParking] = useState(propertyData.coveredparking || 0);
+  const [uncoverdParking, setUncoverdParking] = useState(propertyData.uncoveredparking || 0);
   const [addsuperBuild, setAddSuperBuild] = useState(false);
-  const [noBedroom, setNoBedroom] = useState('');
-  const [noBalconies, setNoBalconies] = useState('');
-  const [noBathroom, setNoBathroom] = useState('');
-  const [ageProperty, setAgeProperty] = useState('');
-  const [ownership, setOwnership] = useState('');
-  const [availablef, setAvailablef] = useState('');
-  const [description, setDescription] = useState('');
-  const [paPlotArea, setPlotArea] = useState(null);
-  const [buArea, setBuArea] = useState(null);
-  const [caArea, setCaArea] = useState(null);
-  const [possession, setPossession] = useState('');
-  const [numCabin, setNumCabin] = useState(null);
-  const [numSets, setNumSeats] = useState(null);
+  const [noBedroom, setNoBedroom] = useState(propertyData.bedroom || '');
+  const [noBalconies, setNoBalconies] = useState(propertyData.balconies || '');
+  const [noBathroom, setNoBathroom] = useState(propertyData.bathroom || '');
+  const [ageProperty, setAgeProperty] = useState(propertyData.propertyage || '');
+  const [ownership, setOwnership] = useState(propertyData.ownership || '');
+  const [availablef, setAvailablef] = useState(propertyData.availabestatus || '');
+  const [description, setDescription] = useState(propertyData.description || '');
+  const [paPlotArea, setPlotArea] = useState(propertyData.plotarea || null);
+  const [buArea, setBuArea] = useState(propertyData.buildarea || null);
+  const [caArea, setCaArea] = useState(propertyData.carpetarea || null);
+  const [possession, setPossession] = useState(propertyData.Possession || '');
+  const [numCabin, setNumCabin] = useState(propertyData.numCabin || null);
+  const [numSets, setNumSeats] = useState(propertyData.numSets || null);
   const [maxnumSets, setMaxnumSets] = useState(null);
   const [mettingRoom, setMettingRoom] = useState(null);
-  const [numFlats, setNumFlats] = useState(null);
+  const [numFlats, setNumFlats] = useState(propertyData.numFlats || null);
   const [offices, setOffices] = useState([]);
   const [selectedKey, setSelectedKey] = useState("");
   const [value, setValue] = useState("");
@@ -43,14 +48,45 @@ const [manualMonth, setManualMonth] = useState("");
 const [manualYear, setManualYear] = useState("");
 const [considerfaq, setConsiderFaq] = useState("");
 
-const [faqText, setFaqText] = useState("");
+
+ const [availabestatus, setChoiseProperty] = useState(propertyData.availabestatus || '');
+  const [choiseWashroom, setChoiseWashroom] = useState('');
+  const [choiseConfrance, setChoiseConfrance] = useState('');
+  const [recptionarea, setRecptionArea] = useState('');
+  const [parking, setParking] = useState('');
+  const [pantry, setPantry] = useState('')
+  const [privateWashroom, setPrivateWashroom] = useState(0);
+  const [publicWashroom, setPublicWashroom] = useState(0);
+  const [saftyFeature, setSaftyFeature] = useState([])
+
+const [faqText, setFaqText] = useState(propertyData.faq[0]?.answer ||"");
 
   const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
-const [entries, setEntries] = useState([]);    // stores size + price pairs
-const [officeunit, setOfficeunit] = useState([]);        // final output
+  const [entries, setEntries] = useState([]);    // stores size + price pairs
+  const [officeunit, setOfficeunit] = useState(propertyData.officeUnits || []);        // final output
+  const [units, setUnits] = useState(propertyData.unitData || []);
+  const [dropdown, setDropdown] = useState(false)
+  const [buildUpdropdown, setBuildUpDropdown] = useState(false)
+  const [carpetArea, setCarpetArea] = useState(false)
+  const [plotarea, setPloatarea] = useState('sq.ft');
+  const [buildarea, setBuildarea] = useState('sq.ft');
+  const [carpet, setCarpet] = useState('sq.ft');
+  const [totalFloor, setTotalFloor] = useState(0);
+  const [projectTotalFloor, setProjectTotalFloor] = useState(propertyData.projectTotalFloor || null);
+  const [reraStatus, setReraStatus] = useState(propertyData.reraStatus || "Not Available");
+  const [reraNumber, setReraNumber] = useState(propertyData.rera || "");
 
 
-  const [units, setUnits] = useState([]);
+  useEffect(() => {
+  if (propertyData?.faq?.length > 0) {
+    setFaqText(propertyData.faq[0].answer.join("\n"));
+  }
+}, [propertyData]);
+
+
+  useEffect(() => {
+  console.log("Redux Updated Data:", propertyData.availabestatus);
+}, [propertyData]);
 
 const buildFaqFromTextarea = (projectname, faqText) => {
 
@@ -98,8 +134,7 @@ const buildFaqFromTextarea = (projectname, faqText) => {
     
   },[officeunit])
 
-  const [reraStatus, setReraStatus] = useState("Not Available");
-  const [reraNumber, setReraNumber] = useState("");
+
 
   const handleStatusChange = (value) => {
     setReraStatus(value);
@@ -167,19 +202,95 @@ const handleDeleteEntry = (index) => {
 
 
 
-  useEffect(() => {
-    const tf = Number(totalFloor)
-    console.log(considerfaq);
+  // useEffect(() => {
+  //   const tf = Number(totalFloor)
+  //   console.log(considerfaq);
     
-    dispatch(updateField({
-      bedroom: noBedroom, bathroom: noBathroom, balconies: noBalconies, plotarea: paPlotArea, plotSizein: plotarea, buildarea: buArea, buildSizein: buildarea, carpetarea: caArea, carpetSizein: carpet,rera:reraNumber,
-      totalfloor: totalFloor, availabestatus: choiseProperty, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,officeUnits:officeunit
-    }))
-  }, [description,considerfaq])
+  //   dispatch(updateField({
+  //     bedroom: noBedroom, bathroom: noBathroom, balconies: noBalconies, plotarea: paPlotArea, plotSizein: plotarea, buildarea: buArea, buildSizein: buildarea, carpetarea: caArea, carpetSizein: carpet,rera:reraNumber,projectTotalFloor:projectTotalFloor,
+  //     totalfloor: totalFloor, availabestatus: availabestatus,numSets:numSets,maxnumSets:maxnumSets,mettingRoom:mettingRoom,numFlats:numFlats, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession,numCabin:numCabin, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,officeUnits:officeunit
+  //   }))
+  // }, [description,considerfaq])
 
-  useEffect(() => {
-  dispatch(updateField({ offices }));
-}, [offices]);
+  const formData = useMemo(() => ({
+  bedroom: noBedroom,
+  bathroom: noBathroom,
+  balconies: noBalconies,
+  plotarea: paPlotArea,
+  plotSizein: plotarea,
+  buildarea: buArea,
+  buildSizein: buildarea,
+  carpetarea: caArea,
+  carpetSizein: carpet,
+  rera: reraNumber,
+  projectTotalFloor,
+  totalfloor: totalFloor,
+  reraStatus,
+  availabestatus,
+  numSets,
+  maxnumSets,
+  mettingRoom,
+  numFlats,
+  ownership,
+  propertyage: ageProperty,
+  coveredparking: coverdParking,
+  uncoveredparking: uncoverdParking,
+  description,
+  Possession: possession,
+  numCabin,
+  saftyFeature,
+  choiseWashroom,
+  choiseConfrance,
+  recptionarea,
+  parking,
+  pantry,
+  privateWashroom,
+  publicWashroom,
+  officeUnits: officeunit
+}), [
+  noBedroom,
+  noBathroom,
+  noBalconies,
+  paPlotArea,
+  plotarea,
+  buArea,
+  buildarea,
+  caArea,
+  carpet,
+  reraNumber,
+  projectTotalFloor,
+  totalFloor,
+  reraStatus,
+  availabestatus,
+  numSets,
+  maxnumSets,
+  mettingRoom,
+  numFlats,
+  ownership,
+  ageProperty,
+  coverdParking,
+  uncoverdParking,
+  description,
+  possession,
+  numCabin,
+  saftyFeature,
+  choiseWashroom,
+  choiseConfrance,
+  recptionarea,
+  parking,
+  pantry,
+  privateWashroom,
+  publicWashroom,
+  officeunit
+]);
+
+useEffect(() => {
+  dispatch(updateField(formData));
+}, [formData]);
+
+//   useEffect(() => {
+//   dispatch(updateField({ offices }));
+// }, [offices]);
 
 // ✅ Update units only when units change
 useEffect(() => {
@@ -216,14 +327,7 @@ useEffect(() => {
     // val might be "unknown", "G", "B1", "15", "-1" (if you used negative for basement), or free text
     // console.log("floor:", val);
   };
-  const [dropdown, setDropdown] = useState(false)
-  const [buildUpdropdown, setBuildUpDropdown] = useState(false)
-  const [carpetArea, setCarpetArea] = useState(false)
-  const [plotarea, setPloatarea] = useState('sq.ft');
-  const [buildarea, setBuildarea] = useState('sq.ft');
-  const [carpet, setCarpet] = useState('sq.ft');
-  const [totalFloor, setTotalFloor] = useState(0);
-  const [projectTotalFloor, setProjectTotalFloor] = useState(null);
+
 
   const handleSelect = (value) => {
     setPloatarea(value);
@@ -356,15 +460,7 @@ useEffect(() => {
     }
   ]
 
-  const [choiseProperty, setChoiseProperty] = useState('underConcetraction');
-  const [choiseWashroom, setChoiseWashroom] = useState('');
-  const [choiseConfrance, setChoiseConfrance] = useState('');
-  const [recptionarea, setRecptionArea] = useState('');
-  const [parking, setParking] = useState('');
-  const [pantry, setPantry] = useState('')
-  const [privateWashroom, setPrivateWashroom] = useState(0);
-  const [publicWashroom, setPublicWashroom] = useState(0);
-  const [saftyFeature, setSaftyFeature] = useState([])
+ 
 
   const [facilities, setFacilities] = useState({
     furnishing: "",
@@ -469,7 +565,7 @@ useEffect(() => {
     if (setValidator) {
       setValidator(validateForm);
     }
-  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, choiseProperty, description, numFlats, projectTotalFloor,faqText]);
+  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, availabestatus, description, numFlats, projectTotalFloor,faqText]);
 
   function validateForm() {
     if (propertyDataFirst.purpose != 'Project' && propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom) {
@@ -1003,7 +1099,7 @@ if (faqText) {
           {availabilityStatus.map((item, index) => {
             return (
               <button name={item.name} key={index} onClick={(e) => setChoiseProperty(e.currentTarget.name)}
-                className={`${choiseProperty === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" : "text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
+                className={`${availabestatus === item.name ? "text-sm mx-2 text-gray-500 font-normal my-2  p-2 rounded-full cursor-pointer bg-gray-100" : "text-sm mx-2 text-gray-500 font-normal my-2 border p-2 rounded-full cursor-pointer border-1 border-gray-200"}`}
               >{item.label}</button>
             )
           })}
@@ -1028,9 +1124,9 @@ if (faqText) {
           })}
         </div>
       </div>
-      <p className={`${choiseProperty === 'Ready to move' ? 'font-medium text-lg my-5' : 'hidden'}`}>Age of Property</p>
+      <p className={`${availabestatus === 'Ready to move' ? 'font-medium text-lg my-5' : 'hidden'}`}>Age of Property</p>
       <div className="flex my-5">
-        <div className={`${choiseProperty === 'Ready to move' ? 'font-medium text-lg' : 'hidden'}`} >
+        <div className={`${availabestatus === 'Ready to move' ? 'font-medium text-lg' : 'hidden'}`} >
           {ageOfProperty.map((item, index) => {
             return (
               <button
@@ -1046,7 +1142,7 @@ if (faqText) {
 
         {/* possession section */}
 
-        <form className={`${choiseProperty === 'Under construction' ? 'w-full mx-auto' : 'hidden'}`}>
+        <form className={`${availabestatus === 'Under construction' ? 'w-full mx-auto' : 'hidden'}`}>
   <label className="block mb-2 font-medium text-gray-900">
     Possession By
   </label>

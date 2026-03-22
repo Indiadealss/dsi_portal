@@ -3,7 +3,7 @@ import { Uploadfile } from "./Uploadfile";
 import { Uploadphots } from "./Uploadphots";
 import { useDispatch, useSelector } from "react-redux";
 import { updateField } from "./Redux/propertySlice";
-import { updateImageMeta, uploadImage, uploadVideo } from "../api/api";
+import { deleteImage, deleteVideo, updateImageMeta, uploadImage, uploadVideo } from "../api/api";
 
 export const Photovideo = ({ propertyId }) => {
 
@@ -31,25 +31,61 @@ export const Photovideo = ({ propertyId }) => {
 
   // ---------------- REMOVE ----------------
 
-  const removeImage = (index) => {
-    setImages((prev) => prev.filter((_, i) => i !== index));
+  const removeImage = async (index) => {
+    try {
+    const imageId = propertyData.images[index]._id;
+    const propertyId = propertyData._id
+
+    const resData = await deleteImage(propertyId,imageId);
+
+    setImages(resData.data.data.images);
+    
+    
+
+    // UI update
+    // setImages(prev => prev.filter((_, i) => i !== index));
+
+  } catch (error) {
+    console.log(error);
+  }
+    // setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const removeVideo = (index) => {
-    setVideoFile((prev) => prev.filter((_, i) => i !== index));
-  };
+ const removeVideo = async (index) => {
+  try {
+    const videoId = propertyData.video[index]._id;
+    const propertyId = propertyData._id;
+
+    const res = await deleteVideo(propertyId, videoId);
+
+    console.log(res.data.data,'data');
+    
+    setVideoFile(res.data.data.video);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   // ---------------- VIDEO UPLOAD ----------------
 
   async function videoUp(e) {
     const files = Array.from(e.target.files);
-
+    const uploadedVideoes = [];
     setVideoFile((prev) => [...prev, ...files]);
 
     for (let file of files) {
       const formData = new FormData();
       formData.append("video", file);
-      await uploadVideo(propertyId, formData);
+      const res = await uploadVideo(propertyId, formData);
+      const newVideo = res.data.video;
+      
+
+      uploadedVideoes.push({
+        ...newVideo,
+        files,
+        fields: newVideo.fields || [],
+      });
     }
 
     e.target.value = "";
@@ -68,6 +104,7 @@ export const Photovideo = ({ propertyId }) => {
 
       const res = await uploadImage(propertyId, formData);
       const newImage = res.data.image;
+      
 
       uploadedImages.push({
         ...newImage,

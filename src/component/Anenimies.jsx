@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { PlusOutlined, CheckOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateField } from './Redux/propertySlice';
@@ -11,48 +11,88 @@ import { getLocalAdvantages } from '../api/api';
 
 export const Anenimies = ({setValidator}) => {
 
-    
-    const [otherRooms,setOtherRooms] = useState([]);
-    const [furnishing,setFurnishing] = useState('');
-    const [proptyFacing,setProptyFacing] = useState('');
-    const [pobackup,setPobackup] = useState('');
-    const [amenitie,setAmenitie] = useState([]);
-    const [selectbulding,setSelectbuilding] = useState([]);
-    const [addFeature,setAddFeature] = useState([]);
-    const [prppertyF,setProppertyF] = useState([]);
-    const [watersource,setWatersource] = useState([]);
-    const [overlo,setOverlo] = useState([]);
-    const [locatadvance,setLocatadavance] = useState([]);
-    const [price,setPrice] = useState('');
-    const [roadWidth,setRoadWidth] = useState('');
-    const [roadSizein,setRoadSizein] = useState('sq.ft');
+       const propertyData = useSelector((state) => state.property.data);
+       const isForedit = useSelector((state) => state.property.isEditMode);
+    const [otherRooms,setOtherRooms] = useState(propertyData.otherrooms || []);
+    const [furnishing,setFurnishing] = useState(propertyData.furnishing || '');
+    const [proptyFacing,setProptyFacing] = useState(propertyData.propertyfacing ||'');
+    const [pobackup,setPobackup] = useState(propertyData.pobackup || '');
+    const [amenitie,setAmenitie] = useState(propertyData.amenitie?.map(item => typeof item === "string" ? item : item._id) || []);
+    const [selectbulding,setSelectbuilding] = useState(propertyData.Buldingfeature?.map(item => typeof item === "string" ? item : item._id) || []);
+    const [addFeature,setAddFeature] = useState(propertyData.addFeature || []);
+    const [prppertyF,setProppertyF] = useState(propertyData.propertyfeature || []);
+    const [watersource,setWatersource] = useState(propertyData.watersource || []);
+    const [overlo,setOverlo] = useState(propertyData.overlo || []);
+    const [locatadvance,setLocatadavance] = useState(propertyData.locatadvance || []);
+    const [price,setPrice] = useState(propertyData.price || '');
+    const [roadWidth,setRoadWidth] = useState(propertyData.road_width || '');
+    const [roadSizein,setRoadSizein] = useState(propertyData.roadSizein || 'sq.ft');
     const dispatch = useDispatch();
     const [dropdown, setDropdown] = useState(false)
-     const [selectedPricing, setSelectedPricing] = useState(""); // will store like "500_inputCheck,1000_inputCheck"
-    const [light,setLight] = useState(0);
-    const [fans,setFans] = useState(0);
-    const [ac,setAc] = useState(0);
-    const [tv,setTv] = useState(0);
-    const [beds,setBeds] = useState(0);
-    const [wardrobe,setWardrobe] = useState(0);
-    const [geyser,setGeyser] = useState(0);
-    const [sofa,setSofa] = useState(false);
-    const [washingMachine,setWashingMachine] = useState(false);
-    const [fridge,setFridge] = useState(false);
-    const [waterPurifer,setWaterPurifer] = useState(false);
-    const [microwave,setMicrowave] = useState(false);
-    const [modularKitchen,setModularKitchen] = useState(false);
-    const [chimeny,setChimeny] = useState(false);
-    const [dinning,setDinning] = useState(false);
-    const [curtains,setCurtains] = useState(false);
-    const [exhaust,setExhaust] = useState(false);
-    const [stove,setStove] = useState(false);
-    const [furnisherAvailable,setFurnisherAvailable] = useState([]);
-    const [brokerageCharge,setBrokerageCharge] = useState('');
-    const [projecttitle , setProjecttitle] = useState('');
-    const [titleDescription,setTitleDescription] = useState('');
-    const [projectdeveloper,setProjectdeveloper] = useState('');
-    const [projectKeyword,setProjectKeyword] = useState('');
+     const [selectedPricing, setSelectedPricing] = useState(propertyData.selectedPricing || ""); // will store like "500_inputCheck,1000_inputCheck"
+    const [light,setLight] = useState(propertyData.light || 0);
+    const [fans,setFans] = useState(propertyData.fans || 0);
+    const [ac,setAc] = useState(propertyData.ac || 0);
+    const [tv,setTv] = useState(propertyData.tv || 0);
+    const [beds,setBeds] = useState(propertyData.beds || 0);
+    const [wardrobe,setWardrobe] = useState(propertyData.wardrobe ||0);
+    const [geyser,setGeyser] = useState(propertyData.geyser || 0);
+    const [sofa,setSofa] = useState(propertyData.sofa || false);
+    const [washingMachine,setWashingMachine] = useState(propertyData.washingMachine || false);
+    const [fridge,setFridge] = useState(propertyData.fridge || false);
+    const [waterPurifer,setWaterPurifer] = useState(propertyData.waterPurifer || false);
+    const [microwave,setMicrowave] = useState(propertyData.microwave || false);
+    const [modularKitchen,setModularKitchen] = useState(propertyData.modularKitchen || false);
+    const [chimeny,setChimeny] = useState(propertyData.chimeny || false);
+    const [dinning,setDinning] = useState(propertyData.dinning || false);
+    const [curtains,setCurtains] = useState(propertyData.curtains || false);
+    const [exhaust,setExhaust] = useState(propertyData.exhaust || false);
+    const [stove,setStove] = useState(propertyData.stove || false);
+    const [furnisherAvailable,setFurnisherAvailable] = useState(propertyData.furnisherAvailable || []);
+    const [brokerageCharge,setBrokerageCharge] = useState(propertyData.brokerageCharge || '');
+    const [projecttitle , setProjecttitle] = useState(propertyData.projecttitle || '');
+    const [titleDescription,setTitleDescription] = useState(propertyData.titleDescription || '');
+    const [projectdeveloper,setProjectdeveloper] = useState(propertyData.projectdeveloper || '');
+    const [projectKeyword,setProjectKeyword] = useState(propertyData.projectKeyword || '');
+
+    useEffect(() => {
+      console.log(amenitie,'check amenitie');
+      
+    },[amenitie])
+
+
+    useEffect(() => {
+  if (propertyData?.available_furniture?.length > 0) {
+
+    propertyData.available_furniture.forEach(item => {
+      switch(item.key){
+
+        case "Light": setLight(item.value); break;
+        case "AC": setAc(item.value); break;
+        case "Fans": setFans(item.value); break;
+        case "TV": setTv(item.value); break;
+        case "Beds": setBeds(item.value); break;
+        case "Wardrobe": setWardrobe(item.value); break;
+        case "Gysere": setGeyser(item.value); break;
+
+        case "sofa": setSofa(true); break;
+        case "washingMachine": setWashingMachine(true); break;
+        case "fridge": setFridge(true); break;
+        case "waterPurifer": setWaterPurifer(true); break;
+        case "microwave": setMicrowave(true); break;
+        case "modularKitchen": setModularKitchen(true); break;
+        case "chimeny": setChimeny(true); break;
+        case "dinning": setDinning(true); break;
+        case "stove": setStove(true); break;
+        case "curtains": setCurtains(true); break;
+        case "exhaust": setExhaust(true); break;
+
+        default: break;
+      }
+    });
+
+  }
+}, [propertyData]);
 
 
     const  getLocationIcon =  async (name) => {
@@ -119,9 +159,50 @@ export const Anenimies = ({setValidator}) => {
     }
   };
 
-    useEffect(() => {
-      dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,available_furniture:furnisherAvailable,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price+selectedPricing,road_width:roadWidth ,roadWidthSize:roadSizein,projecttitle:projecttitle,titleDescription:titleDescription,projectdeveloper:projectdeveloper,projectKeyword:projectKeyword}))
-    },[price,projecttitle,projectdeveloper,projectKeyword,titleDescription])
+    // useEffect(() => {
+    //   dispatch(updateField({otherrooms:otherRooms,furnishing:furnishing,available_furniture:furnisherAvailable,propertyfacing:proptyFacing,amenitie:amenitie,Buldingfeature:selectbulding,pobackup:pobackup,addFeature:addFeature,propertyfeature:prppertyF,watersource:watersource,overlo:overlo,locatadvance:locatadvance,price:price, selectedPricing:selectedPricing,road_width:roadWidth ,roadWidthSize:roadSizein,projecttitle:projecttitle,titleDescription:titleDescription,projectdeveloper:projectdeveloper,projectKeyword:projectKeyword}))
+    // },[price,projecttitle,projectdeveloper,projectKeyword,titleDescription])
+
+
+    const debounceRef = useRef(null);
+
+useEffect(() => {
+  clearTimeout(debounceRef.current);
+
+  debounceRef.current = setTimeout(() => {
+    dispatch(updateField({
+      otherrooms: otherRooms,
+      furnishing,
+      available_furniture: furnisherAvailable,
+      propertyfacing: proptyFacing,
+      amenitie,
+      Buldingfeature: selectbulding,
+      pobackup,
+      addFeature,
+      propertyfeature: prppertyF,
+      watersource,
+      overlo,
+      locatadvance,
+      price,
+      selectedPricing,
+      road_width: roadWidth,
+      roadWidthSize: roadSizein,
+      projecttitle,
+      titleDescription,
+      projectdeveloper,
+      projectKeyword
+    }));
+  }, 400); // 🔥 debounce
+
+  return () => clearTimeout(debounceRef.current);
+
+}, [
+  otherRooms, furnishing, furnisherAvailable, proptyFacing,
+  amenitie, selectbulding, pobackup, addFeature,
+  prppertyF, watersource, overlo, locatadvance,
+  price, selectedPricing, roadWidth, roadSizein,
+  projecttitle, titleDescription, projectdeveloper, projectKeyword
+]);
 
     const handleSelect = (value) =>{
     setRoadSizein(value);
@@ -1119,7 +1200,7 @@ export const Anenimies = ({setValidator}) => {
           })}
         </div>
 
-        <div className=''>
+        <div className={isForedit ? 'hidden' : ''}>
         <p className='font-medium text-lg'>Do you charge brokerage?</p>
         <div class="flex items-center my-4">
         <input id="default-radio-1" type="radio" value="yes" name="default-radio" onClick={(e) => setBrokerageCharge(e.currentTarget.value)} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300" />

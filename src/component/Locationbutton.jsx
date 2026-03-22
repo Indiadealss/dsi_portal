@@ -4,21 +4,62 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSearch, searchaddress } from "../api/api";
 
 export const Locationbutton = ({ setValidator }) => {
-  const [query, setQuery] = useState("");
+
+
+   const propertyData = useSelector((state) => state.property.data);
+   const isForedit = useSelector((state) => state.property.isEditMode);
+  const [query, setQuery] = useState(propertyData.location?.[0]?.City || "");
   const [results, setResults] = useState([]);
-  const [locality, setLocality] = useState("");
+  const [locality, setLocality] = useState(propertyData.location?.[0]?.Address || "");
   const [localityResults, setLocalityResults] = useState([]);
   const [showLocality, setShowLocality] = useState(false);
   const [showAdditional,setShowAdditional] = useState(false);
-  const [projectname,setProjectname] = useState('');
+  const [projectname,setProjectname] = useState(propertyData.projectname || '');
   const dispatch = useDispatch();
   const [apartment,setApartment] = useState('');
   const [detailData,setDetailData] = useState('');
+
+  
+
+  const getFullLocation = (location) => {
+  try {
+    if (!location) return {};
+
+    if (typeof location === "string") {
+      return JSON.parse(location);
+    }
+
+    if (Array.isArray(location)) {
+      return location[0] || {};
+    }
+
+    if (typeof location === "object") {
+      return location;
+    }
+
+    return {};
+  } catch {
+    return {};
+  }
+};
 
   useEffect(() => {
     dispatch(updateField({ location: [{"City":query,"Address":locality,"apartment_name":apartment}],projectname:projectname,apartment_name:apartment }));
   },[query,locality,apartment,projectname])
 
+  
+
+//   useEffect(() => {
+//   if (propertyData) {
+//     const loc = getFullLocation(propertyData.location);
+//     console.log(loc,'locki');
+    
+
+// setQuery(loc.City || "");
+// setLocality(loc.Address || "");
+// setApartment(loc.apartment_name || "");
+//   }
+// }, [propertyData]);
 
 
 useEffect(() => {
@@ -261,7 +302,7 @@ distanceService.getDistanceMatrix(
       )}
 
       {/* Locality */}
-      {showLocality && (
+      {(showLocality || isForedit) && (
         <>
           <label
             htmlFor="locality"
@@ -297,7 +338,7 @@ distanceService.getDistanceMatrix(
         </>
       )}
       {/* Locality */}
-      {showAdditional && (
+      {(showAdditional || isForedit) && (
         <>
         <label
             htmlFor="locality"

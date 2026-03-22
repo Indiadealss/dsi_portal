@@ -110,6 +110,8 @@ export const Postpropertyform = () => {
 
    const featcadditionalfeature = async () => {
     const getallAnimities = await getadditionalfeature();
+    console.log(getAllFeature,'getadditionalfeature');
+    
     const data = getallAnimities.data.data.map((item,index) => {
       return(
         {

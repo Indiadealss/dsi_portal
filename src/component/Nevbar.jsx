@@ -751,9 +751,8 @@ export default function Navbar() {
   {key:"",label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link>},
   {type:"View All Responses",label:<Link to='/responses' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link>},
   {type:'Manage Boss',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link>},
-  {type:'leadsearch',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Lead Search</span></Link>},
+  // {type:'leadsearch',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Lead Search</span></Link>},
   {type:'modifyprofile',label:<Link to='/mybrandsdoor/editProfile' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Modify Profile</span></Link>},
-  {type:'changepassward',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Change Passward</span></Link>},
   { type: "divider" },
   { key: "logout", danger: true, label:  logout}
 ];
