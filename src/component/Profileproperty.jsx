@@ -59,7 +59,7 @@ const [considerfaq, setConsiderFaq] = useState("");
   const [publicWashroom, setPublicWashroom] = useState(0);
   const [saftyFeature, setSaftyFeature] = useState([])
 
-const [faqText, setFaqText] = useState(propertyData.faq[0]?.answer ||"");
+const [faqText, setFaqText] = useState("");
 
   const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
   const [entries, setEntries] = useState([]);    // stores size + price pairs
@@ -82,6 +82,18 @@ const [faqText, setFaqText] = useState(propertyData.faq[0]?.answer ||"");
     setFaqText(propertyData.faq[0].answer.join("\n"));
   }
 }, [propertyData]);
+
+useEffect(() => {
+  if (propertyData?.faq?.length > 0 && isForedit) {
+    const answer = propertyData.faq[0].answer;
+
+    if (Array.isArray(answer)) {
+      setFaqText(answer.join("\n"));
+    } else {
+      setFaqText(answer || "");
+    }
+  }
+}, [isForedit]);
 
 
   useEffect(() => {
