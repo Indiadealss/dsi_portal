@@ -10,6 +10,7 @@ import { updateField } from './Redux/propertySlice';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { GrSubtractCircle } from 'react-icons/gr';
 import computerTable from '../Images/computerTable.avif';
+import { MdEdit } from "react-icons/md";
 import shop from '../Images/shop.jpeg'
 const onChange = (date, dateString) => {
   // console.log(date, dateString);
@@ -49,6 +50,7 @@ const [manualYear, setManualYear] = useState("");
 const [considerfaq, setConsiderFaq] = useState("");
 
 
+
  const [availabestatus, setChoiseProperty] = useState(propertyData.availabestatus || '');
   const [choiseWashroom, setChoiseWashroom] = useState('');
   const [choiseConfrance, setChoiseConfrance] = useState('');
@@ -77,23 +79,33 @@ const [faqText, setFaqText] = useState("");
   const [reraNumber, setReraNumber] = useState(propertyData.rera || "");
 
 
-  useEffect(() => {
-  if (propertyData?.faq?.length > 0) {
-    setFaqText(propertyData.faq[0].answer.join("\n"));
-  }
-}, [propertyData]);
+//   useEffect(() => {
+//   if (propertyData?.faq?.length > 0) {
+//     setFaqText(propertyData.faq[0].answer.join("\n"));
+//   }
+// }, [propertyData]);
+
+// useEffect(() => {
+//   if (propertyData?.faq?.length > 0 && isForedit) {
+//     const answer = propertyData.faq[0].answer;
+
+//     if (Array.isArray(answer)) {
+//       setFaqText(answer.join("\n"));
+//     } else {
+//       setFaqText(answer || "");
+//     }
+//   }
+// }, [isForedit]);
 
 useEffect(() => {
-  if (propertyData?.faq?.length > 0 && isForedit) {
+  if (propertyData?.faq?.length > 0) {
     const answer = propertyData.faq[0].answer;
 
-    if (Array.isArray(answer)) {
-      setFaqText(answer.join("\n"));
-    } else {
-      setFaqText(answer || "");
-    }
+    setFaqText(
+      Array.isArray(answer) ? answer.join("\n") : answer || ""
+    );
   }
-}, [isForedit]);
+}, [propertyData]);
 
 
   useEffect(() => {
