@@ -1,0 +1,254 @@
+import React, { useEffect, useState } from "react";
+import { getAllProjectNames, getallProperty } from "../api/api";
+import projectName from '../Images/background-1.jpg'
+
+const HeroSearch = () => {
+
+  const [projectname, setProjectName] = useState([])
+  useEffect(() => {
+    const featchAllProjectNames = async () => {
+
+      const res = await getAllProjectNames()
+      setProjectName(res.data.data)
+    }
+
+    featchAllProjectNames()
+
+  }, [])
+
+
+
+
+
+  const residentalProperty = [
+    { name: 'Independent House/Villa', value: 'Independent House/Villa' },
+    { name: 'Apartment/Flat', value: 'Apartment / Flat' },
+    { name: 'Builder Floor', value: 'Builder Floor' },
+    { name: 'Row House/Townhouse', value: 'Row House/Townhouse' },
+    { name: 'Residential Plot', value: 'Residential Plot' },
+    { name: 'Studio Apartment', value: 'Studio Apartment' },
+    { name: 'Penthouse', value: 'Penthouse' }
+  ];
+
+  const constructionStatus = [
+    { name: 'New launch', value: 'New launch' },
+    { name: ' Under Construction', value: 'Under Construction' },
+    { name: 'Ready to move', value: ' Ready to move' }
+
+  ]
+
+  const Bedroom = [
+    { name: '1', value: '1' },
+    { name: '2', value: '2' },
+    { name: '3', value: '3' },
+    { name: '4', value: '4' },
+    { name: '5', value: '5' },
+    { name: '6', value: '6' },
+    { name: '7', value: '7' },
+  ]
+
+  const CommericalProperty = [
+    { name: 'Office Space', value: 'Office Space' },
+    { name: 'Shop / Retail Space', value: 'Shop / Retail Space' },
+    { name: 'Showroom', value: 'Showroom' },
+    { name: 'Warehouse/Godown', value: 'Warehouse/Godown' },
+    { name: 'Industrial Property', value: 'Industrial Property' },
+    { name: 'Hotel / Hospitality', value: 'Hotel/Hospitality' },
+    { name: 'Restaurant/Cafe', value: 'Restaurant/Cafe' },
+    { name: 'Commercial Plot/Land', value: 'Commercial Plot/Land' }
+  ];
+
+  const allStatus = [
+    { name: 'All Status', value: 'All Status' },
+    { name: 'For Sale', value: 'For Sale' },
+    { name: 'For Rent', value: 'For Rent' },
+    { name: 'PG', value: 'PG' }
+  ];
+
+  const propertyTypes = [
+    { name: 'All Types', value: 'All Types', component: [] },
+    { name: 'Residential', value: 'Residential', component: residentalProperty },
+    { name: 'Commercial', value: 'Commercial', component: CommericalProperty },
+    { name: 'Project', value: 'Project', component: [] }
+  ];
+
+  const [propertyType, setPropertyType] = useState([]);
+  const [alltype, setAlltype] = useState('All Types');
+  const [sizeSpace, setSizeSpace] = useState('Any');
+  const [selectedSize, setSelectedSize] = useState("");
+  const [customSize, setCustomSize] = useState("");
+  const [selectedSubType, setSelectedSubType] = useState("");
+  const [bedroom, setBedroom] = useState("");
+
+  const size = [
+    { name: '100 - 300 sqft', value: '100-500' },
+    { name: '300 - 500 sqft', value: '500-1000' },
+    { name: '500 - 700 sqft', value: '500-700' },
+    { name: '700 - 1000 sqft', value: '700-1000' },
+  ]
+
+  // handle change
+  const handlePropertyTypeChange = (value) => {
+    const selected = propertyTypes.find(item => item.value === value);
+    setPropertyType(selected?.component || []);
+    setAlltype(selected?.value || '')
+    console.log(selected?.value, 'selected value');
+
+  };
+
+  const handleSearch = async () => {
+    const query = new URLSearchParams();
+
+    if (alltype !== "All Types" && alltype !== "Project") {
+      query.append("property", alltype.toLowerCase());
+    }
+
+    if(alltype === 'Project'){
+      query.append("purpose",alltype);
+    }
+
+    if (selectedSubType) {
+      query.append("propertyType", selectedSubType);
+    }
+
+    if (selectedSize) {
+      query.append("size", selectedSize);
+    }
+
+    if (alltype === "Residential" && bedroom) {
+      query.append("bedroom", bedroom);
+    }
+
+    const featchAllProperty = async () => {
+      const data = await getallProperty()
+      console.log(data);
+      
+    }
+    featchAllProperty()
+
+  };
+  return (
+    <div className="relative w-full h-[80vh] md:h-[90vh]">
+
+      <img
+        src={projectName}
+        alt="property"
+        className="w-full h-full object-cover"
+      />
+
+      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-4 text-center">
+
+        <h1 className="text-white text-2xl md:text-5xl font-semibold">
+          <span className="text-white">Find your perfect</span> <span className="text-lime-500">property</span>
+        </h1>
+
+        {/* <p className="text-gray-200 mt-3 text-sm md:text-lg">
+          We have over million properties for you
+        </p> */}
+
+        <div className="mt-6 w-full max-w-6xl bg-[#ffffff78] rounded md:rounded-full shadow-lg p-2 flex flex-col md:flex-row">
+
+          {/* Property Type */}
+          <select
+            className="flex-1 px-4 py-3 outline-none bg-white md:rounded-s-full text-gray-600 border-b md:border-b-0"
+            onChange={(e) => handlePropertyTypeChange(e.target.value)}
+          >
+            {propertyTypes.map((item, index) => (
+              <option key={index} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Status */}
+          <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
+            {allStatus.map((item, index) => (
+              <option key={index} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+
+          <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
+            <option value="">Looking For</option>
+            {constructionStatus.map((item, index) => (
+              <option key={index} value={item.value}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Sub Property Type */}
+          {(alltype === 'Commercial' || alltype === 'Residential') && (
+            <select
+              disabled={propertyType.length === 0}
+              onChange={(e) => setSelectedSubType(e.target.value)}
+              className={`flex-1 px-4 py-3 outline-none border-b md:border-b-0  
+    ${propertyType.length === 0 ? "bg-white text-gray-400 cursor-not-allowed" : "bg-white"}
+  `}
+            >
+              <option value="">Type of Property</option>
+
+              {propertyType.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          )}
+          {alltype === 'Residential' && (
+            <select
+              value={bedroom}
+              onChange={(e) => setBedroom(e.target.value)}
+              className="flex-1 px-4 py-3 outline-none text-gray-600 border-b md:border-b-0 bg-white"
+            >
+              <option value="">Any Bedroom</option>
+
+              {Bedroom.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          )}
+          {(alltype === 'Commercial' || selectedSubType === 'Residential Plot') && (
+            <select
+              value={selectedSize}
+              onChange={(e) => setSelectedSize(e.target.value)}
+              className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
+            >
+              <option value="">All Size</option>
+
+              {size.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          )}
+
+          {alltype === 'Project' && (
+            <select
+              className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 "
+            >
+              <option value="">All Project</option>
+
+              {projectname.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.projectname}
+                </option>
+              ))}
+            </select>
+          )}
+          {/* Button */}
+          <button onClick={handleSearch} className="my-5 md:my-0 bg-lime-500 text-white px-6 py-3 rounded-full md:rounded-r-full md:rounded-l-none font-semibold hover:bg-lime-600">
+            SEARCH
+          </button>
+
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default HeroSearch;

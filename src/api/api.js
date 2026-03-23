@@ -103,6 +103,10 @@ export const getCampainbyId = async (npxid) => {
   return API.get(`/adddealer/getcampainbyid/${npxid}`);
 }
 
+export const getAllProjectNames = async () => {
+  return API.get(`/property/propertyName`);
+}
+
 export const createPropertyBasic = (data) =>
   API.post("/property/createPropertyBasic", data);
 

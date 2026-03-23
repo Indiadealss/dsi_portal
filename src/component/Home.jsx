@@ -25,6 +25,7 @@ import homepageBaner from '../Images/banner.jpg';
 import { useSelector } from 'react-redux';
 import Seo from './Seo';
 import SclatingHomepage from './Loading/SclatingHomepage';
+import HeroSearch from './HeroSearch';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -363,10 +364,10 @@ console.log(residential, 'residential');
             />
       <div className='block'>
         <div className='relative'>
-          <Banner image={homepageBaner} />
-          <div className='absolute  topSearchbox  object-cover w-[-webkit-fill-available] flex '>
+          <HeroSearch />
+          {/* <div className='absolute  topSearchbox  object-cover w-[-webkit-fill-available] flex '>
             <Searchbox />
-          </div>
+          </div> */}
         </div>
       </div>
 
