@@ -481,7 +481,7 @@ try {
         }
         canonical={
           slug
-            ? `https://www.indiadealss.com/project/${slug}`
+            ? `https://www.brandsdoor.in/project/${slug}`
             : null
         }
       />
