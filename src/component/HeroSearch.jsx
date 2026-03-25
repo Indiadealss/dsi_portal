@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getAllProjectNames, getallProperty } from "../api/api";
 import projectName from '../Images/background-1.jpg'
+import { PropertiesData } from "./PropertiesData";
+import { useNavigate } from "react-router-dom";
 
 const HeroSearch = () => {
+
+
+  const navigate = useNavigate();
 
   const [projectname, setProjectName] = useState([])
   useEffect(() => {
@@ -119,12 +124,13 @@ const HeroSearch = () => {
       query.append("bedroom", bedroom);
     }
 
-    const featchAllProperty = async () => {
+    
       const data = await getallProperty()
       console.log(data);
+      console.log("QUERY:", query.toString());
       
-    }
-    featchAllProperty()
+    navigate(`/properties?${query.toString()}`);
+    
 
   };
   return (
