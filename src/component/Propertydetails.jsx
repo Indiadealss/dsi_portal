@@ -64,7 +64,9 @@ const handleDealerPosition = (y) => {
 
    const  { slug }  = useParams();
 
-   console.log(slug.slug,'spid');
+   
+
+   console.log(slug,'hello I am slug');
 
    const  spid  = slug.slice(-5)
 
@@ -79,6 +81,7 @@ const handleDealerPosition = (y) => {
 
    useEffect(() => {
       fetchproperty()
+      console.log(slug,'spid');
    },[spid])
 
    const fetchproperty = async () => {

@@ -48,7 +48,7 @@ export const Loginform = () => {
     setError("");
     setLoading(true);
     try {
-      const res = await axios.post("https://indiadealss.com/api/auth/send-otp", { mobile });
+      const res = await axios.post("https://brandsdoor.in/api/auth/send-otp", { mobile });
       if (res.data.success) {
         setOtpSent(true);
         alert("✅ OTP sent to your mobile number");
@@ -75,7 +75,7 @@ export const Loginform = () => {
 
     try {
       if (mode === "login") {
-        const res = await axios.post("https://indiadealss.com/api/auth/login", {
+        const res = await axios.post("https://brandsdoor.in/api/auth/login", {
           email,
           password,
         });
@@ -89,7 +89,7 @@ export const Loginform = () => {
       }
 
       if (mode === "register") {
-        const res = await axios.post("https://indiadealss.com/api/auth/register", {
+        const res = await axios.post("https://brandsdoor.in/api/auth/register", {
           name,
           mobile,
           email,
@@ -105,7 +105,7 @@ export const Loginform = () => {
       }
 
       if (mode === "forgot") {
-        const res = await axios.post("https://indiadealss.com/api/auth/forgot-password", { email });
+        const res = await axios.post("https://brandsdoor.in/api/auth/forgot-password", { email });
         if (res.data.success) {
           alert("📩 Reset password link sent to your email");
           setMode("login");
@@ -115,7 +115,7 @@ export const Loginform = () => {
       }
 
       if (mode === "loginWithMobile") {
-        const res = await axios.post("https://indiadealss.com/api/auth/verify-otp", {
+        const res = await axios.post("https://brandsdoor.in/api/auth/verify-otp", {
           mobile,
           otp,
         });

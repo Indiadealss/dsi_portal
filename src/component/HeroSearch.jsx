@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { getAllProjectNames, getallProperty } from "../api/api";
-import projectName from '../Images/background-1.jpg'
+import { getAllProjectNames, getallProperty, searchaddress } from "../api/api";
+import projectName from '../Images/bannertwo.jpg'
+import { useNavigate } from "react-router-dom";
 
 const HeroSearch = () => {
 
@@ -16,7 +17,7 @@ const HeroSearch = () => {
 
   }, [])
 
-
+  const navigate = useNavigate()
 
 
 
@@ -29,6 +30,8 @@ const HeroSearch = () => {
     { name: 'Studio Apartment', value: 'Studio Apartment' },
     { name: 'Penthouse', value: 'Penthouse' }
   ];
+
+  const [construtStatus,setConstrutStatus] = useState('')
 
   const constructionStatus = [
     { name: 'New launch', value: 'New launch' },
@@ -79,6 +82,10 @@ const HeroSearch = () => {
   const [customSize, setCustomSize] = useState("");
   const [selectedSubType, setSelectedSubType] = useState("");
   const [bedroom, setBedroom] = useState("");
+  const [selectedProjectId, setSelectedProjectId] = useState();
+  const [locationInput, setLocationInput] = useState();
+  const [locationList, setLocationList] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState()
 
   const size = [
     { name: '100 - 300 sqft', value: '100-500' },
@@ -96,6 +103,96 @@ const HeroSearch = () => {
 
   };
 
+  // 🔥 NEW STATE ADD
+const [filteredProjects, setFilteredProjects] = useState([]);
+
+useEffect(() => {
+  if (projectname.length) {
+    setFilteredProjects(projectname);
+  }
+}, [projectname]);
+
+// 🔥 FILTER LOGIC ADD
+useEffect(() => {
+  let filtered = [...projectname];
+
+  // city filter
+  if (selectedLocation) {
+    filtered = filtered.filter(project => {
+      let city = "";
+
+      if (Array.isArray(project.location)) {
+        city = project.location[0]?.City || "";
+      } else {
+        try {
+          const parsed = JSON.parse(project.location);
+          city = parsed.City || "";
+        } catch {
+          city = "";
+        }
+      }
+
+      return city.toLowerCase().includes(selectedLocation.toLowerCase());
+    });
+  }
+
+  // construction status filter
+  if (construtStatus) {
+
+  filtered = filtered.filter(project => {
+    const status = project.availabestatus?.trim().toLowerCase();
+    const selected = construtStatus.trim().toLowerCase();
+
+    // skip empty status (optional)
+    if (!status) return false;
+
+    return status === selected;
+  });
+
+}
+  // fallback → show all
+  if (!selectedLocation && !construtStatus) {
+    filtered = projectname;
+  }
+
+  setFilteredProjects(filtered);
+
+}, [selectedLocation, construtStatus, projectname]);
+
+
+  const createSearchSlug = (query) => {
+    // default fallback
+    const city = "noida";
+
+    return `${query}-ffid`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
+
+  const createProjectSlug = (project) => {
+    if (!project) return "";
+
+    let city = "";
+
+    // handle both cases (array / string)
+    if (Array.isArray(project.location)) {
+      city = project.location[0]?.City || "";
+    } else {
+      try {
+        const parsed = JSON.parse(project.location);
+        city = parsed.City || "";
+      } catch {
+        city = "";
+      }
+    }
+
+    return `${project.projectname}-${city}-npxid-${project.npxid}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
+
   const handleSearch = async () => {
     const query = new URLSearchParams();
 
@@ -103,12 +200,16 @@ const HeroSearch = () => {
       query.append("property", alltype.toLowerCase());
     }
 
-    if(alltype === 'Project'){
-      query.append("purpose",alltype);
+    if (alltype === 'Project') {
+      query.append("purpose", alltype);
     }
 
     if (selectedSubType) {
       query.append("propertyType", selectedSubType);
+    }
+
+    if(selectedLocation){
+      query.append("location",selectedLocation);
     }
 
     if (selectedSize) {
@@ -119,13 +220,44 @@ const HeroSearch = () => {
       query.append("bedroom", bedroom);
     }
 
-    const featchAllProperty = async () => {
-      const data = await getallProperty()
-      console.log(data);
-      
-    }
-    featchAllProperty()
+    
 
+    if (alltype !== 'Project') {
+      const slug = createSearchSlug(query);
+      navigate(`/${slug}`);
+    }
+
+    if (alltype === "Project") {
+      const selectedProject = projectname.find(p => p.npxid); // ya selected value
+
+      const slug = createProjectSlug(selectedProject);
+
+      navigate(`/${slug}?preference=S`);
+      return;
+    }
+
+
+
+
+  };
+
+  const handleLocationSearch = async (value) => {
+    setLocationInput(value);
+
+    if (value.length < 2) {
+      setLocationList([]);
+      return;
+    }
+
+    try {
+      const res = await searchaddress(value, "Noida");
+
+      if (res.status === 200) {
+        setLocationList(res.data.existingAddresses);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="relative w-full h-[80vh] md:h-[90vh]">
@@ -139,7 +271,7 @@ const HeroSearch = () => {
       <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-4 text-center">
 
         <h1 className="text-white text-2xl md:text-5xl font-semibold">
-          <span className="text-white">Find your perfect</span> <span className="text-lime-500">property</span>
+          <span className="text-white">Find your perfect</span> <span className="text-white">property</span>
         </h1>
 
         {/* <p className="text-gray-200 mt-3 text-sm md:text-lg">
@@ -160,16 +292,48 @@ const HeroSearch = () => {
             ))}
           </select>
 
-          {/* Status */}
-          <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
-            {allStatus.map((item, index) => (
-              <option key={index} value={item.value}>
-                {item.name}
-              </option>
-            ))}
-          </select>
+          <div className="relative flex-1">
+            <input
+              type="text"
+              value={locationInput}
+              onChange={(e) => handleLocationSearch(e.target.value)}
+              placeholder="Search Location..."
+              className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
+            />
 
-          <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
+            {locationList.length > 0 && (
+              <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
+                {locationList.map((item, index) => (
+                  <li
+                    key={index}
+                    className="p-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => {
+                      const value = `${item.city}`;
+                      setLocationInput(value);
+                      setSelectedLocation(value);
+                      setLocationList([]);
+                    }}
+                  >
+                    {item.city}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* Status */}
+          {alltype !== 'Project' && (
+            <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
+              {allStatus.map((item, index) => (
+                <option key={index} value={item.value}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          )}
+
+
+          <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 " onChange={(e) => setConstrutStatus(e.target.value)}>
             <option value="">Looking For</option>
             {constructionStatus.map((item, index) => (
               <option key={index} value={item.value}>
@@ -227,21 +391,19 @@ const HeroSearch = () => {
             </select>
           )}
 
-          {alltype === 'Project' && (
-            <select
-              className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 "
-            >
+          {(alltype === 'Project') && (
+            <select onChange={(e) => setSelectedProjectId(e.target.value)} className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
               <option value="">All Project</option>
 
-              {projectname.map((item, index) => (
-                <option key={index} value={item.value}>
+              {filteredProjects.map((item) => (
+                <option key={item.npxid} value={item.npxid}>
                   {item.projectname}
                 </option>
               ))}
             </select>
           )}
           {/* Button */}
-          <button onClick={handleSearch} className="my-5 md:my-0 bg-lime-500 text-white px-6 py-3 rounded-full md:rounded-r-full md:rounded-l-none font-semibold hover:bg-lime-600">
+          <button onClick={handleSearch} className="my-5 md:my-0 bg-[#e9ae01] text-white px-6 py-3 rounded-full md:rounded-r-full md:rounded-l-none font-semibold hover:bg-lime-600">
             SEARCH
           </button>
 

@@ -26,6 +26,8 @@ import { useSelector } from 'react-redux';
 import Seo from './Seo';
 import SclatingHomepage from './Loading/SclatingHomepage';
 import HeroSearch from './HeroSearch';
+import ProjectsCrousal from './customcomponent/ProjectsCrousal';
+import PropertyList from './customcomponent/PropertyList';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -379,7 +381,9 @@ console.log(residential, 'residential');
       <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
         {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
         <div className="lg:col-span-8 ms-3 space-y-10">
-          <Customcardcrousal data={data} />
+          {/* <Customcardcrousal data={data} /> */}
+        <PropertyList properties={data} />
+
 
         {/* <Smallmain  title='The most search project in location' data={data}/> */}
 
@@ -411,7 +415,8 @@ console.log(residential, 'residential');
 
       {/* main */}
       <div className='mt-40 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
-        <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/>
+        {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
+        <PropertyList properties={data} />
         <div className='p-0 lg:p-[40px]'>
           <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>
           <h1 className='text-start lg:max-w-xl mx-auto lg:text-center font-bold text-black text-lg lg:text-xl my-3'>Find Better Places to Live, Work and Wonder...</h1>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import img1 from '../Images/noImageBg.svg';
 import { IoIosAdd } from 'react-icons/io';
 import { MdCurrencyRupee } from "react-icons/md";
-import { data, Link } from "react-router";
+import { data, Link, useParams } from "react-router";
 import Ownerdetails from './Ownerdetails';
 import { getallProperty } from '../api/api';
 import { Carousel, Skeleton } from 'antd';
@@ -26,6 +26,41 @@ export const PropertiesData = () => {
   // console.log("Updated properties:", properties);
 }, [properties]);
 
+const { slug } = useParams();
+
+const parseSlug = (slug) => {
+  if (!slug) return {};
+
+  const parts = slug.split("-");
+  const validKeys = ["property", "propertytype", "location", "bedroom", "size"];
+
+  let result = {};
+  let currentKey = null;
+
+  for (let part of parts) {
+    if (part === "ffid") continue; // skip ffid
+
+    if (validKeys.includes(part)) {
+      currentKey = part;
+      result[currentKey] = "";
+    } else if (currentKey) {
+      result[currentKey] += result[currentKey]
+        ? "-" + part
+        : part;
+    }
+  }
+
+  return result;
+};
+
+const filtersFromSlug = parseSlug(slug);
+
+console.log(filtersFromSlug);
+
+
+
+
+
   const [location,setLocation] = useState(useSelector((state) => state.filterSlice.location))
   const [selectedFilters,setSelectedFilters]  = useState(useSelector((state) => state.filterSlice))
   const [projectname,setProjectname] = useState(useSelector((state) => state.filterSlice.projectname))
@@ -36,7 +71,7 @@ export const PropertiesData = () => {
         const propertyType = selectedFilters.propertyType;
         
          setLoading(true)
-        const res = await getallProperty(pageNumber,location,projectname,propertyType);
+        const res = await getallProperty(pageNumber,filtersFromSlug.location,projectname,propertyType,filtersFromSlug.property);
         const resultsAre = res.data?.data || [];
 
         const result = resultsAre.filter((p) => p.purpose != 'Project')
