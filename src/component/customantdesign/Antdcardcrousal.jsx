@@ -11,7 +11,9 @@ const Antdcardcrousal = ({crousal}) => {
     const autoplaySpeed = 5000; // 5sec
     const intervel = 50;
 
-    console.log(crousal.map((item) => item.projecturl), 'project-url');
+    useEffect(() => {
+  console.log(crousal.map((item) => item.projecturl), 'project-url');
+}, [crousal]);
 
     const navigate = useNavigate();
     
