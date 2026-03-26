@@ -49,14 +49,14 @@ const ProjectsCrousal = ({ data }) => {
 
       console.log(data,'data are property');
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+    <div className="bg-white  shadow-md overflow-hidden">
       
       {/* Image */}
-      <div className="relative m-5">
+      <div className="relative mx-3 mt-3">
         <img
           src={data.img}
           alt="property"
-          className="w-full h-52 md:h-56 lg:h-60 object-cover"
+          className="w-full h-[100vw] md:h-56 lg:h-[25vw] object-cover"
         />
 
         {/* Featured Badge */}
@@ -65,22 +65,22 @@ const ProjectsCrousal = ({ data }) => {
         </span>
 
         {/* Bottom Overlay */}
-        {/* <div className="absolute bottom-0 left-0 w-full flex justify-between text-white text-xs px-3 py-2 bg-gradient-to-t from-black/70 to-transparent">
-          <span>📅 {formatDistanceToNow(new Date(data.time), { addSuffix: true })}</span>
-          <span>👤 {data.owner?.name}</span>
-        </div> */}
+        <div className="absolute bottom-0 left-0 w-full flex justify-between text-white text-xs px-3 py-2 bg-gradient-to-t from-black/70 to-transparent">
+          {/* <span>📅 hel</span> */}
+          <span> {data.devloper}</span>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="p-4">
+      <div className="p-4 pb-4">
         
         {/* Category */}
-        {/* <p className="text-green-600 text-xs font-semibold uppercase">
-          {data.propertyType}, {data.property}
-        </p> */}
+        <p className="text-green-600 text-xs font-semibold uppercase">
+          {data.property}
+        </p>
 
         {/* Title */}
-        <Link to={`/${createSlug(data)}?preference=S`}><h3 className="text-lg font-semibold text-gray-800 mt-1 line-clamp-2">
+        <Link to={`/${createSlug(data)}?preference=S`}><h3 className="text-lg font-semibold text-gray-800  line-clamp-2 uppercase">
           {data.label}
         </h3></Link>
 

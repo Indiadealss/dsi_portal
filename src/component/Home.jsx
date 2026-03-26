@@ -136,6 +136,7 @@ const Home = () => {
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
       time: new Date(p.updatedAt).toLocaleDateString() || "N/A",
+      devloper: p.projectdeveloper || '',
       owner: p.owner || "Owner",
        };
     });
