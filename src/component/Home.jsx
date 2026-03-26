@@ -28,6 +28,8 @@ import SclatingHomepage from './Loading/SclatingHomepage';
 import HeroSearch from './HeroSearch';
 import ProjectsCrousal from './customcomponent/ProjectsCrousal';
 import PropertyList from './customcomponent/PropertyList';
+import ImageCrousal from './customantdesign/ImageCrousal';
+import CategoryGrid from './customcomponent/CategoryGrid';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -386,101 +388,34 @@ console.log(residential, 'residential');
         <PropertyList properties={data} />
 
 
+
         {/* <Smallmain  title='The most search project in location' data={data}/> */}
 
-          <Customimagebar />
-
-          <div>
-            <Appartmentvill />
-            <Card
-              style={{
-                width: "98%",
-                borderRadius: 12,
-                background: "#0019432b",
-                padding: "20px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              }}
-            >
-              <Newlaunchcard colu={2} />
-            </Card>
-          </div>
+          
         </div>
 
         {/* Right sidebar = 4/12 (≈33.3% ≈ 30%) */}
-        <div className="lg:col-span-4">
-          <div className="sticky top-20 right-0 left-10">
-            <Customcard />
-          </div>
-        </div>
+        
       </div>
 
       {/* main */}
       <div className='mt-40 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
-        <div className='p-0 lg:p-[40px]'>
-          <p className='text-center text-xs font-bold text-gray-400'>ALL PROPERTY NEEDS - ONE PORTAL</p>
-          <h1 className='text-start lg:max-w-xl mx-auto lg:text-center font-bold text-black text-lg lg:text-xl my-3'>Find Better Places to Live, Work and Wonder...</h1>
-          <Dreamherosection />
-        </div>
-        <Card
-          style={{
-            width: "90%",
-            margin: "auto",
-            borderRadius: 12,
-            background: "#0019432b",
-            padding: "20px",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-          }}
-        >
-          <Newlaunchcard colu={2} />
-        </Card>
         
-
-          <div style={{ padding: "40px" }}>
-          <h2 className=' font-bold text-black text-xl '>Handpicked Residential Projects</h2>
-          <p className=' text-xs font-medium text-gray-300 mb-3'>Featured Residential projects across India</p>
-        <div className="flex justify-evenly w-full">
-  {residential.slice(0,2).map((item, index) => (
-    <Antdpropertycard
-      key={index}
-      image="https://picsum.photos/500/450?random=1"
-      logo="https://picsum.photos/100/100?random=1"
-      title={item.title}
-      data={item}
-      featured
-    />
-  ))}
-</div>
-    </div>
-    <div style={{ padding: "40px",marginTop:"60px" }} className={`${crousalData.length === 0 ? 'hidden' : ''}`}>
-          <h2 className=' font-bold text-black text-xl '>Upcoming Projects</h2>
-          <p className=' text-xs font-medium text-gray-300 mb-3'>Visit these projects and get early bird benefits</p>
-            <Antdcardcrousal  crousal={crousalData}/>
-        </div>
-        {/* <div style={{padding:"40px",marginTop:"60px"}}>
-          < Dreamherosection />
-        </div> */}
-        <div style={{padding:"40px",marginTop:"60px"}}>
-          < Handpickherosection content={handpickherosection.rentHome} />
-        </div>
-        <div style={{padding:"40px",marginTop:"60px"}}>
-          < Handpickherosection content={handpickherosection.postPropertyViaWhatsapp} />
-        </div>
-        <div style={{padding:"40px",marginTop:"60px"}}>
-          <h2>Our Services for owners</h2>
-          <p>Make your life easier with our service</p>
-          <Customantservicecard />
-        </div>
-        <div style={{padding:"40px",marginTop:"60px"}}>
-          < Handpickherosection content={handpickherosection.rentHome} />
-        </div>
-        <div style={{padding:"40px",marginTop:"60px"}}>
-          <p><span className='font-bold text-gray-400 '>TOP CITIES</span></p>
-          <h1 className=' font-bold text-black text-xl my-3 '>Explore Real Estate in Popular Indian Cities</h1>
-          <Antdcitiescardcrousal articles={cities} />
-        </div>
+        
       </div>
+      <div className='my-10 md:my-24'>
+      <ImageCrousal />
+      </div>
+
+       <div className='mt-40  w-full homeContainer max-w-[1265px] mx-auto'>
+        <div>
+          <h3 className='text-center'><span className='text-center tracking-wider'>MOST POPULAR PLACES</span></h3>
+          <p className='text-center'><span className='text-xs font-bold text-gray-600'>FIND YOUR DREAM HOUSE IN YOUR CITY</span></p>
+        </div>
+        <CategoryGrid />
+       </div>
     </div>
   )
 }

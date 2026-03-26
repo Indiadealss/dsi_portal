@@ -35,7 +35,10 @@ const PropertyList = ({ properties }) => {
 
     return (
         <div className="px-0 pe-3 md:px-6 lg:px-10 py-6 relative">
-
+            <div className="my-10">
+            <h1 className="uppercase"><span className="tracking-wider text-4xl">RECENT Projects</span></h1>
+            <span className="uppercase text-sm text-gray-400 pt-3 font-bold">find your dream project in your city</span>
+            </div>
             {/* LEFT BUTTON */}
             <button
                 onClick={() => swiperRef.current?.slidePrev()}
