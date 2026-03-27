@@ -224,7 +224,7 @@ useEffect(() => {
 
     if (alltype !== 'Project') {
       const slug = createSearchSlug(query);
-      navigate(`/${slug}`);
+      navigate(`/property/${slug}`);
     }
 
     if (alltype === "Project") {
@@ -232,7 +232,7 @@ useEffect(() => {
 
       const slug = createProjectSlug(selectedProject);
 
-      navigate(`/${slug}?preference=S`);
+      navigate(`/property/${slug}?preference=S`);
       return;
     }
 

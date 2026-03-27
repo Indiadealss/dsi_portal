@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -55,6 +55,7 @@ import DynamicresponseallListing from "./component/crmCustomcomponents/Dynamicre
 import ShortList from "./component/MyProfile/ShortList";
 import Editprofileproject from "./component/mybrandsdoor/Editprofileproject";
 import EditPropertyStepper from "./component/mybrandsdoor/EditPropertyProject";
+import NotFound from "./component/NotFound";
 
 function App() {
 
@@ -63,8 +64,7 @@ function App() {
   // console.log(user);
   const location = useLocation();
 
-  const hideLayout = location.pathname === "/sucessfullydownload";
-
+  
    useEffect(() => {
   getUserDetatils()
     .then(res => {
@@ -104,7 +104,7 @@ function App() {
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
-    {path: "/:slug",element:<Propertypageslug />},
+    {path: "/property/:slug",element:<Propertypageslug />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
@@ -146,15 +146,25 @@ function App() {
     {path:"/info/privacy",element:<Privacy />},
     {path:"/info/terms-and-conditions",element:<Termsconditions />},
     {path:"/info/cancellation-policy",element: <Cancellation />},
-    {path:"/postproperty", element:<Postpropertyform />}
+    {path:"/postproperty", element:<Postpropertyform />},
+
+
+    // ✅ Redirect all unknown routes
+    { path: "*", element: <NotFound /> },
   ]);
+
+  const isNotFoundPage = routes?.type?.name === "NotFound";
+
+  const hideLayout =
+  location.pathname !== "/sucessfullydownload" ||
+  isNotFoundPage;
 
   return (
     <>
     <Scrooltop>
-      {!hideLayout && <Navbar />}   {/* 👈 always visible */}
+      {hideLayout  && <Navbar />}   {/* 👈 always visible */}
       {routes}
-      {!hideLayout && <Footer />}
+      {hideLayout && <Footer />}
       </Scrooltop>
     </>
   );

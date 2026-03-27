@@ -30,6 +30,7 @@ import ProjectsCrousal from './customcomponent/ProjectsCrousal';
 import PropertyList from './customcomponent/PropertyList';
 import ImageCrousal from './customantdesign/ImageCrousal';
 import CategoryGrid from './customcomponent/CategoryGrid';
+import ServicesSection from './customcomponent/ServicesSection';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -415,6 +416,10 @@ console.log(residential, 'residential');
           <p className='text-center'><span className='text-xs font-bold text-gray-600'>FIND YOUR DREAM HOUSE IN YOUR CITY</span></p>
         </div>
         <CategoryGrid />
+       </div>
+
+       <div className='h-400px  bg-[#f3e2e2]'>
+            <ServicesSection />
        </div>
     </div>
   )
