@@ -1,6 +1,8 @@
+import { useEffect } from "react";
+
 const NotFound = () => {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-start pt-16">
+    <div className=" min-h-screen bg-white flex flex-col items-center justify-start pt-16">
       
       {/* Title */}
       <h1 className="text-4xl font-semibold text-black">

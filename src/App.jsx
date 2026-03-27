@@ -5,9 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Postproperty } from './component/Postproperty'
 import { Postpropertyform } from './component/Postpropertyform'
 import { Property } from './component/Property'
-import Navbar from "./component/Nevbar";
 import Home from "./component/Home";
-import Footer from "./component/Footer";
 import Propertydetails from "./component/Propertydetails";
 import Userlogin from "./component/Userlogin";
 import Scrooltop from "./component/customcomponent/Scrooltop";
@@ -56,6 +54,7 @@ import ShortList from "./component/MyProfile/ShortList";
 import Editprofileproject from "./component/mybrandsdoor/Editprofileproject";
 import EditPropertyStepper from "./component/mybrandsdoor/EditPropertyProject";
 import NotFound from "./component/NotFound";
+import Layout from "./Layout";
 
 function App() {
 
@@ -98,8 +97,11 @@ function App() {
 }, [dispatch]);
   
   let routes = useRoutes([
+    {
+      element:<Layout />,
+      children:[
     { path: "/", element: <Home /> },
-    {path:"/sucessfullydownload",element:<Thankyou />},
+    
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
@@ -147,24 +149,21 @@ function App() {
     {path:"/info/terms-and-conditions",element:<Termsconditions />},
     {path:"/info/cancellation-policy",element: <Cancellation />},
     {path:"/postproperty", element:<Postpropertyform />},
-
+]  
+  },
 
     // ✅ Redirect all unknown routes
+    {path:"/sucessfullydownload",element:<Thankyou />},
     { path: "*", element: <NotFound /> },
   ]);
 
-  const isNotFoundPage = routes?.type?.name === "NotFound";
+  
 
-  const hideLayout =
-  location.pathname !== "/sucessfullydownload" ||
-  isNotFoundPage;
 
   return (
     <>
-    <Scrooltop>
-      {hideLayout  && <Navbar />}   {/* 👈 always visible */}
+    <Scrooltop>  {/* 👈 always visible */}
       {routes}
-      {hideLayout && <Footer />}
       </Scrooltop>
     </>
   );
