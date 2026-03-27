@@ -423,7 +423,7 @@ export default function Propertyfilter() {
   return (
     <div className="sticky top-0">
       {/* Desktop Sidebar */}
-      <aside className=" propertyListingFilter hidden md:block  p-2 space-y-6 bg-white">
+      <aside className=" propertyListingFilter hidden md:block space-y-6 bg-white">
 
         <div className=' size-fit lg:flex w-[24vw]'>
           <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8  ">

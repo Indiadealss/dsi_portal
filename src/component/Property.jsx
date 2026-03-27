@@ -145,12 +145,12 @@ export const Property = () => {
 
   return (
     <section className='mx-auto'>
-      <div className='relative block lg:flex justify-evenly lg:mt-[9vw]'>
-          <div className='sticky top-10 h-auto bg-white overflow-y-auto scrollbar-hide'>
+      <div className='relative block lg:flex justify-evenly'>
+          <div className='sticky top-10 h-auto bg-white overflow-y-auto scrollbar-hide lg:mt-[9vw]'>
         <Propertyfilter />
           </div>
         
-        <div className=' propertyListingDatamain '>
+        <div className='lg:mt-[9vw] propertyListingDatamain '>
 
           <div >
             <div className='flex justify-between my-5 overflow-hidden'>

@@ -362,7 +362,7 @@ console.log(residential, 'residential');
       console.log(crousalData);
     }
   return (
-    <div>
+    <div className='bg-whitesmoke'>
       <Seo
               title='Residential and Commercial properties in India, Flats, Plots, Villas, Apartments'
               description="Brandsdoor.in offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
