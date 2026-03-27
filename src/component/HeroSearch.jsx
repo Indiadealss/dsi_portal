@@ -224,7 +224,7 @@ useEffect(() => {
 
     if (alltype !== 'Project') {
       const slug = createSearchSlug(query);
-      navigate(`/${slug}`);
+      navigate(`/property/${slug}`);
     }
 
     if (alltype === "Project") {

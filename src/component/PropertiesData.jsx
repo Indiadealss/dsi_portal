@@ -232,7 +232,7 @@ if(loading){
         {/* Property Details */}
         <div className="md:webkitFillAvailable lg:w-[max-content]">
           <div className="px-6">
-            <Link to={`/${createSlug(item)}`}>
+            <Link to={`/property/${createSlug(item)}`}>
               <h5 className="text-base font-base">
                 <span className="font-bold text-xl text-gray-700">{item.title}</span>
               </h5>
