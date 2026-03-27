@@ -232,7 +232,7 @@ useEffect(() => {
 
       const slug = createProjectSlug(selectedProject);
 
-      navigate(`/${slug}?preference=S`);
+      navigate(`/property/${slug}?preference=S`);
       return;
     }
 

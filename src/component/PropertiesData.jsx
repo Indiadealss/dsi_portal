@@ -237,7 +237,7 @@ if(loading){
                 <span className="font-bold text-xl text-gray-700">{item.title}</span>
               </h5>
             </Link>
-            <Link to={`/${createSlug(item)}`}>
+            <Link to={`/property/${createSlug(item)}`}>
               <h6 className="text-base font-medium text-gray-700">{item.subtitle}</h6>
             </Link>
           </div>

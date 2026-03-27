@@ -106,7 +106,7 @@ function App() {
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
-    {path: "/:slug",element:<Propertypageslug />},
+    {path: "/property/:slug",element:<Propertypageslug />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
