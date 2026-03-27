@@ -34,24 +34,24 @@ function Footer() {
       {/* Widgets Section */}
       <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
         <div className="mx-auto hidden lg:block">
-          <h4 className="mb-3 font-semibold text-center lg:text-start">Rasidental Properties</h4>
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Property Cities</h4>
           <ul className="space-y-2">
-            <li><a href="#!" className="hover:text-gray-300">Independent House/Villa</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Apartment/Flat</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Builder Floor</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Row House/Townhouse</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Residential Plot</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Studio Apartment</a></li>
+            <li><a href="/property/Noida-ffid" className="hover:text-gray-300">Noida</a></li>
+            <li><a href="/property/Grater-Noida-ffid" className="hover:text-gray-300">Grater Noida</a></li>
+            <li><a href="/property/Delhi-ffid" className="hover:text-gray-300">Delhi</a></li>
+            <li><a href="/property/Gurgaon-ffid" className="hover:text-gray-300">Gurgaon</a></li>
+            <li><a href="/property/Bangalore-ffid" className="hover:text-gray-300">Bangalore</a></li>
+            <li><a href="/property/Mumbai-ffid" className="hover:text-gray-300">Mumbai</a></li>
           </ul>
         </div>
         <div className="mx-auto hidden lg:block">
-          <h4 className="mb-3 font-semibold text-center lg:text-start">Commercial Properties</h4>
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Property Cities</h4>
           <ul className="space-y-2">
-            <li><a href="#!" className="hover:text-gray-300">Office Space</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Shop/Retail Space</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Showroom</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Warehouse/Godown</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Commerical Plot/Land</a></li>
+            <li><a href="/property/Pune-ffid" className="hover:text-gray-300">Pune</a></li>
+            <li><a href="/property/Vrindavan-ffid" className="hover:text-gray-300">Vrindavan</a></li>
+            <li><a href="/property/Mathura-ffid" className="hover:text-gray-300">Mathura</a></li>
+            <li><a href="/property/Faridabad-ffid" className="hover:text-gray-300">Faridabad</a></li>
+            <li><a href="/property/Moradabad-ffid" className="hover:text-gray-300">Moradabad</a></li>
           </ul>
         </div>
         {/* <div className="mx-auto hidden lg:block">
