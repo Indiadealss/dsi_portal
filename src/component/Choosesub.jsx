@@ -4,11 +4,14 @@ import Listingboost from './Listingboost';
 import { useDispatch, useSelector } from 'react-redux';
 // import { submitProperty } from '../api/api';
 import { resetForm } from './Redux/propertySlice';
+import { publishProperty } from '../api/api';
 
 const Choosesub = () => {
 
     const dispatch = useDispatch()
     const propertyIdRedux = useSelector((state) => state.property.propertyId);
+    const propertyFirstData = useSelector((state) => state.property.data);
+    
     const [activeCom,setActiveCom] = useState("Subscriptioncreadits")
     const subDescription = 'By clicking on submit,I confirm that the property details including price, photos are correct And this property is available for sell/reNT. In case of any discreperncies Indiadealss can take strict action including deleting this listing. I also accept terms and conditions.';
     async function handleSumit() {
@@ -16,8 +19,8 @@ const Choosesub = () => {
     setActiveCom("Listingboost");
   } else {
     try {
-      const propertyId = propertyFirstData.propertyId;
-      console.log(propertyId);
+      const propertyId = propertyFirstData?.propertyId;
+      const purpose = propertyFirstData?.purpose;
       
 
       if (!propertyId) {
@@ -25,7 +28,7 @@ const Choosesub = () => {
         return;
       }
 
-      await publishProperty(propertyId);
+      await publishProperty(propertyId,purpose);
 
       alert("✅ You have successfully listed the property");
 

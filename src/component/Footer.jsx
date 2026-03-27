@@ -34,24 +34,24 @@ function Footer() {
       {/* Widgets Section */}
       <div className="container mx-auto py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
         <div className="mx-auto hidden lg:block">
-          <h4 className="mb-3 font-semibold text-center lg:text-start">Land/Plots</h4>
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Rasidental Properties</h4>
           <ul className="space-y-2">
-            <li><a href="#!" className="hover:text-gray-300">Accessibility Statement</a></li>
-            <li><a href="#!" className="hover:text-gray-300">ADA Compliance</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Assistive Technologies</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Accessibility Resources</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Accessibility Standards</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Design Guidelines</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Independent House/Villa</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Apartment/Flat</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Builder Floor</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Row House/Townhouse</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Residential Plot</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Studio Apartment</a></li>
           </ul>
         </div>
         <div className="mx-auto hidden lg:block">
-          <h4 className="mb-3 font-semibold text-center lg:text-start">Home</h4>
+          <h4 className="mb-3 font-semibold text-center lg:text-start">Commercial Properties</h4>
           <ul className="space-y-2">
-            <li><a href="#!" className="hover:text-gray-300">Shop Now</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Product Categories</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Special Offers</a></li>
-            <li><a href="#!" className="hover:text-gray-300">New Releases</a></li>
-            <li><a href="#!" className="hover:text-gray-300">Exclusive Deals</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Office Space</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Shop/Retail Space</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Showroom</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Warehouse/Godown</a></li>
+            <li><a href="#!" className="hover:text-gray-300">Commerical Plot/Land</a></li>
           </ul>
         </div>
         {/* <div className="mx-auto hidden lg:block">

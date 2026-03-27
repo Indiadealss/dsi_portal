@@ -419,8 +419,11 @@ console.log(residential, 'residential');
        </div>
 
        <div className='h-400px  bg-[#f3e2e2]'>
+        <div className='mt-40  w-full homeContainer max-w-[1265px] mx-auto'>
             <ServicesSection />
+        </div>
        </div>
+
     </div>
   )
 }

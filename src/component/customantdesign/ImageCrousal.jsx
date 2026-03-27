@@ -1,5 +1,6 @@
 import React from "react";
 import background2 from '../../Images/background-2.jpg'
+import { Link } from "react-router-dom";
 
 const ImageCrousal = () => {
   return (
@@ -29,14 +30,14 @@ const ImageCrousal = () => {
         <div className="mt-6 flex flex-col sm:flex-row gap-4">
           
           {/* Submit Button */}
-          <button className="bg-lime-400 text-white px-6 py-3 rounded-full font-medium hover:bg-lime-500 transition cursor-pointer">
+          <Link to="/post-property"><button className="bg-lime-400 text-white px-6 py-3 rounded-full font-medium hover:bg-lime-500 transition cursor-pointer">
             SUBMIT PROPERTY
-          </button>
+          </button></Link>
 
           {/* Browse Button */}
-          <button className="border border-lime-400 text-lime-400 px-6 py-3 rounded-full font-medium hover:bg-lime-400 hover:text-white transition cursor-pointer">
+          <Link to="/property/allLocations-ffid"><button className="border border-lime-400 text-lime-400 px-6 py-3 rounded-full font-medium hover:bg-lime-400 hover:text-white transition cursor-pointer">
             BROWSE PROPERTIES
-          </button>
+          </button></Link>
 
         </div>
       </div>
