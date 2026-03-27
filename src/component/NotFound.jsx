@@ -1,7 +1,13 @@
-import { useEffect } from "react";
+import Seo from "./Seo";
 
 const NotFound = () => {
   return (
+    <>
+    <Seo
+        title='404 Not Fount'
+        canonical={window.location.href}
+        description=' '
+      />
     <div className=" min-h-screen bg-white flex flex-col items-center justify-start pt-16">
       
       {/* Title */}
@@ -18,6 +24,7 @@ const NotFound = () => {
       </p>
 
     </div>
+    </>
   );
 };
 
