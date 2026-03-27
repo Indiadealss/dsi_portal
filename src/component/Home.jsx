@@ -362,7 +362,7 @@ console.log(residential, 'residential');
       console.log(crousalData);
     }
   return (
-    <div className='bg-whitesmoke'>
+    <div>
       <Seo
               title='Residential and Commercial properties in India, Flats, Plots, Villas, Apartments'
               description="Brandsdoor.in offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
@@ -377,10 +377,10 @@ console.log(residential, 'residential');
         </div>
       </div>
 
-      <div className={user.loggedIn ?  'mt-20 hidden lg:block' : 'hidden'}>
-        {/* <Smallmain title='Continue browsing...' /> */}
+      {/* <div className={user.loggedIn ?  'mt-20 hidden lg:block' : 'hidden'}>
+        <Smallmain title='Continue browsing...' />
         <Contiunebrowser title='Continue browsing...' />
-      </div>
+      </div> */}
       {/* small {'GET STARTED WITH EXPLORING REAL ESTATE OPTIONS'} */}
       <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
         {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
