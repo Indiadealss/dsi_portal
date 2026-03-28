@@ -79,6 +79,7 @@ const HeroSearch = () => {
   const [alltype, setAlltype] = useState('All Types');
   const [sizeSpace, setSizeSpace] = useState('Any');
   const [selectedSize, setSelectedSize] = useState("");
+  const [projectNpxid,setProjectNpxid] = useState("");
   const [customSize, setCustomSize] = useState("");
   const [selectedSubType, setSelectedSubType] = useState("");
   const [bedroom, setBedroom] = useState("");
@@ -228,7 +229,12 @@ useEffect(() => {
     }
 
     if (alltype === "Project") {
-      const selectedProject = projectname.find(p => p.npxid); // ya selected value
+      const selectedProject = projectname.find(
+  (p) => p.npxid === selectedProjectId
+);
+
+      console.log(selectedProjectId,projectNpxid,"let's check");
+      
 
       const slug = createProjectSlug(selectedProject);
 
@@ -348,9 +354,9 @@ useEffect(() => {
               disabled={propertyType.length === 0}
               onChange={(e) => setSelectedSubType(e.target.value)}
               className={`flex-1 px-4 py-3 outline-none border-b md:border-b-0  
-    ${propertyType.length === 0 ? "bg-white text-gray-400 cursor-not-allowed" : "bg-white"}
-  `}
-            >
+              ${propertyType.length === 0 ? "bg-white text-gray-400 cursor-not-allowed" : "bg-white"}
+                `}
+                >
               <option value="">Type of Property</option>
 
               {propertyType.map((item, index) => (
@@ -396,7 +402,7 @@ useEffect(() => {
               <option value="">All Project</option>
 
               {filteredProjects.map((item) => (
-                <option key={item.npxid} value={item.npxid}>
+                <option key={item.npxid} value={item.npxid} onChange={(e) => setProjectNpxid(e.target.value)}>
                   {item.projectname}
                 </option>
               ))}

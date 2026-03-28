@@ -31,7 +31,7 @@ const ImageCrousal = () => {
           
           {/* Submit Button */}
           <Link to="/post-property"><button className="bg-lime-400 text-white px-6 py-3 rounded-full font-medium hover:bg-lime-500 transition cursor-pointer">
-            SUBMIT PROPERTY
+            POST PROPERTY
           </button></Link>
 
           {/* Browse Button */}
