@@ -55,10 +55,17 @@ export const Anenimies = ({setValidator}) => {
     const [projectdeveloper,setProjectdeveloper] = useState(propertyData.projectdeveloper || '');
     const [projectKeyword,setProjectKeyword] = useState(propertyData.projectKeyword || '');
 
+    const [pricePerSqft,setPricePerSqft] = useState('');
+    
+    const propertyDatas = useSelector((state) => state.property.data);
+
     useEffect(() => {
       console.log(amenitie,'check amenitie');
+      console.log(propertyDatas.superBuildUParia,'propertyData')
+      const calculatePerSqft = Number(price) / Number(propertyDatas.superBuildUParia);
+      setPricePerSqft(calculatePerSqft);
       
-    },[amenitie])
+    },[amenitie, price,propertyDatas?.superBuildUParia])
 
 
     useEffect(() => {
@@ -1175,11 +1182,11 @@ useEffect(() => {
         <input type='number' onKeyDown={(e) => {
     if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
   }} onWheel={(e) => e.target.blur()} value={price} onChange={(e) => setPrice(e.currentTarget.value)} className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
-        <input type='text' disabled className='mx-2  outline-none border border-1 border-gray-200  px-4 my-4 w-30 text-xs' placeholder='Price per sq.ft' />
+        <input type='text' value={pricePerSqft} disabled className='mx-2  outline-none border border-1 border-gray-200  px-4 my-4 w-30 text-xs' placeholder='Price per sq.ft' />
         </div>
         <div className={propertyDataFirst.purpose === 'Project' ?  'flex' : 'hidden'}>
         <input type='text' value={price} onChange={(e) => setPrice(e.currentTarget.value)} className='mx-2 my-1 outline-none border border-1 border-gray-200 my-4 px-4 py-2 w-40' placeholder='Expected Price' />
-        <input type='text' disabled className='mx-2  outline-none border border-1 border-gray-200  px-4 my-4 w-30 text-xs' placeholder='Price per sq.ft' />
+        <input type='text' value={pricePerSqft} disabled className='mx-2  outline-none border border-1 border-gray-200  px-4 my-4 w-30 text-xs' placeholder='Price per sq.ft' />
         </div>
 
         {/* residental */}

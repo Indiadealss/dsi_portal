@@ -140,7 +140,11 @@ export const uploadVideo = (id, formData) =>
 
 
   export const publishProperty = (id,purpose) =>
-  API.put(`/property/publishProperty/${id}&purpose=${purpose}`);
+  API.put(`/property/publishProperty/${id}`,{ purpose });
+
+
+  export const getOverlookingFeatureById = (id) =>
+    API.get(`/overlookingfeature/getOverlookingFeatureById`)
 
 // export const submitProperty = createAsyncThunk(
 //   "property/submitProperty",

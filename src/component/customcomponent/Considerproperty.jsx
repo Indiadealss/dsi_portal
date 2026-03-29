@@ -61,7 +61,7 @@ const Considerpropety = () => {
         <div className='flex my-2 max-w-[-webkit-fill-available] my-3'>
             <div>
             {/* <h2>Place nearby</h2> */}
-            <p> <span className="font-medium text-sm">Why you should consider this property?</span></p>
+            <p> <span className="text-xl font-medium text-sm">Why you should consider this property?</span></p>
             </div>
         </div>
        <div className="relative">

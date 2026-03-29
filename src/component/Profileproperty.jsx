@@ -77,6 +77,7 @@ const [faqText, setFaqText] = useState("");
   const [projectTotalFloor, setProjectTotalFloor] = useState(propertyData.projectTotalFloor || null);
   const [reraStatus, setReraStatus] = useState(propertyData.reraStatus || "Not Available");
   const [reraNumber, setReraNumber] = useState(propertyData.rera || "");
+  const [superBuildUParia,setSuperBuildUParia] = useState(propertyData.superBuildUParia || 0)
 
 
 //   useEffect(() => {
@@ -236,6 +237,15 @@ const handleDeleteEntry = (index) => {
   //   }))
   // }, [description,considerfaq])
 
+
+useEffect(() => {
+  const total = Number(caArea) + Number(buArea);
+
+  setSuperBuildUParia(total);
+
+  console.log(total, 'Number Carpet Area');
+}, [caArea, buArea]);
+
   const formData = useMemo(() => ({
   bedroom: noBedroom,
   bathroom: noBathroom,
@@ -246,6 +256,7 @@ const handleDeleteEntry = (index) => {
   buildSizein: buildarea,
   carpetarea: caArea,
   carpetSizein: carpet,
+  superBuildUParia:superBuildUParia,
   rera: reraNumber,
   projectTotalFloor,
   totalfloor: totalFloor,
@@ -281,6 +292,7 @@ const handleDeleteEntry = (index) => {
   buildarea,
   caArea,
   carpet,
+  superBuildUParia,
   reraNumber,
   projectTotalFloor,
   totalFloor,

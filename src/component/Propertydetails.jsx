@@ -95,12 +95,15 @@ const handleDealerPosition = (y) => {
 
             console.log(data,data.images,'data Responses Done');
             
-            if(data.images && data.images.length > 0){
-               setCrousalData(data.images.map((img)=>({
-                  image:img.src
-               }))
-            );
-            }
+            if (data.images && data.images.length > 0) {
+  setCrousalData(
+    data.images
+      .filter(img => img?.src) // 🔥 important fix
+      .map((img) => ({
+        image: img.src,
+      }))
+  );
+}
          }
          if(data.video && data.video.length > 0){
                   setVideo(data.video.map((video) => ({
@@ -157,7 +160,8 @@ const handleDealerPosition = (y) => {
   return (
    <>
    <Propertydetailsstickcard buttonNames={buttonNames} />
-   <div className='m-10 lg:mx-10'>
+   <div>
+   <div className='m-10 mx-auto 2xl:max-w-[1300px] xl:max-w-[1265px]'>
    <div className='relative'>
    <Antdpropertydetailsimgcroul crousal={crousalData} video={video}  />
    </div>
@@ -187,17 +191,17 @@ const handleDealerPosition = (y) => {
    {/* <div className='my-6'>
       <Furnshingdetails furnshingdetails={features} title={'Semifurnished'} rows={6}/>
    </div> */}
-   <div className='m-0 lg:mx-10'>
+   <div className='m-0 lg:mx-auto  max-w-[1265px]'>
       <div className='my-4'>
          <Propertydelardetail  onDealerPosition={handleDealerPosition}/>
    </div>
    </div>
-   <div className='m-0 lg:mx-10'>
+   <div className='m-0 lg:mx-auto  max-w-[1265px] '>
       <div className='my-4'>
          <Simllarpropertites title={'Similar Properties'} onDealerPosition={handleSimalerPosition} />
    </div>
    </div>
-   <div className='m-0 lg:mx-10'>
+   {/* <div className='m-0 lg:mx-10'>
       <div className='my-4'>
             <Card
               style={{
@@ -211,6 +215,8 @@ const handleDealerPosition = (y) => {
               <Newlaunchcard colu={2} />
             </Card>
           </div>
+      </div> */}
+
       </div>
 
    </>

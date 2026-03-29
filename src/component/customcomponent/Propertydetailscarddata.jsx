@@ -13,6 +13,8 @@ const units = [
 const Propertydetailscarddata = ({ property }) => {
 
       const parseLocation = (location) => {
+        console.log(location,'location check');
+        
   if (typeof location === "string") {
     try {
       return JSON.parse(location);
@@ -28,13 +30,15 @@ const Propertydetailscarddata = ({ property }) => {
     useEffect(() => {
         if (property) {
             setDetail(property);
+            console.log(property.overlo ,'hfajsd');
+            
         }
     }, [property]);
 
     if (!detail) return null; // optional: loading state
 
     return (
-        <div className='block max-w-full h-auto lg:w-[53vw] lg:h-[35vw] p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100'>
+        <div className='block max-w-full h-[max-content]  lg:w-[43vw] lg:h-[max-content] p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100'>
             <table>
                 <tbody>
                     <tr className='border-b border-gray-100'>
@@ -43,9 +47,9 @@ const Propertydetailscarddata = ({ property }) => {
                                 <p className='flex'><HomeOutlined className='myCustomIcon' /><span className='font-medium m-2 text-sm text-gray-500'>Area</span></p>
                                 <p>
                                     Super Build up area: {detail.superbuilduparea || detail.buildarea}
-                                    <Dropdown menu={{ items: units }} trigger={['click']}>
+                                    {/* <Dropdown menu={{ items: units }} trigger={['click']}>
                                         <Space>Options <DownOutlined /></Space>
-                                    </Dropdown>
+                                    </Dropdown> */}
                                 </p>
                                 {/* <p>Build Up area: {detail.buildarea || 'N/A'}</p> */}
                                 <p>Carpet area: {detail.carpetarea || 'N/A'}</p>
@@ -55,7 +59,7 @@ const Propertydetailscarddata = ({ property }) => {
                             <div>
                                 <p className='flex'><HomeOutlined className='myCustomIcon' /><span className='font-medium m-2 text-sm text-gray-500'>Configuration</span></p>
                                 <p>
-                                    {detail.bedroom || 0} Bedroom {detail.bathroom || 0} Bathroom {detail.balconies || 0} Balconies {detail.otherrooms && `with ${detail.otherrooms}`}
+                                    {detail.bedroom || 0} Bedroom {detail.bathroom || 0} Bathroom {detail.balconies || 0} Balconies {detail.otherrooms?.length > 0 && `with ${detail.otherrooms.map(item => item.name).join(", ")}`}
                                 </p>
                             </div>
                         </td>
@@ -71,7 +75,7 @@ const Propertydetailscarddata = ({ property }) => {
                         <td style={{ paddingBottom: '1rem' , paddingLeft:'1rem' }}>
                             <div>
                                 <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Address</span></p>
-                                <p>{parseLocation(detail.location)?.Address || 'N/A'}</p>
+                                <p>{parseLocation(detail.location)[0]?.apartment_name || 'N/A'}, {parseLocation(detail.location)[0]?.Address || 'N/A'}</p>
                             </div>
                         </td>
                     </tr>
@@ -94,10 +98,10 @@ const Propertydetailscarddata = ({ property }) => {
                                     <IoIosPricetag className='myCustomIcon' />
                                     <span className='font-medium text-sm text-gray-500'>Overlooking</span>
                                 </p>
-                                <p>
+                                <p className='w-50'>
                                     {Array.isArray(detail.overlo)
-                                        ? detail.overlo.join(', ')
-                                        : detail.overlo}
+    ? detail.overlo.map(item => item.name).join(', ')
+    : ""}
                                 </p>
                             </td>
                         )}
