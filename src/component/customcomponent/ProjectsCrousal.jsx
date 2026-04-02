@@ -49,7 +49,7 @@ const ProjectsCrousal = ({ data }) => {
 
       console.log(data,'data are property');
   return (
-    <div className="bg-white  shadow-md overflow-hidden">
+    <div className="bg-white shadow-2xl overflow-hidden">
       
       {/* Image */}
       <div className="relative mx-3 mt-3">

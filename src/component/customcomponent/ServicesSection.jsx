@@ -48,7 +48,7 @@ export default function ServicesSection() {
             </p>
           </div>
 
-          <p className="hidden text-gray-500 mb-8 leading-relaxed">
+          <p className=" text-gray-500 mb-8 leading-relaxed">
             Temporibus autem quibusdam et aut officiis debitis is aut rerum
             necessitatibus saepe eveniet ut etes seo lage voluptates repudiandae.
           </p>
@@ -68,7 +68,7 @@ export default function ServicesSection() {
                   <h3 className="text-lg font-semibold text-gray-800">
                     {item.title}
                   </h3>
-                  <p className="hidden text-gray-500 text-sm mt-1">
+                  <p className=" text-gray-500 text-sm mt-1">
                     {item.desc}
                   </p>
                 </div>

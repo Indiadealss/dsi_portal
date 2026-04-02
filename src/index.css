@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('/Fonts/ClashDisplay-Extralight.otf') format('opentype');
+  src: url('../public/ClashDisplay-Extralight.otf') format('opentype');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('/Fonts/ClashDisplay-Light.otf') format('opentype');
+  src: url('../public/ClashDisplay-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -23,7 +23,7 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('/Fonts/ClashDisplay-Regular.otf') format('opentype');
+  src: url('../public/ClashDisplay-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -31,7 +31,7 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('/Fonts/ClashDisplay-Medium.otf') format('opentype');
+  src: url('../public/ClashDisplay-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -39,7 +39,7 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('/Fonts/ClashDisplay-Semibold.otf') format('opentype');
+  src: url('../public/ClashDisplay-Semibold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -47,7 +47,7 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('/Fonts/ClashDisplay-Bold.otf') format('opentype');
+  src: url('../public/ClashDisplay-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -55,9 +55,9 @@
 
 
 
-/* body {
-  font-family: 'ClashDisplay';
-} */
+body {
+  font-family: 'Noto Sans Roboto', sans-serif;
+}
 .scrollbar-hide{
   scrollbar-width: none;
 }

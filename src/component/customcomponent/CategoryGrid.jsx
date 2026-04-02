@@ -5,7 +5,7 @@ const CategoryGrid = () => {
     <div className="p-4 md:p-8 bg-gray-100">
 
       {/* 🔥 FIXED GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-4 gap-2 lg:h-[650px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-3 gap-2 lg:h-[650px]">
 
         {/* Apartment (BIG LEFT) */}
         <div className="relative lg:col-span-2 lg:row-span-2  overflow-hidden group">
