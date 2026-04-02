@@ -90,6 +90,7 @@ const closeFullscreen = () => setIsFullscreen(false);
   };
 
   const onError = () => {
+    console.error("PDF Error:", error);
     setError(true);
     setLoading(false);
   };
@@ -117,7 +118,7 @@ const closeFullscreen = () => setIsFullscreen(false);
       {error && <p className="text-center text-red-500">Failed to load PDF</p>}
 
       {!error && (
-        <Document file={{ url: pdfUrl }} onLoadSuccess={onDocLoad} onLoadError={onError}>
+        <Document file={{ url: pdfUrl,rangeChunkSize: 65536 }} onLoadSuccess={onDocLoad} onLoadError={onError}>
           {numPages && (
             <Swiper
               spaceBetween={20}
