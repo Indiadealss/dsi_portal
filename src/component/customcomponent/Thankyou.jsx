@@ -27,7 +27,7 @@ const Thankyou = () => {
         {/* Logo */}
         <div className="mb-6">
           <img
-            src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1771509319781-brandsdoorlog.png"
+            src="https://d3eoh63gynpjzh.cloudfront.net/1771509319781-brandsdoorlog.png"
             alt="BRANDSDOOR"
             width={180}
             className="mx-auto"

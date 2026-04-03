@@ -825,7 +825,7 @@ useEffect(() => {
           fontSize: 18,
         }}
       >
-        <img src="https://cdn.brandsdoor.in/indiadealss/indiadealss/1771509319781-brandsdoorlog.png" alt="BRANDSDOOR"  width={180} height={100} />
+        <img src="https://d3eoh63gynpjzh.cloudfront.net/1771509319781-brandsdoorlog.png" alt="BRANDSDOOR"  width={180} height={100} />
       </a>
         
       </div>
