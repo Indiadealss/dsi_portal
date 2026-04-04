@@ -69,7 +69,7 @@ function App() {
     .then(res => {
       if (res.status === 200) {
 
-        const usedetails = res.data.usedetails;
+        const usedetails = res.data;
 
         console.log(usedetails);
         
