@@ -42,7 +42,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
 
                 if(res.status === 200){
                   console.log(!res.data.redirect, 'res.data.redirect');
-                  console.log(data,'dddjasdjkl');
+                  console.log(res.data,'dddjasdjkl');
                   
                   
                   if(!res.data.redirect){
