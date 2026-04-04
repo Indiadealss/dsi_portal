@@ -76,9 +76,12 @@ useEffect(() => {
       const data = await res.json();
       if (!isMounted) return;
 
+      console.log(data,'lat lng data');
+      
+
       const { lat, lng } = data.results[0].geometry.location;
 
-      // console.log("Coordinates:", lat, lng);
+      console.log("Coordinates:", lat, lng);
 
       // ---- FIX: Use PlacesService instead of fetch ----
       const service = new window.google.maps.places.PlacesService(

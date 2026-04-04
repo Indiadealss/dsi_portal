@@ -6,17 +6,17 @@ export default function ServicesSection() {
     {
       icon: <FaHome />,
       title: "Renting and Selling Services",
-      desc: "Lorem ipsum dolor sit, consectetur adipisci elit, sed do eiusmod tempor."
+      desc: "Connecting sellers with buyers, and homeowners with renters."
     },
     {
       icon: <FaTools />,
       title: "Property Management",
-      desc: "Lorem ipsum dolor sit, consectetur adipisci elit, sed do eiusmod tempor."
+      desc: "Common area maintenance & housekeeping management."
     },
     {
       icon: <FaBuilding />,
       title: "Property Listing",
-      desc: "Lorem ipsum dolor sit, consectetur adipisci elit, sed do eiusmod tempor."
+      desc: "Showcasing upcoming projects on our dedicated property listing platform."
     }
   ];
 
@@ -44,13 +44,12 @@ export default function ServicesSection() {
               OUR SERVICES
             </h2>
             <p className="text-sm text-gray-500 mt-1">
-              WHAT WE DO FOR YOU
+              How May We Help You Today?
             </p>
           </div>
 
           <p className=" text-gray-500 mb-8 leading-relaxed">
-            Temporibus autem quibusdam et aut officiis debitis is aut rerum
-            necessitatibus saepe eveniet ut etes seo lage voluptates repudiandae.
+            With years of experience in the industry, we bring a diverse range of expert services to meet all your real estate needs.
           </p>
 
           {/* Services List */}
