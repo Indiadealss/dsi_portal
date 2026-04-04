@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Inputforotp from './customcomponent/Inputforotp';
 import { MdEdit } from "react-icons/md";
 import { sentOtp, verifyOtp } from '../api/api';
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './Redux/userSlice';
 import { updateField } from './Redux/propertySlice';
@@ -41,7 +41,8 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
                 const res = await verifyOtp(mobileNo,otp);
 
                 if(res.status === 200){
-                  // console.log(!res.data.redirect);
+                  console.log(!res.data.redirect, 'res.data.redirect');
+                  console.log(data,'dddjasdjkl');
                   
                   
                   if(!res.data.redirect){
@@ -50,7 +51,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
                     // console.log(res.data.user);
                     dispatch(setUser(res.data.user));
                     // console.log(user);
-                     window.location.reload();
+                    //  window.location.reload();
                     alert("Login Sucessfully");
                      if (closeModal) closeModal();
                   }else{
