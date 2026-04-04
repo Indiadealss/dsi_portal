@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 const API = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,   // 🔥 THIS LINE FIXES EVERYTHING
   headers: {
     "Content-Type": "application/json",
   },
@@ -55,14 +56,8 @@ export const verifyOtp = (mobile, otp) =>
 export const register = (name, email, mobile) =>
   API.post("/auth/register", { name, email, mobile })
 
-export const getUserDetatils = () => {
-  return axios.get("/api/auth/me",
-    {
-      withCredentials: true,
-      headers: { "Cache-Control": "no-cache" }
-    }
-  )
-}
+export const getUserDetatils = () =>
+  API.get("/auth/me");
 
 export const updateUser = async (formData) => {
   return axios.post("/api/auth/updateuserprofile", formData, {

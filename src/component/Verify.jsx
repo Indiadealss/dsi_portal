@@ -51,7 +51,7 @@ const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
                     // console.log(res.data.user);
                     dispatch(setUser(res.data.user));
                     // console.log(user);
-                    //  window.location.reload();
+                     window.location.reload();
                     alert("Login Sucessfully");
                      if (closeModal) closeModal();
                   }else{
