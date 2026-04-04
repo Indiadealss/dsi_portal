@@ -71,6 +71,9 @@ function App() {
 
         const usedetails = res.data.usedetails;
 
+        console.log(usedetails);
+        
+
         dispatch(setUser({
           id: usedetails._id,
           name: usedetails.name,
