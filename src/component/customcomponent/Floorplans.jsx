@@ -3,13 +3,9 @@ import Slider from "react-slick";
 import Leadgentaionform from "./Leadgentaionform";
 
 const FloorPlanSlider = ({ layoutData,propertys }) => {
-  const bhkTypes = Object.keys(layoutData);
-  console.log(layoutData,'layoutData');
-  
+  const bhkTypes = Object.keys(layoutData || {});
 
-  console.log(layoutData,'bh8');
-  
-  if (!layoutData || !propertys || !bhkTypes) {
+  if (!layoutData || !propertys || bhkTypes.length === 0) {
     return (
       <div className='my-3'>
         <p>Loading...</p>
@@ -20,11 +16,11 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
   const [activeBhk, setActiveBhk] = useState(bhkTypes[0]);
   const [leadModel, setLeadModel] = useState(false);
 
-useEffect(() => {
-console.log(activeBhk,bhkTypes,bhkTypes[0],'12');
-setActiveBhk(bhkTypes[0])
-
-},[])
+  useEffect(() => {
+    if (bhkTypes.length > 0 && !bhkTypes.includes(activeBhk)) {
+      setActiveBhk(bhkTypes[0]);
+    }
+  }, [layoutData, activeBhk, bhkTypes]);
   
 
 
@@ -37,13 +33,37 @@ setActiveBhk(bhkTypes[0])
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: Math.min(3, (layoutData[activeBhk] || []).length || 1),
     slidesToScroll: 1,
     arrows: true,
+    swipeToSlide: true,
+    adaptiveHeight: true,
+    touchThreshold: 10,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 600, settings: { slidesToShow: 1 } }
-    ]
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: Math.min(2, (layoutData[activeBhk] || []).length || 1),
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+          dots: true,
+        },
+      },
+    ],
   };
 
   const leadGenration = () => {
