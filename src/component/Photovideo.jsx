@@ -72,7 +72,6 @@ export const Photovideo = ({ propertyId }) => {
   async function videoUp(e) {
     const files = Array.from(e.target.files);
     const uploadedVideoes = [];
-    setVideoFile((prev) => [...prev, ...files]);
 
     for (let file of files) {
       const formData = new FormData();
@@ -83,10 +82,11 @@ export const Photovideo = ({ propertyId }) => {
 
       uploadedVideoes.push({
         ...newVideo,
-        files,
         fields: newVideo.fields || [],
       });
     }
+
+    setVideoFile((prev) => [...prev, ...uploadedVideoes]);
 
     e.target.value = "";
   }

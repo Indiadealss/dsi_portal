@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Filterbutton from './Filterbutton'
 import { GoChevronDown } from "react-icons/go";
 import { Rangeslider } from './Rangeslider';
@@ -8,11 +8,22 @@ import { Checkfilter } from './Checkfilter';
 import { Propertyfilterbutton } from './Propertyfilterbutton';
 import { PropertiesData } from './PropertiesData';
 import { FaXmark } from "react-icons/fa6";
+import { useDispatch } from 'react-redux';
+import { updateFilter, clearFilter } from './Redux/filterSlice';
 
 
 export default function Propertyfilter() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const dispatch = useDispatch();
+
+  // Auto-apply filters when selectedFilters changes
+  useEffect(() => {
+    // Dispatch selected filters to Redux automatically
+    Object.keys(selectedFilters).forEach(key => {
+      dispatch(updateFilter({ [key]: selectedFilters[key] }));
+    });
+  }, [selectedFilters, dispatch]);
  
 
   const budgetRef = useRef(null);
@@ -428,12 +439,14 @@ export default function Propertyfilter() {
         <div className=' size-fit lg:flex w-[24vw]'>
           <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow-sm sm:p-8  ">
             <div className="flex items-center justify-between mb-4">
-              <h5 className=" font-samibold leading-none text-gray-900 ">Apply Filters</h5>
-              <a href="#" className={`${selectedFilters == {} ? 'hidden' : "text-sm font-medium text-blue-600 hover:underline "}`} onClick={() => setSelectedFilters({})}>
+              <h5 className=" font-samibold leading-none text-gray-900 ">Filters</h5>
+              <button className={`${Object.keys(selectedFilters).length === 0 ? 'hidden' : "text-sm font-medium text-blue-600 hover:underline bg-transparent border-none cursor-pointer"}`} onClick={(e) => {
+                e.preventDefault();
+                setSelectedFilters({});
+                dispatch(clearFilter());
+              }}>
                 Clear all
-              </a>
-
-
+              </button>
             </div>
             <div className="flex flex-wrap gap-2 mt-4">
               {Object.keys(selectedFilters).map(key => {
@@ -634,7 +647,10 @@ export default function Propertyfilter() {
 
             {/* Bottom Actions */}
             <div className="fixed bottom-0 left-0 w-full bg-white border-t p-4 flex justify-between">
-              <button className="px-4 py-2 border rounded">Clear all</button>
+              <button className="px-4 py-2 border rounded" onClick={() => {
+                setSelectedFilters({});
+                dispatch(clearFilter());
+              }}>Clear all</button>
               <button className="px-4 py-2 bg-blue-600 text-white rounded">
                 See All Properties
               </button>

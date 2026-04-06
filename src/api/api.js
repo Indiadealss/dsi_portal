@@ -76,10 +76,10 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
-export const getallProperty = async (page ='',filter = '',purpose='',propertyType='', slug='') => {
+export const getallProperty = async (page ='',filter = '',purpose='',propertyType='', slug='', filterForm = {}) => {
   console.log(purpose,'purpose');
   
-  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&propertyType=${propertyType}&slug=${slug}`);
+  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&propertyType=${propertyType}&slug=${slug}`,filterForm);
 }
 
 export const getproperty = async(id) => {
@@ -329,7 +329,7 @@ export const getAllFeature = async ()=> {
 } 
 
 export const searchaddress = async (address,city) => {
-  return API.get(`/searchaddress?query=${address}&$city=${city}`);
+  return API.get(`/searchaddress?query=${address}&city=${city}`);
 }
 
 // ✅ Toggle Shortlist (Add / Remove)

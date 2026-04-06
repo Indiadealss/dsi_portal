@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import img1 from '../Images/noImageBg.svg';
 import { IoIosAdd } from 'react-icons/io';
 import { MdCurrencyRupee } from "react-icons/md";
@@ -61,28 +61,108 @@ console.log(filtersFromSlug);
 
 
 
-  const [location,setLocation] = useState(useSelector((state) => state.filterSlice.location))
-  const [selectedFilters,setSelectedFilters]  = useState(useSelector((state) => state.filterSlice))
-  const [projectname,setProjectname] = useState(useSelector((state) => state.filterSlice.projectname))
+  const filterForm = useSelector((state) => state.filterSlice);
+  const location = useSelector((state) => state.filterSlice.location);
+  const selectedFilters = useSelector((state) => state.filterSlice);
+  const projectname = useSelector((state) => state.filterSlice.projectname);
+  const purpose = useSelector((state) => state.filterSlice.purpose);
+
     const fetchProperties = async (pageNumber) => {
+        console.log(filterForm,'filterForm');
         
        try{
 
-        const propertyType = selectedFilters.propertyType;
+        const propertyType = selectedFilters.propertyType || selectedFilters.typesOfProperty || '';
+        console.log('API Params:', {
+          page: pageNumber,
+          location: filtersFromSlug.location || location,
+          purpose: purpose || 'sell',
+          propertyType: Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
+          slug: filtersFromSlug.property || '',
+          projectname: projectname
+        });
+        
         
          setLoading(true)
-        const res = await getallProperty(pageNumber,filtersFromSlug.location,projectname,propertyType,filtersFromSlug.property);
+        const res = await getallProperty(
+          pageNumber,
+          filtersFromSlug.location || location,
+          purpose || 'sell',
+          Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
+          filtersFromSlug.property || '',
+          filterForm || {}
+        );
         const resultsAre = res.data?.data || [];
 
-        const result = resultsAre.filter((p) => p.purpose != 'Project')
-        
+        const result = resultsAre.filter((p) => p.purpose != 'Project');
 
-        if(result.length === 0){
+        // Apply client-side filters
+        let filteredResult = result;
+
+        // Budget filter
+        if (selectedFilters.budget && Array.isArray(selectedFilters.budget) && selectedFilters.budget.length === 2) {
+          const [minPrice, maxPrice] = selectedFilters.budget;
+          filteredResult = filteredResult.filter(p => p.price >= minPrice && p.price <= maxPrice);
+        }
+
+        // Bedroom filter
+        if (selectedFilters.noOfBedroom && selectedFilters.noOfBedroom.length > 0) {
+          filteredResult = filteredResult.filter(p => selectedFilters.noOfBedroom.includes(p.bedroom));
+        }
+
+        // Bathroom filter
+        if (selectedFilters.noBathroom && selectedFilters.noBathroom.length > 0) {
+          filteredResult = filteredResult.filter(p => selectedFilters.noBathroom.includes(p.bathroom?.toString()));
+        }
+
+        // Property type filter (additional check)
+        if (selectedFilters.typesOfProperty && selectedFilters.typesOfProperty.length > 0) {
+          filteredResult = filteredResult.filter(p => selectedFilters.typesOfProperty.includes(p.propertyType));
+        }
+
+        // Property type from Redux (if set)
+        if (selectedFilters.propertyType) {
+          const propType = Array.isArray(selectedFilters.propertyType) ? selectedFilters.propertyType : [selectedFilters.propertyType];
+          if (propType.length > 0 && propType[0]) {
+            filteredResult = filteredResult.filter(p => propType.includes(p.propertyType));
+          }
+        }
+
+        // Area filter
+        if (selectedFilters.area && Array.isArray(selectedFilters.area) && selectedFilters.area.length === 2) {
+          const [minArea, maxArea] = selectedFilters.area;
+          filteredResult = filteredResult.filter(p => p.plotarea >= minArea && p.plotarea <= maxArea);
+        }
+
+        // Furnishing status filter
+        if (selectedFilters.furnishingStatus && selectedFilters.furnishingStatus.length > 0) {
+          filteredResult = filteredResult.filter(p => selectedFilters.furnishingStatus.includes(p.furnishing));
+        }
+
+        // Posted by filter
+        if (selectedFilters.postedby && selectedFilters.postedby.length > 0) {
+          filteredResult = filteredResult.filter(p => selectedFilters.postedby.includes(p.postedBy));
+        }
+
+        // Available for filter
+        if (selectedFilters.avalableFor && selectedFilters.avalableFor.length > 0) {
+          filteredResult = filteredResult.filter(p => selectedFilters.avalableFor.includes(p.availableFor));
+        }
+
+        // Amenities filter
+        if (selectedFilters.anemateFilter && selectedFilters.anemateFilter.length > 0) {
+          filteredResult = filteredResult.filter(p => {
+            if (!p.amenities) return false;
+            return selectedFilters.anemateFilter.some(amenity => p.amenities.includes(amenity));
+          });
+        }
+
+        if(filteredResult.length === 0){
             setHasMore(false);
             return;
         }
 
-        const formattedData = result.map((p) => {
+        const formattedData = filteredResult.map((p) => {
             let locationData = [];
             try{
                 locationData = parseLocation(p.location);
@@ -127,6 +207,9 @@ console.log(filtersFromSlug);
        };
     });
 
+    console.log(formattedData,'helights');
+    
+
     
         setProperties(prev => [...prev, ...formattedData]);
         // console.log(result.data);
@@ -137,6 +220,13 @@ console.log(filtersFromSlug);
         setLoading(false);
     }
     };
+
+    // Reset page and properties when filters change
+    useEffect(() => {
+        setPage(1);
+        setProperties([]);
+        setHasMore(true);
+    }, [selectedFilters, location, projectname, purpose]);
 
     useEffect(() => {
         const handleScroll = ()  => {
@@ -157,12 +247,12 @@ console.log(filtersFromSlug);
 
     useEffect(() => {
         fetchProperties(page)
-    },[page,location]);
+    },[page, location, selectedFilters, projectname, purpose]);
 
 
     function clearFilter() {
         dispatch(updateFilter({location:'All India'}));
-        setLocation('All India')
+        // setLocation('All India')
         // setProjectname((state) => state.filterSlice.projectname)
     }
 
@@ -280,7 +370,7 @@ if(loading){
                   key={i}
                   className="text-gray-500 text-sm mx-1 px-2 py-0.5 bg-gray-100 rounded-full"
                 >
-                  {h.helight}
+                  {typeof h.helight === 'object' ? h.helight.name || h.helight.label || h.helight : h.helight || "N/A"}
                 </p>
               ))}
 
@@ -299,7 +389,7 @@ if(loading){
                     key={i}
                     className="text-gray-700 text-sm px-2 py-1 bg-gray-100 rounded-full"
                   >
-                    {h.helight}
+                    {typeof h.helight === 'object' ? h.helight.name || h.helight.label || h.helight : h.helight || "N/A"}
                   </span>
                 ))}
               </div>

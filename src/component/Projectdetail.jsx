@@ -657,9 +657,9 @@ try {
 
         <div className="w-full md:w-[30%] m-2 sticky top-20 self-start" style={{ position: 'sticky' }}>
           <div className="bg-white shadow-xs rounded p-6 border border-gray-100">
-            <h2 className="text-xl font-bold text-gray-800 mb-3">
+            <h4 className="text-2xl font-bold text-gray-800 mb-3">
               {propertys?.faq[0]?.question}
-            </h2>
+            </h4>
 
             <ul className="list-disc list-inside text-gray-600 space-y-1">
               {firstThree.map((point, i) => (

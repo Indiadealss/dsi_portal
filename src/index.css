@@ -5,59 +5,18 @@
   display: none;
 }
 
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('../public/ClashDisplay-Extralight.otf') format('opentype');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('../public/ClashDisplay-Light.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('../public/ClashDisplay-Regular.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('../public/ClashDisplay-Medium.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('../public/ClashDisplay-Semibold.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('../public/ClashDisplay-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
 
 
 
 body {
-  font-family: 'Noto Sans Roboto', sans-serif;
+  font-family: 'Outfit';
+  font-weight: 400; /* Regular */
+/* font-weight: 700; */
+  margin: 0;
+  background: whitesmoke !important;
 }
+
 .scrollbar-hide{
   scrollbar-width: none;
 }
@@ -72,9 +31,44 @@ input[type=number]::-webkit-outer-spin-button{
   margin:0;
 }
 
-/* Hide  arrows for Firefox*/
+/* Hide arrows for Firefox */
 input[type=number]{
+  appearance: textfield;
   -moz-appearance: textfield;
+}
+
+/* Modern Slim Scrollbar */
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 /* Modal container at bottom with no scroll */
@@ -138,7 +132,6 @@ input[type=number]{
 } */
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -229,10 +222,7 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  background: whitesmoke !important;
-}
+
 
 h1 {
   font-size: 3.2em;
@@ -356,27 +346,23 @@ a{
    background: white !important;
 }
 
-/* ====== Base (Mobile-first) ====== */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
+  font-weight: 600;
   color: #111;
 }
 
 h1 {
-  font-size: 1.5rem;   /* ~24px */
+  font-size: clamp(1.5rem, 4vw, 2rem);   /* Fluid between 1.5rem and 2rem */
   line-height: 1.8rem;
 }
 
 h3 {
-  font-size: 1.125rem; /* ~18px */
+  font-size: clamp(1rem, 2.5vw, 1.25rem); /* ~16px to 20px */
 }
 
 section{
   max-width: 1865px !important;
-}
-/* p {
-  font-size: 0.9rem;   /* ~14px */
-/* } */ 
+} 
 
 a {
   font-size: 0.9rem;
@@ -433,8 +419,8 @@ a {
 }
 /* ====== Tablet (≥768px) ====== */
 @media screen and (min-width: 768px) {
-  h1 { font-size: 2rem; line-height: 2.3rem; }
-  h3 { font-size: 1.25rem; }
+  h1 { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 2.3rem; font-weight: 600; }
+  h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); font-weight: 600; }
   /* p  { font-size: 1rem; } */
   a  { font-size: 1rem; }
 
@@ -470,8 +456,8 @@ a {
 
 /* ====== Laptop (≥1024px) ====== */
 @media screen and (min-width: 1024px) {
-  h1 { font-size: 2.25rem; line-height: 2.6rem; }
-  h3 { font-size: 0.9rem; }
+  h1 { font-size: clamp(2.25rem, 6vw, 2.75rem); line-height: 2.6rem; font-weight: 600; }
+  h3 { font-size: clamp(1.5rem, 3.5vw, 1.75rem); font-weight: 600; }
   /* p  { font-size: 0.8rem; } */
   Link{font-size: 0.9rem; }
   a  { font-size: 0.9rem;  font-weight: 500; color: #011c47e3;}
@@ -523,9 +509,9 @@ a {
 
 /* ====== Desktop (≥1440px) ====== */
 @media screen and (min-width: 1440px) {
-  h1 { font-size: 2.5rem; line-height: 2.8rem; }
-  h2 { font-size: 1.5rem; line-height: 1.9rem; }
-  h3 { font-size: 1.5rem; }
+  h1 { font-size: clamp(2.5rem, 7vw, 3rem); line-height: 2.8rem; font-weight: 600; }
+  h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); line-height: 1.9rem; font-weight: 600; }
+  h3 { font-size: clamp(1.5rem, 4vw, 1.75rem); font-weight: 600; }
   /* p  { font-size: 1.1rem; } */
   a  { font-size: 1.1rem; }
   .propertyListingDatamain{
@@ -564,9 +550,9 @@ a {
 
 /* ====== Ultra-wide 4K (≥2560px) ====== */
 @media screen and (min-width: 2560px) {
-  h1 { font-size: 3rem; line-height: 3.2rem; }
-  h2 {font-size: 1.1rem; line-height: 2.0rem;}
-  h3 { font-size: 1.75rem; }
+  h1 { font-size: clamp(3rem, 8vw, 3.5rem); line-height: 3.2rem; font-weight: 600; }
+  h2 {font-size: clamp(1.8rem, 5vw, 2.2rem); line-height: 2.0rem; font-weight: 600;}
+  h3 { font-size: clamp(1.75rem, 5vw, 2rem); font-weight: 600; }
   /* p  { font-size: 1.3rem;} */
   a  { font-size: 1.25rem; }
 
@@ -583,4 +569,17 @@ a {
   .top {
     top: 17.5vw !important;
   }
+}
+
+/* Professional Typography Classes */
+.font-heading {
+  font-weight: 600;
+}
+
+.font-body {
+  font-weight: 400;
+}
+
+.font-accent {
+  font-weight: 500;
 }

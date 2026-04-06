@@ -202,6 +202,10 @@ export const Postpropertyform = () => {
     setContinueNo(prev => prev - 1);
   }
 
+  useEffect(() => {
+    dispatch(updateField({ _id:propertyId }));
+  }, [propertyId]);
+
   // const features = useSelector((state) => state.feature);
   //         console.log(features);
 
@@ -217,6 +221,8 @@ export const Postpropertyform = () => {
     // STEP 1 → Create Draft
     if (continueNO === 0 && !propertyId) {
       const res = await createPropertyBasic(propertyFirstData);
+      console.log(res.data.propertyId,'propertyId');
+      
       setPropertyId(res.data.propertyId);
     }
 

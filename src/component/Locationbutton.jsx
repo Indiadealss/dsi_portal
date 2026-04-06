@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { updateField } from "./Redux/propertySlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getSearch, searchaddress } from "../api/api";
+import { FaLocationCrosshairs } from "react-icons/fa6";
+import { MdAddLocationAlt } from "react-icons/md";
 
 export const Locationbutton = ({ setValidator }) => {
 
@@ -18,6 +20,7 @@ export const Locationbutton = ({ setValidator }) => {
   const dispatch = useDispatch();
   const [apartment,setApartment] = useState('');
   const [detailData,setDetailData] = useState('');
+  const [loadingLocation, setLoadingLocation] = useState(false);
 
   
 
@@ -149,37 +152,20 @@ distanceService.getDistanceMatrix(
   // Generic search handler
   const fetchLocations = async (value, setData) => {
     if (value.length > 2) {
-      // try {
-      //   const res = await fetch(
-      //     `https://nominatim.openstreetmap.org/search?format=json&q=${value}&addressdetails=1&limit=5&countrycodes=in`
-      //   );
-      //   const data = await res.json();
-      //   // console.log(data);
-        
-      //   setData(data);
-      // } catch (error) {
-      //   // console.log("Error fetching location:", error);
-      // }
-       try{
-            getSearch(value)
-                  .then(res => {
-                    if (res.status === 200) {
-                      // // console.log(res.data.usedetails);
-                      // console.log(res.data);
-                      const data = res.data.data;
-                      // console.log(data);
-                      
-                     setData(res.data.data);     
-                     setDetailData(res.data)    
-                    }
-                  })
-                  .catch(err => {
-                    console.error(err);
-                  });
-          }catch(err){
-            console.error("Logout failed",err);
-            
-          }
+      try {
+        const res = await getSearch(value);
+        console.log(res, 'city search response');
+        if (res.status === 200) {
+          console.log(res.data, 'city data');
+          const cityData = res.data.data || res.data;
+          console.log(cityData, 'processed city data');
+          setData(Array.isArray(cityData) ? cityData : []);
+          setDetailData(res.data);
+        }
+      } catch (err) {
+        console.error('Error fetching cities:', err);
+        setData([]);
+      }
     } else {
       setData([]);
     }
@@ -188,18 +174,13 @@ distanceService.getDistanceMatrix(
   const fetchLocation = async (value, setData) => {
     if (value.length > 2) {
       try {
-        searchaddress(value,query)
-      .then(res => {
-        if(res.status === 200){
-          // console.log(res.data.results);
-          setData(res.data.results)
+        const res = await searchaddress(value, query);
+        if (res.status === 200) {
+          console.log(res, 'res.data.results');
+          setData(res.data.results);
         }
-      })
-        // setData(data);
-        // // console.log(data);
-        
       } catch (error) {
-        // console.log("Error fetching location:", error);
+        console.log("Error fetching location:", error);
       }
     } else {
       setData([]);
@@ -210,6 +191,53 @@ distanceService.getDistanceMatrix(
     const value = e.target.value;
     setQuery(value);
     fetchLocations(value, setResults);
+  };
+
+  const handlePickCurrentLocation = () => {
+    setLoadingLocation(true);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          try {
+            const response = await fetch(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyDWULr4OlxjUlSpoTR8_haquhxRJx0ynEo`
+            );
+            const data = await response.json();
+            if (data.results && data.results.length > 0) {
+              let city = "";
+              // Extract city from address components
+              const addressComponents = data.results[0].address_components;
+              for (let component of addressComponents) {
+                if (component.types.includes("locality")) {
+                  city = component.long_name;
+                  break;
+                } else if (component.types.includes("administrative_area_level_2")) {
+                  city = component.long_name;
+                }
+              }
+              if (city) {
+                setQuery(city);
+                setResults([]);
+                setShowLocality(true);
+                setLoadingLocation(false);
+              }
+            }
+          } catch (error) {
+            console.error("Error reverse geocoding:", error);
+            setLoadingLocation(false);
+          }
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          alert("Unable to access your location. Please enable location permissions.");
+          setLoadingLocation(false);
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by your browser.");
+      setLoadingLocation(false);
+    }
   };
 
   const handleSearchLocation = (e) => {
@@ -267,6 +295,38 @@ distanceService.getDistanceMatrix(
 
   return (
     <div className="p-4">
+      <style>{`
+        .scroll-suggestion {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(59, 130, 246, 0.4) transparent;
+        }
+        .scroll-suggestion::-webkit-scrollbar {
+          width: 4px;
+        }
+        .scroll-suggestion::-webkit-scrollbar-button:increment,
+        .scroll-suggestion::-webkit-scrollbar-button:decrement {
+          height: 0;
+          background: transparent;
+        }
+        .scroll-suggestion::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .scroll-suggestion::-webkit-scrollbar-thumb {
+          background: rgba(59, 130, 246, 0.3);
+          border-radius: 10px;
+          transition: all 0.3s ease;
+        }
+        .scroll-suggestion:hover::-webkit-scrollbar {
+          width: 8px;
+        }
+        .scroll-suggestion:hover::-webkit-scrollbar-thumb {
+          background: linear-gradient(135deg, #3b82f6, #2563eb);
+          width: 8px;
+        }
+        .scroll-suggestion:hover::-webkit-scrollbar-track {
+          background: #f1f5f9;
+        }
+      `}</style>
       <h2 className="text-xl font-medium mb-5">
         Where is your property located?
       </h2>
@@ -278,20 +338,32 @@ distanceService.getDistanceMatrix(
       >
         City
       </label>
-      <input
-        type="text"
-        value={query}
-        onChange={handleSearch}
-        id="city"
-        className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-        focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-          
-         "
-        placeholder="Enter City"
-        required
-      />
+      <div className="relative">
+        <input
+          type="text"
+          value={query}
+          onChange={handleSearch}
+          id="city"
+          className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+          focus:ring-blue-500 focus:border-blue-500 block p-2.5 pr-12
+            
+           "
+          placeholder="Enter City"
+          autoComplete="off"
+          required
+        />
+        <button
+          type="button"
+          onClick={handlePickCurrentLocation}
+          disabled={loadingLocation}
+          title="Pick current location"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-500 hover:text-blue-700 disabled:text-gray-400 transition text-lg"
+        >
+          {loadingLocation ? "⏳" : <FaLocationCrosshairs className="cursor-pointer" />}
+        </button>
+      </div>
       {results.length > 0 && (
-        <ul className="border border-gray-200 mt-2 rounded-lg shadow-md bg-white max-h-48 overflow-y-auto">
+        <ul className="border border-gray-200 mt-2 rounded-lg shadow-md bg-white max-h-48 overflow-y-auto scroll-suggestion">
           {results.map((item) => (
             <li
               key={item.place_id}
@@ -323,10 +395,11 @@ distanceService.getDistanceMatrix(
               
              "
             placeholder="Enter Locality"
+            autoComplete="off"
             required
           />
           {localityResults.length > 0 && (
-            <ul className="border border-gray-200 mt-2 rounded-lg shadow-md bg-white max-h-48 overflow-y-auto">
+            <ul className="border border-gray-200 mt-2 rounded-t-lg shadow-md bg-white max-h-48 overflow-y-auto scroll-suggestion">
               {localityResults.map((item) => (
                 <li
                   key={item.place_id}
@@ -336,8 +409,24 @@ distanceService.getDistanceMatrix(
                   {item.name},{item.address}
                 </li>
               ))}
+             
             </ul>
+            
           )}
+           
+                {locality.length > 2 && (
+            <button
+              type="button"
+              onClick={() => {
+                setShowAdditional(true);
+              }}
+              className=" px-4 w-full py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm cursor-pointer rounded-b-lg"
+            >
+              < MdAddLocationAlt className="inline mr-2 text-lg text-purple-900" /> Can't find your location? Continue manually
+            </button>
+          )}
+              
+          
         </>
       )}
       {/* Locality */}
@@ -355,9 +444,9 @@ distanceService.getDistanceMatrix(
        onChange={(e) => setProjectname(e.target.value)}
       placeholder="Enter the Project name"
       className="w-[30vw] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
-            focus:ring-blue-500 focus:border-blue-500 block p-2.5 
-              
-             " />
+            focus:ring-blue-500 focus:border-blue-500 block p-2.5 "
+            autoComplete="off"
+            />
 
             <label
             htmlFor="locality"
