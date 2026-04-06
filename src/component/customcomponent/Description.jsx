@@ -59,7 +59,7 @@ export default function Description({ text }) {
       </div>
       <div className="mt-10 flex">
         <p onClick={() => setAboutSpecificatioons(false)} className="cursor-pointer"><span className={`${aboutSpecifications ? "text-sm font-medium":"border-b-3 text-base pb-1 font-bold border-blue-500"}`}>About Project</span></p>
-        <p onClick={() => setAboutSpecificatioons(true)} className="cursor-pointer"><span className={`${aboutSpecifications ? "border-b-3 text-base pb-1 font-bold border-blue-500 ms-4" : "text-sm ms-4 font-medium" }`}>Specifications</span></p>
+        {/* <p onClick={() => setAboutSpecificatioons(true)} className="cursor-pointer"><span className={`${aboutSpecifications ? "border-b-3 text-base pb-1 font-bold border-blue-500 ms-4" : "text-sm ms-4 font-medium" }`}>Specifications</span></p> */}
       </div>
     </div>
   }
