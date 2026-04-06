@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 import Leadgentaionform from "./Leadgentaionform";
 
 const FloorPlanSlider = ({ layoutData,propertys }) => {
@@ -29,53 +32,8 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
     return (value / 100000).toFixed(2) + " L";
   };
 
-  const sliderSettings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: Math.min(3, (layoutData[activeBhk] || []).length || 1),
-    slidesToScroll: 1,
-    arrows: true,
-    swipeToSlide: true,
-    adaptiveHeight: true,
-    variableWidth: false,
-    centerMode: false,
-    initialSlide: 0,
-    touchThreshold: 10,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: Math.min(2, (layoutData[activeBhk] || []).length || 1),
-          slidesToScroll: 1,
-          arrows: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-    ],
-  };
-
   const leadGenration = () => {
     setLeadModel(true);
-    setOpen(false);
   }
 
   return (
@@ -104,44 +62,57 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
       </p>
 
       {/* Slider */}
-      <Slider {...sliderSettings}>
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={16}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 1 },
+          1024: { slidesPerView: Math.min(2, (layoutData[activeBhk] || []).length || 1) },
+          1280: { slidesPerView: Math.min(3, (layoutData[activeBhk] || []).length || 1) },
+        }}
+      >
         {(layoutData[activeBhk] || []).map((item, index) => (
-          <div key={index} className="p-3">
-            <div className="border rounded-xl shadow-sm p-3 hover:shadow-lg transition">
+          <SwiperSlide key={index}>
+            <div className="p-3">
+              <div className="border rounded-xl shadow-sm p-3 hover:shadow-lg transition">
 
-              {/* Area */}
-              <p className="font-bold text-lg">
-                {item.areaSqft} sq.ft.
-                <span className="text-gray-500 text-sm"> ({item.areaSqm} sq.m.)</span>
-              </p>
-              <p className="text-sm text-gray-500">
-                Super Built-up Area | {item.bhk}
-              </p>
+                {/* Area */}
+                <p className="font-bold text-lg">
+                  {item.areaSqft} sq.ft.
+                  <span className="text-gray-500 text-sm"> ({item.areaSqm} sq.m.)</span>
+                </p>
+                <p className="text-sm text-gray-500">
+                  Super Built-up Area | {item.bhk}
+                </p>
 
-              {/* Image */}
-              <img
-                src={item.image}
-                className="w-full h-40 object-cover my-4 rounded"
-                alt="floor plan"
-              />
+                {/* Image */}
+                <img
+                  src={item.image}
+                  className="w-full h-40 object-cover my-4 rounded"
+                  alt="floor plan"
+                />
 
-              {/* Price */}
-              <p className="font-bold text-xl">₹ {formatPrice(item.price)}</p>
+                {/* Price */}
+                <p className="font-bold text-xl">₹ {formatPrice(item.price)}</p>
 
-              {/* Status */}
-              <div className="bg-gray-100 p-2 rounded mt-3 text-gray-600 text-sm">
-                <p>{item.status}</p>
-                <p className="font-semibold">{item.possession} possession</p>
-              </div>
+                {/* Status */}
+                <div className="bg-gray-100 p-2 rounded mt-3 text-gray-600 text-sm">
+                  <p>{item.status}</p>
+                  <p className="font-semibold">{item.possession} possession</p>
+                </div>
 
-              {/* Callback */}
-              <div className="mt-4 text-blue-600 font-semibold cursor-pointer flex justify-between items-center" onClick={leadGenration}>
-                Request callback <span className="text-2xl ms-2" >📞</span>
+                {/* Callback */}
+                <div className="mt-4 text-blue-600 font-semibold cursor-pointer flex justify-between items-center" onClick={leadGenration}>
+                  Request callback <span className="text-2xl ms-2" >📞</span>
+                </div>
               </div>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
 
       {/* Lead Modal */}
       {leadModel && (
