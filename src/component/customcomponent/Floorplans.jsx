@@ -38,27 +38,34 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
     arrows: true,
     swipeToSlide: true,
     adaptiveHeight: true,
+    variableWidth: false,
+    centerMode: false,
+    initialSlide: 0,
     touchThreshold: 10,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
         settings: {
           slidesToShow: Math.min(2, (layoutData[activeBhk] || []).length || 1),
+          slidesToScroll: 1,
           arrows: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          dots: true,
         },
       },
       {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-          arrows: false,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
+          slidesToScroll: 1,
           arrows: false,
           dots: true,
         },
