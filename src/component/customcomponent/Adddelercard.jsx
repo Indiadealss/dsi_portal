@@ -71,13 +71,16 @@ const Adddelercard = () => {
     }
 
   return (
+    <>
     <div className='my-10'>
       <p className="text-center font-medium">{message}</p>
+      <div className='py-[10vw]'>
+      <p className="text-center font-medium text-xl">Add Dealer</p>
        <form  className='flex flex-col w-[40vw] mx-auto'>
 
         <input 
             type="text" 
-            placeholder="Set the property id"
+            placeholder="Set the npxid"
             className="border-2 p-2 rounded mx-auto w-[80%] my-3"
             value={npxid}
             onChange={(e) => setNpxid(e.target.value)}
@@ -155,8 +158,9 @@ const Adddelercard = () => {
     </tbody>
   </table>
 </div>
-
+</div>
     </div>
+    </>
   )
 }
 

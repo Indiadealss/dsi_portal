@@ -61,6 +61,10 @@ export const Postbasicdetailsform = ({ setValidator }) => {
             {title:'Storage',name:'Storage'},
             {title:'Industry',name:'Industry'}
         ]
+
+        const projectAllowedMobiles = [
+            '+917906518272'
+        ];
     
         const commercialButton = [
             { title: 'Office', name: 'office' },
@@ -237,7 +241,7 @@ const addUnitRow = () => {
                             <div className='flex my-3'>
                                 
                                 {lokingButton
-                                .filter(item => user.mobile === "+917906518272" ?  true : item.name !== "Project" )
+                                .filter(item => projectAllowedMobiles.includes(user.mobile) ? true : item.name !== "Project" )
                                 .map((item, index) => {
                                     return (
                                         <button key={index} name={item.name} className={`${lookSelection === item.name ? 'bg-gray-100     font-normal text-gray-900  cursor-pointer px-3 rounded-full text-sm mx-1' : 'bg-white border border-gray-300 font-normal text-gray-500  cursor-pointer px-3 rounded-full text-sm mx-1'} ${item.name === 'pg' && selection === 'commercial' ? 'hidden' : 'block'}`} onClick={lookButton}>{item.title}</button>

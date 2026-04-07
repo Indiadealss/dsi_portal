@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import Leadgentaionform from "./Leadgentaionform";
 
-const FloorPlanSlider = ({ layoutData,propertys }) => {
-  const bhkTypes = Object.keys(layoutData || {});
+const FloorPlanSlider = ({ layoutData, propertys }) => {
+  const bhkTypes = useMemo(() => Object.keys(layoutData || {}), [layoutData]);
+  const defaultBhk = bhkTypes[0] || "";
+
+  const [activeBhk, setActiveBhk] = useState(defaultBhk);
+  const [leadModel, setLeadModel] = useState(false);
+
+  useEffect(() => {
+    if (bhkTypes.length > 0 && !bhkTypes.includes(activeBhk)) {
+      setActiveBhk(bhkTypes[0]);
+    }
+  }, [bhkTypes, activeBhk]);
 
   if (!layoutData || !propertys || bhkTypes.length === 0) {
     return (
@@ -15,15 +26,6 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
       </div>
     )
   }
-
-  const [activeBhk, setActiveBhk] = useState(bhkTypes[0]);
-  const [leadModel, setLeadModel] = useState(false);
-
-  useEffect(() => {
-    if (bhkTypes.length > 0 && !bhkTypes.includes(activeBhk)) {
-      setActiveBhk(bhkTypes[0]);
-    }
-  }, [layoutData, activeBhk, bhkTypes]);
   
 
 
@@ -63,15 +65,17 @@ const FloorPlanSlider = ({ layoutData,propertys }) => {
 
       {/* Slider */}
       <Swiper
-        modules={[Pagination]}
+        modules={[Pagination, Navigation]}
         spaceBetween={16}
         slidesPerView={1}
+        grabCursor={true}
+        navigation={true}
         pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 1 },
-          1024: { slidesPerView: Math.min(2, (layoutData[activeBhk] || []).length || 1) },
-          1280: { slidesPerView: Math.min(3, (layoutData[activeBhk] || []).length || 1) },
+          1024: { slidesPerView: 2 },
+          1280: { slidesPerView: 3 },
         }}
       >
         {(layoutData[activeBhk] || []).map((item, index) => (

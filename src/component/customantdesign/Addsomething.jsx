@@ -240,7 +240,7 @@ const handleCreateoverlookingfeature = async (e) => {
   return (
 
     <div>
-      <div className='shadow m-5 p-5 rounded'>
+      <div className='shadow m-5 p-5 rounded py-[12vw]'>
       <div className='flex justify-center gap-4 mb-5'>
         <button 
           onClick={activetabFunction}

@@ -51,7 +51,7 @@ const UpcomingProjects = () => {
     }
 
   return (
-    <div className='my-10'>
+    <div className='py-[14vw]'>
       <p className="text-center font-medium">{message}</p>
        <form  className='flex flex-col w-[40vw] mx-auto'>
 
