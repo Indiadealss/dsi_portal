@@ -112,12 +112,12 @@ export const updatePropertyIdStep = (id, data) =>
   API.put(`/property/updatePropertyById/${id}`, data);
 
 export const uploadImage = (id, formData) =>
-  axios.post(`/api/property/uploadImage/${id}`, formData, {
+  API.post(`/api/property/uploadImage/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
 export const uploadVideo = (id, formData) =>
-  axios.post(`/api/property/uploadVideo/${id}`, formData, {
+  API.post(`/api/property/uploadVideo/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
