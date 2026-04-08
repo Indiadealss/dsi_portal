@@ -60,7 +60,7 @@ export const getUserDetatils = () =>
   API.get("/auth/me");
 
 export const updateUser = async (formData) => {
-  return axios.post("/api/auth/updateuserprofile", formData, {
+  return API.post("/api/auth/updateuserprofile", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -69,7 +69,7 @@ export const updateUser = async (formData) => {
 };
 
 export const getLogout = async () => {
-  return axios.post("/api/auth/logout", {}, { withCredentials: true })
+  return API.post("/api/auth/logout", {}, { withCredentials: true })
 }
 
 export const getSearch = async (city) => {
