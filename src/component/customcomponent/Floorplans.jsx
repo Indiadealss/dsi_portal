@@ -6,8 +6,16 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Leadgentaionform from "./Leadgentaionform";
 
+const swiperStyles = `
+.swiper-button-next,
+.swiper-button-prev {
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+`;
+
 const FloorPlanSlider = ({ layoutData, propertys }) => {
-  const bhkTypes = useMemo(() => Object.keys(layoutData || {}), [layoutData]);
+   const bhkTypes = useMemo(() => Object.keys(layoutData || {}), [layoutData]);
   const defaultBhk = bhkTypes[0] || "";
 
   const [activeBhk, setActiveBhk] = useState(defaultBhk);
@@ -27,39 +35,65 @@ const FloorPlanSlider = ({ layoutData, propertys }) => {
     )
   }
   
+    // ✅ Clean tab names
+  const formatTabName = (name) => {
+    return name
+      .replace("TOWN HOUSE", "Townhouse")
+      .replace("LOWER FLOOR", "Lower")
+      .replace("UPPER FLOOR", "Upper")
+      .replace("SKY VILLA", "Sky Villa")
+      .replace("DUPLEX", "Duplex");
+  };
 
 
   const formatPrice = (value) => {
-    if (value >= 10000000) return (value / 10000000).toFixed(2) + " Cr";
-    return (value / 100000).toFixed(2) + " L";
+    const numberValue = Number(value);
+    if (Number.isNaN(numberValue)) return "N/A";
+    if (numberValue >= 10000000) return (numberValue / 10000000).toFixed(2) + " Cr";
+    return (numberValue / 100000).toFixed(2) + " L";
+  };
+
+  const formatArea = (value) => {
+    console.log(value,'value ai');
+    
+    const numberValue = Number(value);
+    if (Number.isNaN(numberValue)) return "N/A";
+    return numberValue.toLocaleString();
   };
 
   const leadGenration = () => {
     setLeadModel(true);
   }
 
-  return (
-    <div className={propertys.property === 'commercial' ? 'hidden' :'p-4'}>
-      <h2 className="text-xl font-bold mb-3">Floor Plans <span className={propertys.property === 'commercial' ?  'hidden' : ''}> & Pricing </span></h2>
 
-      {/* Tabs */}
-      <div className="flex gap-3 mb-5">
+  return (
+    <div className={propertys.property === "commercial" ? "hidden" : "p-4"}>
+      <style>{swiperStyles}</style>
+
+      {/* Heading */}
+      <h2 className="text-2xl font-semibold mb-4">
+        Floor Plans <span className="text-gray-500">& Pricing</span>
+      </h2>
+
+      {/* ✅ Clean Tabs */}
+      <div className="flex gap-2 overflow-x-auto pb-2 mb-4 no-scrollbar">
         {bhkTypes.map((bhk) => (
           <button
             key={bhk}
             onClick={() => setActiveBhk(bhk)}
-            className={`px-4 py-2 rounded-lg font-medium ${
+            className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition ${
               activeBhk === bhk
-                ? "bg-blue-100 text-blue-700 border border-blue-400"
-                : "bg-gray-100 text-gray-500"
+                ? "bg-blue-600 text-white shadow"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
-            {bhk} Layout
+            {formatTabName(bhk)}
           </button>
         ))}
       </div>
 
-      <p className="text-gray-400 mb-3">
+      {/* Count */}
+      <p className="text-gray-400 mb-4">
         {(layoutData[activeBhk] || []).length} Floor Plans Available
       </p>
 
@@ -68,47 +102,53 @@ const FloorPlanSlider = ({ layoutData, propertys }) => {
         modules={[Pagination, Navigation]}
         spaceBetween={16}
         slidesPerView={1}
-        grabCursor={true}
         navigation={true}
         pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1 },
-          768: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
           1024: { slidesPerView: 2 },
           1280: { slidesPerView: 3 },
         }}
       >
         {(layoutData[activeBhk] || []).map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="p-3">
-              <div className="border rounded-xl shadow-sm p-3 hover:shadow-lg transition">
+            <div className="p-2">
+              <div className="border rounded-2xl p-4 bg-white hover:shadow-xl transition-all duration-300">
 
                 {/* Area */}
-                <p className="font-bold text-lg">
-                  {item.areaSqft} sq.ft.
-                  <span className="text-gray-500 text-sm"> ({item.areaSqm} sq.m.)</span>
+                <p className="font-semibold text-lg">
+                  {formatArea(item.areaSqft)} sq.ft.
+                  <span className="text-gray-500 text-sm">
+                    {" "}
+                    ({formatArea(item.areaSqm)} sq.m.)
+                  </span>
                 </p>
-                <p className="text-sm text-gray-500">
+
+                <p className="text-sm text-gray-500 mb-2">
                   Super Built-up Area | {item.bhk}
                 </p>
 
                 {/* Image */}
                 <img
                   src={item.image}
-                  className="w-full h-40 object-cover my-4 rounded"
+                  className="w-full h-44 object-cover rounded-lg my-3"
                   alt="floor plan"
                 />
 
                 {/* Price */}
-                <p className="font-bold text-xl">₹ {formatPrice(item.price)}</p>
+                <p className="font-bold text-xl text-gray-800">
+                  ₹ {formatPrice(item.price)}
+                </p>
 
                 {/* Status */}
-                <div className="bg-gray-100 p-2 rounded mt-3 text-gray-600 text-sm">
+                <div className="flex bg-gray-100 p-3 rounded-lg mt-3 text-gray-600 text-sm">
                   <p>{item.status}</p>
-                  <p className="font-semibold">{item.possession} possession</p>
+                  <p className="font-semibold">
+                    {item.possession} possession
+                  </p>
                 </div>
 
-                {/* Callback */}
                 <div className="mt-4 text-blue-600 font-semibold cursor-pointer flex justify-between items-center" onClick={leadGenration}>
                   Request callback <span className="text-2xl ms-2" >📞</span>
                 </div>
@@ -118,11 +158,9 @@ const FloorPlanSlider = ({ layoutData, propertys }) => {
         ))}
       </Swiper>
 
-      {/* Lead Modal */}
+      {/* Modal */}
       {leadModel && (
-        <div>
-          <Leadgentaionform setLeadModel={setLeadModel} />
-        </div>
+        <Leadgentaionform setLeadModel={setLeadModel} />
       )}
     </div>
   );

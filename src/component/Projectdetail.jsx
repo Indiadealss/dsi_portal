@@ -234,15 +234,21 @@ const Projectdetail = () => {
 
 
       // console.log(obj, "hello");
+const rawArea =
+  obj["carpet_area"] ||
+  obj["carpet_aria"] ||
+  obj["super_build_area"] ||
+  "";
 
+  const sqft = Number(String(rawArea).replace(/[^0-9.]/g, ""));
 
       grouped[bhk].push({
         bhk,
         image: img.src,
-        areaSqft: Number(areaValue),
-        areaSqm: parseInt(Number(areaValue) / 10.764),
+        areaSqft: sqft,
+        areaSqm: parseInt(sqft / 10.764),
         price: Number(obj["price"]?.replace(/,/g, "") || 0),
-        status: obj["status"] || "",
+        status: obj["status"] || obj["availability"] || "",
         possession: obj["possession"] || "—"
       });
     });
