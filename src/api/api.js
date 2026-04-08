@@ -60,7 +60,7 @@ export const getUserDetatils = () =>
   API.get("/auth/me");
 
 export const updateUser = async (formData) => {
-  return API.post("/api/auth/updateuserprofile", formData, {
+  return API.post("/auth/updateuserprofile", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -69,7 +69,7 @@ export const updateUser = async (formData) => {
 };
 
 export const getLogout = async () => {
-  return API.post("/api/auth/logout", {}, { withCredentials: true })
+  return API.post("/auth/logout", {}, { withCredentials: true })
 }
 
 export const getSearch = async (city) => {
@@ -112,12 +112,12 @@ export const updatePropertyIdStep = (id, data) =>
   API.put(`/property/updatePropertyById/${id}`, data);
 
 export const uploadImage = (id, formData) =>
-  API.post(`/api/property/uploadImage/${id}`, formData, {
+  API.post(`/property/uploadImage/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
 export const uploadVideo = (id, formData) =>
-  API.post(`/api/property/uploadVideo/${id}`, formData, {
+  API.post(`/property/uploadVideo/${id}`, formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 
@@ -182,7 +182,7 @@ export const uploadVideo = (id, formData) =>
 //         formData.append("video", file);
 //       });
 
-//       const res = await axios.post("/api/property/createProperty", formData, {
+//       const res = await axios.post("/property/createProperty", formData, {
 //         headers: { "content-Type": "multipart/form-data" },
 //         withCredentials: true,
 //       });
