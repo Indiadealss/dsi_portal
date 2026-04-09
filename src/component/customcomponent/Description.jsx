@@ -3,6 +3,7 @@ import { Drawer } from "antd";
 import { RxCross2 } from "react-icons/rx";
 import Leadgentaionform from "./Leadgentaionform";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export default function Description({ text }) {
   const [open, setOpen] = useState(false);
@@ -80,7 +81,7 @@ export default function Description({ text }) {
     marginTop: 64,
   }}
 >
-  <span className={`${aboutSpecifications ? 'hidden':"mt-4 leading-relaxed text-xs"}`} style={{ whiteSpace: "pre-line" }}><ReactMarkdown >{text}</ReactMarkdown></span>
+  <span className={`${aboutSpecifications ? 'hidden':"mt-4 leading-relaxed text-xs"}`} style={{ whiteSpace: "pre-line" }}><ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown></span>
 </Drawer>
 
     {leadModel && (
