@@ -19,13 +19,13 @@ const BhkCards = ({ data = [] }) => {
     const parsed = data.map((item) => {
       const obj = typeof item === "string" ? JSON.parse(item) : item;
 
-      return {
-        bhk: obj.specs.bhk,
-        areaMin: obj.specs.areaMin,
-        areaMax: obj.specs.areaMax,
-        priceMin: Number(obj.specs.priceMin),
-        priceMax: Number(obj.specs.priceMax),
-      };
+     return {
+  bhk: obj.specs?.bhk || "",
+  areaMin: obj.specs?.areaMin || "",
+  areaMax: obj.specs?.areaMax || "",
+  priceMin: obj.specs?.priceMin ? Number(obj.specs.priceMin) : "",
+  priceMax: obj.specs?.priceMax ? Number(obj.specs.priceMax) : "",
+};
     });
 
     setUnitData(parsed);
