@@ -23,19 +23,19 @@ export default function PdfSlider({ pdfUrl }) {
   const [numPages, setNumPages] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [swiperRef,setSwiperRef] = useState(null);
-  const [currentIndex,setCurrentIndex] = useState(1);
+  const [swiperRef, setSwiperRef] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   const openFullscreen = () => setIsFullscreen(true);
-const closeFullscreen = () => setIsFullscreen(false);
+  const closeFullscreen = () => setIsFullscreen(false);
 
   const wrapperRef = useRef(null);
-  const [fullScreen,setFullScreen] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
 
   const goFullScreen = () => {
-    if(wrapperRef.current) {
-      if(wrapperRef.current.requestFullscreen){
+    if (wrapperRef.current) {
+      if (wrapperRef.current.requestFullscreen) {
         wrapperRef.current.requestFullscreen();
         setFullScreen(true);
       }
@@ -43,44 +43,44 @@ const closeFullscreen = () => setIsFullscreen(false);
   }
 
   const exitFullScreen = () => {
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  }
-  setFullScreen(false);
-};
-
-     useEffect(() => {
-  // Fires when user exits element fullscreen (ESC)
-  const handleFullscreenChange = () => {
-    if (!document.fullscreenElement) {
-      setFullScreen(false);
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
     }
+    setFullScreen(false);
   };
 
-  // Detect F11 & ESC manually
-  const handleKeyDown = (e) => {
-    if (e.key === "Escape") {
-      exitFullScreen();
-    }
+  useEffect(() => {
+    // Fires when user exits element fullscreen (ESC)
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement) {
+        setFullScreen(false);
+      }
+    };
 
-    if (e.key === "F11") {
-      setTimeout(() => {
-        if (!document.fullscreenElement) {
-          // User toggled browser fullscreen with F11
-          exitFullScreen();
-        }
-      }, 250);
-    }
-  };
+    // Detect F11 & ESC manually
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        exitFullScreen();
+      }
 
-  document.addEventListener("fullscreenchange", handleFullscreenChange);
-  window.addEventListener("keydown", handleKeyDown);
+      if (e.key === "F11") {
+        setTimeout(() => {
+          if (!document.fullscreenElement) {
+            // User toggled browser fullscreen with F11
+            exitFullScreen();
+          }
+        }, 250);
+      }
+    };
 
-  return () => {
-    document.removeEventListener("fullscreenchange", handleFullscreenChange);
-    window.removeEventListener("keydown", handleKeyDown);
-  };
-}, []);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
 
 
@@ -95,24 +95,30 @@ const closeFullscreen = () => setIsFullscreen(false);
   };
 
   return (
-    <div ref={wrapperRef} className={`${fullScreen ? "w-full relative max-w-4xl mx-auto bg-neutral-800 shadow-lg rounded-xl ": "w-full  relative h-[10%]  mx-auto bg-neutral-800 shadow-lg rounded-xl"}`}>
+    <div
+      ref={wrapperRef}
+      className={`${fullScreen
+          ? "w-full relative max-w-4xl mx-auto bg-neutral-800 shadow-lg rounded-xl h-[90vh]"
+          : "w-full relative mx-auto bg-neutral-800 shadow-lg rounded-xl h-[500px]"
+        }`}
+    >
       <div className=" absolute right-4 top-4 z-20">
-                    {
-  fullScreen ? (
-    <AiOutlineFullscreenExit
-    onClick={exitFullScreen}
-    className="text-white text-3xl cursor-pointer"
-    />
-  ) : (
-    
-    <AiOutlineFullscreen
-      onClick={goFullScreen}
-      className="text-white text-3xl cursor-pointer"
-    />
-  )
-}
+        {
+          fullScreen ? (
+            <AiOutlineFullscreenExit
+              onClick={exitFullScreen}
+              className="text-white text-3xl cursor-pointer"
+            />
+          ) : (
 
-                    </div>
+            <AiOutlineFullscreen
+              onClick={goFullScreen}
+              className="text-white text-3xl cursor-pointer"
+            />
+          )
+        }
+
+      </div>
       {loading && <p className="text-center text-gray-500">Loading brochure...</p>}
       {error && <p className="text-center text-red-500">Failed to load PDF</p>}
 
@@ -128,17 +134,14 @@ const closeFullscreen = () => setIsFullscreen(false);
               onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex + 1)}
             >
               {Array.from({ length: numPages }, (_, index) => (
-                <SwiperSlide key={index}>
-                  <div className="flex justify-center w-full relative items-center w-full mt-2 ms-4">
-                    
-                  <Page
-                    pageNumber={index + 1}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                    className={`${fullScreen ?  '' : 'mx-auto w-auto h-auto'}`}
-                    width={`${fullScreen ?  1100 : 500}`}
-                    
-                  />
+                <SwiperSlide className="flex justify-center items-center h-full mt-10">
+                  <div className="flex justify-center items-center w-full h-full ">
+                    <Page
+                      pageNumber={index + 1}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      height={fullScreen ? 760 : 400}
+                    />
                   </div>
                 </SwiperSlide>
               ))}
@@ -146,26 +149,26 @@ const closeFullscreen = () => setIsFullscreen(false);
           )}
         </Document>
       )}
-          <div className="flex justify-center items-center rounded-b-xl gap-6 p-2 mt-2 bg-neutral-900 text-white">
-            <button
-            onClick={() => swiperRef?.slidePrev()}
-            className="px-4 py-2 bg-white rounded-lg text-black cursor-pointer"
-            >
-               <FaAngleLeft />
-            </button>
+      <div className="flex justify-center items-center rounded-b-xl gap-6 p-2 mt-2 bg-neutral-900 text-white">
+        <button
+          onClick={() => swiperRef?.slidePrev()}
+          className="px-4 py-2 bg-white rounded-lg text-black cursor-pointer"
+        >
+          <FaAngleLeft />
+        </button>
 
-            <span className="text-white text-lg font-medium">{currentIndex} of {numPages}</span>
+        <span className="text-white text-lg font-medium">{currentIndex} of {numPages}</span>
 
-            <button 
-            onClick={() => swiperRef?.slideNext()}
-            className="px-4 py-2 bg-white text-black rounded cursor-pointer"
-            >
-             
-              <FaAngleRight />
-            </button>
+        <button
+          onClick={() => swiperRef?.slideNext()}
+          className="px-4 py-2 bg-white text-black rounded cursor-pointer"
+        >
 
-          </div>
-          
+          <FaAngleRight />
+        </button>
+
+      </div>
+
     </div>
   );
 }
