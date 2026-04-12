@@ -42,7 +42,7 @@ const BhkCards = ({ data = [] }) => {
           className="shadow-md my-3 rounded-xl w-74 "
         >
           <h2 className=" font-bold text-blue-700 bg-[#F5F6FF] px-4 rounded-t-xl">
-            <span className="text-lg">{item.bhk} Apartment</span>
+            <span className="text-lg">{item.bhk}</span>
           </h2>
         <div className="px-4">
           <p ><span className="text-xs text-gray-500 mt-2">Super Built-up Area</span></p>
