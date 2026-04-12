@@ -49,6 +49,7 @@ export const Postbasicdetailsform = ({ setValidator }) => {
             {title:'5 Bhk', name:'5 Bhk'},
             {title:'1 RK', name:'1 Rk'},
             {title:'Studio', name:'Studio Appartment'},
+            {title:'Land', name:'Land'},
             {title:'Independent House/Villa', name:'Independent House/Villa'},
             {title:'Farmhouse',name:'Farmhouse'}
 
