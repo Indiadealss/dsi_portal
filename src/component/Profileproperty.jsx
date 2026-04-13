@@ -19,10 +19,10 @@ const onChange = (date, dateString) => {
 export const Profileproperty = ({ setValidator }) => {
 
 
-   const propertyData = useSelector((state) => state.property.data);
-     const isForedit = useSelector((state) => state.property.isEditMode);
+  const propertyData = useSelector((state) => state.property.data);
+  const isForedit = useSelector((state) => state.property.isEditMode);
 
- const [coverdParking, setCoverdParking] = useState(propertyData.coveredparking || 0);
+  const [coverdParking, setCoverdParking] = useState(propertyData.coveredparking || 0);
   const [uncoverdParking, setUncoverdParking] = useState(propertyData.uncoveredparking || 0);
   const [addsuperBuild, setAddSuperBuild] = useState(false);
   const [noBedroom, setNoBedroom] = useState(propertyData.bedroom || '');
@@ -45,13 +45,13 @@ export const Profileproperty = ({ setValidator }) => {
   const [selectedKey, setSelectedKey] = useState("");
   const [value, setValue] = useState("");
   const [manualPossession, setManualPossession] = useState(false);
-const [manualMonth, setManualMonth] = useState("");
-const [manualYear, setManualYear] = useState("");
-const [considerfaq, setConsiderFaq] = useState("");
+  const [manualMonth, setManualMonth] = useState("");
+  const [manualYear, setManualYear] = useState("");
+  const [considerfaq, setConsiderFaq] = useState("");
 
 
 
- const [availabestatus, setChoiseProperty] = useState(propertyData.availabestatus || '');
+  const [availabestatus, setChoiseProperty] = useState(propertyData.availabestatus || '');
   const [choiseWashroom, setChoiseWashroom] = useState('');
   const [choiseConfrance, setChoiseConfrance] = useState('');
   const [recptionarea, setRecptionArea] = useState('');
@@ -61,7 +61,7 @@ const [considerfaq, setConsiderFaq] = useState("");
   const [publicWashroom, setPublicWashroom] = useState(0);
   const [saftyFeature, setSaftyFeature] = useState([])
 
-const [faqText, setFaqText] = useState("");
+  const [faqText, setFaqText] = useState(propertyData.faqText || "");
 
   const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
   const [entries, setEntries] = useState([]);    // stores size + price pairs
@@ -77,87 +77,88 @@ const [faqText, setFaqText] = useState("");
   const [projectTotalFloor, setProjectTotalFloor] = useState(propertyData.projectTotalFloor || null);
   const [reraStatus, setReraStatus] = useState(propertyData.reraStatus || "Not Available");
   const [reraNumber, setReraNumber] = useState(propertyData.rera || "");
-  const [superBuildUParia,setSuperBuildUParia] = useState(propertyData.superBuildUParia || 0)
+  const [superBuildUParia, setSuperBuildUParia] = useState(propertyData.superBuildUParia || 0)
 
+  const propertyDataFirst = useSelector((state) => state.property.data);
 
-//   useEffect(() => {
-//   if (propertyData?.faq?.length > 0) {
-//     setFaqText(propertyData.faq[0].answer.join("\n"));
-//   }
-// }, [propertyData]);
+  //   useEffect(() => {
+  //   if (propertyData?.faq?.length > 0) {
+  //     setFaqText(propertyData.faq[0].answer.join("\n"));
+  //   }
+  // }, [propertyData]);
 
-// useEffect(() => {
-//   if (propertyData?.faq?.length > 0 && isForedit) {
-//     const answer = propertyData.faq[0].answer;
+  // useEffect(() => {
+  //   if (propertyData?.faq?.length > 0 && isForedit) {
+  //     const answer = propertyData.faq[0].answer;
 
-//     if (Array.isArray(answer)) {
-//       setFaqText(answer.join("\n"));
-//     } else {
-//       setFaqText(answer || "");
-//     }
-//   }
-// }, [isForedit]);
+  //     if (Array.isArray(answer)) {
+  //       setFaqText(answer.join("\n"));
+  //     } else {
+  //       setFaqText(answer || "");
+  //     }
+  //   }
+  // }, [isForedit]);
 
-useEffect(() => {
-  if (propertyData?.faq?.length > 0) {
-    const answer = propertyData.faq[0].answer;
+  useEffect(() => {
+    if (!faqText && propertyData?.faq?.length > 0) {
+      const answer = propertyData.faq[0].answer;
 
-    setFaqText(
-      Array.isArray(answer) ? answer.join("\n") : answer || ""
-    );
-  }
-}, [propertyData]);
+      setFaqText(
+        Array.isArray(answer) ? answer.join("\n") : answer || ""
+      );
+    }
+  }, [propertyData]);
 
 
   useEffect(() => {
-  console.log("Redux Updated Data:", propertyData.availabestatus);
-}, [propertyData]);
+    console.log("Redux Updated Data:", propertyData.availabestatus);
+  }, [propertyData]);
 
-const buildFaqFromTextarea = (projectname, faqText) => {
+  const buildFaqFromTextarea = (projectname, faqText) => {
 
-  const points = faqText
-    .split("\n")
-    .map(p => p.trim())
-    .filter(Boolean);
+    const points = faqText
+      .split("\n")
+      .map(p => p.trim())
+      .filter(Boolean);
 
-  return [
-    {
-      question: `Why you should consider ${projectname}?`,
-      answer: points
-    }
-  ];
-};
+    return [
+      {
+        question: `Why you should consider ${projectname}?`,
+        answer: points
+      }
+    ];
+  };
 
 
-  
+
 
 
   const formatPriceLabel = (value) => {
-  if (!value || isNaN(value)) return "";
+    if (!value || isNaN(value)) return "";
 
-  const num = Number(value);
-  const CRORE = 10000000;
-  const LAKH = 100000;
+    const num = Number(value);
+    const CRORE = 10000000;
+    const LAKH = 100000;
 
-  if (num >= CRORE) {
-    return `${(num / CRORE).toFixed(2)} Cr`;
-  }
+    if (num >= CRORE) {
+      return `${(num / CRORE).toFixed(2)} Cr`;
+    }
 
-  if (num >= LAKH) {
-    return `${(num / LAKH).toFixed(2)} L`;
-  }
+    if (num >= LAKH) {
+      return `${(num / LAKH).toFixed(2)} L`;
+    }
 
-  return num.toLocaleString("en-IN");
-};
+    return num.toLocaleString("en-IN");
+  };
 
 
-  
-  
+
+
 
   useEffect(() => {
     console.log(officeunit);
-    
-  },[officeunit])
+
+  }, [officeunit])
 
 
 
@@ -174,16 +175,16 @@ const buildFaqFromTextarea = (projectname, faqText) => {
     setReraNumber(value);
   };
 
-// saved officeUnits want to delete
+  // saved officeUnits want to delete
   const handleDeleteUnit = (index) => {
-  setOfficeunit(prev => prev.filter((_, i) => i !== index));
-};
+    setOfficeunit(prev => prev.filter((_, i) => i !== index));
+  };
 
 
-// delete the inputs office units
-const handleDeleteEntry = (index) => {
-  setEntries(prev => prev.filter((_, i) => i !== index));
-};
+  // delete the inputs office units
+  const handleDeleteEntry = (index) => {
+    setEntries(prev => prev.filter((_, i) => i !== index));
+  };
 
 
 
@@ -198,39 +199,39 @@ const handleDeleteEntry = (index) => {
   ];
 
 
- const generateEntries = (count) => {
-  if (count <= 0) return;
+  const generateEntries = (count) => {
+    if (count <= 0) return;
 
-  setEntries(prev => {
-    let arr = [...prev];
+    setEntries(prev => {
+      let arr = [...prev];
 
-    if (count > arr.length) {
-      let addCount = count - arr.length;
-      for (let i = 0; i < addCount; i++) {
-        arr.push({ size: "0", price: "0" });
+      if (count > arr.length) {
+        let addCount = count - arr.length;
+        for (let i = 0; i < addCount; i++) {
+          arr.push({ size: "0", price: "0" });
+        }
+      } else if (count < arr.length) {
+        arr = arr.slice(0, count);
       }
-    } else if (count < arr.length) {
-      arr = arr.slice(0, count);
-    }
 
-    return arr;
-  });
-};
+      return arr;
+    });
+  };
 
 
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-  console.log("POSSESSION SAVED:", possession);
-}, [possession]);
+    console.log("POSSESSION SAVED:", possession);
+  }, [possession]);
 
 
 
   // useEffect(() => {
   //   const tf = Number(totalFloor)
   //   console.log(considerfaq);
-    
+
   //   dispatch(updateField({
   //     bedroom: noBedroom, bathroom: noBathroom, balconies: noBalconies, plotarea: paPlotArea, plotSizein: plotarea, buildarea: buArea, buildSizein: buildarea, carpetarea: caArea, carpetSizein: carpet,rera:reraNumber,projectTotalFloor:projectTotalFloor,
   //     totalfloor: totalFloor, availabestatus: availabestatus,numSets:numSets,maxnumSets:maxnumSets,mettingRoom:mettingRoom,numFlats:numFlats, ownership: ownership, propertyage: ageProperty, coveredparking: coverdParking, uncoveredparking: uncoverdParking, description: description, Possession: possession,numCabin:numCabin, saftyFeature: saftyFeature, choiseWashroom: choiseWashroom, choiseConfrance: choiseConfrance, recptionarea: recptionarea, parking: parking, pantry: pantry, privateWashroom: privateWashroom, publicWashroom: publicWashroom,officeUnits:officeunit
@@ -238,102 +239,107 @@ const handleDeleteEntry = (index) => {
   // }, [description,considerfaq])
 
 
-useEffect(() => {
-  const total = Number(caArea) + Number(buArea);
+  useEffect(() => {
+    const total = Number(caArea) + Number(buArea);
 
-  setSuperBuildUParia(total);
+    setSuperBuildUParia(total);
 
-  console.log(total, 'Number Carpet Area');
-}, [caArea, buArea]);
+    console.log(total, 'Number Carpet Area');
+  }, [caArea, buArea]);
 
   const formData = useMemo(() => ({
-  bedroom: noBedroom,
-  bathroom: noBathroom,
-  balconies: noBalconies,
-  plotarea: paPlotArea,
-  plotSizein: plotarea,
-  buildarea: buArea,
-  buildSizein: buildarea,
-  carpetarea: caArea,
-  carpetSizein: carpet,
-  superBuildUParia:superBuildUParia,
-  rera: reraNumber,
-  projectTotalFloor,
-  totalfloor: totalFloor,
-  reraStatus,
-  availabestatus,
-  numSets,
-  maxnumSets,
-  mettingRoom,
-  numFlats,
-  ownership,
-  propertyage: ageProperty,
-  coveredparking: coverdParking,
-  uncoveredparking: uncoverdParking,
-  description,
-  Possession: possession,
-  numCabin,
-  saftyFeature,
-  choiseWashroom,
-  choiseConfrance,
-  recptionarea,
-  parking,
-  pantry,
-  privateWashroom,
-  publicWashroom,
-  officeUnits: officeunit
-}), [
-  noBedroom,
-  noBathroom,
-  noBalconies,
-  paPlotArea,
-  plotarea,
-  buArea,
-  buildarea,
-  caArea,
-  carpet,
-  superBuildUParia,
-  reraNumber,
-  projectTotalFloor,
-  totalFloor,
-  reraStatus,
-  availabestatus,
-  numSets,
-  maxnumSets,
-  mettingRoom,
-  numFlats,
-  ownership,
-  ageProperty,
-  coverdParking,
-  uncoverdParking,
-  description,
-  possession,
-  numCabin,
-  saftyFeature,
-  choiseWashroom,
-  choiseConfrance,
-  recptionarea,
-  parking,
-  pantry,
-  privateWashroom,
-  publicWashroom,
-  officeunit
-]);
+    bedroom: noBedroom,
+    bathroom: noBathroom,
+    balconies: noBalconies,
+    plotarea: paPlotArea,
+    plotSizein: plotarea,
+    buildarea: buArea,
+    buildSizein: buildarea,
+    carpetarea: caArea,
+    carpetSizein: carpet,
+    superBuildUParia: superBuildUParia,
+    rera: reraNumber,
+    projectTotalFloor,
+    totalfloor: totalFloor,
+    reraStatus,
+    availabestatus,
+    numSets,
+    maxnumSets,
+    mettingRoom,
+    numFlats,
+    ownership,
+    propertyage: ageProperty,
+    coveredparking: coverdParking,
+    uncoveredparking: uncoverdParking,
+     faq: buildFaqFromTextarea(
+          propertyDataFirst.projectname,
+          faqText
+        ),
+    description,
+    Possession: possession,
+    numCabin,
+    saftyFeature,
+    choiseWashroom,
+    choiseConfrance,
+    recptionarea,
+    parking,
+    pantry,
+    privateWashroom,
+    publicWashroom,
+    officeUnits: officeunit
+  }), [
+    noBedroom,
+    noBathroom,
+    noBalconies,
+    paPlotArea,
+    plotarea,
+    buArea,
+    buildarea,
+    caArea,
+    carpet,
+    superBuildUParia,
+    reraNumber,
+    projectTotalFloor,
+    totalFloor,
+    reraStatus,
+    availabestatus,
+    numSets,
+    maxnumSets,
+    mettingRoom,
+    numFlats,
+    ownership,
+    ageProperty,
+    coverdParking,
+    uncoverdParking,
+    faqText,
+    description,
+    possession,
+    numCabin,
+    saftyFeature,
+    choiseWashroom,
+    choiseConfrance,
+    recptionarea,
+    parking,
+    pantry,
+    privateWashroom,
+    publicWashroom,
+    officeunit
+  ]);
 
-useEffect(() => {
-  dispatch(updateField(formData));
-}, [formData]);
+  useEffect(() => {
+    dispatch(updateField(formData));
+  }, [formData]);
 
-//   useEffect(() => {
-//   dispatch(updateField({ offices }));
-// }, [offices]);
+  //   useEffect(() => {
+  //   dispatch(updateField({ offices }));
+  // }, [offices]);
 
-// ✅ Update units only when units change
-useEffect(() => {
-  dispatch(updateField({ unitData: units }));
-}, [units]);
+  // ✅ Update units only when units change
+  useEffect(() => {
+    dispatch(updateField({ unitData: units }));
+  }, [units]);
 
-  const propertyDataFirst = useSelector((state) => state.property.data);
+  
 
   // console.log('purpose :', propertyDataFirst.purpose, 'Property:', propertyDataFirst.property, 'property type:', propertyDataFirst.propertyType);
 
@@ -416,25 +422,25 @@ useEffect(() => {
 
 
   // convert to count the price
-   const formatToCr = (value, decimals = 2, suffix = "cr onwards") => {
-        if (value == null || isNaN(value)) return "";
+  const formatToCr = (value, decimals = 2, suffix = "cr onwards") => {
+    if (value == null || isNaN(value)) return "";
 
-        const num = Number(value);
-        const ONE_CRORE = 1e7;
-        const ONE_LAKH = 1e5;
+    const num = Number(value);
+    const ONE_CRORE = 1e7;
+    const ONE_LAKH = 1e5;
 
-        if (num >= ONE_CRORE) {
-            const val = +(num / ONE_CRORE).toFixed(decimals);
-            return `${val} ${suffix}`;
-        }
+    if (num >= ONE_CRORE) {
+      const val = +(num / ONE_CRORE).toFixed(decimals);
+      return `${val} ${suffix}`;
+    }
 
-        if (num >= ONE_LAKH) {
-            const val = +(num / ONE_LAKH).toFixed(decimals);
-            return `${val} L onwards`;
-        }
+    if (num >= ONE_LAKH) {
+      const val = +(num / ONE_LAKH).toFixed(decimals);
+      return `${val} L onwards`;
+    }
 
-        return num.toLocaleString("en-IN");
-    };
+    return num.toLocaleString("en-IN");
+  };
 
   const pantryAvalible = [
     {
@@ -496,7 +502,7 @@ useEffect(() => {
     }
   ]
 
- 
+
 
   const [facilities, setFacilities] = useState({
     furnishing: "",
@@ -601,7 +607,7 @@ useEffect(() => {
     if (setValidator) {
       setValidator(validateForm);
     }
-  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, availabestatus, description, numFlats, projectTotalFloor,faqText]);
+  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, availabestatus, description, numFlats, projectTotalFloor, faqText]);
 
   function validateForm() {
     if (propertyDataFirst.purpose != 'Project' && propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom) {
@@ -635,21 +641,21 @@ useEffect(() => {
       return false;
     }
 
-    if(propertyDataFirst.purpose === 'Project' && (faqText === '' || !faqText)){
+    if (propertyDataFirst.purpose === 'Project' && (faqText === '' || !faqText)) {
       alert("Please set the Answer")
       return false;
     }
 
-if (faqText) {
-  dispatch(updateField({
-    faq: buildFaqFromTextarea(
-      propertyDataFirst.projectname,
-      faqText
-    )
-  }));
-}
+    if (faqText) {
+      dispatch(updateField({
+        faq: buildFaqFromTextarea(
+          propertyDataFirst.projectname,
+          faqText
+        )
+      }));
+    }
 
-    
+
     return true
   }
   return (
@@ -1124,7 +1130,7 @@ if (faqText) {
       <p className='font-medium text-xs text-gray-500'><span className={`${propertyDataFirst.purpose != 'Project' ? "hidden" : ''}`}>Total no of floors in this Project</span><span className={`${propertyDataFirst.purpose === 'Project' ? "hidden" : ''}`}>Total no of floors and your floor details.</span></p>
       <div>
         <input type='text' className={`${propertyDataFirst.purpose === 'Project' ? "hidden" : 'outline-none border border-1 border-gray-200 my-4 p-4 w-full'}`} value={totalFloor} onChange={(e) => setTotalFloor(e.target.value)} placeholder='Total Floor' />
-        <input type='text' className={`${propertyDataFirst.purpose === 'Project' ? 'outline-none border border-1 border-gray-200 my-4 p-4 w-full': 'hidden'}`} value={projectTotalFloor} onChange={(e) => setProjectTotalFloor(e.target.value)} placeholder='Total Floor' />
+        <input type='text' className={`${propertyDataFirst.purpose === 'Project' ? 'outline-none border border-1 border-gray-200 my-4 p-4 w-full' : 'hidden'}`} value={projectTotalFloor} onChange={(e) => setProjectTotalFloor(e.target.value)} placeholder='Total Floor' />
         <div className={`${totalFloor > 1 ? 'block mb-5' : 'hidden'}`}>
           <FloorSelector maxPreset={totalFloor} onChange={handleFloorChange} />
         </div>
@@ -1179,93 +1185,93 @@ if (faqText) {
         {/* possession section */}
 
         <form className={`${availabestatus === 'Under construction' ? 'w-full mx-auto' : 'hidden'}`}>
-  <label className="block mb-2 font-medium text-gray-900">
-    Possession By
-  </label>
+          <label className="block mb-2 font-medium text-gray-900">
+            Possession By
+          </label>
 
-  {/* DROPDOWN MODE */}
-  {!manualPossession && (
-    <>
-      <select
-        value={possession}
-        onChange={(e) => setPossession(e.target.value)}
-        className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-      >
-        <option value="">Expected by</option>
-        {underConcetraction.map((item, index) => (
-          <option key={index} value={item.name}>
-            {item.label}
-          </option>
-        ))}
-      </select>
+          {/* DROPDOWN MODE */}
+          {!manualPossession && (
+            <>
+              <select
+                value={possession}
+                onChange={(e) => setPossession(e.target.value)}
+                className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+              >
+                <option value="">Expected by</option>
+                {underConcetraction.map((item, index) => (
+                  <option key={index} value={item.name}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
 
-      <button
-        type="button"
-        onClick={() => setManualPossession(true)}
-        className="mt-2 text-sm text-blue-600 hover:underline"
-      >
-        + Add manually
-      </button>
-    </>
-  )}
+              <button
+                type="button"
+                onClick={() => setManualPossession(true)}
+                className="mt-2 text-sm text-blue-600 hover:underline"
+              >
+                + Add manually
+              </button>
+            </>
+          )}
 
-  {/* MANUAL MODE */}
-  {manualPossession && (
-    <>
-      <div className="flex gap-2">
-        <input
-          type="text"
-          placeholder="Month (e.g. March)"
-          value={manualMonth}
-          onChange={(e) => setManualMonth(e.target.value)}
-          className="border p-2 rounded w-1/2"
-        />
+          {/* MANUAL MODE */}
+          {manualPossession && (
+            <>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Month (e.g. March)"
+                  value={manualMonth}
+                  onChange={(e) => setManualMonth(e.target.value)}
+                  className="border p-2 rounded w-1/2"
+                />
 
-        <input
-          type="number"
-          placeholder="Year (e.g. 2027)"
-          value={manualYear}
-          onChange={(e) => setManualYear(e.target.value)}
-          className="border p-2 rounded w-1/2"
-        />
-      </div>
+                <input
+                  type="number"
+                  placeholder="Year (e.g. 2027)"
+                  value={manualYear}
+                  onChange={(e) => setManualYear(e.target.value)}
+                  className="border p-2 rounded w-1/2"
+                />
+              </div>
 
-      <div className="flex gap-3 mt-3">
-        <button
-          type="button"
-          className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
-          onClick={() => {
-            if (!manualMonth || !manualYear) return;
-            setPossession(`${manualMonth} ${manualYear}`);
-            setManualPossession(false);
-          }}
-        >
-          Save
-        </button>
+              <div className="flex gap-3 mt-3">
+                <button
+                  type="button"
+                  className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+                  onClick={() => {
+                    if (!manualMonth || !manualYear) return;
+                    setPossession(`${manualMonth} ${manualYear}`);
+                    setManualPossession(false);
+                  }}
+                >
+                  Save
+                </button>
 
-        <button
-          type="button"
-          className="text-sm text-gray-600"
-          onClick={() => {
-            setManualPossession(false);
-            setManualMonth("");
-            setManualYear("");
-          }}
-        >
-          Cancel
-        </button>
-      </div>
-    </>
-  )}
+                <button
+                  type="button"
+                  className="text-sm text-gray-600"
+                  onClick={() => {
+                    setManualPossession(false);
+                    setManualMonth("");
+                    setManualYear("");
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          )}
 
-  {/* possession MANUAL MODE */}
-  {possession && !manualPossession && (
-  <p className="text-sm text-green-600 mt-1">
-    Selected: {possession}
-  </p>
-)}
+          {/* possession MANUAL MODE */}
+          {possession && !manualPossession && (
+            <p className="text-sm text-green-600 mt-1">
+              Selected: {possession}
+            </p>
+          )}
 
-</form>
+        </form>
 
 
       </div>
@@ -1284,7 +1290,7 @@ if (faqText) {
           })}
         </div>
       </div>
-      
+
       <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : ''}`}>
         <h3 className='text-xl font-medium my-5'>Reserved Parking <span className="font-light text-sm text-gray-400">(Optional)</span></h3>
         <div className='flex flex-wrap my-5'>
@@ -1309,364 +1315,364 @@ if (faqText) {
         </div>
       </div>
 
-{/* ✅✅ FIXED: DYNAMIC OFFICES */}
-<div className={`${propertyDataFirst.purpose === 'Project' && propertyDataFirst.property !== 'residential' ? '' : 'hidden'}`}>
-  <select
-  className="border p-2 rounded"
-  value={unitType}
-  onChange={(e) => setUnitType(e.target.value)}
->
-  <option value="">Select Unit Type</option>
-  <option value="Offices">Offices</option>
-  <option value="Shop">Shop</option>
-</select>
+      {/* ✅✅ FIXED: DYNAMIC OFFICES */}
+      <div className={`${propertyDataFirst.purpose === 'Project' && propertyDataFirst.property !== 'residential' ? '' : 'hidden'}`}>
+        <select
+          className="border p-2 rounded"
+          value={unitType}
+          onChange={(e) => setUnitType(e.target.value)}
+        >
+          <option value="">Select Unit Type</option>
+          <option value="Offices">Offices</option>
+          <option value="Shop">Shop</option>
+        </select>
 
-<input
-  type="number"
-  className="border p-2 rounded mt-4 mx-2"
-  placeholder="How many units you want to add?"
-  onChange={(e) => generateEntries(Number(e.target.value))}
-  min="1"
-/>
-
-
-<button
-  onClick={() =>
-    setEntries(prev => [...prev, { size: "", price: "" }])
-  }
-  className="bg-green-500 text-white px-4 py-2 rounded mt-4 mx-4 hidden"
->
-  Add Unit Entry
-</button>
+        <input
+          type="number"
+          className="border p-2 rounded mt-4 mx-2"
+          placeholder="How many units you want to add?"
+          onChange={(e) => generateEntries(Number(e.target.value))}
+          min="1"
+        />
 
 
-{entries.map((item, index) => (
-  <div key={index} className="flex gap-2 mt-2 items-center">
-
-    {/* SIZE INPUT */}
-    <div>
-    <input
-      className="border p-2"
-      placeholder="Size"
-      value={item.size}
-      onChange={(e) =>
-        setEntries(prev =>
-          prev.map((x, i) =>
-            i === index ? { ...x, size: e.target.value } : x
-          )
-        )
-      }
-      onBlur={() =>
-        setEntries(prev =>
-          prev.map((x, i) =>
-            i === index
-              ? { ...x, size: x.size === "" ? "0" : x.size }
-              : x
-          )
-        )
-      }
-    />
-    <span className='text-xs font-medium'>sq.ft.</span>
-    </div>
-
-    {/* PRICE INPUT */}
-    <div >
-    <input
-      className="border p-2"
-      placeholder="Price"
-      value={item.price}
-      onChange={(e) =>
-        setEntries(prev =>
-          prev.map((x, i) =>
-            i === index ? { ...x, price: e.target.value } : x
-          )
-        )
-      }
-      onBlur={() =>
-        setEntries(prev =>
-          prev.map((x, i) =>
-            i === index
-              ? { ...x, price: x.price === "" ? "0" : x.price }
-              : x
-          )
-        )
-      }
-    />
-
-    {/* PRICE FORMATTED */}
-    <span className='text-xs font-medium'>{formatToCr(item.price)}</span>
-    </div>
-
-    {/* DELETE BUTTON */}
-    <button
-      className="text-red-500 font-bold px-2"
-      onClick={() => handleDeleteEntry(index)}
-    >
-      Delete
-    </button>
-
-  </div>
-))}
+        <button
+          onClick={() =>
+            setEntries(prev => [...prev, { size: "", price: "" }])
+          }
+          className="bg-green-500 text-white px-4 py-2 rounded mt-4 mx-4 hidden"
+        >
+          Add Unit Entry
+        </button>
 
 
+        {entries.map((item, index) => (
+          <div key={index} className="flex gap-2 mt-2 items-center">
+
+            {/* SIZE INPUT */}
+            <div>
+              <input
+                className="border p-2"
+                placeholder="Size"
+                value={item.size}
+                onChange={(e) =>
+                  setEntries(prev =>
+                    prev.map((x, i) =>
+                      i === index ? { ...x, size: e.target.value } : x
+                    )
+                  )
+                }
+                onBlur={() =>
+                  setEntries(prev =>
+                    prev.map((x, i) =>
+                      i === index
+                        ? { ...x, size: x.size === "" ? "0" : x.size }
+                        : x
+                    )
+                  )
+                }
+              />
+              <span className='text-xs font-medium'>sq.ft.</span>
+            </div>
+
+            {/* PRICE INPUT */}
+            <div >
+              <input
+                className="border p-2"
+                placeholder="Price"
+                value={item.price}
+                onChange={(e) =>
+                  setEntries(prev =>
+                    prev.map((x, i) =>
+                      i === index ? { ...x, price: e.target.value } : x
+                    )
+                  )
+                }
+                onBlur={() =>
+                  setEntries(prev =>
+                    prev.map((x, i) =>
+                      i === index
+                        ? { ...x, price: x.price === "" ? "0" : x.price }
+                        : x
+                    )
+                  )
+                }
+              />
+
+              {/* PRICE FORMATTED */}
+              <span className='text-xs font-medium'>{formatToCr(item.price)}</span>
+            </div>
+
+            {/* DELETE BUTTON */}
+            <button
+              className="text-red-500 font-bold px-2"
+              onClick={() => handleDeleteEntry(index)}
+            >
+              Delete
+            </button>
+
+          </div>
+        ))}
 
 
 
 
-<button
-  className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
-  onClick={() => {
-    if (!unitType || entries.length === 0) return;
-
-    const formattedItems = entries.map(e => ({
-      area: Number(e.size),
-      price: Number(e.price)
-    }));
-
-    setOfficeunit(prev => [
-      ...prev,
-      {
-        name: unitType,
-        icon: unitType === "Offices" ? computerTable : shop,
-        items: formattedItems
-      }
-    ]);
-
-    // Reset form after save
-    setUnitType("");
-    setEntries([]);
-  }}
->
-  Save Unit
-</button>
 
 
-<div className='my-10'>
-  {officeunit.length > 0 &&
-    officeunit.map((unit, i) => (
-      <div key={i} className="border p-3 my-2">
-        <div className="flex justify-between items-center">
-          <h3 className="font-bold">{unit.name}</h3>
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded mt-4"
+          onClick={() => {
+            if (!unitType || entries.length === 0) return;
 
-          {/* Delete Button */}
-          <button
-            className="text-red-500 font-bold"
-            onClick={() => handleDeleteUnit(i)}
-          >
-            Delete
-          </button>
+            const formattedItems = entries.map(e => ({
+              area: Number(e.size),
+              price: Number(e.price)
+            }));
+
+            setOfficeunit(prev => [
+              ...prev,
+              {
+                name: unitType,
+                icon: unitType === "Offices" ? computerTable : shop,
+                items: formattedItems
+              }
+            ]);
+
+            // Reset form after save
+            setUnitType("");
+            setEntries([]);
+          }}
+        >
+          Save Unit
+        </button>
+
+
+        <div className='my-10'>
+          {officeunit.length > 0 &&
+            officeunit.map((unit, i) => (
+              <div key={i} className="border p-3 my-2">
+                <div className="flex justify-between items-center">
+                  <h3 className="font-bold">{unit.name}</h3>
+
+                  {/* Delete Button */}
+                  <button
+                    className="text-red-500 font-bold"
+                    onClick={() => handleDeleteUnit(i)}
+                  >
+                    Delete
+                  </button>
+                </div>
+
+                {unit.items.map((item, idx) => (
+                  <p key={idx}>
+                    Area: {item.area} | Price: {item.price}
+                  </p>
+                ))}
+              </div>
+            ))
+          }
         </div>
 
-        {unit.items.map((item, idx) => (
-          <p key={idx}>
-            Area: {item.area} | Price: {item.price}
-          </p>
+
+
+      </div>
+
+
+      {/* ✅✅ FIXED: DYNAMIC UNITS */}
+      <div className={`${propertyDataFirst.purpose === 'Project' && propertyDataFirst.property === 'residential' ? '' : 'hidden'}`}>
+
+        <button
+          onClick={() =>
+            setUnits(prev => [
+              ...prev,
+              { id: Date.now(), specs: {}, selectedKey: "", value: "" }
+            ])
+          }
+          className="bg-blue-600 text-white px-4 py-2 rounded my-4"
+        >
+          Add Apartment Unit
+        </button>
+
+        {units.map((unit, index) => (
+          <div key={unit.id} className="border p-4 rounded my-4 bg-gray-50">
+            <h2 className="text-lg font-bold">Unit {index + 1}</h2>
+
+            {/* ✅ SELECT FIELD FIX */}
+            <select
+              className="border p-2 my-2 rounded"
+              value={unit.selectedKey}
+              onChange={(e) =>
+                setUnits(prev =>
+                  prev.map((u, i) =>
+                    i === index ? { ...u, selectedKey: e.target.value } : u
+                  )
+                )
+              }
+            >
+              <option value="">Select Field</option>
+              <option value="bhk">BHK Type</option>
+              <option value="areaMin">Area Min</option>
+              <option value="areaMax">Area Max</option>
+              <option value="priceMin">Price Min</option>
+              <option value="priceMax">Price Max</option>
+            </select>
+
+            {/* ✅ VALUE INPUT FIX */}
+            <input
+              className="border p-2 ml-2 rounded"
+              placeholder="Enter value"
+              value={unit.value}
+              onChange={(e) =>
+                setUnits(prev =>
+                  prev.map((u, i) =>
+                    i === index ? { ...u, value: e.target.value } : u
+                  )
+                )
+              }
+            />
+
+            {/* PRICE PREVIEW */}
+            {(unit.selectedKey === "priceMin" || unit.selectedKey === "priceMax") &&
+              unit.value && (
+                <span className="text-xs text-gray-500 mt-1">
+                  {formatPriceLabel(unit.value)}
+                </span>
+              )}
+
+            {/* ✅ ADD FIELD FIX */}
+            <button
+              className="bg-green-500 text-white px-3 py-1 ml-2 rounded"
+              onClick={() => {
+                if (!unit.selectedKey || !unit.value) return;
+
+                setUnits(prev =>
+                  prev.map((u, i) =>
+                    i === index
+                      ? {
+                        ...u,
+                        specs: { ...u.specs, [u.selectedKey]: u.value },
+                        selectedKey: "",
+                        value: ""
+                      }
+                      : u
+                  )
+                );
+              }}
+            >
+              Add
+            </button>
+
+            {/* SHOW SPECS */}
+            <div className="mt-3">
+              <h3 className="font-semibold mb-2">Specifications:</h3>
+
+              {Object.entries(unit.specs).map(([k, v]) => (
+                <div
+                  key={k}
+                  className="flex items-center justify-between bg-white border rounded px-3 py-2 mb-2"
+                >
+                  <p className="text-sm">
+                    <strong>{k}:</strong> {v}
+                  </p>
+
+                  <div className="flex gap-2">
+                    {/* EDIT */}
+                    <button
+                      className="text-blue-600 text-sm"
+                      onClick={() => {
+                        setUnits(prev =>
+                          prev.map((u, i) =>
+                            i === index
+                              ? { ...u, selectedKey: k, value: v }
+                              : u
+                          )
+                        );
+                      }}
+                    >
+                      Edit
+                    </button>
+
+                    {/* DELETE */}
+                    <button
+                      className="text-red-600 text-sm"
+                      onClick={() => {
+                        setUnits(prev =>
+                          prev.map((u, i) =>
+                            i === index
+                              ? {
+                                ...u,
+                                specs: Object.fromEntries(
+                                  Object.entries(u.specs).filter(
+                                    ([key]) => key !== k
+                                  )
+                                )
+                              }
+                              : u
+                          )
+                        );
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
-    ))
-  }
-</div>
 
+      <div className={`${propertyDataFirst.purpose === 'Project' ? 'flex flex-col' : 'hidden'}`}>
+        <label className="font-medium">RERA Number</label>
 
+        {/* Radio Buttons */}
+        <div className="flex my-3">
 
-</div>
+          <label className="flex items-center cursor-pointer">
+            <input
+              type="radio"
+              value="Available"
+              name="reraStatus"
+              checked={reraStatus === "Available"}
+              onChange={() => handleStatusChange("Available")}
+              className="w-4 h-4 cursor-pointer border border-gray-400 rounded-full"
+            />
+            <span className="ml-2 text-sm font-medium text-heading">Available</span>
+          </label>
 
+          <label className="flex items-center cursor-pointer ml-4">
+            <input
+              type="radio"
+              value="Not Available"
+              name="reraStatus"
+              checked={reraStatus === "Not Available"}
+              onChange={() => handleStatusChange("Not Available")}
+              className="w-4 h-4 cursor-pointer border border-gray-400 rounded-full"
+            />
+            <span className="ml-2 text-sm font-medium text-heading">Not Available</span>
+          </label>
+        </div>
 
-{/* ✅✅ FIXED: DYNAMIC UNITS */}
-<div className={`${propertyDataFirst.purpose === 'Project' && propertyDataFirst.property === 'residential' ? '' : 'hidden'}`}>
-
-  <button
-    onClick={() =>
-      setUnits(prev => [
-        ...prev,
-        { id: Date.now(), specs: {}, selectedKey: "", value: "" }
-      ])
-    }
-    className="bg-blue-600 text-white px-4 py-2 rounded my-4"
-  >
-    Add Apartment Unit
-  </button>
-
-  {units.map((unit, index) => (
-    <div key={unit.id} className="border p-4 rounded my-4 bg-gray-50">
-      <h2 className="text-lg font-bold">Unit {index + 1}</h2>
-
-      {/* ✅ SELECT FIELD FIX */}
-      <select
-        className="border p-2 my-2 rounded"
-        value={unit.selectedKey}
-        onChange={(e) =>
-          setUnits(prev =>
-            prev.map((u, i) =>
-              i === index ? { ...u, selectedKey: e.target.value } : u
-            )
-          )
-        }
-      >
-        <option value="">Select Field</option>
-        <option value="bhk">BHK Type</option>
-        <option value="areaMin">Area Min</option>
-        <option value="areaMax">Area Max</option>
-        <option value="priceMin">Price Min</option>
-        <option value="priceMax">Price Max</option>
-      </select>
-
-      {/* ✅ VALUE INPUT FIX */}
-      <input
-        className="border p-2 ml-2 rounded"
-        placeholder="Enter value"
-        value={unit.value}
-        onChange={(e) =>
-          setUnits(prev =>
-            prev.map((u, i) =>
-              i === index ? { ...u, value: e.target.value } : u
-            )
-          )
-        }
-      />
-
-       {/* PRICE PREVIEW */}
-  {(unit.selectedKey === "priceMin" || unit.selectedKey === "priceMax") &&
-    unit.value && (
-      <span className="text-xs text-gray-500 mt-1">
-        {formatPriceLabel(unit.value)}
-      </span>
-    )}
-
-      {/* ✅ ADD FIELD FIX */}
-      <button
-        className="bg-green-500 text-white px-3 py-1 ml-2 rounded"
-        onClick={() => {
-          if (!unit.selectedKey || !unit.value) return;
-
-          setUnits(prev =>
-            prev.map((u, i) =>
-              i === index
-                ? {
-                    ...u,
-                    specs: { ...u.specs, [u.selectedKey]: u.value },
-                    selectedKey: "",
-                    value: ""
-                  }
-                : u
-            )
-          );
-        }}
-      >
-        Add
-      </button>
-
-      {/* SHOW SPECS */}
-<div className="mt-3">
-  <h3 className="font-semibold mb-2">Specifications:</h3>
-
-  {Object.entries(unit.specs).map(([k, v]) => (
-    <div
-      key={k}
-      className="flex items-center justify-between bg-white border rounded px-3 py-2 mb-2"
-    >
-      <p className="text-sm">
-        <strong>{k}:</strong> {v}
-      </p>
-
-      <div className="flex gap-2">
-        {/* EDIT */}
-        <button
-          className="text-blue-600 text-sm"
-          onClick={() => {
-            setUnits(prev =>
-              prev.map((u, i) =>
-                i === index
-                  ? { ...u, selectedKey: k, value: v }
-                  : u
-              )
-            );
-          }}
-        >
-          Edit
-        </button>
-
-        {/* DELETE */}
-        <button
-          className="text-red-600 text-sm"
-          onClick={() => {
-            setUnits(prev =>
-              prev.map((u, i) =>
-                i === index
-                  ? {
-                      ...u,
-                      specs: Object.fromEntries(
-                        Object.entries(u.specs).filter(
-                          ([key]) => key !== k
-                        )
-                      )
-                    }
-                  : u
-              )
-            );
-          }}
-        >
-          Delete
-        </button>
-      </div>
-    </div>
-  ))}
-</div>
-    </div>
-  ))}
-</div>
-
- <div className={`${propertyDataFirst.purpose === 'Project' ? 'flex flex-col' : 'hidden'}`}>
-      <label className="font-medium">RERA Number</label>
-
-      {/* Radio Buttons */}
-      <div className="flex my-3">
-
-        <label className="flex items-center cursor-pointer">
+        {/* Conditional Input */}
+        {reraStatus === "Available" && (
           <input
-            type="radio"
-            value="Available"
-            name="reraStatus"
-            checked={reraStatus === "Available"}
-            onChange={() => handleStatusChange("Available")}
-            className="w-4 h-4 cursor-pointer border border-gray-400 rounded-full"
+            type="text"
+            placeholder="Enter RERA Number"
+            value={reraNumber}
+            onChange={(e) => handleInput(e.target.value)}
+            className="mx-2 border border-gray-300 rounded outline-none w-[50%] my-2 px-2 py-1"
           />
-          <span className="ml-2 text-sm font-medium text-heading">Available</span>
-        </label>
-
-        <label className="flex items-center cursor-pointer ml-4">
-          <input
-            type="radio"
-            value="Not Available"
-            name="reraStatus"
-            checked={reraStatus === "Not Available"}
-            onChange={() => handleStatusChange("Not Available")}
-            className="w-4 h-4 cursor-pointer border border-gray-400 rounded-full"
-          />
-          <span className="ml-2 text-sm font-medium text-heading">Not Available</span>
-        </label>
+        )}
       </div>
-
-      {/* Conditional Input */}
-      {reraStatus === "Available" && (
-        <input
-          type="text"
-          placeholder="Enter RERA Number"
-          value={reraNumber}
-          onChange={(e) => handleInput(e.target.value)}
-          className="mx-2 border border-gray-300 rounded outline-none w-[50%] my-2 px-2 py-1"
-        />
-      )}
-    </div>
       <div className={propertyDataFirst.purpose === 'Project' ? '' : 'hidden'}>
-    <h3><span className='text-xl font-medium'>Why You Should Consider {propertyDataFirst.projectname}</span></h3>
-    <div>
-        <textarea id="message" rows="5" value={faqText} onInput={(e) => setFaqText(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder={`Enter FAQ points (one per line)
-Example:
-Prime location in Greater Noida
-Easy access to highways
-Modern amenities`} />
-      </div>
+        <h3><span className='text-xl font-medium'>Why You Should Consider {propertyDataFirst.projectname}</span></h3>
+        <div>
+          <textarea id="message" rows="5" value={faqText} onInput={(e) => setFaqText(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder={`Enter FAQ points (one per line)
+            Example:
+            Prime location in Greater Noida
+            Easy access to highways
+            Modern amenities`} />
+        </div>
       </div>
 
 

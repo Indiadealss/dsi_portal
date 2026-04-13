@@ -8,6 +8,7 @@ import { deleteImage, deleteVideo, updateImageMeta, uploadImage, uploadVideo } f
 export const Photovideo = ({ propertyId }) => {
 
   const propertyData = useSelector((state) => state.property.data);
+  const [loading, setLoading] = useState(false);
 
   const [videoFile, setVideoFile] = useState(propertyData.video || []);
   const [images, setImages] = useState(propertyData.images || []);
@@ -79,12 +80,17 @@ export const Photovideo = ({ propertyId }) => {
       const res = await uploadVideo(propertyId, formData);
       const newVideo = res.data.video;
       
+      console.log("FULL RESPONSE:", res);
+console.log("DATA:", res.data);
 
       uploadedVideoes.push({
         ...newVideo,
         fields: newVideo.fields || [],
       });
     }
+
+    console.log(uploadedVideoes);
+    
 
     setVideoFile((prev) => [...prev, ...uploadedVideoes]);
 
@@ -187,7 +193,24 @@ export const Photovideo = ({ propertyId }) => {
   // ---------------- UI ----------------
 
   return (
+    
     <>
+    {loading && (
+  <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm z-50 flex items-center justify-center">
+    
+    <div className="bg-white px-6 py-4 rounded-xl shadow-lg flex flex-col items-center gap-3">
+      
+      {/* Spinner */}
+      <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+
+      {/* Text */}
+      <p className="text-sm font-medium text-gray-700">
+        Uploading... Please wait ⏳
+      </p>
+
+    </div>
+  </div>
+)}
       <h3 className="text-xl font-medium">Add one Video of Property</h3>
 
       <Uploadfile
