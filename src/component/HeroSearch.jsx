@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllProjectNames, getallProperty, searchaddress } from "../api/api";
-import projectName from '../Images/bannertwo.jpg'
+import projectName from '../Images/dubai-marina-panorama-photo.jpg';
 import { useNavigate } from "react-router-dom";
 
 const HeroSearch = () => {
@@ -172,8 +172,19 @@ useEffect(() => {
   };
 
   const createProjectSlug = (project) => {
-    if (!project) return "";
+    if (!project && alltype === 'Project') {
+      console.log(locationInput ,alltype,'no project found');
+      return `${locationInput}-${alltype}-${construtStatus}-ffid`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+    }
 
+    if (!project) {
+      return "";
+    }
+
+    console.log(project,'no project found');
     let city = "";
 
     // handle both cases (array / string)

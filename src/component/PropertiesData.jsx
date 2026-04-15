@@ -95,6 +95,11 @@ console.log(filtersFromSlug);
         const resultsAre = res.data?.data || [];
 
         const result = resultsAre.filter((p) => p.purpose != 'Project');
+        console.log(slug,'slug budget');
+        if(slug.includes('project')){
+          console.log('yeah');
+          
+        }
 
         // Apply client-side filters
         let filteredResult = result;
