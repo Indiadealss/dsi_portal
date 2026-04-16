@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getAllProjectNames, getallProperty, searchaddress } from "../api/api";
 import projectName from '../Images/dubai-marina-panorama-photo.jpg';
 import { useNavigate } from "react-router-dom";
+import { updateFilter } from "./Redux/filterSlice";
+import { useDispatch } from "react-redux";
 
 const HeroSearch = () => {
 
@@ -18,6 +20,8 @@ const HeroSearch = () => {
   }, [])
 
   const navigate = useNavigate()
+
+  let dispatch = useDispatch();
 
 
 
@@ -174,6 +178,12 @@ useEffect(() => {
   const createProjectSlug = (project) => {
     if (!project && alltype === 'Project') {
       console.log(locationInput ,alltype,'no project found');
+      // dispatch(updateFilter({location:locationInput}));
+      if(locationInput){
+        dispatch(updateFilter({location:locationInput}));
+      }else{        dispatch(updateFilter({location:'All India'}));
+      } 
+      dispatch(updateFilter({purpose:alltype}));
       return `${locationInput}-${alltype}-${construtStatus}-ffid`
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
@@ -186,6 +196,8 @@ useEffect(() => {
 
     console.log(project,'no project found');
     let city = "";
+
+    dispatch(updateFilter({purpose:construtStatus}));
 
     // handle both cases (array / string)
     if (Array.isArray(project.location)) {

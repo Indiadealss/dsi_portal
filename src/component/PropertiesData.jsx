@@ -80,7 +80,7 @@ console.log(filtersFromSlug);
           propertyType: Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
           slug: filtersFromSlug.property || '',
           projectname: projectname
-        });
+        }, 'API Params');
         
         
          setLoading(true)
@@ -93,9 +93,15 @@ console.log(filtersFromSlug);
           filterForm || {}
         );
         const resultsAre = res.data?.data || [];
-
-        const result = resultsAre.filter((p) => p.purpose != 'Project');
-        console.log(slug,'slug budget');
+        let result = [];
+        console.log(slug,resultsAre,purpose,'slug budget');
+        if(purpose==='Project'){
+          result = resultsAre.filter((p) => p.purpose === 'Project');
+        }
+        if(purpose!=='Project'){
+          result = resultsAre.filter((p) => p.purpose != 'Project');
+        }
+        // const  = resultsAre.filter((p) => p.purpose != 'Project');
         if(slug.includes('project')){
           console.log('yeah');
           
@@ -194,7 +200,7 @@ console.log(filtersFromSlug);
       : [];
             return{
                 id:p._id,
-                spid:p.spid,
+                spid:p.spid || p.npxid || '',
       images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
       title: locationData?.apartment_name || p.projectname,
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
@@ -275,8 +281,17 @@ console.log(filtersFromSlug);
   const createSlug = (item) => {
   if (!item?.spid) return "";
 
-  const locationData = parseLocation(item.location);
+    const locationData = parseLocation(item.location);
   const city = locationData?.[0]?.City || "";
+
+  if(purpose === 'Project'){
+    return `${item.title}-${city}-npxid-${item.spid}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+  }
+
+
 
   return `${item.subtitle}-spid-${item.spid}`
     .toLowerCase()
