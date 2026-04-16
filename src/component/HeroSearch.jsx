@@ -296,7 +296,7 @@ useEffect(() => {
   };
 
     const handleProjectSearch = async (value) => {
-      const filtered = projectname.filter(project =>
+      const filtered = filteredProjects.filter(project =>
     project.projectname?.toLowerCase().includes(value.toLowerCase()) ||
     project.npxid?.toLowerCase().includes(value.toLowerCase())
   );
