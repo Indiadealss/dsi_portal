@@ -89,6 +89,7 @@ const HeroSearch = () => {
   const [bedroom, setBedroom] = useState("");
   const [selectedProjectId, setSelectedProjectId] = useState();
   const [locationInput, setLocationInput] = useState();
+  const [projectInput, setProjectInut] = useState()
   const [locationList, setLocationList] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState()
 
@@ -110,6 +111,7 @@ const HeroSearch = () => {
 
   // 🔥 NEW STATE ADD
 const [filteredProjects, setFilteredProjects] = useState([]);
+const [projectList,setProjectList] = useState([]);
 
 useEffect(() => {
   if (projectname.length) {
@@ -270,6 +272,8 @@ useEffect(() => {
 
   };
 
+
+
   const handleLocationSearch = async (value) => {
     setLocationInput(value);
 
@@ -277,6 +281,8 @@ useEffect(() => {
       setLocationList([]);
       return;
     }
+
+    
 
     try {
       const res = await searchaddress(value, "Noida");
@@ -288,6 +294,17 @@ useEffect(() => {
       console.log(err);
     }
   };
+
+    const handleProjectSearch = async (value) => {
+      const filtered = projectname.filter(project =>
+    project.projectname?.toLowerCase().includes(value.toLowerCase()) ||
+    project.npxid?.toLowerCase().includes(value.toLowerCase())
+  );
+
+  setProjectList(filtered);
+      console.log(filteredProjects);
+      setProjectInut(value)
+    }
   return (
     <div className="relative w-full h-[80vh] md:h-[90vh]">
 
@@ -421,15 +438,38 @@ useEffect(() => {
           )}
 
           {(alltype === 'Project') && (
-            <select onChange={(e) => setSelectedProjectId(e.target.value)} className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
-              <option value="">All Project</option>
+            <div className="relative flex-1">
+            <input
+              type="text"
+              value={projectInput}
+              onChange={(e) => handleProjectSearch(e.target.value)}
+              placeholder="Search Project By Name..."
+              className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
+            />
+            
 
-              {filteredProjects.map((item) => (
-                <option key={item.npxid} value={item.npxid} onChange={(e) => setProjectNpxid(e.target.value)}>
-                  {item.projectname}
-                </option>
-              ))}
-            </select>
+            {filteredProjects.length > 0 && projectInput && (
+              <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
+                {projectList.map((item, index) => (
+                  <li
+                    key={index}
+                    className="p-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => {
+                      const value = `${item.npxid}`;
+                      const projectName = `${item.projectname}`;
+                      setProjectNpxid(value);
+                      setSelectedProjectId(item.npxid);
+                      setProjectInut(projectName);
+                      setSelectedLocation(value);
+                      setLocationList([]);
+                    }}
+                  >
+                    {item.projectname}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
           )}
           {/* Button */}
           <button onClick={handleSearch} className="my-5 md:my-0 bg-[#e9ae01] text-white px-6 py-3 rounded-full md:rounded-r-full md:rounded-l-none font-semibold hover:bg-lime-600">
