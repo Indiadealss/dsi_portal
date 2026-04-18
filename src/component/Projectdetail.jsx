@@ -497,7 +497,7 @@ try {
           <p><span className='text-xs'>Home > Project in > {propertys.projectname}</span></p>
           <div className="flex">
             <div className="flex">
-              <h2 className=''>{propertys.projectname}</h2>
+              <h2 className=''><span className='text-md font-medium text-gray-700 mt-3  line-clamp-2 uppercase'>{propertys.projectname}</span></h2>
               <div onClick={GetShortList}>
                 {favurate ? (
                   <CiHeart className='text-2xl mt-1 mx-2 text-red-500 cursor-pointer' />
