@@ -80,8 +80,8 @@ const ProjectsCrousal = ({ data }) => {
         </p>
 
         {/* Title */}
-        <Link to={`/property/${createSlug(data)}?preference=S`}><h3 className="text-lg font-semibold text-gray-800  line-clamp-2 uppercase">
-          {data.label}
+        <Link to={`/property/${createSlug(data)}?preference=S`}><h3 className="text-sm font-medium text-gray-800  line-clamp-2 uppercase">
+          <span className="text-lg font-semibold text-gray-800  line-clamp-2 uppercase">{data.label}</span>
         </h3></Link>
 
         {/* Location */}
