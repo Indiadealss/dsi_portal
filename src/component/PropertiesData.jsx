@@ -203,8 +203,10 @@ console.log(filtersFromSlug);
                 spid:p.spid || p.npxid || '',
       images: validImages.length ? validImages : [{ src: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg', alt: "No image" }],
       title: locationData?.apartment_name || p.projectname,
+      purpose: p.purpose || '',
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
       subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${locationData.City}`}`,
+      subtitle2: p.purpose === 'Project' ? `${p.propertyType} Project in ${locationData?.City}` : `${p.bedroom} BHK ${p.propertyType} in ${locationData?.City}`,
       bathroom: p.bathroom ? `${p.bathroom} Baths` : "N/A",
       bedroom:p.bedroom ? p.bedroom : '',
       location: p.location || "Unknown",
@@ -214,7 +216,7 @@ console.log(filtersFromSlug);
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
       time: new Date(p.updatedAt).toLocaleDateString() || "N/A",
-      owner: p.owner || "Owner",
+      owner: p.purpose === 'Project' ? '' : `${p.owner || 'Owner'}`,
        };
     });
 
@@ -348,7 +350,7 @@ if(loading){
               </h5>
             </Link>
             <Link to={`/property/${createSlug(item)}`}>
-              <h6 className="text-base font-medium text-gray-700">{item.subtitle}</h6>
+              <h6 className="text-base font-medium text-gray-700">{item.subtitle2}</h6>
             </Link>
           </div>
 
@@ -431,7 +433,7 @@ if(loading){
           {/* Dealer Section */}
           <div className="flex ps-2 pt-2 justify-between">
             <div>
-              <p className="text-base text-gray-500">
+              <p className={item.purpose === 'Project' ? 'hidden' : 'text-base text-gray-500'}>
                 Dealer · {formatDistanceToNow(item.time, { addSuffix: true })}
               </p>
               <p className="text-sm font-bold text-gray-500">{item.owner.name}</p>
