@@ -71,7 +71,7 @@ const Investmentoption = ({ propertys }) => {
         <div className='my-20'>
             <div className="flex justify-between flex-col-reverse md:flex-row">
                 <div className={propertys.invest ? 'hidden' : ''}>
-                    <h2>Investment Options In {propertys.projectname}</h2>
+                    <h2><span className="text-md font-normal text-gray-800">Investment Options In {propertys.projectname}</span></h2>
                 </div>
                 <div className={propertys.invest ? 'hidden' : ''}>
                     <button className='font-bold  text-blue-500 border shadow-sm p-2 rounded cursor-pointer flex h-10' onClick={() => setLeadModel(true)}><ImFolderDownload className='m-1' />Download Brochure</button>

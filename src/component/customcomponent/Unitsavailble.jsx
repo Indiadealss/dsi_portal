@@ -83,7 +83,7 @@ export default function Unitsavailble({ propertys }) {
 
   return (
     <div className="my-20">
-      <h2 className="my-10">Investment Options In {propertys.projectname}</h2>
+      <h2 className="my-10"><span className="text-md font-normal text-gray-800">Explore Office & Retail Opportunities</span></h2>
       <div className={`flex  gap-6`}>
 
         {units.map((u, idx) => (

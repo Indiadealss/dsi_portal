@@ -604,7 +604,7 @@ try {
           <div>
             <div className="flex justify-between">
               <div>
-                <h2><span className='font-medium'>Top Facilities</span></h2>
+                <h2><span className="text-md font-normal text-gray-800">Top Facilities</span></h2>
               </div>
               <div>
                 {/* <button className='text-blue-500 cursor-pointer font-medium'>View All</button> */}
@@ -635,7 +635,7 @@ try {
           <div>
             <div className="flex justify-between">
               <div>
-                <h2><span>Location Advantages</span></h2>
+                <h2><span className="text-md font-normal text-gray-800">Location Advantages</span></h2>
 
               </div>
               <div>
@@ -649,8 +649,8 @@ try {
           </div>
 
           {/* about Project */}
-          <div className='my-5'>
-            <h2><span className='text-xl'>More about {propertys.projectname}</span></h2>
+          <div className='my-15'>
+            <h2><span className="text-xl font-medium text-gray-800">More about {propertys.projectname}</span></h2>
             <Description text={propertys.description} />
           </div>
 
@@ -679,8 +679,8 @@ try {
 
         <div className="w-full md:w-[30%] m-2 sticky top-20 self-start" style={{ position: 'sticky' }}>
           <div className="bg-white shadow-xs rounded p-6 border border-gray-100">
-            <h4 className="text-2xl font-bold text-gray-800 mb-3">
-              {propertys?.faq[0]?.question}
+            <h4 className="mb-3">
+              <span className="text-xl font-medium text-gray-800">{propertys?.faq[0]?.question}</span>
             </h4>
 
             <ul className="list-disc list-inside text-gray-600 space-y-1">
