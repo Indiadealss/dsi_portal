@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 const BhkCards = ({ data = [] }) => {
   const formatPrice = (value) => {
     value = Number(value);
+    if(value === 0) return "";
     if (value >= 10000000) {
       return (value / 10000000).toFixed(2) + " Cr";
     } else {
       return (value / 100000).toFixed(2) + " L";
     }
+    
+    
   };
 
   const [unitData, setUnitData] = useState([]);
@@ -50,8 +53,8 @@ const BhkCards = ({ data = [] }) => {
             <span className="text-sm text-gray-800 mt-2">{item.areaMin} - {item.areaMax}</span>
           </p>
 
-          <p ><span className="text-lg font-bold text-gray-800 mt-4">
-            ₹ {formatPrice(item.priceMin)} - {formatPrice(item.priceMax)}
+          <p ><sup className="font-bold">₹</sup><span className="text-lg font-medium text-gray-800 mt-4 p-2">
+             {formatPrice(item.priceMin)} <span className={formatPrice(item.priceMax) ? "text-gray-700" : "hidden"}>-</span> {formatPrice(item.priceMax)}
             <span className="text-blue-500 text-sm ml-1 cursor-pointer">
               + Charges 
             </span>

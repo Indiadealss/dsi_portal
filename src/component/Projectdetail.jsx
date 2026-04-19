@@ -560,7 +560,19 @@ try {
 
           </div>
           {/* Apartment Layout */}
-          <div className={`${propertys.property === 'commercial' ? 'hidden' : 'mt-2'}`}><p><span className="font-medium text-gray-500 mt-5">{Array.isArray(propertys?.propertyType) ? propertys.propertyType.map(p => p.replace(" Bhk", "")).join(", ") : ''} BHK Apartment</span></p></div>
+          <div className={`${propertys.property === 'commercial' ? 'hidden' : 'mt-2'}`}>
+  <p>
+    <span className="font-medium text-gray-500 mt-5">
+      {
+        Array.isArray(propertys?.propertyType)
+          ? propertys.propertyType.includes("Land")
+            ? "Premium Residential Plot"
+            : `${propertys.propertyType.map(p => p.replace(" Bhk", "")).join(", ")} BHK Apartment`
+          : ""
+      }
+    </span>
+  </p>
+</div>
           <div className='mb-5'>
             <BhkCards data={unitData} />
           </div>

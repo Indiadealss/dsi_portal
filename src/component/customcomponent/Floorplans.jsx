@@ -140,6 +140,7 @@ const FloorPlanSlider = ({ layoutData, propertys }) => {
                 <p className="font-bold text-xl text-gray-800">
                   ₹ {formatPrice(item.price)}
                 </p>
+                {item.price}
 
                 {/* Status */}
                 <div className="flex bg-gray-100 p-3 rounded-lg mt-3 text-gray-600 text-sm">
