@@ -28,11 +28,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
 import Seo from './Seo';
 import { setTitle } from './Redux/titleSlice';
+import MobileGallery from './customcomponent/MobileGallery';
 
 
 
 
 const Projectdetail = () => {
+
+  
   const [propertys, setPropertys] = useState(null)
   const [image, setImage] = useState([])
   const [video, setVideo] = useState([])
@@ -48,6 +51,15 @@ const Projectdetail = () => {
   const [favurate, setFavurate] = useState(true);
   const [projectOwners,setprojectOwners] = useState('');
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const npxid = slug.split("npxid-")[1];
   const user = useSelector((state) => state.user);
@@ -491,9 +503,13 @@ try {
             : null
         }
       />
-      <div className="flex justify-center flex-col pt-[27vw] md:pt-[7vw] md:flex-row mx-6">
+      <div className="flex justify-center flex-col pt-[2vw] md:pt-[7vw] lg:pt-[7vw] md:pt-[7vw] md:flex-row mx-6">
         <div className="w-full md:w-[60%] m-2">
-          <Collapage images={image} video={video} />
+          {isMobile ? (
+    <MobileGallery images={image} video={video} />
+  ) : (
+    <Collapage images={image} video={video} />
+  )}
           <p><span className='text-xs'>Home > Project in > {propertys.projectname}</span></p>
           <div className="flex">
             <div className="flex">
