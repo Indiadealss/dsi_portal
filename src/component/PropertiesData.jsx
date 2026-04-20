@@ -211,7 +211,7 @@ console.log(filtersFromSlug,'slug filters');
       size: p.plotarea || p.availabestatus,
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
-      time: new Date(p.updatedAt).toLocaleDateString() || "N/A",
+      time: p.updatedAt || "N/A",
       owner: p.purpose === 'Project' ? '' : `${p.owner || 'Owner'}`,
        };
     });
