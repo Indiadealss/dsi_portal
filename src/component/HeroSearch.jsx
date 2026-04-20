@@ -224,11 +224,11 @@ useEffect(() => {
   const handleSearch = async () => {
     const query = new URLSearchParams();
 
-    if (alltype !== "All Types" && alltype !== "Project") {
+    if (alltype !== "All Types" && alltype !== "Projects") {
       query.append("property", alltype.toLowerCase());
     }
 
-    if (alltype === 'Project') {
+    if (alltype === 'Projects') {
       query.append("purpose", alltype);
     }
 
@@ -370,7 +370,7 @@ useEffect(() => {
           </div>
 
           {/* Status */}
-          {alltype !== 'Project' && (
+          {alltype !== 'Projects' && (
             <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
               {allStatus.map((item, index) => (
                 <option key={index} value={item.value}>
@@ -439,13 +439,13 @@ useEffect(() => {
             </select>
           )}
 
-          {(alltype === 'Project') && (
+          {(alltype === 'Projects') && (
             <div className="relative flex-1">
             <input
               type="text"
               value={projectInput}
               onChange={(e) => handleProjectSearch(e.target.value)}
-              placeholder="Search Project By Name..."
+              placeholder="Search Projects By Name..."
               className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
             />
             
