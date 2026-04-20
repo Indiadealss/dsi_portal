@@ -8,6 +8,10 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
+
+  build: {
+    target: "es2015" // 🔥 important fix
+  },
   optimizeDeps:{
     include : ["mammoth"]
   },
