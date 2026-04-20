@@ -32,7 +32,7 @@ const Mobilenavcustombtn = ({setOpen,setShowLogin}) => {
        <div className="h-full overflow-y-auto bg-gray-100">
 
     {/* Top Blue Section */}
-    <div className="bg-blue-600 text-white p-4 relative">
+    <div className="bg-[#011638] text-white p-4 relative">
       <button
         onClick={() => setOpen(false)}
         className="absolute right-4 top-4 text-white text-xl"
@@ -41,17 +41,17 @@ const Mobilenavcustombtn = ({setOpen,setShowLogin}) => {
       </button>
 
       <div className="flex items-center gap-3">
-        <div className="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
           <UserOutlined className="text-2xl" />
         </div>
         <div>
-          <h3 className="font-semibold text-lg">Welcome {user.name}</h3>
+          <h3 className="font-semibold text-lg"><span className='text-white'>Welcome {user.name}</span></h3>
           <p className="text-sm">Guest Profile • Manage Profile</p>
         </div>
       </div>
 
       <button className="mt-4 w-full bg-white text-blue-600 py-2 rounded font-medium" >
-        {user.loggedIn ?  <span onClick={handleLogout}>Log out</span> : <span onClick={loginBtn}>'Login / Register Now'</span>}
+        {user.loggedIn ?  <span onClick={handleLogout} className='text-[#011638]'>Log out</span> : <span onClick={loginBtn} className='text-[#011638]'>Login / Register Now'</span>}
       </button>
     </div>
 

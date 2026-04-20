@@ -42,7 +42,7 @@ const parseSlug = (slug) => {
 
   return {
     location: parts[0],   // noida
-    property: parts.includes("project") ? "Project" : ""
+    property: parts.includes("projects") ? "Project" : ""
   };
 };
 
@@ -83,7 +83,7 @@ console.log(filtersFromSlug,'slug filters');
         const res = await getallProperty(
           pageNumber,
           filtersFromSlug.location || location,
-          purpose || 'sell',
+          filtersFromSlug.property || 'sell',
           Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
           filtersFromSlug.property || '',
           filterForm || {}
@@ -208,7 +208,7 @@ console.log(filtersFromSlug,'slug filters');
       location: p.location || "Unknown",
       price: p.price || 0,
       deposit: Number(p.price) * 0.3 || "N/A",
-      size: p.plotarea || 0,
+      size: p.plotarea || p.availabestatus,
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
       time: new Date(p.updatedAt).toLocaleDateString() || "N/A",
@@ -366,10 +366,14 @@ if(loading){
             </div>
 
             <div className="px-5 border-e border-gray-300">
-              <p className="text-[15px] font-medium">
+              <p className={item.purpose === 'Project' ?  'text-[15px] font-medium' : 'hidden'}>
+                {item.size} 
+              </p>
+               <p className={item.purpose === 'Project' ?  'hidden' : 'text-[15px] font-medium'}>
                 {Math.round(item.size)} Sqft ({(item.size * 0.092903).toFixed(0)} sqm)
               </p>
-              <p className="text-[15px] font-medium">{item.area} Area</p>
+
+              <p className={item.purpose === 'Project' ? 'hidden' : 'text-[15px] font-medium'}>{item.area} Area</p>
             </div>
 
             <div className="px-5">

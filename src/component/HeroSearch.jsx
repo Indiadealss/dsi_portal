@@ -76,7 +76,7 @@ const HeroSearch = () => {
     { name: 'All Types', value: 'All Types', component: [] },
     { name: 'Residential', value: 'Residential', component: residentalProperty },
     { name: 'Commercial', value: 'Commercial', component: CommericalProperty },
-    { name: 'Project', value: 'Project', component: [] }
+    { name: 'Projects', value: 'Projects', component: [] }
   ];
 
   const [propertyType, setPropertyType] = useState([]);
@@ -178,15 +178,17 @@ useEffect(() => {
   };
 
   const createProjectSlug = (project) => {
-    if (!project && alltype === 'Project') {
+    if (!project && alltype === 'Projects') {
       console.log(locationInput ,alltype,'no project found');
       // dispatch(updateFilter({location:locationInput}));
+      const finalLocation = locationInput || 'All India';
       if(locationInput){
         dispatch(updateFilter({location:locationInput}));
-      }else{        dispatch(updateFilter({location:'All India'}));
+      }else{
+          dispatch(updateFilter({location:'All India'}));
       } 
       dispatch(updateFilter({purpose:alltype}));
-      return `${locationInput}-${alltype}-${construtStatus}-ffid`
+      return `${finalLocation}-${alltype}-${construtStatus}-ffid`
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)+/g, "");
@@ -248,12 +250,12 @@ useEffect(() => {
 
     
 
-    if (alltype !== 'Project') {
+    if (alltype !== 'Projects') {
       const slug = createSearchSlug(query);
       navigate(`/property/${slug}`);
     }
 
-    if (alltype === "Project") {
+    if (alltype === "Projects") {
       const selectedProject = projectname.find(
   (p) => p.npxid === selectedProjectId
 );
