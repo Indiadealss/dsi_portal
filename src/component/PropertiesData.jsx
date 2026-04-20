@@ -13,6 +13,8 @@ import { updateFilter } from './Redux/filterSlice';
 import SklatingLoding from './Loading/SklatingLoding';
 export const PropertiesData = () => {
 
+  
+
     let timeStamp = Date.now();
 
     let dispatch = useDispatch();
@@ -37,25 +39,16 @@ const parseSlug = (slug) => {
   let result = {};
   let currentKey = null;
 
-  for (let part of parts) {
-    if (part === "ffid") continue; // skip ffid
 
-    if (validKeys.includes(part)) {
-      currentKey = part;
-      result[currentKey] = "";
-    } else if (currentKey) {
-      result[currentKey] += result[currentKey]
-        ? "-" + part
-        : part;
-    }
-  }
-
-  return result;
+  return {
+    location: parts[0],   // noida
+    property: parts.includes("project") ? "Project" : ""
+  };
 };
 
 const filtersFromSlug = parseSlug(slug);
 
-console.log(filtersFromSlug);
+console.log(filtersFromSlug,'slug filters');
 
 
 
@@ -65,7 +58,10 @@ console.log(filtersFromSlug);
   const location = useSelector((state) => state.filterSlice.location);
   const selectedFilters = useSelector((state) => state.filterSlice);
   const projectname = useSelector((state) => state.filterSlice.projectname);
-  const purpose = useSelector((state) => state.filterSlice.purpose);
+  let purpose = useSelector((state) => state.filterSlice.purpose);
+  if(filtersFromSlug.property === 'Project'){
+    purpose = 'Project';
+  }
 
     const fetchProperties = async (pageNumber) => {
         console.log(filterForm,'filterForm');
@@ -76,7 +72,7 @@ console.log(filtersFromSlug);
         console.log('API Params:', {
           page: pageNumber,
           location: filtersFromSlug.location || location,
-          purpose: purpose || 'sell',
+          purpose: filtersFromSlug.property || 'sell',
           propertyType: Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
           slug: filtersFromSlug.property || '',
           projectname: projectname
@@ -206,7 +202,7 @@ console.log(filtersFromSlug);
       purpose: p.purpose || '',
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
       subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${locationData.City}`}`,
-      subtitle2: p.purpose === 'Project' ? `${p.propertyType} Project in ${locationData?.City}` : `${p.bedroom} BHK ${p.propertyType} in ${locationData?.City}`,
+      subtitle2: p.purpose === 'Project' ? `${p.propertyType} Project in ${parseLocation(locationData)[0]?.City}` : `${p.bedroom} BHK ${p.propertyType} in ${locationData?.City}`,
       bathroom: p.bathroom ? `${p.bathroom} Baths` : "N/A",
       bedroom:p.bedroom ? p.bedroom : '',
       location: p.location || "Unknown",
@@ -364,8 +360,8 @@ if(loading){
               <div className="flex items-center">
                 {/* <IoIosAdd className="text-lg" /> */}
                 {/* <p className="text-[15px] font-medium px-1">Deposit</p> */}
-                <MdCurrencyRupee className="text-[15px]" />
-                <p>{(item.price / item.size).toFixed(0)}/sqft</p>
+                {/* <MdCurrencyRupee className="text-[15px]" />
+                <p>{(item.price / item.size).toFixed(0)}/sqft</p> */}
               </div>
             </div>
 
