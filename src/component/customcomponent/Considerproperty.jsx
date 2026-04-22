@@ -55,6 +55,13 @@ const Considerpropety = () => {
 };
 
     const locAdvan = property.locatadvance.map(item => parseLocation(item))
+    const Buldingfeatures = property.Buldingfeature;
+    
+    const total = locAdvan.length + Buldingfeatures.length;
+    
+    if(total === 0){
+      return '';
+    }
 
   return (
     <div className='block max-w-full p-6  border-b border-gray-300 '>
@@ -68,7 +75,7 @@ const Considerpropety = () => {
       {/* Left Button */}
       <Button
         onClick={() => sliderRef.current?.slickPrev()}
-        className={`${locAdvan.length <= 8 ? "!hidden" :"!absolute !left-[-2px] !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"}`}
+        className={`${total.length <= 8 ? "!hidden" :"!absolute !left-[-2px] !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"}`}
         icon={<LeftOutlined />}
       />
 
@@ -76,7 +83,15 @@ const Considerpropety = () => {
       <Slider ref={sliderRef} {...settings}>
         {locAdvan.map((item, idx) => (
           <div  className="px-2">
-        <button key={idx} className="bg-emerald-400 font-medium  text-white  border border-gray-500 w-full px-4 py-2 rounded-full text-sm">
+        <button key={idx} className="bg-white font-medium  text-[#011638]  border border-gray-100 w-full px-4 py-2 rounded-full text-sm">
+              {item.name}
+            </button>
+          </div>
+        ))}
+        {Buldingfeatures.map((item, idx) => (
+          <div  className="px-2">
+        <button key={idx} className="bg-white  font-medium  text-[#011638]  border border-gray-100 w-full px-4 py-2 rounded-full text-sm flex">
+             <img src={item.icon} alt={item.name} className="inline-block w-4 h-4 mr-2" />
               {item.name}
             </button>
           </div>
@@ -86,7 +101,7 @@ const Considerpropety = () => {
       {/* Right Button */}
       <Button
         onClick={() => sliderRef.current?.slickNext()}
-        className={`${locAdvan.length <= 8 ? "!hidden":"!absolute !right-0 !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"}`}
+        className={`${total.length <= 8 ? "!hidden":"!absolute !right-0 !top-1/2 !-translate-y-1/2 !bg-[#011c49cf] !text-white !rounded-full z-10"}`}
         icon={<RightOutlined />}
       />
     </div>

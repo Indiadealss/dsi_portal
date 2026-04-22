@@ -224,8 +224,16 @@ useEffect(() => {
   const handleSearch = async () => {
     const query = new URLSearchParams();
 
+    if(selectedLocation){
+      query.append("location",selectedLocation);
+    }
+
+    if(!selectedLocation){
+      query.append("location",'All India');
+    }
+
     if (alltype !== "All Types" && alltype !== "Projects") {
-      query.append("property", alltype.toLowerCase());
+      query.append("property", alltype);
     }
 
     if (alltype === 'Projects') {
@@ -236,9 +244,7 @@ useEffect(() => {
       query.append("propertyType", selectedSubType);
     }
 
-    if(selectedLocation){
-      query.append("location",selectedLocation);
-    }
+    
 
     if (selectedSize) {
       query.append("size", selectedSize);
@@ -247,6 +253,9 @@ useEffect(() => {
     if (alltype === "Residential" && bedroom) {
       query.append("bedroom", bedroom);
     }
+
+    console.log(query,'all query has been updated ?');
+    
 
     
 

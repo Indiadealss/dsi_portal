@@ -23,6 +23,8 @@ const Placesnearby = () => {
   try{
     if(property?.location){
       locationData = parseLocation(property.location);
+      console.log(locationData,'location Data is property');
+      
     }
   }catch(er){
     console.error(er);
@@ -57,12 +59,13 @@ if (!property || !property.location) {
     );
   }
   return (
-    <div className='block max-w-full p-6 bg-gray-50 border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100  '>
+    <div className='block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm  '>
         <div className='flex my-2 max-w-[-webkit-fill-available] my-3'>
             <img className='' src={landmark} alt="..." />
             <div>
             <h2>Place nearby</h2>
-            <p>{`${locationData.apartment_name}  ${locationData.Address}`}</p>
+            <p>{`${locationData[0]?.apartment_name}  ${locationData[0]?.Address}`}</p>
+           
             </div>
         </div>
         <Antplanerbycus  />

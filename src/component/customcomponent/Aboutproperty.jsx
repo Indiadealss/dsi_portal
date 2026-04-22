@@ -35,7 +35,7 @@ const Aboutproperty = () => {
 
   const aboutDetaild = {
     title:'About Property',
-    Address:locationData.Address,
+    Address:locationData[0]?.City,
     addressDetails:property.description
   }
   

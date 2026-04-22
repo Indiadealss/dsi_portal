@@ -35,13 +35,15 @@ const parseSlug = (slug) => {
 
   const parts = slug.split("-");
   const validKeys = ["property", "propertytype", "location", "bedroom", "size"];
+  console.log(slug,'jdslj');
+  
 
   let result = {};
   let currentKey = null;
 
 
   return {
-    location: parts[0],   // noida
+    location: parts[1],   // noida
     property: parts.includes("projects") ? "Project" : ""
   };
 };

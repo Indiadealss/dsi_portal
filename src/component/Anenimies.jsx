@@ -1200,7 +1200,7 @@ useEffect(() => {
           {pricingDetails.map((item,index) =>{
             return(
               <div className='flex mb-4 item-center flex-wrap mx-2 my-1'>
-                <input id="default-checkbox" type="checkbox" onChange={() => handleToggle(value)} value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm outline-none" />
+                <input id="default-checkbox" type="checkbox" onChange={() => handleToggle(item.name)} value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm outline-none" />
     <label for="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 ">{item.label}</label>
               </div>
             )
