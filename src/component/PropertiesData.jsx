@@ -43,7 +43,7 @@ const parseSlug = (slug) => {
 
 
   return {
-    location: parts[1],   // noida
+    location: parts[0],   // noida
     property: parts.includes("projects") ? "Project" : ""
   };
 };
