@@ -908,7 +908,6 @@ useEffect(() => {
     menu={{ items: profileItems }}
     trigger={["click"]}
     className="navBtn"
-    
   >
     <Button type="text " >
       <Space>
