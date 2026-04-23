@@ -4,8 +4,8 @@ import Footer from "./component/Footer";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 
 const Layout = () => {
-  const phoneNumber = "919818752056"; 
-  const whatsappNumber = "919818752056";
+  const phoneNumber = "919818764200";
+  const whatsappNumber = "919818764200";
 
   return (
     <>
@@ -14,24 +14,30 @@ const Layout = () => {
       <Footer />
 
       {/* Floating Buttons */}
-      <div className="fixed bottom-5 right-5 flex flex-col gap-3 z-50">
-        
+      <div className="fixed bottom-5 right-4 flex flex-col gap-3 z-50">
+
         {/* Call Button */}
         <a
           href={`tel:+${phoneNumber}`}
-          className="bg-[#011638] text-white p-3 rounded-full shadow-lg cursor-pointer transition"
+          className="group flex items-center gap-2 bg-[#011638] text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-all"
         >
-          <FaPhoneAlt size={20} />
+          <FaPhoneAlt size={18} className="text-white" />
+          <span className="hidden md:inline text-sm font-medium text-white">
+            Call Now
+          </span>
         </a>
 
         {/* WhatsApp Button */}
         <a
-          href={`https://wa.me/${whatsappNumber}`}
+          href={`https://wa.me/${whatsappNumber}?text=Hi%20I%20am%20interested%20in%20your%20property`}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition"
+          className="group flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-full shadow-lg hover:scale-105 transition-all"
         >
-          <FaWhatsapp size={22} />
+          <FaWhatsapp size={20} />
+          <span className="hidden md:inline text-sm font-medium">
+            WhatsApp
+          </span>
         </a>
 
       </div>
