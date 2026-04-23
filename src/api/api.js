@@ -76,10 +76,10 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
-export const getallProperty = async (page ='',filter = '',purpose='',propertyType='', slug='', filterForm = {}) => {
+export const getallProperty = async (page ='',filter = '',purpose='',property='', slug='', filterForm = {}) => {
   console.log(purpose,'purpose');
   
-  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&propertyType=${propertyType}&slug=${slug}`,filterForm);
+  return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&property=${property}&slug=${slug}`,filterForm);
 }
 
 export const getproperty = async(id) => {

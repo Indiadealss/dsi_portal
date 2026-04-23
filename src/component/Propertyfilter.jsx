@@ -218,7 +218,7 @@ export default function Propertyfilter() {
     { name: 'Verified' },
     { name: 'Furnished' },
     { name: 'With Photos' },
-    { name: 'With Videoes' }
+    { name: 'With Video' }
   ]
 
   const NewProjectSocity = [
@@ -342,7 +342,7 @@ export default function Propertyfilter() {
     { title: 'Budget', data: 'Rangeslider',min:0, max:10000000, name: 'budget', useref: useRef(null) },
     { title: 'No. of Bedrooms', data: noBedroom, name: 'noOfBedroom', useref: useRef(null) },
     { title: 'Types of Property', data: propertyType, name: 'typesOfProperty', useRef: useRef(null) },
-    { title: 'Available For', data: availableFor, name: 'avalableFor', useref: useRef(null) },
+    // { title: 'Available For', data: availableFor, name: 'avalableFor', useref: useRef(null) },
     { title: 'Posted by', data: postedBy, name: 'postedby', useRef: useRef(null) },
     { title: 'Furnishing Status', data: furnishingStatus, name: 'furnishingStatus', useRef: useRef(null) },
     { title: 'Localities', data: localtiesCheck, name: 'localities', useref: useRef(null) },

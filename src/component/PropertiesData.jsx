@@ -34,18 +34,45 @@ const parseSlug = (slug) => {
   if (!slug) return {};
 
   const parts = slug.split("-");
-  const validKeys = ["property", "propertytype", "location", "bedroom", "size"];
-  console.log(slug,'jdslj');
-  
+  const validKeys = ["location", "property", "propertytype", "bedroom", "size"];
 
   let result = {};
-  let currentKey = null;
+  let i = 0;
 
+  while (i < parts.length) {
+    const part = parts[i];
 
-  return {
-    location: parts[0],   // noida
-    property: parts.includes("projects") ? "Project" : ""
-  };
+    if (validKeys.includes(part)) {
+      const key = part;
+      let value = "";
+
+      i++;
+
+      // collect value until next valid key
+      while (i < parts.length && !validKeys.includes(parts[i]) && parts[i] !== "ffid") {
+        value += (value ? "-" : "") + parts[i];
+        i++;
+      }
+
+      // special parsing
+      if (key === "size") {
+        const [min, max] = value.split("-");
+        result[key] = [Number(min), Number(max)];
+      } else {
+        result[key] = value;
+      }
+
+    } else {
+      i++;
+    }
+  }
+
+  // special case for project
+  if (slug.includes("projects")) {
+    result.property = "Project";
+  }
+
+  return result;
 };
 
 const filtersFromSlug = parseSlug(slug);
@@ -61,6 +88,7 @@ console.log(filtersFromSlug,'slug filters');
   const selectedFilters = useSelector((state) => state.filterSlice);
   const projectname = useSelector((state) => state.filterSlice.projectname);
   let purpose = useSelector((state) => state.filterSlice.purpose);
+  
   if(filtersFromSlug.property === 'Project'){
     purpose = 'Project';
   }
@@ -70,12 +98,12 @@ console.log(filtersFromSlug,'slug filters');
         
        try{
 
-        const propertyType = selectedFilters.propertyType || selectedFilters.typesOfProperty || '';
+        const property = selectedFilters.property || selectedFilters.typesOfProperty || '';
         console.log('API Params:', {
           page: pageNumber,
           location: filtersFromSlug.location || location,
-          purpose: filtersFromSlug.property || 'sell',
-          propertyType: Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
+          purpose: filtersFromSlug.purpose || 'sell',
+          property: Array.isArray(property) ? property.join(',') : property,
           slug: filtersFromSlug.property || '',
           projectname: projectname
         }, 'API Params');
@@ -85,9 +113,9 @@ console.log(filtersFromSlug,'slug filters');
         const res = await getallProperty(
           pageNumber,
           filtersFromSlug.location || location,
-          filtersFromSlug.property || 'sell',
-          Array.isArray(propertyType) ? propertyType.join(',') : propertyType,
-          filtersFromSlug.property || '',
+          filtersFromSlug.property === 'Project' ? 'Project' : filtersFromSlug.purpose || purpose || 'sell',
+          filtersFromSlug.property === 'Project' ? '' : filtersFromSlug.property,
+          Array.isArray(property) ? property.join(',') : property,
           filterForm || {}
         );
         const resultsAre = res.data?.data || [];
@@ -126,14 +154,14 @@ console.log(filtersFromSlug,'slug filters');
 
         // Property type filter (additional check)
         if (selectedFilters.typesOfProperty && selectedFilters.typesOfProperty.length > 0) {
-          filteredResult = filteredResult.filter(p => selectedFilters.typesOfProperty.includes(p.propertyType));
+          filteredResult = filteredResult.filter(p => selectedFilters.typesOfProperty.includes(p.property));
         }
 
         // Property type from Redux (if set)
-        if (selectedFilters.propertyType) {
-          const propType = Array.isArray(selectedFilters.propertyType) ? selectedFilters.propertyType : [selectedFilters.propertyType];
+        if (selectedFilters.property) {
+          const propType = Array.isArray(selectedFilters.property) ? selectedFilters.property : [selectedFilters.property];
           if (propType.length > 0 && propType[0]) {
-            filteredResult = filteredResult.filter(p => propType.includes(p.propertyType));
+            filteredResult = filteredResult.filter(p => propType.includes(p.property));
           }
         }
 
@@ -203,8 +231,8 @@ console.log(filtersFromSlug,'slug filters');
       title: locationData?.apartment_name || p.projectname,
       purpose: p.purpose || '',
       heilights:highlights.length ? highlights : [{ helight: "N/A" }],
-      subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.propertyType} in ${locationData?.City}`: `${p.propertyType === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.propertyType} in ${locationData.City}`}`,
-      subtitle2: p.purpose === 'Project' ? `${p.propertyType} Project in ${parseLocation(locationData)[0]?.City}` : `${p.bedroom} BHK ${p.propertyType} in ${locationData?.City}`,
+      subtitle: p.property === 'commercial' ? `${p.availabestatus === 'Ready to move' ? p.availabestatus : ''} ${p.property} in ${locationData?.City}`: `${p.property === 'plotLand' ? `${p.property} Property available in ${p.City} for ${p.purpose}`: `${p.bedroom} BHK ${p.property} in ${locationData.City}`}`,
+      subtitle2: p.purpose === 'Project' ? `${p.property} Project in ${parseLocation(locationData)[0]?.City}` : `${p.bedroom} BHK ${p.property} in ${locationData?.City}`,
       bathroom: p.bathroom ? `${p.bathroom} Baths` : "N/A",
       bedroom:p.bedroom ? p.bedroom : '',
       location: p.location || "Unknown",
