@@ -29,6 +29,7 @@ import { Helmet } from 'react-helmet-async';
 import Seo from './Seo';
 import { setTitle } from './Redux/titleSlice';
 import MobileGallery from './customcomponent/MobileGallery';
+import Customenquiryform from './customcomponent/Customenquiryform';
 
 
 
@@ -41,6 +42,7 @@ const Projectdetail = () => {
   const [video, setVideo] = useState([])
   const [showModal, setShowModal] = useState(false);
   const [leadModel, setLeadModel] = useState(false);
+  const [customEnquiry, setCustomEnquiry] = useState(false);
   const { slug } = useParams();
   const location = useLocation();
   const dispatch = useDispatch()
@@ -312,6 +314,14 @@ const rawArea =
       dispatch(setTitle(propertys.projectname));
     }
   }, [propertys?.projectname]);
+
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setCustomEnquiry(true);
+  }, 3000); // 5 seconds
+
+  return () => clearTimeout(timer); // cleanup
+}, []);
 
   useEffect(() => {
     fetchproperty()
@@ -794,6 +804,13 @@ try {
       {leadModel && (
         <div>
           <Leadgentaionform setLeadModel={setLeadModel} projectOwners={projectOwners}  />
+          {/* <Customenquiryform setLeadModel={setLeadModel} /> */}
+        </div>
+      )}
+
+      {customEnquiry && (
+        <div>
+          <Customenquiryform setCustomEnquiry={setCustomEnquiry} propertys={propertys} />
         </div>
       )}
 
