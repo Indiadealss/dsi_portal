@@ -375,7 +375,7 @@ const HeroSearch = () => {
                       className="p-2 cursor-pointer hover:bg-gray-100"
                       onClick={() => {
                         setLocationInput(displayText);
-                        setSelectedLocation(displayText);
+                        setSelectedLocation(item.city);
                         setLocationList([]);
                       }}
                     >
