@@ -400,7 +400,7 @@ console.log(residential, 'residential');
       </div>
 
       {/* main */}
-      <div className='mt-40 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
+      <div className='mt-10 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
         

@@ -319,7 +319,7 @@ const HeroSearch = () => {
     setProjectInut(value)
   }
   return (
-    <div className="relative w-full h-[80vh] md:h-[90vh]">
+    <div className="relative w-full h-[80vh] md:h-[46vh]">
 
       <img
         src={projectName}
@@ -327,7 +327,7 @@ const HeroSearch = () => {
         className="w-full h-full object-cover"
       />
 
-      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-4 text-center">
+      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-4 text-center pt-[36vh]">
 
         <h1 className="text-white text-2xl md:text-5xl font-semibold">
           <span className="text-white">Find your perfect</span> <span className="text-white">property</span>
