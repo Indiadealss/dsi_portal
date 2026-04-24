@@ -76,6 +76,10 @@ export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
 }
 
+export const getSearchcitiesList = async (city) => {
+  return API.get(`/cities/searchCities?query=${city}`)
+}
+
 export const getallProperty = async (page ='',filter = '',purpose='',property='', slug='', filterForm = {}) => {
   console.log(purpose,'purpose');
   

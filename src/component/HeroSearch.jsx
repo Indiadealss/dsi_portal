@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllProjectNames, getallProperty, searchaddress } from "../api/api";
+import { getAllProjectNames, getallProperty, getSearch, getSearchcitiesList, searchaddress } from "../api/api";
 import projectName from '../Images/dubai-marina-panorama-photo.jpg';
 import { useNavigate } from "react-router-dom";
 import { updateFilter } from "./Redux/filterSlice";
@@ -35,7 +35,7 @@ const HeroSearch = () => {
     { name: 'Penthouse', value: 'Penthouse' }
   ];
 
-  const [construtStatus,setConstrutStatus] = useState('')
+  const [construtStatus, setConstrutStatus] = useState('')
 
   const constructionStatus = [
     { name: 'New launch', value: 'New launch' },
@@ -83,7 +83,7 @@ const HeroSearch = () => {
   const [alltype, setAlltype] = useState('All Types');
   const [sizeSpace, setSizeSpace] = useState('Any');
   const [selectedSize, setSelectedSize] = useState("");
-  const [projectNpxid,setProjectNpxid] = useState("");
+  const [projectNpxid, setProjectNpxid] = useState("");
   const [customSize, setCustomSize] = useState("");
   const [selectedSubType, setSelectedSubType] = useState("");
   const [bedroom, setBedroom] = useState("");
@@ -110,61 +110,61 @@ const HeroSearch = () => {
   };
 
   // 🔥 NEW STATE ADD
-const [filteredProjects, setFilteredProjects] = useState([]);
-const [projectList,setProjectList] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+  const [projectList, setProjectList] = useState([]);
 
-useEffect(() => {
-  if (projectname.length) {
-    setFilteredProjects(projectname);
-  }
-}, [projectname]);
+  useEffect(() => {
+    if (projectname.length) {
+      setFilteredProjects(projectname);
+    }
+  }, [projectname]);
 
-// 🔥 FILTER LOGIC ADD
-useEffect(() => {
-  let filtered = [...projectname];
+  // 🔥 FILTER LOGIC ADD
+  useEffect(() => {
+    let filtered = [...projectname];
 
-  // city filter
-  if (selectedLocation) {
-    filtered = filtered.filter(project => {
-      let city = "";
+    // city filter
+    if (selectedLocation) {
+      filtered = filtered.filter(project => {
+        let city = "";
 
-      if (Array.isArray(project.location)) {
-        city = project.location[0]?.City || "";
-      } else {
-        try {
-          const parsed = JSON.parse(project.location);
-          city = parsed.City || "";
-        } catch {
-          city = "";
+        if (Array.isArray(project.location)) {
+          city = project.location[0]?.City || "";
+        } else {
+          try {
+            const parsed = JSON.parse(project.location);
+            city = parsed.City || "";
+          } catch {
+            city = "";
+          }
         }
-      }
 
-      return city.toLowerCase().includes(selectedLocation.toLowerCase());
-    });
-  }
+        return city.toLowerCase().includes(selectedLocation.toLowerCase());
+      });
+    }
 
-  // construction status filter
-  if (construtStatus) {
+    // construction status filter
+    if (construtStatus) {
 
-  filtered = filtered.filter(project => {
-    const status = project.availabestatus?.trim().toLowerCase();
-    const selected = construtStatus.trim().toLowerCase();
+      filtered = filtered.filter(project => {
+        const status = project.availabestatus?.trim().toLowerCase();
+        const selected = construtStatus.trim().toLowerCase();
 
-    // skip empty status (optional)
-    if (!status) return false;
+        // skip empty status (optional)
+        if (!status) return false;
 
-    return status === selected;
-  });
+        return status === selected;
+      });
 
-}
-  // fallback → show all
-  if (!selectedLocation && !construtStatus) {
-    filtered = projectname;
-  }
+    }
+    // fallback → show all
+    if (!selectedLocation && !construtStatus) {
+      filtered = projectname;
+    }
 
-  setFilteredProjects(filtered);
+    setFilteredProjects(filtered);
 
-}, [selectedLocation, construtStatus, projectname]);
+  }, [selectedLocation, construtStatus, projectname]);
 
 
   const createSearchSlug = (query) => {
@@ -179,29 +179,29 @@ useEffect(() => {
 
   const createProjectSlug = (project) => {
     if (!project && alltype === 'Projects') {
-      console.log(locationInput ,alltype,'no project found');
+      console.log(locationInput, alltype, 'no project found');
       // dispatch(updateFilter({location:locationInput}));
       const finalLocation = locationInput || 'All India';
-      if(locationInput){
-        dispatch(updateFilter({location:locationInput}));
-      }else{
-          dispatch(updateFilter({location:'All India'}));
-      } 
-      dispatch(updateFilter({purpose:alltype}));
+      if (locationInput) {
+        dispatch(updateFilter({ location: locationInput }));
+      } else {
+        dispatch(updateFilter({ location: 'All India' }));
+      }
+      dispatch(updateFilter({ purpose: alltype }));
       return `${finalLocation}-${alltype}-${construtStatus}-ffid`
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)+/g, "");
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)+/g, "");
     }
 
     if (!project) {
       return "";
     }
 
-    console.log(project,'no project found');
+    console.log(project, 'no project found');
     let city = "";
 
-    dispatch(updateFilter({purpose:construtStatus}));
+    dispatch(updateFilter({ purpose: construtStatus }));
 
     // handle both cases (array / string)
     if (Array.isArray(project.location)) {
@@ -224,12 +224,12 @@ useEffect(() => {
   const handleSearch = async () => {
     const query = new URLSearchParams();
 
-    if(selectedLocation){
-      query.append("location",selectedLocation);
+    if (selectedLocation) {
+      query.append("location", selectedLocation);
     }
 
-    if(!selectedLocation){
-      query.append("location",'All India');
+    if (!selectedLocation) {
+      query.append("location", 'All India');
     }
 
     if (alltype !== "All Types" && alltype !== "Projects") {
@@ -244,7 +244,7 @@ useEffect(() => {
       query.append("propertyType", selectedSubType);
     }
 
-    
+
 
     if (selectedSize) {
       query.append("size", selectedSize);
@@ -254,10 +254,10 @@ useEffect(() => {
       query.append("bedroom", bedroom);
     }
 
-    console.log(query,'all query has been updated ?');
-    
+    console.log(query, 'all query has been updated ?');
 
-    
+
+
 
     if (alltype !== 'Projects') {
       const slug = createSearchSlug(query);
@@ -266,11 +266,11 @@ useEffect(() => {
 
     if (alltype === "Projects") {
       const selectedProject = projectname.find(
-  (p) => p.npxid === selectedProjectId
-);
+        (p) => p.npxid === selectedProjectId
+      );
 
-      console.log(selectedProjectId,projectNpxid,"let's check");
-      
+      console.log(selectedProjectId, projectNpxid, "let's check");
+
 
       const slug = createProjectSlug(selectedProject);
 
@@ -293,29 +293,31 @@ useEffect(() => {
       return;
     }
 
-    
+
 
     try {
-      const res = await searchaddress(value, "Noida");
+      const res = await getSearchcitiesList(value);
 
       if (res.status === 200) {
-        setLocationList(res.data.existingAddresses);
+        setLocationList(res.data.data);
+        console.log(res.data.data, 'res.data', res.data.existingAddresses, 'res existingAddresses');
+
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-    const handleProjectSearch = async (value) => {
-      const filtered = filteredProjects.filter(project =>
-    project.projectname?.toLowerCase().includes(value.toLowerCase()) ||
-    project.npxid?.toLowerCase().includes(value.toLowerCase())
-  );
+  const handleProjectSearch = async (value) => {
+    const filtered = filteredProjects.filter(project =>
+      project.projectname?.toLowerCase().includes(value.toLowerCase()) ||
+      project.npxid?.toLowerCase().includes(value.toLowerCase())
+    );
 
-  setProjectList(filtered);
-      console.log(filteredProjects);
-      setProjectInut(value)
-    }
+    setProjectList(filtered);
+    console.log(filteredProjects);
+    setProjectInut(value)
+  }
   return (
     <div className="relative w-full h-[80vh] md:h-[90vh]">
 
@@ -360,20 +362,27 @@ useEffect(() => {
 
             {locationList.length > 0 && (
               <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
-                {locationList.map((item, index) => (
-                  <li
-                    key={index}
-                    className="p-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => {
-                      const value = `${item.city}`;
-                      setLocationInput(value);
-                      setSelectedLocation(value);
-                      setLocationList([]);
-                    }}
-                  >
-                    {item.city}
-                  </li>
-                ))}
+                {locationList.map((item, index) => {
+                  const isSame = item.name?.toLowerCase() === item.city?.toLowerCase();
+
+                  const displayText = isSame
+                    ? item.name
+                    : `${item.name}, ${item.city}`;
+
+                  return (
+                    <li
+                      key={index}
+                      className="p-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => {
+                        setLocationInput(displayText);
+                        setSelectedLocation(displayText);
+                        setLocationList([]);
+                      }}
+                    >
+                      {displayText}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>
@@ -407,7 +416,7 @@ useEffect(() => {
               className={`flex-1 px-4 py-3 outline-none border-b md:border-b-0  
               ${propertyType.length === 0 ? "bg-white text-gray-400 cursor-not-allowed" : "bg-white"}
                 `}
-                >
+            >
               <option value="">Type of Property</option>
 
               {propertyType.map((item, index) => (
@@ -450,37 +459,37 @@ useEffect(() => {
 
           {(alltype === 'Projects') && (
             <div className="relative flex-1">
-            <input
-              type="text"
-              value={projectInput}
-              onChange={(e) => handleProjectSearch(e.target.value)}
-              placeholder="Search Projects By Name..."
-              className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
-            />
-            
+              <input
+                type="text"
+                value={projectInput}
+                onChange={(e) => handleProjectSearch(e.target.value)}
+                placeholder="Search Projects By Name..."
+                className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
+              />
 
-            {filteredProjects.length > 0 && projectInput && (
-              <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
-                {projectList.map((item, index) => (
-                  <li
-                    key={index}
-                    className="p-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => {
-                      const value = `${item.npxid}`;
-                      const projectName = `${item.projectname}`;
-                      setProjectNpxid(value);
-                      setSelectedProjectId(item.npxid);
-                      setProjectInut(projectName);
-                      setSelectedLocation(value);
-                      setLocationList([]);
-                    }}
-                  >
-                    {item.projectname}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+
+              {filteredProjects.length > 0 && projectInput && (
+                <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
+                  {projectList.map((item, index) => (
+                    <li
+                      key={index}
+                      className="p-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => {
+                        const value = `${item.npxid}`;
+                        const projectName = `${item.projectname}`;
+                        setProjectNpxid(value);
+                        setSelectedProjectId(item.npxid);
+                        setProjectInut(projectName);
+                        setSelectedLocation(value);
+                        setLocationList([]);
+                      }}
+                    >
+                      {item.projectname}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           )}
           {/* Button */}
           <button onClick={handleSearch} className="my-5 md:my-0 bg-[#e9ae01] text-white px-6 py-3 rounded-full md:rounded-r-full md:rounded-l-none font-semibold hover:bg-lime-600">
