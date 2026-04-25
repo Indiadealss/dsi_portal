@@ -31,7 +31,7 @@ import { clearUser } from "./Redux/userSlice";
 import { getLogout } from "../api/api";
 import { updateFilter } from "./Redux/filterSlice";
 import Mobilenavcustombtn from "./customantdesign/Mobilenavcustombtn";
-import AlertBox from "./customcomponent/Alertbox";
+import AlertBox from "./customcomponent/AlertBox";
 
 const { Header } = Layout;
 
