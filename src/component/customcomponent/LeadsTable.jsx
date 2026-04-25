@@ -78,4 +78,4 @@ const LeadsTable = ({ data }) => {
   );
 };
 
-export default LeadsTable;
+export default LeadsTable
