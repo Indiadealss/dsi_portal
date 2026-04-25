@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 export default function Inputforotp({ length, onComplete }) {
   const [values, setValues] = useState(Array(length).fill(""));
   const refs = useRef(Array(length).fill(null));
+  const inputsRef = useRef([]);
 
   useEffect(() => {
   inputsRef.current[0]?.focus();
