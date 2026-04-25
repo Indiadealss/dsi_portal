@@ -6,115 +6,132 @@ import { data, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './Redux/userSlice';
 import { updateField } from './Redux/propertySlice';
+import AlertBox from './customcomponent/Alertbox';
 
-const Verify = ({mobile, changeotpsend,redirectTo,resmobilef,closeModal  }) => {
-    const [timer,setTimer] = useState(30); //30 seconds countdown
-    const [canResend,setCanResend] = useState(false);
-    const [otp, setOtp] = useState("");
-    const [foundit,setFounded] = useState(false);
-    const user = useSelector(state => state.user);
-    const dispatch = useDispatch();
+const Verify = ({ mobile, changeotpsend, redirectTo, resmobilef, closeModal }) => {
+  const [timer, setTimer] = useState(30); //30 seconds countdown
+  const [canResend, setCanResend] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [foundit, setFounded] = useState(false);
+  const [alert, setAlert] = useState(null);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
 
 
-    useEffect(() => {
-  // console.log("Updated user:", user);
-}, [user]);
+  useEffect(() => {
+    // console.log("Updated user:", user);
+  }, [user]);
 
-    useEffect(() => {
-        if(timer > 0){
-            const countdown = setTimeout(() => setTimer(timer - 1), 1000);
-            return () => clearTimeout(countdown);
-        }
-        else {
-            setCanResend(true);
-        }
-    },[timer]);
-
-    function handleOtpChange(value){
-        setOtp(value);
+  useEffect(() => {
+    if (timer > 0) {
+      const countdown = setTimeout(() => setTimer(timer - 1), 1000);
+      return () => clearTimeout(countdown);
     }
-
-    let mobileNo = `+91${mobile}`;
-    const handleVerify = async () => {
-            try{
-                const res = await verifyOtp(mobileNo,otp);
-
-                if(res.status === 200){
-                  console.log(!res.data.redirect, 'res.data.redirect');
-                  console.log(res.data,'dddjasdjkl');
-                  
-                  
-                  if(!res.data.redirect){
-                    resmobilef(res.data.user.mobile);
-                    redirectTo(res.data.redirect);
-                    // console.log(res.data.user);
-                    dispatch(setUser(res.data.user));
-                    // console.log(user);
-                     window.location.reload();
-                    alert("Login Sucessfully");
-                     if (closeModal) closeModal();
-                  }else{
-                  resmobilef(res.data.mobile);
-                  redirectTo(res.data.redirect);
-                  }
-                }
-            }catch(err){
-                console.error('Error verify OTP:',err);
-                
-            }
+    else {
+      setCanResend(true);
     }
+  }, [timer]);
+
+  function handleOtpChange(value) {
+    setOtp(value);
+  }
+
+  let mobileNo = `+91${mobile}`;
+  const handleVerify = async () => {
+    try {
+      const res = await verifyOtp(mobileNo, otp);
+
+      if (res.status === 200) {
+        console.log(!res.data.redirect, 'res.data.redirect');
+        console.log(res.data, 'dddjasdjkl');
 
 
-    const handleSend = async () => {
-      setOtp(0)
-            try{
-                const res = await sentOtp(mobileNo);
-                // console.log("otp sent:",res.status);
-                if(res.status === 200) {
-                  setOtpSent(true)
-                }
-                
-            }catch(err) {
-              console.error("Error sending OTP:", err);
-              
-            }
-          };
+        if (!res.data.redirect) {
+          resmobilef(res.data.user.mobile);
+          redirectTo(res.data.redirect);
+          // console.log(res.data.user);
+          dispatch(setUser(res.data.user));
+          setAlert({
+            message: "Login successful ✅",
+            type: "success",
+          });
+          // window.location.reload();
+          setTimeout(() => {
+        setAlert(null);
+        window.location.reload(); // optional
+      }, 2000);
+
+          if (closeModal) closeModal();
+        } else {
+          resmobilef(res.data.mobile);
+          redirectTo(res.data.redirect);
+        }
+      }
+    } catch (err) {
+      console.error('Error verify OTP:', err);
+
+    }
+  }
+
+
+  const handleSend = async () => {
+    setOtp(0)
+    try {
+      const res = await sentOtp(mobileNo);
+      // console.log("otp sent:",res.status);
+      if (res.status === 200) {
+        setOtpSent(true)
+      }
+
+    } catch (err) {
+      console.error("Error sending OTP:", err);
+
+    }
+  };
 
   return (
     <>
-        <div>
-            <div >
-        <h2><span className="text-2xl font-bold text-gray-700" style={{fontFamily:"sans-serif"}}>Verify your number</span></h2>
-        <div className='mb-10 flex'><span className="text-2xl font-medium text-gray-700" style={{fontFamily:"sans-serif"}}>+91-{mobile}</span> <MdEdit className='m-1 text-xl text-blue-500 cursor-pointer' onClick={changeotpsend} /></div>
 
-      </div>
+      {alert && (
+        <AlertBox
+          message={alert.message}
+          type={alert.type}
+          onClose={() => setAlert(null)}
+        />
+      )}
+      <div>
+        <div >
+          <h2><span className="text-2xl font-bold text-gray-700" style={{ fontFamily: "sans-serif" }}>Verify your number</span></h2>
+          <div className='mb-10 flex'><span className="text-2xl font-medium text-gray-700" style={{ fontFamily: "sans-serif" }}>+91-{mobile}</span> <MdEdit className='m-1 text-xl text-blue-500 cursor-pointer' onClick={changeotpsend} /></div>
 
-      {/* <div className="mb-3">
+        </div>
+
+        {/* <div className="mb-3">
             <label className="block my-2 mb-5 text-sm font-normal text-gray-500 ">Please enter your Phone Number</label>
             <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     outline-none" placeholder="Enter your phone number" />
           </div> */}
-          <p className='my-2'>
+        <p className='my-2'>
           <span className='font-medium'>Enter your 4 digit OTP</span>
         </p>
-          <Inputforotp length={4} onComplete={handleOtpChange}/>
+        <Inputforotp length={4} onComplete={handleOtpChange} />
 
-          {canResend ? (
-            <p>
-          Haven't recived yet? <button  className='text-blue-600 cursor-pointer hover:unerline' onClick={handleSend}>Resend OTP</button>
-        </p>
-          ) : (
-            <p className="text-gray-500 text-sm">
-          Haven't recived yet? wait {timer}s
-        </p>
-          )}
+        {canResend ? (
+          <p>
+            Haven't recived yet? <button className='text-blue-600 cursor-pointer hover:unerline' onClick={handleSend}>Resend OTP</button>
+          </p>
+        ) : (
+          <p className="text-gray-500 text-sm">
+            Haven't recived yet? wait {timer}s
+          </p>
+        )}
 
-          <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10">
           <button type="button" onClick={handleVerify} className="cursor-pointer w-full text-xl text-white font-medium bg-blue-200 bg-blue-500 shadow-lg shadow-blue-500/50 p-2 rounded">
             Verify & Continue
           </button>
-          </div>
         </div>
+      </div>
     </>
   )
 }

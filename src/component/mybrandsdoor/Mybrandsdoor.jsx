@@ -211,7 +211,7 @@ const Mybrandsdoor = () => {
                     </div>
 
                     {/* MAIN SCROLL AREA */}
-                    <div className='flex-1 overflow-y-auto px-2 md:px-5 pb-10'>
+                    <div className='flex-1 overflow-y-auto px-2 md:px-5 pb-10 mb-[7vw]'>
                         <Outlet />
                     </div>
 

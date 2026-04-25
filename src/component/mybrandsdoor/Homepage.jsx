@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { lead } from '../../api/api';
 import { useSelector } from 'react-redux';
+import LeadsTable from '../customcomponent/Leadstable';
 
 const Homepage = () => {
 
@@ -44,10 +45,12 @@ useEffect(() => {
   properties: propertyList.filter(p => p.spid).length,
   expiringSoon: 0,
   recentlyExpired: 0,
-  enquiry: enquiryList.length
+  enquiry: enquiryList
 });
 
 console.log("propertyList", propertyList);
+console.log(stats.enquiry, 'enquiry is the list');
+
 console.log("projects", propertyList.filter(p => p.npxid));
 console.log("properties", propertyList.filter(p => p.spid));
         }
@@ -60,6 +63,8 @@ console.log("properties", propertyList.filter(p => p.spid));
 if (!projects.length && !properties.length) {
   return <div>Loading...</div>;
 }
+
+
 
 
   return (
@@ -96,7 +101,7 @@ if (!projects.length && !properties.length) {
           </div>
           <div>
             <h3 className="text-sm font-medium"><span className='text-gray-700 font-medium'>Enquiry</span></h3>
-            <p className="text-lg font-semibold">{stats.enquiry}</p>
+            <p className="text-lg font-semibold">{stats.enquiry.length}</p>
           </div>
         </div>
       </div>
@@ -117,7 +122,7 @@ if (!projects.length && !properties.length) {
 
     {/*Edit properties*/}
 
-
+          <LeadsTable data={stats.enquiry} />
    
     </div>
   )

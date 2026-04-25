@@ -31,6 +31,7 @@ import { clearUser } from "./Redux/userSlice";
 import { getLogout } from "../api/api";
 import { updateFilter } from "./Redux/filterSlice";
 import Mobilenavcustombtn from "./customantdesign/Mobilenavcustombtn";
+import AlertBox from "./customcomponent/Alertbox";
 
 const { Header } = Layout;
 
@@ -562,6 +563,7 @@ export default function Navbar() {
 
   const [scroll,setScroll] = useState(false);
   const [locationNav,setLocationNav] = useState('All India')
+  const [alert, setAlert] = useState(null);
 
   
 
@@ -607,7 +609,23 @@ export default function Navbar() {
   //logout api
   const handleLogout = async () => {
     try{
-      await getLogout();
+      const res = await getLogout();
+
+      if(res.status === 200){
+        setAlert({
+        message: "Logout successful ✅",
+        type: "success",
+      });
+
+      dispatch(clearUser());
+
+      setTimeout(() => {
+        setAlert(null);
+        window.location.reload(); // optional
+      }, 2000);
+        // window.location.reload();
+      }
+      
       dispatch(clearUser());
     }catch(err){
       console.error("Logout failed",err);
@@ -616,7 +634,7 @@ export default function Navbar() {
   };
 
   const logout = user.loggedIn ? (
-     <span onClick={handleLogout}>Log out</span>//show user name
+     <span onClick={handleLogout} className="cursor-pointer">Log out</span>//show user name
   ):(
     ''
   )
@@ -694,6 +712,7 @@ useEffect(() => {
 
     return (
       <>
+     
       <div
         style={{
           background: "#f5f5f5",
@@ -788,6 +807,13 @@ useEffect(() => {
 
   return (
     <>
+     {alert && (
+  <AlertBox
+    message={alert.message}
+    type={alert.type}
+    onClose={() => setAlert(null)}
+  />
+)}
     <Header
     className={`w-full  left-0 z-50 transition-all duration-50 
   ${
