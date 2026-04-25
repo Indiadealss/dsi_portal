@@ -1,9 +1,13 @@
 // OTPInput.jsx
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Inputforotp({ length, onComplete }) {
   const [values, setValues] = useState(Array(length).fill(""));
   const refs = useRef(Array(length).fill(null));
+
+  useEffect(() => {
+  inputsRef.current[0]?.focus();
+}, []);
 
   const focusInput = (idx) => {
     const node = refs.current[idx];
