@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { lead } from '../../api/api';
 import { useSelector } from 'react-redux';
-import LeadsTable from '../customcomponent/Leadstable';
+import LeadsTable from '../customcomponent/LeadsTable.jsx';
 
 const Homepage = () => {
 
@@ -128,4 +128,4 @@ if (!projects.length && !properties.length) {
   )
 }
 
-export default Homepage
+export default Homepage;
