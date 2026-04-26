@@ -1324,6 +1324,7 @@ export const Profileproperty = ({ setValidator }) => {
         >
           <option value="">Select Unit Type</option>
           <option value="Offices">Offices</option>
+          <option value="Studio">Studio</option>
           <option value="Shop">Shop</option>
         </select>
 

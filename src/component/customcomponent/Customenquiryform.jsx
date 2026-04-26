@@ -7,6 +7,7 @@ export default function Customenquiryform({ setCustomEnquiry, propertys }) {
     
   const [formData, setFormData] = useState({
     property_id: propertys._id,
+    projectname: propertys.projectname,
     Name: "",
     PhoneNumber: "",
     email: "",
