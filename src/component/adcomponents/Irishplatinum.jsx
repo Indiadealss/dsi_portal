@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import banner from '../../Images/irishPlatinumBanner.jpg';
 import irislogo from '../../Images/irishLogo.png'
+import IrishLogo from '../../Images/Irish-Logo.png'
 import { Phone, MessageCircle, Image } from 'lucide-react';
 import Amenities from "./Adanminities.jsx";
 import Customenquiryform from "../customcomponent/Customenquiryform.jsx";
@@ -60,13 +61,20 @@ const Irishplatinum = () => {
       {/* 2. Top Navigation Items (Logo & Labels) */}
       <div className="absolute top-8 left-8 z-10 hidden md:block">
         <div className="flex flex-col items-center">
-            <p className=" opacity-80 uppercase tracking-tighter">+91 9818764200</p>
+            <div className="w-22 h-12 bg-white rounded-full p-2  flex items-center justify-center mb-1">
+                <img
+          src={IrishLogo} // Replace with your image path
+          fill
+          className="object-cover"
+          priority
+          alt="Irish Platinum"
+        />
+            </div>
         </div>
       </div>
       
       <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
-        
-        <div className="w-22 h-12  flex items-center justify-center mb-1">
+        <div className="w-42 h-12  flex items-center justify-center mb-1">
                 <img
           src={irislogo} // Replace with your image path
           fill
@@ -75,6 +83,7 @@ const Irishplatinum = () => {
           alt="Irish Platinum"
         />
             </div>
+        <p className=" opacity-80 uppercase tracking-tighter">+91 9818764200</p>
         
       </div>
 
