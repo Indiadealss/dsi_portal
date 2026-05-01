@@ -122,7 +122,7 @@ export default function ContactSection() {
               ✅ Enquiry submitted successfully!
             </div>
           )}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
               <div>
                 <label className="text-xs font-bold text-gray-500 uppercase mb-1 block">Name</label>
                 <input
@@ -142,7 +142,7 @@ export default function ContactSection() {
                  <input
               type="text"
               name="PhoneNumber"
-              placeholder="PhoneNumber Number"
+              placeholder="Phone Number"
               value={formData.PhoneNumber}
               onChange={handleChange}
               className="w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
@@ -153,7 +153,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="">
               <div className="space-y-4">
                 <div>
                   <label className="text-xs font-bold text-gray-500 uppercase mb-1 block">Email</label>
@@ -185,14 +185,14 @@ export default function ContactSection() {
               </div>
               
               {/* Small Decorative Image inside Form (as seen in screenshot) */}
-              <div className="hidden md:block relative rounded-lg overflow-hidden h-full">
+              {/* <div className="hidden md:block relative rounded-lg overflow-hidden h-full">
                 <img
                   src={irishPlatinumQuestion} // Small project thumbnail
                   fill
                   className="object-cover"
                   alt="Project Thumbnail"
                 />
-              </div>
+              </div> */}
             </div>
 
             

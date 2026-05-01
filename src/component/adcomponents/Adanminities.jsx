@@ -63,7 +63,7 @@ const amenities = [
 const highlights = [
   { text: "11 ft high ceilings", sub: " offering enhanced space and luxury feel" },
   { text: "8 ft wide balconies", sub: "enjoy a terrace-like experience" },
-  { text: "Designed by Irish Group", sub: "" },
+  { text: "MI-VAN Construction", sub: "" },
   { text: "Low-Density Living", sub: "with Park Facing & Road Facing Units" },
   { text: "High Rise Apartments", sub: "up to 29 Floors" },
 ];
@@ -213,16 +213,19 @@ export default function Adanminities({setCustomEnquiry}) {
             </div>
             <hr className="border-gray-300" />
             <div className="space-y-3 pt-2">
-                <p className="text-[#333] font-bold">4 BHK + Study + 3 Toilets: 
+                <p className="text-[#333] font-bold">3 BHK + 2 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1390 sq ft</span>
+              </p>
+                <p className="text-[#333] font-bold">3 BHK + 3 Toilets: 
                 <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1690 sq ft</span>
               </p>
-              <p className="text-[#333] font-bold">3 BHK + Servent + 2 Toilets: 
+              <p className="text-[#333] font-bold">3 BHK + 4 Toilets + Servent: 
                 <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1925 sq ft</span>
               </p>
-              <p className="text-[#333] font-bold">4 BHK + Servent + 5 Toilets: 
+              <p className="text-[#333] font-bold">4 BHK  + 4 Toilets: 
                 <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">2150 sq ft</span>
               </p>
-              <p className="text-[#333] font-bold">4 BHK + Servent + 5 Toilets: 
+              <p className="text-[#333] font-bold">4 BHK  + 5 Toilets + Servent: 
                 <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">2550 sq ft</span>
               </p>
               
