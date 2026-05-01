@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import banner from '../../Images/irishPlatinumBanner.jpg';
-import irislogo from '../../Images/irishLogo.webp'
+import irislogo from '../../Images/irishLogo.png'
 import { Phone, MessageCircle, Image } from 'lucide-react';
 import Amenities from "./Adanminities.jsx";
 import Customenquiryform from "../customcomponent/Customenquiryform.jsx";
@@ -60,7 +60,13 @@ const Irishplatinum = () => {
       {/* 2. Top Navigation Items (Logo & Labels) */}
       <div className="absolute top-8 left-8 z-10 hidden md:block">
         <div className="flex flex-col items-center">
-            <div className="w-12 h-12 bg-white  flex items-center justify-center mb-1">
+            <p className=" opacity-80 uppercase tracking-tighter">+91 9818764200</p>
+        </div>
+      </div>
+      
+      <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
+        
+        <div className="w-22 h-12  flex items-center justify-center mb-1">
                 <img
           src={irislogo} // Replace with your image path
           fill
@@ -69,12 +75,7 @@ const Irishplatinum = () => {
           alt="Irish Platinum"
         />
             </div>
-            <p className="text-[10px] tracking-widest font-bold uppercase">Irish Platinum</p>
-        </div>
-      </div>
-      
-      <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
-        <p className=" opacity-80 uppercase tracking-tighter">+91 9818764200</p>
+        
       </div>
 
       {/* 3. Main Content */}
