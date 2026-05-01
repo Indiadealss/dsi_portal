@@ -10,7 +10,7 @@ const Layout = () => {
   const location = useLocation();
 
   // 2. Define the paths where you want to hide the header/footer
-  const hideLayout = location.pathname === "/irish";
+  const hideLayout = location.pathname === "/irish-platinum";
 
   return (
     <>
