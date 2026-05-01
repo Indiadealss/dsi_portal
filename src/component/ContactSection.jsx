@@ -201,7 +201,7 @@ export default function ContactSection() {
               type="submit"
               className="w-full bg-[#3b82f6] cursor-pointer text-white font-bold py-4 rounded transition-all uppercase tracking-widest text-sm shadow-lg"
             >
-              Explore Now
+              Submit Now
             </button>
           </form>
         </div>
