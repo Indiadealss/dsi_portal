@@ -3,6 +3,7 @@ import irishPlatinumgall from '../../Images/irishPlatinumgall-3.jpg';
 import irishPlatinumSportsArea from '../../Images/irishPlatinumSportsArea.jpeg';
 import irishPlatinumgalls from '../../Images/irishPlatinumgall-2.jpg';
 import irishPlatinumQuestion from '../../Images/irishPlatinumQuestion.jpg';
+import Dayview from '../../Images/DayView.png';
 import { Tag, Home, Building2 } from 'lucide-react';
 import { Bed, Utensils, Sofa, DoorOpen, Paintbrush } from 'lucide-react';
 
@@ -155,12 +156,13 @@ export default function Adanminities({setCustomEnquiry}) {
 
           {/* Right Side: Image with Rounded Corners */}
           <div className="relative h-[400px] md:h-[500px] w-full rounded-[40px] overflow-hidden shadow-2xl">
-            <img
-              src={irishPlatinumQuestion} // Path to your building render image
-              alt="Irish Platinum"
-              fill
-              className="object-cover w-[-webkit-fill-available]"
-            />
+           <img
+    src={irishPlatinumQuestion}
+    alt="Tower T-10 Gold Render"
+    // 'object-contain' puri image dikhayega, bina crop kiye.
+    // 'object-bottom' building ko neeche se align karega taaki neeche khali jagah na dikhe.
+    className="w-full h-full object-contain object-bottom"
+  />
           </div>
         </div>
       </div>
@@ -179,11 +181,12 @@ export default function Adanminities({setCustomEnquiry}) {
         {/* Left Side: High-Resolution Render */}
         <div className="relative h-[500px] lg:h-[650px] w-full overflow-hidden shadow-xl">
           <img
-            src={irishPlatinumQuestion} // Path to your gold tower render
-            alt="Tower T-10"
-            fill
-            className="object-cover w-[-webkit-fill-available]"
-          />
+    src={Dayview}
+    alt="Tower T-10 Gold Render"
+    // 'object-contain' puri image dikhayega, bina crop kiye.
+    // 'object-bottom' building ko neeche se align karega taaki neeche khali jagah na dikhe.
+    className="w-[-webkit-fill-available] h-full object-contain object-bottom"
+  />
         </div>
 
         {/* Right Side: Information Data */}
@@ -210,19 +213,19 @@ export default function Adanminities({setCustomEnquiry}) {
             </div>
             <hr className="border-gray-300" />
             <div className="space-y-3 pt-2">
-              <p className="text-[#333] font-bold">3 BHK + Study + 2 Toilets: 
-                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1390 sq ft</span>
+                <p className="text-[#333] font-bold">4 BHK + Study + 3 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1690 sq ft</span>
               </p>
-              
               <p className="text-[#333] font-bold">3 BHK + Servent + 2 Toilets: 
                 <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1925 sq ft</span>
               </p>
-              <p className="text-[#333] font-bold">4 BHK + Study + 3 Toilets: 
-                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1690 sq ft</span>
+              <p className="text-[#333] font-bold">4 BHK + Servent + 5 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">2150 sq ft</span>
               </p>
               <p className="text-[#333] font-bold">4 BHK + Servent + 5 Toilets: 
                 <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">2550 sq ft</span>
               </p>
+              
             </div>
           </div>
 
