@@ -6,6 +6,7 @@ import irishPlatinumQuestion from '../../Images/irishPlatinumQuestion.jpg';
 import { Tag, Home, Building2 } from 'lucide-react';
 import { Bed, Utensils, Sofa, DoorOpen, Paintbrush } from 'lucide-react';
 
+
 const specs = [
   {
     title: "Master Bedroom",
@@ -61,10 +62,9 @@ const amenities = [
 const highlights = [
   { text: "11 ft high ceilings", sub: " offering enhanced space and luxury feel" },
   { text: "8 ft wide balconies", sub: "enjoy a terrace-like experience" },
-  { text: "Designed by Irish Group", sub: "(Global Architect) & Built by GLC Infra" },
+  { text: "Designed by Irish Group", sub: "" },
   { text: "Low-Density Living", sub: "with Park Facing & Road Facing Units" },
-  { text: "High Rise Apartments", sub: "up to 45 Floors" },
-  { text: "Pre-Launch Investment Opportunity", sub: "" },
+  { text: "High Rise Apartments", sub: "up to 29 Floors" },
 ];
 
 
@@ -193,7 +193,7 @@ export default function Adanminities({setCustomEnquiry}) {
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-[#b08d57] font-bold">
               <Tag size={20} />
-              <span className="uppercase tracking-widest text-sm">Pre-Launch Pricing</span>
+              <span className="uppercase tracking-widest text-sm"> Pricing</span>
             </div>
             <hr className="border-gray-300" />
             <div className="space-y-2 pt-2">
@@ -210,11 +210,18 @@ export default function Adanminities({setCustomEnquiry}) {
             </div>
             <hr className="border-gray-300" />
             <div className="space-y-3 pt-2">
-              <p className="text-[#333] font-bold">3 BHK + Study + 4 Toilets: 
-                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1390 sq ft 3 BHK + 2 TOILET</span>
+              <p className="text-[#333] font-bold">3 BHK + Study + 2 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1390 sq ft</span>
               </p>
-              <p className="text-[#333] font-bold">4 BHK + Study + 5 Toilets: 
-                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1690 sq ft 3 BHK + 3 TOILET</span>
+              
+              <p className="text-[#333] font-bold">3 BHK + Servent + 2 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1925 sq ft</span>
+              </p>
+              <p className="text-[#333] font-bold">4 BHK + Study + 3 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">1690 sq ft</span>
+              </p>
+              <p className="text-[#333] font-bold">4 BHK + Servent + 5 Toilets: 
+                <span className="font-normal text-gray-600 block sm:inline ml-0 sm:ml-2">2550 sq ft</span>
               </p>
             </div>
           </div>
@@ -228,7 +235,7 @@ export default function Adanminities({setCustomEnquiry}) {
             <hr className="border-gray-300" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 pt-2">
               <p className="text-[#333] font-bold">Tower: <span className="font-normal text-gray-600">T-4 | G+29 floors (1st to 29th)</span></p>
-              <p className="text-[#333] font-bold">Per Floor: <span className="font-normal text-gray-600"> 6 unit per floor in 3 BHK Tower & unit per floor in 4 BHK </span></p>
+              <p className="text-[#333] font-bold">Per Floor: <span className="font-normal text-gray-600"> 6 unit per floor in 3 BHK Tower & 4 unit per floor in 4 BHK </span></p>
               <p className="text-[#333] font-bold">Lifts: <span className="font-normal text-gray-600">3 High-Speed Lifts</span></p>
               <p className="text-[#333] font-bold">Type: <span className="font-normal text-gray-600">Low-density premium tower</span></p>
             </div>

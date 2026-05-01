@@ -11,6 +11,7 @@ import { Landmark } from 'lucide-react';
 import sbi from '../../Images/sbi.png';
 import uno from '../../Images/uno.png';
 import centralLogo from '../../Images/central-bank-of-india-logo-vector.png';
+import icici from '../../Images/icici.jpeg';
 
 
 const Irishplatinum = () => {
@@ -20,7 +21,7 @@ const Irishplatinum = () => {
 
       const banksAvailable = [
         {name:'SBI',logo:sbi},
-        {name:'uno',logo:uno},
+        {name:'ICICI',logo:icici},
         {name:'central',logo:centralLogo},
       ]
 
