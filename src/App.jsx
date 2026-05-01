@@ -55,6 +55,7 @@ import Editprofileproject from "./component/mybrandsdoor/Editprofileproject";
 import EditPropertyStepper from "./component/mybrandsdoor/EditPropertyProject";
 import NotFound from "./component/NotFound";
 import Layout from "./Layout";
+import Irishplatinum from './component/adcomponents/Irishplatinum.jsx'
 
 function App() {
 
@@ -104,6 +105,7 @@ function App() {
       element:<Layout />,
       children:[
     { path: "/", element: <Home /> },
+    {path:'/irish-platinum',element:<Irishplatinum />},
     
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
