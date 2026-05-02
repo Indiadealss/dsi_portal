@@ -37,7 +37,7 @@ function Footer() {
           <h4 className="mb-3 font-semibold text-center lg:text-start">Property Cities</h4>
           <ul className="space-y-2">
             <li><a href="/property/Noida-ffid" className="hover:text-gray-300">Noida</a></li>
-            <li><a href="/property/Grater-Noida-ffid" className="hover:text-gray-300">Grater Noida</a></li>
+            <li><a href="/property/Greater-Noida-ffid" className="hover:text-gray-300">Greater Noida</a></li>
             <li><a href="/property/Delhi-ffid" className="hover:text-gray-300">Delhi</a></li>
             <li><a href="/property/Gurgaon-ffid" className="hover:text-gray-300">Gurgaon</a></li>
             <li><a href="/property/Bangalore-ffid" className="hover:text-gray-300">Bangalore</a></li>
@@ -84,7 +84,7 @@ function Footer() {
         <div>
           <h4 className="mb-3 font-semibold text-center ">Address</h4>
           <div className="">
-            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium"> Registered Office:<br /> C-337 C , 3rd Floor, Block C, Golden I, Techzone 4, Grater Noida West,201304</span></p>
+            <p className="flex"><span className="text-lg pt-2 "><CiLocationOn /></span><span className="text-white text-lg ps-1  font-medium"> Registered Office:<br /> C-337 C , 3rd Floor, Block C, Golden I, Techzone 4, Greater Noida West,201304</span></p>
           </div>
         </div>
       </div>
