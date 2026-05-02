@@ -12,6 +12,8 @@ const Layout = () => {
   // 2. Define the paths where you want to hide the header/footer
   const hideLayout = location.pathname === "/irish-platinum";
 
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+
   return (
     <>
      {!hideLayout && <Navbar />}
