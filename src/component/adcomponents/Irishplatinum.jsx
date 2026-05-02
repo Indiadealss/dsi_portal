@@ -546,7 +546,7 @@ const Irishplatinum = () => {
     </div>
 
 
-    <ContactSection />
+    <ContactSection projectName='IRISH PLATINUM' projectLocation=' Gh-04A, Sector 10, Greater Noida West, <br />(Noida Extension), Uttar Pradesh'/>
     {customEnquiry && (
             <div>
               <Customenquiryform setCustomEnquiry={setCustomEnquiry} propertys={propertys} />

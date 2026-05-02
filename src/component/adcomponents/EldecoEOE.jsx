@@ -236,14 +236,16 @@ const EldecoEOE = () => {
             </div>
           </div>
 
-          <div className="flex justify-between shadow-md bg-white w-150 mx-auto p-4 rounded">
-                <img draggable="false"
-                    src={EOEOFFER}
-                    alt='EOE'
-                    fill
-                    className="object-cover w-150 transition-transform duration-500 group-hover:scale-110 mx-auto"
-                  />
-          </div>
+          <div className="mx-auto w-full max-w-[600px] overflow-hidden rounded bg-white shadow-md" onClick={() => setCustomEnquiry(true)}>
+  <div className="relative aspect-video w-full group">
+    <img
+      draggable="false"
+      src={EOEOFFER}
+      alt="EOE"
+      className=" w-full object-cover transition-transform duration-500 group-hover:scale-102 cursor-pointer"
+    />
+  </div>
+</div>
     
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto  px-4 py-20">
             {amenities.map((item, index) => (
