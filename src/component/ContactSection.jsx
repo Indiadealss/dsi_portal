@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import irishPlatinumQuestion from '../Images/irishPlatinumQuestion.jpg';
 import { createLead } from '../api/api';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight,Loader2 } from 'lucide-react';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ export default function ContactSection() {
 
    const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const validate = () => {
     let newErrors = {};
@@ -51,10 +52,15 @@ export default function ContactSection() {
         console.log("Form Submitted:", formData);
   
       //   setSubmitted(true);
+      setLoading(true)
   
        try {
             const res = await createLead(formData);
-            console.log(res.status);
+              console.log(res.status, 'hee', res.status === 200);
+          if(res.status === 201){
+            alert('✅ Enquiry submitted')
+            setSubmitted(true);
+          }
           } catch (error) {
             console.log(error);
       
@@ -62,6 +68,7 @@ export default function ContactSection() {
           //   setLoading(false); // stop loader
           //   setReady(true);
           setTimeout(() => {
+            setLoading(false)
           setCustomEnquiry(false);
           setSubmitted(false);
         }, 2000);
@@ -139,7 +146,7 @@ export default function ContactSection() {
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {submitted && (
             <div className="bg-green-100 text-green-700 p-2 rounded text-center text-sm">
-              ✅ Enquiry submitted successfully!
+              ✅ Enquiry submitted
             </div>
           )}
             <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
@@ -219,9 +226,21 @@ export default function ContactSection() {
 
             <button 
               type="submit"
-              className="w-full bg-[#3b82f6] cursor-pointer text-white font-bold py-4 rounded transition-all uppercase tracking-widest text-sm shadow-lg"
+              disabled={loading}
+              className={`w-full flex items-center justify-center gap-3 py-4 rounded-xl font-bold uppercase tracking-widest text-sm shadow-lg transition-all
+                ${loading 
+                  ? 'bg-blue-400 cursor-not-allowed opacity-80' 
+                  : 'bg-blue-600 hover:bg-blue-700 active:scale-[0.98] cursor-pointer text-white'
+                }`}
             >
-              Submit Now
+              {loading ? (
+                <>
+                  <Loader2 className="animate-spin" size={20} />
+                  Processing...
+                </>
+              ) : (
+                'Submit Now'
+              )}
             </button>
           </form>
         </div>
