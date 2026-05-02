@@ -4,10 +4,10 @@ import irishPlatinumQuestion from '../Images/irishPlatinumQuestion.jpg';
 import { createLead } from '../api/api';
 import { MapPin, ArrowRight,Loader2 } from 'lucide-react';
 
-export default function ContactSection() {
+export default function ContactSection({projectName,projectLocation}) {
   const [formData, setFormData] = useState({
     property_id: '69c0104cd245c44e5d487a7f',
-    projectname: 'IRISH PLATINUM',
+    projectname: projectName,
     Name: '',
     PhoneNumber: '',
     email: '',
@@ -129,10 +129,9 @@ export default function ContactSection() {
             <div className="inline-flex items-start gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm max-w-sm">
               <MapPin className="text-[#c19a6b] mt-1 shrink-0" size={24} />
               <div>
-                <h4 className="text-white font-semibold mb-1">IRISH PLATINUM</h4>
+                <h4 className="text-white font-semibold mb-1">{projectName}</h4>
                 <p className="text-gray-400 text-sm leading-snug">
-                  Gh-04A, Sector 10, Greater Noida West, <br />
-                  (Noida Extension), Uttar Pradesh
+                 {projectLocation}
                 </p>
               </div>
             </div>
