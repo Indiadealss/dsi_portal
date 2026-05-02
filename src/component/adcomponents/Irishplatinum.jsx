@@ -18,6 +18,12 @@ import irishPlatinumQuestion from '../../Images/irishPlatinumQuestion.jpg';
 import Dayview from '../../Images/DayView.png';
 import { Tag, Home, Building2 } from 'lucide-react';
 import { Bed, Utensils, Sofa, DoorOpen, Paintbrush } from 'lucide-react';
+import PropertyCardFloorplan from "./PropertyCardFloorplan.jsx";
+import floorPlan1 from "../../Images/1390.jpeg";
+import floorPlan2 from "../../Images/1690.jpeg";
+import floorPlan3 from "../../Images/1925.jpeg";
+import floorPlan4 from "../../Images/2150.jpeg";
+import floorPlan5 from "../../Images/2550.jpeg";
 
 
 const Irishplatinum = () => {
@@ -42,6 +48,45 @@ const Irishplatinum = () => {
       
         return () => clearTimeout(timer); // cleanup
       }, []);
+
+
+     const floorPlans = [
+  {
+    id: 1,
+    title: "3 BHK +  2T",
+    size: "1390 - 1925 SQ. FT.",
+    features: "Low-density premium tower",
+    imageUrl: floorPlan1
+  },
+  {
+    id: 2,
+    title: "3 BHK + 3T",
+    size: "1390 - 1925 SQ.FT",
+    features: "MIVAN Superior Construction",
+    imageUrl: floorPlan2
+  },
+  {
+    id: 3,
+    title: "3 BHK + 3T + SQ",
+    size: "1390 - 1925 SQ.FT",
+    features: "MIVAN Superior Construction",
+    imageUrl: floorPlan3
+  },
+  {
+    id: 4,
+    title: "4 BHK + 4T",
+    size: "2125 - 2550 SQ.FT",
+    features: "MIVAN Superior Construction",
+    imageUrl: floorPlan3
+  },
+  {
+    id: 5,
+    title: "4 BHK + 4T",
+    size: "2125 - 2550 SQ.FT",
+    features: "MIVAN Superior Construction",
+    imageUrl: floorPlan4
+  },
+];
 
       const specs = [
         {
@@ -165,7 +210,10 @@ const Irishplatinum = () => {
             <span className="text-white">IRISH PLATINUM</span>
           </h2>
           <p className="text-sm md:text-lg font-semibold tracking-tight text-gray-200">
-            10TH TOWER | GREATER NOIDA WEST
+            4 TH TOWER | GREATER NOIDA WEST
+          </p>
+          <p className="text-sm md:text-lg font-semibold tracking-tight text-gray-200">
+          RERA APPROVED :- UPRERAPRJ503189/03/2024
           </p>
         </div>
 
@@ -256,6 +304,7 @@ const Irishplatinum = () => {
                   <p className="text-gray-600 leading-relaxed text-justify">
                     Irish Platinum in Sector 10, Greater Noida West, is an emerging residential project that brings together modern architecture, thoughtful design, and a comfortable lifestyle. Designed for urban families seeking both luxury and convenience, this development offers a perfect blend of elegance and practicality. With its strategic location and high-quality construction, Irish Platinum is quickly becoming a preferred choice among homebuyers and investors.
                   </p>
+                  
                 </div>
     
                 <div className="space-y-6">
@@ -446,6 +495,24 @@ const Irishplatinum = () => {
       <p className="text-center text-gray-400 text-sm mt-8 border-t pt-8 border-gray-50">
         & many other leading financial institutions
       </p>
+    </div>
+
+    <div className="bg-[#0f172a] min-h-screen p-10">
+      <h1 className="text-white text-3xl mb-10 text-center font-serif">Floor Plan Options</h1>
+      
+      {/* Grid wrapper to handle multiple cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
+        {floorPlans.map((plan) => (
+          <PropertyCardFloorplan 
+            key={plan.id} // Important for React performance
+            title={plan.title}
+            size={plan.size}
+            features={plan.features}
+            imageUrl={plan.imageUrl}
+            setCustomEnquiry={setCustomEnquiry}
+          />
+        ))}
+      </div>
     </div>
 
 

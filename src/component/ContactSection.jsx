@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import irishPlatinumQuestion from '../Images/irishPlatinumQuestion.jpg';
 import { createLead } from '../api/api';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -100,16 +101,35 @@ export default function ContactSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-[#1e3a8a]/70 to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl px-4 mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Side: Content */}
-        <div className="text-white space-y-4">
-          <h2 className="text-4xl md:text-5xl font-bold uppercase leading-tight">
-            Tell Us What You're Looking For
+        <div className="space-y-8">
+          {/* Accent Label */}
+          <span className="text-[#c19a6b] text-sm font-bold uppercase tracking-[0.3em] border-l-2 border-[#c19a6b] pl-4">
+            Exclusive Opportunities
+          </span>
+
+          <h2 className="text-white text-5xl md:text-6xl font-serif font-light leading-[1.1] tracking-tight">
+            Tell Us What <br /> 
+            <span className="italic text-[#c19a6b]">You're Looking For</span>
           </h2>
-          <p className="text-lg opacity-90 max-w-md">
-            Share your requirement and our experts will connect you with the best properties instantly.
-          </p>
+
+          <div className="space-y-6">
+            
+
+            {/* Address Card with Glassmorphism */}
+            <div className="inline-flex items-start gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm max-w-sm">
+              <MapPin className="text-[#c19a6b] mt-1 shrink-0" size={24} />
+              <div>
+                <h4 className="text-white font-semibold mb-1">IRISH PLATINUM</h4>
+                <p className="text-gray-400 text-sm leading-snug">
+                  Gh-04A, Sector 10, Greater Noida West, <br />
+                  (Noida Extension), Uttar Pradesh
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right Side: Form Card */}
