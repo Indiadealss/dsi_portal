@@ -15,7 +15,7 @@ import irishPlatinumgall from '../../Images/irishPlatinumgall-3.jpg';
 import irishPlatinumSportsArea from '../../Images/irishPlatinumSportsArea.jpeg';
 import irishPlatinumgalls from '../../Images/irishPlatinumgall-2.jpg';
 import irishPlatinumQuestion from '../../Images/irishPlatinumQuestion.jpg';
-import Dayview from '../../Images/DayView.png';
+import Dayview from '../../Images/Asset1.jpg';
 import { Tag, Home, Building2 } from 'lucide-react';
 import { Bed, Utensils, Sofa, DoorOpen, Paintbrush } from 'lucide-react';
 import PropertyCardFloorplan from "./PropertyCardFloorplan.jsx";
@@ -24,6 +24,8 @@ import floorPlan2 from "../../Images/1690.jpeg";
 import floorPlan3 from "../../Images/1925.jpeg";
 import floorPlan4 from "../../Images/2150.jpeg";
 import floorPlan5 from "../../Images/2550.jpeg";
+import Asset1 from '../../Images/Asset1.jpg';
+import Asset2 from '../../Images/Asset2.png'
 
 
 const Irishplatinum = () => {
@@ -54,35 +56,35 @@ const Irishplatinum = () => {
   {
     id: 1,
     title: "3 BHK +  2T",
-    size: "1390 - 1925 SQ. FT.",
+    size: "1390 SQ. FT.",
     features: "Low-density premium tower",
     imageUrl: floorPlan1
   },
   {
     id: 2,
     title: "3 BHK + 3T",
-    size: "1390 - 1925 SQ.FT",
+    size: "1690 SQ.FT",
     features: "MIVAN Superior Construction",
     imageUrl: floorPlan2
   },
   {
     id: 3,
-    title: "3 BHK + 3T + SQ",
-    size: "1390 - 1925 SQ.FT",
+    title: "3 BHK + 4T + SER",
+    size: "1925 SQ.FT",
     features: "MIVAN Superior Construction",
     imageUrl: floorPlan3
   },
   {
     id: 4,
     title: "4 BHK + 4T",
-    size: "2125 - 2550 SQ.FT",
+    size: "2150 SQ.FT",
     features: "MIVAN Superior Construction",
     imageUrl: floorPlan3
   },
   {
     id: 5,
-    title: "4 BHK + 4T",
-    size: "2125 - 2550 SQ.FT",
+    title: "4 BHK + 5T + SER",
+    size: "2550 SQ.FT",
     features: "MIVAN Superior Construction",
     imageUrl: floorPlan4
   },
@@ -302,41 +304,69 @@ const Irishplatinum = () => {
                 <div>
                   <h3 className="text-2xl font-bold text-[#0f172a] mb-4">Irish Platinum</h3>
                   <p className="text-gray-600 leading-relaxed text-justify">
-                    Irish Platinum in Sector 10, Greater Noida West, is an emerging residential project that brings together modern architecture, thoughtful design, and a comfortable lifestyle. Designed for urban families seeking both luxury and convenience, this development offers a perfect blend of elegance and practicality. With its strategic location and high-quality construction, Irish Platinum is quickly becoming a preferred choice among homebuyers and investors.
+                    Irish Platinum is a RERA-registered project being developed by Irish Infrastructure in Sector-10, Greater Noida West. It is currently under-construction, and scheduled for possession by January 2029. Irish Infrastructure, the project developer has already delivered a project (Irish Pearls) in the area. 
                   </p>
-                  
+                  <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                   The Irish Platinum project is on a 4-side open plot and offers 3-BHK and 4-BHK flats. There are 550 units across 4 towers on the 5.5 acres of land. The super areas of the flats range from 1,390 sq. ft. to 2,550 sq. ft. The celling heights in the flats is 11 feet, and door height is 8 feet. The balconies are 8 feet wide with stylish glass and stainless-steel railings. 
+                   </p>
+                   <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                   Irish Platinum offers an all-round, elevated living experience with its wide variety of facilities. The project includes a club house, a swimming pool, and an amphitheater where residents can gather and unwind. The project also includes fitness-focused facilities - a gymnasium and a jogging track. The children’s play area has been mindfully designed to be an experience-rich playground for the little ones. The project has also carved out spaces for sports lovers with its badminton court, squash court and basketball court. 
+                   </p>
                 </div>
     
-                <div className="space-y-6">
-                  <h4 className="text-2xl font-bold text-[#0f172a]">Project Highlights</h4>
-                  <ul className="space-y-4">
-                    {highlights.map((item, index) => (
-                      <li key={index} className="flex flex-col">
-                        <div className="flex items-start gap-2">
-                          <span className="font-bold text-[#0f172a] min-w-max">
-                            {item.text}
-                          </span>
-                          {item.sub && (
-                            <span className="text-gray-500 font-normal">
-                              {item.sub}
-                            </span>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                
               </div>
     
               {/* Right Side: Image with Rounded Corners */}
-              <div className="relative h-[400px] md:h-[500px] w-full rounded-[40px] overflow-hidden shadow-2xl">
+              <div className="relative h-[600px] md:h-[700px] w-full rounded-[40px] overflow-hidden shadow-2xl">
                <img draggable="false"
-        src={irishPlatinumQuestion}
+        src={Asset2}
         alt="Tower T-10 Gold Render"
         // 'object-contain' puri image dikhayega, bina crop kiye.
         // 'object-bottom' building ko neeche se align karega taaki neeche khali jagah na dikhe.
-        className="w-full h-full object-contain object-bottom"
+        className="w-full h-full object-cover object-bottom"
       />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-1 gap-12 items-center">
+              <div className="space-y-8">
+                <div className="mt-10">
+                  <p className="text-gray-600 leading-relaxed text-justify">
+                    
+                  </p>
+                  <p className="text-gray-800 leading-relaxed mt-3 text-justify font-bold ">
+                  Key Features & Benefits of Irish Platinum  
+                  </p>
+                   <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                   <ul>
+                    <li>-	RERA-registered project. </li>
+                    <li>-	4-side open plot</li>
+                    <li>-	5.5 Acre project with plenty of greenery, parking spaces & facilities.</li>
+                    <li>-	550 units, 4 towers.</li>
+                    <li>-	3-BHK (1,390 sq. ft.) & 4-BHK (2,550 sq. ft.) flats.</li>
+                    <li>-	Spacious balcony and high ceilings.</li>
+                    <li>-	Community spaces like club house, amphitheater.</li>
+                    <li>-	Gym, jogging track & children’s play area.</li>
+                    <li>-	Good local connectivity with roads & metro (Aqua line & Blue line)</li>
+                    <li>-	Near schools, hospitals, malls & offices.</li>
+                    <li>-	The RERA registration number of this project is UPRERAPRJ503189/03/2024.</li>
+                   </ul>
+                   </p>
+                   <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                  The project is located in Greater Noida West, also known as Noida Extension. This area is a part of Delhi-NCR and has road and metro connectivity to Delhi, Noida, Ghaziabad, Gurugram and Faridabad. The area is well-served by public transportation modes of app-based cabs, auto, and e-rickshaws making travel easy. 
+                  </p>
+                  <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                    Greater Noida West is the upcoming commercial and residential hub in the NCR region. There are several malls with major brands in the area, and plenty of office spaces as well. Multi-specialty hospitals like Yatharth Hospital, Sarvodaya Hospital, and NuMed Hospital are also present in Greater Noida West.
+                  </p>
+                  <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                    Greater Noida West also has many schools, and school buses from Noida and Greater Noida also serve the area. Universities and higher education institutions are located in the Knowledge Park sectors of Greater Noida, and throughout Noida. 
+                    </p>
+                    <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                    Buying a flat in Irish Platinum offers a one-of-a-kind luxury living opportunity with spacious homes, holistic facilities, nearby conveniences, and connectivity to all regions of Delhi-NCR. It is also a savvy investment opportunity, as property rates continue to keep rising in Greater Noida West. 
+                    </p>
+                </div>
+    
+                
               </div>
             </div>
           </div>
@@ -353,13 +383,13 @@ const Irishplatinum = () => {
           <div className="max-w-7xl mx-auto  px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             
             {/* Left Side: High-Resolution Render */}
-            <div className="relative h-[500px] lg:h-[650px] w-full overflow-hidden shadow-xl">
+            <div className="relative h-[400px] lg:h-[680px] w-full overflow-hidden shadow-xl rounded">
               <img draggable="false"
         src={Dayview}
         alt="Tower T-10 Gold Render"
         // 'object-contain' puri image dikhayega, bina crop kiye.
         // 'object-bottom' building ko neeche se align karega taaki neeche khali jagah na dikhe.
-        className="w-[-webkit-fill-available] h-full object-contain object-bottom"
+        className="w-[-webkit-fill-available] h-full object-cover object-bottom rounded"
       />
             </div>
     

@@ -2,7 +2,7 @@ import React from 'react';
 
 const PropertyCardFloorplan = ({ title, size, features, imageUrl,setCustomEnquiry }) => {
   return (
-    <div className="bg-[#1e252b] text-white rounded-xl p-6 shadow-2xl border border-gray-700 min-w-2xl">
+    <div className="bg-[#1e252b] text-white rounded-xl p-6 shadow-2xl border border-gray-700 xl:w-[50vw] max-w-2xl">
       {/* Image Container */}
       <div className="bg-white rounded-lg overflow-hidden mb-6 h-64 flex items-center justify-center">
         <img 
