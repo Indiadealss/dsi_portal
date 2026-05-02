@@ -160,7 +160,7 @@ const Irishplatinum = () => {
       <section className="relative h-[90vh] min-h-[700px] w-full flex flex-col items-center justify-center text-white text-center px-4 overflow-hidden">
       {/* 1. Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
-        <img
+        <img draggable="false"
           src={banner} // Replace with your image path
           fill
           className="object-cover h-[-webkit-fill-available] lg:h-auto w-[-webkit-fill-available]"
@@ -174,7 +174,7 @@ const Irishplatinum = () => {
       <div className="absolute top-8 left-8 z-10 hidden md:block">
         <div className="flex flex-col items-center">
             <div className="w-22 h-12 bg-white rounded-full p-2  flex items-center justify-center mb-1">
-                <img
+                <img draggable="false"
           src={IrishLogo} // Replace with your image path
           fill
           className="object-cover"
@@ -187,7 +187,7 @@ const Irishplatinum = () => {
       
       <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
         <div className="w-42 h-12  flex items-center justify-center mb-1">
-                <img
+                <img draggable="false"
           src={irislogo} // Replace with your image path
           fill
           className="object-cover"
@@ -262,7 +262,7 @@ const Irishplatinum = () => {
               >
                 {/* Image Container */}
                 <div className="relative w-full h-48 mb-6 overflow-hidden rounded-lg">
-                  <img
+                  <img draggable="false"
                     src={item.image}
                     alt={item.title}
                     fill
@@ -330,7 +330,7 @@ const Irishplatinum = () => {
     
               {/* Right Side: Image with Rounded Corners */}
               <div className="relative h-[400px] md:h-[500px] w-full rounded-[40px] overflow-hidden shadow-2xl">
-               <img
+               <img draggable="false"
         src={irishPlatinumQuestion}
         alt="Tower T-10 Gold Render"
         // 'object-contain' puri image dikhayega, bina crop kiye.
@@ -354,7 +354,7 @@ const Irishplatinum = () => {
             
             {/* Left Side: High-Resolution Render */}
             <div className="relative h-[500px] lg:h-[650px] w-full overflow-hidden shadow-xl">
-              <img
+              <img draggable="false"
         src={Dayview}
         alt="Tower T-10 Gold Render"
         // 'object-contain' puri image dikhayega, bina crop kiye.
@@ -477,7 +477,7 @@ const Irishplatinum = () => {
         {banksAvailable.map((bank, index) => (
           <div key={index} className=" flex flex-col items-center gap-3">
             <div className="relative w-32 h-16  filter ">
-              <img
+              <img draggable="false"
                 src={bank.logo}
                 alt={`${bank.name} logo`}
                 fill
