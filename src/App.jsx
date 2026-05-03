@@ -57,6 +57,7 @@ import NotFound from "./component/NotFound";
 import Layout from "./Layout";
 import Irishplatinum from './component/adcomponents/Irishplatinum.jsx'
 import EldecoEOE from "./component/adcomponents/EldecoEOE.jsx";
+import Aceestaee from "./component/adcomponents/Aceestaee.jsx";
 
 function App() {
 
@@ -108,6 +109,7 @@ function App() {
     { path: "/", element: <Home /> },
     {path:'/irish-platinum',element:<Irishplatinum />},
     {path:'/eldeco-eoe',element:<EldecoEOE />},
+    {path:'/ace-estaee',element:<Aceestaee />},
     
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
