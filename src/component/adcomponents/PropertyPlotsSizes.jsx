@@ -18,7 +18,7 @@ const PropertyPlotsSizes = ({ title, size, features, imageUrl,setCustomEnquiry }
           {title}
         </h2>
         <div className="text-sm space-y-1 text-gray-300">
-          <p className="font-semibold">{size}</p>
+          <p className="font-semibold"><span className='font-blod'>Size:</span> {size}</p>
           <p className="italic text-gray-400">{features}</p>
         </div>
 
