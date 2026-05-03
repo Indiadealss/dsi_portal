@@ -42,7 +42,7 @@ const EldecoEOE = () => {
         useEffect(() => {
             setPropertys({
         _id:'69c0104cd245c44e5d487a7f',
-        projectname:'IRISH PLATINUM'
+        projectname:'Eldeco Echoes of Eden'
       })
         const timer = setTimeout(() => {
           setCustomEnquiry(true);
@@ -532,7 +532,7 @@ const EldecoEOE = () => {
     <ContactSection projectName='Eldeco Echoes of Eden' projectLocation='GH 01 B/1, Sector 22D, Yamuna Expressway, Greater Noida, Uttar Pradesh' />
     {customEnquiry && (
             <div>
-              <CustomNameEnquiryform setCustomEnquiry={setCustomEnquiry} propertys={propertys} />
+              <CustomNameEnquiryform setCustomEnquiry={setCustomEnquiry} propertys={propertys} prop />
             </div>
           )}
     </div>
