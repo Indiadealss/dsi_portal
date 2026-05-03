@@ -89,28 +89,28 @@ const gymAmenities = [
     id: 1,
     title: "2.25 Cr",
     size: "150 SQ.YD.",
-    features: "Low-density premium tower",
+    features: "",
     imageUrl: ''
   },
   {
-    id: 1,
+    id: 2,
     title: "3.1 Cr",
     size: "200 SQ.YD.",
-    features: "MIVAN Superior Construction",
+    features: "",
     imageUrl: ''
   },
   {
     id: 3,
     title: "4.5 Cr",
     size: "300 SQ.YD.",
-    features: "Low-density premium tower",
+    features: "",
     imageUrl: ''
   },
   {
     id: 4,
     title: "7.5 Cr",
     size: "500 SQ.YD",
-    features: "MIVAN Superior Construction",
+    features: "",
     imageUrl: ''
   },
   
@@ -250,9 +250,9 @@ const gymAmenities = [
             Starting Price – ₹ 2.25 Cr*
           </p>
           <p className="text-xs md:text-sm font-medium opacity-90 mt-2 flex flex-wrap justify-center gap-x-4">
-            <span>Best Luxury Flats</span>
+            <span>Premium Plots</span>
             <span>|</span>
-            <span>Mivan Construction</span>
+            <span>Low-density Plots</span>
             <span>|</span>
             <span>Premium Lifestyle</span>
             <span>|</span>
@@ -263,7 +263,7 @@ const gymAmenities = [
         {/* 4. Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
           <button onClick={() => setCustomEnquiry(true)} className="bg-gradient-to-r from-[#7a553a] to-[#a3836a] hover:scale-105 transition-transform px-10 py-4 rounded-full font-bold text-sm uppercase shadow-xl cursor-pointer">
-            Book Site Tour
+            Free Site Visit
           </button>
           <button onClick={() => setCustomEnquiry(true)} className="border-2 border-white/80 backdrop-blur-sm hover:scale-105  transition-all px-10 py-4 rounded-full font-bold text-sm uppercase cursor-pointer">
             Explore
@@ -345,7 +345,7 @@ const gymAmenities = [
                 Why Ace Estate is in Tranding
               </h2>
               <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed">
-                Looking for Ultra luxury apartments in Greater Noida West with premium amenities and high appreciation?
+                Looking for Ultra luxury apartments in Yamuna Expressway with premium amenities and high appreciation?
               </p>
             </div>
     
@@ -594,7 +594,7 @@ const gymAmenities = [
     
 
 
-    <ContactSection projectName='Ace Estate' projectLocation='Sector 22D, Yamuna Expy, Authority, Greater Noida, Uttar Pradesh 281205, India' />
+    <ContactSection projectName='Ace Estate' projectLocation='Sector 22D, Yamuna Expressway, Greater Noida, Uttar Pradesh 281205, India' />
     {customEnquiry && (
             <div>
               <Customenquiryform setCustomEnquiry={setCustomEnquiry} propertys={propertys} prop />
