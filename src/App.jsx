@@ -109,7 +109,7 @@ function App() {
     { path: "/", element: <Home /> },
     {path:'/irish-platinum',element:<Irishplatinum />},
     {path:'/eldeco-eoe',element:<EldecoEOE />},
-    {path:'/ace-estaee',element:<Aceestaee />},
+    {path:'/ace-estate',element:<Aceestaee />},
     
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},

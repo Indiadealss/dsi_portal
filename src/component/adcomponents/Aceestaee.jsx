@@ -183,7 +183,7 @@ const gymAmenities = [
          <Seo
               title='ACE ESTAEE ACE sector 22D Yamuna Expressway'
               description=""
-              canonical={`https://www.brandsdoor.in/ace-estaee`}
+              canonical={`https://www.brandsdoor.in/ace-estate`}
             />
       <section className="relative h-[90vh] min-h-[700px] w-full flex flex-col items-center justify-center text-white text-center px-4 overflow-hidden">
       {/* 1. Background Image with Dark Overlay */}
