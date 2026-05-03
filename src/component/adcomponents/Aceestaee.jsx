@@ -199,7 +199,7 @@ const gymAmenities = [
       </div>
 
       {/* 2. Top Navigation Items (Logo & Labels) */}
-      <div className="absolute top-8 left-8 z-10  md:block">
+      <div className="absolute top-8 left-8 z-10 hidden md:block">
         <div className="flex flex-col items-center">
             <div className="w-42 h-12  rounded px-1  flex items-center justify-center mb-1 ">
                 <img draggable="false"
@@ -213,7 +213,7 @@ const gymAmenities = [
         </div>
       </div>
       
-      <div className="absolute top-8 right-8 z-10 text-right  md:block">
+      <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
         <div className="w-42 h-12  flex items-center justify-center mb-1">
                 <img draggable="false"
           src={aceestatelogo} // Replace with your image path
