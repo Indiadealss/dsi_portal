@@ -10,7 +10,7 @@ const Layout = () => {
   const location = useLocation();
 
   // 2. Define the paths where you want to hide the header/footer
-  const hiddenPaths = ["/irish-platinum", "/eldeco-eoe"];
+  const hiddenPaths = ["/irish-platinum", "/eldeco-eoe","/ace-estaee"];
   const hideLayout = hiddenPaths.includes(location.pathname);
 
   document.addEventListener("contextmenu", (e) => e.preventDefault());
