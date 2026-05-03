@@ -213,7 +213,7 @@ const gymAmenities = [
         </div>
       </div>
       
-      <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
+      <div className="absolute top-8 right-8 z-10 text-right  md:block">
         <div className="w-42 h-12  flex items-center justify-center mb-1">
                 <img draggable="false"
           src={aceestatelogo} // Replace with your image path
