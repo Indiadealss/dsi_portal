@@ -175,10 +175,10 @@ const fadeUp = {
       <div className="absolute inset-0 z-0">
         <img
   src="https://d3eoh63gynpjzh.cloudfront.net/ashtech/bannerAchtesh.webp"
-  className="object-cover object-bottom   w-[-webkit-fill-available]"
+  className="object-cover object-bottom   w-[-webkit-fill-available] h-[-webkit-fill-available]"
   alt=""
 />
-        <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_100px_rgba(0,0,0,0.5)]" />
+        {/* <div className="absolute inset-0 bg-black/40 shadow-[inset_0_0_100px_rgba(0,0,0,0.5)]" /> */}
       </div>
 
       {/* 2. Top Navigation Items (Logo & Labels) */}
