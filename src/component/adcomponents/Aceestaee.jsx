@@ -223,7 +223,6 @@ const gymAmenities = [
           alt="Ace Estate"
         />
             </div>
-        <p className=" opacity-80 uppercase tracking-tighter mt-10 right-9 relative">+91 9818764200</p>
         
       </div>
 

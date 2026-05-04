@@ -177,7 +177,6 @@ const EldecoEOE = () => {
           alt="Eldeco Echoes of Eden"
         />
             </div>
-        <p className=" opacity-80 uppercase tracking-tighter">+91 9818764200</p>
         
       </div>
 

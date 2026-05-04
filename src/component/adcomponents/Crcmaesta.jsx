@@ -174,7 +174,6 @@ const Crcmaesta = () => {
           alt="CRC MAESTA"
         />
             </div>
-       <a href="tel:+91 9818764200"> <p className=" opacity-80 uppercase tracking-tighter text-white">+91 9818764200</p></a>
         
       </div>
 
