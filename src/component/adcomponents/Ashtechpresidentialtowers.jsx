@@ -224,7 +224,7 @@ const fadeUp = {
             5  TOWER | GREATER NOIDA WEST
           </p>
           <p className="text-sm md:text-lg text-[#732430] font-semibold tracking-tight">
-          RERA APPROVED :- UPRERAPRJ724518/07/2024
+          RERA APPROVED :- UPRERAPRJ746615/10/2025
           </p>
         </div>
 
