@@ -140,7 +140,7 @@ const Crcmaesta = () => {
       {/* 1. Background Image with Dark Overlay */}
       <div className="absolute inset-0 z-0">
         <img draggable="false"
-          src='https://d3eoh63gynpjzh.cloudfront.net/CRC/crc(19).jpg' // Replace with your image path
+          src='https://d3eoh63gynpjzh.cloudfront.net/CRC/crc(2).jpg' // Replace with your image path
           fill
           className="object-cover h-[-webkit-fill-available]  w-[-webkit-fill-available]"
           priority
