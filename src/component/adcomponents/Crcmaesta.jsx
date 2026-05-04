@@ -189,7 +189,7 @@ const Crcmaesta = () => {
             <span className="text-white">CRC MAESTA</span>
           </h2>
           <p className="text-sm md:text-lg font-semibold tracking-tight text-gray-200">
-            5 TH TOWER | GREATER NOIDA WEST
+            5 TOWER | GREATER NOIDA WEST
           </p>
           <p className="text-sm md:text-lg font-semibold tracking-tight text-gray-200">
           RERA APPROVED :- UPRERAPRJ724518/07/2024
