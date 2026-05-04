@@ -229,7 +229,7 @@ const fadeUp = {
 
         <div className="py-2">
           <p className="text-lg md:text-2xl font-bold text-[#732430]">
-            Starting Price – ₹ 2.4 Cr*
+            Starting Price – ₹ 2.6 Cr*
           </p>
           <p className="text-xs md:text-sm font-medium opacity-90 mt-2 text-[#732430] flex flex-wrap justify-center gap-x-4">
             <span>Best Luxury Flats</span>
@@ -441,7 +441,7 @@ const fadeUp = {
                 </div>
                 <hr className="border-gray-300" />
                 <div className="space-y-2 pt-2">
-                    <p className="text-[#333] text-lg font-bold">Starting Price: <span className="text-[#b08d57]">₹2.4 Cr*</span></p>
+                    <p className="text-[#333] text-lg font-bold">Starting Price: <span className="text-[#b08d57]">₹2.6 Cr*</span></p>
                   <p className="text-[#333] text-lg font-bold">Booking Amount: <span className="font-normal text-gray-600 text-base">10% of the total value</span></p>
                 </div>
               </div>
