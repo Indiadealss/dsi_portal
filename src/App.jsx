@@ -59,6 +59,7 @@ import Irishplatinum from './component/adcomponents/Irishplatinum.jsx'
 import EldecoEOE from "./component/adcomponents/EldecoEOE.jsx";
 import Aceestaee from "./component/adcomponents/Aceestaee.jsx";
 import Crcmaesta from "./component/adcomponents/Crcmaesta.jsx";
+import Ashtechpresidentialtowers from "./component/adcomponents/Ashtechpresidentialtowers.jsx";
 
 function App() {
 
@@ -113,6 +114,7 @@ function App() {
     {path:'/eldeco-eoe',element:<EldecoEOE />},
     {path:'/ace-estate',element:<Aceestaee />},
     {path:'/crc-maesta',element:<Crcmaesta />},
+    {path:'/ashtech-presidential-towers',element:<Ashtechpresidentialtowers />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
