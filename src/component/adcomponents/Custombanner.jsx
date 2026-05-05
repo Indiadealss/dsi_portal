@@ -43,7 +43,9 @@ const Custombanner = ({ setCustomEnquiry }) => {
 
           {/* Main Headline */}
           <h2 className=" md:text-2xl md:text-3xl font-extrabold text-[#634b3d] leading-tight md:mb-12">
-           <span className='text-sm md:text-2xl'>Starting Price – ₹ 1.81 Cr*</span>
+           <span className='text-sm md:text-2xl'>Starting Price – ₹ 1.81 Cr*</span><br />
+           <span className='text-sm md:text-2xl block md:hidden'>RERA APPROVED :- UPRERAPRJ677887/10/2024</span>
+
            
 
           </h2>
