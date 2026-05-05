@@ -61,6 +61,7 @@ import Aceestaee from "./component/adcomponents/Aceestaee.jsx";
 import Crcmaesta from "./component/adcomponents/Crcmaesta.jsx";
 import Ashtechpresidentialtowers from "./component/adcomponents/Ashtechpresidentialtowers.jsx";
 import Aceacreville from "./component/adcomponents/Aceacreville.jsx";
+import Acehanei from "./component/adcomponents/Acehanei.jsx";
 
 function App() {
 
@@ -117,6 +118,7 @@ function App() {
     {path:'/crc-maesta',element:<Crcmaesta />},
     {path:'/ashtech-presidential-towers',element:<Ashtechpresidentialtowers />},
     {path:'/ace-acreville',element:<Aceacreville />},
+    {path:'/ace-hanie',element:<Acehanei />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
