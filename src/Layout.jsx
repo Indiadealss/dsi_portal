@@ -31,6 +31,7 @@ let message = ''
   // condition
   if (
   page !== "" &&
+  project &&
   !project.toLowerCase().includes("ffid")
 ) {
    message =
