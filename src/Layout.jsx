@@ -30,8 +30,7 @@ const formattedPage = capitalizeWords(page);
 let message = ''
   // condition
   if (
-  page !== "home" &&
-  project &&
+  page !== "" &&
   !project.toLowerCase().includes("ffid")
 ) {
    message =
