@@ -29,7 +29,11 @@ const Layout = () => {
 const formattedPage = capitalizeWords(page);
 let message = ''
   // condition
-  if (page !== "" || !propertyProject.toLowerCase().includes("ffid")) {
+  if (
+  page !== "home" &&
+  project &&
+  !project.toLowerCase().includes("ffid")
+) {
    message =
   page === "property"
     ? `Hi I am interested in your property ${formattedProject}`
