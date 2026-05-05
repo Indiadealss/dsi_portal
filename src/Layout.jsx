@@ -15,7 +15,7 @@ const Layout = () => {
   console.log(page,'page is the',project);
 
   // 2. Define the paths where you want to hide the header/footer
-  const hiddenPaths = ["/irish-platinum", "/eldeco-eoe","/ace-estate","/crc-maesta","/ashtech-presidential-towers", "/ace-acreville", "/ace-hanie"];
+  const hiddenPaths = ["/irish-platinum", "/eldeco-eoe","/ace-estate","/crc-maesta","/ashtech-presidential-towers", "/ace-acreville", "/ace-hanei"];
   const hideLayout = hiddenPaths.includes(location.pathname);
 
   const capitalizeWords = (str) =>
