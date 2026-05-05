@@ -195,9 +195,9 @@ const gymAmenities = [
       </div>
 
       {/* 2. Top Navigation Items (Logo & Labels) */}
-      <div className="absolute top-8 left-8 z-10 hidden md:block">
+      <div className="absolute top-10 left-4 md:top-8 md:left-8 z-10  block">
         <div className="flex flex-col items-center">
-            <div className="w-42 h-12  rounded px-1  flex items-center justify-center mb-1 ">
+            <div className="w-42 h-12 bg-white/50 md:bg-transparent p-10  rounded px-1  flex items-center justify-center mb-1 ">
                 <img draggable="false"
           src={AceEstatteLogo} // Replace with your image path
           fill
@@ -209,8 +209,8 @@ const gymAmenities = [
         </div>
       </div>
       
-      <div className="absolute top-8 right-8 z-10 text-right hidden md:block">
-        <div className="w-42 h-12  flex items-center justify-center mb-1">
+      <div className="absolute top-8   right-4 md:right-8 z-10 text-right  md:block">
+        <div className="w-30 md:w-42 h-12  flex items-center justify-center mb-1">
                 <img draggable="false"
           src='https://d3eoh63gynpjzh.cloudfront.net/Aceacervillay/ace_acrevilleLogo@3x.png' // Replace with your image path
           fill

@@ -1,17 +1,35 @@
 import React from 'react';
+import { useEffect, useState } from "react";
 
 const Custombanner = ({ setCustomEnquiry }) => {
+
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768); // mobile breakpoint
+  };
+
+  handleResize(); // initial check
+  window.addEventListener("resize", handleResize);
+
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
   return (
-    <div className="flex mt-10 items-center w-full min-h-screen bg-gray-200 p-4">
+    <div className="flex mt-10 items-center w-full min-h-screen bg-gray-200 p-">
       {/* Main Container */}
-      <div className="relative w-full max-w-[1000px] h-[500px] bg-transparent shadow-2xl overflow-hidden flex">
+      <div className="relative w-full max-w-[1000px] h-[400px] md:h-[500px] bg-transparent shadow-2xl overflow-hidden flex">
         
        
 
         {/* LEFT SIDE: Content with Diagonal Cut */}
         <div 
-          className="relative z-10 w-[65%] h-full bg-[#f3f3f3] flex flex-col p-10"
-          style={{ clipPath: 'polygon(-20% 0, 100% 0, 80% 100%, 0% 100%)' }}
+          className="relative z-10 w-[100%] md:w-[65%] h-full bg-[#f3f3f3] flex flex-col p-5 lg:p-10"
+          style={
+    !isMobile
+      ? { clipPath: "polygon(-20% 0, 100% 0, 80% 100%, 0% 100%)" }
+      : {}
+  }
         >
           {/* Logo/Save Badge */}
           <div className="flex flex-col items-center w-fit mb-6">
@@ -24,13 +42,15 @@ const Custombanner = ({ setCustomEnquiry }) => {
           </div>
 
           {/* Main Headline */}
-          <h2 className="text-2xl md:text-3xl font-extrabold text-[#634b3d] leading-tight mb-12">
-           Starting Price – ₹ 1.81 Cr*
+          <h2 className=" md:text-2xl md:text-3xl font-extrabold text-[#634b3d] leading-tight md:mb-12">
+           <span className='text-sm md:text-2xl'>Starting Price – ₹ 1.81 Cr*</span>
+           
 
           </h2>
+          
 
           {/* Perks Grid (Top Row) */}
-          <div className="flex justify-between items-start text-center mb-10 pr-20">
+          <div className="hidden md:flex flex-col md:flex-row justify-between items-start text-center mb-10 pr-20">
             <div className="flex-1 px-2 border-r border-gray-400">
               <p className="text-[13px] font-bold text-gray-700">Car Parking<br />Charges Waived</p>
             </div>
@@ -43,7 +63,7 @@ const Custombanner = ({ setCustomEnquiry }) => {
           </div>
 
           {/* Perks Grid (Bottom Row) */}
-          <div className="flex items-center gap-10 pr-20">
+          <div className="hidden md:flex items-center gap-10 pr-20">
              <div className="flex-1 flex justify-end items-center gap-4 border-r border-gray-400 pr-10">
                 <p className="text-right text-[13px] font-bold text-gray-700">Assured Gift On<br />Every Booking</p>
              </div>
