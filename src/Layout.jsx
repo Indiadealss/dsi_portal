@@ -29,6 +29,9 @@ const Layout = () => {
 const formattedPage = capitalizeWords(page);
 let message = ''
   // condition
+  if (page === "property" && project) {
+    message = `Hi I am interested in your property ${formattedProject}`;
+  }
   if (
   page !== "" &&
   project &&
@@ -39,7 +42,10 @@ let message = ''
     ? `Hi I am interested in your property ${formattedProject}`
     : `Hi I am interested in **${formattedPage}**`;
   }else {
-       message = ``;
+       message =
+  page === "property"
+    ? `Hi I am interested in your property ${formattedProject}`
+    : `Hi I am interested in **${formattedPage}**`;
   }
 // encode for URL
 const encodedMessage = encodeURIComponent(message);
