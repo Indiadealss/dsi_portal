@@ -118,7 +118,7 @@ function App() {
     {path:'/crc-maesta',element:<Crcmaesta />},
     {path:'/ashtech-presidential-towers',element:<Ashtechpresidentialtowers />},
     {path:'/ace-acreville',element:<Aceacreville />},
-    {path:'/ace-hanie',element:<Acehanei />},
+    {path:'/ace-hanei',element:<Acehanei />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
