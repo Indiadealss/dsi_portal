@@ -322,7 +322,12 @@ const gymAmenities = [
                   Project Facilities
                   </p>
                   <p className="text-gray-600 leading-relaxed mt-3 text-justify">
-                  ACE Hanei, Greater Noida West (Noida Extension) Sector 12, is an upcoming world-class residential society that presents a state-of-the-art living opportunity with its era-redefining infrastructure and blend of in-project facilities. The project is spread across an area of 6.4 acres and 80% open space. The project has 6 towers of 25 floors each, and 518 units in total. This project has 2-BHK, 3-BHK and 4-BHK flats. The 2-BHK configuration measures 1341 sq. ft. The 3-BHK flat has two variants - 1623 sq. ft. and 2054 sq. ft. The 4-BHK flat also has two variants measuring 2355 sq. ft. and 3108 sq. ft. 
+                  ACE Hanei, Greater Noida West (Noida Extension) Sector 12, is an upcoming world-class residential society that presents a state-of-the-art living opportunity with its era-redefining infrastructure and blend of in-project facilities. The project is spread across an area of 6.4 acres and 80% open space. The project has 6 towers of 25 floors each, and 518 units in total.
+                  </p>
+
+                  <p className="text-gray-600 leading-relaxed mt-3 text-justify">
+                    {/* Additional features can be listed here */}
+                    ACE Hanei has 3-BHK and 4-BHK flats. The 3-BHK flat measures 2290 sq. ft. The 4-BHK flat is available in sizes of 3200 sq. ft., and 4190 sq. ft.
                   </p>
                    
                 </div>
@@ -351,7 +356,7 @@ const gymAmenities = [
                    <ul>
                     <li>●	Situated in the high-growth corridor of Sector 12, Greater Noida West (Noida Extension).</li>
                     <li>●	Spread across 6.4 acres with an impressive 80% open space.</li>
-                    <li>●	Offers premium 2, 3, and 4-BHK luxury apartments.</li>
+                    <li>●	Offers premium 3, and 4-BHK luxury apartments.</li>
                     <li>●	Signature wrap-around balconies for seamless outdoor-indoor living.</li>
                     <li>●	Strategically positioned towers to ensure unmatched resident privacy.</li>
                     <li>●	High-end triple-height lobbies and high-speed elevators.</li>
