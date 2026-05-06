@@ -265,7 +265,7 @@ const gymAmenities = [
       <Custombanner setCustomEnquiry={setCustomEnquiry} />
 
     </section>
-     <ProjectStats stats={stats} />
+     <ProjectStats stats={stats} gridColumns={6} />
     <section className="bg-[#0f172a] pt-20 ">
           <div className="max-w-7xl mx-auto  px-4 text-center mb-16">
             <h2 className="text-white text-4xl md:text-5xl font-baskervville font-bold mb-4">
@@ -375,7 +375,7 @@ const gymAmenities = [
 
           <section>
             <div className="bg-[#0f172a] min-h-screen p-10">
-      <h1 className="text-white text-3xl mb-10 text-center font-baskervville font-bold">ACE HANEI PRICE LIST</h1>
+      <h1 className="text-white text-3xl mb-10 text-center font-baskervville font-bold">Floor Plan Options</h1>
       
       {/* Grid wrapper to handle multiple cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
