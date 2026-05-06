@@ -11,6 +11,9 @@ import icici from '../../Images/icici.jpeg';
 import { Tag, Home, Building2 } from 'lucide-react';
 import { Bed, Utensils, Sofa, DoorOpen, Paintbrush } from 'lucide-react';
 import PropertyCardFloorplan from "./PropertyCardFloorplan.jsx";
+import ProjectStats from "./ProjectStats.jsx";
+import { Layers  } from 'lucide-react';
+
 
 const Crcmaesta = () => {
 
@@ -35,6 +38,45 @@ const Crcmaesta = () => {
         return () => clearTimeout(timer); // cleanup
       }, []);
 
+
+      const stats = [
+    {
+      id: 1,
+      icon: <Building2 size={48} strokeWidth={1} />,
+      value: "5",
+      label: "Total No. of Towers",
+    },
+    {
+      id: 2,
+      icon: <Layers size={48} strokeWidth={1} />,
+      value: "33",
+      label: "Total No. of Floors",
+    },
+    {
+      id: 3,
+      icon: <DoorOpen size={48} strokeWidth={1} />,
+      value: "375",
+      label: "Total Flats",
+    },
+      {
+      id: 4,
+      icon: <Home  size={48} strokeWidth={1} />,
+      value: "3 BHK",
+      label: "1720 Sq.ft. - 2245 Sq.ft.",
+    },
+        {
+          id: 5,
+          icon: <Home  size={48} strokeWidth={1} />,
+          value: "4 BHK",
+          label: "2690 Sq.ft.",
+        },
+    {
+      id: 6,
+      icon: <Layers size={48} strokeWidth={1} />,
+      value: "Possession",
+      label: "May 2029",
+    },
+  ];
 
      const floorPlans = [
   {
@@ -222,6 +264,12 @@ const Crcmaesta = () => {
       </div>
 
     </section>
+
+
+    {/* Project Stats */}
+     <ProjectStats stats={stats} gridColumns={6} />
+
+
     <section className="bg-[#0f172a] pt-20 ">
           <div className="max-w-7xl mx-auto  px-4 text-center mb-16">
             <h2 className="text-white text-4xl md:text-5xl font-serif mb-4">

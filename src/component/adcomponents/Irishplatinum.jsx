@@ -24,6 +24,8 @@ import floorPlan2 from "../../Images/1690.jpeg";
 import floorPlan3 from "../../Images/1925.jpeg";
 import floorPlan4 from "../../Images/2150.jpeg";
 import floorPlan5 from "../../Images/2550.jpeg";
+import { Layers  } from 'lucide-react';
+import ProjectStats from "./ProjectStats.jsx";
 import Asset1 from '../../Images/Asset1.jpg';
 import Asset2 from '../../Images/Asset2.png'
 
@@ -32,6 +34,46 @@ const Irishplatinum = () => {
 
      const [customEnquiry, setCustomEnquiry] = useState(false);
       const [propertys, setPropertys] = useState(null)
+
+
+      const stats = [
+    {
+      id: 1,
+      icon: <Building2 size={48} strokeWidth={1} />,
+      value: "4",
+      label: "Total No. of Towers",
+    },
+    {
+      id: 2,
+      icon: <Layers size={48} strokeWidth={1} />,
+      value: "30",
+      label: "Total No. of Floors",
+    },
+    {
+      id: 3,
+      icon: <DoorOpen size={48} strokeWidth={1} />,
+      value: "566",
+      label: "Total Flats",
+    },
+      {
+      id: 4,
+      icon: <Home  size={48} strokeWidth={1} />,
+      value: "3 BHK",
+      label: "1390 Sq.ft. - 1925 Sq.ft.",
+    },
+    {
+      id: 4,
+      icon: <Home  size={48} strokeWidth={1} />,
+      value: "4 BHK",
+      label: "2150 Sq.ft. - 2550 Sq.ft.",
+    },
+    {
+      id: 4,
+      icon: <Layers size={48} strokeWidth={1} />,
+      value: "Possession",
+      label: "October 2029",
+    },
+  ];
 
       const banksAvailable = [
         {name:'SBI',logo:sbi},
@@ -245,6 +287,7 @@ const Irishplatinum = () => {
       </div>
 
     </section>
+     <ProjectStats stats={stats} />
     <section className="bg-[#0f172a] pt-20 ">
           <div className="max-w-7xl mx-auto  px-4 text-center mb-16">
             <h2 className="text-white text-4xl md:text-5xl font-serif mb-4">

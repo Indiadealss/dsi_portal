@@ -136,14 +136,14 @@ const gymAmenities = [
   },
   {
     id: 2,
-    title: "3 BHK + 4T + Servent",
+    title: "4 BHK + 4T + Servent",
     size: "3200 SQ.FT",
     features: "MIVAN Superior Construction",
     imageUrl: 'https://d3eoh63gynpjzh.cloudfront.net/Acehanei/2900.jpeg'
   },
   {
     id: 3,
-    title: "3 BHK + 4T",
+    title: "4 BHK + 4T",
     size: "4190 SQ.FT.",
     features: "Premium finishing",
     imageUrl: 'https://d3eoh63gynpjzh.cloudfront.net/Acehanei/4190.jpeg'
@@ -375,7 +375,7 @@ const gymAmenities = [
 
           <section>
             <div className="bg-[#0f172a] min-h-screen p-10">
-      <h1 className="text-white text-3xl mb-10 text-center font-baskervville font-bold">ACE ACREVILLE PRICE LIST</h1>
+      <h1 className="text-white text-3xl mb-10 text-center font-baskervville font-bold">ACE HANEI PRICE LIST</h1>
       
       {/* Grid wrapper to handle multiple cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">

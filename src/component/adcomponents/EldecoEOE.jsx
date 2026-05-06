@@ -26,6 +26,9 @@ import Asset1 from '../../Images/Asset1.jpg';
 import Asset2 from '../../Images/Asset2.png'
 import CustomNameEnquiryform from "../customcomponent/CustomNameEnquiryform.jsx";
 import EOEOFFER from "../../Images/offerEOE.png"
+import ProjectStats from "./ProjectStats.jsx";
+import { Layers  } from 'lucide-react';
+
 
 
 const EldecoEOE = () => {
@@ -102,6 +105,40 @@ const EldecoEOE = () => {
           icon: Paintbrush,
         },
       ];
+
+
+      const stats = [
+    {
+      id: 1,
+      icon: <Building2 size={48} strokeWidth={1} />,
+      value: "2",
+      label: "Total No. of Towers",
+    },
+    {
+      id: 2,
+      icon: <Layers size={48} strokeWidth={1} />,
+      value: "14",
+      label: "Total No. of Floors",
+    },
+    {
+      id: 3,
+      icon: <DoorOpen size={48} strokeWidth={1} />,
+      value: "210",
+      label: "Total Flats",
+    },
+      {
+      id: 4,
+      icon: <Home  size={48} strokeWidth={1} />,
+      value: "3 BHK",
+      label: "1550 Sq.ft. - 1850 Sq.ft.",
+    },
+    {
+      id: 4,
+      icon: <Layers size={48} strokeWidth={1} />,
+      value: "Ready to Move",
+      label: "Possession started in 2022",
+    },
+  ];
       
       
       const amenities = [
@@ -225,6 +262,11 @@ const EldecoEOE = () => {
       </div>
 
     </section>
+
+
+    {/* Project Stats */}
+     <ProjectStats stats={stats} gridColumns={5} />
+
     <section className="bg-[#0f172a] pt-20 ">
           <div className="max-w-7xl mx-auto  px-4 text-center mb-16">
             <h2 className="text-white text-4xl md:text-5xl font-serif mb-4">

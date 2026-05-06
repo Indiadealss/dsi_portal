@@ -1,33 +1,14 @@
 import React from 'react';
 // Agar aapke paas lucide-react nahi hai, toh install karein: npm install lucide-react
-import { Building2, Layers, DoorOpen } from 'lucide-react';
 
-const ProjectStats = () => {
-  const stats = [
-    {
-      id: 1,
-      icon: <Building2 size={48} strokeWidth={1} />,
-      value: "7",
-      label: "Total No. of Towers",
-    },
-    {
-      id: 2,
-      icon: <Layers size={48} strokeWidth={1} />,
-      value: "25",
-      label: "Total No. of Floors",
-    },
-    {
-      id: 3,
-      icon: <DoorOpen size={48} strokeWidth={1} />,
-      value: "518",
-      label: "Total Flats",
-    },
-  ];
+
+const ProjectStats = ({stats, gridColumns = 6}) => {
+  
 
   return (
     <div className="w-full bg-white py-16">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-8xl mx-auto px-1">
+        <div className={`grid grid-cols-1 md:grid-cols-${gridColumns} gap-8`}>
           {stats.map((stat) => (
             <div key={stat.id} className="flex flex-col items-center text-center">
               {/* Icon Container */}
