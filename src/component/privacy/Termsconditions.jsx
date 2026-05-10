@@ -399,7 +399,7 @@ export default function Termsconditions() {
                     <br />
                     <div>
                         <br />
-                        <span className='text-lg font-medium'>11. Contact Us</span>
+                        <span className='text-lg font-medium'>15. Contact Us</span>
                        <div className='ms-4'>
                         <span>
                                 For questions or concerns regarding these Terms, contact:
@@ -416,7 +416,7 @@ export default function Termsconditions() {
                                 +91 9818764200
                             </li> */}
                             <li>
-                               UNIT No: 320, TOWER C, GOLDEN I, TECHZONE 4, Grater Noida, 201009 
+                               UNIT No: 320, TOWER C, GOLDEN I, TECHZONE 4, Greater  Noida, 201009 
                             </li>
                         </ul>
                        </div>

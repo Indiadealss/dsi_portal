@@ -49,7 +49,7 @@ const Crcmaesta = () => {
     {
       id: 2,
       icon: <Layers size={48} strokeWidth={1} />,
-      value: "33",
+      value: "30",
       label: "Total No. of Floors",
     },
     {
