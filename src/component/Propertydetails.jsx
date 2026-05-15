@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux';
 import { setProperty } from './Redux/propertyidSlice';
 import Featuredetails from './customcomponent/Features';
 import Considerpropety from './customcomponent/Considerproperty';
+import Antplanerbycus from './customantdesign/Antplanerbycus';
 
 const Propertydetails = () => {
 
@@ -170,6 +171,9 @@ const handleDealerPosition = (y) => {
    </div>
    <div className='mt-10'>
       <Placesnearby property={propertys} />
+   </div>
+   <div className='mt-10'>
+      <Antplanerbycus  />
    </div>
    <div className='mt-10'>
       <Considerpropety property={propertys} />

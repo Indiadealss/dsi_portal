@@ -34,6 +34,7 @@ export const Profileproperty = ({ setValidator }) => {
   const [description, setDescription] = useState(propertyData.description || '');
   const [paPlotArea, setPlotArea] = useState(propertyData.plotarea || null);
   const [buArea, setBuArea] = useState(propertyData.buildarea || null);
+  const [ploatbuArea, setPloatBuArea] = useState(propertyData.buildarea || null);
   const [caArea, setCaArea] = useState(propertyData.carpetarea || null);
   const [possession, setPossession] = useState(propertyData.Possession || '');
   const [numCabin, setNumCabin] = useState(propertyData.numCabin || null);
@@ -48,9 +49,9 @@ export const Profileproperty = ({ setValidator }) => {
   const [manualMonth, setManualMonth] = useState("");
   const [manualYear, setManualYear] = useState("");
   const [considerfaq, setConsiderFaq] = useState("");
-
-
-
+  const [area, setArea] = useState('');
+  const [length, setLength] = useState('');
+  const [Breadth, setBreadth] = useState('');
   const [availabestatus, setChoiseProperty] = useState(propertyData.availabestatus || '');
   const [choiseWashroom, setChoiseWashroom] = useState('');
   const [choiseConfrance, setChoiseConfrance] = useState('');
@@ -72,12 +73,19 @@ export const Profileproperty = ({ setValidator }) => {
   const [carpetArea, setCarpetArea] = useState(false)
   const [plotarea, setPloatarea] = useState('sq.ft');
   const [buildarea, setBuildarea] = useState('sq.ft');
+  
   const [carpet, setCarpet] = useState('sq.ft');
   const [totalFloor, setTotalFloor] = useState(0);
   const [projectTotalFloor, setProjectTotalFloor] = useState(propertyData.projectTotalFloor || null);
   const [reraStatus, setReraStatus] = useState(propertyData.reraStatus || "Not Available");
   const [reraNumber, setReraNumber] = useState(propertyData.rera || "");
-  const [superBuildUParia, setSuperBuildUParia] = useState(propertyData.superBuildUParia || 0)
+  const [superBuildUParia, setSuperBuildUParia] = useState(propertyData.superBuildUParia || 0);
+
+  const [plotFloorDetails,setPlotFloorDetails] = useState(propertyData.plotFloorDetails || 0);
+  const [boundary, setBoundary] = useState("");
+  const [openSides, setOpenSides] = useState("");
+  const [approvedBy, setApprovedBy] = useState("");
+
 
   const propertyDataFirst = useSelector((state) => state.property.data);
 
@@ -198,6 +206,84 @@ export const Profileproperty = ({ setValidator }) => {
     "maintenance"
   ];
 
+  const unitConversion = {
+  "Sq.ft": 1,
+  "Sq.m": 10.7639,
+  "Sq.yd": 9,
+  "Arce": 43560,
+  "Hactare": 107639,
+  "Marla": 272.25,
+  "Guntha": 1089,
+  "Bigha": 27225,
+  "Kanal": 5445,
+  "Lacha": 43560,
+  "Cent": 435.6,
+  "Chhatak": 45,
+  "Perch": 272.25,
+};
+
+  const handleAreaChange = (value) => {
+  setArea(value);
+
+  if (length) {
+    setBreadth((Number(value) / Number(length)).toFixed(2));
+  } else if (breadth) {
+    setLength((Number(value) / Number(breadth)).toFixed(2));
+  }
+};
+
+const handleLengthChange = (value) => {
+  setLength(value);
+
+  if (area) {
+    setBreadth((Number(area) / Number(value)).toFixed(2));
+  } else if (breadth) {
+    setArea((Number(value) * Number(breadth)).toFixed(2));
+  }
+};
+
+const handleBreadthChange = (value) => {
+  setBreadth(value);
+
+  if (area) {
+    setLength((Number(area) / Number(value)).toFixed(2));
+  } else if (length) {
+    setArea((Number(length) * Number(value)).toFixed(2));
+  }
+};
+
+const convertArea = (value, fromUnit, toUnit) => {
+  const sqft = value * unitConversion[fromUnit];
+  return (sqft / unitConversion[toUnit]).toFixed(2);
+};
+
+const linearUnitMap = {
+  "Sq.ft": "ft",
+  "Sq.m": "m",
+  "Sq.yd": "yd",
+  "Arce": "ft",
+  "Hactare": "m",
+  "Marla": "ft",
+  "Guntha": "ft",
+  "Bigha": "ft",
+  "Kanal": "ft",
+  "Lacha": "ft",
+  "Cent": "ft",
+  "Chhatak": "ft",
+  "Perch": "ft",
+};
+
+const handleBuildPlotarea = (newUnit) => {
+
+  if (area) {
+    const converted = convertArea(area, buildarea, newUnit);
+    setArea(converted);
+  }
+
+  setPloatBuArea(newUnit);
+  setBuildUpDropdown(false);
+};
+
 
   const generateEntries = (count) => {
     if (count <= 0) return;
@@ -251,6 +337,14 @@ export const Profileproperty = ({ setValidator }) => {
     bedroom: noBedroom,
     bathroom: noBathroom,
     balconies: noBalconies,
+    PlotArea: `${area} ${ploatbuArea}`,
+    PlotAreaLength:`${length} ${linearUnitMap[buildarea]}`,
+    PlotAreaBreadth:`${Breadth} ${linearUnitMap[buildarea]}`,
+    AllowedConstructionDetails:plotFloorDetails,
+    wallBoundary:boundary,
+    OpenSides:openSides,
+    ploatPossession:possession,
+    ploatApprovedBy:approvedBy,
     plotarea: paPlotArea,
     plotSizein: plotarea,
     buildarea: buArea,
@@ -292,6 +386,14 @@ export const Profileproperty = ({ setValidator }) => {
     noBathroom,
     noBalconies,
     paPlotArea,
+    area,
+    length,
+    Breadth,
+    plotFloorDetails,
+    boundary,
+    openSides,
+    possession,
+    approvedBy,
     plotarea,
     buArea,
     buildarea,
@@ -363,6 +465,22 @@ export const Profileproperty = ({ setValidator }) => {
     "sq.m",
     "arce",
     "hactare"
+  ]
+
+  const ploatSizeDropdown = [
+    "Sq.ft",
+    "Sq.m",
+    "Sq.yd",
+    "Arce",
+    "Hactare",
+    "Marla",
+    "Guntha",
+    "Bigha",
+    "Kanal",
+    "Lacha",
+    "Cent",
+    "Chhatak",
+    "Perch",
   ]
 
   const handleFloorChange = (val) => {
@@ -636,6 +754,24 @@ export const Profileproperty = ({ setValidator }) => {
       alert('Enter the ownership')
       return false;
     }
+    if(!area && propertyDataFirst.propertyType === 'plotLand'){
+                alert('Enter the Ploat Area');
+                return false;
+              }
+      
+      if(!boundary && propertyDataFirst.propertyType === 'plotLand'){
+                alert('Boundary wall Availble or Not');
+                return false;
+              }
+              
+      if(!possession && propertyDataFirst.propertyType === 'plotLand'){
+                alert('Expected Possession');
+                return false;
+              }
+       if(!approvedBy && propertyDataFirst.propertyType === 'plotLand'){
+                alert('Boundary wall Availble or Not');
+                return false;
+              }
     if (description === '') {
       alert("Please specify the unique aspect of your property.")
       return false;
@@ -661,6 +797,261 @@ export const Profileproperty = ({ setValidator }) => {
   return (
     <>
       <h2 className="text-2xl font-medium mb-5">Tell us your property</h2>
+    {/* Is this a plot or Land */}
+    <div className={propertyDataFirst.propertyType === 'plotLand' ? '' : 'hidden'}>
+      <p>Add Area Details</p>
+      <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 pt-2 relative">
+          <div
+            className={'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+          >
+            <span>Ploat Area</span>
+          </div>
+
+          <input
+            type='number' onKeyDown={(e) => {
+              if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+            }} onWheel={(e) => e.target.blur()}
+            value={area}
+            onChange={(e) => handleAreaChange(e.target.value)}
+            className="w-full py-2 ps-6 rounded-b outline-none"
+            placeholder='Enter the Ploat Area'
+          />
+          
+        <button
+          type="button"
+          id="unitDropdownButton"
+          onClick={buildFun}
+          className="flex items-center gap-1 text-white absolute top-2.5 end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 
+                 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium 
+                 rounded-lg text-sm px-4 py-2 cursor-pointer"
+        >
+          {ploatbuArea} <ChevronDownIcon className="w-5 h-5" />
+        </button>
+        {/* Dropdown Menu */}
+       {buildUpdropdown && (
+          <div className="absolute right-0 mt-2 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+            <ul
+              className="py-2 text-sm text-gray-700 h-[200px] overflow-auto"
+              aria-labelledby="unitDropdownButton"
+            >
+              {ploatSizeDropdown.map((item) => (
+                <li key={item} >
+                  <button type='button'
+                    onClick={() => handleBuildPlotarea(item)}
+                    className='w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer'>
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        </div>
+
+        {/* Is this a Property Dimensions */}
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 mt-[20px] pt-2 relative">
+          <div
+            className={'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+          >
+            <span>Length</span>
+          </div>
+
+          <input
+            type='number' onKeyDown={(e) => {
+              if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+            }} onWheel={(e) => e.target.blur()}
+            value={length}
+            onChange={(e) => handleLengthChange(e.target.value)}
+            className="w-full py-2 ps-6 rounded-b outline-none"
+            placeholder={`Enter the Length ${linearUnitMap[ploatbuArea]} (Optional)`}
+          />
+        </div>
+
+        <div className="rounded border border-gray-300 text-gray-900 bg-gray-50 mt-[20px] pt-2 relative">
+          <div
+            className={'text-gray-400 font-medium h-[5px] text-xs px-2 rounded-t'}
+          >
+            <span>Breadth</span>
+          </div>
+
+          <input
+            type='number' onKeyDown={(e) => {
+              if (e.key === "ArrowUp" || e.key === "ArrowDown") e.preventDefault(); // disable arrow keys
+            }} onWheel={(e) => e.target.blur()}
+            value={Breadth}
+            onChange={(e) => handleBreadthChange(e.target.value)}
+            className="w-full py-2 ps-6 rounded-b outline-none"
+            placeholder={`Enter the Breadth ${linearUnitMap[ploatbuArea]} (Optional)`}
+          />
+        </div>
+        
+        {/* Is this Floors Details  */}
+         <p className="font-medium text-lg mt-[20px]">Floor </p>
+      <p className='font-medium text-xs text-gray-500'><span className={`${propertyDataFirst.purpose != 'Project' ? "hidden" : ''}`}>Floors allowed for construction</span><span className={`${propertyDataFirst.purpose === 'Project' ? "hidden" : ''}`}>Floors allowed for construction.</span></p>
+      <div>
+        <input type='text' className={`${propertyDataFirst.purpose === 'Project' ? "hidden" : 'outline-none border border-1 border-gray-200 mt-4 p-4 w-full'}`} value={plotFloorDetails} onChange={(e) => setPlotFloorDetails(e.target.value)} placeholder='Total Floor' />
+        
+      </div>
+
+      {/* Is this is wall details */}
+      <p className='font-medium text-lg mt-[20px]'>Is there a Boundary wall around the Property?</p>
+            <div className="flex items-center gap-4 mt-4">
+  {["Yes", "No"].map((item) => (
+    <button
+      key={item}
+      type="button"
+      onClick={() => setBoundary(item)}
+      className={`px-6 py-2 rounded-full border transition
+        ${
+          boundary === item
+            ? "bg-gray-300 text-black border-gray-300"
+            : "border-gray-300 text-gray-700 cursor-pointer"
+        }`}
+    >
+      {item}
+    </button>
+  ))}
+</div>
+
+      <p className='font-medium text-lg mt-[20px]'>No of Open Sides</p>
+      <div className="flex items-center gap-4 mt-4">
+  {["1", "2",'3','3+'].map((item) => (
+    <button
+      key={item}
+      type="button"
+      onClick={() => setOpenSides(item)}
+      className={`px-6 py-2 rounded-full border transition
+        ${
+          openSides === item
+            ? "bg-gray-300 text-black border-gray-300"
+            : "border-gray-300 text-gray-700 cursor-pointer"
+        }`}
+    >
+      {item}
+    </button>
+  ))}
+</div>
+
+
+{/* Is this is a Possession By */}
+
+ <form className='w-full mx-auto mt-[20px]'>
+          <label className="block mb-2 font-medium text-gray-900">
+            Possession By
+          </label>
+
+          {/* DROPDOWN MODE */}
+          {!manualPossession && (
+            <>
+              <select
+                value={possession}
+                onChange={(e) => setPossession(e.target.value)}
+                className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+              >
+                <option value="">Expected by</option>
+                {underConcetraction.map((item, index) => (
+                  <option key={index} value={item.name}>
+                    {item.label}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                type="button"
+                onClick={() => setManualPossession(true)}
+                className="mt-2 text-sm text-blue-600 hover:underline"
+              >
+                + Add manually
+              </button>
+            </>
+          )}
+
+          {/* MANUAL MODE */}
+          {manualPossession && (
+            <>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Month (e.g. March)"
+                  value={manualMonth}
+                  onChange={(e) => setManualMonth(e.target.value)}
+                  className="border p-2 rounded w-1/2"
+                />
+
+                <input
+                  type="number"
+                  placeholder="Year (e.g. 2027)"
+                  value={manualYear}
+                  onChange={(e) => setManualYear(e.target.value)}
+                  className="border p-2 rounded w-1/2"
+                />
+              </div>
+
+              <div className="flex gap-3 mt-3">
+                <button
+                  type="button"
+                  className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+                  onClick={() => {
+                    if (!manualMonth || !manualYear) return;
+                    setPossession(`${manualMonth} ${manualYear}`);
+                    setManualPossession(false);
+                  }}
+                >
+                  Save
+                </button>
+
+                <button
+                  type="button"
+                  className="text-sm text-gray-600"
+                  onClick={() => {
+                    setManualPossession(false);
+                    setManualMonth("");
+                    setManualYear("");
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          )}
+
+          {/* possession MANUAL MODE */}
+          {possession && !manualPossession && (
+            <p className="text-sm text-green-600 mt-1">
+              Selected: {possession}
+            </p>
+          )}
+
+        </form>
+
+        {/* Is this autohority part */}
+      <p className='font-medium text-lg mt-[20px]'>Approved By</p>
+      <div className="flex items-center gap-4 mt-4">
+  {["YEIDA", "GNIDA",'UPAVP'].map((item) => (
+    <button
+      key={item}
+      type="button"
+      onClick={() => setApprovedBy(item)}
+      className={`px-6 py-2 rounded-full border transition
+        ${
+          approvedBy === item
+            ? "bg-gray-300 text-black border-gray-300"
+            : "border-gray-300 text-gray-700 cursor-pointer"
+        }`}
+    >
+      {item}
+    </button>
+  ))}
+</div>
+
+ <h3 className='font-medium text-xl mt-[20px]'> <span className='text-xl font-medium '>What makes your property unique</span></h3>
+      <p className='text-xs font-medium  text-gray-500'>Adding description will increase your listing visibility</p>
+      <div>
+        <textarea id="message" rows="4" value={description} onInput={(e) => setDescription(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.." />
+      </div>
+    </div>
+
+      <div className={propertyDataFirst.propertyType === 'plotLand' ? 'hidden' : ''}>
       <div className={`${propertyDataFirst.propertyType === 'plotLand' ? 'hidden' : ''}`}>
         <div className={`${propertyDataFirst.property === 'commercial' ? 'hidden' : ''}`}>
           <p className={`${propertyDataFirst.property === 'commercial' || propertyDataFirst.purpose === 'Project' ? 'hidden' : "text-sm font-medium"}`}>No of Bedrooms</p>
@@ -1681,6 +2072,7 @@ export const Profileproperty = ({ setValidator }) => {
       <p className='text-xs font-medium  text-gray-500'>Adding description will increase your listing visibility</p>
       <div>
         <textarea id="message" rows="4" value={description} onInput={(e) => setDescription(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder="Share some details about your property like spacious rooms, well maintained facilities.." />
+      </div>
       </div>
     </>
   )

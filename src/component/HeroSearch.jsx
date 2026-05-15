@@ -262,7 +262,7 @@ const HeroSearch = () => {
 
     if (alltype !== 'Projects') {
       const slug = createSearchSlug(query);
-      navigate(`/property/${slug}`);
+      navigate(`/${slug}`);
     }
 
     if (alltype === "Projects") {
@@ -275,7 +275,7 @@ const HeroSearch = () => {
 
       const slug = createProjectSlug(selectedProject);
 
-      navigate(`/property/${slug}?preference=S`);
+      navigate(`/${slug}?preference=S`);
       return;
     }
 

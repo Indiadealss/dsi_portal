@@ -66,7 +66,7 @@ locationData = parseLocation(property.location);
 
 
     return (
-        <div className='mt-25' style={{position:'', top:0,zIndex:101,background:'white'}}>
+        <div  style={{position:'', top:0,zIndex:101,background:'white'}}>
             <div className='border-b border-gray-300'>
                 <div className='mx-10 hidden lg:block'>
                     <button className='text-white text-[10px] font-bold px-1 bg-[#814883fc]'>Featured</button>

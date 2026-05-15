@@ -250,7 +250,7 @@ useEffect(() => {
             }, [otherRooms,furnishing,proptyFacing,pobackup,amenitie,selectbulding,addFeature,prppertyF,watersource,overlo,locatadvance,price,projecttitle,projectdeveloper,projectKeyword,titleDescription]);
 
             function validateForm(){
-              if(!furnishing){
+              if(!furnishing && propertyDataFirst.propertyType != 'plotLand'){
                 alert('add furnishing');
                 return false;
               }
@@ -712,8 +712,8 @@ useEffect(() => {
     <>
         <h3 className='text-xl font-medium my-2'>Add amenities/unique features</h3>
         <p className='text-sm text-gray-400 font-normal'>These fields are used to populate USP & captions<br />All fields on this page are optional</p>
-        <h3 className='text-xl font-medium my-5'>Other rooms<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
-        <div className='flex flex-wrap '>
+        <h3 className={propertyDataFirst.propertyType === 'plotLand' ? 'hidden': ' text-xl font-medium my-5'}>Other rooms<span className="font-light text-sm text-gray-400">(Optional)</span></h3>
+        <div className={propertyDataFirst.propertyType === 'plotLand' ? 'hidden' : 'flex flex-wrap '}>
             {OtherRoom.map((item,index) => {
               const isSelected = otherRooms.includes(item.name)
                 return(

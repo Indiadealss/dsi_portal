@@ -3,7 +3,8 @@ import { HomeOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { IoIosPricetag } from "react-icons/io";
-
+import { Ruler } from "lucide-react";
+import { LayoutGrid } from "lucide-react";
 const units = [
     "sq.ft", "sq.yards", "grounds", "aankadam", "rood", "chataks", "perch",
     "guntha", "ares", "biswa", "acres", "bigha", "kottah", "hectares", "malrla",
@@ -13,7 +14,7 @@ const units = [
 const Propertydetailscarddata = ({ property }) => {
 
       const parseLocation = (location) => {
-        console.log(location,'location check');
+        console.log(property,'location check');
         
   if (typeof location === "string") {
     try {
@@ -41,7 +42,7 @@ const Propertydetailscarddata = ({ property }) => {
         <div className='block max-w-full h-[max-content]  lg:w-[43vw] lg:h-[max-content] p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100'>
             <table>
                 <tbody>
-                    <tr className='border-b border-gray-100'>
+                    <tr className={property.propertyType ==='plotLand' ? 'hidden' : 'border-b border-gray-100'} >
                         <td style={{ paddingBottom: '1rem' }}>
                             <div>
                                 <p className='flex'><HomeOutlined className='myCustomIcon' /><span className='font-medium m-2 text-sm text-gray-500'>Area</span></p>
@@ -55,11 +56,35 @@ const Propertydetailscarddata = ({ property }) => {
                                 <p>Carpet area: {detail.carpetarea || 'N/A'}</p>
                             </div>
                         </td>
-                        <td style={{ paddingBottom: '1rem', paddingLeft: '1rem' }}>
-                            <div>
+                        <td  style={{ paddingBottom: '1rem', paddingLeft: '1rem' }}>
+                            <div >
                                 <p className='flex'><HomeOutlined className='myCustomIcon' /><span className='font-medium m-2 text-sm text-gray-500'>Configuration</span></p>
                                 <p>
                                     {detail.bedroom || 0} Bedroom {detail.bathroom || 0} Bathroom {detail.balconies || 0} Balconies {detail.otherrooms?.length > 0 && `with ${detail.otherrooms.map(item => item.name).join(", ")}`}
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr className={property.propertyType ==='plotLand' ? 'border-b border-gray-100' : 'hidden'} >
+                        <td style={{ paddingBottom: '1rem' }}>
+                            <div>
+                                <p className='flex'><Ruler className='myCustomIcon' /><span className='font-medium m-2 text-sm text-gray-500'>Area</span></p>
+                                <p>
+                                    Ploat Area: {property.PlotArea}
+                                    {/* <Dropdown menu={{ items: units }} trigger={['click']}>
+                                        <Space>Options <DownOutlined /></Space>
+                                    </Dropdown> */}
+                                </p>
+                                {/* <p>Build Up area: {detail.buildarea || 'N/A'}</p> */}
+                                <p>L X B: {property.PlotAreaLength} X {property.PlotAreaBreadth}</p>
+                            </div>
+                        </td>
+                        <td  style={{ paddingBottom: '1rem', paddingLeft: '1rem' }}>
+                            <div >
+                                <p className='flex'><LayoutGrid className='myCustomIcon mt-2' /><span className='font-medium m-2 text-sm text-gray-500'>Authority Approved</span></p>
+                                <p className='ms-10'>
+                                    Yes
                                 </p>
                             </div>
                         </td>
@@ -81,9 +106,13 @@ const Propertydetailscarddata = ({ property }) => {
                     </tr>
 
                     <tr className='border-b border-gray-100'>
-                        <td style={{ paddingBottom: '1rem' }}>
+                        <td className={property.propertyType === 'plotLand' ? 'hidden' : ''} style={{ paddingBottom: '1rem' }}>
                             <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Floor Number</span></p>
                             <p>{detail.floor || 'N/A'} / {detail.totalfloor || 'N/A'} Floors</p>
+                        </td>
+                        <td className={property.propertyType === 'plotLand' ? '' : 'hidden'} style={{ paddingBottom: '1rem' }}>
+                            <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Allowed Construction Floor </span></p>
+                            <p> {detail.AllowedConstructionDetails || 'N/A'} Floors</p>
                         </td>
                         <td style={{ paddingBottom: '1rem', paddingLeft: '1rem' }}>
                             <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Facing</span></p>
@@ -106,8 +135,8 @@ const Propertydetailscarddata = ({ property }) => {
                             </td>
                         )}
                         <td style={{ paddingBottom: '1rem',paddingLeft:'1rem' }}>
-                            <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>Property Age</span></p>
-                            <p>{detail.propertyage || 'N/A'}</p>
+                            <p className='flex'><IoIosPricetag className='myCustomIcon' /><span className='font-medium text-sm text-gray-500'>No. of Open Sides</span></p>
+                            <p className='ms-4'>{detail.OpenSides || 'N/A'}</p>
                         </td>
                     </tr>
                 </tbody>

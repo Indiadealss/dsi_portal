@@ -62,13 +62,13 @@ if (!property || !property.location) {
     <div className='block max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm  '>
         <div className='flex my-2 max-w-[-webkit-fill-available] my-3'>
             <img className='' src={landmark} alt="..." />
-            <div>
+            <div className='ms-4'>
             <h2>Place nearby</h2>
-            <p>{`${locationData[0]?.apartment_name}  ${locationData[0]?.Address}`}</p>
+            <p className='mt-1'>{`${locationData[0]?.apartment_name}  ${locationData[0]?.Address}`}</p>
            
             </div>
         </div>
-        <Antplanerbycus  />
+        
     </div>
   )
 }

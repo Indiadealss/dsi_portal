@@ -35,7 +35,7 @@ const ImageCrousal = () => {
           </button></Link>
 
           {/* Browse Button */}
-          <Link to="/property/allLocations-ffid"><button className="border border-lime-400 text-lime-400 px-6 py-3 rounded-full font-medium hover:bg-lime-400 hover:text-white transition cursor-pointer">
+          <Link to="/allLocations-ffid"><button className="border border-lime-400 text-lime-400 px-6 py-3 rounded-full font-medium hover:bg-lime-400 hover:text-white transition cursor-pointer">
             BROWSE PROPERTIES
           </button></Link>
 
