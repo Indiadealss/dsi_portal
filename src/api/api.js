@@ -216,6 +216,14 @@ export const createLead = async (formData) => {
   })
 }
 
+export const createLeadMessage = async (formData) => {
+  return API.post(`/lead/leadmessage`,formData,{
+    headers:{
+      "Content-Type": "multipart/form-data",
+    },
+  })
+}
+
 export const createCampain = async (formData) => {
   return API.post(`/adddealer/adddelear`,formData,{
     headers:{

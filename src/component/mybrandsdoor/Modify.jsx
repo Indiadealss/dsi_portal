@@ -375,12 +375,12 @@ const Modify = () => {
                                     <p><span className='font-light text-gray-700'>Current State: <span className='font-medium'>UP</span></span></p>
                                 </div>
                                 <div>
-                                    <p><span className='font-light text-gray-700'>Current City: <span className='font-medium'>Grater Noida</span></span></p>
+                                    <p><span className='font-light text-gray-700'>Current City: <span className='font-medium'>Greater  Noida</span></span></p>
                                 </div>
                             </div>
                             <div className='flex justify-around'>
                                 <div>
-                                    <p><span>Current Address: <span>Grater Noida West, UP</span></span></p>
+                                    <p><span>Current Address: <span>Greater  Noida West, UP</span></span></p>
                                 </div>
                                 <div>
                                     <p><span>GISTIN Number: <span>jdj28dsfj28</span></span></p>

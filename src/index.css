@@ -10,11 +10,11 @@
 
 
 body {
-  font-family: 'Outfit';
+    font-family: 'Manrope';
   font-weight: 400; /* Regular */
 /* font-weight: 700; */
   margin: 0;
-  background: whitesmoke !important;
+  /* background: whitesmoke !important; */
 }
 
 .scrollbar-hide{
@@ -213,14 +213,7 @@ input[type="range"]::-moz-range-track{
   border-radius: 5px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+
 
 
 
@@ -283,9 +276,7 @@ h2 {
   border: none;
 }
 
-a{
-  color: white;
-}
+
 .webkitFillAvailable{
   width: -webkit-fill-available;
 }
@@ -297,9 +288,6 @@ a{
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
   }
 }
 
@@ -346,28 +334,12 @@ a{
    background: white !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-}
 
-h1 {
-  font-size: clamp(1.5rem, 4vw, 2rem);   /* Fluid between 1.5rem and 2rem */
-  line-height: 1.8rem;
-}
 
-h3 {
-  font-size: clamp(1rem, 2.5vw, 1.25rem); /* ~16px to 20px */
-}
 
-section{
-  max-width: 1865px !important;
-} 
 
-a {
-  font-size: 0.9rem;
-  text-decoration: none;
-  color: #1677ff;
-}
+
+
 
 .ant-btn {
   font-size: 14px;
@@ -418,10 +390,6 @@ a {
 }
 /* ====== Tablet (≥768px) ====== */
 @media screen and (min-width: 768px) {
-  h1 { font-size: clamp(2rem, 5vw, 2.5rem); line-height: 2.3rem; font-weight: 600; }
-  h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); font-weight: 600; }
-  /* p  { font-size: 1rem; } */
-  a  { font-size: 1rem; }
 
  .topSearchbox{
     top:86%;
@@ -454,11 +422,8 @@ a {
 
 /* ====== Laptop (≥1024px) ====== */
 @media screen and (min-width: 1024px) {
-  h1 { font-size: clamp(2.25rem, 6vw, 2.75rem); line-height: 2.6rem; font-weight: 600; }
-  h3 { font-size: clamp(1.5rem, 3.5vw, 1.75rem); font-weight: 600; }
   /* p  { font-size: 0.8rem; } */
   Link{font-size: 0.9rem; }
-  a  { font-size: 0.9rem;  font-weight: 500; color: #011c47e3;}
   .propertyListingFilter{
     width: 25vw;
   }
@@ -509,9 +474,7 @@ a {
 @media screen and (min-width: 1440px) {
   h1 { font-size: clamp(2.5rem, 7vw, 3rem); line-height: 2.8rem; font-weight: 600; }
   h2 { font-size: clamp(1.5rem, 4vw, 1.9rem); line-height: 1.9rem; font-weight: 600; }
-  h3 { font-size: clamp(1.5rem, 4vw, 1.75rem); font-weight: 600; }
   /* p  { font-size: 1.1rem; } */
-  a  { font-size: 1.1rem; }
   .propertyListingDatamain{
     width: 66% !important;
   }
@@ -548,11 +511,10 @@ a {
 
 /* ====== Ultra-wide 4K (≥2560px) ====== */
 @media screen and (min-width: 2560px) {
-  h1 { font-size: clamp(3rem, 8vw, 3.5rem); line-height: 3.2rem; font-weight: 600; }
+  /* h1 { font-size: clamp(3rem, 8vw, 3.5rem); line-height: 3.2rem; font-weight: 600; }
   h2 {font-size: clamp(1.8rem, 5vw, 2.2rem); line-height: 2.0rem; font-weight: 600;}
-  h3 { font-size: clamp(1.75rem, 5vw, 2rem); font-weight: 600; }
+  h3 { font-size: clamp(1.75rem, 5vw, 2rem); font-weight: 600; } */
   /* p  { font-size: 1.3rem;} */
-  a  { font-size: 1.25rem; }
 
   .ant-btn {
     font-size: 20px;
@@ -581,3 +543,21 @@ a {
 .font-accent {
   font-weight: 500;
 }
+
+@keyframes dropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dropdown {
+  animation: dropdown 0.25s ease;
+}
+
+

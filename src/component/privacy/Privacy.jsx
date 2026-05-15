@@ -423,7 +423,7 @@ export default function Privacy() {
                                 +91 9818764200
                             </li> */}
                             <li>
-                               UNIT No: 320, TOWER C, GOLDEN I, TECHZONE 4, Grater Noida, 201009 
+                               UNIT No: 320, TOWER C, GOLDEN I, TECHZONE 4, Greater  Noida, 201009 
                             </li>
                         </ul>
                        </div>

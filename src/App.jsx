@@ -62,6 +62,7 @@ import Crcmaesta from "./component/adcomponents/Crcmaesta.jsx";
 import Ashtechpresidentialtowers from "./component/adcomponents/Ashtechpresidentialtowers.jsx";
 import Aceacreville from "./component/adcomponents/Aceacreville.jsx";
 import Acehanei from "./component/adcomponents/Acehanei.jsx";
+import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
 
 function App() {
 
@@ -118,12 +119,13 @@ function App() {
     {path:'/crc-maesta',element:<Crcmaesta />},
     {path:'/ashtech-presidential-towers',element:<Ashtechpresidentialtowers />},
     {path:'/ace-acreville',element:<Aceacreville />},
+    {path:'/sobha-rivana',element:<Sobharivana />},
     {path:'/ace-hanei',element:<Acehanei />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
     { path: "/property",element:<Property />},
-    {path: "/property/:slug",element:<Propertypageslug />},
+    {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },

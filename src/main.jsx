@@ -7,6 +7,9 @@ import store from "./component/Redux/store.js";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { HelmetProvider } from 'react-helmet-async';
+import '@fontsource/manrope'; // Default weight 400
+import '@fontsource/manrope/500.css';
+import '@fontsource/manrope/700.css';
 
 // window.onerror = function (msg, url, line, col, error) {
 //   document.body.innerHTML = `

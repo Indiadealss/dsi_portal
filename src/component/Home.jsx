@@ -31,6 +31,11 @@ import PropertyList from './customcomponent/PropertyList';
 import ImageCrousal from './customantdesign/ImageCrousal';
 import CategoryGrid from './customcomponent/CategoryGrid';
 import ServicesSection from './customcomponent/ServicesSection';
+import CategoriesProperties from './customantdesign/CategoriesProperties';
+import BrandsDoorSection from './customantdesign/BrandsdoorSection';
+import ContactglobalForm from './customantdesign/ContactglobalForm';
+import CitySection from './customantdesign/Citysection';
+import TestimonialSection from './customantdesign/TestimonialSection';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -39,7 +44,6 @@ const Home = () => {
   const [loading,setLoading] = useState(false)
   const location = 'All India';
   const [data,setData] = useState([]);
-
   const [crousalData,setCrousalData] = useState();
   const [HandpickedProject,setHandpickedProject] = useState();
 
@@ -135,6 +139,7 @@ const Home = () => {
       npxid:p.npxid? p.npxid : "N/A",
       deposit: p.deposit || "N/A",
       unitData:p.unitData || "N/A",
+      officeUnits: p.officeUnits || "N/A",
       size: p.plotarea || 0,
       area: p.areaType || "Built-up",
       description: p.description || "No description available",
@@ -382,47 +387,42 @@ console.log(residential, 'residential');
         <Contiunebrowser title='Continue browsing...' />
       </div> */}
       {/* small {'GET STARTED WITH EXPLORING REAL ESTATE OPTIONS'} */}
-      <div className="  grid grid-cols-1 lg:grid-cols-12 gap-10 mt-10 lg:mt-40 lg:hidden w-full max-w-[1440px] mx-auto">
-        {/* Left content = 8/12 (≈66.7% ≈ 70%) */}
-        <div className="lg:col-span-8 ms-3 space-y-10">
-          {/* <Customcardcrousal data={data} /> */}
-        <PropertyList properties={data} />
-
-
-
-        {/* <Smallmain  title='The most search project in location' data={data}/> */}
-
-          
-        </div>
-
-        {/* Right sidebar = 4/12 (≈33.3% ≈ 30%) */}
-        
-      </div>
+      
 
       {/* main */}
-      <div className='mt-10 hidden lg:block w-full homeContainer max-w-[1265px] mx-auto'>
+      <div className='lg:block
+          w-[90%]
+          2xl:w-[85%]
+          3xl:w-[95%]
+          4xl:w-[82%]
+          mx-auto'>
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
-        
+        <CategoriesProperties />
+        <BrandsDoorSection />
         
       </div>
-      <div className='my-10 md:my-24'>
-      <ImageCrousal />
-      </div>
 
-       <div className='mt-40  w-full homeContainer max-w-[1265px] mx-auto'>
-        <div>
-          <h3 className='text-center'><span className='text-center tracking-wider'>MOST POPULAR PLACES</span></h3>
-          <p className='text-center'><span className='text-xs font-bold text-gray-600'>FIND YOUR DREAM HOUSE IN YOUR CITY</span></p>
-        </div>
-        <CategoryGrid />
-       </div>
+      
 
-       <div className='h-400px  bg-[#f3e2e2]'>
-        <div className='mt-40  w-full homeContainer max-w-[1265px] mx-auto'>
-            <ServicesSection />
+       <div className='h-400px'>
+        <div className=' w-full '>
+            <ContactglobalForm />
+           
+            
+            {/* <Contactussection /> */}
         </div>
        </div>
+
+       <div className=' lg:block
+          w-[90%]
+          2xl:w-[85%]
+          3xl:w-[95%]
+          4xl:w-[82%]
+          mx-auto'>
+             <CitySection />
+             <TestimonialSection />
+          </div>
 
     </div>
   )

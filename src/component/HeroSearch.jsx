@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getAllProjectNames, getallProperty, getSearch, getSearchcitiesList, searchaddress } from "../api/api";
-import projectName from '../Images/dubai-marina-panorama-photo.jpg';
+import projectName from '../Images/banner34.jpg';
 import { useNavigate } from "react-router-dom";
 import { updateFilter } from "./Redux/filterSlice";
 import { useDispatch } from "react-redux";
+import Searchbar from "./Searchbar";
 
 const HeroSearch = () => {
 
@@ -319,7 +320,7 @@ const HeroSearch = () => {
     setProjectInut(value)
   }
   return (
-    <div className="relative w-full h-[80vh] md:h-[46vh]">
+    <div className="relative w-full h-[40vh] md:h-[52vh]">
 
       <img
         src={projectName}
@@ -327,176 +328,13 @@ const HeroSearch = () => {
         className="w-full h-full object-cover"
       />
 
-      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center px-4 text-center pt-[36vh]">
-
-        <h1 className="text-white text-2xl md:text-5xl font-semibold">
-          <span className="text-white">Find your perfect</span> <span className="text-white">property</span>
-        </h1>
+      <div className="absolute inset-0  flex flex-col items-center justify-center px-4 text-center pt-[30vh]">
 
         {/* <p className="text-gray-200 mt-3 text-sm md:text-lg">
           We have over million properties for you
         </p> */}
 
-        <div className="mt-6 w-full max-w-6xl bg-[#ffffff78] rounded md:rounded-full shadow-lg p-2 flex flex-col md:flex-row">
-
-          {/* Property Type */}
-          <select
-            className="flex-1 px-4 py-3 outline-none bg-white md:rounded-s-full text-gray-600 border-b md:border-b-0"
-            onChange={(e) => handlePropertyTypeChange(e.target.value)}
-          >
-            {propertyTypes.map((item, index) => (
-              <option key={index} value={item.value}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-
-          <div className="relative flex-1">
-            <input
-              type="text"
-              value={locationInput}
-              onChange={(e) => handleLocationSearch(e.target.value)}
-              placeholder="Search Location..."
-              className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
-            />
-
-            {locationList.length > 0 && (
-              <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
-                {locationList.map((item, index) => {
-                  const isSame = item.name?.toLowerCase() === item.city?.toLowerCase();
-
-                  const displayText = isSame
-                    ? item.name
-                    : `${item.name}, ${item.city}`;
-
-                  return (
-                    <li
-                      key={index}
-                      className="p-2 cursor-pointer hover:bg-gray-100"
-                      onClick={() => {
-                        setLocationInput(displayText);
-                        setSelectedLocation(item.city);
-                        setLocationList([]);
-                      }}
-                    >
-                      {displayText}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
-
-          {/* Status */}
-          {alltype !== 'Projects' && (
-            <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 ">
-              {allStatus.map((item, index) => (
-                <option key={index} value={item.value}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          )}
-
-
-          <select className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0 " onChange={(e) => setConstrutStatus(e.target.value)}>
-            <option value="">Looking For</option>
-            {constructionStatus.map((item, index) => (
-              <option key={index} value={item.value}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-
-          {/* Sub Property Type */}
-          {(alltype === 'Commercial' || alltype === 'Residential') && (
-            <select
-              disabled={propertyType.length === 0}
-              onChange={(e) => setSelectedSubType(e.target.value)}
-              className={`flex-1 px-4 py-3 outline-none border-b md:border-b-0  
-              ${propertyType.length === 0 ? "bg-white text-gray-400 cursor-not-allowed" : "bg-white"}
-                `}
-            >
-              <option value="">Type of Property</option>
-
-              {propertyType.map((item, index) => (
-                <option key={index} value={item.value}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          )}
-          {alltype === 'Residential' && (
-            <select
-              value={bedroom}
-              onChange={(e) => setBedroom(e.target.value)}
-              className="flex-1 px-4 py-3 outline-none text-gray-600 border-b md:border-b-0 bg-white"
-            >
-              <option value="">Any Bedroom</option>
-
-              {Bedroom.map((item, index) => (
-                <option key={index} value={item.value}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          )}
-          {(alltype === 'Commercial' || selectedSubType === 'Residential Plot') && (
-            <select
-              value={selectedSize}
-              onChange={(e) => setSelectedSize(e.target.value)}
-              className="flex-1 px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
-            >
-              <option value="">All Size</option>
-
-              {size.map((item, index) => (
-                <option key={index} value={item.value}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          )}
-
-          {(alltype === 'Projects') && (
-            <div className="relative flex-1">
-              <input
-                type="text"
-                value={projectInput}
-                onChange={(e) => handleProjectSearch(e.target.value)}
-                placeholder="Search Projects By Name..."
-                className="w-full px-4 py-3 bg-white outline-none text-gray-600 border-b md:border-b-0"
-              />
-
-
-              {filteredProjects.length > 0 && projectInput && (
-                <ul className="absolute left-0 right-0 bg-white border mt-1 shadow-md max-h-48 overflow-y-auto z-50">
-                  {projectList.map((item, index) => (
-                    <li
-                      key={index}
-                      className="p-2 cursor-pointer hover:bg-gray-100"
-                      onClick={() => {
-                        const value = `${item.npxid}`;
-                        const projectName = `${item.projectname}`;
-                        setProjectNpxid(value);
-                        setSelectedProjectId(item.npxid);
-                        setProjectInut(projectName);
-                        setSelectedLocation(value);
-                        setLocationList([]);
-                      }}
-                    >
-                      {item.projectname}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
-          {/* Button */}
-          <button onClick={handleSearch} className="my-5 md:my-0 bg-[#e9ae01] text-white px-6 py-3 rounded-full md:rounded-r-full md:rounded-l-none font-semibold hover:bg-lime-600">
-            SEARCH
-          </button>
-
-        </div>
+        <Searchbar />
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ const Placesnearby = () => {
     nearlocations:[
       {title:"Delta 1 Metro Station"},
       {title:"MSX Mall"},
-      {title:"Noida-Grater Noida E"},
+      {title:"Noida-Greater  Noida E"},
       {title:"Somerville School"},
       {title:"Ram-Eesh Institue"},
       {title:"Kailash Hospital"},

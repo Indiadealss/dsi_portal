@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import aceestatelogo from '../../Images/aceestatelogo.png'
 import AceEstatteLogo from '../../Images/AceEstatteLogo.png'
 import { Phone, MessageCircle, Image } from 'lucide-react';
 import Customenquiryform from "../customcomponent/Customenquiryform.jsx";
@@ -176,12 +175,13 @@ const gymAmenities = [
         { text: "High Rise Apartments", sub: "up to 30 Floors" },
       ];
 
+      
  
         
   return (
     <div>
          <Seo
-              title='ACE ESTAEE ACE sector 22D Yamuna Expressway'
+              title='ACE ACREVILLE  TS-01, Yamuna Expressway, Gautam Budh Nagar, Sector-22A, Greater Noida, Uttar Pradesh 203201'
               description=""
               canonical={`https://www.brandsdoor.in/ace-estate`}
             />

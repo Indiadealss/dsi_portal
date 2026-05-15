@@ -513,7 +513,7 @@ try {
             : null
         }
       />
-      <div className="flex justify-center flex-col pt-[2vw] md:pt-[7vw] lg:pt-[7vw] md:pt-[7vw] md:flex-row mx-6">
+      <div className="flex justify-center flex-col  md:flex-row mx-6">
         <div className="w-full md:w-[60%] m-2">
           {isMobile ? (
     <MobileGallery images={image} video={video} />
