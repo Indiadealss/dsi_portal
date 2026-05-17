@@ -63,6 +63,7 @@ import Ashtechpresidentialtowers from "./component/adcomponents/Ashtechpresident
 import Aceacreville from "./component/adcomponents/Aceacreville.jsx";
 import Acehanei from "./component/adcomponents/Acehanei.jsx";
 import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
+import Loginpage from "./component/Loginpage.jsx";
 
 function App() {
 
@@ -124,6 +125,9 @@ function App() {
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},
+    {path:"/login",
+      element:user.loggedIn ?  <Navigate to="/" /> : <Loginpage />
+    },
     { path: "/property",element:<Property />},
     {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",

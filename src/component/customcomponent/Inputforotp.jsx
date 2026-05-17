@@ -98,7 +98,7 @@ export default function Inputforotp({ length, onComplete }) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex justify-center gap-6">
       {Array.from({ length }).map((_, i) => (
         <input
           key={i}
@@ -111,7 +111,7 @@ export default function Inputforotp({ length, onComplete }) {
           pattern="[0-9]*"
           maxLength={1}
           aria-label={`OTP digit ${i + 1}`}
-          className="w-12 h-12 text-center text-xl rounded border focus:outline-none focus:ring"
+          className="w-12 h-12 text-center text-xl text-blue-500 rounded border border-gray-400 outline-none "
           // style can be replaced with Tailwind or your own CSS
         />
       ))}

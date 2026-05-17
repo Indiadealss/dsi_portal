@@ -76,7 +76,9 @@ const Verify = ({ mobile, changeotpsend, redirectTo, resmobilef, closeModal }) =
 
 
   const handleSend = async () => {
-    setOtp(0)
+    setOtp("")
+    setCanResend(false)
+    setTimer(30)
     try {
       const res = await sentOtp(mobileNo);
       // console.log("otp sent:",res.status);
@@ -101,28 +103,25 @@ const Verify = ({ mobile, changeotpsend, redirectTo, resmobilef, closeModal }) =
         />
       )}
       <div>
-        <div >
-          <h2><span className="text-2xl font-bold text-gray-700" style={{ fontFamily: "sans-serif" }}>Verify your number</span></h2>
-          <div className='mb-10 flex'><span className="text-2xl font-medium text-gray-700" style={{ fontFamily: "sans-serif" }}>+91-{mobile}</span> <MdEdit className='m-1 text-xl text-blue-500 cursor-pointer' onClick={changeotpsend} /></div>
+        <div>
+          <h2 className='text-center mb-[12px]'><span className="text-2xl font-bold text-gray-700" style={{ fontFamily: "sans-serif" }}>Enter OTP</span></h2>
+          <p className='text-center mb-[12px]'>we have sent a 4-digit OTP to</p>
+          <div className=' flex justify-center mb-[12px]'><span className="text-md font-medium text-gray-700" style={{ fontFamily: "sans-serif" }}>+91-{mobile}</span> <span className='ms-2 text-md text-blue-500 cursor-pointer' onClick={changeotpsend} >change</span></div>
 
         </div>
-
         {/* <div className="mb-3">
             <label className="block my-2 mb-5 text-sm font-normal text-gray-500 ">Please enter your Phone Number</label>
             <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5     outline-none" placeholder="Enter your phone number" />
           </div> */}
-        <p className='my-2'>
-          <span className='font-medium'>Enter your 4 digit OTP</span>
-        </p>
         <Inputforotp length={4} onComplete={handleOtpChange} />
 
         {canResend ? (
-          <p>
-            Haven't recived yet? <button className='text-blue-600 cursor-pointer hover:unerline' onClick={handleSend}>Resend OTP</button>
+          <p className='text-center mt-3'>
+            <button className='text-blue-600 cursor-pointer hover:unerline' onClick={handleSend}>Resend OTP</button>
           </p>
         ) : (
-          <p className="text-gray-500 text-sm">
-            Haven't recived yet? wait {timer}s
+          <p className="text-gray-500 text-sm text-center mt-3">
+           Resend OTP in<span className='text-blue-500'> 00:{timer}</span>
           </p>
         )}
 

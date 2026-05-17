@@ -264,12 +264,12 @@ const handleLoginmobile = () => {
           fontSize: 18,
         }}
       >
- <img src="https://d3eoh63gynpjzh.cloudfront.net/logo.svg" alt="BRANDSDOOR"  width={180} className="w-[140px]" />
+ <img src="https://d3eoh63gynpjzh.cloudfront.net/logo.svg" alt="BRANDSDOOR"  width={180} className="mt-[0.2px]" />
  </a>
           </div>
 
           {/* Location (Desktop only) */}
-          <div className=" md:flex items-center gap-1 cursor-pointer text-[small] flex">
+          <div className=" md:flex items-center gap-1 cursor-pointer text-[large] flex">
             Noida <FaChevronDown size={12} />
           </div>
 
@@ -332,12 +332,7 @@ const handleLoginmobile = () => {
   )}
 </div>
   ) : (
-    <button
-      className="text-[small] cursor-pointer"
-      onClick={() => setShowLogin(true)}
-    >
-      Login
-    </button>
+    <Link to='/login'>Login</Link>
   )}
 
   <Link
