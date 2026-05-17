@@ -449,12 +449,8 @@ const handleLoginmobile = () => {
 
     <div className="flex items-center">
 
-      <button
-        className="text-[12px] text-[#0d2235] font-medium pr-6 border-r border-[#6c7a86]"
-        onClick={handleLoginmobile}
-      >
-        LOGIN
-      </button>
+         <Link to='/login' onClick={() => setMenuOpen(false)} className="text-[12px] text-[#0d2235] font-medium pr-6 border-r border-[#6c7a86]">Login</Link>
+
 
       <Link
         to="/post-property"

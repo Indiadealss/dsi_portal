@@ -29,7 +29,7 @@ import UpcomingProjects from "./component/customcomponent/Upcomingprojects";
 import Mybrandsdoor from "./component/mybrandsdoor/Mybrandsdoor";
 import Leadsearch from "./component/lead/Leadsearch";
 import Allprojects from "./component/Projectslead/Allprojects";
-import Allproject from "./component/mybrandsdoor/Allproducts";
+import Allproducts  from "./component/mybrandsdoor/Allproducts";
 import Homepage from "./component/mybrandsdoor/Homepage";
 import Banner from "./component/mybrandsdoor/Banner";
 import Fsllistings from "./component/mybrandsdoor/Fsllistings";
@@ -64,6 +64,7 @@ import Aceacreville from "./component/adcomponents/Aceacreville.jsx";
 import Acehanei from "./component/adcomponents/Acehanei.jsx";
 import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
 import Loginpage from "./component/Loginpage.jsx";
+import AllProjects from "./component/AllProjects.jsx";
 
 function App() {
 
@@ -129,6 +130,7 @@ function App() {
       element:user.loggedIn ?  <Navigate to="/" /> : <Loginpage />
     },
     { path: "/property",element:<Property />},
+    { path: "/project",element:<AllProjects />},
     {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
@@ -140,7 +142,7 @@ function App() {
   children:[
     { index: true, element: <Homepage /> },
     { path:"all_listings/ALL", element:<Allprojects /> },
-    { path:"all_listings", element:<Allproject /> },
+    { path:"all_listings", element:<Allproducts /> },
     { path:"homepage", element:<Homepage />},
     { path:"all_listings/LP", element:<Alllistings />},
     { path:"Edit_Profile/LP", element:<Editprofileproject />},
