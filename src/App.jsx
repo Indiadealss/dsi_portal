@@ -65,6 +65,7 @@ import Acehanei from "./component/adcomponents/Acehanei.jsx";
 import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
 import Loginpage from "./component/Loginpage.jsx";
 import AllProjects from "./component/AllProjects.jsx";
+import PropertyListingPage from "./component/PropertyListingPage.tsx"
 
 function App() {
 
@@ -131,6 +132,7 @@ function App() {
     },
     { path: "/property",element:<Property />},
     { path: "/project",element:<AllProjects />},
+    {path: "/Propertylistingpage", element:<PropertyListingPage />},
     {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />

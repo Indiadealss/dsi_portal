@@ -408,6 +408,10 @@ const handleLoginmobile = () => {
                 )}
               </div>
             ))}
+
+            <div>
+              <input type="text" className="hidden h-[-webkit-fill-available] border-s-1 border-gray-500" />
+            </div>
           </div>
       </div>
 

@@ -16,6 +16,10 @@ export const sentOtp = (mobile) =>
   API.post("/auth/send-otp", { mobile });
 
 
+export const getAlltyprojects = (currentpage = 1, projectsPerPage = 1, city = "Noida", propertyType = "All", status= "Ready to move") => 
+  API.get(`/property/getAllProjects?page=${currentpage}&limit=${projectsPerPage}&city=${city}&propertyType=${propertyType}&status=${status}`)
+
+
 export const lead = (id) =>
   API.get(`/mycrmhomepage/getcrmHomepage?id=${id}`)
 
