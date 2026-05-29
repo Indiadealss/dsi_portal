@@ -14,7 +14,7 @@ import new_launch from '../Images/rocket_launch.svg';
 import refresh from '../Images/refresh.svg';
 import { getAlltyprojects, searchaddress } from "../api/api";
 import { IoIosArrowDown } from "react-icons/io";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AllProjects = () => {
 
@@ -30,7 +30,7 @@ const AllProjects = () => {
   // const projectsPerPage = 5;
 
   const location = useLocation();
-
+  
 
   useEffect(() => {
 
@@ -72,6 +72,22 @@ console.log(locationName);
     }
 
   }, []);
+
+
+
+    const createSlug = (item) => {
+
+      console.log(item,'item is the createSlug');
+      
+  if (!item?.id) return "";
+
+  
+
+  return `${item.name}-${item.city}-npxid-${item.id}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
+};
 
   const getLocation = async (value) => {
     if (value.length >= 2) {
@@ -1007,12 +1023,12 @@ console.log(locationName);
             <option value="Price: High to Low">
               Price: High to Low
             </option>
-            <option value="Ready To Move">
+            {/* <option value="Ready To Move">
               Ready To Move
             </option>
             <option value="Under Construction">
               Under Construction
-            </option>
+            </option> */}
           </select>
         </div>
       </div>
@@ -1066,9 +1082,11 @@ console.log(locationName);
 
                 {/* Content */}
                 <div className="py-2 flex flex-col justify-between h-full">
+                  <Link to={`/${createSlug(project)}`}>
                   <p className="text-xl font-black text-[#0F172A]">
                     {project.name}
                   </p>
+                  </Link>
 
                   <div className="flex items-center gap-2 mt-1 text-gray-600">
                     <p className="flex gap-1">
@@ -1136,9 +1154,11 @@ console.log(locationName);
                   </div>
 
                   <div className="flex flex-row justify-between w-[-webkit-fill-available] lg:flex-col items-center">
+                    <Link to={`/${createSlug(project)}`}>
                     <button className="max-w-[170px] text-center border border-[#1E80E4] text-[#1E80E4] bg-white rounded-lg px-10 py-2 text-[12px] cursor-pointer  transition ">
                       View Details
                     </button>
+                    </Link>
 
                     <button className="flex items-center gap-2 text-[#1E80E4] mx-auto mt-3 text-[12px]">
                       <Heart size={18} />

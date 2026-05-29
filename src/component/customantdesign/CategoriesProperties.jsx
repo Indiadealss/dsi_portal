@@ -1,40 +1,53 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const propertyData = [
+
+
+
+
+export default function CategoriesProperties() {
+
+  const savedLocation = localStorage.getItem("userLocation");
+
+
+  useEffect(() => {
+    console.log(savedLocation,'this is the CategoriesProperties location');
+    
+  },[])
+
+  const propertyData = [
   {
     title: "Residential Homes",
     desc: "Apartments, villas & builder floors for modern living",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
-    button:'residential-noida-pidd'
+    button:`residential-${savedLocation}-pidd`
   },
   {
     title: "Commercial Spaces",
     desc: "Offices, shops & high-return investment spaces",
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
-      button:'commercial-noida-pidd'
+      button:`commercial-${savedLocation}-pidd`
   },
   {
     title: "Plots & Land",
     desc: "Secure land for your future and build your vision",
     image:
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
-      button:'plot-noida-pidd'
+      button:`plot-${savedLocation}-pidd`
   },
   {
     title: "Luxury Properties",
     desc: "Premium homes with world-class lifestyle amenities",
     image:
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200&auto=format&fit=crop",
-      button:'luxury-noida-ffid'
+      button:`luxury-${savedLocation}-ffid`
   },
 ];
-
-export default function CategoriesProperties() {
   return (
     <section className="w-full mt-[100px]">
       <div className="">

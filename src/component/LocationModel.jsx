@@ -54,7 +54,7 @@ const LocationModel = ({ open, onClose }) => {
             setSearch(e.target.value);
             getLocation(e.target.value);
           }}
-          className="w-full border p-2 rounded mb-4"
+          className="w-full border border-gray-200 p-2 rounded mb-4"
         />
 
         <div className="max-h-[300px] overflow-y-auto">
