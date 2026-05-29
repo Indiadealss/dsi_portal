@@ -69,7 +69,7 @@ const AllProjects = () => {
       }));
     }
 
-  }, [location.pathname]);
+  }, []);
 
   const getLocation = async (value) => {
     if (value.length >= 2) {
