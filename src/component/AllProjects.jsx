@@ -47,7 +47,7 @@ console.log(currentLocation, 'That is the current Location');
   if (savedLocation && currentLocation === '') {
 
     setSearch(savedLocation);
-
+    console.log('This is working');
     setFilters((prev) => ({
       ...prev,
       location: savedLocation,
@@ -55,7 +55,7 @@ console.log(currentLocation, 'That is the current Location');
   }
   else{
     setSearch(currentLocation);
-
+    console.log('That is not working')
     setFilters((prev) => ({
       ...prev,
       location: currentLocation,
