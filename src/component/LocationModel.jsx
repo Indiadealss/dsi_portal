@@ -33,6 +33,8 @@ const LocationModel = ({ open, onClose }) => {
     console.log(item, 'item city is where');
     
     updateLocation(item.city);
+    setSearch('');
+    setLocations([]);
     onClose();
   };
 

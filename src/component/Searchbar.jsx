@@ -67,7 +67,7 @@ export default function Searchbar() {
 
   const [prLocation, setPrLocation] = useState('');
   const [np, setNp] = useState('');
-  const [projectid, setProjectId] = useState('')
+  const [projectid, setProjectId] = useState('');
   const [projectname, setProjectname] = useState('');
   const [projectList, setProjectList] = useState([]);
   const [parsedLocation,setParsedLocation] = useState(null);

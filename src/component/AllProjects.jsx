@@ -12,8 +12,9 @@ import precision_manufacturing from '../Images/precision_manufacturing.png';
 import readyToMove from '../Images/readyToMove.png';
 import new_launch from '../Images/rocket_launch.svg';
 import refresh from '../Images/refresh.svg';
-import { getAlltyprojects } from "../api/api";
+import { getAlltyprojects, searchaddress } from "../api/api";
 import { IoIosArrowDown } from "react-icons/io";
+import { useLocation } from "react-router-dom";
 
 const AllProjects = () => {
 
@@ -24,8 +25,59 @@ const AllProjects = () => {
   const [pagination, setPagination] = useState({});
   const [showSizeDropdown, setShowSizeDropdown] = useState(false);
   const [allProjects, setAllProjects] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [search, setSearch] = useState("");
   // const projectsPerPage = 5;
 
+  const location = useLocation();
+
+  console.log(location);
+  
+  
+  useEffect(() => {
+  const savedLocation = localStorage.getItem("userLocation");
+
+  const currentLocation =
+  location.pathname
+    .replace("/", "")
+    .replace("-pidd", "");
+
+console.log(currentLocation, 'That is the current Location');
+
+  if (savedLocation && currentLocation === '') {
+
+    setSearch(savedLocation);
+
+    setFilters((prev) => ({
+      ...prev,
+      location: savedLocation,
+    }));
+  }
+  else{
+    setSearch(currentLocation);
+
+    setFilters((prev) => ({
+      ...prev,
+      location: currentLocation,
+    }));
+  }
+}, []);
+
+  const getLocation = async (value) => {
+    if (value.length >= 2) {
+      try {
+        const res = await searchaddress(value);
+
+        if (res.status === 200) {
+          setLocations(res.data.results || []);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      setLocations([]);
+    }
+  };
 
 
   const allProjectsl = [
@@ -362,10 +414,10 @@ const AllProjects = () => {
     },
     propertyType: "",
     bhk: "",
-   size: {
-  from: 0,
-  to: 10000,
-},
+    size: {
+      from: 0,
+      to: 10000,
+    },
     status: "",
   });
 
@@ -398,10 +450,10 @@ const AllProjects = () => {
       },
       propertyType: "",
       bhk: "",
-     size: {
-  from: 0,
-  to: 10000,
-},
+      size: {
+        from: 0,
+        to: 10000,
+      },
       status: "",
     });
   };
@@ -411,11 +463,15 @@ const AllProjects = () => {
     let projects = [...allProjects];
 
     // BHK FILTER (Frontend)
-    if (filters.bhk) {
-      projects = projects.filter((item) =>
-        item.bhk?.includes(filters.bhk)
-      );
-    }
+   if (filters.bhk) {
+  projects = projects.filter((item) =>
+    item.bhk?.some(
+      (bhk) =>
+        bhk.toLowerCase().replace(/\s/g, "") ===
+        filters.bhk.toLowerCase().replace(/\s/g, "")
+    )
+  );
+}
 
     // BUDGET FILTER (Frontend)
     projects = projects.filter((item) => {
@@ -544,7 +600,7 @@ const AllProjects = () => {
         location: item.location?.[0]?.Address || "",
         budget: item.price,
         propertyType: item.property || "",
-        bhk: item.propertyType?.join(", "),
+        bhk: item.propertyType || [],
         status: item.availabestatus,
         price: item.price,
         description: item.description,
@@ -600,27 +656,53 @@ const AllProjects = () => {
           <div className="flex gap-4 overflow-x-auto lg:overflow-visible scrollbar-hide pb-2">
 
             {/* Location */}
-            <div>
+            <div className="relative">
+
               <label className="hidden lg:block text-sm font-medium text-gray-700">
                 Location
               </label>
 
-              <div className="flex items-center border border-gray-300 rounded w-[130px] h-[31px] mt-1 p-[7.8px]">
-                <MapPin size={16} className="text-gray-400" />
+              <div className="flex items-center border border-gray-300 rounded w-[180px] h-[31px] mt-1 px-2">
 
-                <select
-                  value={filters.location}
-                  onChange={(e) =>
-                    handleChange("location", e.target.value)
-                  }
+                <MapPin size={16} className="text-gray-400 mr-2" />
+
+                <input
+                  type="text"
+                  placeholder="Search Location"
+                  value={search}
+                  onChange={(e) => {
+                    getLocation(e.target.value);
+                    setSearch(e.target.value);
+                  }}
                   className="w-full outline-none bg-transparent text-gray-600 text-[11px]"
-                >
-                  <option value="">All Location</option>
-                  <option value="Noida">Noida</option>
-                  <option value="Delhi">Delhi</option>
-                  <option value="Gurgaon">Gurgaon</option>
-                </select>
+                />
+
               </div>
+
+              {/* Dropdown */}
+              {locations.length > 0 && (
+                <div className="absolute top-[65px] left-0 w-full bg-white border border-gray-200 rounded shadow-lg z-50 max-h-[250px] overflow-y-auto">
+
+                  {locations.map((item) => (
+                    <div
+                      key={item.place_id}
+                      onClick={() => {
+                        setSearch(item.city);
+
+                        handleChange("location", item.city);
+
+                        setLocations([]);
+                      }}
+                      className="p-2 hover:bg-gray-100 cursor-pointer border-b border-gray-200"
+                    >
+                      <p className="text-sm font-medium">
+                        {item.city}
+                      </p>
+                    </div>
+                  ))}
+
+                </div>
+              )}
             </div>
 
             {/* Budget */}
@@ -819,178 +901,17 @@ const AllProjects = () => {
                     className="w-full outline-none bg-transparent text-gray-600 ml-1 text-[11px] "
                   >
                     <option value="">All BHK</option>
-                    <option value="2BHK">2 BHK</option>
-                    <option value="3BHK">3 BHK</option>
-                    <option value="4BHK">4 BHK</option>
+                    <option value="2 BHK">2 BHK</option>
+                    <option value="3 BHK">3 BHK</option>
+                    <option value="4 BHK">4 BHK</option>
                   </select>
                 </div>
               </div>
             )}
 
             {/* Size From-To (only for commercial) */}
-           {/* Size Filter */}
-{filters.propertyType === "commercial" && (
-  <div className="relative z-40">
-
-    <label className="hidden lg:block text-sm font-medium text-gray-700">
-      Size
-    </label>
-
-    {/* Trigger */}
-    <div
-      onClick={() =>
-        setShowSizeDropdown(!showSizeDropdown)
-      }
-      className="flex items-center justify-between border border-gray-300 rounded w-[170px] h-[31px] mt-1 px-3 cursor-pointer bg-white"
-    >
-      <div className="flex items-center gap-2">
-
-        <Construction
-          size={16}
-          className="text-gray-400"
-        />
-
-        <span className="text-[12px] text-gray-600">
-          {filters.size.from} - {filters.size.to} sqft
-        </span>
-      </div>
-
-      <span className="text-gray-800 text-sm">
-        <IoIosArrowDown />
-      </span>
-    </div>
-
-    {/* Dropdown */}
-    {showSizeDropdown && (
-      <div className="absolute top-[50px] left-0 w-[320px] bg-white border border-gray-200 rounded-2xl shadow-xl p-5 z-[9999]">
-
-        {/* Inputs */}
-        <div className="flex gap-3 mb-5">
-
-          {/* From */}
-          <div className="flex-1">
-            <p className="text-xs text-gray-500 mb-1">
-              From Size
-            </p>
-
-            <input
-              type="number"
-              value={filters.size.from}
-              onChange={(e) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  size: {
-                    ...prev.size,
-                    from: Number(e.target.value),
-                  },
-                }))
-              }
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none"
-            />
-          </div>
-
-          {/* To */}
-          <div className="flex-1">
-            <p className="text-xs text-gray-500 mb-1">
-              To Size
-            </p>
-
-            <input
-              type="number"
-              value={filters.size.to}
-              onChange={(e) =>
-                setFilters((prev) => ({
-                  ...prev,
-                  size: {
-                    ...prev.size,
-                    to: Number(e.target.value),
-                  },
-                }))
-              }
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none"
-            />
-          </div>
-        </div>
-
-        {/* Range Sliders */}
-        <div className="relative h-10">
-
-          {/* From Slider */}
-          <input
-            type="range"
-            min="0"
-            max="10000"
-            step="100"
-            value={filters.size.from}
-            onChange={(e) =>
-              setFilters((prev) => ({
-                ...prev,
-                size: {
-                  ...prev.size,
-                  from: Math.min(
-                    Number(e.target.value),
-                    prev.size.to - 100
-                  ),
-                },
-              }))
-            }
-            className="absolute w-full accent-blue-500"
-          />
-
-          {/* To Slider */}
-          <input
-            type="range"
-            min="0"
-            max="10000"
-            step="100"
-            value={filters.size.to}
-            onChange={(e) =>
-              setFilters((prev) => ({
-                ...prev,
-                size: {
-                  ...prev.size,
-                  to: Math.max(
-                    Number(e.target.value),
-                    prev.size.from + 100
-                  ),
-                },
-              }))
-            }
-            className="absolute w-full accent-blue-500"
-          />
-        </div>
-
-        {/* Footer */}
-        <div className="flex justify-between mt-6 gap-3">
-
-          <button
-            onClick={() => {
-              setFilters((prev) => ({
-                ...prev,
-                size: {
-                  from: 0,
-                  to: 10000,
-                },
-              }));
-            }}
-            className="w-full border border-blue-500 text-blue-500 py-2 rounded-lg text-sm"
-          >
-            Reset
-          </button>
-
-          <button
-            onClick={() =>
-              setShowSizeDropdown(false)
-            }
-            className="w-full bg-blue-500 text-white py-2 rounded-lg text-sm"
-          >
-            Apply
-          </button>
-        </div>
-      </div>
-    )}
-  </div>
-)}
+            {/* Size Filter */}
+            
 
             {/* Status */}
             <div>
