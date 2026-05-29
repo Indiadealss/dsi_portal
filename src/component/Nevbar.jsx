@@ -24,6 +24,8 @@ import { getLogout } from "../api/api";
 import { updateFilter } from "./Redux/filterSlice";
 import Mobilenavcustombtn from "./customantdesign/Mobilenavcustombtn";
 import AlertBox from "./customcomponent/AlertBox";
+import LocationModal from "./LocationModel.jsx";
+import { useLocationContext } from "./LocationContext.jsx";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,6 +37,10 @@ const Navbar = () => {
 
   const menuItems = ["Buy", "Rent", "Services", "Resources", "Blogs"];
   const [profileOpen, setProfileOpen] = useState(false);
+
+  const {location} = useLocationContext();
+
+  const [locationModal, setLocationModal] = useState(false);
 
     const screens = Grid.useBreakpoint();
   const isMobile = !screens.md;
@@ -269,9 +275,13 @@ const handleLoginmobile = () => {
           </div>
 
           {/* Location (Desktop only) */}
-          <div className=" md:flex items-center gap-1 cursor-pointer text-[large] flex">
-            Noida <FaChevronDown size={12} />
-          </div>
+          <div
+  onClick={() => setLocationModal(true)}
+  className="md:flex items-center gap-1 cursor-pointer text-[large] flex"
+>
+  {location}
+  <FaChevronDown size={12} />
+</div>
 
           
 
@@ -552,6 +562,11 @@ const handleLoginmobile = () => {
     </div>
   </div>
 )}
+
+<LocationModal
+  open={locationModal}
+  onClose={() => setLocationModal(false)}
+/>
 
       {isMobile ? (
   <Mobileloginmodal open={showLogin} onClose={() => setShowLogin(false)} />

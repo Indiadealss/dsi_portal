@@ -23,7 +23,6 @@ const AllProjects = () => {
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({});
   const [showSizeDropdown, setShowSizeDropdown] = useState(false);
-
   const [allProjects, setAllProjects] = useState([]);
   // const projectsPerPage = 5;
 

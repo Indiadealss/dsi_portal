@@ -315,45 +315,69 @@ export default function Searchbar() {
 
 
           {/* Filter & Search Button */}
-          <div className="flex items-center gap-2  md:w-auto">
-            <button className="text-gray-500 hover:bg-gray-100  transition-colors  w-full">
-              <SlidersHorizontal size={20} />
-            </button>
-            <div className='w-[1px] h-[35px] bg-gray-400 text-white' />
-            <Link
-            to={
-            activeTab === "PROJECTS"
-            ? projectid?.npxid
-              ? `${projectid?.projectname}-${parsedLocation}-npxid-${projectid?.npxid}`
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-        : `${inputValue.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-ffid`
-      : np !== 'N/A' && np?.length === 5
-      ? createSlug(projectid)
-      : createSlugs(projectid)
-  }
-  onClick={handleClick}
->
-              <button
-  disabled={inputValue.trim().length < 3}
-  className={`
-    hidden md:block
-    px-2 py-0 md:px-8 md:py-[2px]
-    rounded-sm
-    transition-all
-    md:w-auto
-    ${
-      inputValue.trim().length < 3
-        ? "bg-blue-200 cursor-not-allowed text-white"
-        : "bg-[#3477c5] hover:bg-[#3477c5] text-white cursor-pointer"
-    }
-  `}
->
-                Search
-              </button>
-            </Link>
-            <Search className=" mr-2 block md:hidden bg-[#3477c5] p-4 text-white" size={20} />
-          </div>
+<div className="flex items-center gap-2 md:w-auto">
+  <button className="text-gray-500 hover:bg-gray-100 transition-colors w-full">
+    <SlidersHorizontal size={20} />
+  </button>
+
+  <div className="w-[1px] h-[35px] bg-gray-400" />
+
+  {activeTab !== "PROJECTS" &&
+  inputValue.trim().length < 3 ? (
+    <button
+      disabled
+      className="
+        hidden md:block
+        px-2 py-0 md:px-8 md:py-[2px]
+        rounded-sm
+        bg-blue-200
+        cursor-not-allowed
+        text-white
+      "
+    >
+      Search
+    </button>
+  ) : (
+    <Link
+      to={
+        activeTab === "PROJECTS"
+          ? projectid?.npxid
+            ? `${projectid?.projectname}-${parsedLocation}-npxid-${projectid?.npxid}`
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/(^-|-$)+/g, "")
+            : `${inputValue
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")}-pidd`
+          : np !== "N/A" && np?.length === 5
+          ? createSlug(projectid)
+          : createSlugs(projectid)
+      }
+      onClick={handleClick}
+    >
+      <button
+        className="
+          hidden md:block
+          px-2 py-0 md:px-8 md:py-[2px]
+          rounded-sm
+          transition-all
+          md:w-auto
+          bg-[#3477c5]
+          hover:bg-[#2f6db5]
+          text-white
+          cursor-pointer
+        "
+      >
+        Search
+      </button>
+    </Link>
+  )}
+
+  <Search
+    className="mr-2 block md:hidden bg-[#3477c5] p-4 text-white"
+    size={20}
+  />
+</div>
         </div>
       </div>
 

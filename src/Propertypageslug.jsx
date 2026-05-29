@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Propertydetails from "./component/Propertydetails";
 import Projectdetail from "./component/Projectdetail";
 import { Property } from "./component/Property";
+import AllProjects from "./component/AllProjects";
 
 const Propertypageslug = () => {
   const { slug } = useParams();
@@ -20,6 +21,10 @@ const Propertypageslug = () => {
 
   if(slug.includes("ffid")){
     return <Property />;
+  }
+
+  if(slug.includes("pidd")){
+    return  <AllProjects />
   }
 
 };

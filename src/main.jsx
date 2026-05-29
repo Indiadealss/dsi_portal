@@ -10,6 +10,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import '@fontsource/manrope'; // Default weight 400
 import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/700.css';
+import { LocationProvider } from "./component/LocationContext";
 
 // window.onerror = function (msg, url, line, col, error) {
 //   document.body.innerHTML = `
@@ -25,7 +26,9 @@ createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <HelmetProvider>
       <BrowserRouter>
+      <LocationProvider>
       <App />
+      </LocationProvider>
     </BrowserRouter>
     </HelmetProvider>
     </Provider>,
