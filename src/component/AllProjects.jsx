@@ -32,36 +32,44 @@ const AllProjects = () => {
   const location = useLocation();
 
   console.log(location);
-  
-  
+
+
   useEffect(() => {
-  const savedLocation = localStorage.getItem("userLocation");
 
-  const currentLocation =
-  location.pathname
-    .replace("/", "")
-    .replace("-pidd", "");
+    const savedLocation =
+      localStorage.getItem("userLocation");
 
-console.log(currentLocation, 'That is the current Location');
+    const currentLocation =
+      location.pathname
+        .replace(/^\/+/, "")
+        .replace("-pidd", "")
+        .trim();
 
-  if (savedLocation && currentLocation === '') {
+    console.log(currentLocation);
 
-    setSearch(savedLocation);
-    console.log('This is working');
-    setFilters((prev) => ({
-      ...prev,
-      location: savedLocation,
-    }));
-  }
-  else{
-    setSearch(currentLocation);
-    console.log('That is not working')
-    setFilters((prev) => ({
-      ...prev,
-      location: currentLocation,
-    }));
-  }
-}, []);
+    if (
+      savedLocation &&
+      (!currentLocation || currentLocation === "")
+    ) {
+
+      setSearch(savedLocation);
+
+      setFilters((prev) => ({
+        ...prev,
+        location: savedLocation,
+      }));
+
+    } else {
+
+      setSearch(currentLocation);
+
+      setFilters((prev) => ({
+        ...prev,
+        location: currentLocation,
+      }));
+    }
+
+  }, [location.pathname]);
 
   const getLocation = async (value) => {
     if (value.length >= 2) {
@@ -463,15 +471,15 @@ console.log(currentLocation, 'That is the current Location');
     let projects = [...allProjects];
 
     // BHK FILTER (Frontend)
-   if (filters.bhk) {
-  projects = projects.filter((item) =>
-    item.bhk?.some(
-      (bhk) =>
-        bhk.toLowerCase().replace(/\s/g, "") ===
-        filters.bhk.toLowerCase().replace(/\s/g, "")
-    )
-  );
-}
+    if (filters.bhk) {
+      projects = projects.filter((item) =>
+        item.bhk?.some(
+          (bhk) =>
+            bhk.toLowerCase().replace(/\s/g, "") ===
+            filters.bhk.toLowerCase().replace(/\s/g, "")
+        )
+      );
+    }
 
     // BUDGET FILTER (Frontend)
     projects = projects.filter((item) => {
@@ -911,7 +919,7 @@ console.log(currentLocation, 'That is the current Location');
 
             {/* Size From-To (only for commercial) */}
             {/* Size Filter */}
-            
+
 
             {/* Status */}
             <div>
