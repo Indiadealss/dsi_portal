@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const propertyData = [
   {
@@ -8,24 +9,28 @@ const propertyData = [
     desc: "Apartments, villas & builder floors for modern living",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
+    button:'residential-noida-pidd'
   },
   {
     title: "Commercial Spaces",
     desc: "Offices, shops & high-return investment spaces",
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop",
+      button:'commercial-noida-pidd'
   },
   {
     title: "Plots & Land",
     desc: "Secure land for your future and build your vision",
     image:
       "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop",
+      button:'plot-noida-pidd'
   },
   {
     title: "Luxury Properties",
     desc: "Premium homes with world-class lifestyle amenities",
     image:
       "https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=1200&auto=format&fit=crop",
+      button:'luxury-noida-ffid'
   },
 ];
 
@@ -68,6 +73,8 @@ export default function CategoriesProperties() {
                     md:bottom-5
                   "
                 >
+
+                  <Link to={`/${item.button}`}>
                   <button
                     className="
                       flex w-full items-center justify-center gap-2
@@ -77,11 +84,14 @@ export default function CategoriesProperties() {
                       text-sm font-semibold uppercase tracking-wide
                       text-white shadow-xl
                       transition hover:from-blue-700 hover:to-blue-600
+                      cursor-pointer
                     "
+
                   >
                     Explore Now
                     <ArrowRight size={18} />
                   </button>
+                  </Link>
                 </div>
 
                 {/* Mobile Always Visible Button */}
@@ -104,14 +114,14 @@ export default function CategoriesProperties() {
 
               {/* Content */}
               <div className="mt-4 px-1">
-  <h4 className="text-xl font-semibold text-[#08233c] leading-tight">
-    {item.title}
-  </h4>
+                <h4 className="text-xl font-semibold text-[#08233c] leading-tight">
+                  {item.title}
+                </h4>
 
-  <p className="mt-1 text-xs text-gray-600 font-semibold leading-relaxed">
-    {item.desc}
-  </p>
-</div>
+                <p className="mt-1 text-xs text-gray-600 font-semibold leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>

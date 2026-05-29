@@ -31,25 +31,26 @@ const AllProjects = () => {
 
   const location = useLocation();
 
-  console.log(location);
-
 
   useEffect(() => {
 
     const savedLocation =
       localStorage.getItem("userLocation");
 
-    const currentLocation =
-      location.pathname
-        .replace(/^\/+/, "")
-        .replace("-pidd", "")
-        .trim();
+   const currentPath =
+  location.pathname
+    .replace(/^\/+/, "")
+    .replace("-pidd", "");
 
-    console.log(currentLocation);
+const [propertyType, locationName] =
+  currentPath.split("-");
+
+console.log(propertyType);
+console.log(locationName);
 
     if (
       savedLocation &&
-      (!currentLocation || currentLocation === "")
+      (!locationName || locationName === "")
     ) {
 
       setSearch(savedLocation);
@@ -61,11 +62,12 @@ const AllProjects = () => {
 
     } else {
 
-      setSearch(currentLocation);
+      setSearch(locationName);
 
       setFilters((prev) => ({
         ...prev,
-        location: currentLocation,
+        location: locationName,
+        propertyType:propertyType
       }));
     }
 
