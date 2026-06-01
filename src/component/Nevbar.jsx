@@ -96,49 +96,122 @@ const handleLoginmobile = () => {
         title: "Popular Choices",
         active: true,
         links: [
-          "Ready to Move",
-          "Owner Properties",
-          "Budget Homes",
-          "Premium Homes",
-          "New Projects",
+
+          <Link to="/ready-to-move-property-in-noida-ffid-buy-noida-ready-to-move">
+            Ready to Move
+          </Link>,
+
+          <Link to="/owner-property-in-noida-ffid-buy-noida-owner">
+            Owner Properties
+          </Link>,
+
+          <Link to="/budget-homes-in-noida-ffid-buy-noida-budget">
+            Budget Homes
+          </Link>,
+
+          <Link to="/premium-homes-in-noida-ffid-buy-noida-premium">
+            Premium Homes
+          </Link>,
+
+          <Link to="/new-projects-in-noida-pidd">
+            New Projects
+          </Link>,
         ],
       },
+
       {
         title: "Property Type",
         links: [
-          "Flats in Noida",
-          "House for sale in Noida",
-          "Villa in Noida",
-          "Plot in Noida",
-          "Office Space in Noida",
-          "Commercial Space in Noida",
+
+          <Link to="/buy-property-in-noida-ffid-buy-noida-flat">
+            Flats in Noida
+          </Link>,
+
+          <Link to="/house-for-sale-in-noida-ffid-buy-noida-house">
+            House for sale in Noida
+          </Link>,
+
+          <Link to="/villa-in-noida-ffid-buy-noida-villa">
+            Villa in Noida
+          </Link>,
+
+          <Link to="/plot-in-noida-ffid-buy-noida-plot">
+            Plot in Noida
+          </Link>,
+
+          <Link to="/office-space-in-noida-ffid-buy-noida-office">
+            Office Space in Noida
+          </Link>,
+
+          <Link to="/commercial-space-in-noida-ffid-buy-noida-commercial">
+            Commercial Space in Noida
+          </Link>,
         ],
       },
+
       {
         title: "Budget",
         links: [
-          "Under ₹ 50 Lac",
-          "₹ 50 Lac - ₹ 1 CR",
-          "₹ 1 CR - ₹ 1.5 CR",
-          "Above ₹ 1 CR",
+
+          <Link to="/property-under-50-lac-in-noida-ffid-buy-noida-under50lac">
+            Under ₹ 50 Lac
+          </Link>,
+
+          <Link to="/property-between-50lac-1cr-in-noida-ffid-buy-noida-50lac-1cr">
+            ₹ 50 Lac - ₹ 1 CR
+          </Link>,
+
+          <Link to="/property-between-1cr-1-5cr-in-noida-ffid-buy-noida-1cr-1-5cr">
+            ₹ 1 CR - ₹ 1.5 CR
+          </Link>,
+
+          <Link to="/property-above-1cr-in-noida-ffid-buy-noida-above1cr">
+            Above ₹ 1 CR
+          </Link>,
         ],
       },
+
       {
         title: "Explore",
         links: [
-          "Localities in Noida",
-          "Projects in Noida",
-          "Find an Agent",
-          "Home interiors in Noida",
+
+          <Link to="/localities-in-noida-ffid-buy-noida-localities">
+            Localities in Noida
+          </Link>,
+
+          <Link to="/projects-in-noida-pidd">
+            Projects in Noida
+          </Link>,
+
+          <Link to="/find-agent-in-noida">
+            Find an Agent
+          </Link>,
+
+          <Link to="/home-interiors-in-noida">
+            Home interiors in Noida
+          </Link>,
         ],
       },
+
       {
         title: "Buying Tools",
         links: [
-          "PropWorth",
-          "Rates & Trends",
-          "Buy vs Rent",
-          "Tips & Guides",
+
+          <Link to="/propworth">
+            PropWorth
+          </Link>,
+
+          <Link to="/rates-and-trends">
+            Rates & Trends
+          </Link>,
+
+          <Link to="/buy-vs-rent">
+            Buy vs Rent
+          </Link>,
+
+          <Link to="/buying-tips-guides">
+            Tips & Guides
+          </Link>,
         ],
       },
     ],
@@ -151,43 +224,112 @@ const handleLoginmobile = () => {
         title: "Popular Choices",
         active: true,
         links: [
-          "Owner Properties",
-          "Verified Properties",
-          "Furnished Homes",
-          "Bachelor Friendly Homes",
-          "Immediately Available",
+
+          <Link to="/owner-rental-properties-in-noida-ffid-rent-noida-owner">
+            Owner Properties
+          </Link>,
+
+          <Link to="/verified-rental-properties-in-noida-ffid-rent-noida-verified">
+            Verified Properties
+          </Link>,
+
+          <Link to="/furnished-homes-in-noida-ffid-rent-noida-furnished">
+            Furnished Homes
+          </Link>,
+
+          <Link to="/bachelor-friendly-homes-in-noida-ffid-rent-noida-bachelor">
+            Bachelor Friendly Homes
+          </Link>,
+
+          <Link to="/immediately-available-homes-in-noida-ffid-rent-noida-immediate">
+            Immediately Available
+          </Link>,
         ],
       },
+
       {
         title: "Property Type",
         links: [
-          "Flats for rent in Noida",
-          "House for rent in Noida",
-          "villa for rent in Noida",
-          "PG in Noida",
-          "Office Space in Noida",
-          "Commercial Space in Noida",
-          "Coliving space in Noida",
-          "Student Hostel in Noida",
-          "Luxury PG in Noida",
+
+          <Link to="/flats-for-rent-in-noida-ffid-rent-noida-flat">
+            Flats for rent in Noida
+          </Link>,
+
+          <Link to="/house-for-rent-in-noida-ffid-rent-noida-house">
+            House for rent in Noida
+          </Link>,
+
+          <Link to="/villa-for-rent-in-noida-ffid-rent-noida-villa">
+            Villa for rent in Noida
+          </Link>,
+
+          <Link to="/pg-in-noida-ffid-rent-noida-pg">
+            PG in Noida
+          </Link>,
+
+          <Link to="/office-space-for-rent-in-noida-ffid-rent-noida-office">
+            Office Space in Noida
+          </Link>,
+
+          <Link to="/commercial-space-for-rent-in-noida-ffid-rent-noida-commercial">
+            Commercial Space in Noida
+          </Link>,
+
+          <Link to="/coliving-space-in-noida-ffid-rent-noida-coliving">
+            Coliving space in Noida
+          </Link>,
+
+          <Link to="/student-hostel-in-noida-ffid-rent-noida-hostel">
+            Student Hostel in Noida
+          </Link>,
+
+          <Link to="/luxury-pg-in-noida-ffid-rent-noida-luxury-pg">
+            Luxury PG in Noida
+          </Link>,
         ],
       },
+
       {
         title: "Budget",
         links: [
-          "Under ₹ 10,000",
-          "₹ 10,000 - ₹ 15,000",
-          "₹ 15,000 - ₹ 25,000",
-          "Above ₹ 25,000",
+
+          <Link to="/rent-property-under-10000-in-noida-ffid-rent-noida-under10k">
+            Under ₹ 10,000
+          </Link>,
+
+          <Link to="/rent-property-between-10k-15k-in-noida-ffid-rent-noida-10k-15k">
+            ₹ 10,000 - ₹ 15,000
+          </Link>,
+
+          <Link to="/rent-property-between-15k-25k-in-noida-ffid-rent-noida-15k-25k">
+            ₹ 15,000 - ₹ 25,000
+          </Link>,
+
+          <Link to="/rent-property-above-25k-in-noida-ffid-rent-noida-above25k">
+            Above ₹ 25,000
+          </Link>,
         ],
       },
+
       {
         title: "Explore",
         links: [
-          "Localities",
-          "Buy Vs Rent",
-          "Find an Agent",
-          "Share Requirement",
+
+          <Link to="/rent-localities-in-noida-ffid-rent-noida-localities">
+            Localities
+          </Link>,
+
+          <Link to="/buy-vs-rent">
+            Buy Vs Rent
+          </Link>,
+
+          <Link to="/find-agent-in-noida">
+            Find an Agent
+          </Link>,
+
+          <Link to="/share-requirement">
+            Share Requirement
+          </Link>,
         ],
       },
     ],
@@ -199,34 +341,49 @@ const handleLoginmobile = () => {
       {
         title: "For Owner",
         active: true,
-        links: ["Post Property", "My Dashboard"],
+        links: [
+
+          <Link to="/post-property">
+            Post Property
+          </Link>,
+
+          <Link to="/mybrandsdoor">
+            My Dashboard
+          </Link>,
+        ],
       },
+
       {
         title: "For Agent & Builder",
-        links: ["My Dashboard", "Enquiries"],
+        links: [
+
+          <Link to="/mybrandsdoor">
+            My Dashboard
+          </Link>,
+
+          <Link to="/responses">
+            Enquiries
+          </Link>,
+        ],
       },
+
       {
         title: "Selling Tools",
-        links: ["Property Valuation", "Find an Agent"],
+        links: [
+
+          <Link to="/property-valuation">
+            Property Valuation
+          </Link>,
+
+          <Link to="/find-agent-in-noida">
+            Find an Agent
+          </Link>,
+        ],
       },
     ],
   },
 
-  // Services: {
-  //   width: "w-[350px]",
-  //   columns: [
-  //     {
-  //       title: "Tools",
-  //       active: true,
-  //       links: [
-  //         "EMI Calculator",
-  //         "Property Value Calculator",
-  //         "Rent Receipt Generator",
-  //       ],
-  //     },
-  //   ],
-  // },
-   Help: {
+  Help: {
     width: "w-[650px]",
     columns: [],
   },

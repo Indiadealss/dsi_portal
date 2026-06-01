@@ -65,7 +65,7 @@ import Acehanei from "./component/adcomponents/Acehanei.jsx";
 import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
 import Loginpage from "./component/Loginpage.jsx";
 import AllProjects from "./component/AllProjects.jsx";
-import PropertyListingPage from "./component/PropertyListingPage.tsx"
+import PropertyListingPage from "./component/PropertyListingPage.jsx"
 
 function App() {
 

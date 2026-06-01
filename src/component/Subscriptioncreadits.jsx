@@ -25,7 +25,7 @@ const Subscriptioncreadits = () => {
   return (
     <div>
     <div className='my-3'>
-      <h1>Croose a Subscription</h1>
+      <h1>Choose a Subscription</h1>
       <p className='my-3'>You have the following existing plans. Pick the plan you would like to post this property</p>
         <div className="flex">
             <div>

@@ -6,7 +6,79 @@
 }
 
 
+/* Budget Range Slider */
 
+.budget-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 36px;
+  background: transparent;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.budget-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #2563EB;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+}
+
+.budget-slider::-moz-range-thumb {
+  pointer-events: auto;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #2563EB;
+  cursor: pointer;
+}
+
+/* Modern Auto Hide Scrollbar */
+
+.modern-scrollbar {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+  position: relative;
+}
+
+/* Hide scrollbar by default */
+.modern-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  transition: all 0.3s ease;
+}
+
+/* Show scrollbar on hover */
+.modern-scrollbar:hover::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+.modern-scrollbar:hover::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Thumb */
+.modern-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.45);
+  border-radius: 999px;
+}
+
+/* Thumb hover */
+.modern-scrollbar:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.7);
+}
 
 
 body {

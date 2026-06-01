@@ -3,6 +3,7 @@ import Propertydetails from "./component/Propertydetails";
 import Projectdetail from "./component/Projectdetail";
 import { Property } from "./component/Property";
 import AllProjects from "./component/AllProjects";
+import PropertyListingPage from "./component/PropertyListingPage";
 
 const Propertypageslug = () => {
   const { slug } = useParams();
@@ -19,9 +20,33 @@ const Propertypageslug = () => {
       return <Propertydetails />;
   }
 
-  if(slug.includes("ffid")){
-    return <Property />;
-  }
+  if (slug.includes("ffid")) {
+
+  const type =
+    slug.includes("buy")
+      ? "buy"
+      : slug.includes("rent")
+      ? "rent"
+      : slug.includes("lease")
+      ? "lease"
+      : "all";
+
+  const cityMatch = slug.match(
+    /(noida|greater-noida|ghaziabad|delhi|gurugram)/i
+  );
+
+  const city = cityMatch
+    ? cityMatch[0]
+        .replace(/-/g, " ")
+    : "";
+
+  return (
+    <PropertyListingPage
+      initialListingType={type}
+      initialCity={city}
+    />
+  );
+}
 
   if(slug.includes("pidd")){
     return  <AllProjects />

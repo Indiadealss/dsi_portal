@@ -90,6 +90,12 @@ export const getallProperty = async (page ='',filter = '',purpose='',property=''
   return API.get(`/property/getAllProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&property=${property}&slug=${slug}`,filterForm);
 }
 
+export const getOnlyProperties = async (page ='',filter = '',purpose='',property='', slug='', filterForm = {}) => {
+  console.log(purpose,'purpose');
+  
+  return API.get(`/property/getOnlyProperties?page=${page}&limit=10&location=${filter}&purpose=${purpose}&property=${property}&slug=${slug}`,filterForm);
+}
+
 export const getproperty = async(id) => {
   return API.get(`/property/getProperty/${id}`);
 }
@@ -346,6 +352,11 @@ export const getAllFeature = async ()=> {
 
 export const searchaddress = async (address,city) => {
   return API.get(`/searchaddress?query=${address}&city=${city}`);
+}
+
+
+export const searchCities = async (city) => {
+  return API.get(`/cities/searchCities?query=${city}`);
 }
 
 // ✅ Toggle Shortlist (Add / Remove)
