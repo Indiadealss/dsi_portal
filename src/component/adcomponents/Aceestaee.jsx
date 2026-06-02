@@ -458,7 +458,7 @@ const gymAmenities = [
             <p className=' text-center'><span className='text-xl'>Developed by ACE Group</span></p>
             </div>
           <div className=" w-full mx-auto  px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div className="rounded min-h-screen p-8 md:p-12 font-sans relative">
+            <div className="rounded min-h-screen p-8 md:p-12  relative">
       
       {/* Central Tree Logo Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
@@ -503,7 +503,7 @@ const gymAmenities = [
       </div>
     </div>
 
-          <div className="rounded min-h-screen p-8 md:p-12 font-sans relative">
+          <div className="rounded min-h-screen p-8 md:p-12  relative">
       
       {/* Central Tree Logo Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">

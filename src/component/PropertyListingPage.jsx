@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { getOnlyProperties, searchaddress } from "../api/api";
+import { getOnlyProperties, searchaddress, searchCities } from "../api/api";
 import BuyLabel from "../Images/BuyLabel.svg";
 import RenLabel from "../Images/RentLabel.svg";
 import LeaseLabel from "../Images/LeaseLabel.svg";
@@ -195,10 +195,11 @@ function FilterPanel({ filters, onFiltersChange, onApply, onClear }) {
       try {
         setLoadingLocation(true);
 
-        const res = await searchaddress(value);
+        const res = await searchCities(value);
 
         if (res.status === 200) {
-          setLocations(res.data.results || []);
+          setLocations(res.data.data || []);
+          console.log(res.data);
         }
       } catch (err) {
         console.log(err);
@@ -277,7 +278,7 @@ function FilterPanel({ filters, onFiltersChange, onApply, onClear }) {
           {/* MultiCheck */}
           <MultiCheck
             options={locations
-              .map((loc) => loc?.city || loc?.address)
+              .map((loc) => loc?.city || loc?.name)
               .filter(Boolean)}
             selected={local.cities}
             onChange={(v) => set("cities", v)}
@@ -761,7 +762,7 @@ export default function PropertyListingPage({
     + (filters.minBudget || filters.maxBudget ? 1 : 0);
 
   return (
-    <div style={{ fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif", background: "#F9FAFB", minHeight: "100vh" }}>
+    <div style={{ fontFamily: "'', -apple-system, BlinkMacSystemFont", background: "#F9FAFB", minHeight: "100vh" }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: isMobile ? "16px 14px" : "24px 20px", display: "flex", gap: "24px", alignItems: "flex-start" }}>
 
         {/* Desktop Sidebar */}

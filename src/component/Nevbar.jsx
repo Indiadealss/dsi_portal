@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import inheight from "../Images/deskIn.png";
 import { CgMenuLeft } from "react-icons/cg";
+import logo_1 from "../Images/logo_1.svg";
 import {
   Grid,
 } from "antd";
@@ -413,10 +414,9 @@ const handleLoginmobile = () => {
 
       {/* 🔷 TOP NAVBAR */}
       <div className="bg-[#001A2D] text-white">
-        <div className=" mx-auto px-2 md:px-[100px]  py-[11px] flex items-center justify-between">
+        <div className=" mx-auto px-2 md:px-[40px]  py-[15px] flex items-center justify-between">
 
           {/* Logo */}
-          <div className="text-lg font-bold tracking-wide">
             <a
         href="/"
         
@@ -427,16 +427,15 @@ const handleLoginmobile = () => {
           fontSize: 18,
         }}
       >
- <img src="https://d3eoh63gynpjzh.cloudfront.net/logo.svg" alt="BRANDSDOOR"  width={180} className="mt-[0.2px]" />
+ <img src={logo_1} alt="BRANDSDOOR"  className="w-[100px] md:w-[250px]" /> 
  </a>
-          </div>
 
           {/* Location (Desktop only) */}
           <div
   onClick={() => setLocationModal(true)}
-  className="md:flex items-center gap-1 cursor-pointer text-[large] flex"
+  className="md:flex items-center gap-1 cursor-pointer text-[large] flex "
 >
-  {location}
+  <span className="border-b">{location}</span>
   <FaChevronDown size={12} />
 </div>
 

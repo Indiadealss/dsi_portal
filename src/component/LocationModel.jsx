@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocationContext } from "./LocationContext";
-import { searchaddress } from "../api/api";
+import { searchaddress, searchCities } from "../api/api";
 
 const LocationModel = ({ open, onClose }) => {
   const { updateLocation } = useLocationContext();
@@ -13,12 +13,12 @@ const LocationModel = ({ open, onClose }) => {
   const getLocation = async (value) => {
     if (value.length >= 2) {
       try {
-        const res = await searchaddress(value);
+        const res = await searchCities(value);
 
         if (res.status === 200) {
           console.log(res.data);
 
-          setLocations(res.data.results || []);
+          setLocations(res.data.data || []);
         }
       } catch (err) {
         console.log(err);

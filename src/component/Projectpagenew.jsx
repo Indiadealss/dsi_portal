@@ -1,0 +1,817 @@
+import { useState } from "react";
+import {
+  MapPin, Heart, Share2, ChevronLeft, ChevronRight,
+  Download, Phone, Calendar, CheckCircle, Home, Info,
+  Building2, Ruler, Zap, Car, Droplets, Shield,
+  Trees, Dumbbell, ShoppingBag, Waves, PlayCircle,
+  Activity, Mountain, AlignJustify, Building,
+  X, ZoomIn, Play, Star
+} from "lucide-react";
+import PdfSlider from "./customcomponent/PdfSlider";
+import {
+  BedDouble,
+  Bath,
+  Compass,
+} from "lucide-react";
+
+// ─── PASTE YOUR BACKEND DATA HERE ───────────────────────────────────────────
+const propertyData = {
+  _id: "69e8b8e4a70326c0f7f4d06a",
+  projectname: "PURVANCHAL ROYAL ATLANTIS",
+  projecttitle: "Purvanchal Royal Atlantis Lucknow, Gomti Nagar, 4BHK Flats",
+  projectdeveloper: "Purvanchal Group",
+  price: "40 L - 2 Cr",
+  availabestatus: "Ready to move",
+  propertyType: ["1 Bhk", "2 Bhk", "Studio Appartment"],
+  rera: "UPRERAPRJ546517/07/2024",
+  reraStatus: "Available",
+  propertyage: "5-10 years",
+  propertyfacing: "North-East",
+  furnishing: "Un-furnished",
+  coveredparking: 1,
+  uncoveredparking: 1,
+  pobackup: "Full",
+  projectTotalFloor: "22",
+  ownership: "Leasehold",
+  road_width: "22",
+  watersource: ["Municipal corporation", "Borewell/Tank", "24*7 water"],
+  location: [
+    {
+      City: "Lucknow",
+      Address:
+        "PURVANCHAL ROYAL ATLANTIS, C.G City, Plot No. F-7, Chak Ganajaria, Lucknow, Ahmamau, Uttar Pradesh 226002, India",
+    },
+  ],
+  description: `Purvanchal Royal Atlantis Phase 1 is an under construction, RERA registered, residential society in Gomti Nagar Extension, Lucknow. The project is being developed by Purvanchal Projects and is scheduled for completion in 2029. The Gomti Nagar Extension area is a rapidly developing pocket of Lucknow and known for its upscale, high-end projects. It offers proximity to renowned schools, hospitals and malls with global brands.
+
+**Project Features**
+Purvanchal Royal Atlantis Phase 1 has a sprawling campus surrounded by lush, landscaped greenery and wide internal roads. The society is 20 minutes away from the Chaudhary Charan Singh International Airport, Charbagh Railway Station, Purvanchal Expressway and Indira Nagar Metro Station. The homes in Purvanchal Royal Atlantis have a spacious 4-BHK configuration. The sizes of the flats are 2955 sq. ft. All units are open on 4 sides with 360° views and ventilation.`,
+  faq: [
+    {
+      question: "Why you should consider PURVANCHAL ROYAL ATLANTIS?",
+      answer: [
+        "Developed by Purvanchal Projects, a firm known for delivering successful projects in Noida and Greater Noida.",
+        "Located in the upscale location of Sector 7, Gomti Nagar Extension.",
+        "Spacious 4-BHK configurations measuring 2955 sq. ft.",
+        "All units are open on 4 sides with 360° views and ventilation.",
+        "Wellness facilities like open terrace spaces, yoga zone, sauna, steam room and landscaped areas.",
+      ],
+    },
+  ],
+  images: [
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861146640-1.jpg", type: "cover" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861148448-2.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861149035-3.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861149592-4.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861150092-5.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861151307-6.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861152628-7.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861155042-8.jpg", type: "general" },
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861161938-layout.jpg", type: "general" },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861162399-purvanchal-royal-at.pdf",
+      type: "brouser", // brochure PDF
+    },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861162974-TOWER_1.jpg",
+      type: "layout",
+      fields: [{ key: "Floor_Plan", value: "Tower 1" }],
+    },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861163376-Tower_2.jpg",
+      type: "layout",
+      fields: [{ key: "Floor_Plan", value: "Tower 2" }],
+    },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861163621-Tower1&2_1BHK.jpg",
+      type: "layout",
+      fields: [
+        { key: "Floor_Plan", value: "1 BHK" },
+        { key: "carpet_area", value: "570 sqft" },
+        { key: "Price", value: "6000000" },
+      ],
+    },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861163918-Tower1&2_2BHK.jpg",
+      type: "layout",
+      fields: [
+        { key: "Floor_Plan", value: "2 BHK" },
+        { key: "carpet_area", value: "947.17 sqft" },
+        { key: "Price", value: "9800000" },
+      ],
+    },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861164070-Tower1&2_Studio.jpg",
+      type: "layout",
+      fields: [
+        { key: "Floor_Plan", value: "Studio" },
+        { key: "carpet_area", value: "373.43 sqft" },
+        { key: "Price", value: "4000000" },
+      ],
+    },
+    {
+      src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861164204-Tower1_3BHK.jpg",
+      type: "layout",
+      fields: [
+        { key: "Floor_Plan", value: "3 BHK" },
+        { key: "carpet_area", value: "1670 sqft" },
+        { key: "Price", value: "18000000" },
+      ],
+    },
+  ],
+  video: [
+    { src: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776861160505-purvanchal%20atlantics.mp4" },
+  ],
+  Buldingfeature: [
+    { name: "Children's Play Area", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775630058426-kids_play_area.png" },
+    { name: "Jogging Track", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775630007263-jogging_track.png" },
+    { name: "Rock Climbing Wall", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775629989871-rock_climbing_wall.png" },
+    { name: "Landscape Garden", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775629958707-landscape_garden.png" },
+    { name: "Badminton Court", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775629912479-badminton_court.png" },
+    { name: "Club", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775629828953-club.png" },
+    { name: "Swimming Pool", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765889910936-swimming.png" },
+    { name: "Fitness Centre /Gym", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765889761554-gym.png" },
+    { name: "Shopping Center", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765889625782-placeholder%20%281%29.png" },
+    { name: "Water softening planting", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765819825195-watering.png" },
+  ],
+  amenitie: [
+    { name: "Lift(s)", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765817409969-elevator.png" },
+    { name: "Intercom Facility", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765817387759-intercom.png" },
+    { name: "Park", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765817305635-park.png" },
+    { name: "Feng Shui / Vaastu Compliant", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765817280980-download%20%281%29.png" },
+    { name: "Visitor Parking", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765798076846-placeholder.png" },
+    { name: "Security/Fire Alarm", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765798023387-fire-alarm.png" },
+    { name: "Water Storage", icon: "https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1765797995862-tank.png" },
+  ],
+  locatadvance: [
+    { name: "Close to Airport", type: "airport", propertyName: "Chaudhary Charan Singh International Airport", distance: "22 Km" },
+    { name: "Close to School", type: "school", propertyName: "Delhi Public School Gomti Nagar Extension", distance: "2.5 Km" },
+  ],
+  unitData: [
+    { id: 1, specs: { bhk: "1 BHK", areaMin: "570 sqft", priceMin: "6000000" } },
+    { id: 2, specs: { bhk: "2 BHK", areaMin: "947.17 sqft", priceMin: "10000000" } },
+    { id: 3, specs: { bhk: "Studio", areaMin: "373.41 sqft", priceMin: "8000000" } },
+    { id: 4, specs: { bhk: "3 BHK", areaMin: "1670 sqft", areaMax: "1674 sqft", priceMin: "17535000", priceMax: "18000000" } },
+  ],
+  owner: { name: "INDIADEALSS", mobile: "+917906518272", email: "brandsdoor.in@gmail.com" },
+};
+// ────────────────────────────────────────────────────────────────────────────
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+const formatPrice = (val) => {
+  if (!val) return "";
+  const n = Number(val);
+  if (n >= 10000000) return `${(n / 10000000).toFixed(2)} Cr`;
+  if (n >= 100000) return `${(n / 100000).toFixed(2)} L`;
+  return n.toLocaleString("en-IN");
+};
+
+const renderDescription = (text) => {
+  if (!text) return null;
+  return text.split("\n").map((line, i) => {
+    if (line.startsWith("**") && line.endsWith("**"))
+      return <p key={i} className="font-semibold text-gray-800 mt-3 mb-1">{line.replace(/\*\*/g, "")}</p>;
+    if (line.startsWith("●")) return <li key={i} className="ml-4 text-gray-600 text-sm list-disc">{line.replace("●\t", "").replace("●", "")}</li>;
+    return line.trim() ? <p key={i} className="text-gray-600 text-sm leading-relaxed">{line}</p> : null;
+  });
+};
+
+// ── Gallery Component ─────────────────────────────────────────────────────────
+function Gallery({ images }) {
+  const galleryImgs = images.filter((i) => ["cover", "general", "banner"].includes(i.type));
+  const [active, setActive] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
+  const [reraModal, setReraModal] = useState(false);
+  const prev = () => setActive((a) => (a - 1 + galleryImgs.length) % galleryImgs.length);
+  const next = () => setActive((a) => (a + 1) % galleryImgs.length);
+
+  return (
+    <div className="flex flex-col gap-2">
+      {/* Main Image */}
+      <div className="relative rounded-md overflow-hidden" style={{ height: 380 }}>
+        <img src={galleryImgs[active]?.src} alt="property" className="w-full h-full object-cover" />
+        {/* Verified Badge */}
+        <div className="absolute top-3 left-3 group z-20">
+  
+  {/* Badge */}
+  <div className="bg-green-500  text-white text-xs font-semibold px-3 py-1 rounded-md flex items-center gap-1 cursor-pointer" onMouseEnter={() => setReraModal(true)} onMouseLeave={() => setReraModal(false)}>
+    <Info size={15} />
+    Rera Approved
+  </div>
+
+  {/* Hover Modal */}
+  <div className={reraModal ? "absolute top-12 left-0 w-[280px] transition-all duration-300 backdrop-blur-xl bg-white/90 border border-white/30 shadow-2xl rounded-2xl p-4 " : "hidden"}>
+    
+    <div className="flex items-start gap-3">
+      
+      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+        <CheckCircle size={20} className="text-green-600" />
+      </div>
+
+      <div>
+        <h4 className="text-sm font-bold text-gray-800">
+          RERA Registered
+        </h4>
+
+        <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+          This property is verified and registered under the Real Estate
+          Regulatory Authority (RERA).
+        </p>
+
+        <div className="mt-3 space-y-1">
+          <p className="text-xs">
+            <span className="font-semibold text-gray-700">
+              RERA No:
+            </span>{" "}
+            {propertyData.rera}
+          </p>
+
+          <p className="text-xs">
+            <span className="font-semibold text-gray-700">
+              Status:
+            </span>{" "}
+            {propertyData.reraStatus}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Arrow */}
+    <div className="absolute -top-2 left-5 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-200"></div>
+  </div>
+</div>
+        {/* Nav Arrows */}
+        <button onClick={prev} className="backdrop-blur-md absolute left-3 text-white top-1/2 -translate-y-1/2 bg-black/40 cursor-pointer rounded-full p-2 shadow">
+          <ChevronLeft size={18} />
+        </button>
+        <button onClick={next} className="backdrop-blur-md absolute right-3 top-1/2 text-white -translate-y-1/2 bg-black/40 cursor-pointer rounded-full p-2 shadow">
+          <ChevronRight size={18} />
+        </button>
+        {/* View Photos */}
+        <button onClick={() => setLightbox(true)} className="absolute bottom-3 left-3 backdrop-blur-md bg-black/40  text-white cursor-pointer text-xs font-medium px-3 py-1.5 rounded-lg flex items-center gap-1 shadow">
+          <ZoomIn size={13} /> View Photos ({galleryImgs.length})
+        </button>
+      </div>
+
+      {/* Thumbnails */}
+      <div className="flex gap-2 overflow-x-auto pb-1">
+        {galleryImgs.slice(0, 5).map((img, i) => (
+          <button key={i} onClick={() => setActive(i)}
+            className={`flex-shrink-0 rounded-md overflow-hidden border-2 transition-all ${active === i ? "border-blue-700" : "border-transparent"}`}
+            style={{ width: 100, height: 80 }}>
+            <img src={img.src} alt="" className="w-full h-full object-cover" />
+          </button>
+        ))}
+        {galleryImgs.length > 5 && (
+          <button onClick={() => setLightbox(true)}
+            className="relative flex-shrink-0 rounded-md overflow-hidden bg-black/40 text-white text-xs font-semibold flex items-center justify-center"
+            style={{
+            width: 100,
+            height: 80,
+            backgroundImage: `url(${galleryImgs[5]?.src})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            }}>
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-xs font-semibold">
+      +{galleryImgs.length - 5}
+    </div>
+          </button>
+        )}
+      </div>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+          <button onClick={() => setLightbox(false)} className="absolute top-4 right-4 text-white"><X size={28} /></button>
+          <button onClick={prev} className="absolute left-4 text-white"><ChevronLeft size={36} /></button>
+          <img src={galleryImgs[active]?.src} alt="" className="max-h-screen max-w-5xl object-contain rounded-md" />
+          <button onClick={next} className="absolute right-4 text-white"><ChevronRight size={36} /></button>
+          <div className="absolute bottom-4 text-white text-sm">{active + 1} / {galleryImgs.length}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Property Info Card ────────────────────────────────────────────────────────
+function InfoCard({ data }) {
+  const [saved, setSaved] = useState(false);
+  return (
+    <div className=" border border-gray-200 rounded-md p-7  h-fit sticky top-4">
+      <h1 className="text-xl font-bold text-gray-900"><span className="text-2xl font-bold">{data.projectname}</span></h1>
+      <div className="flex items-start gap-1 mt-[5px] text-gray-500 text-sm">
+        <MapPin size={18} className="mt-0.5 flex-shrink-0" />
+        <span>{data.location?.[0]?.Address}</span>
+      </div>
+      <p className="mt-[35px] text-sm">
+        Developed By
+      </p>
+      <p className="text-sm text-[#1D85DB] font-medium">
+        {data.projectdeveloper}
+      </p>
+
+      <div className="mt-[35px]">
+        <p className="text-xs uppercase tracking-wide font-medium"><span className="font-bold">Starting From</span></p>
+        <p className="text-4xl font-bold text-[#1D85DB] mt-0.5">{data.price}<sup>*</sup></p>
+      </div>
+
+      {/* Unit type chips */}
+      <div className="mt-[35px]">
+        <p className="text-xs tracking-wide font-medium"><span className="font-bold">Size Availble</span></p>
+      <div className="flex flex-wrap gap-2 mt-[0.5px]">
+        {data.unitData?.map((u) => (
+          <span key={u.id} className="border border-gray-300 bg-[#E8F5FF] text-gray-700 text-xs font-medium px-3 py-1.5 rounded-md">
+            {u.specs.bhk}
+          </span>
+        ))}
+      </div>
+      </div>
+
+      <div className="flex gap-3 mt-[35px]">
+        <button onClick={() => setSaved(!saved)}
+          className={`flex-1 flex items-center justify-center gap-2 border rounded-lg py-2.5 text-sm font-medium transition-all ${saved ? "bg-red-50 border-red-300 text-red-600" : "border-gray-300 text-gray-600 hover:border-gray-400"}`}>
+          <Heart size={16} fill={saved ? "currentColor" : "none"} /> {saved ? "Saved" : "Save Property"}
+        </button>
+        <button className="flex-1 flex items-center justify-center gap-2 border border-gray-300 text-gray-600 rounded-md py-2.5 text-sm font-medium hover:border-gray-400 transition-all">
+          <Share2 size={16} /> Share
+        </button>
+      </div>
+
+      {/* RERA
+      {data.rera && (
+        <div className="mt-4 bg-blue-50 rounded-md px-3 py-2 text-xs text-blue-700">
+          <span className="font-semibold">RERA:</span> {data.rera}
+        </div>
+      )} */}
+    </div>
+  );
+}
+
+// ── Highlight Cards ───────────────────────────────────────────────────────────
+function Highlights({ data }) {
+  const items = [
+    { icon: <Building2 size={18} className="text-blue-600" />, label: "Configuration", value: data.unitData?.map((u) => u.specs.bhk).join(", ") || data.propertyType?.join(", ") },
+    { icon: <Ruler size={18} className="text-blue-600" />, label: "Area (Sq.Ft.)", value: data.unitData?.[0]?.specs?.areaMin ? `${data.unitData[0].specs.areaMin}+` : "—" },
+    { icon: <CheckCircle size={18} className="text-blue-600" />, label: "Status", value: data.availabestatus },
+    { icon: <Home size={18} className="text-blue-600" />, label: "Property Type", value: data.property ? data.property.charAt(0).toUpperCase() + data.property.slice(1) + " Apartment" : "Residential Apartment" },
+    { icon: <Zap size={18} className="text-blue-600" />, label: "Power Backup", value: data.pobackup },
+    { icon: <Car size={18} className="text-blue-600" />, label: "Parking", value: `${data.coveredparking} Covered, ${data.uncoveredparking} Open` },
+  ];
+  return (
+    <div className="flex flex-wrap gap-3">
+      {items.map((item, i) => (
+        <div key={i} className="bg-white border border-gray-200 rounded-md px-[12px] py-2 flex items-center gap-3">
+          <div className="flex-shrink-0">{item.icon}</div>
+          <div>
+            <p className="text-xs text-gray-500">{item.label}</p>
+            <p className="text-sm font-semibold text-gray-800 mt-0.5">{item.value || "—"}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── About Section ─────────────────────────────────────────────────────────────
+function AboutSection({ data }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">About Property</h2>
+      <div className={`overflow-hidden transition-all justify-center ${expanded ? "" : "max-h-40"}`}>
+        {renderDescription(data.description)}
+      </div>
+      <button onClick={() => setExpanded(!expanded)}
+        className="cursor-pointer mt-3 text-blue-600 border border-blue-600 text-sm font-medium px-4 py-1.5 rounded-md hover:bg-blue-50 transition-all">
+        {expanded ? "View Less" : "View More"}
+      </button>
+    </div>
+  );
+}
+
+// ── Floor Plan & Brochure ─────────────────────────────────────────────────────
+function FloorPlanBrochure({ images }) {
+  const [tab, setTab] = useState("floorplan");
+  const [activeLayout, setActiveLayout] = useState(0);
+
+  const layouts = images.filter((i) => i.type === "layout" && i.fields?.length > 0);
+  const brochurePdf = images.find((i) => i.type === "brouser");
+
+  const activeImg = layouts[activeLayout];
+  const getField = (key) => activeImg?.fields?.find((f) => f.key === key)?.value || "—";
+
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Floor Plan &amp; Brochure</h2>
+
+      {/* Tab Buttons */}
+      <div className="flex gap-2 mb-4">
+        <button onClick={() => setTab("floorplan")}
+          className={`px-5 py-2 rounded-md text-sm font-medium border transition-all ${tab === "floorplan" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"}`}>
+          Floor Plan
+        </button>
+        <button onClick={() => setTab("brochure")}
+          className={`px-5 py-2 rounded-md text-sm font-medium border transition-all ${tab === "brochure" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"}`}>
+          Brochure
+        </button>
+      </div>
+
+      {/* FLOOR PLAN */}
+  {tab === "floorplan" && layouts.length > 0 && (
+    <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
+      
+      {/* BHK Tabs */}
+      <div className="flex items-center gap-6 border-b border-gray-200 px-4 py-3">
+        {layouts.map((l, i) => {
+          const label =
+            l.fields?.find((f) => f.key === "Floor_Plan")?.value ||
+            `Plan ${i + 1}`;
+
+          return (
+            <button
+              key={i}
+              onClick={() => setActiveLayout(i)}
+              className={`text-[18px] font-medium pb-1 transition-all ${
+                activeLayout === i
+                  ? "text-[#1D85DB] border-b-2 border-[#1D85DB]"
+                  : "text-gray-700"
+              }`}
+            >
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Main Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr]">
+        
+        {/* LEFT IMAGE */}
+        <div className="border-r border-gray-200 bg-[#FAFAFA] p-4">
+          <img
+            src={activeImg?.src}
+            alt="Floor Plan"
+            className="w-full h-full object-contain rounded-md"
+          />
+        </div>
+
+        {/* RIGHT DETAILS */}
+        <div className="p-6 flex flex-col">
+          
+          {/* Heading */}
+          <h3 className="text-[20px] font-bold text-gray-800 mb-4">
+            {getField("Floor_Plan")} Apartment
+          </h3>
+
+          {/* Area */}
+          <div className="space-y-1 border-b border-gray-200 pb-4">
+            <div className="flex justify-between text-[18px]">
+              <span className="text-gray-600">Super Built up Area</span>
+              <span className="font-semibold text-gray-800">
+                {getField("super_built_area")}
+              </span>
+            </div>
+
+            <div className="flex justify-between text-[18px]">
+              <span className="text-gray-600">Carpet Area</span>
+              <span className="font-semibold text-gray-800">
+                {getField("carpet_area")}
+              </span>
+            </div>
+          </div>
+
+          {/* Features */}
+          <div className="flex flex-col gap-6 py-6">
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <BedDouble size={22} className="text-[#1D85DB]" />
+                <span className="text-[18px] text-gray-700">Bedrooms</span>
+              </div>
+              <span className="text-[18px] font-medium">
+                {getField("bedroom")}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Bath size={22} className="text-[#1D85DB]" />
+                <span className="text-[18px] text-gray-700">Bathrooms</span>
+              </div>
+              <span className="text-[18px] font-medium">
+                {getField("bathroom")}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Building2 size={22} className="text-[#1D85DB]" />
+                <span className="text-[18px] text-gray-700">Balcony</span>
+              </div>
+              <span className="text-[18px] font-medium">
+                {getField("balcony")}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Compass size={22} className="text-[#1D85DB]" />
+                <span className="text-[18px] text-gray-700">Facing</span>
+              </div>
+              <span className="text-[18px] font-medium">
+                {getField("facing")}
+              </span>
+            </div>
+          </div>
+
+          {/* Buttons */}
+          <div className="mt-auto flex flex-col gap-3">
+            
+            <a
+              href={activeImg?.src}
+              download
+              className="h-[50px] rounded-xl border border-[#1D85DB] text-[#1D85DB] flex items-center justify-center gap-2 text-[18px] font-medium hover:bg-blue-50 transition-all"
+            >
+              <Download size={18} />
+              Download Site Layout
+            </a>
+
+            <a
+              href={activeImg?.src}
+              download
+              className="h-[50px] rounded-xl border border-[#1D85DB] text-[#1D85DB] flex items-center justify-center gap-2 text-[18px] font-medium hover:bg-blue-50 transition-all"
+            >
+              <Download size={18} />
+              Download Layout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
+      {tab === "brochure" && (
+        <div className="flex flex-col items-start gap-4">
+          {brochurePdf ? (
+            <div className="w-full max-w-lg bg-gradient-to-br from-yellow-50 to-amber-100 border border-amber-200 rounded-xl p-8 flex flex-col items-center gap-4">
+              <div className="text-amber-700 opacity-60">
+                <AlignJustify size={48} />
+              </div>
+              <p className="text-gray-700 font-semibold text-lg">{propertyData.projectname}</p>
+              <p className="text-gray-500 text-sm">Project Brochure PDF</p>
+              <a href={brochurePdf.src} target="_blank" rel="noreferrer"
+                className="flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-all">
+                <Download size={15} /> Download Brochure
+              </a>
+            </div>
+          ) : (
+            <p className="text-gray-500 text-sm">No brochure available.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Amenities ─────────────────────────────────────────────────────────────────
+function Amenities({ features, amenities }) {
+  const all = [...(features || []), ...(amenities || [])];
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Amenities</h2>
+      <div className="flex flex-wrap gap-3">
+        {all.map((item, i) => (
+          <div key={i} className="flex items-center gap-2 bg-white border border-gray-200 rounded-md px-4 py-4 text-xs text-gray-700">
+            <img src={item.icon} alt={item.name} className="w-5 h-5 object-contain" onError={(e) => { e.target.style.display = "none"; }} />
+            {item.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Location Advantages ───────────────────────────────────────────────────────
+function LocationSection({ locatadvance, address }) {
+  const encodedAddr = encodeURIComponent(address || "");
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Location Advantages</h2>
+      <div className="flex flex-col md:flex-row gap-6 rounded-md p-4">
+        <div className="flex-1 rounded-md overflow-hidden min-h-40">
+          <iframe
+            title="map"
+            width="100%" height="200"
+            style={{ border: 0 }}
+            loading="lazy"
+            src={`https://maps.google.com/maps?q=${encodedAddr}&output=embed`}
+            className="rounded-md"
+          />
+        </div>
+        <div className="flex-1">
+          <ul className="space-y-3">
+            {locatadvance?.map((loc, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <div className="w-2 h-2 rounded-md bg-blue-500 mt-1.5 flex-shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">{loc.propertyName}</p>
+                  <p className="text-xs text-gray-500">{loc.name} · {loc.distance}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Unit Pricing Table ────────────────────────────────────────────────────────
+function UnitTable({ unitData }) {
+  if (!unitData?.length) return null;
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Pricing & Configurations</h2>
+      <div className="overflow-x-auto rounded-md border border-gray-200">
+        <table className="w-full text-sm">
+          <thead className="bg-blue-50 text-gray-700">
+            <tr>
+              <th className="text-left px-4 py-3 font-semibold">Type</th>
+              <th className="text-left px-4 py-3 font-semibold">Area</th>
+              <th className="text-left px-4 py-3 font-semibold">Price</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-100">
+            {unitData.map((u, i) => (
+              <tr key={i} className=" transition-colors">
+                <td className="px-4 py-3 font-medium text-gray-800">{u.specs.bhk}</td>
+                <td className="px-4 py-3 text-gray-600">
+                  {u.specs.areaMin}{u.specs.areaMax ? ` – ${u.specs.areaMax}` : ""}
+                </td>
+                <td className="px-4 py-3 text-blue-600 font-semibold">
+                  {formatPrice(u.specs.priceMin)}{u.specs.priceMax ? ` – ${formatPrice(u.specs.priceMax)}` : ""}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ── Lead Form Sidebar ─────────────────────────────────────────────────────────
+function LeadForm({ owner }) {
+  const [form, setForm] = useState({ name: "", mobile: "", message: "" });
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleSubmit = (e) => { e.preventDefault(); alert("Inquiry submitted! Our expert will contact you shortly."); };
+
+  return (
+    <div className="bg-blue-50 rounded-md p-6 border border-blue-100">
+      <h3 className="font-bold text-gray-800 text-base mb-1">Interested In This Property?</h3>
+      <p className="text-xs text-gray-500 mb-4">Fill in your details and our expert will get in touch with you shortly.</p>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col md:flex-row gap-3">
+          <input name="name" value={form.name} onChange={handleChange} placeholder="Name"
+            className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
+          <input name="mobile" value={form.mobile} onChange={handleChange} placeholder="Mobile No."
+            className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
+        </div>
+        <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"
+          rows={3} className="bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all resize-none" />
+        <div className="flex gap-3 mt-1">
+          <button onClick={handleSubmit}
+            className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-md transition-all">
+            <Calendar size={15} /> Schedule a Visit
+          </button>
+          <a href={`tel:${owner?.mobile}`}
+            className="flex-1 flex items-center justify-center gap-2 bg-white border-2 border-blue-600 text-blue-600 text-sm font-semibold py-2.5 rounded-md hover:bg-blue-50 transition-all">
+            <Phone size={15} /> Call Now
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── FAQ Section ───────────────────────────────────────────────────────────────
+function FAQSection({ faq }) {
+  if (!faq?.length) return null;
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">FAQs</h2>
+      {faq.map((item, i) => (
+        <div key={i} className="mb-4">
+          <p className="font-semibold text-gray-800 mb-2">{item.question}</p>
+          <ul className="space-y-1.5">
+            {item.answer.map((ans, j) => (
+              <li key={j} className="flex items-start gap-2 text-sm text-gray-600">
+                <CheckCircle size={14} className="text-green-500 mt-0.5 flex-shrink-0" />
+                {ans}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Main Page ─────────────────────────────────────────────────────────────────
+export default function PropertyDetailPage() {
+  const d = propertyData;
+
+  return (
+    <div className=" min-h-screen ">
+      <div className="max-w-[1250px] mx-auto  py-4 px-4 lg:px-0">
+        {/* Breadcrumb */}
+        <nav className="text-[10px] curdor-default text-gray-500 mb-4 flex items-center gap-1 flex-wrap font-medium">
+          {["Home", "All Project", d.location?.[0]?.City, d.availabestatus, d.projectname].map((crumb, i, arr) => (
+            <span key={i} className="flex items-center gap-1">
+              {crumb}
+              {/* <a href="#" className={`hover:text-blue-600 ${i === arr.length - 1 ? "text-gray-800 font-medium" : ""}`}>{crumb}</a> */}
+              {i < arr.length - 1 && <span className="text-gray-300">&gt;</span>}
+            </span>
+          ))}
+        </nav>
+
+        {/* Hero: Gallery + Info */}
+        <div className="flex flex-col lg:flex-row gap-6 mb-6">
+          <div className="w-full lg:w-[800px]">
+            <Gallery images={d.images} />
+          </div>
+          <div className="w-full lg:w-[800px]">
+            <InfoCard data={d} />
+          </div>
+        </div>
+
+        {/* Highlights */}
+        {/* <div className="mb-6">
+          <Highlights data={d} />
+        </div> */}
+
+        {/* Two-column: Main Content + Sidebar */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col gap-8">
+              <div className="mb-6">
+          <Highlights data={d} />
+        </div>
+            <div className="py-6 border-b border-gray-200">
+              <AboutSection data={d} />
+            </div>
+
+            <div className="py-6 border-b border-gray-200">
+              <UnitTable unitData={d.unitData} />
+            </div>
+
+            <div className="py-6 border-b border-gray-200">
+              <FloorPlanBrochure images={d.images} />
+            </div>
+
+            <div className="py-6 border-b border-gray-200">
+              <Amenities features={d.Buldingfeature} amenities={d.amenitie} />
+            </div>
+
+            <div className="py-6 border-b border-gray-200">
+              <LocationSection locatadvance={d.locatadvance} address={d.location?.[0]?.Address} />
+            </div>
+
+            <div className="py-6 border-b border-gray-200">
+              <FAQSection faq={d.faq} />
+            </div>
+          </div>
+
+          {/* Sticky Sidebar */}
+          <div className="w-full lg:w-110 flex flex-col gap-4">
+            <div className="sticky top-[115px]">
+              <LeadForm owner={d.owner} />
+
+              {/* Quick Info */}
+              <div className="mt-4 bg-white rounded-md p-5 border border-gray-200 shadow-sm">
+                <h4 className="font-semibold text-gray-800 text-sm mb-3">Property Details</h4>
+                <div className="space-y-2 text-xs text-gray-600">
+                  {[
+                    ["Developer", d.projectdeveloper],
+                    ["Status", d.availabestatus],
+                    ["Total Floors", d.projectTotalFloor],
+                    ["Facing", d.propertyfacing],
+                    ["Furnishing", d.furnishing],
+                    ["Ownership", d.ownership],
+                    ["Property Age", d.propertyage],
+                    ["Water Source", d.watersource?.join(", ")],
+                  ].map(([label, value]) => value ? (
+                    <div key={label} className="flex justify-between gap-2">
+                      <span className="text-gray-400 flex-shrink-0">{label}</span>
+                      <span className="font-medium text-gray-700 text-right">{value}</span>
+                    </div>
+                  ) : null)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

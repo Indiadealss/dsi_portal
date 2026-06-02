@@ -66,6 +66,7 @@ import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
 import Loginpage from "./component/Loginpage.jsx";
 import AllProjects from "./component/AllProjects.jsx";
 import PropertyListingPage from "./component/PropertyListingPage.jsx"
+import PropertyDetailPage from "./component/Projectpagenew.jsx";
 
 function App() {
 
@@ -132,6 +133,7 @@ function App() {
     },
     { path: "/property",element:<Property />},
     { path: "/project",element:<AllProjects />},
+    {path:"/property-detail-page",element:<PropertyDetailPage />},
     {path: "/Propertylistingpage", element:<PropertyListingPage />},
     {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",

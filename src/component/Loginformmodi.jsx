@@ -36,7 +36,7 @@ const Loginformmodi = ({ closeModal }) => {
     <>
     <div className={`${otpSent || registration || emailreg ? 'hidden' : 'block'}`}>
       <div className="flex">
-        <h2><span className="text-2xl font-bold text-gray-700" style={{fontFamily:"sans-serif"}}>Login/Register</span></h2>
+        <h2><span className="text-2xl font-bold text-gray-700" style={{}}>Login/Register</span></h2>
       </div>
           <div className="mb-3">
             <label className="block my-2 mb-5 text-sm font-normal text-gray-500 ">Please enter your Phone Number</label>

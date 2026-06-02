@@ -29,7 +29,7 @@ const styles = {
     borderRadius: '10px',
     background: '#fff',
     boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'Arial,',
     textAlign: 'center',
   },
   input: {

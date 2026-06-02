@@ -43,7 +43,7 @@ const Loginpage = ({ closeModal }) => {
     <div className="w-[400px] mx-auto  shadow-xl rounded-xl  h-[max-content] bg-white p-[40px]">
     <div className={`${otpSent || registration || emailreg ? 'hidden' : 'block'}`}>
       <div className="flex">
-        <h2 className="text-center mx-auto"><span className="text-2xl font-bold" style={{fontFamily:"sans-serif"}}>Welcome Back</span></h2>
+        <h2 className="text-center mx-auto"><span className="text-2xl font-bold" style={{}}>Welcome Back</span></h2>
       </div>
           <div className="mb-3">
             <label className="block my-2 mb-5 text-sm font-normal text-gray-500 text-center">Login or signup in seconds to continue your property journey.</label>

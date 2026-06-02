@@ -104,9 +104,9 @@ const Verify = ({ mobile, changeotpsend, redirectTo, resmobilef, closeModal }) =
       )}
       <div>
         <div>
-          <h2 className='text-center mb-[12px]'><span className="text-2xl font-bold text-gray-700" style={{ fontFamily: "sans-serif" }}>Enter OTP</span></h2>
+          <h2 className='text-center mb-[12px]'><span className="text-2xl font-bold text-gray-700" style={{  }}>Enter OTP</span></h2>
           <p className='text-center mb-[12px]'>we have sent a 4-digit OTP to</p>
-          <div className=' flex justify-center mb-[12px]'><span className="text-md font-medium text-gray-700" style={{ fontFamily: "sans-serif" }}>+91-{mobile}</span> <span className='ms-2 text-md text-blue-500 cursor-pointer' onClick={changeotpsend} >change</span></div>
+          <div className=' flex justify-center mb-[12px]'><span className="text-md font-medium text-gray-700" style={{  }}>+91-{mobile}</span> <span className='ms-2 text-md text-blue-500 cursor-pointer' onClick={changeotpsend} >change</span></div>
 
         </div>
         {/* <div className="mb-3">

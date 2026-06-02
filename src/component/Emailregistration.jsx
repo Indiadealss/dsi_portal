@@ -29,7 +29,7 @@ const Emailregistration = ({ closeEmail }) => {
           <h2 className="text-center mx-auto">
             <span
               className="text-2xl font-bold"
-              style={{ fontFamily: "sans-serif" }}
+              style={{  }}
             >
               Welcome Back
             </span>
