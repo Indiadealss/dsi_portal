@@ -16,7 +16,6 @@ import { useEffect } from "react";
 import { getUserDetatils } from "./api/api";
 import { updateField } from "./component/Redux/propertySlice";
 import Buyservice from "./component/Buyservice";
-import Projectdetail from "./component/Projectdetail";
 import Addsomething from "./component/customantdesign/Addsomething";
 import Privacy from "./component/privacy/Privacy";
 import Termsconditions from "./component/privacy/Termsconditions";

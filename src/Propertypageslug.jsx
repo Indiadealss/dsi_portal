@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import Propertydetails from "./component/Propertydetails";
-import Projectdetail from "./component/Projectdetail";
 import { Property } from "./component/Property";
 import AllProjects from "./component/AllProjects";
 import PropertyListingPage from "./component/PropertyListingPage";
