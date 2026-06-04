@@ -12,6 +12,9 @@ import AllLabel from "../Images/AllProperties.svg";
 async function fetchPropertiesAPI(page, purpose) {
   const res = await getOnlyProperties(page, 'noida', purpose === 'all' ? 'sell' : purpose);
   const data = res.data?.data || [];
+
+  console.log(data, 'data is console');
+  
   return {
     data,
     total: res.data?.total || data.length,

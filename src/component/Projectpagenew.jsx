@@ -247,7 +247,7 @@ function Gallery({ images, propertyData }) {
             </div>
 
             {/* Arrow */}
-            <div className="absolute -top-2 left-5 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-200"></div>
+            <div className="absolute -top-2 left-5 w-4 h-4 backdrop-blur-xl shadow-2xl bg-[#F8F6F3] rotate-45 "></div>
           </div>
         </div>
         {/* Nav Arrows */}
@@ -445,7 +445,7 @@ function FloorPlanBrochure({ images, propertyData }) {
       {/* Tab Buttons */}
       <div className="flex gap-2 mb-4">
         <button onClick={() => setTab("floorplan")}
-          className={`${propertyData.property === "commercial" ? "hidden" : ""} px-5 py-2 rounded-md text-sm font-medium border transition-all ${tab === "floorplan" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"}`}>
+          className={`${propertyData.property === "commercial" ? "hidden" : ""} px-5 py-2 rounded-md text-sm font-medium border transition-all ${tab === "floorplan" ? "bg-blue cursor-pointer text-white border-blue-600" : "cursor-pointer bg-white text-gray-600 border-gray-300 hover:border-gray-400"}`}>
           Floor Plan
         </button>
         <button onClick={() => setTab("brochure")}
@@ -763,11 +763,11 @@ function LeadForm({ owner, propertyData }) {
           rows={3} className="bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all resize-none" />
         <div className="flex gap-3 mt-1">
           <button onClick={handleSubmit}
-            className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2.5 rounded-md transition-all">
+            className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue .color-blue text-white text-sm font-semibold py-2.5 rounded-md transition-all">
             <Calendar size={15} /> Schedule a Visit
           </button>
-          <a href={`tel:${owner?.mobile}`}
-            className="flex-1 flex items-center justify-center gap-2 bg-white border-2 border-blue-600 text-blue-600 text-sm font-semibold py-2.5 rounded-md hover:bg-blue-50 transition-all">
+          <a href={`tel:+919818764200`}
+            className="cursor-pointer flex-1 flex items-center justify-center gap-2 text-white border-2 bg-blue text-blue-600 text-sm font-semibold py-2.5 rounded-md hover:bg-blue-50 transition-all">
             <Phone size={15} /> Call Now
           </a>
         </div>
@@ -880,7 +880,7 @@ export default function PropertyDetailPage() {
         </div> */}
 
         {/* Two-column: Main Content + Sidebar */}
-        <div className="flex flex-col lg:flex-row gap-2">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Main Content */}
           <div className="flex-1 flex flex-col gap-2">
             <div className="mb-6">
@@ -919,7 +919,7 @@ export default function PropertyDetailPage() {
               {/* Quick Info */}
               <div className="mt-4 rounded-md p-5 border border-gray-200">
                 <h4 className="font-semibold text-gray-800 text-sm mb-3">Property Details</h4>
-                <div className="space-y-2 text-xs text-gray-600">
+                <div className="space-y-2 text-sm  text-gray-600">
                   {[
                     ["Developer", d.projectdeveloper],
                     ["Status", d.availabestatus],
@@ -931,8 +931,8 @@ export default function PropertyDetailPage() {
                     ["Water Source", d.watersource?.join(", ")],
                   ].map(([label, value]) => value ? (
                     <div key={label} className="flex justify-between gap-2">
-                      <span className="text-gray-400 flex-shrink-0">{label}</span>
-                      <span className="font-medium text-gray-700 text-right">{value}</span>
+                      <span className="paragraph-color flex-shrink-0">{label}</span>
+                      <span className="font-medium text-gray-500 text-right">{value}</span>
                     </div>
                   ) : null)}
                 </div>
