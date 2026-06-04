@@ -85,7 +85,7 @@ export default function TestimonialSection() {
         <div className="flex-1 bg-white rounded-2xl shadow-md p-7">
           
           {/* NAME */}
-          <h2 className="text-[55px] font-extrabold leading-none text-[#001B38] uppercase transition-all duration-500">
+          <h2 className="heading-h2 font-extrabold leading-none text-[#001B38] uppercase transition-all duration-500">
             {active.name}
           </h2>
 
@@ -140,12 +140,12 @@ export default function TestimonialSection() {
       <div className=" mx-auto my-[100px]">
           {/* Decorative Circle */}
 
-          <h3 className="text-center text-4xl font-bold text-[#001B38] uppercase ">
+          <h3 className="md:text-center heading-h3 font-bold text-[#001B38] uppercase ">
             READY TO FIND YOUR PERFECT PROPERTY?
           </h3>
-          <p className=" text-center">
-            <span className="text-xs text-gray-500 ">
-              Explore verified listings, connect with trusted experts, and take the next step towords <br/> your dream property today.
+          <p className="text-sm font-medium text-gray-500 mt-2  text-center">
+            <span className="">
+              Explore verified listings, connect with trusted experts, and take the next step towords. <br/> Your dream property today.
             </span>
           </p>
           <div className="mx-auto flex justify-between w-[max-content]">

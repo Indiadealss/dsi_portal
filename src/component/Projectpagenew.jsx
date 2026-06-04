@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MapPin, Heart, Share2, ChevronLeft, ChevronRight,
   Download, Phone, Calendar, CheckCircle, Home, Info,
@@ -8,14 +8,24 @@ import {
   X, ZoomIn, Play, Star
 } from "lucide-react";
 import PdfSlider from "./customcomponent/PdfSlider";
+import dobuleBad from "../Images/Group_454.svg";
+import area from "../Images/Group_455.svg";
+import Status from "../Images/Group_456.svg";
+import buldingIcon from "../Images/Group_457.svg";
 import {
-  BedDouble,
   Bath,
   Compass,
 } from "lucide-react";
+import { createLead, createLeadMessage, getCampainbyId, getPropertyByRera } from "../api/api";
+import { useParams } from "react-router-dom";
+import Unitsavailble from "./customcomponent/Unitsavailble";
+import { useDispatch } from "react-redux";
+import { setProperty } from "./Redux/propertyidSlice";
+
+
 
 // ─── PASTE YOUR BACKEND DATA HERE ───────────────────────────────────────────
-const propertyData = {
+const propertyDatas = {
   _id: "69e8b8e4a70326c0f7f4d06a",
   projectname: "PURVANCHAL ROYAL ATLANTIS",
   projecttitle: "Purvanchal Royal Atlantis Lucknow, Gomti Nagar, 4BHK Flats",
@@ -177,7 +187,7 @@ const renderDescription = (text) => {
 };
 
 // ── Gallery Component ─────────────────────────────────────────────────────────
-function Gallery({ images }) {
+function Gallery({ images, propertyData }) {
   const galleryImgs = images.filter((i) => ["cover", "general", "banner"].includes(i.type));
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
@@ -192,54 +202,54 @@ function Gallery({ images }) {
         <img src={galleryImgs[active]?.src} alt="property" className="w-full h-full object-cover" />
         {/* Verified Badge */}
         <div className="absolute top-3 left-3 group z-20">
-  
-  {/* Badge */}
-  <div className="bg-green-500  text-white text-xs font-semibold px-3 py-1 rounded-md flex items-center gap-1 cursor-pointer" onMouseEnter={() => setReraModal(true)} onMouseLeave={() => setReraModal(false)}>
-    <Info size={15} />
-    Rera Approved
-  </div>
 
-  {/* Hover Modal */}
-  <div className={reraModal ? "absolute top-12 left-0 w-[280px] transition-all duration-300 backdrop-blur-xl bg-white/90 border border-white/30 shadow-2xl rounded-2xl p-4 " : "hidden"}>
-    
-    <div className="flex items-start gap-3">
-      
-      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-        <CheckCircle size={20} className="text-green-600" />
-      </div>
+          {/* Badge */}
+          <div className="bg-green-500  text-white text-xs font-semibold px-3 py-1 rounded-md flex items-center gap-1 cursor-pointer" onMouseEnter={() => setReraModal(true)} onMouseLeave={() => setReraModal(false)}>
+            <Info size={15} />
+            Rera Approved
+          </div>
 
-      <div>
-        <h4 className="text-sm font-bold text-gray-800">
-          RERA Registered
-        </h4>
+          {/* Hover Modal */}
+          <div className={reraModal ? "absolute top-12 left-0 w-[280px] transition-all duration-300 backdrop-blur-xl bg-white/90 border border-white/30 shadow-2xl rounded-2xl p-4 " : "hidden"}>
 
-        <p className="text-xs text-gray-600 mt-1 leading-relaxed">
-          This property is verified and registered under the Real Estate
-          Regulatory Authority (RERA).
-        </p>
+            <div className="flex items-start gap-3">
 
-        <div className="mt-3 space-y-1">
-          <p className="text-xs">
-            <span className="font-semibold text-gray-700">
-              RERA No:
-            </span>{" "}
-            {propertyData.rera}
-          </p>
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                <CheckCircle size={20} className="text-green-600" />
+              </div>
 
-          <p className="text-xs">
-            <span className="font-semibold text-gray-700">
-              Status:
-            </span>{" "}
-            {propertyData.reraStatus}
-          </p>
+              <div>
+                <h4 className="text-sm font-bold text-gray-800">
+                  RERA Registered
+                </h4>
+
+                <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                  This property is verified and registered under the Real Estate
+                  Regulatory Authority (RERA).
+                </p>
+
+                <div className="mt-3 space-y-1">
+                  <p className="text-xs">
+                    <span className="font-semibold text-gray-700">
+                      RERA No:
+                    </span>{" "}
+                    {propertyData.rera}
+                  </p>
+
+                  <p className="text-xs">
+                    <span className="font-semibold text-gray-700">
+                      Status:
+                    </span>{" "}
+                    {propertyData.reraStatus}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Arrow */}
+            <div className="absolute -top-2 left-5 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-200"></div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    {/* Arrow */}
-    <div className="absolute -top-2 left-5 w-4 h-4 bg-white rotate-45 border-l border-t border-gray-200"></div>
-  </div>
-</div>
         {/* Nav Arrows */}
         <button onClick={prev} className="backdrop-blur-md absolute left-3 text-white top-1/2 -translate-y-1/2 bg-black/40 cursor-pointer rounded-full p-2 shadow">
           <ChevronLeft size={18} />
@@ -266,15 +276,15 @@ function Gallery({ images }) {
           <button onClick={() => setLightbox(true)}
             className="relative flex-shrink-0 rounded-md overflow-hidden bg-black/40 text-white text-xs font-semibold flex items-center justify-center"
             style={{
-            width: 100,
-            height: 80,
-            backgroundImage: `url(${galleryImgs[5]?.src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+              width: 100,
+              height: 80,
+              backgroundImage: `url(${galleryImgs[5]?.src})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}>
             <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-xs font-semibold">
-      +{galleryImgs.length - 5}
-    </div>
+              +{galleryImgs.length - 5}
+            </div>
           </button>
         )}
       </div>
@@ -294,16 +304,16 @@ function Gallery({ images }) {
 }
 
 // ── Property Info Card ────────────────────────────────────────────────────────
-function InfoCard({ data }) {
+function InfoCard({ data, propertyData  }) {
   const [saved, setSaved] = useState(false);
   return (
-    <div className=" border border-gray-200 rounded-md p-7  h-fit sticky top-4">
-      <h1 className="text-xl font-bold text-gray-900"><span className="text-2xl font-bold">{data.projectname}</span></h1>
-      <div className="flex items-start gap-1 mt-[5px] text-gray-500 text-sm">
+    <div className=" border border-gray-200 rounded-md p-3 md:p-5  h-fit sticky top-4">
+      <h1 className=" font-bold text-[#001A2D]"><span className="heading-h4 font-bold">{data.projectname}</span></h1>
+      <div className="flex items-start gap-1 mt-[5px] text-[#515151] text-sm">
         <MapPin size={18} className="mt-0.5 flex-shrink-0" />
         <span>{data.location?.[0]?.Address}</span>
       </div>
-      <p className="mt-[35px] text-sm">
+      <p className="mt-[35px] text-sm text-[#001A2D]">
         Developed By
       </p>
       <p className="text-sm text-[#1D85DB] font-medium">
@@ -311,20 +321,29 @@ function InfoCard({ data }) {
       </p>
 
       <div className="mt-[35px]">
-        <p className="text-xs uppercase tracking-wide font-medium"><span className="font-bold">Starting From</span></p>
-        <p className="text-4xl font-bold text-[#1D85DB] mt-0.5">{data.price}<sup>*</sup></p>
+        <p className="text-xs uppercase tracking-wide font-medium text-[#001A2D]"><span className="font-bold">Starting From</span></p>
+        <p className="text-lg md:text-4xl font-bold text-[#1D85DB] mt-0.5">{data.price}<sup>*</sup></p>
       </div>
 
       {/* Unit type chips */}
       <div className="mt-[35px]">
-        <p className="text-xs tracking-wide font-medium"><span className="font-bold">Size Availble</span></p>
-      <div className="flex flex-wrap gap-2 mt-[0.5px]">
-        {data.unitData?.map((u) => (
-          <span key={u.id} className="border border-gray-300 bg-[#E8F5FF] text-gray-700 text-xs font-medium px-3 py-1.5 rounded-md">
-            {u.specs.bhk}
-          </span>
-        ))}
-      </div>
+        <p className="text-xs tracking-wide font-medium mb-2"><span className="font-bold">Size Availble</span></p>
+        <div className={ propertyData.property === "commercial" ? "hidden" : "flex flex-wrap gap-2 mt-[0.5px]"}>
+          {data.unitData?.map((u) => (
+            <span key={u.id} className="text-center border border-gray-300 bg-[#E8F5FF] text-[#001A2D] text-sm font-bold px-3 py-1.5 rounded-md">
+              {u.specs.bhk} <br />
+              <span className="text-xs font-medium text-center text-[#515151]"> Apartment </span>
+            </span>
+          ))}
+        </div>
+
+        <div className={ propertyData.property === "commercial" ? "flex flex-wrap gap-2 mt-[0.5px]" : "hidden"}>
+          {data.officeUnits?.map((u) => (
+            <span key={u.name} className="text-center border border-gray-300 bg-[#E8F5FF] text-[#001A2D] text-sm font-bold px-3 py-1.5 rounded-md">
+              {u.name} <br />
+            </span>
+          )) }
+        </div>
       </div>
 
       <div className="flex gap-3 mt-[35px]">
@@ -350,12 +369,10 @@ function InfoCard({ data }) {
 // ── Highlight Cards ───────────────────────────────────────────────────────────
 function Highlights({ data }) {
   const items = [
-    { icon: <Building2 size={18} className="text-blue-600" />, label: "Configuration", value: data.unitData?.map((u) => u.specs.bhk).join(", ") || data.propertyType?.join(", ") },
-    { icon: <Ruler size={18} className="text-blue-600" />, label: "Area (Sq.Ft.)", value: data.unitData?.[0]?.specs?.areaMin ? `${data.unitData[0].specs.areaMin}+` : "—" },
-    { icon: <CheckCircle size={18} className="text-blue-600" />, label: "Status", value: data.availabestatus },
-    { icon: <Home size={18} className="text-blue-600" />, label: "Property Type", value: data.property ? data.property.charAt(0).toUpperCase() + data.property.slice(1) + " Apartment" : "Residential Apartment" },
-    { icon: <Zap size={18} className="text-blue-600" />, label: "Power Backup", value: data.pobackup },
-    { icon: <Car size={18} className="text-blue-600" />, label: "Parking", value: `${data.coveredparking} Covered, ${data.uncoveredparking} Open` },
+    { icon: <img src={dobuleBad} size={18} className="text-blue-600 w-10 h-10" />, label: "Configuration", value: data.unitData?.map((u) => u.specs.bhk).join(", ") || data.propertyType?.join(", ") },
+    { icon: <img src={area} size={18} className="text-blue-600 w-10 h-10" />, label: "Area (Sq.Ft.)", value: data.unitData?.[0]?.specs?.areaMin ? `${data.unitData[0].specs.areaMin}+` : "—" },
+    { icon: <img src={Status} size={18} className="text-blue-600 w-10 h-10" />, label: "Status", value: data.availabestatus },
+    { icon: <img src={buldingIcon} size={18} className="text-blue-600 w-10 h-10" />, label: "Property Type", value: data.property ? data.property.charAt(0).toUpperCase() + data.property.slice(1) + " Apartment" : "Residential Apartment" },
   ];
   return (
     <div className="flex flex-wrap gap-3">
@@ -377,7 +394,7 @@ function AboutSection({ data }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div>
-      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">About Property</h2>
+      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3 heading-h6"><span className="font-bold"> About Property</span></h2>
       <div className={`overflow-hidden transition-all justify-center ${expanded ? "" : "max-h-40"}`}>
         {renderDescription(data.description)}
       </div>
@@ -390,9 +407,18 @@ function AboutSection({ data }) {
 }
 
 // ── Floor Plan & Brochure ─────────────────────────────────────────────────────
-function FloorPlanBrochure({ images }) {
+function FloorPlanBrochure({ images, propertyData }) {
   const [tab, setTab] = useState("floorplan");
   const [activeLayout, setActiveLayout] = useState(0);
+
+
+
+
+  useEffect(() => {
+    if (propertyData.property === "commercial") {
+      setTab("brochure");
+    }
+  }, [propertyData.property]);
 
   const layouts = images.filter((i) => i.type === "layout" && i.fields?.length > 0);
   const brochurePdf = images.find((i) => i.type === "brouser");
@@ -400,14 +426,26 @@ function FloorPlanBrochure({ images }) {
   const activeImg = layouts[activeLayout];
   const getField = (key) => activeImg?.fields?.find((f) => f.key === key)?.value || "—";
 
+
+  const hasValue = (key) => {
+    const value = getField(key);
+
+    return (
+      value &&
+      value !== "—" &&
+      value !== "null" &&
+      value !== "undefined"
+    );
+  };
+
   return (
     <div>
-      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Floor Plan &amp; Brochure</h2>
+      <h2 className="heading-h6 text-gray-800 uppercase tracking-wide mb-3"><span className={propertyData.property === "commercial" ? "hidden" : "font-bold"}> Floor Plan &amp;</span>  Brochure</h2>
 
       {/* Tab Buttons */}
       <div className="flex gap-2 mb-4">
         <button onClick={() => setTab("floorplan")}
-          className={`px-5 py-2 rounded-md text-sm font-medium border transition-all ${tab === "floorplan" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"}`}>
+          className={`${propertyData.property === "commercial" ? "hidden" : ""} px-5 py-2 rounded-md text-sm font-medium border transition-all ${tab === "floorplan" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-600 border-gray-300 hover:border-gray-400"}`}>
           Floor Plan
         </button>
         <button onClick={() => setTab("brochure")}
@@ -417,151 +455,159 @@ function FloorPlanBrochure({ images }) {
       </div>
 
       {/* FLOOR PLAN */}
-  {tab === "floorplan" && layouts.length > 0 && (
-    <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
-      
-      {/* BHK Tabs */}
-      <div className="flex items-center gap-6 border-b border-gray-200 px-4 py-3">
-        {layouts.map((l, i) => {
-          const label =
-            l.fields?.find((f) => f.key === "Floor_Plan")?.value ||
-            `Plan ${i + 1}`;
+      {tab === "floorplan" && layouts.length > 0 && (
+        <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
 
-          return (
-            <button
-              key={i}
-              onClick={() => setActiveLayout(i)}
-              className={`text-[18px] font-medium pb-1 transition-all ${
-                activeLayout === i
-                  ? "text-[#1D85DB] border-b-2 border-[#1D85DB]"
-                  : "text-gray-700"
-              }`}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </div>
+          {/* BHK Tabs */}
+          <div className="flex items-center gap-6 border-b border-gray-200 px-4 py-3">
+            {layouts.map((l, i) => {
+              const label =
+                l.fields?.find((f) => f.key === "Floor_Plan")?.value ||
+                `Plan ${i + 1}`;
 
-      {/* Main Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr]">
-        
-        {/* LEFT IMAGE */}
-        <div className="border-r border-gray-200 bg-[#FAFAFA] p-4">
-          <img
-            src={activeImg?.src}
-            alt="Floor Plan"
-            className="w-full h-full object-contain rounded-md"
-          />
+              return (
+                <button
+                  key={i}
+                  onClick={() => setActiveLayout(i)}
+                  className={`text-[18px] font-medium pb-1 transition-all ${activeLayout === i
+                      ? "text-[#1D85DB] border-b-2 border-[#1D85DB]"
+                      : "text-gray-700"
+                    }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Main Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr]">
+
+            {/* LEFT IMAGE */}
+            <div className="border-r border-gray-200 bg-[#FAFAFA] p-4">
+              <img
+                src={activeImg?.src}
+                alt="Floor Plan"
+                className="w-full h-full object-cover rounded-md"
+              />
+            </div>
+
+            {/* RIGHT DETAILS */}
+            <div className="p-6 flex flex-col">
+
+              {/* Heading */}
+              {hasValue("Floor_Plan") && (
+                <h3 className="text-[20px] font-bold text-gray-800 mb-4">
+                  {getField("Floor_Plan")} Apartment
+                </h3>
+              )}
+
+              {/* Area */}
+              {(hasValue("super_built_area") || hasValue("carpet_area")) && (
+                <div className="space-y-1 border-b border-gray-200 pb-4">
+
+                  {hasValue("super_built_area") && (
+                    <div className="flex justify-between text-[18px]">
+                      <span className="text-gray-600">Super Built up Area</span>
+                      <span className="font-semibold text-gray-800">
+                        {getField("super_built_area")}
+                      </span>
+                    </div>
+                  )}
+
+                  {hasValue("carpet_area") && (
+                    <div className="flex justify-between text-[18px]">
+                      <span className="text-gray-600">Carpet Area</span>
+                      <span className="font-semibold text-gray-800">
+                        {getField("carpet_area")}
+                      </span>
+                    </div>
+                  )}
+
+                </div>
+              )}
+
+              {/* Features */}
+              <div className="flex flex-col gap-6 py-6">
+
+                {hasValue("bedroom") && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <img src={dobuleBad} alt="Bedroom" size={22} className="text-[#1D85DB]" />
+                      <span className="text-[18px] text-gray-700">Bedrooms</span>
+                    </div>
+                    <span className="text-[18px] font-medium">
+                      {getField("bedroom")}
+                    </span>
+                  </div>
+                )}
+
+                {hasValue("bathroom") && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Bath size={22} className="text-[#1D85DB]" />
+                      <span className="text-[18px] text-gray-700">Bathrooms</span>
+                    </div>
+                    <span className="text-[18px] font-medium">
+                      {getField("bathroom")}
+                    </span>
+                  </div>
+                )}
+
+                {hasValue("balcony") && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Building2 size={22} className="text-[#1D85DB]" />
+                      <span className="text-[18px] text-gray-700">Balcony</span>
+                    </div>
+                    <span className="text-[18px] font-medium">
+                      {getField("balcony")}
+                    </span>
+                  </div>
+                )}
+
+                {hasValue("facing") && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Compass size={22} className="text-[#1D85DB]" />
+                      <span className="text-[18px] text-gray-700">Facing</span>
+                    </div>
+                    <span className="text-[18px] font-medium">
+                      {getField("facing")}
+                    </span>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Buttons */}
+              <div className="mt-auto flex flex-col gap-3">
+
+                {activeImg?.src && (
+                  <a
+                    href={activeImg?.src}
+                    download
+                    className="h-[50px] rounded-xl border border-[#1D85DB] text-[#1D85DB] flex items-center justify-center gap-2 text-[18px] font-medium hover:bg-blue-50 transition-all"
+                  >
+                    <Download size={18} />
+                    Download Site Layout
+                  </a>
+                )}
+
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* RIGHT DETAILS */}
-        <div className="p-6 flex flex-col">
-          
-          {/* Heading */}
-          <h3 className="text-[20px] font-bold text-gray-800 mb-4">
-            {getField("Floor_Plan")} Apartment
-          </h3>
-
-          {/* Area */}
-          <div className="space-y-1 border-b border-gray-200 pb-4">
-            <div className="flex justify-between text-[18px]">
-              <span className="text-gray-600">Super Built up Area</span>
-              <span className="font-semibold text-gray-800">
-                {getField("super_built_area")}
-              </span>
-            </div>
-
-            <div className="flex justify-between text-[18px]">
-              <span className="text-gray-600">Carpet Area</span>
-              <span className="font-semibold text-gray-800">
-                {getField("carpet_area")}
-              </span>
-            </div>
-          </div>
-
-          {/* Features */}
-          <div className="flex flex-col gap-6 py-6">
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <BedDouble size={22} className="text-[#1D85DB]" />
-                <span className="text-[18px] text-gray-700">Bedrooms</span>
-              </div>
-              <span className="text-[18px] font-medium">
-                {getField("bedroom")}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Bath size={22} className="text-[#1D85DB]" />
-                <span className="text-[18px] text-gray-700">Bathrooms</span>
-              </div>
-              <span className="text-[18px] font-medium">
-                {getField("bathroom")}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Building2 size={22} className="text-[#1D85DB]" />
-                <span className="text-[18px] text-gray-700">Balcony</span>
-              </div>
-              <span className="text-[18px] font-medium">
-                {getField("balcony")}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Compass size={22} className="text-[#1D85DB]" />
-                <span className="text-[18px] text-gray-700">Facing</span>
-              </div>
-              <span className="text-[18px] font-medium">
-                {getField("facing")}
-              </span>
-            </div>
-          </div>
-
-          {/* Buttons */}
-          <div className="mt-auto flex flex-col gap-3">
-            
-            <a
-              href={activeImg?.src}
-              download
-              className="h-[50px] rounded-xl border border-[#1D85DB] text-[#1D85DB] flex items-center justify-center gap-2 text-[18px] font-medium hover:bg-blue-50 transition-all"
-            >
-              <Download size={18} />
-              Download Site Layout
-            </a>
-
-            <a
-              href={activeImg?.src}
-              download
-              className="h-[50px] rounded-xl border border-[#1D85DB] text-[#1D85DB] flex items-center justify-center gap-2 text-[18px] font-medium hover:bg-blue-50 transition-all"
-            >
-              <Download size={18} />
-              Download Layout
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  )}
+      )}
 
       {tab === "brochure" && (
-        <div className="flex flex-col items-start gap-4">
+        <div className="flex flex-col items-start gap-4 ml-[auto] mr-[auto]">
           {brochurePdf ? (
-            <div className="w-full max-w-lg bg-gradient-to-br from-yellow-50 to-amber-100 border border-amber-200 rounded-xl p-8 flex flex-col items-center gap-4">
-              <div className="text-amber-700 opacity-60">
-                <AlignJustify size={48} />
-              </div>
-              <p className="text-gray-700 font-semibold text-lg">{propertyData.projectname}</p>
-              <p className="text-gray-500 text-sm">Project Brochure PDF</p>
+            <div className="relative w-full max-w-2xl  rounded-xl p-8 flex flex-col items-center gap-4">
+              <PdfSlider pdfUrl={brochurePdf.src} />
               <a href={brochurePdf.src} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-6 py-2.5 rounded-lg hover:bg-blue-700 transition-all">
-                <Download size={15} /> Download Brochure
+                className="absolute z-21 top-100 left-10 flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-3 py-3 rounded-full hover:bg-blue-700 transition-all">
+                <Download size={24} />
               </a>
             </div>
           ) : (
@@ -578,7 +624,7 @@ function Amenities({ features, amenities }) {
   const all = [...(features || []), ...(amenities || [])];
   return (
     <div>
-      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Amenities</h2>
+      <h2 className="heading-h6 text-gray-800 uppercase tracking-wide mb-3">Amenities</h2>
       <div className="flex flex-wrap gap-3">
         {all.map((item, i) => (
           <div key={i} className="flex items-center gap-2 bg-white border border-gray-200 rounded-md px-4 py-4 text-xs text-gray-700">
@@ -596,7 +642,7 @@ function LocationSection({ locatadvance, address }) {
   const encodedAddr = encodeURIComponent(address || "");
   return (
     <div>
-      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Location Advantages</h2>
+      <h2 className="heading-h6 text-gray-800 uppercase tracking-wide mb-3">Location Advantages</h2>
       <div className="flex flex-col md:flex-row gap-6 rounded-md p-4">
         <div className="flex-1 rounded-md overflow-hidden min-h-40">
           <iframe
@@ -627,12 +673,12 @@ function LocationSection({ locatadvance, address }) {
 }
 
 // ── Unit Pricing Table ────────────────────────────────────────────────────────
-function UnitTable({ unitData }) {
-  if (!unitData?.length) return null;
+function UnitTable({ unitData, propertyData }) {
+  // if (!unitData?.length) return null;
   return (
     <div>
-      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">Pricing & Configurations</h2>
-      <div className="overflow-x-auto rounded-md border border-gray-200">
+      <h2 className="heading-h6 text-gray-800 uppercase tracking-wide mb-3"><span className="font-bold">Pricing & Configurations </span></h2>
+      <div className={propertyData.property === "commercial" ? "hidden" : "overflow-x-auto rounded-md border border-gray-200"}>
         <table className="w-full text-sm">
           <thead className="bg-blue-50 text-gray-700">
             <tr>
@@ -656,15 +702,51 @@ function UnitTable({ unitData }) {
           </tbody>
         </table>
       </div>
+
+      <div className={propertyData.property === "commercial" ?  "" : "hidden"}>
+      <Unitsavailble propertys={propertyData}/>
+      </div>
     </div>
   );
 }
 
 // ── Lead Form Sidebar ─────────────────────────────────────────────────────────
-function LeadForm({ owner }) {
-  const [form, setForm] = useState({ name: "", mobile: "", message: "" });
+function LeadForm({ owner, propertyData }) {
+  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", PhoneNumber: "", message: "" });
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => { e.preventDefault(); alert("Inquiry submitted! Our expert will contact you shortly."); };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+    try {
+      const res = await createLeadMessage(form);
+      console.log(res.status, 'hee', res.status === 200);
+      if (res.status === 201) {
+        alert(' ✅ Enquiry submitted')
+        setSubmitted(true);
+      }
+    } catch (error) {
+      console.log(error);
+
+    } finally {
+      //   setLoading(false); // stop loader
+      //   setReady(true);
+      //    setLoading(false)
+      //    setTimeout(() => {
+      //    setSubmitted(false);
+      //  }, 2000);
+
+      setFormData({
+        projectname: "",
+        Name: "",
+        requirement: "",
+        PhoneNumber: "",
+        email: "",
+        message: "",
+      });
+
+    }
+  };
 
   return (
     <div className="bg-blue-50 rounded-md p-6 border border-blue-100">
@@ -672,9 +754,9 @@ function LeadForm({ owner }) {
       <p className="text-xs text-gray-500 mb-4">Fill in your details and our expert will get in touch with you shortly.</p>
       <div className="flex flex-col gap-3">
         <div className="flex flex-col md:flex-row gap-3">
-          <input name="name" value={form.name} onChange={handleChange} placeholder="Name"
+          <input name="Name" value={form.Name} onChange={handleChange} placeholder="Name"
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
-          <input name="mobile" value={form.mobile} onChange={handleChange} placeholder="Mobile No."
+          <input name="PhoneNumber" value={form.PhoneNumber} onChange={handleChange} placeholder="Mobile No."
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
         </div>
         <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"
@@ -699,7 +781,7 @@ function FAQSection({ faq }) {
   if (!faq?.length) return null;
   return (
     <div>
-      <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3">FAQs</h2>
+      <h2 className="heading-h6 text-gray-800 uppercase tracking-wide mb-3">FAQs</h2>
       {faq.map((item, i) => (
         <div key={i} className="mb-4">
           <p className="font-semibold text-gray-800 mb-2">{item.question}</p>
@@ -719,13 +801,60 @@ function FAQSection({ faq }) {
 
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function PropertyDetailPage() {
-  const d = propertyData;
+  const [propertyData, setPropertyData] = useState(null);
+  const { slug } = useParams();
+  const npxid = slug.split("npxid-")[1];
 
+
+  useEffect(() => {
+    fetchproperty()
+    getcampaindetails(npxid)
+  }, [npxid]);
+
+
+
+  const getcampaindetails = async (npxid) => {
+    try {
+      const res = await getCampainbyId(npxid);
+      //  console.log(res,'26');
+      //  const data = res.data.data[0];
+      //  console.log(data,'33');
+
+      console.log(res, 'campaign details');
+
+    } catch (err) {
+      console.error(err);
+
+    }
+  }
+
+    const dispatch = useDispatch();
+
+  const fetchproperty = async () => {
+    try {
+      const res = await getPropertyByRera(npxid)
+      const data = res.data
+      console.log(data, 'property details');
+      setPropertyData(data);
+      dispatch(setProperty(data));
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+
+  if (!propertyData) {
+    return <div className="min-h-screen flex items-center justify-center">
+      <p className="text-gray-500 text-sm">Loading property details...</p>
+    </div>
+  }
+
+  const d = propertyData;
   return (
     <div className=" min-h-screen ">
-      <div className="max-w-[1250px] mx-auto  py-4 px-4 lg:px-0">
+      <div className="w-full md:max-w-[1300px] mx-auto  py-4 px-4 lg:px-0">
         {/* Breadcrumb */}
-        <nav className="text-[10px] curdor-default text-gray-500 mb-4 flex items-center gap-1 flex-wrap font-medium">
+        <nav className="text-[12px] curdor-default text-gray-500 mb-4 flex items-center gap-1 flex-wrap font-medium">
           {["Home", "All Project", d.location?.[0]?.City, d.availabestatus, d.projectname].map((crumb, i, arr) => (
             <span key={i} className="flex items-center gap-1">
               {crumb}
@@ -738,10 +867,10 @@ export default function PropertyDetailPage() {
         {/* Hero: Gallery + Info */}
         <div className="flex flex-col lg:flex-row gap-6 mb-6">
           <div className="w-full lg:w-[800px]">
-            <Gallery images={d.images} />
+            <Gallery images={d.images} propertyData={d} />
           </div>
           <div className="w-full lg:w-[800px]">
-            <InfoCard data={d} />
+            <InfoCard data={d}  propertyData={d}/>
           </div>
         </div>
 
@@ -751,22 +880,22 @@ export default function PropertyDetailPage() {
         </div> */}
 
         {/* Two-column: Main Content + Sidebar */}
-        <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex flex-col lg:flex-row gap-2">
           {/* Main Content */}
-          <div className="flex-1 flex flex-col gap-8">
-              <div className="mb-6">
-          <Highlights data={d} />
-        </div>
+          <div className="flex-1 flex flex-col gap-2">
+            <div className="mb-6">
+              <Highlights data={d} />
+            </div>
             <div className="py-6 border-b border-gray-200">
               <AboutSection data={d} />
             </div>
 
             <div className="py-6 border-b border-gray-200">
-              <UnitTable unitData={d.unitData} />
+              <UnitTable unitData={d.unitData} propertyData={d}/>
             </div>
 
             <div className="py-6 border-b border-gray-200">
-              <FloorPlanBrochure images={d.images} />
+              <FloorPlanBrochure images={d.images} propertyData={d} />
             </div>
 
             <div className="py-6 border-b border-gray-200">
@@ -785,10 +914,10 @@ export default function PropertyDetailPage() {
           {/* Sticky Sidebar */}
           <div className="w-full lg:w-110 flex flex-col gap-4">
             <div className="sticky top-[115px]">
-              <LeadForm owner={d.owner} />
+              <LeadForm owner={d.owner} propertyData={d} />
 
               {/* Quick Info */}
-              <div className="mt-4 bg-white rounded-md p-5 border border-gray-200 shadow-sm">
+              <div className="mt-4 rounded-md p-5 border border-gray-200">
                 <h4 className="font-semibold text-gray-800 text-sm mb-3">Property Details</h4>
                 <div className="space-y-2 text-xs text-gray-600">
                   {[

@@ -14,7 +14,7 @@ const PropertyCardFloorplan = ({ title, size, features, imageUrl,setCustomEnquir
 
       {/* Text Content */}
       <div className="text-center">
-        <h2 className="text-[#c19a6b] text-2xl font-serif uppercase tracking-widest mb-2">
+        <h2 className="text-[#c19a6b] text-2xl  uppercase tracking-widest mb-2">
           {title}
         </h2>
         <div className="text-sm space-y-1 text-gray-300">

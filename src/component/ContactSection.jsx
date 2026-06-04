@@ -117,7 +117,7 @@ export default function ContactSection({projectName,projectLocation}) {
             Exclusive Opportunities
           </span>
 
-          <h2 className="text-white text-5xl md:text-6xl font-serif font-light leading-[1.1] tracking-tight">
+          <h2 className="text-white heading-h2 font-light leading-[1.1] tracking-tight">
             Tell Us What <br /> 
             <span className="italic text-[#c19a6b]">You're Looking For</span>
           </h2>
@@ -140,7 +140,7 @@ export default function ContactSection({projectName,projectLocation}) {
 
         {/* Right Side: Form Card */}
         <div className="bg-white rounded-xl shadow-2xl p-8 max-w-xl lg:ml-auto w-full">
-          <h3 className="text-2xl font-bold text-[#0f172a] mb-6 uppercase">Contact Now</h3>
+          <h3 className="heading-h3 font-bold text-[#0f172a] mb-6 uppercase">Contact Now</h3>
           
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {submitted && (

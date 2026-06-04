@@ -85,7 +85,7 @@ const PropertyList = ({ properties }) => {
     return (
         <div className="relative mt-[100px]">
             <div className="mb-[30px]">
-            <h1 className="uppercase"><span className="text-4xl">HANDPICKED For You</span></h1>
+            <h1 className="uppercase"><span className="heading-h3">HANDPICKED For You</span></h1>
             </div>
             {/* LEFT BUTTON
             <button

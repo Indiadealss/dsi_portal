@@ -132,7 +132,7 @@ const ContactglobalForm = () => {
   onSubmit={handleSubmit}
   className="w-[-webkit-fill-available] max-w-[560px] bg-white rounded-2xl shadow-2xl p-[12px] sm:p-[20px]"
 >
-          <h2 className="text-[34px] sm:text-[48px] font-extrabold uppercase text-[#001b38] leading-none">
+          <h2 className="heading-h3 sm:text-[48px] font-extrabold uppercase text-[#001b38] leading-none">
             Contact Now
           </h2>
 
@@ -141,7 +141,7 @@ const ContactglobalForm = () => {
             
             {/* Name */}
             <div>
-              <label className="text-[#23364B] text-md font-medium">
+              <label className="text-[#23364B]  text-md font-medium">
                 Name
               </label>
                 {errors.Name && (

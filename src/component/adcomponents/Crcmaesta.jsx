@@ -272,7 +272,7 @@ const Crcmaesta = () => {
 
     <section className="bg-[#0f172a] pt-20 ">
           <div className="max-w-7xl mx-auto  px-4 text-center mb-16">
-            <h2 className="text-white text-4xl md:text-5xl font-serif mb-4">
+            <h2 className="text-white text-4xl md:text-5xl  mb-4">
               Discover Premium Living
             </h2>
             <div className="w-24 h-1 bg-white mx-auto relative">
@@ -314,7 +314,7 @@ const Crcmaesta = () => {
           <div className="max-w-7xl mx-auto  px-4">
             {/* Header */}
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif text-[#0f172a] mb-6">
+              <h2 className="text-4xl md:text-5xl  text-[#0f172a] mb-6">
                 Why CRC MAESTA is in Tranding
               </h2>
               <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed">
@@ -412,7 +412,7 @@ const Crcmaesta = () => {
     
           <section className="bg-[#fdf2f0] py-16 px-6">
     
-            <h2 className='font-serif text-center py-10'>The Finest Address—Now at Its Finest Price</h2>
+            <h2 className=' text-center py-10'>The Finest Address—Now at Its Finest Price</h2>
             <div className='text-center mx-auto lg:w-140 pb-5'>
             <p className=' text-center'><span className='text-xl'>Developed by CRC Group</span></p>
             </div>
@@ -492,7 +492,7 @@ const Crcmaesta = () => {
           <div className="max-w-7xl mx-auto  px-4">
             {/* Header Section */}
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif text-[#0f172a] mb-4">
+              <h2 className="text-4xl md:text-5xl  text-[#0f172a] mb-4">
                 Tower Specifications
               </h2>
               <p className="text-gray-500 font-medium">
@@ -530,7 +530,7 @@ const Crcmaesta = () => {
         </section>
     <div className="mx-auto bg-white p-8 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 transition-all hover:shadow-lg max-w-4xl">
       {/* Header Section */}
-      <h3 className="text-2xl md:text-3xl font-serif font-bold text-[#0f172a] text-center mb-10">
+      <h3 className="text-2xl md:text-3xl  font-bold text-[#0f172a] text-center mb-10">
         All Bank Finance Available
       </h3>
 
@@ -560,7 +560,7 @@ const Crcmaesta = () => {
     </div>
 
     <div className="bg-[#0f172a] min-h-screen p-10">
-      <h1 className="text-white text-3xl mb-10 text-center font-serif">Floor Plan Options</h1>
+      <h1 className="text-white text-3xl mb-10 text-center ">Floor Plan Options</h1>
       
       {/* Grid wrapper to handle multiple cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">

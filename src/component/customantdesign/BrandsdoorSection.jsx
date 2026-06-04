@@ -10,7 +10,7 @@ import layout from '../../Images/Group20.svg';
 const BrandsDoorSection = () => {
   return (
     <section className="mt-[100px]">
-      <h4 className="text-3xl font-bold text-[#001f3f]  tracking-wide mb-[30px]">
+      <h4 className="text-3xl heading-h3 font-bold text-[#001f3f]  tracking-wide mb-[30px]">
         WHY BRANDSDOOR IS THE RIGHT CHOICE
       </h4>
 

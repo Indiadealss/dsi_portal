@@ -4,6 +4,7 @@ import Projectdetail from "./component/Projectdetail";
 import { Property } from "./component/Property";
 import AllProjects from "./component/AllProjects";
 import PropertyListingPage from "./component/PropertyListingPage";
+import PropertyDetailPage from "./component/Projectpagenew";
 
 const Propertypageslug = () => {
   const { slug } = useParams();
@@ -13,7 +14,7 @@ const Propertypageslug = () => {
 
   // Decide page type by slug
   if (slug.includes("npxid")) {
-    return <Projectdetail />;
+    return <PropertyDetailPage />;
   }
 
   if(slug.includes("spid")){

@@ -98,8 +98,8 @@ export default function PdfSlider({ pdfUrl }) {
     <div
       ref={wrapperRef}
       className={`${fullScreen
-          ? "w-full relative max-w-4xl mx-auto bg-neutral-800 shadow-lg rounded-xl h-[90vh]"
-          : "w-full relative mx-auto bg-neutral-800 shadow-lg rounded-xl h-[500px]"
+          ? "w-full relative max-w-4xl mx-auto  rounded-xl h-[90vh]"
+          : "w-full relative mx-auto   rounded-xl h-[500px]"
         }`}
     >
       <div className=" absolute right-4 top-4 z-20">
@@ -107,13 +107,13 @@ export default function PdfSlider({ pdfUrl }) {
           fullScreen ? (
             <AiOutlineFullscreenExit
               onClick={exitFullScreen}
-              className="text-white text-3xl cursor-pointer"
+              className="text-black/40 text-3xl cursor-pointer"
             />
           ) : (
 
             <AiOutlineFullscreen
               onClick={goFullScreen}
-              className="text-white text-3xl cursor-pointer"
+              className="text-black/40 text-3xl cursor-pointer"
             />
           )
         }
@@ -149,19 +149,19 @@ export default function PdfSlider({ pdfUrl }) {
           )}
         </Document>
       )}
-      <div className="flex justify-center items-center rounded-b-xl gap-6 p-2 mt-2 bg-neutral-900 text-white">
+      <div className="flex justify-center items-center rounded-b-xl gap-6 p-2 mt-2  text-white">
         <button
           onClick={() => swiperRef?.slidePrev()}
-          className="px-4 py-2 bg-white rounded-lg text-black cursor-pointer"
+          className="px-4 py-2 backdrop-blur-md bg-black/40 rounded-full text-white cursor-pointer"
         >
           <FaAngleLeft />
         </button>
 
-        <span className="text-white text-lg font-medium">{currentIndex} of {numPages}</span>
+        <span className="text-[#007BE2] text-lg font-medium">{currentIndex} of {numPages}</span>
 
         <button
           onClick={() => swiperRef?.slideNext()}
-          className="px-4 py-2 bg-white text-black rounded cursor-pointer"
+          className="px-4 py-2 backdrop-blur-md bg-black/40 rounded-full text-white cursor-pointer"
         >
 
           <FaAngleRight />

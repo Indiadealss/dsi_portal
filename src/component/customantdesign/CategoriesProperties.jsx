@@ -52,8 +52,8 @@ export default function CategoriesProperties() {
     <section className="w-full mt-[100px]">
       <div className="">
         {/* Heading */}
-        <h2 className=" text-2xl font-extrabold uppercase tracking-tight text-[#08233c] sm:text-4xl lg:text-6xl mb-[30px]">
-          <span className=" text-2xl font-extrabold uppercase  text-[#08233c] sm:text-4xl lg:text-4xl">FIND YOUR PERFECT DOOR</span>
+        <h2 className="heading-h3 uppercase tracking-tight text-[#08233c] mb-[30px]">
+          <span className=" ">FIND YOUR PERFECT DOOR</span>
         </h2>
 
         {/* Cards Grid */}

@@ -12,7 +12,7 @@ const leadGenration = () => {
   }
 
   return (
-    <div className="fixed inset-0  z-40  mt-16 flex justify-end">
+    <div className="fixed inset-0  z-50   flex justify-end backdrop-blur-xs bg-black/40">
       <div className="w-[420px] h-full bg-white p-6 overflow-y-auto shadow-xl">
         
         {/* Header */}

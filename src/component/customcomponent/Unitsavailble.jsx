@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import UnitDrawer from "./UnitDrawer";
 import computerTable from '../../Images/computerTable.avif';
-import shop from '../../Images/shop.jpeg'
+import shop from '../../Images/shops.svg';
+import studio from '../../Images/studio_appartment.svg';
+import office from '../../Images/offices.svg';
 
 export default function Unitsavailble({ propertys }) {
 
@@ -82,14 +84,15 @@ export default function Unitsavailble({ propertys }) {
   const toSqm = (sqft) => (sqft * 0.092903).toFixed(2);
 
   return (
-    <div className="my-20">
-      <h2 className="my-10"><span className="text-md font-normal text-gray-800">Explore Office & Retail Opportunities</span></h2>
+    <div className="">
       <div className={`flex  gap-6`}>
 
         {units.map((u, idx) => (
-          <div key={idx} className="p-5 w-[100%] md:w-[35%] rounded shadow">
+          <div key={idx} className="p-5 w-[100%] md:w-[35%] rounded ">
             <div className="flex items-center gap-3">
-              <img src={u.icon} className="w-10 h-10" />
+              <img src={studio} className={u.name === "studio" ? "w-10 h-10" : "hidden"} />
+              <img src={shop} className={u.name === "Shop" ? "w-10 h-10" : "hidden"} />
+              <img src={office} className={u.name === "Offices" ? "w-10 h-10" : "hidden"} />
               <h4 className="font-normal text-lg"><span className="font-medium text-sm">{u.name}</span></h4>
             </div>
 
