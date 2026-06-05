@@ -395,7 +395,7 @@ function AboutSection({ data }) {
   return (
     <div>
       <h2 className="text-lg font-bold text-gray-800 uppercase tracking-wide mb-3 heading-h6"><span className="font-bold"> About Property</span></h2>
-      <div className={`overflow-hidden transition-all justify-center ${expanded ? "" : "max-h-40"}`}>
+      <div className={`overflow-hidden transition-all text-justify ${expanded ? "" : "max-h-40"}`}>
         {renderDescription(data.description)}
       </div>
       <button onClick={() => setExpanded(!expanded)}

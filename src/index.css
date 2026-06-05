@@ -54,6 +54,10 @@
   @apply text-base md:text-lg lg:text-xl font-bold;
 }
 
+.border-color{
+  border-color: #E6E6E6 !important;
+}
+
 /* Budget Range Slider */
 
 .budget-slider {
