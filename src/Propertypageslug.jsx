@@ -4,6 +4,7 @@ import { Property } from "./component/Property";
 import AllProjects from "./component/AllProjects";
 import PropertyListingPage from "./component/PropertyListingPage";
 import PropertyDetailPage from "./component/Projectpagenew";
+import PropertyDetailsPage from "./component/PropertyDetailsPage";
 
 const Propertypageslug = () => {
   const { slug } = useParams();
@@ -17,7 +18,7 @@ const Propertypageslug = () => {
   }
 
   if(slug.includes("spid")){
-      return <Propertydetails />;
+      return <PropertyDetailsPage />;
   }
 
   if (slug.includes("ffid")) {

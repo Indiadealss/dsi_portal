@@ -4,6 +4,7 @@ import BuyLabel from "../Images/BuyLabel.svg";
 import RenLabel from "../Images/RentLabel.svg";
 import LeaseLabel from "../Images/LeaseLabel.svg";
 import AllLabel from "../Images/AllProperties.svg";
+import { Link } from "react-router-dom";
 // import { getOnlyProperties } from "../api/api";
 
 
@@ -88,6 +89,7 @@ function formatProperty(p) {
     numSets: p.numSets || null,
     numCabin: p.numCabin || null,
     updatedAt: new Date(p.updatedAt).toLocaleDateString("en-IN"),
+    spid:p.spid
   };
 }
 
@@ -490,6 +492,8 @@ function PropertyCard({ property, selected, onSelect }) {
   const s = STATUS_COLORS[property.status] || STATUS_COLORS["FOR SALE"];
   const coverImg = property.images?.[0]?.src;
 
+  
+
   return (
     <div onClick={onSelect} style={{ background: "#fff", borderRadius: "14px", overflow: "hidden", border: selected ? "2px solid #2563eb" : "1px solid #E5E7EB", cursor: "pointer", position: "relative", boxShadow: selected ? "0 8px 24px rgba(37,99,235,0.18)" : "0 1px 4px rgba(0,0,0,0.06)", transition: "all 0.22s" }}
       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 12px 28px rgba(0,0,0,0.1)"; }}
@@ -664,11 +668,73 @@ export default function PropertyListingPage({
       : [],
   });
 
+
+
+  const slugify = (text = "") =>
+  text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const createSlug = (p) => {
+  const city =
+    p?.raw?.location?.[0]?.City ||
+    p?.city ||
+    "";
+
+  const spid = p?.spid || "";
+
+
+  console.log(p,'let check the p');
+  
+  // Plot
+  if (p.raw?.propertyType === "plotLand") {
+    return slugify(
+      `plots-in-${
+        p.raw?.projectname ||
+        p.raw?.apartment_name
+      }-${city}-spid-${spid}`
+    );
+  }
+
+  // Commercial
+  if (p.raw?.property === "commercial") {
+    return slugify(
+      `${p.raw?.availabestatus}-${
+        p.raw?.commercialType ||
+        p.raw?.propertyType
+      }-${city}-spid-${spid}`
+    );
+  }
+
+  // Flat / Apartment
+  if (p.raw?.propertyType === "flatApartment") {
+    return slugify(
+      `${p.raw?.bedroom}-bhk-bedroom-apartment-flat-for-sale-${city}-spid-${spid}`
+    );
+  }
+
+  // Builder Floor
+  if (p.raw?.propertyType === "builderFloor") {
+    return slugify(
+      `${p.raw?.bedroom}-bhk-builder-floor-for-sale-${city}-spid-${spid}`
+    );
+  }
+
+  return slugify(
+    `${p.title}-${city}-spid-${spid}`
+  );
+};
+
+ 
   // Server data
   const [allProperties, setAllProperties] = useState([]);  // raw from API
   const [loading, setLoading] = useState(false);
   const [serverTotal, setServerTotal] = useState(0);
   const [serverTotalPages, setServerTotalPages] = useState(1);
+
+   const propertyUrl = `/${createSlug(allProperties)}`;
 
   // ── Fetch on listingType or page change ────────────────────────────────────
   useEffect(() => {
@@ -916,7 +982,11 @@ export default function PropertyListingPage({
           {!loading && sorted.length > 0 && (
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(280px, 1fr))", gap: "16px", marginBottom: "28px" }}>
               {sorted.map(p => (
-                <PropertyCard key={p.id} property={p} selected={selectedId === p.id} onSelect={() => setSelectedId(p.id === selectedId ? null : p.id)} />
+                <Link
+                to={`/${createSlug(p)}`}
+                style={{ textDecoration: "none" }}
+                ><PropertyCard key={p.id} property={p} selected={selectedId === p.id} onSelect={() => setSelectedId(p.id === selectedId ? null : p.id)} />
+                </Link>
               ))}
             </div>
           )}
