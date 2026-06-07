@@ -48,7 +48,7 @@ const Mybrandsdoor = () => {
     ]
 
     return (
-        <div className='bg-gray-100 mt-0 lg:mt-20'>
+        <div className='bg-gray-100 mt-0'>
 
             {/* MOBILE HEADER */}
             <div className='lg:hidden flex justify-between items-center px-4 py-3 bg-[#00255d] text-white'>
