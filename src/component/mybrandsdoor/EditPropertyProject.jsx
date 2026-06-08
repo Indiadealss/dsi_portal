@@ -301,7 +301,7 @@ useEffect(() => {
 
   // ================= UI =================
   return (
-    <div className="flex flex-col lg:flex-row gap-6 p-4 lg:p-6 lg:mt-[7vw] lg:mx-auto">
+    <div className="flex flex-col lg:flex-row gap-6 p-4 lg:p-6  lg:mx-auto">
 
       {/* ===== LEFT STEPPER ===== */}
       <div className="w-full lg:w-[25vw] bg-[#cfd8dc] rounded-xl p-6 relative h-[30vw]">
