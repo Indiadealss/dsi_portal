@@ -1,9 +1,31 @@
-import React, { useState } from 'react';
-import { createadditionalfeature, createAminities, createFeature, createLocalAdvantages, createoverlookingfeature, createpropertyfeature, createroom } from '../../api/api';
+import React, { useEffect, useState } from 'react';
+import { createadditionalfeature, createAminities, createFeature, createLocalAdvantages, createoverlookingfeature, createpropertyfeature, createroom, getAminities } from '../../api/api';
 
 const Addsomething = () => {
   const [activeTab, setActiveTab] = useState("feature");
+  const [animitiesData, setAnimitiesData] = useState([]);
 
+
+  useEffect(() => {
+    featchAnimities()
+  },[])
+
+  const featchAnimities = async () => {
+      const getallAnimities = await getAminities();
+      const data = getallAnimities.data.data.map((item,index) => {
+        return(
+          {
+            id:item._id,
+            name:item._id,
+            label:item.name,
+            icon:item.icon,
+            createAt:item.createdAt
+          }
+        )
+      })
+      setAnimitiesData(data)
+      console.log(data, 'getallAnimities data');
+     }
 
   const activetabFunction = (e) => {
     console.log(e.currentTarget.name);
@@ -306,8 +328,8 @@ const handleCreateoverlookingfeature = async (e) => {
         <form onSubmit={handleFeatureSubmit} className='flex flex-col'>
           <input 
             type="text" 
-            placeholder="Feature name"
-            className="border p-2 rounded mx-auto w-[80%] my-3"
+            placeholder="Feature Name"
+            className="border border-gray-300 p-2 rounded mx-auto w-[80%] my-3 text-gray-500"
             value={featureName}
             onChange={(e) => setFeatureName(e.target.value)}
           />
@@ -315,7 +337,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input
             type="file"
             accept="image/*"
-            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            className="w-[80%] mx-auto border border-gray-300 p-2 rounded text-gray-500"
             onChange={(e) => setFeatureIcon(e.target.files[0])}
           />
 
@@ -333,8 +355,8 @@ const handleCreateoverlookingfeature = async (e) => {
         <form onSubmit={handleAdvantageSubmit} className='flex flex-col'>
           <input 
             type="text" 
-            placeholder="Advantage name"
-            className="border p-2 rounded mx-auto w-[80%] my-3"
+            placeholder="Advantage Name"
+            className="border border-gray-300 p-2 rounded mx-auto w-[80%] my-3 text-gray-500"
             value={advName}
             onChange={(e) => setAdvName(e.target.value)}
           />
@@ -342,7 +364,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input
             type="file"
             accept="image/*"
-            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            className="w-[80%] mx-auto border border-gray-300 p-2 rounded text-gray-500"
             onChange={(e) => setAdvIcon(e.target.files[0])}
           />
 
@@ -360,8 +382,8 @@ const handleCreateoverlookingfeature = async (e) => {
         <form onSubmit={handleCreateAmenities} className='flex flex-col'>
           <input 
             type="text" 
-            placeholder="Animities name"
-            className="border p-2 rounded mx-auto w-[80%] my-3"
+            placeholder="Animities Name"
+            className="border border-gray-300 p-2 rounded mx-auto w-[80%] my-3"
             value={anName}
             onChange={(e) => setAnName(e.target.value)}
           />
@@ -369,7 +391,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input
             type="file"
             accept="image/*"
-            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            className="w-[80%] mx-auto border border-gray-300 p-2 rounded text-gray-500"
             onChange={(e) => setAnIcon(e.target.files[0])}
           />
 
@@ -381,6 +403,8 @@ const handleCreateoverlookingfeature = async (e) => {
             {loading ? "Uploading..." : "Add Animities"}
           </button>
         </form>
+
+        
       )}
 
       {activeTab === "otherroom" && (
@@ -415,7 +439,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input 
             type="text" 
             placeholder="Property Feature name"
-            className="border p-2 rounded mx-auto w-[80%] my-3"
+            className="border border-gray-300 p-2 rounded mx-auto w-[80%] my-3"
             value={anName}
             onChange={(e) => setAnName(e.target.value)}
           />
@@ -423,7 +447,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input
             type="file"
             accept="image/*"
-            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            className="w-[80%] mx-auto border border-gray-300 p-2 rounded text-gray-500"
             onChange={(e) => setAnIcon(e.target.files[0])}
           />
 
@@ -442,7 +466,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input 
             type="text" 
             placeholder="Additional Feature name"
-            className="border p-2 rounded mx-auto w-[80%] my-3"
+            className="border border-gray-300 p-2 rounded mx-auto w-[80%] my-3"
             value={anName}
             onChange={(e) => setAnName(e.target.value)}
           />
@@ -450,7 +474,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input
             type="file"
             accept="image/*"
-            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            className="w-[80%] mx-auto border border-gray-300 p-2 rounded text-gray-500"
             onChange={(e) => setAnIcon(e.target.files[0])}
           />
 
@@ -469,7 +493,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input 
             type="text" 
             placeholder="Overlooking Feature name"
-            className="border p-2 rounded mx-auto w-[80%] my-3"
+            className="border border-gray-300 p-2 rounded mx-auto w-[80%] my-3"
             value={anName}
             onChange={(e) => setAnName(e.target.value)}
           />
@@ -477,7 +501,7 @@ const handleCreateoverlookingfeature = async (e) => {
           <input
             type="file"
             accept="image/*"
-            className="w-[80%] mx-auto border p-2 rounded text-gray-500"
+            className="w-[80%] mx-auto border border-gray-300 p-2 rounded text-gray-500"
             onChange={(e) => setAnIcon(e.target.files[0])}
           />
 
@@ -490,6 +514,62 @@ const handleCreateoverlookingfeature = async (e) => {
           </button>
         </form>
       )}
+    </div>
+    <div className='max-w-[800px] mx-auto mb-10 h-[350px] overflow-auto'>
+    {activeTab === "animities" && (
+      <div className=" rounded-2xl border border-gray-200 bg-white shadow-sm overflow-auto">
+  
+
+  <div className="overflow-x-auto">
+    <table className="w-full">
+      <thead>
+        <tr className="bg-gray-50">
+          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+            Icon
+          </th>
+          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+            Amenities
+          </th>
+          <th className="px-6 py-4 text-left text-sm font-semibold text-gray-600">
+            Created
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {animitiesData?.map((item, index) => (
+          <tr
+            key={item._id}
+            className={`border-t hover:bg-blue-50 transition ${
+              index % 2 === 0 ? "bg-white" : "bg-gray-50"
+            }`}
+          >
+            <td className="px-6 py-4">
+              <div className="h-12 w-12 rounded-xl bg-gray-100 flex items-center justify-center">
+                <img
+                  src={item.icon}
+                  alt={item.name}
+                  className="h-7 w-7 object-contain"
+                />
+              </div>
+            </td>
+
+            <td className="px-6 py-4">
+              <span className="font-medium text-gray-800">
+                {item.label}
+              </span>
+            </td>
+
+            <td className="px-6 py-4 text-sm text-gray-500">
+              {new Date(item.createAt).toLocaleDateString()}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+    )}
     </div>
     </div>
   );
