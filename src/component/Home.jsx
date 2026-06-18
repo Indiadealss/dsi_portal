@@ -252,10 +252,21 @@ console.log(residential, 'residential');
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
         <CategoriesProperties />
-        <BrandsDoorSection />
+        {/* <BrandsDoorSection /> */}
         
       </div>
 
+
+
+        <div className=' lg:block
+          w-[90%]
+          2xl:w-[85%]
+          3xl:w-[95%]
+          4xl:w-[82%]
+          mx-auto'>
+             <CitySection />
+             {/* <TestimonialSection /> */}
+          </div>
       
 
        <div className='h-400px'>
@@ -267,15 +278,7 @@ console.log(residential, 'residential');
         </div>
        </div>
 
-       <div className=' lg:block
-          w-[90%]
-          2xl:w-[85%]
-          3xl:w-[95%]
-          4xl:w-[82%]
-          mx-auto'>
-             <CitySection />
-             {/* <TestimonialSection /> */}
-          </div>
+       
 
     </div>
   )

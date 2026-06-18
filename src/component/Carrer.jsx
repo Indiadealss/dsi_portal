@@ -1,8 +1,8 @@
 import carrers from '../Images/carrer.webp'
 import { Modal } from 'antd';
-import Oppenings from '../Customcomponent/Oppenings';
+import Oppenings from './Opennings.jsx';
 import { useState } from 'react';
-import carrer from '../Images/carrers.jpg'
+import carrer from '../Images/carrers.jpg';
 
 const carerPage = () => {
 

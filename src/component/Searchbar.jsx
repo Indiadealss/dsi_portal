@@ -13,7 +13,7 @@ export default function Searchbar() {
 
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('BUY');
-  const tabs = ['BUY', 'RENT','RESIDENTIAL', 'INDUSTRIAL', 'COMMERCIAL', 'PROJECTS'];
+  const tabs = ['BUY', 'RENT','RESIDENTIAL','COMMERCIAL', 'INDUSTRIAL', 'PLOTS/LAND', 'PROJECTS'];
 
 
   function activateTabFun(tab) {
@@ -253,9 +253,6 @@ export default function Searchbar() {
             />
           </button>
         ))}
-        <Link to="/post-property" className="text-sm font-medium text-white ml-auto hidden md:block drop-shadow-md cursor-pointer">
-          POST PROPERTIES
-        </Link>
       </div>
 
       {/* 2. Glassmorphism Search Bar */}

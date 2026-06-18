@@ -17,7 +17,7 @@ export default function Footer() {
           {/* ABOUT */}
           <div className="col-span-2">
             <p className="text-white font-semibold text-lg uppercase">
-              ABOUT BRANDSDOOR
+              ABOUT INDIADEALS
             </p>
 
             <p className="text-[#d8d8d8] text-xs leading-[1.6] mt-2 max-w-[300px] text-justify ">
