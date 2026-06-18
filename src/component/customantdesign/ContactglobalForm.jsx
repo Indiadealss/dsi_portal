@@ -215,13 +215,13 @@ const ContactglobalForm = () => {
               </label>
 
              <input
-  type="text"
-  name="projectname"
-  value={formData.projectname}
-  onChange={handleChange}
-  placeholder="ACE 153"
-  className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
-/>
+                type="text"
+                name="projectname"
+                value={formData.projectname}
+                onChange={handleChange}
+                placeholder="Enter the Project Name"
+                className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
+              />
             </div>
 
             <div>

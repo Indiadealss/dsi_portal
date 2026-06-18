@@ -30,6 +30,10 @@
   color: #001A2D !important;
 }
 
+.swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
 .heading-h1 {
   @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
 }

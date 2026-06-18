@@ -119,16 +119,23 @@ const PropertyList = ({ properties }) => {
 
             {/* SWIPER */}
             <Swiper
-        modules={[Navigation]}
-        spaceBetween={20}
-        slidesPerView={6}
-        breakpoints={{
-          320: { slidesPerView: 1.2 },
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 5 },
-        }}
-      >
+  modules={[Autoplay]}
+  loop={true}
+  speed={7000}
+   autoplay={{
+    delay: 2000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+  }}
+  onMouseEnter={() => swiperRef.current?.autoplay?.stop()}
+  onMouseLeave={() => swiperRef.current?.autoplay?.start()}
+   breakpoints={{
+    320: { slidesPerView: 1.2 },
+    640: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 },
+    1280: { slidesPerView: 5 },
+  }}
+>
                 {newCards.map((item, index) => (
                     <SwiperSlide key={index} className="rounded-xl border border-gray-200 overflow-hidden ">
                         <ProjectsCrousal data={item} />

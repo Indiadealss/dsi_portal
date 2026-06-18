@@ -21,7 +21,7 @@ export default function Footer() {
             </p>
 
             <p className="text-[#d8d8d8] text-xs leading-[1.6] mt-2 max-w-[300px] text-justify ">
-              Brandsdoor is a leading real estate platform that empowers you
+              Indiadeals is a leading real estate platform that empowers you
               to navigate real estate with ease.
               <br />
               We connect you with verified listings, genuine leads, and expert
