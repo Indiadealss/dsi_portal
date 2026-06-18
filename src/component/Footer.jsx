@@ -12,22 +12,10 @@ export default function Footer() {
       {/* TOP CONTENT */}
       <div className="w-[-webkit-fill-available] mx-auto px-10 md:px-[135px]  pt-12 pb-30 relative z-10">
         
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           
           {/* ABOUT */}
-          <div className="col-span-2">
-            <p className="text-white font-semibold text-lg uppercase">
-              ABOUT INDIADEALS
-            </p>
-
-            <p className="text-[#d8d8d8] text-xs leading-[1.6] mt-2 max-w-[300px] text-justify ">
-              Indiadeals is a leading real estate platform that empowers you
-              to navigate real estate with ease.
-              <br />
-              We connect you with verified listings, genuine leads, and expert
-              support to help you Buy, Sell and Invest in properties and real estate.
-            </p>
-          </div>
+         
 
           {/* QUICK LINKS */}
           <div>
@@ -66,8 +54,8 @@ export default function Footer() {
             </p>
 
             <div className="mt-2 space-y-1 text-[#d8d8d8] text-xs">
-              <p>+91 9818764200</p>
-              <p>www.brandsdoor.in</p>
+              <p>+91 9818763100</p>
+              <p>www.indiadealsgroup.com</p>
             </div>
 
            
@@ -81,19 +69,19 @@ export default function Footer() {
 
               <div className="flex items-center gap-3 mt-2">
                 <div className="w-18 h-10   rounded-md flex items-center justify-center">
-                  <a href="https://facebook.com/profile.php?id=61588169025866" target="_blank" ><img src={Facebook} alt="Facebook" /></a>
+                  <a href="https://www.facebook.com/people/Indiadeals/61587222626520" target="_blank" ><img src={Facebook} alt="Facebook" /></a>
                 </div>
 
                 <div className="w-18 h-10   rounded-md flex items-center justify-center">
-                  <a href="https://instagram.com/_brandsdoor_?igsh=OGVqeHVtNG1mbjMy" target="_blank" ><img src={Instagram} alt="Instagram" /></a>
+                  <a href="https://www.instagram.com/indiadeals_official?igsh=eGEwc2x0enJtaWk0" target="_blank" ><img src={Instagram} alt="Instagram" /></a>
                 </div>
 
                 <div className="w-18 h-10   rounded-md flex items-center justify-center">
-                  <a href="https://linkedin.com/company/brandsdoor" target="_blank" ><img src={Linkedin} alt="Linkedin" /></a>
+                  <a href="https://www.linkedin.com/company/indiadeals-official/" target="_blank" ><img src={Linkedin} alt="Linkedin" /></a>
                 </div>
 
                 <div className="w-18 h-10   rounded-md flex items-center justify-center">
-                  <a href="https://youtube.com/@brandsdoor-f7v?si=6GZAbAPZfsNc85kE" target="_blank" ><img src={Youtube} alt="Youtube" /></a>
+                  <a href="https://www.youtube.com/@indiadealss" target="_blank" ><img src={Youtube} alt="Youtube" /></a>
                 </div>
               </div>
             </div>

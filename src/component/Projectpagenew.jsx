@@ -759,6 +759,10 @@ function LeadForm({ owner, propertyData }) {
           <input name="PhoneNumber" value={form.PhoneNumber} onChange={handleChange} placeholder="Mobile No."
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
         </div>
+        <div className="flex flex-col md:flex-row gap-3">
+          <input name="Email Id" value={form.Name} onChange={handleChange} placeholder="Email Id" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+          <input name="requirements" value={form.requirement} onChange={handleChange} placeholder="Requirements" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+        </div>
         <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"
           rows={3} className="bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all resize-none" />
         <div className="flex gap-3 mt-1">
