@@ -538,13 +538,13 @@ const handleLoginmobile = () => {
             {Object.entries(megaMenuData).map(([menu, data]) => (
   <div key={menu} className="group relative">
 
-    {(menu === "Home" || menu === "Careers" || menu === "Blogs") ? (
+    {(menu === "Home" || menu === "Career" || menu === "Blogs") ? (
       <Link
         to={
           menu === "Home"
             ? "/"
             : menu === "Career"
-            ? "/career"
+            ? "/careers"
             : "/blogs"
         }
         className="flex items-center gap-1 py-2 hover:text-blue-400"
