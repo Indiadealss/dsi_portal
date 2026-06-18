@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import inheight from "../Images/deskIn.png";
 import { CgMenuLeft } from "react-icons/cg";
-import logo_1 from "../Images/logo_1.svg";
+import logo_1 from "../Images/INDIADEALS_LOGO.svg";
 import {
   Grid,
 } from "antd";
@@ -36,7 +36,7 @@ const Navbar = () => {
 
   const [showLogin, setShowLogin] = useState(false);
 
-  const menuItems = ["Buy", "Rent", "Services", "Resources", "Blogs"];
+  const menuItems = ["Home", "Residential", "Buy", "Rent", "Services", "Resources", "Blogs", ];
   const [profileOpen, setProfileOpen] = useState(false);
 
   const {location} = useLocationContext();
@@ -90,6 +90,11 @@ const handleLoginmobile = () => {
   )
 
   const megaMenuData = {
+
+    Home: {
+    width: "w-[650px]",
+    columns: [],
+  },
   Buy: {
     width: "w-[1000px]",
     columns: [
@@ -384,10 +389,14 @@ const handleLoginmobile = () => {
     ],
   },
 
-  Help: {
+  Blogs: {
     width: "w-[650px]",
     columns: [],
   },
+  Carrers: {
+    width: "w-[650px]",
+    columns: [],
+  }
 };
 
 
@@ -414,7 +423,7 @@ const handleLoginmobile = () => {
 
       {/* 🔷 TOP NAVBAR */}
       <div className="bg-[#001A2D] text-white">
-        <div className=" mx-auto px-2 md:px-[40px]  py-[15px] flex items-center justify-between">
+        <div className=" mx-auto px-2 md:px-[40px]  flex items-center justify-between">
 
           {/* Logo */}
             <a
@@ -424,10 +433,14 @@ const handleLoginmobile = () => {
           display: "inline-flex",
           alignItems: "center",
           fontWeight: 700,
-          fontSize: 18,
+          fontSize: 20,
         }}
       >
- <img src={logo_1} alt="BRANDSDOOR"  className="w-[100px] md:w-[250px]" /> 
+ <img
+  src={logo_1}
+  alt="INDIADEALSS"
+  className="h-[50px] md:h-[100px] w-auto object-contain"
+/>
  </a>
 
           {/* Location (Desktop only) */}

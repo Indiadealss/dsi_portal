@@ -47,7 +47,7 @@ const Myindiadealss = () => {
                                     <div className='w-[100%] bg-[#00255d] pt-5 overflow-y-auto'>
                                         <div className='w-20 h-20  rounded-full mx-auto'>
                                             {user.img ? (
-                                                <img src='' alt='...' className='w-10 h-10 bg-gray-300 rounded-full' />
+                                                <img src='' alt='INDIADEALSS' className='w-10 h-10 bg-gray-300 rounded-full' />
                                             ) : (
                                                 <FaRegUser className='w-20 h-20 bg-gray-300 rounded-full' />
                                             )}

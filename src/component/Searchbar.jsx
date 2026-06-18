@@ -13,7 +13,7 @@ export default function Searchbar() {
 
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('BUY');
-  const tabs = ['BUY', 'RENT', 'COMMERCIAL', 'PROJECTS'];
+  const tabs = ['BUY', 'RENT','RESIDENTIAL', 'INDUSTRIAL', 'COMMERCIAL', 'PROJECTS'];
 
 
   function activateTabFun(tab) {
@@ -241,7 +241,7 @@ export default function Searchbar() {
               className={`h-[0.8px] bg-white transition-all duration-300
         ${activeTab === tab
                   ? tab === "BUY"
-                    ? "w-[20px] md:w-[30px]"
+                    ? "w-[20px] md:w-[22px]"
                     : tab === "RENT"
                       ? "w-[25px] md:w-[35px]"
                       : tab === "COMMERCIAL"

@@ -181,113 +181,7 @@ const Home = () => {
           },[page,location]);
       
 
- const handpickherosection = {
-  rentHome:[{
-    img : "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1771931556648-PLOTS.jpg",
-    title:"BUY PLOTS/LAND",
-    subtitle:"Residential & Commerical Plots/Land",
-    subtitleDesc:"Explore Residential,Agricultural, Industrial and Commerical Plots/Land",
-    buttonName:"Explore Plots/Land",
-    bannercontenttitle:"Best articles on Plots/land",
-    articles : [
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-  ]
 
-  }
-  ],
-  postPropertyViaWhatsapp:[{
-    img : "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1771931807683-Post%20via%20%20Whatsapp.jpg",
-    title:`Post via  Whatsapp`,
-    subtitle:"Sell or rent faster at the right price!",
-    subtitleDesc:"List your property now",
-    buttonName:"Post Property,It's Free",
-    bannercontenttitle:"Articles & guides for property Owners",
-    articles : [
-    {
-      title: "Kolkata Tower Demolition Impact on Buyers",
-      date: "Sep 02,2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "No stamp duty on husing plots in Harya",
-      date: "Aug 28,2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-  ]
-
-  }
-  ]
-
- }
 
   const  crousalDat = [
     {image:"https://picsum.photos/830/464?random=1"},
@@ -297,48 +191,7 @@ const Home = () => {
     {image:"https://picsum.photos/830/464?random=5"},
   ]
 
-  const cities = [
-    {
-      title: "Delhi / NCR",
-      date: "231,000+ Properties",
-      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108109320-Delhi.jpg",
-    },
-    {
-      title: "Bangalore",
-      date: "62,000+ Properties",
-      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108873314-West%20Bengal.jpg",
-    },
-    {
-      title: "Pune",
-      date: "64,000+ Properties",
-      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108242089-Pune.jpg",
-    },
-    {
-      title: "Gurgaon",
-      date: "May 20, 2025",
-      img: "https://cdn.brandsdoor.in/brandsdoor/brandsdoor/1772108523768-Haryana.jpg",
-    },
-    {
-      title: "UP women homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2025",
-      img: "https://picsum.photos/200/140?random=1",
-    },
-    {
-      title: "Oberoi Realty to enter Gurgaon market",
-      date: "May 20, 2025",
-      img: "https://picsum.photos/200/140?random=2",
-    },
-    {
-      title: "UP w homebuyers get 1% stamp duty rebate",
-      date: "Jul 28, 2026",
-      img: "https://picsum.photos/200/140?random=3",
-    },
-    {
-      title: "Oberoi Real to enter Gurgaon market",
-      date: "May 20, 2026",
-      img: "https://picsum.photos/200/140?random=4",
-    },
-  ]
+ 
 
   if (!data || !crousalData) {
     // console.log(data);
@@ -421,7 +274,7 @@ console.log(residential, 'residential');
           4xl:w-[82%]
           mx-auto'>
              <CitySection />
-             <TestimonialSection />
+             {/* <TestimonialSection /> */}
           </div>
 
     </div>

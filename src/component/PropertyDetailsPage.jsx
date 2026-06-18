@@ -47,7 +47,7 @@ function LocationSection({ locatadvance, address }) {
     <div>
       <h2 className="heading-h6 text-gray-800 tracking-wide">Location</h2>
       <div className="flex flex-col md:flex-row gap-3 rounded-md py-4">
-        <div className="rounded-md overflow-hidden min-h-40 w-[500px]">
+        <div className="rounded-md overflow-hidden min-h-40 w-[-webkit-fill-available] md:w-[500px]">
           <iframe
             title="map"
             width="100%"
@@ -506,7 +506,7 @@ export default function PropertyDetailsPage() {
       </div>
 
       {/* ── MOBILE BOTTOM CTA ── */}
-      <div className="xl:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#E6E6E6] px-4 py-3 flex gap-2.5 shadow-2xl">
+      <div className="hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-[#E6E6E6] px-4 py-3 flex gap-2.5 shadow-2xl">
         <a href={`tel:${property?.owner?.mobile}`} className="flex-1 bg-[#2F73D9] text-white font-bold py-3 rounded-xl text-sm transition text-center">📞 Contact</a>
         <a href={`https://wa.me/${property?.owner?.mobile}`} target="_blank" rel="noopener noreferrer" className="flex-1 bg-[#24B15A] text-white font-bold py-3 rounded-xl text-sm transition text-center">💬 WhatsApp</a>
         <button onClick={() => setOpenLeadModal(true)} className="flex-1 border-2 border-[#2F73D9] text-[#2F73D9] font-bold py-3 rounded-xl text-sm transition">🗓 Visit</button>

@@ -67,6 +67,8 @@ import AllProjects from "./component/AllProjects.jsx";
 import PropertyListingPage from "./component/PropertyListingPage.jsx"
 import PropertyDetailPage from "./component/Projectpagenew.jsx";
 import PropertyDetailsPage from "./component/PropertyDetailsPage.jsx";
+import BrandsDoorPostProject from "./component/BrandsDoorPostProject.jsx";
+import ProjectListingStep1 from "./component/Projecttype.jsx";
 
 function App() {
 
@@ -133,7 +135,8 @@ function App() {
     },
     { path: "/property",element:<Property />},
     { path: "/project",element:<AllProjects />},
-    {path:"/property-detail-page",element:<PropertyDetailsPage />},
+    {path:"/property-detail-page",element:<BrandsDoorPostProject />},
+    {path:"/choose-listing-type", element:<ProjectListingStep1 /> },
     {path: "/Propertylistingpage", element:<PropertyListingPage />},
     {path: "/:slug",element:<Propertypageslug />},
     {path:"/post-property",
