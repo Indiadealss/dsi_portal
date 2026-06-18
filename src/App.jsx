@@ -69,6 +69,7 @@ import PropertyDetailPage from "./component/Projectpagenew.jsx";
 import PropertyDetailsPage from "./component/PropertyDetailsPage.jsx";
 import BrandsDoorPostProject from "./component/BrandsDoorPostProject.jsx";
 import ProjectListingStep1 from "./component/Projecttype.jsx";
+import Carrer from "./component/Carrer.jsx";
 
 function App() {
 
@@ -126,6 +127,8 @@ function App() {
     {path:'/ashtech-presidential-towers',element:<Ashtechpresidentialtowers />},
     {path:'/ace-acreville',element:<Aceacreville />},
     {path:'/sobha-rivana',element:<Sobharivana />},
+    {path:'/',},
+    {path:'/careers',element:<Carrer />},
     {path:'/ace-hanei',element:<Acehanei />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},

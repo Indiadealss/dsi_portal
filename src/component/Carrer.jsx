@@ -1,10 +1,10 @@
-import carrers from '../Images/carrer.webp'
+import carers from '../Images/carrer.webp'
 import { Modal } from 'antd';
 import Oppenings from './Opennings.jsx';
 import { useState } from 'react';
 import carrer from '../Images/carrers.jpg';
 
-const carerPage = () => {
+const Carrer = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState("");
@@ -139,10 +139,8 @@ const carerPage = () => {
         <img
           src={carers}
           alt="Vrindavan Banner"
-          
-          
           sizes="100vw"
-          className="object-cover hidden lg:block"
+          className="object-cover hidden lg:block w-[-webkit-fill-available] h-[-webkit-fill-available]"
         />
 
         <img
@@ -241,4 +239,4 @@ const carerPage = () => {
   )
 }
 
-export default carerPage
+export default Carrer

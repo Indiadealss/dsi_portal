@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { message, Modal } from "antd";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Oppenings = ({ selectedJob }) => {
 
-  const [form, setForm] = useState<FormType>({
+  const [form, setForm] = useState({
   name: "",
   email: "",
   phone: "",
@@ -17,7 +17,7 @@ const Oppenings = ({ selectedJob }) => {
 });
 
 
-  const router = useRouter()
+ const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -132,7 +132,7 @@ if (form.resume) {
       }
 
        if (finalRes.ok) {
-        router.push("/thankyou");
+       navigate("/thankyou");
         message.success("Thank you! Our team will contact you soon.");
       }
 
