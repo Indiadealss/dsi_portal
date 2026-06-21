@@ -8,7 +8,7 @@ import Crmrightmenu from './Crmrightmenu';
 import { Modal } from 'antd';
 import Changepasswordmodal from '../customantdesign/Changepasswordmodal';
 
-const Mybrandsdoor = () => {
+const MyIndiadeals = () => {
 
     const user = useSelector((state) => state.user);
 
@@ -346,4 +346,4 @@ const Mybrandsdoor = () => {
     )
 }
 
-export default Mybrandsdoor
+export default MyIndiadeals

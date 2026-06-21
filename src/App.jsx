@@ -25,7 +25,7 @@ import Propertypageslug from "./Propertypageslug";
 import Recentactivity from "./component/Recentactivity";
 import Adddelercard from "./component/customcomponent/Adddelercard";
 import UpcomingProjects from "./component/customcomponent/Upcomingprojects";
-import Mybrandsdoor from "./component/mybrandsdoor/Mybrandsdoor";
+import MyIndiadeals from "./component/mybrandsdoor/MyIndiadeals.jsx";
 import Leadsearch from "./component/lead/Leadsearch";
 import Allprojects from "./component/Projectslead/Allprojects";
 import Allproducts  from "./component/mybrandsdoor/Allproducts";
@@ -152,8 +152,8 @@ useEffect(() => {
     },
     { path:"/edit-property/:id", element:<EditPropertyStepper /> },
     {
-  path: "/mybrandsdoor",
-  element: <Mybrandsdoor />,
+  path: "/myindiadeals",
+  element: <MyIndiadeals />,
   children:[
     { index: true, element: <Homepage /> },
     { path:"all_listings/ALL", element:<Allprojects /> },
