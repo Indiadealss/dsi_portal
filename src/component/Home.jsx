@@ -31,7 +31,7 @@ import ImageCrousal from './customantdesign/ImageCrousal';
 import CategoryGrid from './customcomponent/CategoryGrid';
 import ServicesSection from './customcomponent/ServicesSection';
 import CategoriesProperties from './customantdesign/CategoriesProperties';
-import BrandsDoorSection from './customantdesign/BrandsdoorSection';
+import IndiadealsSection from './customantdesign/IndiadealsSection';
 import ContactglobalForm from './customantdesign/ContactglobalForm';
 import CitySection from './customantdesign/Citysection';
 import TestimonialSection from './customantdesign/TestimonialSection';
@@ -254,7 +254,7 @@ console.log(residential, 'residential');
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
         <CategoriesProperties />
-        {/* <BrandsDoorSection /> */}
+        {/* <IndiadealsSection /> */}
         
       </div>
 

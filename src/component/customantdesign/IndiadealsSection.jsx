@@ -7,7 +7,7 @@ import Square from '../../Images/NoFakeGroup.svg';
 import messageSquare from '../../Images/Group.svg';
 import layout from '../../Images/Group20.svg';
 
-const BrandsDoorSection = () => {
+const IndiadealsSection = () => {
   return (
     <section className="mt-[100px]">
       <h4 className="text-3xl heading-h3 font-bold text-[#001f3f]  tracking-wide mb-[30px]">
@@ -95,4 +95,4 @@ const BrandsDoorSection = () => {
   );
 };
 
-export default BrandsDoorSection;
+export default IndiadealsSection;
