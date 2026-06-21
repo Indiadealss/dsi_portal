@@ -11,7 +11,6 @@ import { Button } from "antd";
 import Appartmentvill from './customantdesign/Appartmentvill';
 import Antdcrousal from './customantdesign/Antdcrousal';
 import Newlaunchcard from './customcomponent/Newlaunchcard';
-import Dreamherosection from './customantdesign/Dreamherosection';
 import Smallmain from './customantdesign/Smallmain';
 import Handpickherosection from './customantdesign/Handpickherosection';
 import Antdpropertycard from './customantdesign/Antdpropertycard';
@@ -226,8 +225,8 @@ console.log(residential, 'residential');
     <div>
       <Seo
               title='Residential and Commercial properties in India, Flats, Plots, Villas, Apartments'
-              description="Brandsdoor.in offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
-              canonical={`https://www.brandsdoor.in/`}
+              description="Indiadealsgroup offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
+              canonical={`https://www.indiadealsgroup.com/`}
             />
       <div className='block'>
         <div className='relative'>

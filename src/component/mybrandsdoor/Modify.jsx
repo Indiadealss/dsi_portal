@@ -401,10 +401,10 @@ const Modify = () => {
                 {/* aggreement */}
 
                 <div className='shadow-sm bg-white mt-3 mx-5 px-2'>
-                    <p><span>Subscribe For Updates From BRANDSDOOR</span></p>
+                    <p><span>Subscribe For Updates From INDIADEALSGROUP</span></p>
                     <div class="flex items-center mb-4 mt-2 py-3">
                         <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft" />
-                        <label for="default-checkbox" class="select-none ms-2 text-xs font-medium text-heading">I agree to be contacted by BRANDSDOOR for similar properties or related services via What's app, phone(overring NDNC registration), SMS,e-mail etc.</label>
+                        <label for="default-checkbox" class="select-none ms-2 text-xs font-medium text-heading">I agree to be contacted by INDIADEALSGROUP for similar properties or related services via What's app, phone(overring NDNC registration), SMS,e-mail etc.</label>
                     </div>
                 </div>
 

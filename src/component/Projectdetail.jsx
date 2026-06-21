@@ -501,7 +501,7 @@ try {
   return (
     <>
       <Seo
-        title={`${propertys?.projecttitle || "BRANDSDOOR"}`}
+        title={`${propertys?.projecttitle || "INDIADEALSGROUP"}`}
         description={
           propertys?.titleDescription
             ? propertys.titleDescription
@@ -509,7 +509,7 @@ try {
         }
         canonical={
           slug
-            ? `https://www.brandsdoor.in/project/${slug}`
+            ? `https://www.indiadealsgroup.com/project/${slug}`
             : null
         }
       />

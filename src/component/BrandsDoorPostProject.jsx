@@ -244,7 +244,7 @@ export default function BrandsDoorPostProject() {
 
               {/* Benefits Banner */}
               <div style={{ background: "#F3FBF6", border: "1px solid #D7F1DF", borderRadius: 10, padding: "16px 20px", marginBottom: 24 }}>
-                <h4 style={{ fontSize: 15, fontWeight: 600, color: "#122033", marginBottom: 14 }}>Why Post with Brandsdoor ?</h4>
+                <h4 style={{ fontSize: 15, fontWeight: 600, color: "#122033", marginBottom: 14 }}>Why Post with Indiadealsgroup ?</h4>
                 <div className="benefits-grid" style={{ display: "flex", gap: 0, alignItems: "stretch" }}>
                   {benefits.map((b, i) => (
                     <>

@@ -28,7 +28,7 @@ const Thankyou = () => {
         <div className="mb-6">
           <img
             src="https://d3eoh63gynpjzh.cloudfront.net/1771509319781-brandsdoorlog.png"
-            alt="BRANDSDOOR"
+            alt="INDIADEALSGROUP"
             width={180}
             className="mx-auto"
           />

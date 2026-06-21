@@ -11,7 +11,7 @@ const BrandsDoorSection = () => {
   return (
     <section className="mt-[100px]">
       <h4 className="text-3xl heading-h3 font-bold text-[#001f3f]  tracking-wide mb-[30px]">
-        WHY BRANDSDOOR IS THE RIGHT CHOICE
+        WHY INDIADEALSGROUP IS THE RIGHT CHOICE
       </h4>
 
       <div className="flex flex-col md:flex-row justify-between gap-12 items-start">
@@ -82,7 +82,7 @@ const BrandsDoorSection = () => {
                  <svg viewBox="0 0 100 100" className="w-full h-full p-1">
                   <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                   <text className="text-[10px] fill-white uppercase tracking-tighter">
-                    <textPath xlinkHref="#circlePath" startOffset="0%" textLength="230"  lengthAdjust="spacing">Brandsdoor . Brandsdoor . Brandsdoor .</textPath>
+                    <textPath xlinkHref="#circlePath" startOffset="0%" textLength="230"  lengthAdjust="spacing">Indiadealsgroup . Indiadealsgroup . Indiadealsgroup .</textPath>
                   </text>
                 </svg>
               </div>

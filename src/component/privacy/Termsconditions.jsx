@@ -22,7 +22,7 @@ const SECTIONS = [
     id: "Services Provided",
     title: "Services Provided",
     content: {
-      intro: "BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED. provides:",
+      intro: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED. provides:",
       items: [
         "Real estate advisory services",
         "Property listings and project information",
@@ -109,7 +109,7 @@ const SECTIONS = [
     id: "intellectual-property-rights",
     title: " Intellectual Property Rights",
     content: {
-      intro: "All content on our Platform—including text, images, logos, graphics, brochures, and materials—is the exclusive property of BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED ",
+      intro: "All content on our Platform—including text, images, logos, graphics, brochures, and materials—is the exclusive property of INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED ",
       items: [
             "Copy",
             "Reproduce",
@@ -125,7 +125,7 @@ const SECTIONS = [
     id: "limitation-of-liability",
     title: "Limitation of Liability",
     content: {
-      intro: "BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED is not liable for:",
+      intro: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED is not liable for:",
       items: [
         "Losses arising from reliance on property information",
         "Errors or inaccuracies in developer-provided details",
@@ -196,8 +196,8 @@ const SECTIONS = [
       intro:
         "For any questions, requests, or concerns regarding this Privacy Policy, please contact:",
       contact: {
-        company: "BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED",
-        address: "Unit No. 337, TOWER C, GOLDEN I, TECHZONE 4, Greater Noida, 201009",
+        company: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED",
+        address: "Unit No. 320, TOWER C, GOLDEN I, TECHZONE 4, Greater Noida, 201009",
       },
     },
   },
@@ -379,7 +379,7 @@ export default function Termsconditions() {
              Terms & Conditions
             </h1>
             <p className="text-xs font-medium text-[#515151] text-justify" style={{ margin: 0, lineHeight: 1.3 }}>
-              Welcome to BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED (“Company”, “we”, “our”, “us”). These Terms & Conditions govern your use of our website, mobile application, services, property listings, promotional activities, and any interactions with our sales team or channel partners (“Platform”).
+              Welcome to INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED (“Company”, “we”, “our”, “us”). These Terms & Conditions govern your use of our website, mobile application, services, property listings, promotional activities, and any interactions with our sales team or channel partners (“Platform”).
             </p>
             <p className="text-xs font-medium text-[#515151] text-justify mt-10 md:mt-0" style={{ margin: 0, lineHeight: 1.3 }}>
              By accessing or using any part of our Platform, you agree to be bound by these Terms. If you disagree with any part of these Terms, you should discontinue use of our services.  
@@ -449,7 +449,7 @@ export default function Termsconditions() {
                   <p style={{ margin: 0, fontWeight: 700, fontSize: "13.5px", color: "#1F2937" }}>Important</p>
                 </div>
                 <p style={{ margin: 0, fontSize: "12.5px", color: "#6B7280", lineHeight: 1.7 }}>
-                  By using Brandsdoor, you agree to these terms and condition.
+                  By using Indiadealsgroup, you agree to these terms and condition.
                 </p>
               </div>
             </aside>

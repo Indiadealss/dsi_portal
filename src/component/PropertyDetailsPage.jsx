@@ -477,7 +477,7 @@ export default function PropertyDetailsPage() {
                     <div>
                       <div className="font-extrabold text-[#1F1F1F] text-sm">Ravie Misra</div>
                       <div className="text-[11px] text-[#6E6E6E]">Property Consultant</div>
-                      <div className="text-[11px] text-[#001A2D] font-semibold">Brandsdoor Agent</div>
+                      <div className="text-[11px] text-[#001A2D] font-semibold">Indiadeals Agent</div>
                       <div className="flex items-center gap-1 mt-0.5">
                         {[1, 2, 3, 4, 5].map(s => (
                           <span key={s} className={`text-xs ${s <= 4 ? "text-yellow-400" : "text-gray-300"}`}>★</span>

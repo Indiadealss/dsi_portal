@@ -164,7 +164,7 @@ const fadeUp = {
          <Seo
               title='Ashtech Presidential Towers'
               description="Ashtech Presidential Towers Plot No. GH-01/F,G,H & I, Sector 12, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, 201318"
-              canonical={`https://www.brandsdoor.in/irish-platinum`}
+              canonical={`https://www.indiadealsgroup.com/irish-platinum`}
             />
       <motion.div
   variants={fadeUp}

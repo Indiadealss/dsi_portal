@@ -87,7 +87,7 @@ const Mybrandsdoor = () => {
 
                     <div className='bg-black pt-5 pb-10 h-[calc(100vh-250px)] overflow-y-auto'>
                         <div className='mx-3'>
-                            <Link to={`Homepage`}><span className='text-xs text-gray-500 font-medium'>My DOOR</span></Link>
+                            <Link to={`Homepage`}><span className='text-xs text-gray-500 font-medium'>My INDIADEALS</span></Link>
                         </div>
                         <div className='bg-white/20 ms-5 mt-5 px-5'>
                             <span className='text-xs text-center font-medium text-gray-500'>MANAGE PRODUCTS</span>
@@ -236,7 +236,7 @@ const Mybrandsdoor = () => {
         </div>
                     <div className='w-full bg-black pt-5 pb-10 h-full lg:h-[400px] 2xl:h-[440px] overflow-y-auto overflow-x-hidden relative'>
                         <div className='mx-3'>
-                            <Link to={`Homepage`}><span className='text-xs text-gray-500 font-medium'>My DOOR</span></Link>
+                            <Link to={`Homepage`}><span className='text-xs text-gray-500 font-medium'>My INDIADEALS</span></Link>
                         </div>
                         <div className='bg-white/20 ms-5 mt-5 px-5'>
                             <span className='text-xs text-center font-medium text-gray-500'>MANAGE PRODUCTS</span>

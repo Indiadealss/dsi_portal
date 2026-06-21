@@ -174,7 +174,7 @@ const EldecoEOE = () => {
          <Seo
               title='Eldeco EOE sector 22D Yamuna Expressway'
               description=""
-              canonical={`https://www.brandsdoor.in/eldeco-eoe`}
+              canonical={`https://www.indiadealsgroup.com/eldeco-eoe`}
             />
       <section className="relative h-[90vh] min-h-[700px] w-full flex flex-col items-center justify-center text-white text-center px-4 overflow-hidden">
       {/* 1. Background Image with Dark Overlay */}

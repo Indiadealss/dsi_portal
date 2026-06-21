@@ -218,7 +218,7 @@ const gymAmenities = [
          <Seo
               title='Ace Hanei, Plot No- GH-05, Sector 12, Saini, Greater Noida, Uttar Pradesh 203207'
               description=""
-              canonical={`https://www.brandsdoor.in/ace-hanei`}
+              canonical={`https://www.indiadealsgroup.com/ace-hanei`}
             />
       <section className="relative h-[90vh] min-h-[700px] w-full flex flex-col items- justify-center text-white text-center px-4 overflow-hidden">
       {/* 1. Background Image with Dark Overlay */}

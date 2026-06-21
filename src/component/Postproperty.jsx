@@ -97,7 +97,7 @@ export const Postproperty = () => {
             <section className='m-10'>
                 <div className='flex'>
                     <div className='hidden lg:block lg:w-[50vw]'>
-                        <h3 className='text-4xl font-bold'>Sell or Rent Property<br /> online faster with BRANDSDOOR</h3>
+                        <h3 className='text-4xl font-bold'>Sell or Rent Property<br /> online faster with INDIADEALSGROUP</h3>
                         <img src='https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1772110066681-sa2x.png' alt='...' className='w-[25vw] mx-auto mt-15' />
                     </div>
                     <div>

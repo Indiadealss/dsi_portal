@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Loginform } from './Login_2';
 import { RxCross1 } from "react-icons/rx";
 import Loginformmodi from './Loginformmodi';
 
@@ -23,7 +22,6 @@ export const Login = ({ open, onClose  }) => {
                       <div className="bg-white  pt-5 pb-4 sm:p-6 sm:pb-4">
                         
                         <div>
-                        {/* <Loginform /> */}
                         <Loginformmodi closeModal={onClose} />
                         </div>
                       </div>

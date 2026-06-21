@@ -302,7 +302,7 @@ const Choosepropertype = () => {
 
                 {/* ── BENEFITS BANNER ── */}
                 <div className="bg-[#F6FCF8] border border-[#DCEFE3] rounded-xl px-5 py-4">
-                    <h3 className="text-lg font-semibold text-[#111827] mb-4">Why Post with Brandsdoor ?</h3>
+                    <h3 className="text-lg font-semibold text-[#111827] mb-4">Why Post with Indiadealsgroup ?</h3>
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
                         {benefits.map((b) => (
                             <div key={b.title} className="flex flex-col md:flex-row items-start gap-3">

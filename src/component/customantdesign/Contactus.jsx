@@ -35,7 +35,7 @@ const Contactus = () => {
     },
     {
       icon: <FontAwesomeIcon icon={faPhone} className="text-white text-lg" />,
-      title: "BEST – BRANDSDOOR  Experience Satisfaction Team",
+      title: "BEST – INDIADEALSGROUP  Experience Satisfaction Team",
       desc: "Customer Care: +91–9818764200\n7 Days | 8:00 AM – 8:00 PM",
     },
     // {

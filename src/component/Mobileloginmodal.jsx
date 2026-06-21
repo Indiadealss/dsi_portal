@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-//import { Loginform } from "./Loginform";
 import { Loginform } from './Login_2';
 import Loginformmodi from './Loginformmodi';
 

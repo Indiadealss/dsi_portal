@@ -1,60 +1,29 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import ProjectsCrousal from "./ProjectsCrousal";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import { FaAngleRight } from "react-icons/fa6";
-import "swiper/css";
-import "swiper/css/navigation";
-import { FaAngleLeft } from "react-icons/fa6";
+
+const GAP = 16;
 
 const PropertyList = ({ properties }) => {
-  const swiperRef = useRef(null);
-
-  console.log(properties, 'properties');
-
-  const propertyes = properties.filter((item) => {
-    return item.hotScreen === true;
-    
-  })
-
-  console.log(propertyes, 'propertyes is filter');
-  
-
+  const propertyes = properties.filter((item) => item.hotScreen === true);
 
   const newCards = propertyes.map((item) => {
-    const covers = item.images?.filter(
-      (img) => img.type === "cover"
-    ) ?? [];
-
+    const covers = item.images?.filter((img) => img.type === "cover") ?? [];
     const coverImages = covers.length
       ? covers
-      : item.images?.filter(
-        (img) => img.type === "banner"
-      ) ?? [];
-
+      : item.images?.filter((img) => img.type === "banner") ?? [];
     const coverSrc =
       coverImages.length > 0
         ? coverImages[0].src
         : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
 
-    // RESIDENTIAL RANDOM UNIT
     const randomUnit =
-      item.unitData?.[
-      Math.floor(Math.random() * item.unitData.length)
-      ];
-
-    // COMMERCIAL RANDOM OFFICE TYPE
+      item.unitData?.[Math.floor(Math.random() * item.unitData.length)];
     const randomOfficeType =
-      item.officeUnits?.[
-      Math.floor(Math.random() * item.officeUnits.length)
-      ];
-
-    // RANDOM AREA INSIDE OFFICE TYPE
+      item.officeUnits?.[Math.floor(Math.random() * item.officeUnits.length)];
     const randomOfficeItem =
       randomOfficeType?.items?.[
-      Math.floor(
-        Math.random() * randomOfficeType.items.length
-      )
+        Math.floor(Math.random() * randomOfficeType.items.length)
       ];
 
     return {
@@ -62,27 +31,17 @@ const PropertyList = ({ properties }) => {
       label: item.title,
       location: item.location,
       city: item.city,
-
       unitData: item.unitData,
-
-      // RESIDENTIAL
-      bhk:
-        item.property === "residential"
-          ? randomUnit?.specs?.bhk || "N/A"
-          : null,
-
-      // SIZE FOR BOTH
+      bhk: item.property === "residential" ? randomUnit?.specs?.bhk || "N/A" : null,
       size:
         item.property === "residential"
           ? randomUnit?.specs?.areaMax
             ? `${randomUnit.specs.areaMax} Sq.ft`
             : "N/A"
           : randomOfficeItem?.area
-            ? `${randomOfficeItem.area} Sq.ft`
-            : "N/A",
-
+          ? `${randomOfficeItem.area} Sq.ft`
+          : "N/A",
       officeData: item.officeUnits,
-
       devloper: item.devloper,
       property: item.property,
       npxid: item.npxid,
@@ -90,66 +49,131 @@ const PropertyList = ({ properties }) => {
     };
   });
 
+  const wrapperRef = useRef(null);   // overflow-hidden outer div
+  const innerRef = useRef(null);     // the transformed flex track (2x cards)
+  const positionRef = useRef(0);     // always increases for autoplay
+  const halfWidthRef = useRef(0);    // width of ONE full set of cards
+  const isPaused = useRef(false);
+  const isNudging = useRef(false);
+  const rafId = useRef(null);
+  const resumeTimeout = useRef(null);
+  const nudgeTimeout = useRef(null);
+  const speed = 0.6; // px per frame, badhao/ghatao raftar ke liye
+
+  const loopedCards = [...newCards, ...newCards];
+
+  // measure total width of one set, on mount + resize
+  useEffect(() => {
+    const measure = () => {
+      if (innerRef.current) {
+        halfWidthRef.current = innerRef.current.scrollWidth / 2;
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [newCards.length]);
+
+  // main animation loop — sirf forward, kabhi backward nahi
+  useEffect(() => {
+    const step = () => {
+      const inner = innerRef.current;
+      const half = halfWidthRef.current;
+
+      if (inner && half > 0) {
+        if (!isPaused.current && !isNudging.current) {
+          positionRef.current += speed;
+        }
+        if (!isNudging.current) {
+          let pos = positionRef.current % half;
+          if (pos < 0) pos += half;
+          inner.style.transform = `translateX(-${pos}px)`;
+        }
+      }
+      rafId.current = requestAnimationFrame(step);
+    };
+    rafId.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId.current);
+  }, []);
+
+  const pauseAutoplay = () => {
+    isPaused.current = true;
+    clearTimeout(resumeTimeout.current);
+  };
+
+  const resumeAutoplayAfterDelay = (delay = 200) => {
+    clearTimeout(resumeTimeout.current);
+    resumeTimeout.current = setTimeout(() => {
+      isPaused.current = false;
+    }, delay);
+  };
+
+  const nudge = (dir) => {
+    const inner = innerRef.current;
+    const half = halfWidthRef.current;
+    if (!inner || half <= 0) return;
+
+    isNudging.current = true;
+    pauseAutoplay();
+
+    const cardWidth = (inner.firstChild?.offsetWidth || 280) + GAP;
+    positionRef.current += dir * cardWidth;
+
+    let pos = positionRef.current % half;
+    if (pos < 0) pos += half;
+
+    inner.style.transition = "transform 450ms cubic-bezier(0.22,1,0.36,1)";
+    inner.style.transform = `translateX(-${pos}px)`;
+
+    clearTimeout(nudgeTimeout.current);
+    nudgeTimeout.current = setTimeout(() => {
+      inner.style.transition = "";
+      isNudging.current = false;
+      resumeAutoplayAfterDelay(150);
+    }, 450);
+  };
+
   return (
     <div className="relative mt-[100px]">
       <div className="mb-[30px]">
-        <h1 className="uppercase"><span className="heading-h3">HOT PROPERTIES</span></h1>
+        <h1 className="uppercase">
+          <span className="heading-h3">HOT PROPERTIES</span>
+        </h1>
       </div>
-      {/* LEFT BUTTON
-            <button
-                onClick={() => swiperRef.current?.slidePrev()}
-                className="hidden md:block absolute left-2 top-1/2 -translate-y-1/2 z-10 cursor-pointer"
-            >
-                <div className="w-12 h-12 flex items-center justify-center
-                  bg-transparent text-black
-                  hover:bg-[#84cc16] hover:text-white
-                  transition-all duration-300
-                  [clip-path:polygon(0%_0%,80%_0%,100%_100%,20%_100%)]">
 
-                    <FaAngleLeft />
-                </div>
-            </button> */}
-
-      {/* RIGHT BUTTON
-            <button
-                onClick={() => swiperRef.current?.slideNext()}
-                className="hidden md:block absolute right-2 top-1/2 -translate-y-1/2 z-10 cursor-pointer"
-            >
-                <div className="w-12 h-12 flex items-center justify-center 
-                  bg-transparent text-black
-                  hover:bg-[#84cc16] hover:text-white
-                  transition-all duration-300
-                  [clip-path:polygon(20%_0%,100%_0%,80%_100%,0%_100%)]">
-
-                    <FaAngleRight />
-                </div>
-            </button> */}
-
-      {/* SWIPER */}
-      <Swiper
-        modules={[Autoplay]}
-        loop={true}
-        speed={7000}
-        autoplay={{
-          delay: 2000,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        onMouseEnter={() => { swiperRef.current?.autoplay?.stop() }}
-        onMouseLeave={() => swiperRef.current?.autoplay?.start()}
-        breakpoints={{
-          320: { slidesPerView: 1.2 },
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 5 },
-        }}
+      <button
+        type="button"
+        onClick={() => nudge(-1)}
+        className="hidden md:flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow cursor-pointer hover:bg-[#84cc16] hover:text-white transition-all duration-300"
       >
-        {newCards.map((item, index) => (
-          <SwiperSlide key={index} className="rounded-xl border border-gray-200 overflow-hidden ">
-            <ProjectsCrousal data={item} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <FaAngleLeft />
+      </button>
+
+      <button
+        type="button"
+        onClick={() => nudge(1)}
+        className="hidden md:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow cursor-pointer hover:bg-[#84cc16] hover:text-white transition-all duration-300"
+      >
+        <FaAngleRight />
+      </button>
+
+      <div
+        ref={wrapperRef}
+        onMouseEnter={pauseAutoplay}
+        onMouseLeave={() => resumeAutoplayAfterDelay(200)}
+        className="overflow-hidden"
+      >
+        <div ref={innerRef} className="flex gap-[16px] will-change-transform">
+          {loopedCards.map((item, index) => (
+            <div
+              key={index}
+              className="flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_20%] rounded-xl border border-gray-200 overflow-hidden shrink-0"
+            >
+              <ProjectsCrousal data={item} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

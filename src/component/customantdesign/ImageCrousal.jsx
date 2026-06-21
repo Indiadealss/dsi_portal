@@ -23,7 +23,7 @@ const ImageCrousal = () => {
         <h1 className="text-white text-2xl md:text-4xl lg:text-5xl font-semibold leading-snug max-w-3xl">
           <span className="text-white">Buy or sell your{" "}</span>
           <span className="text-lime-400">house</span> <span className="text-white">in few seconds with</span>
-          <span className="text-white"> Brandsdoor</span>
+          <span className="text-white">Indiadealsgroup</span>
         </h1>
 
         {/* Buttons */}

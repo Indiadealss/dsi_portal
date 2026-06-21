@@ -87,8 +87,8 @@ function App() {
 
         const usedetails = res.data.usedetails;
 
-        console.log(usedetails);
-        
+        console.log(usedetails,'hello');
+        console.log("Payload:", usedetails);
 
         dispatch(setUser({
           id: usedetails._id,
@@ -111,9 +111,12 @@ function App() {
     })
     .catch(err => {
       console.error(err);
-      dispatch(clearUser()); // ✅ FIX
     });
 }, [dispatch]);
+
+useEffect(() => {
+  console.log("Redux User State:", user);
+}, [user]);
 //hel
   
   let routes = useRoutes([

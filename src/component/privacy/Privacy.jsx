@@ -155,7 +155,7 @@ const SECTIONS = [
     content: {
       items: [
         "Our website or promotional materials may include links to third-party websites.",
-        "BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED is not responsible for the privacy practices, accuracy, or content of these external platforms.",
+        "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED is not responsible for the privacy practices, accuracy, or content of these external platforms.",
       ],
       outro: "Please review their privacy policies before interacting with them.",
     },
@@ -187,7 +187,7 @@ const SECTIONS = [
       intro:
         "For any questions, requests, or concerns regarding this Privacy Policy, please contact:",
       contact: {
-        company: "BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED",
+        company: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED",
         address: "Unit No. 337, TOWER C, GOLDEN I, TECHZONE 4, Greater Noida, 201009",
       },
     },
@@ -370,7 +370,7 @@ export default function Privacy() {
               Privacy Policy
             </h1>
             <p className="text-xs font-medium text-[#515151] text-justify" style={{ margin: 0, lineHeight: 1.3 }}>
-               BRANDSDOOR DIGITAL SERVICES PRIVATE LIMITED. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
+               INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
             </p>
             <p className="text-xs font-medium text-[#515151] text-justify mt-10 md:mt-0" style={{ margin: 0, lineHeight: 1.3 }}>
              By accessing or using our services, you acknowledge and agree to the terms described in this Privacy Policy.  

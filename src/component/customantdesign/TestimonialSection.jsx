@@ -15,7 +15,7 @@ const testimonials = [
     role: "CEO, HOUSE HUSBAND",
     image: jp,
     review:
-      "I had Brought plot with brandsdoor in ACE it was such a beautiful moment for me the service was amazing and the facility that they are providing i dont know is there anyone that are providing that such service in the market.",
+      "I had Brought plot with INDIADEALSGROUP in ACE it was such a beautiful moment for me the service was amazing and the facility that they are providing i dont know is there anyone that are providing that such service in the market.",
     rating: 4,
     project:
       "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
@@ -26,7 +26,7 @@ const testimonials = [
     role: "BUSINESSMAN",
     image: rahul,
     review:
-      "Brandsdoor helped me find the perfect property with complete transparency.",
+      "Indiadealsgroup helped me find the perfect property with complete transparency.",
     rating: 5,
     project:
       "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",

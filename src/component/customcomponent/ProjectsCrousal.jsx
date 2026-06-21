@@ -70,11 +70,14 @@ const capitalizeFirst = (str) => {
     <div className="relative rounded-lg m-1 overflow-hidden group">
 
   {/* Image */}
+  <Link
+        to={`/${createSlug(data)}`}
+        >
   <img
     src={data.img}
     alt="property"
     className="w-[-webkit-fill-available] h-[90vw] md:h-64 lg:h-[310px] object-cover   rounded-lg"
-  />
+  /></Link>
 
   {/* Price Badge */}
   <div className="absolute top-2 left-2 bg-black/40 backdrop-blur-md text-white text-sm font-semibold px-2 py-1 rounded shadow">

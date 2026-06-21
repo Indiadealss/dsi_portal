@@ -33,7 +33,7 @@ const initialState = {
     furnishing: "",
     propertyfacing: "",
     pobackup: "",
-    amenitie: new Set(),
+    amenitie: [],
     propertyfeature: [],
     Buldingfeature: [],
     addFeature: [],

@@ -176,7 +176,7 @@ const Sobharivana = () => {
          <Seo
               title='SOBHA RIVANA'
               description="SOBHA RIVANA GH-11B, Greater Noida W Rd, Sector 1, Bisrakh Jalalpur, Greater Noida, Uttar Pradesh 201306"
-              canonical={`https://www.brandsdoor.in/irish-platinum`}
+              canonical={`https://www.indiadealsgroup.com/irish-platinum`}
             />
       <section className="relative h-[90vh] min-h-[700px] w-full flex flex-col items-center justify-center text-white text-center px-4 overflow-hidden">
       {/* 1. Background Image with Dark Overlay */}

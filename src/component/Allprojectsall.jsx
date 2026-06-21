@@ -63,7 +63,7 @@ const Myindiadealss = () => {
                                     </div>
                                     <div className='w-[100%] bg-black py-5  left-0 h-screen overflow-y-auto'>
                                         <div className='mx-3'>
-                                            <Link to={`all_listings/ALL`}><span className='text-xs text-gray-500 font-medium'>My DOOR</span></Link>
+                                            <Link to={`all_listings/ALL`}><span className='text-xs text-gray-500 font-medium'>My INDIADEALS</span></Link>
                                         </div>
                                         <div className='bg-white/20 ms-5 mt-5 px-5'>
                                             <span className='text-xs text-center font-medium text-gray-500'>MANAGE PRODUCTS</span>
