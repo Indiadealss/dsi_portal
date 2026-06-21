@@ -146,18 +146,21 @@ const Home = () => {
       time: new Date(p.updatedAt).toLocaleDateString() || "N/A",
       devloper: p.projectdeveloper || '',
       owner: p.owner || "Owner",
+      hotScreen: p.hotScreen || false,
        };
     });
-    // // console.log(formattedData);
+    console.log(formattedData, 'formattedData is myth');
     
           
           setData((prev) => [...prev, ...formattedData])
+          if(res.status === 200 && res.totalPages !== page){
+            setPage(page + 1)
+          } 
           
       }catch(err){
           console.error(err);
       }finally{
-          setLoading(false);
-      }
+          setLoading(false);      }
       };
 
 

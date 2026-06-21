@@ -1,14 +1,12 @@
-import Image from "next/image";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { message, Modal } from "antd";
-import downloadPdf from "@/Images/pdbDownload.png";
-import { useRouter } from "next/navigation";
-import projectHomepage2 from "@/Images/project3.jpg";
+import downloadPdf from "../Images/pdbDownload.png";
+import projectHomepage2 from "../Images/project3.jpg";
 
 
-export default function Home() {
+export default function Hanumatviharawasiya() {
 
   const [open, setOpen] = useState(false);
 const [form, setForm] = useState({
@@ -180,7 +178,7 @@ const [form, setForm] = useState({
         {/* ABOUT SECTION */}
         <section className="py-20 px-0 lg:px-2" >
           <div className="lg:flex lg:justify-between flex-cols mx-1 lg:mx-1">
-            <Image
+            <img
               src={projectHomepage2}
               alt="Hanumat Vihar Awasiya Yojna (Vrindavan)"
               width={2000}
@@ -327,11 +325,11 @@ const [form, setForm] = useState({
         {/* rera,logo */}
         <section className="">
           <div className="flex flex-col md:flex-row justify-around">
-            <Image src={downloadPdf} alt="Plots in Vrindavan" className="text-white cursor-pointer mx-auto my-10 md:my-0 lg:mx-0 rounded w-[80vw] md:w-[25vw] font-bold " onClick={() => setOpen(true)} />
+            <img src={downloadPdf} alt="Plots in Vrindavan" className="text-white cursor-pointer mx-auto my-10 md:my-0 lg:mx-0 rounded w-[80vw] md:w-[25vw] font-bold " onClick={() => setOpen(true)} />
 
 
             {/* <div className="">
-              <Image src={reracertificate} alt="..." className="mx-auto" />
+              <img src={reracertificate} alt="..." className="mx-auto" />
             </div> */}
           </div>
         </section>

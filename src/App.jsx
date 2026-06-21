@@ -70,6 +70,7 @@ import PropertyDetailsPage from "./component/PropertyDetailsPage.jsx";
 import BrandsDoorPostProject from "./component/BrandsDoorPostProject.jsx";
 import ProjectListingStep1 from "./component/Projecttype.jsx";
 import Carrer from "./component/Carrer.jsx";
+import Hanumatviharawasiya from "./component/Hanumatviharawasiya.jsx";
 
 function App() {
 
@@ -129,6 +130,7 @@ function App() {
     {path:'/sobha-rivana',element:<Sobharivana />},
     {path:'/',},
     {path:'/careers',element:<Carrer />},
+    {path:'/hanumat-vihar-awasiya-yojna', element:<Hanumatviharawasiya />},
     {path:'/ace-hanei',element:<Acehanei />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},

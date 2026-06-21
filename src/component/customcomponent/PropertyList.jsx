@@ -12,8 +12,16 @@ const PropertyList = ({ properties }) => {
 
   console.log(properties, 'properties');
 
+  const propertyes = properties.filter((item) => {
+    return item.hotScreen === true;
+    
+  })
 
-  const newCards = properties.map((item) => {
+  console.log(propertyes, 'propertyes is filter');
+  
+
+
+  const newCards = propertyes.map((item) => {
     const covers = item.images?.filter(
       (img) => img.type === "cover"
     ) ?? [];
