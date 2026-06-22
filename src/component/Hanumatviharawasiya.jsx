@@ -4,6 +4,7 @@ import { useState } from "react";
 import { message, Modal } from "antd";
 import downloadPdf from "../Images/pdbDownload.png";
 import projectHomepage2 from "../Images/project3.jpg";
+import Seo from "./Seo";
 
 
 export default function Hanumatviharawasiya() {
@@ -154,6 +155,11 @@ const [form, setForm] = useState({
 
   return (
     <div className="min-h-screen">
+      <Seo
+              title='Hanumat Vihar Awasiya Yojna Plots Vrindavan, Mathura'
+              description="Hanumat Vihar Awasiya Yojna is a new residential project offers plots and Villas are located at Raal Road, Vrindavan, Mathura. Well connected to Noida, Delhi, Faridabad and Gurgaon."
+              canonical={`https://www.indiadealsgroup.com/hanumat-vihar-awasiya-yojna`}
+            />
       <div className="">
         <video
           autoPlay
