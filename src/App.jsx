@@ -71,6 +71,10 @@ import BrandsDoorPostProject from "./component/BrandsDoorPostProject.jsx";
 import ProjectListingStep1 from "./component/Projecttype.jsx";
 import Carrer from "./component/Carrer.jsx";
 import Hanumatviharawasiya from "./component/Hanumatviharawasiya.jsx";
+import Ourteam from "./component/Ourteam.jsx";
+import Itteam from "./component/Itteam.jsx";
+import Salesteam from "./component/Salesteam.jsx";
+import About from "./component/About.jsx";
 
 function App() {
 
@@ -134,6 +138,10 @@ useEffect(() => {
     {path:'/',},
     {path:'/careers',element:<Carrer />},
     {path:'/hanumat-vihar-awasiya-yojna', element:<Hanumatviharawasiya />},
+    {path:'/management-team', element:<Ourteam />},
+    {path:'/about-us', element:<About />},
+    {path:'/it-team', element:<Itteam />},
+    {path:'/sales-team', element:<Salesteam />},
     {path:'/ace-hanei',element:<Acehanei />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},

@@ -39,9 +39,7 @@ const Navbar = () => {
   const menuItems = [
   "Home",
   "About Us",
-  "Our Projects",
   "Our Team",
-  "Our Policy",
   "Contact Us",
   "Careers",
 ];
@@ -87,8 +85,6 @@ const handleLoginmobile = () => {
 const directLinks = [
   "Home",
   "About Us",
-  "Our Team",
-  "Our Policy",
   "Contact Us",
   "Careers",
 ];
@@ -118,36 +114,20 @@ const directLinks = [
     columns: [],
   },
 
-  "Our Projects": {
-    width: "w-[900px]",
+  "Our Team": {
+    width: "w-[300px]",
     columns: [
       {
-        title: "Residential Projects",
         active: true,
         links: [
-          <Link to="/projects/noida">Noida Projects</Link>,
-          <Link to="/projects/greater-noida">Greater Noida Projects</Link>,
-          <Link to="/projects/gurgaon">Gurgaon Projects</Link>,
-        ],
-      },
-
-      {
-        title: "Commercial Projects",
-        links: [
-          <Link to="/commercial/noida">Commercial Noida</Link>,
-          <Link to="/commercial/greater-noida">Commercial Greater Noida</Link>,
+          <Link to="/management-team" className="text-xl text-center">Management Team</Link>,
+          <Link to="/sales-team"  className="text-xl text-center">Sales Team</Link>,
+          <Link to="/it-team"  className="text-xl text-center">IT Team</Link>,
         ],
       },
     ],
   },
 
-  "Our Team": {
-    columns: [],
-  },
-
-  "Our Policy": {
-    columns: [],
-  },
 
   "Contact Us": {
     columns: [],
