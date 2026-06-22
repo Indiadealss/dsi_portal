@@ -712,7 +712,7 @@ function UnitTable({ unitData, propertyData }) {
 
 // ── Lead Form Sidebar ─────────────────────────────────────────────────────────
 function LeadForm({ owner, propertyData }) {
-  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", Email:"", Requirements:"", PhoneNumber: "", message: "" });
+  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", email:"", Requirements:"", PhoneNumber: "", message: "" });
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -760,7 +760,7 @@ function LeadForm({ owner, propertyData }) {
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
         </div>
         <div className="flex flex-col md:flex-row gap-3">
-          <input name="Email" value={form.Email} onChange={handleChange} placeholder="Email Id" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+          <input name="email" value={form.email} onChange={handleChange} placeholder="email Id" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
           <input name="requirements" value={form.Requirement} onChange={handleChange} placeholder="Requirements" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
         </div>
         <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"

@@ -134,7 +134,7 @@ const PropertyList = ({ properties }) => {
   };
 
   return (
-    <div className="relative mt-[100px]">
+    <div className="relative mt-[50px]">
       <div className="mb-[30px]">
         <h1 className="uppercase">
           <span className="heading-h3">HOT PROPERTIES</span>

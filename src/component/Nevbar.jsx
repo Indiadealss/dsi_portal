@@ -36,7 +36,15 @@ const Navbar = () => {
 
   const [showLogin, setShowLogin] = useState(false);
 
-  const menuItems = ["Home", "Residential", "Buy", "Rent", "Services", "Resources", "Blogs", ];
+  const menuItems = [
+  "Home",
+  "About Us",
+  "Our Projects",
+  "Our Team",
+  "Our Policy",
+  "Contact Us",
+  "Careers",
+];
   const [profileOpen, setProfileOpen] = useState(false);
 
   const {location} = useLocationContext();
@@ -76,6 +84,15 @@ const handleLoginmobile = () => {
   setMenuOpen(false);
 }
 
+const directLinks = [
+  "Home",
+  "About Us",
+  "Our Team",
+  "Our Policy",
+  "Contact Us",
+  "Careers",
+];
+
   const user = useSelector((state) => state.user);
   console.log(user,'user were not found why');
   
@@ -93,313 +110,52 @@ const handleLoginmobile = () => {
   )
 
   const megaMenuData = {
-
-    Home: {
-    width: "w-[650px]",
+  Home: {
     columns: [],
   },
-  Buy: {
-    width: "w-[1000px]",
-    columns: [
-      {
-        title: "Popular Choices",
-        active: true,
-        links: [
 
-          <Link to="/ready-to-move-property-in-noida-ffid-buy-noida-ready-to-move">
-            Ready to Move
-          </Link>,
-
-          <Link to="/owner-property-in-noida-ffid-buy-noida-owner">
-            Owner Properties
-          </Link>,
-
-          <Link to="/budget-homes-in-noida-ffid-buy-noida-budget">
-            Budget Homes
-          </Link>,
-
-          <Link to="/premium-homes-in-noida-ffid-buy-noida-premium">
-            Premium Homes
-          </Link>,
-
-          <Link to="/new-projects-in-noida-pidd">
-            New Projects
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Property Type",
-        links: [
-
-          <Link to="/buy-property-in-noida-ffid-buy-noida-flat">
-            Flats in Noida
-          </Link>,
-
-          <Link to="/house-for-sale-in-noida-ffid-buy-noida-house">
-            House for sale in Noida
-          </Link>,
-
-          <Link to="/villa-in-noida-ffid-buy-noida-villa">
-            Villa in Noida
-          </Link>,
-
-          <Link to="/plot-in-noida-ffid-buy-noida-plot">
-            Plot in Noida
-          </Link>,
-
-          <Link to="/office-space-in-noida-ffid-buy-noida-office">
-            Office Space in Noida
-          </Link>,
-
-          <Link to="/commercial-space-in-noida-ffid-buy-noida-commercial">
-            Commercial Space in Noida
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Budget",
-        links: [
-
-          <Link to="/property-under-50-lac-in-noida-ffid-buy-noida-under50lac">
-            Under ₹ 50 Lac
-          </Link>,
-
-          <Link to="/property-between-50lac-1cr-in-noida-ffid-buy-noida-50lac-1cr">
-            ₹ 50 Lac - ₹ 1 CR
-          </Link>,
-
-          <Link to="/property-between-1cr-1-5cr-in-noida-ffid-buy-noida-1cr-1-5cr">
-            ₹ 1 CR - ₹ 1.5 CR
-          </Link>,
-
-          <Link to="/property-above-1cr-in-noida-ffid-buy-noida-above1cr">
-            Above ₹ 1 CR
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Explore",
-        links: [
-
-          <Link to="/localities-in-noida-ffid-buy-noida-localities">
-            Localities in Noida
-          </Link>,
-
-          <Link to="/projects-in-noida-pidd">
-            Projects in Noida
-          </Link>,
-
-          <Link to="/find-agent-in-noida">
-            Find an Agent
-          </Link>,
-
-          <Link to="/home-interiors-in-noida">
-            Home interiors in Noida
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Buying Tools",
-        links: [
-
-          <Link to="/propworth">
-            PropWorth
-          </Link>,
-
-          <Link to="/rates-and-trends">
-            Rates & Trends
-          </Link>,
-
-          <Link to="/buy-vs-rent">
-            Buy vs Rent
-          </Link>,
-
-          <Link to="/buying-tips-guides">
-            Tips & Guides
-          </Link>,
-        ],
-      },
-    ],
+  "About Us": {
+    columns: [],
   },
 
-  Rent: {
+  "Our Projects": {
     width: "w-[900px]",
     columns: [
       {
-        title: "Popular Choices",
+        title: "Residential Projects",
         active: true,
         links: [
-
-          <Link to="/owner-rental-properties-in-noida-ffid-rent-noida-owner">
-            Owner Properties
-          </Link>,
-
-          <Link to="/verified-rental-properties-in-noida-ffid-rent-noida-verified">
-            Verified Properties
-          </Link>,
-
-          <Link to="/furnished-homes-in-noida-ffid-rent-noida-furnished">
-            Furnished Homes
-          </Link>,
-
-          <Link to="/bachelor-friendly-homes-in-noida-ffid-rent-noida-bachelor">
-            Bachelor Friendly Homes
-          </Link>,
-
-          <Link to="/immediately-available-homes-in-noida-ffid-rent-noida-immediate">
-            Immediately Available
-          </Link>,
+          <Link to="/projects/noida">Noida Projects</Link>,
+          <Link to="/projects/greater-noida">Greater Noida Projects</Link>,
+          <Link to="/projects/gurgaon">Gurgaon Projects</Link>,
         ],
       },
 
       {
-        title: "Property Type",
+        title: "Commercial Projects",
         links: [
-
-          <Link to="/flats-for-rent-in-noida-ffid-rent-noida-flat">
-            Flats for rent in Noida
-          </Link>,
-
-          <Link to="/house-for-rent-in-noida-ffid-rent-noida-house">
-            House for rent in Noida
-          </Link>,
-
-          <Link to="/villa-for-rent-in-noida-ffid-rent-noida-villa">
-            Villa for rent in Noida
-          </Link>,
-
-          <Link to="/pg-in-noida-ffid-rent-noida-pg">
-            PG in Noida
-          </Link>,
-
-          <Link to="/office-space-for-rent-in-noida-ffid-rent-noida-office">
-            Office Space in Noida
-          </Link>,
-
-          <Link to="/commercial-space-for-rent-in-noida-ffid-rent-noida-commercial">
-            Commercial Space in Noida
-          </Link>,
-
-          <Link to="/coliving-space-in-noida-ffid-rent-noida-coliving">
-            Coliving space in Noida
-          </Link>,
-
-          <Link to="/student-hostel-in-noida-ffid-rent-noida-hostel">
-            Student Hostel in Noida
-          </Link>,
-
-          <Link to="/luxury-pg-in-noida-ffid-rent-noida-luxury-pg">
-            Luxury PG in Noida
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Budget",
-        links: [
-
-          <Link to="/rent-property-under-10000-in-noida-ffid-rent-noida-under10k">
-            Under ₹ 10,000
-          </Link>,
-
-          <Link to="/rent-property-between-10k-15k-in-noida-ffid-rent-noida-10k-15k">
-            ₹ 10,000 - ₹ 15,000
-          </Link>,
-
-          <Link to="/rent-property-between-15k-25k-in-noida-ffid-rent-noida-15k-25k">
-            ₹ 15,000 - ₹ 25,000
-          </Link>,
-
-          <Link to="/rent-property-above-25k-in-noida-ffid-rent-noida-above25k">
-            Above ₹ 25,000
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Explore",
-        links: [
-
-          <Link to="/rent-localities-in-noida-ffid-rent-noida-localities">
-            Localities
-          </Link>,
-
-          <Link to="/buy-vs-rent">
-            Buy Vs Rent
-          </Link>,
-
-          <Link to="/find-agent-in-noida">
-            Find an Agent
-          </Link>,
-
-          <Link to="/share-requirement">
-            Share Requirement
-          </Link>,
+          <Link to="/commercial/noida">Commercial Noida</Link>,
+          <Link to="/commercial/greater-noida">Commercial Greater Noida</Link>,
         ],
       },
     ],
   },
 
-  Sell: {
-    width: "w-[650px]",
-    columns: [
-      {
-        title: "For Owner",
-        active: true,
-        links: [
-
-          <Link to="/post-property">
-            Post Property
-          </Link>,
-
-          <Link to="/mybrandsdoor">
-            My Dashboard
-          </Link>,
-        ],
-      },
-
-      {
-        title: "For Agent & Builder",
-        links: [
-
-          <Link to="/mybrandsdoor">
-            My Dashboard
-          </Link>,
-
-          <Link to="/responses">
-            Enquiries
-          </Link>,
-        ],
-      },
-
-      {
-        title: "Selling Tools",
-        links: [
-
-          <Link to="/property-valuation">
-            Property Valuation
-          </Link>,
-
-          <Link to="/find-agent-in-noida">
-            Find an Agent
-          </Link>,
-        ],
-      },
-    ],
-  },
-
-  Blogs: {
-    width: "w-[650px]",
+  "Our Team": {
     columns: [],
   },
-  Career: {
-    width: "w-[650px]",
+
+  "Our Policy": {
     columns: [],
-  }
+  },
+
+  "Contact Us": {
+    columns: [],
+  },
+
+  Careers: {
+    columns: [],
+  },
 };
 
 
@@ -541,17 +297,23 @@ const handleLoginmobile = () => {
             {Object.entries(megaMenuData).map(([menu, data]) => (
   <div key={menu} className="group relative">
 
-    {(menu === "Home" || menu === "Career" || menu === "Blogs") ? (
-      <Link
-        to={
-          menu === "Home"
-            ? "/"
-            : menu === "Career"
-            ? "/careers"
-            : "/blogs"
-        }
-        className="flex items-center gap-1 py-2 hover:text-blue-400"
-      >
+    {directLinks.includes(menu) ? (
+       <Link
+    to={
+      menu === "Home"
+        ? "/"
+        : menu === "About Us"
+        ? "/about-us"
+        : menu === "Our Team"
+        ? "/our-team"
+        : menu === "Our Policy"
+        ? "/our-policy"
+        : menu === "Contact Us"
+        ? "/contact-us"
+        : "/careers"
+    }
+    className="flex items-center gap-1 py-2 hover:text-blue-400"
+  >
         {menu}
       </Link>
     ) : (
@@ -667,49 +429,63 @@ const handleLoginmobile = () => {
           key={index}
           className="border-b border-gray-300"
         >
-          <button
-            onClick={() =>
-              setOpen(open === menu ? null : menu)
-            }
-            className="w-full flex items-center justify-between py-3 text-[14px] text-[#23364B]"
-          >
-            {menu}
+          {directLinks.includes(menu) ? (
+  <Link
+    to={
+      menu === "Home"
+        ? "/"
+        : menu === "About Us"
+        ? "/about-us"
+        : menu === "Our Team"
+        ? "/our-team"
+        : menu === "Our Policy"
+        ? "/our-policy"
+        : menu === "Contact Us"
+        ? "/contact-us"
+        : "/careers"
+    }
+    onClick={() => setMenuOpen(false)}
+    className="block py-3 text-[14px] text-[#23364B] border-b border-gray-300"
+  >
+    {menu}
+  </Link>
+) : (
+  <div className="border-b border-gray-300">
+    <button
+      onClick={() => setOpen(open === menu ? null : menu)}
+      className="w-full flex items-center justify-between py-3 text-[14px] text-[#23364B]"
+    >
+      {menu}
+      <FaChevronDown
+        size={11}
+        className={`transition-all duration-300 ${
+          open === menu ? "rotate-180" : ""
+        }`}
+      />
+    </button>
 
-            <FaChevronDown
-              size={11}
-              className={`transition-all duration-300 ${
-                open === menu ? "rotate-180" : ""
-              }`}
-            />
-          </button>
+    {open === menu && (
+      <div className="pb-3 pl-2">
+        {megaMenuData[menu]?.columns?.map((col, idx) => (
+          <div key={idx} className="mb-4">
+            <h4 className="text-[13px] font-semibold text-[#2F80ED] mb-2">
+              {col.title}
+            </h4>
 
-          {open === menu && (
-            <div className="pb-3 pl-2">
-
-              {megaMenuData[menu]?.columns?.map((col, idx) => (
-                <div key={idx} className="mb-4">
-
-                  <h4 className="text-[13px] font-semibold text-[#2F80ED] mb-2">
-                    {col.title}
-                  </h4>
-
-                  <ul className="space-y-2">
-                    {col.links?.map((link, i) => (
-                      <li
-                        key={i}
-                        className="text-[13px] text-gray-700"
-                      >
-                        {link}
-                      </li>
-                    ))}
-                  </ul>
-
-                </div>
+            <ul className="space-y-2">
+              {col.links?.map((link, i) => (
+                <li key={i} className="text-[13px] text-gray-700">
+                  {link}
+                </li>
               ))}
-
-            </div>
-          )}
-        </div>
+            </ul>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+)}
+          </div>
       ))}
 
     </div>
