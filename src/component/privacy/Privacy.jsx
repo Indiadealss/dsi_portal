@@ -370,7 +370,7 @@ export default function Privacy() {
               Privacy Policy
             </h1>
             <p className="text-xs font-medium text-[#515151] text-justify" style={{ margin: 0, lineHeight: 1.3 }}>
-               INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED. (“Company”, “we”, “our”, “us”) is committed to safeguarding your personal information and ensuring transparency in how your data is collected, used, and protected. This Privacy Policy explains our practices when you visit our website, engage with our real-estate services, submit enquiries, or interact with our sales team.
+               INDIADEALSGROUP 
             </p>
             <p className="text-xs font-medium text-[#515151] text-justify mt-10 md:mt-0" style={{ margin: 0, lineHeight: 1.3 }}>
              By accessing or using our services, you acknowledge and agree to the terms described in this Privacy Policy.  
