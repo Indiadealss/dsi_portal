@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { createLead, createLeadMessage } from "../../api/api";
+import React, { useEffect, useState } from "react";
+import { createLead, createLeadMessage, getAllProjectNames } from "../../api/api";
 import bgImage from "../../Images/contactbannerimage.jpg"; // background image
 import buildingImg from "../../Images/projectPhoto.jpg"; // small card image
 
@@ -25,6 +25,18 @@ const ContactglobalForm = () => {
     const [errors, setErrors] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [projectNames, setProjectNames] = useState([]);
+    const [projectList, setProjectList] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+
+    useEffect(() => {
+      const featchAllProjectNames = async () => {
+        const res = await getAllProjectNames()
+        setProjectNames(res.data.data)
+      }
+
+      featchAllProjectNames();
+    },[])
   
   
     const validate = () => {
@@ -46,9 +58,44 @@ const ContactglobalForm = () => {
       return newErrors;
     };
   
-    const handleChange = (e) => {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const [showSuggestions, setShowSuggestions] = useState(false);
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+
+  if (name === "projectname") {
+    setInputValue(value);
+
+    const filtered = projectNames.filter(
+      (project) =>
+        project.projectname
+          ?.toLowerCase()
+          .includes(value.toLowerCase()) ||
+        project.npxid
+          ?.toLowerCase()
+          .includes(value.toLowerCase())
+    );
+
+    setProjectList(filtered);
+    setShowSuggestions(true);
+  }
+};
+
+const handleSelectProject = (project) => {
+  setInputValue(project.projectname);
+  
+  setFormData((prev) => ({
+    ...prev,
+    projectname: project.projectname,
+  }));
+
+  setShowSuggestions(false);
+};
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -209,20 +256,39 @@ const ContactglobalForm = () => {
             </div>
 
             {/* Project */}
-            <div>
-              <label className="text-[#23364B] text-md font-medium">
-                Project
-              </label>
+            <div className="relative">
+  <label className="text-[#23364B] text-md font-medium">
+    Project
+  </label>
 
-             <input
-                type="text"
-                name="projectname"
-                value={formData.projectname}
-                onChange={handleChange}
-                placeholder="Enter the Project Name"
-                className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
-              />
-            </div>
+  <input
+    type="text"
+    name="projectname"
+    value={inputValue}
+    onChange={handleChange}
+    placeholder="Enter the Project Name"
+    className="w-full h-[40px] border border-gray-300 rounded-lg px-4 outline-none text-sm"
+  />
+
+  {showSuggestions && projectList.length > 0 && (
+    <div className="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+      {projectList.map((project) => (
+        <div
+          key={project.npxid}
+          onClick={() => handleSelectProject(project)}
+          className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+        >
+          <div className="font-medium">
+            {project.projectname}
+          </div>
+          <div className="text-xs text-gray-500">
+            {project.npxid}
+          </div>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
 
             <div>
               <label className="text-[#23364B] text-md font-medium">

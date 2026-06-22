@@ -712,7 +712,7 @@ function UnitTable({ unitData, propertyData }) {
 
 // ── Lead Form Sidebar ─────────────────────────────────────────────────────────
 function LeadForm({ owner, propertyData }) {
-  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", PhoneNumber: "", message: "" });
+  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", Email:"", Requirements:"", PhoneNumber: "", message: "" });
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -756,16 +756,16 @@ function LeadForm({ owner, propertyData }) {
         <div className="flex flex-col md:flex-row gap-3">
           <input name="Name" value={form.Name} onChange={handleChange} placeholder="Name"
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
-          <input name="PhoneNumber" value={form.PhoneNumber} onChange={handleChange} placeholder="Mobile No."
+          <input name="PhoneNumber" value={form.PhoneNumber} onChange={handleChange} minLength={10} maxLength={10} placeholder="Mobile No."
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
         </div>
         <div className="flex flex-col md:flex-row gap-3">
-          <input name="Email Id" value={form.Name} onChange={handleChange} placeholder="Email Id" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
-          <input name="requirements" value={form.requirement} onChange={handleChange} placeholder="Requirements" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+          <input name="Email" value={form.Email} onChange={handleChange} placeholder="Email Id" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+          <input name="requirements" value={form.Requirement} onChange={handleChange} placeholder="Requirements" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
         </div>
         <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"
           rows={3} className="bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all resize-none" />
-        <div className="flex gap-3 mt-1">
+        {/* <div className="flex gap-3 mt-1">
           <button onClick={handleSubmit}
             className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue .color-blue text-white text-sm font-semibold py-2.5 rounded-md transition-all">
             <Calendar size={15} /> Schedule a Visit
@@ -774,7 +774,13 @@ function LeadForm({ owner, propertyData }) {
             className="cursor-pointer flex-1 flex items-center justify-center gap-2 text-white border-2 bg-blue text-blue-600 text-sm font-semibold py-2.5 rounded-md hover:bg-blue-50 transition-all">
             <Phone size={15} /> Call Now
           </a>
-        </div>
+        </div> */}
+
+          <button onClick={handleSubmit}
+            className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue  text-white text-sm font-semibold py-2.5 rounded-md transition-all">
+            Submit
+          </button>
+
       </div>
     </div>
   );
