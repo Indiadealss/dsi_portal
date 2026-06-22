@@ -379,7 +379,7 @@ export default function Termsconditions() {
              Terms & Conditions
             </h1>
             <p className="text-xs font-medium text-[#515151] text-justify" style={{ margin: 0, lineHeight: 1.3 }}>
-              Welcome to INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED (“Company”, “we”, “our”, “us”). These Terms & Conditions govern your use of our website, mobile application, services, property listings, promotional activities, and any interactions with our sales team or channel partners (“Platform”).
+              Welcome to INDIADEALSGROUP
             </p>
             <p className="text-xs font-medium text-[#515151] text-justify mt-10 md:mt-0" style={{ margin: 0, lineHeight: 1.3 }}>
              By accessing or using any part of our Platform, you agree to be bound by these Terms. If you disagree with any part of these Terms, you should discontinue use of our services.  
