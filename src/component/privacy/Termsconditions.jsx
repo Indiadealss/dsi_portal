@@ -22,7 +22,7 @@ const SECTIONS = [
     id: "Services Provided",
     title: "Services Provided",
     content: {
-      intro: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED. provides:",
+      intro: "DSI INDIADEALSS PRIVATE LIMITED. provides:",
       items: [
         "Real estate advisory services",
         "Property listings and project information",
@@ -109,7 +109,7 @@ const SECTIONS = [
     id: "intellectual-property-rights",
     title: " Intellectual Property Rights",
     content: {
-      intro: "All content on our Platform—including text, images, logos, graphics, brochures, and materials—is the exclusive property of INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED ",
+      intro: "All content on our Platform—including text, images, logos, graphics, brochures, and materials—is the exclusive property of DSI INDIADEALSS PRIVATE LIMITED ",
       items: [
             "Copy",
             "Reproduce",
@@ -125,7 +125,7 @@ const SECTIONS = [
     id: "limitation-of-liability",
     title: "Limitation of Liability",
     content: {
-      intro: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED is not liable for:",
+      intro: "DSI INDIADEALSS PRIVATE LIMITED is not liable for:",
       items: [
         "Losses arising from reliance on property information",
         "Errors or inaccuracies in developer-provided details",
@@ -196,7 +196,7 @@ const SECTIONS = [
       intro:
         "For any questions, requests, or concerns regarding this Privacy Policy, please contact:",
       contact: {
-        company: "INDIADEALSGROUP DIGITAL SERVICES PRIVATE LIMITED",
+        company: "DSI INDIADEALSS PRIVATE LIMITED",
         address: "Unit No. 320, TOWER C, GOLDEN I, TECHZONE 4, Greater Noida, 201009",
       },
     },
