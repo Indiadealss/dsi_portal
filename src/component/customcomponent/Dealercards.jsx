@@ -3,7 +3,7 @@ import { getCampain } from "../../api/api";
 
 const dealers = [
   {
-    name: "INDIADEALSGROUP",
+    name: "INDIADEALS GROUP",
     logo: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/299496974O-1622789292915.jpeg",
     video: "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/299496974O-1622789292915.jpeg",
     reranumber:'',

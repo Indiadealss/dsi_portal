@@ -40,8 +40,8 @@ const Navbar = () => {
   "Home",
   "About Us",
   "Our Team",
-  "Contact Us",
   "Careers",
+  "Contact Us",
 ];
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -127,13 +127,11 @@ const directLinks = [
       },
     ],
   },
-
-
-  "Contact Us": {
+  Careers: {
     columns: [],
   },
-
-  Careers: {
+  
+  "Contact Us": {
     columns: [],
   },
 };
@@ -167,7 +165,6 @@ const directLinks = [
           {/* Logo */}
             <a
         href="/"
-        
         style={{
           display: "inline-flex",
           alignItems: "center",
@@ -286,10 +283,10 @@ const directLinks = [
         ? "/about-us"
         : menu === "Our Team"
         ? "/our-team"
-        : menu === "Our Policy"
-        ? "/our-policy"
         : menu === "Contact Us"
         ? "/contact-us"
+        : menu === "Our Policy"
+        ? "/our-policy"
         : "/careers"
     }
     className="flex items-center gap-1 py-2 hover:text-blue-400"

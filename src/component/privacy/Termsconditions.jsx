@@ -379,7 +379,7 @@ export default function Termsconditions() {
              Terms & Conditions
             </h1>
             <p className="text-xs font-medium text-[#515151] text-justify" style={{ margin: 0, lineHeight: 1.3 }}>
-              Welcome to INDIADEALSGROUP
+              Welcome to INDIADEALS GROUP
             </p>
             <p className="text-xs font-medium text-[#515151] text-justify mt-10 md:mt-0" style={{ margin: 0, lineHeight: 1.3 }}>
              By accessing or using any part of our Platform, you agree to be bound by these Terms. If you disagree with any part of these Terms, you should discontinue use of our services.  
@@ -449,7 +449,7 @@ export default function Termsconditions() {
                   <p style={{ margin: 0, fontWeight: 700, fontSize: "13.5px", color: "#1F2937" }}>Important</p>
                 </div>
                 <p style={{ margin: 0, fontSize: "12.5px", color: "#6B7280", lineHeight: 1.7 }}>
-                  By using Indiadealsgroup, you agree to these terms and condition.
+                  By using Indiadeals group, you agree to these terms and condition.
                 </p>
               </div>
             </aside>

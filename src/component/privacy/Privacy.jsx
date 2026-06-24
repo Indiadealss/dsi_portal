@@ -370,7 +370,7 @@ export default function Privacy() {
               Privacy Policy
             </h1>
             <p className="text-xs font-medium text-[#515151] text-justify" style={{ margin: 0, lineHeight: 1.3 }}>
-               INDIADEALSGROUP 
+               INDIADEALS GROUP 
             </p>
             <p className="text-xs font-medium text-[#515151] text-justify mt-10 md:mt-0" style={{ margin: 0, lineHeight: 1.3 }}>
              By accessing or using our services, you acknowledge and agree to the terms described in this Privacy Policy.  

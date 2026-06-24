@@ -95,7 +95,7 @@ export default function Footer() {
           </p>
 
           <p className="text-[#d8d8d8] text-[10px]">
-            Made with ❤️ Indiadealsgroup
+            Made with ❤️ Indiadeals group
           </p>
         </div>
       </div>

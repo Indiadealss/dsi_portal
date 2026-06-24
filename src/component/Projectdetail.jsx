@@ -501,7 +501,7 @@ try {
   return (
     <>
       <Seo
-        title={`${propertys?.projecttitle || "INDIADEALSGROUP"}`}
+        title={`${propertys?.projecttitle || "INDIADEALS GROUP"}`}
         description={
           propertys?.titleDescription
             ? propertys.titleDescription

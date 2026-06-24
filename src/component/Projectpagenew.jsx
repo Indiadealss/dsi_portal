@@ -865,7 +865,7 @@ export default function PropertyDetailPage() {
   return (
     <div className=" min-h-screen ">
       <Seo
-        title={`${d?.projecttitle || "INDIADEALSGROUP"}`}
+        title={`${d?.projecttitle || "INDIADEALS GROUP"}`}
         description={
           d?.titleDescription
             ? d.titleDescription

@@ -226,7 +226,7 @@ console.log(residential, 'residential');
     <div>
       <Seo
               title='Residential and Commercial properties in India, Flats, Plots, Villas, Apartments'
-              description="Indiadealsgroup offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
+              description="Indiadeals group offers to Buy, Sale, Lease and Rent Residential and Commercial Properties Like Flats, Plots, Villas, Apartments and Commercial Office Spaces, Shops & Industries Plots in India."
               canonical={`https://www.indiadealsgroup.com/`}
             />
       <div className='block'>
