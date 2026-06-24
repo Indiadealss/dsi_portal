@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import Unitsavailble from "./customcomponent/Unitsavailble";
 import { useDispatch } from "react-redux";
 import { setProperty } from "./Redux/propertyidSlice";
+import Seo from "./Seo";
 
 
 
@@ -750,6 +751,7 @@ function LeadForm({ owner, propertyData }) {
 
   return (
     <div className="bg-blue-50 rounded-md p-6 border border-blue-100">
+      
       <h3 className="font-bold text-gray-800 text-base mb-1">Interested In This Property?</h3>
       <p className="text-xs text-gray-500 mb-4">Fill in your details and our expert will get in touch with you shortly.</p>
       <div className="flex flex-col gap-3">
@@ -862,6 +864,19 @@ export default function PropertyDetailPage() {
   const d = propertyData;
   return (
     <div className=" min-h-screen ">
+      <Seo
+        title={`${d?.projecttitle || "INDIADEALSGROUP"}`}
+        description={
+          d?.titleDescription
+            ? d.titleDescription
+            : "Explore premium residential and commercial projects in India."
+        }
+        canonical={
+          slug
+            ? `https://www.indiadealsgroup.com/project/${slug}`
+            : null
+        }
+      />
       <div className="w-full md:max-w-[1300px] mx-auto  py-4 px-4 lg:px-0">
         {/* Breadcrumb */}
         <nav className="text-[12px] curdor-default text-gray-500 mb-4 flex items-center gap-1 flex-wrap font-medium">

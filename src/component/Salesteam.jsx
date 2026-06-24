@@ -4,6 +4,9 @@ import Ravie from '../Images/RAVIE-SIR.jpg';
 import Ajit from '../Images/AJIT-SIR.jpg'
 import Mehak from '../Images/MehakShukla.jpg';
 import saurabh from '../Images/saurabh-freelincer.jpg'
+import pushkar from '../Images/puskar.png';
+import Gulnar from '../Images/gulnar-1.png';
+import Shilpy from '../Images/shilpy.png';
 
 const Salesteam = () => {
 
@@ -38,22 +41,39 @@ const Salesteam = () => {
 
         },
         {
+            id: 5,
+            name: "Puskar Sniha",
+            role: "Assistant Manager-sales",
+            image: pushkar,
+            linkedin: "#"
+        },
+        {
             id: 7,
             name: "Mahak Shukla",
             role: "Sales coordinator",
             image: Mehak,
             linkedin: "#"
         },
+        {
+            id: 8,
+            name: "Gulnar Farheen",
+            role: "Sales coordinator",
+            image: Gulnar,
+            linkedin: "#"
+        },
+        {
+            id: 9,
+            name: "Shilpy",
+            role: "Sales coordinator",
+            image: Shilpy,
+            linkedin: "#"
+        },
     ];
     return (
         <div>
             {/* HERO SECTION */}
-
-
             {/* our team our streanth */}
             <div className=''>
-
-
                 <div className='p-0 md:p-10 bg-opacity-0'>
                     <div className='mx-auto'>
                         <h1 className='text-center mt-10 font-bold text-[#313036] text-xl text-4xl uppercase'>Sales Team</h1>
