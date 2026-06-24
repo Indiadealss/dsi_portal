@@ -35,6 +35,7 @@ import IndiadealsSection from './customantdesign/IndiadealsSection';
 import ContactglobalForm from './customantdesign/ContactglobalForm';
 import CitySection from './customantdesign/Citysection';
 import TestimonialSection from './customantdesign/TestimonialSection';
+import Newlaunch from './customcomponent/Newlaunch';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -253,6 +254,7 @@ console.log(residential, 'residential');
           mx-auto'>
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
+        <Newlaunch properties={data} />
         <CategoriesProperties />
         {/* <IndiadealsSection /> */}
         
