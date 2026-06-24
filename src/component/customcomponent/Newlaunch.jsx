@@ -11,10 +11,10 @@ const Newlaunch = ({ properties }) => {
         propertyes = properties.filter((item) => item.availabestatus === 'New Launch' || properties.filter((item) => item.hotScreen === true));
     }
     else{
-        propertyes = properties.filter((item) => item.hotScreen === true);
+        propertyes = properties.filter((item) => item.hotScreen === false);
     }
 
-  const newCards = propertyes.map((item) => {
+    const newCards = propertyes.map((item) => {
     const covers = item.images?.filter((img) => img.type === "cover") ?? [];
     const coverImages = covers.length
       ? covers
