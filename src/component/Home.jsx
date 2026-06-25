@@ -36,6 +36,7 @@ import ContactglobalForm from './customantdesign/ContactglobalForm';
 import CitySection from './customantdesign/Citysection';
 import TestimonialSection from './customantdesign/TestimonialSection';
 import Newlaunch from './customcomponent/Newlaunch';
+import Blogone from './Blogone';
 const Home = () => {
 
    const [hideBanner, setHideBanner] = useState(false);
@@ -256,6 +257,9 @@ console.log(residential, 'residential');
         <PropertyList properties={data} />
         <Newlaunch properties={data} />
         <CategoriesProperties />
+        <div className='mt-[5vw] mb-[15vw]'>
+        <Blogone />
+        </div>
         {/* <IndiadealsSection /> */}
         
       </div>

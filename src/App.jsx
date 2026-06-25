@@ -75,6 +75,8 @@ import Ourteam from "./component/Ourteam.jsx";
 import Itteam from "./component/Itteam.jsx";
 import Salesteam from "./component/Salesteam.jsx";
 import About from "./component/About.jsx";
+import Mydashboard from "./component/Mydashboard.jsx";
+import Noidavsgraternoida from "./component/Noidavsgraternoida.jsx";
 
 function App() {
 
@@ -140,6 +142,7 @@ useEffect(() => {
     {path:'/hanumat-vihar-awasiya-yojna', element:<Hanumatviharawasiya />},
     {path:'/management-team', element:<Ourteam />},
     {path:'/about-us', element:<About />},
+    {path:'/myDashboard',element:<Mydashboard />},
     {path:'/it-team', element:<Itteam />},
     {path:'/sales-team', element:<Salesteam />},
     {path:'/ace-hanei',element:<Acehanei />},
@@ -159,6 +162,13 @@ useEffect(() => {
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
     { path:"/edit-property/:id", element:<EditPropertyStepper /> },
+    {
+      path:"/articles",
+      children:[
+        { path:'noida-vs-noida-extension-comparison',element:<Noidavsgraternoida />},
+        { path: 'noida-vs-greater-noida', element:<Noidavsgraternoida />}
+      ]
+    },
     {
   path: "/myindiadeals",
   element: <MyIndiadeals />,
