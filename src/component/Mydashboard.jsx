@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
+import { lead } from "../api/api";
+import { useSelector } from "react-redux";
+import MyListings from "./MyListings";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -109,8 +112,6 @@ export default function Mydashboard() {
  
   const [activeNav,     setActiveNav]     = useState("dashboard");
   const [sidebarOpen,   setSidebarOpen]   = useState(false);
-  
-
 
 
 
@@ -213,6 +214,7 @@ export default function Mydashboard() {
         </aside>
 
           {activeNav === "dashboard" && <Dashboard />}
+          {activeNav === "listings" && <MyListings />}
         
       </div>
     </>

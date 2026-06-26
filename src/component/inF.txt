@@ -1,0 +1,40 @@
+{/* dashboard */}
+
+{/* Performance Summary */}
+            <div className={`card${visible ? " fade-up" : ""}`} style={{ padding: 20 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 16 }}>Performance Summary (This Month)</h2>
+              <div className="perf-grid">
+                {loading
+                  ? Array(5).fill(0).map((_, i) => (
+                    <div key={i} className="card" style={{ padding: 14 }}>
+                      <Skeleton w={28} h={28} r={14} mb={10} /><Skeleton h={10} mb={6} /><Skeleton h={22} w="60%" />
+                    </div>
+                  ))
+                  : PERF_CONFIG.map(({ key, label, icon, iconColor }) => (
+                    <div key={key} className="card" style={{ padding: "14px 16px", display: "flex", flexDirection: "column", gap: 6 }}>
+                      {/* icon & label: static */}
+                      <Icon name={icon} size={22} color={iconColor} />
+                      <div style={{ fontSize: 12, color: "#64748B" }}>{label}</div>
+                      {/* value: from backend */}
+                      <div style={{ fontSize: 22, fontWeight: 700, color: "#0F172A" }}>{data?.performance?.[key] ?? "—"}</div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
+
+            {/* Quick Actions — fully static */}
+            <div className={`card${visible ? " fade-up" : ""}`} style={{ padding: 20 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 14 }}>Quick Actions</h2>
+              <div className="qa-grid">
+                {QUICK_ACTIONS.map(({ label, icon, color }) => (
+                  <button key={label} className="qa-btn" style={{ border: "1px solid #E5E7EB", borderRadius: 10, background: "#fff", height: 90, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, cursor: "pointer", fontSize: 11, fontWeight: 500, color: "#374151", transition: "transform .18s, box-shadow .18s" }}>
+                    <div style={{ width: 36, height: 36, borderRadius: "50%", background: `${color}18`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <Icon name={icon} size={18} color={color} />
+                    </div>
+                    <span style={{ textAlign: "center", lineHeight: 1.3 }}>{label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>

@@ -7,6 +7,8 @@ import saurabh from '../Images/saurabh-freelincer.jpg'
 import pushkar from '../Images/puskar.png';
 import Gulnar from '../Images/gulnar-1.png';
 import Shilpy from '../Images/shilpy.png';
+import Anshika from '../Images/Anshika-Rai.png'
+import pankaj from '../Images/pankaj.png'
 
 const Salesteam = () => {
 
@@ -32,12 +34,12 @@ const Salesteam = () => {
             image: rohitBhia,
             linkedin: "#"
         },
-        
+
         {
-            id:6,
-            name:"Saurabh Kumar",
+            id: 6,
+            name: "Saurabh Kumar",
             role: "Assistant Manager-Sales",
-            image:saurabh,
+            image: saurabh,
 
         },
         {
@@ -48,21 +50,35 @@ const Salesteam = () => {
             linkedin: "#"
         },
         {
+            id: 11,
+            name: "Pankaj Panday",
+            role: "Assistant Manager-sales",
+            image: pankaj,
+            linkedin: "#"
+        },
+        {
             id: 7,
+            name: "Anshika Rai",
+            role: "Sales corrdinator",
+            image: Anshika,
+            linkedin: "#"
+        },
+        {
+            id: 8,
             name: "Mahak Shukla",
             role: "Sales coordinator",
             image: Mehak,
             linkedin: "#"
         },
         {
-            id: 8,
+            id: 9,
             name: "Gulnar Farheen",
             role: "Sales coordinator",
             image: Gulnar,
             linkedin: "#"
         },
         {
-            id: 9,
+            id: 10,
             name: "Shilpy",
             role: "Sales coordinator",
             image: Shilpy,
@@ -79,7 +95,7 @@ const Salesteam = () => {
                         <h1 className='text-center mt-10 font-bold text-[#313036] text-xl text-4xl uppercase'>Sales Team</h1>
                         <div className='mx-auto w-10 border mt-3'></div>
                     </div>
-                    
+
                     <section className="p-0 m-0 md:py-20 md:px-20">
                         <div className="md:flex md:flex-wrap justify-center gap-6">
 
@@ -90,12 +106,11 @@ const Salesteam = () => {
                                     className="bg-white rounded-xl shadow-md mx-auto my-4  relative w-[80%] md:w-[23%]"
                                 >
 
-                                    <div className="relative w-full h-[440px] md:h-[300px] 2xl:h-[400px]">
+                                    <div className="relative w-full h-[440px] md:h-[300px] 2xl:h-[400px] bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden">
                                         <img
                                             src={member.image}
                                             alt={member.name}
-                                            fill
-                                            className="object-contain rounded-xl"
+                                            className="max-w-full max-h-full object-cover"
                                         />
                                     </div>
 
