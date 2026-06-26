@@ -76,6 +76,8 @@ import Itteam from "./component/Itteam.jsx";
 import Salesteam from "./component/Salesteam.jsx";
 import About from "./component/About.jsx";
 import Mydashboard from "./component/Mydashboard.jsx";
+import Yamunagreencity from "./component/Yamunagreencity.jsx";
+import Noidavsnoidaextention from "./component/Noidavsnoidaextention.jsx";
 import Noidavsgraternoida from "./component/Noidavsgraternoida.jsx";
 
 function App() {
@@ -165,7 +167,8 @@ useEffect(() => {
     {
       path:"/articles",
       children:[
-        { path:'noida-vs-noida-extension-comparison',element:<Noidavsgraternoida />},
+        { path:'noida-vs-noida-extension-comparison',element:<Noidavsnoidaextention />},
+        { path: 'yamuna-expressway-buy-the-dream-today', element:<Yamunagreencity />},
         { path: 'noida-vs-greater-noida', element:<Noidavsgraternoida />}
       ]
     },

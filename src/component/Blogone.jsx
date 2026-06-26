@@ -12,9 +12,16 @@ const articles = [
   },
   {
     id: 2,
-    title: "Noida vs. Greater Noida: Which One is Right for You?",
+    title: "Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow",
     date: "Feb 24, 2022",
-    img: "https://images.unsplash.com/photo-1487875961445-47a00398c267?w=200&q=80",
+    img: " https://d3eoh63gynpjzh.cloudfront.net/1769256244053-Ace%20153%20imag.jpg",
+    link: '/articles/yamuna-expressway-buy-the-dream-today'
+  },
+  {
+    id: 3,
+    title: "Noida vs. Greater Noida: Which One is Right for You?",
+    date: "Jun 26 2026",
+    img:'https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776427218293-amenities-external-1.jpg',
     link: '/articles/noida-vs-greater-noida'
   }
 ];

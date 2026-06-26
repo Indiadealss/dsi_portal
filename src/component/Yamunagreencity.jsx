@@ -1,170 +1,168 @@
 import React, { useState, useEffect, useRef } from "react";
-import NoidaExtention from "../Images/NoidavsGraterNoida.png";
-import { Link } from "react-router-dom";
+import NoidaExtention from "../Images/yamuna.png";
 import Seo from "./Seo";
 
 // ── BLOG CONTENT ─────────────────────────────────────────────────────────────
 const blog = [
     {
     type: "h2",
-    text: "Noida vs. Greater Noida: Which One is Right for You?",
+    text: "Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow  ",
   },
   {
     type: "p",
-    text: "Choosing where to buy your dream home is a huge milestone, and naturally it feels like one of the biggest decisions you have ever made. Buying a home is a symbol of your hard work, dedication and success.",
+    text: "When we look at the real estate landscape of the Delhi-NCR, it is impossible to ignore how the biggest and most expensive real estate markets of today, were once sparsely populated outskirts of the city.",
   },
   {
     type: "p",
-    text: "If you are looking at various areas of NCR, to narrow down your search radius, we are here to help!",
+    text: "Years ago, early believers of the Noida and Gurugram expansion plans, believed in the vision that these wide, empty roads and blueprint layouts will turn into bustling hubs of commerce, institutions, people and culture.",
   },
   {
     type: "p",
-    text: `Two of the most happening and in-demand markets of NCR are Noida and Greater Noida. If you are confused between the two, read on to find out which one is right for you!`,
+    text: `And it is the brave who are favoured by fortune. Today, those very tracts of land, villas and flats have become premium urban homes, whose property values have multiplied exponentially.`,
   },
   {
     type: "p",
-    text: "Noida and Greater Noida are named similarly, share a boundary, and have a down-to-earth vibe, but they offer distinctly different lifestyles.Don’t worry, neither choice is 'wrong', it all just depends on your rhythm of life.",
+    text: "Now, a new frontier is taking shape. This new frontier is the Yamuna Expressway and the YEIDA region.",
   },
   {
     type: "p",
-    text:"Let’s discuss how Noida and Greater Noida are different, and how they cater to different needs and lifestyles."
+    text: "The Yamuna Expressway and the YEIDA (Yamuna Expressway Industrial Development Authority) region is another chance of being an early investor, and taking the leap. For homebuyers and investors alike, buying real estate in YEIDA today is about locking in exceptional value before the market transitions into its inevitable phase of premium pricing. ACE TERRA, TS-02/A, Plot No- P5 & P6, Yamuna Expy, Sector 22D, Greater Noida.",
   },
   {
     type: "h2",
-    id: "Noida",
-    text: "Noida",
+    id: "Present-Day YEIDA",
+    text: "Present-Day YEIDA: A Living, Connected Suburban Oasis",
   },
   {
     type: "p",
-    text: "Ahh, Noida. The Vibrant, Connected Urban Hub! Noida feels like a seamless extension of Delhi itself, and if you love the high-energy, fast-paced dynamism of city life, look no further! Noida is a mature, highly developed urban market that welcomes everyone with open arms.",
+    text: "Unlike traditional long-term real estate bets, the Yamuna Expressway region is already an active, functional corridor. It is no longer, just a stretch of highway; it is a budding ecosystem where families are already moving into completed, master-planned townships.",
   },
   {
     type: "h2",
-    id: "superior-metro-transit",
-    text: "Superior Metro Transit",
+    id: "World-Class",
+    text: "World-Class Connectivity",
   },
   {
     type: "p",
-    text: "Noida’s biggest edge is its dense metro network. Depending on the sector, you have immediate access to the Blue Line - connecting you straight to Delhi, Ghaziabad, Gurgaon and Faridabad; or the Aqua Line linking you to the vast expanse of Central Noida and Greater Noida.",
+    text: "The 165-kilometer, 6-lane Yamuna Expressway ensures a flawless driving experience, seamlessly connecting the region to Greater Noida, Noida, and Delhi.",
   },
   {
     type: "h2",
-    id: "Lifestyle-Paradise",
-    text: "A Retail and Lifestyle Paradise.",
+    id: "Proximity-Job-Hubs",
+    text: "Proximity to Job Hubs",
   },
   {
     type: "p",
-    text: "From massive shopping malls like the DLF Mall of India to grand high-street showrooms and bustling local markets, Noida is built for convenience and entertainment!",
+    text: "The YEIDA corridor sits right next to the massive industrial and corporate sectors of Greater Noida. Living here allows professionals to enjoy a peaceful, congestion-free suburban lifestyle while keeping their offices a short drive away.",
+  },
+  {
+    type: "p",
+    text: "Massive capital inflows from MNCs, manufacturing conglomerates, tech giants, and mega-projects like the upcoming Film City are also establishing a permanent, high-income employment base.",
   },
   {
     type: "h2",
-    id: "Options-Across-All-Budgets",
-    text: "Options Across All Budgets",
+    id: "Serene-Green-Living",
+    text: "Serene, Green Living"
   },
   {
     type: "p",
-    text: "Whether you are looking for a humble studio apartment, a farmhouse, a family villa or an ultra-luxury duplex, Noida’s real estate span accommodates every price point and residential need.",
+    text: "The YEIDA-Yamuna Expressway region has been meticulously planned with modern, urban guidelines. This includes thoughtfully included green belts, tree-covered and forested areas. Residents enjoy open spaces, fresh air, and a tranquil, low-density environment. ACE ACREVILLE, TS-01, Yamuna Expy, Gautam Budh Nagar, Sector-22A, Greater Noida,"
   },
   {
     type: "h2",
-    id: "Greater-Noida",
-    text: "Greater Noida",
+    id: "Noida-Airport-Right-At-Your-Door",
+    text: "Noida Airport Right At Your Door"
   },
   {
     type: "p",
-    text: "On the other end of the stunning and modern Noida-Greater Noida Expressway sits Greater Noida.",
-  },
-  {
-    type: "p",
-    text: "Greater Noida seems a little far, but is worth the drive! It trades in the urban hustle for beautifully planned, charming suburban neighbourhoods. The area is a fantastic place for young bachelors starting a new chapter and families looking to put down roots.",
-  },
-  {
-    type: "h2",
-    id:"Wider-Roads-and-Greener-Horizons",
-    text: "Wider Roads and Greener Horizons"
-  },
-  {
-    type:"p",
-    text: "Greater Noida is less populated than Noida and other pockets of NCR, and you are greeted with sprawling layouts, massive parks, wide roads, and significantly less traffic congestion. Even homes here are generally much more spacious."
+    text: "The true value anchor of the YEIDA-Yamuna Expressway region is the Noida International Airport at Jewar. The presence of a global aviation hub completely reshapes local real estate, bringing the corridor into the same league as the premium zones surrounding Delhi-Gurgaon’s IGI Airport."
   },
   {
     type:"h2",
-    id:"A-Thriving-Corporate-Base",
-    text:"A Thriving Corporate Base"
+    id:"The-Future-Evolution",
+    text: "The Future? Evolution into an Upscale Residential Pocket!"
+  },
+  {
+    type: "p",
+    text:"The next few years will see a dramatic shift in the real estate profile of the Yamuna Expressway. A plethora of luxury residential projects, featuring premium low-density configurations, grand clubhouses, resort-like amenities, and smart-home facilities, are currently under construction and set for completion in the upcoming years."
   },
   {
     type:"p",
-    text:"Greater Noida has quietly transformed into a massive industrial and commercial employment hub. It is home to global manufacturing and tech giants like LG, Infosys, Vivo, Samsung and many more. Living here means you can cut your daily commute down to minutes!"
+    text: "As these premium towers and plotted communities cross the finish line, the region will actively transform into an upscale residential pocket. The influx of corporate executives, airport personnel, and tech professionals means that housing demand, both for luxury living and rental income, is set to skyrocket."
   },
   {
-    type:"h2",
-    id:"Self-Contained-Region",
-    text:"Self-Contained Region"
+    type: "h2",
+    id: "The-Ultimate-Early-Bird-Advantage",
+    text: "The Ultimate Early-Bird Advantage"
   },
   {
-    type:"p",
-    text:"While Greater Noida is served exclusively by the Aqua Line metro, it doesn't require you to travel far for essentials. It is completely self-contained, packed with top-tier schools, hospitals, and markets."
-  },
-  {
-    type:"h2",
-    id:"Verdict",
-    text:"Verdict: Noida for Urban Energy and Greater Noida for Suburban Bliss"
+    type: "p",
+    text:"The golden rule of real estate investment is simple: buy during the infrastructure build-up, and reap the rewards during full operations."
   },
   {
     type:"p",
-    text:"Despite their stylistic differences, both Noida and Greater Noida offer excellent comforts. No matter which side of the expressway you choose, you will find an established community of residents, highly rated schools, advanced medical care, and safe neighborhoods right around the corner."
-  },
-  {
-    type:"p",
-    text:"Your decision ultimately depends on your daily routine and lifestyle goals. If you want to be right in the center of the action, with instant metro access to wider NCR and a vibrant social scene, Noida is your clear winner."
-  },
-  {
-    type:"p",
-    text:"On the other hand, if you want wider roads, a stress-free commute to a nearby MNC, and a calm environment to build a life, Greater Noida is an absolute dream."
-  },
-  {
-    type:"p",
-    text:"Both paths lead to an incredible quality of life, you just have to choose the backdrop!"
+    text:"By stepping into the Yamuna Expressway market today, you get your hands on the best possible deals, flexible payment structures, and premium inventory choices. You are securing a home equipped with the newest comforts at entry-level pricing, and as the community fills out and the plans come alive, your early belief in the vision will have secured a highly valuable, future-proof asset."
   }
 ];
 
 // ── SIDEBAR DYNAMIC CONTENT ───────────────────────────────────────────────────
 const relatedArticles = [
   {
-    title: "Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?",
-    date: "Jun 26, 2026",
+    title: "Top 10 Sectors in Noida for Residential Investment in 2025",
+    date: "May 12, 2025",
     tag: "Investment",
     tagColor: "#0D6EFD",
     img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=200&q=80",
-    link: 'noida-vs-noida-extension-comparison'
+  },
+  {
+    title: "Why Greater Noida West is NCR's Fastest Growing Real Estate Hub",
+    date: "Apr 28, 2025",
+    tag: "Market Trends",
+    tagColor: "#10B981",
+    img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=200&q=80",
+  },
+  {
+    title: "Metro Expansion 2025: How It Will Impact Property Prices in NCR",
+    date: "Apr 10, 2025",
+    tag: "Connectivity",
+    tagColor: "#F59E0B",
+    img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=200&q=80",
+  },
+  {
+    title: "First-Time Buyer's Guide to Buying Flats in Noida Extension",
+    date: "Mar 22, 2025",
+    tag: "Guide",
+    tagColor: "#8B5CF6",
+    img: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=200&q=80",
   },
 ];
 
 const quickFacts = [
   {
-    label: "Avg. Price/sqft (Noida)",
-    value: "₹8,200",
-    trend: "↑ 9%",
+    label: "Avg. Price/sqft",
+    value: "₹5,800",
+    trend: "↑ 18% YoY",
     up: true,
   },
   {
-    label: "Avg. Price/sqft (Greater Noida)",
-    value: "₹6,300",
-    trend: "↑ 16%",
+    label: "Investment Hotspot",
+    value: "Jewar Airport Zone",
+    trend: "High Growth",
     up: true,
   },
   {
-    label: "Metro Connectivity",
-    value: "Aqua & Blue Line",
-    trend: "Well Connected",
-    up: true,
+    label: "Key Developments",
+    value: "Film City & Metro",
+    trend: "Upcoming",
+    up: null,
   },
   {
-    label: "Growth Potential",
-    value: "High",
-    trend: "Rapid Development",
+    label: "Connectivity",
+    value: "Yamuna Expressway",
+    trend: "Excellent",
     up: true,
   },
+  
 ];
 
 const tableOfContents = [
@@ -178,9 +176,8 @@ const tableOfContents = [
 // Longer phrases are matched first ("Noida Extension" before "Noida").
 // Each keyword is linked only on its FIRST occurrence per text block.
 const LINK_MAP = [
-  { word: "Irish Platinum",          href: "/irish-platinum-greater-noida-npxid-87a7f",  title: "Irish Platinum" },
-  { word: 'ACE ESTATE', href:"/ace-estate-yamuna-expressway-npxid-51b11", title: "ACE ESTATE"},
-  { word: "Ace 153", href:"/ace-153-noida-npxid-8787d", title: "Ace 153"}
+  { word: "ACE TERRA", href: "/ace-terra-greater-noida-npxid-3c960",  title: "ACE TERRA" },
+  { word: 'ACE ACREVILLE', href:"/ace-acreville-grater-noida-npxid-39ff3", title: "ACE ACREVILLE"},
 ];
 
 /**
@@ -526,7 +523,7 @@ function RelatedArticles() {
               transition: "background 0.18s ease",
             }}
           >
-            <Link to={a.link} className="w-[200px] "><img
+            <img
               src={a.img}
               alt={a.title}
               style={{
@@ -536,7 +533,7 @@ function RelatedArticles() {
                 objectFit: "cover",
                 flexShrink: 0,
               }}
-            /></Link>
+            />
             <div style={{ minWidth: 0 }}>
               <span
                 style={{
@@ -555,7 +552,7 @@ function RelatedArticles() {
               >
                 {a.tag}
               </span>
-              <Link to={a.link}><p
+              <p
                 style={{
                   fontSize: "13px",
                   fontWeight: 600,
@@ -571,7 +568,7 @@ function RelatedArticles() {
                 }}
               >
                 {a.title}
-              </p></Link>
+              </p>
               <p
                 style={{
                   fontSize: "11px",
@@ -590,7 +587,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Noidavsgraternoida = () => {
+const Yamunagreencity = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -619,12 +616,12 @@ const Noidavsgraternoida = () => {
 
   return (
     <>
-      
-    <Seo
-              title='Noida vs. Greater Noida: Which One is Right for You?'
-              description="Noida vs. Greater Noida: Which One is Right for You?"
-              canonical={`https://www.indiadealsgroup.com/articles/noida-vs-greater-noida`}
+      <Seo
+              title='Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow'
+              description="Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow"
+              canonical={`https://www.indiadealsgroup.com/articles/yamuna-expressway-buy-the-dream-today`}
             />
+
       <article
         style={{
           width: "100%",
@@ -965,7 +962,6 @@ const Noidavsgraternoida = () => {
           >
             <TOC active={activeSection} />
             <QuickFacts />
-            <RelatedArticles />
           </aside>
         </div>
       </article>
@@ -984,4 +980,4 @@ const Noidavsgraternoida = () => {
   );
 };
 
-export default Noidavsgraternoida;
+export default Yamunagreencity;

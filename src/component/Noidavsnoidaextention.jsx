@@ -1,170 +1,107 @@
 import React, { useState, useEffect, useRef } from "react";
-import NoidaExtention from "../Images/NoidavsGraterNoida.png";
-import { Link } from "react-router-dom";
+import NoidaExtention from "../Images/NoidaExtention.png";
 import Seo from "./Seo";
 
 // ── BLOG CONTENT ─────────────────────────────────────────────────────────────
 const blog = [
     {
     type: "h2",
-    text: "Noida vs. Greater Noida: Which One is Right for You?",
+    text: "Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home? ",
   },
   {
     type: "p",
-    text: "Choosing where to buy your dream home is a huge milestone, and naturally it feels like one of the biggest decisions you have ever made. Buying a home is a symbol of your hard work, dedication and success.",
+    text: "Finding the perfect spot for your dream home in the Delhi-NCR region often comes down to a classic real estate dilemma: should you move into an established, bustling hub, or buy into a rapidly growing, modern destination?",
   },
   {
     type: "p",
-    text: "If you are looking at various areas of NCR, to narrow down your search radius, we are here to help!",
+    text: "If you are wondering whether you should look for homes in Noida or Noida Extension - also known by its official name as Greater Noida West), read more to find out! ACE ESTATE Sector 22D, Yamuna Expy, Authority, Greater Noida.",
   },
   {
     type: "p",
-    text: `Two of the most happening and in-demand markets of NCR are Noida and Greater Noida. If you are confused between the two, read on to find out which one is right for you!`,
+    text: `Between the locales of Noida and Noida Extension, there is no single "better" choice that comes out on top.`,
   },
   {
     type: "p",
-    text: "Noida and Greater Noida are named similarly, share a boundary, and have a down-to-earth vibe, but they offer distinctly different lifestyles.Don’t worry, neither choice is 'wrong', it all just depends on your rhythm of life.",
-  },
-  {
-    type: "p",
-    text:"Let’s discuss how Noida and Greater Noida are different, and how they cater to different needs and lifestyles."
+    text: "Both locations offer unique lifestyles tailored to different priorities, budgets, and long-term goals. In this blog, we are breaking down what makes each area special so you can decide which is the best choice for your new, shiny address!",
   },
   {
     type: "h2",
-    id: "Noida",
-    text: "Noida",
+    id: "noida-established",
+    text: "Noida: The Established, Connected Urban Classic",
   },
   {
     type: "p",
-    text: "Ahh, Noida. The Vibrant, Connected Urban Hub! Noida feels like a seamless extension of Delhi itself, and if you love the high-energy, fast-paced dynamism of city life, look no further! Noida is a mature, highly developed urban market that welcomes everyone with open arms.",
+    text: "If your priority is immediate convenience, an active neighborhood, and seamless transit, Noida is hard to beat. Noida has developed over several decades, so, buying a home here now, means stepping into a fully matured ecosystem. Ace 153 Sector 153, Noida.",
+  },
+  {
+    type: "list",
+    items: [
+      "Noida's Metro Connectivity: Depending on which sector you choose, Noida offers robust public transit right at your doorstep. The Blue Line connects residents directly to Central Delhi and Dwarka, while the Aqua Line seamlessly links Noida to Greater Noida.",
+      "Mature Infrastructure: You won't have to wait for amenities to arrive in Noida. The sectors in Noida are already packed with top-tier schools, colleges, offices, civic amenities, multi-specialty hospitals, and have vibrant local markets, like the famous Atta Market or Sector 18 hub.",
+      "An Established Community: Moving to Noida means joining a settled, diverse community of long-time residents, families, and working professionals, which offers a strong sense of neighborhood security and familiarity from day one.",
+    ],
   },
   {
     type: "h2",
-    id: "superior-metro-transit",
-    text: "Superior Metro Transit",
+    id: "noida-extension",
+    text: "Noida Extension: The Modern, High-Growth Frontier",
   },
   {
     type: "p",
-    text: "Noida’s biggest edge is its dense metro network. Depending on the sector, you have immediate access to the Blue Line - connecting you straight to Delhi, Ghaziabad, Gurgaon and Faridabad; or the Aqua Line linking you to the vast expanse of Central Noida and Greater Noida.",
+    text: "Just on the edge of Central Noida, stands Noida Extension (Greater Noida West), a young locale, but with enough merit to stand on its own and have a distinct identity. It is an area bursting with fresh energy on the residential and commercial frontier. Irish Platinum Grater Noida Sector 10",
+  },
+  {
+    type: "p",
+    text: "As a newer market, it has quickly become one of the most attractive real estate hotspots in the entire NCR, appealing equally to families, young bachelors, and savvy investors.",
+  },
+  {
+    type: "list",
+    items: [
+      "New Communities & Cutting-Edge Living: Because the residential projects here are newer, they feature contemporary architecture, smart-home technologies, and world-class, modern clubhouses. The environment is vibrant, driven by people moving into the area.",
+      "Lifestyle and Brands: The retail scene in Noida Extension is exploding and is on par with other upscale neighbourhoods of NCR. From massive modern malls to high-street retail centers, the best lifestyle brands, entertainment zones, and dining options are popping up right next to residential sectors.",
+      "Premium Comfort at Affordable Prices: The price points of homes is one of the biggest plus points of buying a home in Noida Extension. Compared to the soaring property prices in Noida, Delhi or Gurgaon, buying a home in this area allows you to choose a spacious, modern apartment equipped with the newest comforts at a relatively lower price.",
+      "Connectivity: Noida Extension offers excellent road connectivity to the rest of the NCR today, and the planned metro expansions ensure that buyers stand to gain significant value appreciation tomorrow.",
+    ],
   },
   {
     type: "h2",
-    id: "Lifestyle-Paradise",
-    text: "A Retail and Lifestyle Paradise.",
+    id: "verdict",
+    text: "The Verdict: Which is Right For You?",
   },
   {
     type: "p",
-    text: "From massive shopping malls like the DLF Mall of India to grand high-street showrooms and bustling local markets, Noida is built for convenience and entertainment!",
-  },
-  {
-    type: "h2",
-    id: "Options-Across-All-Budgets",
-    text: "Options Across All Budgets",
+    text: "The choice between buying in Noida or Noida Extension ultimately mirrors your current stage of life.",
   },
   {
     type: "p",
-    text: "Whether you are looking for a humble studio apartment, a farmhouse, a family villa or an ultra-luxury duplex, Noida’s real estate span accommodates every price point and residential need.",
-  },
-  {
-    type: "h2",
-    id: "Greater-Noida",
-    text: "Greater Noida",
+    text: "If you want a settled neighborhood where the schools, metro stations, civic amenities and markets are already up and running, Noida is your ideal match.",
   },
   {
     type: "p",
-    text: "On the other end of the stunning and modern Noida-Greater Noida Expressway sits Greater Noida.",
+    text: "If you want a budget-friendly entry point into a modern, forward-looking community, and a neighbourhood with top-tier amenities, new malls, and immense investment potential, Noida Extension is waiting to welcome you home!",
   },
   {
     type: "p",
-    text: "Greater Noida seems a little far, but is worth the drive! It trades in the urban hustle for beautifully planned, charming suburban neighbourhoods. The area is a fantastic place for young bachelors starting a new chapter and families looking to put down roots.",
+    text: "Both areas lead to an incredible NCR lifestyle and choosing either is sure to bring you delight, it just depends on which chapter you are ready to write!",
   },
-  {
-    type: "h2",
-    id:"Wider-Roads-and-Greener-Horizons",
-    text: "Wider Roads and Greener Horizons"
-  },
-  {
-    type:"p",
-    text: "Greater Noida is less populated than Noida and other pockets of NCR, and you are greeted with sprawling layouts, massive parks, wide roads, and significantly less traffic congestion. Even homes here are generally much more spacious."
-  },
-  {
-    type:"h2",
-    id:"A-Thriving-Corporate-Base",
-    text:"A Thriving Corporate Base"
-  },
-  {
-    type:"p",
-    text:"Greater Noida has quietly transformed into a massive industrial and commercial employment hub. It is home to global manufacturing and tech giants like LG, Infosys, Vivo, Samsung and many more. Living here means you can cut your daily commute down to minutes!"
-  },
-  {
-    type:"h2",
-    id:"Self-Contained-Region",
-    text:"Self-Contained Region"
-  },
-  {
-    type:"p",
-    text:"While Greater Noida is served exclusively by the Aqua Line metro, it doesn't require you to travel far for essentials. It is completely self-contained, packed with top-tier schools, hospitals, and markets."
-  },
-  {
-    type:"h2",
-    id:"Verdict",
-    text:"Verdict: Noida for Urban Energy and Greater Noida for Suburban Bliss"
-  },
-  {
-    type:"p",
-    text:"Despite their stylistic differences, both Noida and Greater Noida offer excellent comforts. No matter which side of the expressway you choose, you will find an established community of residents, highly rated schools, advanced medical care, and safe neighborhoods right around the corner."
-  },
-  {
-    type:"p",
-    text:"Your decision ultimately depends on your daily routine and lifestyle goals. If you want to be right in the center of the action, with instant metro access to wider NCR and a vibrant social scene, Noida is your clear winner."
-  },
-  {
-    type:"p",
-    text:"On the other hand, if you want wider roads, a stress-free commute to a nearby MNC, and a calm environment to build a life, Greater Noida is an absolute dream."
-  },
-  {
-    type:"p",
-    text:"Both paths lead to an incredible quality of life, you just have to choose the backdrop!"
-  }
 ];
 
 // ── SIDEBAR DYNAMIC CONTENT ───────────────────────────────────────────────────
 const relatedArticles = [
   {
-    title: "Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?",
-    date: "Jun 26, 2026",
+    title: "Noida vs. Greater Noida: Which One is Right for You?",
+    date: "May 12, 2025",
     tag: "Investment",
     tagColor: "#0D6EFD",
     img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=200&q=80",
-    link: 'noida-vs-noida-extension-comparison'
   },
 ];
 
 const quickFacts = [
-  {
-    label: "Avg. Price/sqft (Noida)",
-    value: "₹8,200",
-    trend: "↑ 9%",
-    up: true,
-  },
-  {
-    label: "Avg. Price/sqft (Greater Noida)",
-    value: "₹6,300",
-    trend: "↑ 16%",
-    up: true,
-  },
-  {
-    label: "Metro Connectivity",
-    value: "Aqua & Blue Line",
-    trend: "Well Connected",
-    up: true,
-  },
-  {
-    label: "Growth Potential",
-    value: "High",
-    trend: "Rapid Development",
-    up: true,
-  },
+  { label: "Avg. Price/sqft (Noida)", value: "₹7,200", trend: "↑ 8%", up: true },
+  { label: "Avg. Price/sqft (Noida Ext.)", value: "₹4,800", trend: "↑ 14%", up: true },
+  { label: "Metro Stations (Noida)", value: "21", trend: "Active", up: true },
+  { label: "Planned Stations (Noida Ext.)", value: "6", trend: "Upcoming", up: null },
 ];
 
 const tableOfContents = [
@@ -526,7 +463,7 @@ function RelatedArticles() {
               transition: "background 0.18s ease",
             }}
           >
-            <Link to={a.link} className="w-[200px] "><img
+            <img
               src={a.img}
               alt={a.title}
               style={{
@@ -536,7 +473,7 @@ function RelatedArticles() {
                 objectFit: "cover",
                 flexShrink: 0,
               }}
-            /></Link>
+            />
             <div style={{ minWidth: 0 }}>
               <span
                 style={{
@@ -555,7 +492,7 @@ function RelatedArticles() {
               >
                 {a.tag}
               </span>
-              <Link to={a.link}><p
+              <p
                 style={{
                   fontSize: "13px",
                   fontWeight: 600,
@@ -571,7 +508,7 @@ function RelatedArticles() {
                 }}
               >
                 {a.title}
-              </p></Link>
+              </p>
               <p
                 style={{
                   fontSize: "11px",
@@ -590,7 +527,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Noidavsgraternoida = () => {
+const Noidavsnoidaextention = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -619,12 +556,12 @@ const Noidavsgraternoida = () => {
 
   return (
     <>
-      
-    <Seo
-              title='Noida vs. Greater Noida: Which One is Right for You?'
-              description="Noida vs. Greater Noida: Which One is Right for You?"
-              canonical={`https://www.indiadealsgroup.com/articles/noida-vs-greater-noida`}
+      <Seo
+              title='Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?'
+              description="Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?"
+              canonical={`https://www.indiadealsgroup.com/articles/noida-vs-noida-extension-comparison`}
             />
+
       <article
         style={{
           width: "100%",
@@ -887,7 +824,7 @@ const Noidavsgraternoida = () => {
               }
             })}
 
-            {/* ── VERDICT CARD ──
+            {/* ── VERDICT CARD ── */}
             <div className="mt-10 rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-green-50 p-7 md:p-8">
   <div className="mb-[18px] flex items-center gap-3">
     <span className="text-2xl">🏡</span>
@@ -947,7 +884,7 @@ const Noidavsgraternoida = () => {
       </div>
     ))}
   </div>
-</div> */}
+</div>
           </div>
 
           {/* ── SIDEBAR ── */}
@@ -984,4 +921,4 @@ const Noidavsgraternoida = () => {
   );
 };
 
-export default Noidavsgraternoida;
+export default Noidavsnoidaextention;
