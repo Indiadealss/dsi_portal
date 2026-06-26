@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NoidaExtention from "../Images/noidavsnoidaextention.png"
+import { Link } from "react-router-dom";
 
 const heroPost = {
   id: 0,
@@ -21,6 +22,7 @@ const allPosts = [
     author: "",
     avatar: "",
     date: "12 Mar 2024",
+    link:'/articles/yamuna-expressway-buy-the-dream-today'
   },
   {
     id:2,
@@ -29,7 +31,8 @@ const allPosts = [
     image:"https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776427218293-amenities-external-1.jpg",
     author: "",
     avtar:"",
-    date:"26 Jun 2026"
+    date:"26 Jun 2026",
+    link:'/articles/noida-vs-greater-noida'
   },
   {
     id:3,
@@ -38,7 +41,8 @@ const allPosts = [
     image:NoidaExtention,
     author: "",
     avtar:"",
-    date:""
+    date:"26 Jun 2026",
+    link:'/articles/noida-vs-noida-extension-comparison'
   }
   
 ];
@@ -188,25 +192,25 @@ function BlogCard({ post, animationDelay }) {
     >
       {/* Image */}
       <div className="w-full overflow-hidden rounded-2xl bg-[#F2F4F7]" style={{ aspectRatio: "16/10" }}>
-        <img
+        <Link to={post.link} ><img
           src={post.image}
           alt={post.title}
           onLoad={() => setImgLoaded(true)}
           className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-[1.04] ${
             imgLoaded ? "opacity-100" : "opacity-0"
           }`}
-        />
+        /></Link>
       </div>
 
       {/* Content */}
       <div className="pt-4 flex flex-col flex-1">
-        <h3
+        <Link to={post.link} ><h3
           className="text-[#101828] font-semibold leading-snug mb-3 line-clamp-2 group-hover:text-[#344054] transition-colors duration-200"
           style={{ fontSize: "clamp(16px, 1.4vw, 22px)" }}
         >
           {post.title}
-        </h3>
-        <p className="text-[#667085] text-[15px] leading-relaxed line-clamp-3 mb-3 flex-1">
+        </h3></Link>
+        <p className="text-[#667085] text-[15px] leading-relaxed line-clamp-3 mb-3 flex-1 cursor-default">
           {post.description}
         </p>
 
