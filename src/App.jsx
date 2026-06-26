@@ -79,6 +79,7 @@ import Mydashboard from "./component/Mydashboard.jsx";
 import Yamunagreencity from "./component/Yamunagreencity.jsx";
 import Noidavsnoidaextention from "./component/Noidavsnoidaextention.jsx";
 import Noidavsgraternoida from "./component/Noidavsgraternoida.jsx";
+import BlogsPage from "./component/BlogsPage.jsx"
 
 function App() {
 
@@ -155,6 +156,7 @@ useEffect(() => {
       element:user.loggedIn ?  <Navigate to="/" /> : <Loginpage />
     },
     { path: "/property",element:<Property />},
+    { path:"/our-blogs", element:<BlogsPage />},
     { path: "/project",element:<AllProjects />},
     {path:"/property-detail-page",element:<BrandsDoorPostProject />},
     {path:"/choose-listing-type", element:<ProjectListingStep1 /> },
@@ -164,6 +166,7 @@ useEffect(() => {
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
     { path:"/edit-property/:id", element:<EditPropertyStepper /> },
+    
     {
       path:"/articles",
       children:[

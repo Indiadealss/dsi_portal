@@ -41,6 +41,7 @@ const Navbar = () => {
   "About Us",
   "Our Team",
   "Careers",
+  "Blogs",
   "Contact Us",
 ];
   const [profileOpen, setProfileOpen] = useState(false);
@@ -87,6 +88,7 @@ const directLinks = [
   "About Us",
   "Contact Us",
   "Careers",
+  "Blogs",
 ];
 
   const user = useSelector((state) => state.user);
@@ -126,6 +128,9 @@ const directLinks = [
         ],
       },
     ],
+  },
+  Blogs:{
+    columns: []
   },
   Careers: {
     columns: [],
@@ -287,6 +292,8 @@ const directLinks = [
         ? "/contact-us"
         : menu === "Our Policy"
         ? "/our-policy"
+         : menu === "Blogs"
+        ? "/our-blogs"
         : "/careers"
     }
     className="flex items-center gap-1 py-2 hover:text-blue-400"
