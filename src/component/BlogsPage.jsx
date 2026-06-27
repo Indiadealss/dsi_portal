@@ -23,7 +23,7 @@ const allPosts = [
     author: "",
     avatar: "",
     date: "12 Mar 2024",
-    link:'/articles/yamuna-expressway-buy-the-dream-today'
+    link:'/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow'
   },
   {
     id:2,
@@ -33,7 +33,7 @@ const allPosts = [
     author: "",
     avtar:"",
     date:"26 Jun 2026",
-    link:'/articles/noida-vs-greater-noida'
+    link:'/blog/noida-vs-greater-noida'
   },
   {
     id:3,
@@ -43,7 +43,7 @@ const allPosts = [
     author: "",
     avtar:"",
     date:"26 Jun 2026",
-    link:'/articles/noida-vs-noida-extension-comparison'
+    link:'/blog/noida-vs-noida-extension-comparison'
   },
   {
     id:4,
@@ -53,7 +53,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"27 Jun 2026",
-    link: '/articles/guide-to-buying-a-property-in-ncr'
+    link: '/blog/guide-to-buying-a-property-in-ncr'
   }
   
 ];

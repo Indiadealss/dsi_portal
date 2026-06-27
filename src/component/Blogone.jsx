@@ -8,21 +8,21 @@ const articles = [
     title: "Noida vs. Noida Extension Comparison",
     date: "Feb 16, 2022",
     img: NoidaExtention,
-    link: '/articles/noida-vs-noida-extension-comparison'
+    link: '/blog/noida-vs-noida-extension-comparison'
   },
   {
     id: 2,
     title: "Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow",
     date: "Feb 24, 2022",
     img: " https://d3eoh63gynpjzh.cloudfront.net/1769256244053-Ace%20153%20imag.jpg",
-    link: '/articles/yamuna-expressway-buy-the-dream-today'
+    link: '/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow'
   },
   {
     id: 3,
     title: "Noida vs. Greater Noida: Which One is Right for You?",
     date: "Jun 26 2026",
     img:'https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776427218293-amenities-external-1.jpg',
-    link: '/articles/noida-vs-greater-noida'
+    link: '/blog/noida-vs-greater-noida'
   }
 ];
 
@@ -106,7 +106,7 @@ export default function Blogone() {
 
           {/* CTA */}
           <Link
-            to="/articles/noida-vs-noida-extension-comparison"
+            to="/blog/noida-vs-noida-extension-comparison"
             onMouseEnter={() => setBtnHover(true)}
             onMouseLeave={() => setBtnHover(false)}
             style={{
@@ -192,7 +192,7 @@ export default function Blogone() {
                 marginBottom: "8px",
               }}
             >
-              Choose your articles
+              Choose your blog
             </h3>
             <p
               style={{

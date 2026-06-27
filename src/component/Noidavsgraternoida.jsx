@@ -623,7 +623,7 @@ const Noidavsgraternoida = () => {
     <Seo
               title='Noida vs. Greater Noida: Which One is Right for You?'
               description="Noida vs. Greater Noida: Which One is Right for You?"
-              canonical={`https://www.indiadealsgroup.com/articles/noida-vs-greater-noida`}
+              canonical={`https://www.indiadealsgroup.com/blog/noida-vs-greater-noida`}
             />
       <article
         style={{

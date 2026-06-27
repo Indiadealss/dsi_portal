@@ -559,7 +559,7 @@ const Noidavsnoidaextention = () => {
       <Seo
               title='Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?'
               description="Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?"
-              canonical={`https://www.indiadealsgroup.com/articles/noida-vs-noida-extension-comparison`}
+              canonical={`https://www.indiadealsgroup.com/blog/noida-vs-noida-extension-comparison`}
             />
 
       <article

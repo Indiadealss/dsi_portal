@@ -169,10 +169,10 @@ useEffect(() => {
     { path:"/edit-property/:id", element:<EditPropertyStepper /> },
     
     {
-      path:"/articles",
+      path:"/blog",
       children:[
         { path:'noida-vs-noida-extension-comparison',element:<Noidavsnoidaextention />},
-        { path: 'yamuna-expressway-buy-the-dream-today', element:<Yamunagreencity />},
+        { path: 'yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow', element:<Yamunagreencity />},
         { path: 'noida-vs-greater-noida', element:<Noidavsgraternoida />},
         {
           path: 'guide-to-buying-a-property-in-ncr',

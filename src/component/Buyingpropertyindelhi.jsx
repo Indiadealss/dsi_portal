@@ -738,7 +738,7 @@ const Buyingpropertyindelhi = () => {
     <Seo
               title='10-Step Guide to Buying A Property in NCR'
               description="10-Step Guide to Buying A Property in NCR"
-              canonical={`https://www.indiadealsgroup.com/articles/guide-to-buying-a-property-in-ncr`}
+              canonical={`https://www.indiadealsgroup.com/blog/guide-to-buying-a-property-in-ncr`}
             />
       <article
         style={{

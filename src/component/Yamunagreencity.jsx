@@ -619,7 +619,7 @@ const Yamunagreencity = () => {
       <Seo
               title='Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow'
               description="Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow"
-              canonical={`https://www.indiadealsgroup.com/articles/yamuna-expressway-buy-the-dream-today`}
+              canonical={`https://www.indiadealsgroup.com/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow`}
             />
 
       <article
