@@ -117,14 +117,14 @@ const directLinks = [
   },
 
   "Our Team": {
-    width: "w-[300px]",
+    width: "w-[max-content]",
     columns: [
       {
         active: true,
         links: [
-          <Link to="/management-team" className="text-xl text-center">Management Team</Link>,
-          <Link to="/sales-team"  className="text-xl text-center">Sales Team</Link>,
-          <Link to="/it-team"  className="text-xl text-center">IT Team</Link>,
+          <Link to="/management-team" className="text-md text-center">Management Team</Link>,
+          <Link to="/sales-team"  className="text-md text-center">Sales Team</Link>,
+          <Link to="/it-team"  className="text-md text-center">IT Team</Link>,
         ],
       },
     ],
@@ -314,23 +314,23 @@ const directLinks = [
     className={`absolute top-full left-1/2 -translate-x-1/2 hidden group-hover:flex ${data.width} bg-white text-black shadow-2xl rounded-md p-6 z-50`}
   >
                   {data.columns?.map((col, idx) => (
-                    <div key={idx} className="min-w-[180px] px-4">
+                    <div key={idx} className="min-w-[100px] px-4 mx-auto">
 
-                      <h3
+                      {/* <h3
                         className={`text-[15px] font-semibold mb-3 inline-block border-b-2 pb-1 ${
-                          col.active
+                          col.active && col.title !== ''
                             ? "border-gray-500"
                             : "border-gray-500"
                         }`}
                       >
                         {col.title}
-                      </h3>
+                      </h3> */}
 
-                      <ul className="space-y-2">
+                      <ul className="space-y-2 mx-auto">
                         {col.links.map((link, i) => (
                           <li
                             key={i}
-                            className="text-[14px] text-gray-700 hover:text-blue-600 cursor-pointer whitespace-nowrap"
+                            className="text-[16px] text-gray-700 hover:text-blue-600 cursor-pointer whitespace-nowrap mx-auto"
                           >
                             {link}
                           </li>

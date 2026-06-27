@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NoidaExtention from "../Images/noidavsnoidaextention.png"
+import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png"
 import { Link } from "react-router-dom";
 
 const heroPost = {
@@ -43,6 +44,16 @@ const allPosts = [
     avtar:"",
     date:"26 Jun 2026",
     link:'/articles/noida-vs-noida-extension-comparison'
+  },
+  {
+    id:4,
+    title:"10-Step Guide to Buying A Property in NCR",
+    description:"Buying a property in Delhi-NCR is an incredible milestone! But let’s be honest, the buying process can feel completely overwhelming.",
+    image:PropertyGuideCoverImage,
+    author:"",
+    avtar:"",
+    date:"27 Jun 2026",
+    link: '/articles/guide-to-buying-a-property-in-ncr'
   }
   
 ];

@@ -80,6 +80,7 @@ import Yamunagreencity from "./component/Yamunagreencity.jsx";
 import Noidavsnoidaextention from "./component/Noidavsnoidaextention.jsx";
 import Noidavsgraternoida from "./component/Noidavsgraternoida.jsx";
 import BlogsPage from "./component/BlogsPage.jsx"
+import Buyingpropertyindelhi from "./component/Buyingpropertyindelhi.jsx";
 
 function App() {
 
@@ -172,7 +173,11 @@ useEffect(() => {
       children:[
         { path:'noida-vs-noida-extension-comparison',element:<Noidavsnoidaextention />},
         { path: 'yamuna-expressway-buy-the-dream-today', element:<Yamunagreencity />},
-        { path: 'noida-vs-greater-noida', element:<Noidavsgraternoida />}
+        { path: 'noida-vs-greater-noida', element:<Noidavsgraternoida />},
+        {
+          path: 'guide-to-buying-a-property-in-ncr',
+          element:<Buyingpropertyindelhi />
+        }
       ]
     },
     {
