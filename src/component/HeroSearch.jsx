@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllProjectNames, getallProperty, getSearch, getSearchcitiesList, searchaddress } from "../api/api";
-import projectName from '../Images/Irish-1.png';
+import Banner from '../Images/Irish-1.png';
 import { useNavigate } from "react-router-dom";
 import { updateFilter } from "./Redux/filterSlice";
 import { useDispatch } from "react-redux";
@@ -323,7 +323,7 @@ const HeroSearch = () => {
     <div className="relative w-full h-[40vh] md:h-[52vh]">
 
       <img
-        src={projectName}
+        src={Banner}
         alt="property"
         className="w-full h-full "
       />

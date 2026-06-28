@@ -37,9 +37,8 @@ const Leadgentaionform = ({ setLeadModel,projectOwners }) => {
     }, [])
 
   const planningOption = [
-    { label: "3 Months", value: "3 Months" },
-    { label: "6 Months", value: "6 Months" },
-    { label: "More than 6 months", value: "More than 6 months" }
+    { label: "Immediate", value: "Immediate" },
+    { label: "3 Months", value: "3 Months" }
   ];
 
   const yourReason = [
@@ -267,7 +266,7 @@ const Leadgentaionform = ({ setLeadModel,projectOwners }) => {
                 <span className='text-xs font-medium text-gray-500'>By when you are planning to buy the property?</span>
                 {/* Dynamic Radio button */}
 
-                <div className="flex flex-col sm:flex-row sm:justify-between gap-3 mt-2">
+                <div className="flex flex-col sm:flex-row  gap-5 mt-2">
                   {planningOption.map((option, index) => (
                     <label
                       key={index}

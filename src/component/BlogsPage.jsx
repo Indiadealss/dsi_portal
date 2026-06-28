@@ -1,7 +1,9 @@
 import { useState } from "react";
 import NoidaExtention from "../Images/noidavsnoidaextention.png"
 import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png"
+import experionSatori from "../Images/experionSatori.jpeg"
 import { Link } from "react-router-dom";
+
 
 const heroPost = {
   id: 0,
@@ -54,6 +56,16 @@ const allPosts = [
     avtar:"",
     date:"27 Jun 2026",
     link: '/blog/guide-to-buying-a-property-in-ncr'
+  },
+  {
+    id:5,
+    title:"Project Watch: Noida Sector 151’s Experion Saatori",
+    description:"When one is looking for a dream home along the high-growth corridor of the Noida-Greater Noida Expressway, the standard checklist includes the connectivity, urban conveniences, and established communites.",
+    image:experionSatori,
+    author:"",
+    avtar:"",
+    date:"28-06-2026",
+    link:'/blog/project-watch-noida-sector-151-experion-saatori'
   }
   
 ];

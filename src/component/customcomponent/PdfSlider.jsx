@@ -51,11 +51,11 @@ export default function PdfSlider({ pdfUrl }) {
   };
 
   useEffect(() => {
-  setLoading(true);
-  setError(false);
-  setNumPages(null);
-  setCurrentIndex(1);
-}, [pdfUrl]);
+    setLoading(true);
+    setError(false);
+    setNumPages(null);
+    setCurrentIndex(1);
+  }, [pdfUrl]);
 
   useEffect(() => {
     // Fires when user exits element fullscreen (ESC)
@@ -97,19 +97,19 @@ export default function PdfSlider({ pdfUrl }) {
     setLoading(false);
   };
 
- const onError = (error) => {
-  console.log("PDF Error:", error);
+  const onError = (error) => {
+    console.log("PDF Error:", error);
 
-  setError(true);
-  setLoading(false);
-};
+    setError(true);
+    setLoading(false);
+  };
 
   return (
     <div
       ref={wrapperRef}
       className={`${fullScreen
-          ? "w-full relative max-w-4xl mx-auto  rounded-xl h-[90vh]"
-          : "w-full relative mx-auto   rounded-xl h-[500px]"
+        ? "w-full relative max-w-4xl mx-auto  rounded-xl h-[90vh]"
+        : "w-full relative mx-auto   rounded-xl h-[500px]"
         }`}
     >
       <div className=" absolute right-4 top-4 z-20">
@@ -134,46 +134,46 @@ export default function PdfSlider({ pdfUrl }) {
 
       {!error && (
         <Document
-  file={pdfUrl}
-  loading={
-    <div className="flex justify-center items-center h-[400px]">
-      <Mosaic color="#3183cc" size="large" text="" textColor="" />
-    </div>
-  }
-  error={
-    <div className="flex justify-center items-center h-[400px] text-red-500">
-      Failed to load PDF
-    </div>
-  }
-  onLoadSuccess={onDocLoad}
-  onLoadError={onError}
->
-  {numPages && (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={1}
-      navigation
-      className="overflow-hidden"
-      onSwiper={setSwiperRef}
-      onSlideChange={(swiper) =>
-        setCurrentIndex(swiper.activeIndex + 1)
-      }
-    >
-      {Array.from({ length: numPages }, (_, index) => (
-        <SwiperSlide key={index}>
-  {Math.abs(index - (currentIndex - 1)) <= 1 && (
-    <Page
-      pageNumber={index + 1}
-      renderTextLayer={false}
-      renderAnnotationLayer={false}
-      height={fullScreen ? 760 : 400}
-    />
-  )}
-</SwiperSlide>
-      ))}
-    </Swiper>
-  )}
-</Document>
+          file={pdfUrl}
+          loading={
+            <div className="flex justify-center items-center h-[400px]">
+              <Mosaic color="#3183cc" size="large" text="" textColor="" />
+            </div>
+          }
+          error={
+            <div className="flex justify-center items-center h-[400px] text-red-500">
+              Failed to load PDF
+            </div>
+          }
+          onLoadSuccess={onDocLoad}
+          onLoadError={onError}
+        >
+          {numPages && (
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={1}
+              navigation
+              className="overflow-hidden"
+              onSwiper={setSwiperRef}
+              onSlideChange={(swiper) =>
+                setCurrentIndex(swiper.activeIndex + 1)
+              }
+            >
+              {Array.from({ length: numPages }, (_, index) => (
+                <SwiperSlide key={index}>
+                  {Math.abs(index - (currentIndex - 1)) <= 1 && (
+                    <Page
+                      pageNumber={index + 1}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      height={fullScreen ? 760 : 400}
+                    />
+                  )}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+        </Document>
       )}
       <div className="flex justify-center items-center rounded-b-xl gap-6 p-2 mt-2  text-white">
         <button
