@@ -599,9 +599,9 @@ const Experionsaatori = () => {
     <>
       
     <Seo
-              title='10-Step Guide to Buying A Property in NCR'
-              description="10-Step Guide to Buying A Property in NCR"
-              canonical={`https://www.indiadealsgroup.com/blog/guide-to-buying-a-property-in-ncr`}
+              title='Project Watch: Noida Sector 151’s Experion Saatori'
+              description="When one is looking for a dream home along the high-growth corridor of the Noida-Greater Noida Expressway, the standard checklist includes the connectivity, urban conveniences, and established communites."
+              canonical={`https://www.indiadealsgroup.com/blog/project-watch-noida-sector-151-experion-saatori`}
             />
 
             {/* Image */}
