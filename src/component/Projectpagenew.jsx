@@ -409,7 +409,7 @@ function AboutSection({ data }) {
 }
 
 // ── Floor Plan & Brochure ─────────────────────────────────────────────────────
-function FloorPlanBrochure({ images, propertyData,setLeadModel }) {
+function FloorPlanBrochure({ images, propertyData,setLeadModel, cachedPdf}) {
   const [tab, setTab] = useState("floorplan");
   const [activeLayout, setActiveLayout] = useState(0);
 
@@ -604,9 +604,9 @@ function FloorPlanBrochure({ images, propertyData,setLeadModel }) {
 
       {tab === "brochure" && (
         <div className="flex flex-col items-start gap-4 ml-[auto] mr-[auto]">
-          {brochurePdf ? (
+          {cachedPdf ? (
             <div className="relative w-full max-w-2xl  rounded-xl p-8 flex flex-col items-center gap-4">
-              <PdfSlider pdfUrl={brochurePdf.src} />
+              <PdfSlider pdfUrl={cachedPdf} />
               <button onClick={() => setLeadModel(true)}
                 className="absolute z-21 top-100 left-10 flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-3 py-3 rounded-full hover:bg-blue-700 transition-all">
                 <Download size={24} />
@@ -821,11 +821,40 @@ export default function PropertyDetailPage() {
   const npxid = slug.split("npxid-")[1];
 
 
+  const [cachedPdf, setCachedPdf] = useState(null);
+
+  
+
+
   useEffect(() => {
     fetchproperty()
     getcampaindetails(npxid)
   }, [npxid]);
 
+
+useEffect(() => {
+    if (!propertyData?.images) return;
+
+    const brochure = propertyData.images.find(
+        (img) => img.type === "brouser"
+    );
+
+    if (!brochure?.src) return;
+
+    fetch(brochure.src)
+        .then((res) => res.blob())
+        .then((blob) => {
+            const blobUrl = URL.createObjectURL(blob);
+            setCachedPdf(blobUrl);
+        })
+        .catch(console.error);
+
+    return () => {
+        if (cachedPdf) {
+            URL.revokeObjectURL(cachedPdf);
+        }
+    };
+}, [propertyData]);
 
 
   const getcampaindetails = async (npxid) => {
@@ -864,6 +893,7 @@ export default function PropertyDetailPage() {
       <p className="text-gray-500 text-sm">Loading property details...</p>
     </div>
   }
+
 
   const d = propertyData;
   return (
@@ -924,7 +954,7 @@ export default function PropertyDetailPage() {
             </div>
 
             <div className="py-6 border-b border-gray-200">
-              <FloorPlanBrochure images={d.images} propertyData={d} setLeadModel={setLeadModel}/>
+              <FloorPlanBrochure images={d.images} propertyData={d} setLeadModel={setLeadModel} cachedPdf={cachedPdf}/>
             </div>
 
             <div className="py-6 border-b border-gray-200">
