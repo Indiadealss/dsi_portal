@@ -23,6 +23,13 @@ const articles = [
     date: "Jun 26 2026",
     img:'https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776427218293-amenities-external-1.jpg',
     link: '/blog/noida-vs-greater-noida'
+  },
+  {
+    id: 4,
+    title: "10-Step Guide to Buying A Property in NCR",
+    date: "Jun 27 2026",
+    img:'https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1775993901712-8.jpg',
+    link: '/blog/guide-to-buying-a-property-in-ncr'
   }
 ];
 

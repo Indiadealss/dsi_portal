@@ -22,6 +22,7 @@ import Unitsavailble from "./customcomponent/Unitsavailble";
 import { useDispatch } from "react-redux";
 import { setProperty } from "./Redux/propertyidSlice";
 import Seo from "./Seo";
+import Leadgentaionform from "./customcomponent/Leadgentaionform";
 
 
 
@@ -408,7 +409,7 @@ function AboutSection({ data }) {
 }
 
 // ── Floor Plan & Brochure ─────────────────────────────────────────────────────
-function FloorPlanBrochure({ images, propertyData }) {
+function FloorPlanBrochure({ images, propertyData,setLeadModel }) {
   const [tab, setTab] = useState("floorplan");
   const [activeLayout, setActiveLayout] = useState(0);
 
@@ -606,10 +607,10 @@ function FloorPlanBrochure({ images, propertyData }) {
           {brochurePdf ? (
             <div className="relative w-full max-w-2xl  rounded-xl p-8 flex flex-col items-center gap-4">
               <PdfSlider pdfUrl={brochurePdf.src} />
-              <a href={brochurePdf.src} target="_blank" rel="noreferrer"
+              <button onClick={() => setLeadModel(true)}
                 className="absolute z-21 top-100 left-10 flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-3 py-3 rounded-full hover:bg-blue-700 transition-all">
                 <Download size={24} />
-              </a>
+              </button>
             </div>
           ) : (
             <p className="text-gray-500 text-sm">No brochure available.</p>
@@ -814,6 +815,8 @@ function FAQSection({ faq }) {
 // ── Main Page ─────────────────────────────────────────────────────────────────
 export default function PropertyDetailPage() {
   const [propertyData, setPropertyData] = useState(null);
+  const [leadModel, setLeadModel] = useState(false);
+  const [projectOwners,setprojectOwners] = useState('');
   const { slug } = useParams();
   const npxid = slug.split("npxid-")[1];
 
@@ -848,6 +851,7 @@ export default function PropertyDetailPage() {
       const data = res.data
       console.log(data, 'property details');
       setPropertyData(data);
+      setprojectOwners(data.owner.mobile)
       dispatch(setProperty(data));
     } catch (err) {
       console.error(err)
@@ -920,7 +924,7 @@ export default function PropertyDetailPage() {
             </div>
 
             <div className="py-6 border-b border-gray-200">
-              <FloorPlanBrochure images={d.images} propertyData={d} />
+              <FloorPlanBrochure images={d.images} propertyData={d} setLeadModel={setLeadModel}/>
             </div>
 
             <div className="py-6 border-b border-gray-200">
@@ -966,6 +970,12 @@ export default function PropertyDetailPage() {
           </div>
         </div>
       </div>
+      {leadModel && (
+        <div>
+          <Leadgentaionform setLeadModel={setLeadModel} projectOwners={projectOwners}  />
+          {/* <Customenquiryform setLeadModel={setLeadModel} /> */}
+        </div>
+      )}
     </div>
   );
 }
