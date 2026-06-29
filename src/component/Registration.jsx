@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { register } from '../api/api';
 import ReactCountryFlag from "react-country-flag";
+import { useDispatch } from 'react-redux';
+import { setUser } from './Redux/userSlice';
 
 
 const Registration = ({resMobile,closeModal}) => {
@@ -14,6 +16,8 @@ const Registration = ({resMobile,closeModal}) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     return regex.test(value);
   };
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -47,6 +51,19 @@ const Registration = ({resMobile,closeModal}) => {
                   // alert("You have Register Succesfully");
                   // window.location.reload();
                   // dispatch(setUser(res.data.user));
+                  localStorage.setItem("token", res.data.token);
+                  localStorage.setItem("user", JSON.stringify(res.data.user));
+                  dispatch(setUser(res.data.user));
+                  setAlert({
+            message: `Welcome ${res.data.user.name}`,
+            type: "success",
+          });
+          // window.location.reload();
+          setTimeout(() => {
+        setAlert(null);
+        window.location.reload(); // optional
+      }, 2000);
+                  // window.location.reload()
                   console.log(res);
                   
                     if (closeModal) closeModal();

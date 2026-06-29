@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { lead } from '../api/api';
 
 const Dashboard = () => {
-  const [visible, setVisible]         = useState(false);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState(null);
-  const [data, setData]               = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [listings, setListings] = useState([])
 
@@ -25,52 +25,51 @@ const Dashboard = () => {
 
           // ─── FIX 2: Build dashboarddata AFTER the API resolves ──────────────
           // Adjust apiData[0], apiData[1], apiData[2] to match your real API shape
-          const stats      = apiData[2] ?? {};
-          const leadsArr   = apiData[1] ?? [];
+          const stats = apiData[2] ?? {};
+          const leadsArr = apiData[1] ?? [];
           const listings = apiData[0] ?? [];
 
           console.log(listings, 'check listings');
 
 
           const formattedListings = listings.map((listing) => ({
-  id: listing.npxid || listing.spid,
-  key: listing.npxid || listing.spid,
-  title:
-    listing.projectname ||
-    listing.apartment_name ||
-    listing.projecttitle ||
-    "",
-  location: listing.location || "",
-  price: listing.price,
-  status: Boolean(listing.npxid || listing.spid) ? "Active" : "Inactive",
-  images: listing.images[0] || [],
-  imageUrl: listing.images?.[0] || null,
-  npxid: listing.npxid || null,
-  spid: listing.spid || null,
-}));
+            id: listing.npxid || listing.spid,
+            key: listing.npxid || listing.spid,
+            title:
+              listing.projectname ||
+              listing.apartment_name ||
+              listing.projecttitle ||
+              "",
+            location: listing.location || "",
+            price: listing.price,
+            status: Boolean(listing.npxid || listing.spid) ? "Active" : "Inactive",
+            images: listing.images[0]?.src || [],
+            imageUrl: listing.images?.[0]?.src || null,
+            npxid: listing.npxid || null,
+            spid: listing.spid || null,
+          }));
 
-setListings(formattedListings);
-          console.log(listings[0].images[0], 'leads array');
-          
+          setListings(formattedListings);
+
 
           setData({
             userName: user.name,
             stats: {
-              totalListings:    stats.totalListings    ?? 0,
-              activeListings:   stats.activeListings   ?? 0,
-              activeListingsPct:stats.activeListingsPct ?? "—",
-              totalLeads:       stats.totalLeads        ?? 0,
-              savedProperties:  stats.savedProperties   ?? 0,
-              unreadMessages:   stats.unreadMessages    ?? 0,
+              totalListings: stats.totalListings ?? 0,
+              activeListings: stats.activeListings ?? 0,
+              activeListingsPct: stats.activeListingsPct ?? "—",
+              totalLeads: stats.totalLeads ?? 0,
+              savedProperties: stats.savedProperties ?? 0,
+              unreadMessages: stats.unreadMessages ?? 0,
             },
             leads: leadsArr,
             listings: formattedListings,
             performance: {
-              propertyViews:   "12,450",
-              newLeads:        "85",
-              callReceived:    "42",
+              propertyViews: "12,450",
+              newLeads: "85",
+              callReceived: "42",
               messageReceived: "29",
-              savedListings:   "17",
+              savedListings: "17",
             },
           });
 
@@ -97,37 +96,37 @@ setListings(formattedListings);
     const s = { width: size, height: size, display: "block", flexShrink: 0 };
     const p = { fill: "none", stroke: color, strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" };
     const map = {
-      listing:      <svg style={s} viewBox="0 0 24 24" {...p}><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>,
-      layers:       <svg style={s} viewBox="0 0 24 24" {...p}><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>,
-      users:        <svg style={s} viewBox="0 0 24 24" {...p}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-      bookmark:     <svg style={s} viewBox="0 0 24 24" {...p}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>,
-      message:      <svg style={s} viewBox="0 0 24 24" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
-      eye:          <svg style={s} viewBox="0 0 24 24" {...p}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>,
-      phone:        <svg style={s} viewBox="0 0 24 24" {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
-      settings:     <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
-      plus:         <svg style={s} viewBox="0 0 24 24" {...p}><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>,
-      chevronLeft:  <svg style={s} viewBox="0 0 24 24" {...p}><polyline points="15 18 9 12 15 6"/></svg>,
-      dots:         <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>,
+      listing: <svg style={s} viewBox="0 0 24 24" {...p}><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="21" x2="9" y2="9" /></svg>,
+      layers: <svg style={s} viewBox="0 0 24 24" {...p}><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></svg>,
+      users: <svg style={s} viewBox="0 0 24 24" {...p}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
+      bookmark: <svg style={s} viewBox="0 0 24 24" {...p}><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" /></svg>,
+      message: <svg style={s} viewBox="0 0 24 24" {...p}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>,
+      eye: <svg style={s} viewBox="0 0 24 24" {...p}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>,
+      phone: <svg style={s} viewBox="0 0 24 24" {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>,
+      settings: <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>,
+      plus: <svg style={s} viewBox="0 0 24 24" {...p}><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>,
+      chevronLeft: <svg style={s} viewBox="0 0 24 24" {...p}><polyline points="15 18 9 12 15 6" /></svg>,
+      dots: <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /></svg>,
     };
     return map[name] || null;
   };
 
   // ─── Static configs ───────────────────────────────────────────────────────────
   const STAT_CONFIG = [
-    { key: "totalListings",   label: "Total Listing",    subKey: null,               staticSub: "All Time",    iconBg: "#ECFDF3", iconColor: "#16A34A", icon: "listing"  },
-    { key: "activeListings",  label: "Active Listings",  subKey: "activeListingsPct",staticSub: null,          iconBg: "#EEF5FF", iconColor: "#3B82F6", icon: "layers"   },
-    { key: "totalLeads",      label: "Total Leads",      subKey: null,               staticSub: "This Month",  iconBg: "#F5ECFF", iconColor: "#9333EA", icon: "users"    },
-    { key: "savedProperties", label: "Saved Properties", subKey: null,               staticSub: "All Time",    iconBg: "#FFF7E9", iconColor: "#F59E0B", icon: "bookmark" },
+    { key: "totalListings", label: "Total Listing", subKey: null, staticSub: "All Time", iconBg: "#ECFDF3", iconColor: "#16A34A", icon: "listing" },
+    { key: "activeListings", label: "Active Listings", subKey: "activeListingsPct", staticSub: null, iconBg: "#EEF5FF", iconColor: "#3B82F6", icon: "layers" },
+    { key: "totalLeads", label: "Total Leads", subKey: null, staticSub: "This Month", iconBg: "#F5ECFF", iconColor: "#9333EA", icon: "users" },
+    { key: "savedProperties", label: "Saved Properties", subKey: null, staticSub: "All Time", iconBg: "#FFF7E9", iconColor: "#F59E0B", icon: "bookmark" },
   ];
 
   const BADGE_STYLE = {
-    New:       { bg: "#ECFDF3", color: "#16A34A" },
+    New: { bg: "#ECFDF3", color: "#16A34A" },
     Contacted: { bg: "#EEF4FF", color: "#2563EB" },
-    Active:    { bg: "#ECFDF3", color: "#16A34A" },
+    Active: { bg: "#ECFDF3", color: "#16A34A" },
   };
 
-  const LISTING_ACCENTS = ["#0ea5e9","#14b8a6","#a3e635","#f59e0b","#8b5cf6","#ef4444"];
-  const AVATAR_BG       = ["#3B82F6","#9333EA","#16A34A","#F59E0B","#EF4444","#0891B2","#DC2626"];
+  const LISTING_ACCENTS = ["#0ea5e9", "#14b8a6", "#a3e635", "#f59e0b", "#8b5cf6", "#ef4444"];
+  const AVATAR_BG = ["#3B82F6", "#9333EA", "#16A34A", "#F59E0B", "#EF4444", "#0891B2", "#DC2626"];
 
   // ─── Helpers ──────────────────────────────────────────────────────────────────
   const initials = (name = "") =>
@@ -135,7 +134,7 @@ setListings(formattedListings);
 
   const Avatar = ({ name, size = 40 }) => {
     const ini = initials(name);
-    const bg  = AVATAR_BG[ini.charCodeAt(0) % AVATAR_BG.length];
+    const bg = AVATAR_BG[ini.charCodeAt(0) % AVATAR_BG.length];
     return (
       <div style={{ width: size, height: size, borderRadius: "50%", background: bg, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: size * 0.3, fontWeight: 700, flexShrink: 0 }}>
         {ini}
@@ -224,7 +223,7 @@ setListings(formattedListings);
         <div className="stat-row">
           {STAT_CONFIG.map(({ key, label, subKey, staticSub, iconBg, iconColor, icon }, i) => {
             const value = data?.stats?.[key] ?? "—";
-            const sub   = subKey ? (data?.stats?.[subKey] ?? staticSub) : staticSub;
+            const sub = subKey ? (data?.stats?.[subKey] ?? staticSub) : staticSub;
             return (
               <div key={key} className="stat-card card fade-up" style={{ padding: "16px 20px", display: "flex", alignItems: "center", gap: 14, height: 110, animationDelay: `${i * 60}ms` }}>
                 <div style={{ width: 48, height: 48, borderRadius: "50%", background: iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -296,34 +295,87 @@ setListings(formattedListings);
                 <button className="view-btn">View all</button>
               </div>
               <div>
-                {(data?.listings  ?? []).map((listing, i) => {
-                  const accent = LISTING_ACCENTS[i % LISTING_ACCENTS.length];
-                  return (
-                    <div key={listing.npxid} className="listing-row" style={{ display: "flex", gap: 14, padding: "14px 20px", borderBottom: "1px solid #F8FAFC", alignItems: "center", transition: "background .15s" }}>
-                      <PropertyThumb src={listing.imageUrl} accent={accent} />
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 15, fontWeight: 600, color: "#111827", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{listing.title}</div>
-                        {/* <div style={{ fontSize: 12, color: "#6B7280", margin: "2px 0" }}>{listing.location}</div> */}
-                        <div style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{listing.price}</div>
-                      </div>
-                      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8, flexShrink: 0 }}>
-                        <Badge status={listing.status} />
-                        <div style={{ position: "relative" }}>
-                          <button className="icon-btn" onClick={e => { e.stopPropagation(); setOpenDropdown(openDropdown === listing.id ? null : listing.id); }}>
-                            <Icon name="dots" size={18} color="#6B7280" />
-                          </button>
-                          {openDropdown === listing.id && (
-                            <div className="dropdown">
-                              <button>Edit</button>
-                              <button>View Details</button>
-                              <button style={{ color: "#EF4444" }}>Delete</button>
-                            </div>
-                          )}
+                {(data?.listings ?? [])
+                  .slice(0, 3)
+                  .map((listing, i) => {
+                    const accent = LISTING_ACCENTS[i % LISTING_ACCENTS.length];
+
+                    return (
+                      <div
+                        key={listing.id}
+                        className="listing-row"
+                        style={{
+                          display: "flex",
+                          gap: 14,
+                          padding: "14px 20px",
+                          borderBottom: "1px solid #F8FAFC",
+                          alignItems: "center",
+                          transition: "background .15s",
+                        }}
+                      >
+                        <PropertyThumb src={listing.imageUrl} accent={accent} />
+
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div
+                            style={{
+                              fontSize: 15,
+                              fontWeight: 600,
+                              color: "#111827",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {listing.title}
+                          </div>
+
+                          <div
+                            style={{
+                              fontSize: 14,
+                              fontWeight: 600,
+                              color: "#111827",
+                            }}
+                          >
+                            {listing.price}
+                          </div>
+                        </div>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                            gap: 8,
+                            flexShrink: 0,
+                          }}
+                        >
+                          <Badge status={listing.status} />
+
+                          <div style={{ position: "relative" }}>
+                            <button
+                              className="icon-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setOpenDropdown(
+                                  openDropdown === listing.id ? null : listing.id
+                                );
+                              }}
+                            >
+                              <Icon name="dots" size={18} color="#6B7280" />
+                            </button>
+
+                            {openDropdown === listing.id && (
+                              <div className="dropdown">
+                                <button>Edit</button>
+                                <button>View Details</button>
+                                <button style={{ color: "#EF4444" }}>Delete</button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
               </div>
             </div>
           </div>

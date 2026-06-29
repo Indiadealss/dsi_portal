@@ -118,8 +118,8 @@ export default function Blogone() {
             onMouseLeave={() => setBtnHover(false)}
             style={{
               width: "clamp(200px, 100%, 260px)",
-              height: "72px",
-              padding:"1px",
+              height: "auto",
+              padding:"8px",
               background: btnHover ? "#005CE6" : "#0D6EFD",
               color: "#FFFFFF",
               borderRadius: "12px",

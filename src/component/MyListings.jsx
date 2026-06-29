@@ -1,5 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import * as XLSX from "xlsx";
+import { lead } from "../api/api";
+import { useSelector } from "react-redux";
 
 // ─── MOCK BACKEND DATA ────────────────────────────────────────────────────────
 const BACKEND_LISTINGS = [
@@ -137,6 +139,9 @@ export default function MyListings() {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(4);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const dropdownRef = useRef(null);
 
@@ -147,6 +152,104 @@ export default function MyListings() {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+
+    const user = useSelector((state) => state.user);
+
+   useEffect(() => {
+      setLoading(true);
+      setError(null);
+  
+      lead(user.id)
+        .then(res => {
+          if (res.status === 200) {
+            const apiData = res.data.data;
+            console.log(apiData, 'api data is console')
+
+            const formatData = apiData.map((item) => {
+  // Handle location
+  let location = {};
+
+  try {
+    if (typeof item.location === "string") {
+      location = JSON.parse(item.location);
+    } else if (Array.isArray(item.location)) {
+      location = item.location[0] || {};
+    } else {
+      location = item.location || {};
+    }
+  } catch {
+    location = {};
+  }
+
+  return {
+    id: item.npxid || item.spid,
+    title:
+      item.projecttitle ||
+      item.projectname ||
+      item.apartment_name ||
+      "",
+
+    type:
+      item.property,
+
+    subType: item.purpose || "For Sale",
+
+    locationName:
+      location.apartment_name ||
+      item.projectname ||
+      "",
+
+    city: location.City || "",
+
+    price: item.price
+      ? `₹ ${Number(
+          String(item.price).replace(/[^\d]/g, "")
+        ).toLocaleString("en-IN")}`
+      : "",
+
+    area:
+      item.superbuilduparea
+        ? `${item.superbuilduparea} Sq.Ft`
+        : item.plotarea && item.plotarea !== "null"
+        ? `${item.plotarea} Sq.Ft`
+        : "",
+
+    status:
+      item.availabestatus === "Ready to move"
+        ? "Active"
+        : "Inactive",
+
+    views: item.views || 0,
+    leads: item.leads || 0,
+
+    addedOn: new Date(item.createdAt).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+
+    image:
+      item.images?.find((img) => img.type === "banner")?.src?.trim() ||
+      item.images?.find((img) => img.type === "cover")?.src?.trim() ||
+      item.images?.[0]?.src?.trim() ||
+      "",
+  };
+});
+
+console.log(formatData, 'hello Dear');
+// setData(formatData);
+  
+            setLoading(false);
+            setTimeout(() => setVisible(true), 60);
+          }
+        })
+        .catch(err => {
+          console.error(err);
+          setError(err.message ?? "Failed to load dashboard data");
+          setLoading(false);
+        });
+    }, [user.id]);
 
   // Derived filter options
   const types = ["All Types", ...new Set(BACKEND_LISTINGS.map(l => l.type))];
