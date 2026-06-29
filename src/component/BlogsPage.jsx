@@ -3,6 +3,7 @@ import NoidaExtention from "../Images/noidavsnoidaextention.png"
 import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png"
 import experionSatori from "../Images/experionSatori.jpeg"
 import { Link } from "react-router-dom";
+import iNNERPAGE from "../Images/iNNERPAGE.png"
 
 
 const heroPost = {
@@ -66,7 +67,17 @@ const allPosts = [
     avtar:"",
     date:"28-06-2026",
     link:'/blog/project-watch-noida-sector-151-experion-saatori'
-  }
+  },
+  {
+    id:7,
+    title:"The Ultimate NCR Plot-Buying Guide",
+    description:"When it comes to securing your own piece of land in the Delhi-NCR, the market shifts into a completely different gear compared to buying an apartment or a villa.",
+    image:iNNERPAGE,
+    author:"",
+    avtar:"",
+    date:"29-06-2026",
+    link:'/blog/the-ultimate-ncr-plot-buying-guide'
+  },
   
 ];
 
