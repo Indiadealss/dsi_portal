@@ -82,6 +82,7 @@ import Noidavsgraternoida from "./component/Noidavsgraternoida.jsx";
 import BlogsPage from "./component/BlogsPage.jsx"
 import Buyingpropertyindelhi from "./component/Buyingpropertyindelhi.jsx";
 import Experionsaatori from "./component/Experionsaatori.jsx";
+import Ncrplots from "./component/Ncrplots.jsx";
 
 function App() {
 
@@ -182,7 +183,8 @@ useEffect(() => {
         {
           path:'project-watch-noida-sector-151-experion-saatori',
           element:<Experionsaatori />
-        }
+        },
+        {path:'the-ultimate-ncr-plot-buying-guide', element:<Ncrplots />}
       ]
     },
     {
