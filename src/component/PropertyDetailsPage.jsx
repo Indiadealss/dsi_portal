@@ -104,37 +104,37 @@ export default function PropertyDetailsPage() {
 
 
   const getInitials = (name = "") =>
-  name
-    .trim()
-    .split(" ")
-    .map((word) => word[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+    name
+      .trim()
+      .split(" ")
+      .map((word) => word[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
 
 
-    const getAvatarColor = (name = "") => {
-  const colors = [
-    "#2563EB", // Blue
-    "#DC2626", // Red
-    "#16A34A", // Green
-    "#9333EA", // Purple
-    "#EA580C", // Orange
-    "#0891B2", // Cyan
-    "#BE185D", // Pink
-    "#CA8A04", // Yellow
-    "#4F46E5", // Indigo
-    "#0F766E", // Teal
-  ];
+  const getAvatarColor = (name = "") => {
+    const colors = [
+      "#2563EB", // Blue
+      "#DC2626", // Red
+      "#16A34A", // Green
+      "#9333EA", // Purple
+      "#EA580C", // Orange
+      "#0891B2", // Cyan
+      "#BE185D", // Pink
+      "#CA8A04", // Yellow
+      "#4F46E5", // Indigo
+      "#0F766E", // Teal
+    ];
 
-  let hash = 0;
+    let hash = 0;
 
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
 
-  return colors[Math.abs(hash) % colors.length];
-};
+    return colors[Math.abs(hash) % colors.length];
+  };
   const { slug } = useParams();
   const spid = slug?.slice(-5);
 
@@ -506,19 +506,19 @@ export default function PropertyDetailsPage() {
                   <h3 className="text-[13px] font-bold text-[#1F1F1F] mb-4 uppercase tracking-wider">Agent Information</h3>
                   <div className="flex items-center gap-3">
                     <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-blue-100 shrink-0  flex items-center justify-center" style={{ backgroundColor: getAvatarColor(property?.owner?.name) }}>
-  {!imageError && property?.owner?.image ? (
-    <img
-      src={property.owner.image}
-      alt={property.owner?.name}
-      className="w-full h-full object-cover"
-      onError={() => setImageError(true)}
-    />
-  ) : (
-    <span className="text-white font-bold text-lg">
-      {getInitials(property?.owner?.name)}
-    </span>
-  )}
-</div>
+                      {!imageError && property?.owner?.image ? (
+                        <img
+                          src={property.owner.image}
+                          alt={property.owner?.name}
+                          className="w-full h-full object-cover"
+                          onError={() => setImageError(true)}
+                        />
+                      ) : (
+                        <span className="text-white font-bold text-lg">
+                          {getInitials(property?.owner?.name)}
+                        </span>
+                      )}
+                    </div>
                     <div>
                       <div className="font-extrabold text-[#1F1F1F] text-sm">{property.owner?.name}</div>
                       <div className="text-[11px] text-[#6E6E6E]">Property Consultant</div>

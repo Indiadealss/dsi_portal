@@ -3,6 +3,7 @@ import Dashboard from "./Dashboard";
 import { lead } from "../api/api";
 import { useSelector } from "react-redux";
 import MyListings from "./MyListings";
+import LeadsInquiries from "./LeadsInquiries";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -89,7 +90,7 @@ const Icon = ({ name, size = 20, color = "currentColor" }) => {
 const NAV = [
   { id: "dashboard",    label: "Dashboard",            icon: "listing"      },
   { id: "listings",     label: "My Listings",          icon: "layers"       },
-  { id: "saved",        label: "Saved Properties",     icon: "bookmark"     },
+  // { id: "saved",        label: "Saved Properties",     icon: "bookmark"     },
   { id: "leads",        label: "Leads & Inquiries",    icon: "users"        },
   { id: "messages",     label: "Messages",             icon: "message"      },
   { id: "notifications",label: "Notifications",        icon: "bell"         },
@@ -215,6 +216,7 @@ export default function Mydashboard() {
 
           {activeNav === "dashboard" && <Dashboard />}
           {activeNav === "listings" && <MyListings />}
+          {activeNav === 'leads' && <LeadsInquiries />}
         
       </div>
     </>

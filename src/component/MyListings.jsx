@@ -4,66 +4,53 @@ import { lead } from "../api/api";
 import { useSelector } from "react-redux";
 
 // ─── MOCK BACKEND DATA ────────────────────────────────────────────────────────
-const BACKEND_LISTINGS = [
-  { id: "PRP12345", title: "3 BHK Apartment", type: "Residential", subType: "For Sale", locationName: "DLF The Crest", city: "Gurgaon", price: "₹ 2.45 Cr", area: "3,200 Sq.Ft", status: "Active", views: 1245, leads: 28, addedOn: "20 May 2024", image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=320&q=70" },
-  { id: "PRP12344", title: "Office Space", type: "Commercial", subType: "For Rent", locationName: "One World Center", city: "Noida", price: "₹ 1.85 Lakh / Month", area: "2,000 Sq.Ft", status: "Active", views: 987, leads: 16, addedOn: "20 May 2024", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=320&q=70" },
-  { id: "PRP12343", title: "2 BHK Apartment", type: "Residential", subType: "For Rent", locationName: "Godrej Woods", city: "Noida", price: "₹ 28,000 / Month", area: "1,150 Sq.Ft", status: "Active", views: 645, leads: 12, addedOn: "20 May 2024", image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=320&q=70" },
-  { id: "PRP12342", title: "4 BHK Villa", type: "Residential", subType: "For Sale", locationName: "Bestech Park View", city: "Gurgaon", price: "₹ 6.75 Cr", area: "4,500 Sq.Ft", status: "Inactive", views: 1876, leads: 34, addedOn: "20 May 2024", image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=320&q=70" },
-  { id: "PRP12341", title: "Studio Apartment", type: "Residential", subType: "For Rent", locationName: "Cyber Hub", city: "Gurgaon", price: "₹ 18,000 / Month", area: "550 Sq.Ft", status: "Active", views: 420, leads: 9, addedOn: "18 May 2024", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=320&q=70" },
-  { id: "PRP12340", title: "Commercial Shop", type: "Commercial", subType: "For Sale", locationName: "Pacific Mall", city: "Delhi", price: "₹ 85 Lakh", area: "480 Sq.Ft", status: "Draft", views: 210, leads: 5, addedOn: "17 May 2024", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=320&q=70" },
-  { id: "PRP12339", title: "Plot – 200 Sq.Yd", type: "Plot", subType: "For Sale", locationName: "Sector 150", city: "Noida", price: "₹ 1.20 Cr", area: "200 Sq.Yd", status: "Active", views: 763, leads: 21, addedOn: "15 May 2024", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=320&q=70" },
-  { id: "PRP12338", title: "5 BHK Penthouse", type: "Residential", subType: "For Sale", locationName: "DLF Magnolias", city: "Gurgaon", price: "₹ 18.50 Cr", area: "8,200 Sq.Ft", status: "Active", views: 3412, leads: 67, addedOn: "14 May 2024", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=320&q=70" },
-  { id: "PRP12337", title: "Warehouse", type: "Commercial", subType: "For Rent", locationName: "IMT Manesar", city: "Gurgaon", price: "₹ 4.50 Lakh / Month", area: "15,000 Sq.Ft", status: "Inactive", views: 198, leads: 3, addedOn: "12 May 2024", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=320&q=70" },
-  { id: "PRP12336", title: "1 BHK Flat", type: "Residential", subType: "For Rent", locationName: "Indirapuram", city: "Noida", price: "₹ 12,000 / Month", area: "650 Sq.Ft", status: "Draft", views: 155, leads: 4, addedOn: "10 May 2024", image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=320&q=70" },
-  { id: "PRP12335", title: "Plot – 500 Sq.Yd", type: "Plot", subType: "For Sale", locationName: "Sector 78", city: "Noida", price: "₹ 3.10 Cr", area: "500 Sq.Yd", status: "Active", views: 890, leads: 19, addedOn: "08 May 2024", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=320&q=70" },
-  { id: "PRP12334", title: "3 BHK Independent House", type: "Residential", subType: "For Sale", locationName: "Vasant Kunj", city: "Delhi", price: "₹ 4.80 Cr", area: "2,400 Sq.Ft", status: "Active", views: 1102, leads: 31, addedOn: "05 May 2024", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=320&q=70" },
-];
+
 
 // ─── ICONS ────────────────────────────────────────────────────────────────────
 const Icon = {
   Download: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
   ),
   Search: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
   ),
   ChevronDown: () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
   ),
   Eye: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
   ),
   Edit: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
   ),
   MoreVertical: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /></svg>
   ),
   ChevronRight: () => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
   ),
   Listing: () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="21" x2="9" y2="9" /></svg>
   ),
   Layers: () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2" /><polyline points="2 17 12 22 22 17" /><polyline points="2 12 12 17 22 12" /></svg>
   ),
   Pause: () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9333EA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9333EA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="4" height="16" /><rect x="14" y="4" width="4" height="16" /></svg>
   ),
   EyeViews: () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" /><circle cx="12" cy="12" r="3" /></svg>
   ),
   Users: () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
   ),
 };
 
 // ─── STATUS BADGE ─────────────────────────────────────────────────────────────
 const statusStyles = {
-  Active:   { bg: "#ECFDF3", text: "#16A34A" },
+  Active: { bg: "#ECFDF3", text: "#16A34A" },
   Inactive: { bg: "#F3F4F6", text: "#374151" },
-  Draft:    { bg: "#F5ECFF", text: "#9333EA" },
+  Draft: { bg: "#F5ECFF", text: "#9333EA" },
 };
 
 function StatusBadge({ status }) {
@@ -142,6 +129,7 @@ export default function MyListings() {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [BACKEND_LISTINGS, setbACKEND_LISTINGS] = useState([])
 
   const dropdownRef = useRef(null);
 
@@ -154,102 +142,110 @@ export default function MyListings() {
   }, []);
 
 
-    const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
-   useEffect(() => {
-      setLoading(true);
-      setError(null);
-  
-      lead(user.id)
-        .then(res => {
-          if (res.status === 200) {
-            const apiData = res.data.data;
-            console.log(apiData, 'api data is console')
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
 
-            const formatData = apiData.map((item) => {
-  // Handle location
-  let location = {};
+    lead(user.id)
+      .then(res => {
+        if (res.status === 200) {
+          const apiData = res.data.data;
+          console.log(apiData, 'api data is console')
 
-  try {
-    if (typeof item.location === "string") {
-      location = JSON.parse(item.location);
-    } else if (Array.isArray(item.location)) {
-      location = item.location[0] || {};
-    } else {
-      location = item.location || {};
-    }
-  } catch {
-    location = {};
-  }
+          const formatData = apiData[0].map((item) => {
+            // Handle location
+            let location = {};
 
-  return {
-    id: item.npxid || item.spid,
-    title:
-      item.projecttitle ||
-      item.projectname ||
-      item.apartment_name ||
-      "",
+            try {
+              if (typeof item.location === "string") {
+                location = JSON.parse(item.location);
+              } else if (Array.isArray(item.location)) {
+                location = item.location[0] || {};
+              } else {
+                location = item.location || {};
+              }
+            } catch {
+              location = {};
+            }
 
-    type:
-      item.property,
+            return {
+              id: item.npxid || item.spid,
+              title:
+                item.projecttitle ||
+                item.projectname ||
+                item.apartment_name ||
+                "",
 
-    subType: item.purpose || "For Sale",
+              type:
+                item.property,
 
-    locationName:
-      location.apartment_name ||
-      item.projectname ||
-      "",
+              subType: item.purpose || "For Sale",
 
-    city: location.City || "",
+              locationName:
+                location.apartment_name ||
+                item.projectname ||
+                "",
 
-    price: item.price
-      ? `₹ ${Number(
-          String(item.price).replace(/[^\d]/g, "")
-        ).toLocaleString("en-IN")}`
-      : "",
+              city: location.City || "",
 
-    area:
-      item.superbuilduparea
-        ? `${item.superbuilduparea} Sq.Ft`
-        : item.plotarea && item.plotarea !== "null"
-        ? `${item.plotarea} Sq.Ft`
-        : "",
+              price: item.price
+                ? `₹ ${Number(
+                  String(item.price).replace(/[^\d]/g, "")
+                ).toLocaleString("en-IN")}`
+                : "",
 
-    status:
-      item.availabestatus === "Ready to move"
-        ? "Active"
-        : "Inactive",
+              area:
+                item.superbuilduparea
+                  ? `${item.superbuilduparea} Sq.Ft`
+                  : item.plotarea && item.plotarea !== "null"
+                    ? `${item.plotarea} Sq.Ft`
+                    : "",
 
-    views: item.views || 0,
-    leads: item.leads || 0,
+              status:
+                item.availabestatus === "Ready to move"
+                  ? "Active"
+                  : "Inactive",
 
-    addedOn: new Date(item.createdAt).toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
+              views: item.views || 0,
+              leads: item.leads || 0,
 
-    image:
-      item.images?.find((img) => img.type === "banner")?.src?.trim() ||
-      item.images?.find((img) => img.type === "cover")?.src?.trim() ||
-      item.images?.[0]?.src?.trim() ||
-      "",
-  };
-});
+              addedOn: new Date(item.createdAt).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              }),
 
-console.log(formatData, 'hello Dear');
-// setData(formatData);
-  
-            setLoading(false);
-            setTimeout(() => setVisible(true), 60);
-          }
-        })
-        .catch(err => {
-          console.error(err);
-          setError(err.message ?? "Failed to load dashboard data");
+              image:
+                item.images?.find((img) => img.type === "banner")?.src?.trim() ||
+                item.images?.find((img) => img.type === "cover")?.src?.trim() ||
+                item.images?.[0]?.src?.trim() ||
+                "",
+            };
+          });
+
+          console.log(formatData, 'hello Dear');
+          setbACKEND_LISTINGS(formatData);
+
           setLoading(false);
-        });
-    }, [user.id]);
+          setTimeout(() => setVisible(true), 60);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setError(err.message ?? "Failed to load dashboard data");
+        setLoading(false);
+      });
+  }, [user.id]);
+
+  if (BACKEND_LISTINGS === []) {
+    return (
+      <div>
+        ....
+      </div>
+    )
+  }
 
   // Derived filter options
   const types = ["All Types", ...new Set(BACKEND_LISTINGS.map(l => l.type))];
@@ -355,7 +351,7 @@ console.log(formatData, 'hello Dear');
   };
 
   return (
-    <div className="min-h-screen bg-[#F9FAFB]" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
+    <div className="min-h-screen " style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
       <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 py-6 flex flex-col gap-6">
 
         {/* ── HEADER ── */}
@@ -385,9 +381,8 @@ console.log(formatData, 'hello Dear');
           <div className="flex gap-6 sm:gap-8">
             {["All Listing", "Drafts", "Inactive"].map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)}
-                className={`pb-3 text-sm font-medium transition-all duration-200 focus:outline-none relative ${
-                  activeTab === tab ? "text-[#0D6EFD]" : "text-[#6B7280] hover:text-[#374151]"
-                }`}>
+                className={`pb-3 text-sm font-medium transition-all duration-200 focus:outline-none relative ${activeTab === tab ? "text-[#0D6EFD]" : "text-[#6B7280] hover:text-[#374151]"
+                  }`}>
                 {tab}
                 {activeTab === tab && (
                   <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0D6EFD] rounded-full" />
@@ -433,7 +428,7 @@ console.log(formatData, 'hello Dear');
           {/* Rows */}
           {paged.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 text-[#9CA3AF]">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mb-3 opacity-40"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mb-3 opacity-40"><rect x="3" y="3" width="18" height="18" rx="2" /><line x1="3" y1="9" x2="21" y2="9" /></svg>
               <p className="text-base font-medium">No listings found</p>
               <p className="text-sm mt-1">Try adjusting your search or filters</p>
             </div>
@@ -443,7 +438,7 @@ console.log(formatData, 'hello Dear');
               style={{ gridTemplateColumns: "2.5fr 1fr 1.2fr 1.2fr 0.8fr 0.6fr 0.6fr 0.7fr", minHeight: 110 }}>
 
               {/* Property */}
-              <div className="flex items-center gap-4 px-5 py-4">
+              <div className=" items-center gap-4 px-5 py-4">
                 <img src={listing.image} alt={listing.title} className="w-[160px] h-[80px] rounded-lg object-cover flex-shrink-0" />
                 <div className="min-w-0">
                   <p className="text-[18px] font-semibold text-[#111827] leading-snug">{listing.title}</p>
@@ -514,11 +509,10 @@ console.log(formatData, 'hello Dear');
                   <span key={`ellipsis-${i}`} className="w-9 h-9 flex items-center justify-center text-sm text-[#6B7280]">…</span>
                 ) : (
                   <button key={page} onClick={() => setCurrentPage(page)}
-                    className={`w-9 h-9 flex items-center justify-center text-sm rounded-md font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30 ${
-                      currentPage === page
+                    className={`w-9 h-9 flex items-center justify-center text-sm rounded-md font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30 ${currentPage === page
                         ? "bg-[#0D6EFD] text-white"
                         : "border border-[#D1D5DB] bg-white text-[#374151] hover:bg-[#F8FAFC]"
-                    }`}>
+                      }`}>
                     {page}
                   </button>
                 )
