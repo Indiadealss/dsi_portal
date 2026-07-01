@@ -163,7 +163,7 @@ function PillSelect({ options, selected, onChange }) {
         const active = selected.includes(opt);
         return (
           <button key={opt} onClick={() => onChange(active ? selected.filter(x => x !== opt) : [...selected, opt])}
-            style={{ padding: "5px 14px", borderRadius: "999px", border: active ? "1.5px solid #2563eb" : "1.5px solid #E5E7EB", fontSize: "12.5px", cursor: "pointer", background: active ? "#EFF6FF" : "white", color: active ? "#2563eb" : "#374151", fontWeight: active ? 600 : 400, fontFamily: "inherit" }}>
+            style={{ padding: "5px 14px", borderRadius: "999px", border: active ? "1.5px solid #2563eb" : "1.5px solid #E5E7EB", fontSize: "12.5px", cursor: "pointer", background: active ? "#EFF6FF" : "white", color: active ? "#2563eb" : "#374151", fontWeight: active ? 600 : 400,  }}>
             {opt} BHK
           </button>
         );
@@ -176,7 +176,7 @@ function Accordion({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
     <div style={{ borderBottom: "1px solid #F3F4F6", paddingBottom: "4px" }}>
-      <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "none", border: "none", cursor: "pointer", padding: "13px 0 9px", color: "#111827", fontWeight: 600, fontSize: "13.5px", fontFamily: "inherit" }}>
+      <button onClick={() => setOpen(!open)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", background: "none", border: "none", cursor: "pointer", padding: "13px 0 9px", color: "#111827", fontWeight: 600, fontSize: "13.5px",  }}>
         {title}
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: open ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s" }}>
           <polyline points="6 9 12 15 18 9" />
@@ -240,7 +240,7 @@ function FilterPanel({ filters, onFiltersChange, onApply, onClear }) {
         <span style={{ fontWeight: 700, fontSize: "15px", color: "#111827" }}>
           Filters {activeCount > 0 && <span style={{ background: "#2563eb", color: "white", borderRadius: "999px", padding: "1px 8px", fontSize: "11px", marginLeft: "6px" }}>{activeCount}</span>}
         </span>
-        <button onClick={handleClear} style={{ background: "none", border: "none", color: "#2563eb", fontSize: "12.5px", cursor: "pointer", fontWeight: 600, fontFamily: "inherit" }}>Clear all</button>
+        <button onClick={handleClear} style={{ background: "none", border: "none", color: "#2563eb", fontSize: "12.5px", cursor: "pointer", fontWeight: 600,  }}>Clear all</button>
       </div>
 
       <div
@@ -477,7 +477,7 @@ function FilterPanel({ filters, onFiltersChange, onApply, onClear }) {
       </div>
 
       <div style={{ paddingTop: "14px", flexShrink: 0 }}>
-        <button onClick={handleApply} style={{ width: "100%", height: "46px", background: "linear-gradient(135deg,#1d4ed8,#2563eb)", color: "white", border: "none", borderRadius: "10px", fontWeight: 600, fontSize: "14px", cursor: "pointer", fontFamily: "inherit" }}>
+        <button onClick={handleApply} style={{ width: "100%", height: "46px", background: "linear-gradient(135deg,#1d4ed8,#2563eb)", color: "white", border: "none", borderRadius: "10px", fontWeight: 600, fontSize: "14px", cursor: "pointer",  }}>
           Apply Filters
         </button>
       </div>
@@ -528,7 +528,7 @@ function PropertyCard({ property, selected, onSelect }) {
 
       {/* Content */}
       <div style={{ padding: "13px 14px 14px" }}>
-        <h3 style={{ margin: "0 0 3px", fontSize: "14.5px", fontWeight: 700, color: "#111827", lineHeight: 1.3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{property.title}</h3>
+        <h3 style={{ margin: "0 0 3px", fontSize: "20px", fontWeight: 700, color: "#111827", lineHeight: 1.3, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{property.title}</h3>
         <p style={{ margin: "0 0 2px", fontSize: "11.5px", color: "#6b7280" }}>{property.subtitle}</p>
         <div style={{ display: "flex", alignItems: "center", gap: "4px", color: "#9ca3af", marginBottom: "10px" }}>
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
@@ -611,7 +611,7 @@ function Pagination({ current, total, onChange }) {
 
   const btn = (content, onClick, active = false, disabled = false) => (
     <button key={content + Math.random()} onClick={onClick} disabled={disabled}
-      style={{ minWidth: "34px", height: "34px", borderRadius: "8px", border: active ? "none" : "1px solid #E5E7EB", background: active ? "#2563eb" : disabled ? "#f9fafb" : "white", color: active ? "white" : disabled ? "#d1d5db" : "#374151", cursor: disabled ? "default" : "pointer", fontWeight: active ? 700 : 400, fontSize: "13px", fontFamily: "inherit", display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
+      style={{ minWidth: "34px", height: "34px", borderRadius: "8px", border: active ? "none" : "1px solid #E5E7EB", background: active ? "#2563eb" : disabled ? "#f9fafb" : "white", color: active ? "white" : disabled ? "#d1d5db" : "#374151", cursor: disabled ? "default" : "pointer", fontWeight: active ? 700 : 400, fontSize: "13px",  display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
       {content}
     </button>
   );
@@ -831,7 +831,7 @@ const createSlug = (p) => {
     + (filters.minBudget || filters.maxBudget ? 1 : 0);
 
   return (
-    <div style={{ fontFamily: "'', -apple-system, BlinkMacSystemFont", background: "#F9FAFB", minHeight: "100vh" }}>
+    <div style={{ background: "#F9FAFB", minHeight: "100vh" }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: isMobile ? "16px 14px" : "24px 20px", display: "flex", gap: "24px", alignItems: "flex-start" }}>
 
         {/* Desktop Sidebar */}
@@ -854,14 +854,14 @@ const createSlug = (p) => {
             </div>
             <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
               {isMobile && (
-                <button onClick={() => setMobileFilterOpen(true)} style={{ height: "38px", padding: "0 14px", border: "1.5px solid #E5E7EB", borderRadius: "10px", background: "white", display: "flex", gap: "6px", alignItems: "center", cursor: "pointer", fontSize: "13px", fontFamily: "inherit", color: "#374151", position: "relative" }}>
+                <button onClick={() => setMobileFilterOpen(true)} style={{ height: "38px", padding: "0 14px", border: "1.5px solid #E5E7EB", borderRadius: "10px", background: "white", display: "flex", gap: "6px", alignItems: "center", cursor: "pointer", fontSize: "13px",  color: "#374151", position: "relative" }}>
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></svg>
                   Filters
                   {activeFilterCount > 0 && <span style={{ position: "absolute", top: "-6px", right: "-6px", background: "#2563eb", color: "white", borderRadius: "50%", width: "18px", height: "18px", fontSize: "10px", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center" }}>{activeFilterCount}</span>}
                 </button>
               )}
               <select value={sortBy} onChange={e => setSortBy(e.target.value)}
-                style={{ height: "38px", border: "1px solid #D1D5DB", borderRadius: "8px", padding: "0 10px", fontSize: "13px", fontFamily: "inherit", color: "#374151", outline: "none", background: "white", cursor: "pointer" }}>
+                style={{ height: "38px", border: "1px solid #D1D5DB", borderRadius: "8px", padding: "0 10px", fontSize: "13px",  color: "#374151", outline: "none", background: "white", cursor: "pointer" }}>
                 <option value="relevance">Sort: Relevance</option>
                 <option value="price_asc">Price: Low to High</option>
                 <option value="price_desc">Price: High to Low</option>
@@ -971,7 +971,7 @@ const createSlug = (p) => {
               <p style={{ fontSize: "16px", fontWeight: 600, color: "#374151" }}>No properties found</p>
               <p style={{ fontSize: "13px", marginTop: "4px" }}>Try adjusting your filters or switching tabs</p>
               {activeFilterCount > 0 && (
-                <button onClick={() => setFilters(EMPTY_FILTERS)} style={{ marginTop: "12px", padding: "8px 20px", background: "#2563eb", color: "white", border: "none", borderRadius: "8px", cursor: "pointer", fontFamily: "inherit", fontSize: "13px", fontWeight: 600 }}>
+                <button onClick={() => setFilters(EMPTY_FILTERS)} style={{ marginTop: "12px", padding: "8px 20px", background: "#2563eb", color: "white", border: "none", borderRadius: "8px", cursor: "pointer",  fontSize: "13px", fontWeight: 600 }}>
                   Clear Filters
                 </button>
               )}
