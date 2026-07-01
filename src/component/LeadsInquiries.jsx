@@ -1,5 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import * as XLSX from "xlsx";
+import { lead } from "../api/api";
+import { useSelector } from "react-redux";
 
 // ── Mock Backend Data ──────────────────────────────────────────────────────────
 const MOCK_LEADS = [
@@ -318,6 +320,21 @@ export default function LeadsInquiries() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(7);
   const [moreMenu, setMoreMenu] = useState(null);
+  const [stats, setStats] = useState();
+
+  
+  const user = useSelector((state) =>  state.user);
+
+
+  useEffect(() => {
+    featch()
+  },[user.id])
+
+  const featch = async () => {
+    const res = await lead(user.id)
+
+    console.log(res, "res data is comming from backend")
+  }
 
   // Derived options
   const sources = useMemo(() => {

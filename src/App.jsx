@@ -83,6 +83,7 @@ import BlogsPage from "./component/BlogsPage.jsx"
 import Buyingpropertyindelhi from "./component/Buyingpropertyindelhi.jsx";
 import Experionsaatori from "./component/Experionsaatori.jsx";
 import Ncrplots from "./component/Ncrplots.jsx";
+import Neighbourhood from "./component/Neighbourhood.jsx";
 
 function App() {
 
@@ -184,7 +185,8 @@ useEffect(() => {
           path:'project-watch-noida-sector-151-experion-saatori',
           element:<Experionsaatori />
         },
-        {path:'the-ultimate-ncr-plot-buying-guide', element:<Ncrplots />}
+        {path:'the-ultimate-ncr-plot-buying-guide', element:<Ncrplots />},
+        {path:'neighbourhood-watch-sector-150-noida-is-a-residential-oasis', element: <Neighbourhood /> }
       ]
     },
     {

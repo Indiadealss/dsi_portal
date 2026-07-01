@@ -4,6 +4,7 @@ import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png"
 import experionSatori from "../Images/experionSatori.jpeg"
 import { Link } from "react-router-dom";
 import iNNERPAGE from "../Images/iNNERPAGE.png"
+import Neighbourhood from "../Images/Neighbourhood.png"
 
 
 const heroPost = {
@@ -78,6 +79,16 @@ const allPosts = [
     date:"29-06-2026",
     link:'/blog/the-ultimate-ncr-plot-buying-guide'
   },
+  {
+    id:8,
+    title:"Neighbourhood Watch: Sector 150, Noida is A Residential Oasis",
+    description:"When people picture the Delhi-NCR skyline, they often think of towering concrete structures, packed lanes, and fast-paced commercial intersections.",
+    image:Neighbourhood,
+    author:"",
+    avtar:"",
+    date:"01-07-2026",
+    link:'/blog/neighbourhood-watch-sector-150-noida-is-a-residential-oasis'
+  }
   
 ];
 

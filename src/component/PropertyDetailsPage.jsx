@@ -96,7 +96,7 @@ export default function PropertyDetailsPage() {
   const [openLeadModal, setOpenLeadModal] = useState(false);
   const [property, setProperty] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-  const [form, setForm] = useState({ property_id: "", projectname: "", Name: "", PhoneNumber: "", message: "" });
+  const [form, setForm] = useState({ property_id: "", projectname: "", Name: "", PhoneNumber: "", message: "", budget: "" });
   const [amount, setAmount] = useState(1000000);
   const [rate, setRate] = useState(8.5);
   const [years, setYears] = useState(20);
@@ -503,7 +503,7 @@ export default function PropertyDetailsPage() {
               {/* AGENT CARD */}
               {property.agent !== "assign" && (
                 <div className="bg-white rounded-xl border border-[#E6E6E6] p-5 fade-up fade-up-4">
-                  <h3 className="text-[13px] font-bold text-[#1F1F1F] mb-4 uppercase tracking-wider">Agent Information</h3>
+                  {/* <h3 className="text-[13px] font-bold text-[#1F1F1F] mb-4 uppercase tracking-wider">Agent Information</h3> */}
                   <div className="flex items-center gap-3">
                     <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-blue-100 shrink-0  flex items-center justify-center" style={{ backgroundColor: getAvatarColor(property?.owner?.name) }}>
                       {!imageError && property?.owner?.image ? (
@@ -522,13 +522,8 @@ export default function PropertyDetailsPage() {
                     <div>
                       <div className="font-extrabold text-[#1F1F1F] text-sm">{property.owner?.name}</div>
                       <div className="text-[11px] text-[#6E6E6E]">Property Consultant</div>
-                      <div className="text-[11px] text-[#001A2D] font-semibold">Indiadeals Agent</div>
-                      <div className="flex items-center gap-1 mt-0.5">
-                        {[1, 2, 3, 4, 5].map(s => (
-                          <span key={s} className={`text-xs ${s <= 4 ? "text-yellow-400" : "text-gray-300"}`}>★</span>
-                        ))}
-                        <span className="text-[10px] text-[#6E6E6E] ml-1">4.8 · 120 Reviews</span>
-                      </div>
+                      {/* <div className="text-[11px] text-[#001A2D] font-semibold">Indiadeals</div> */}
+                     
                     </div>
                   </div>
                   <div className="flex gap-2 mt-4">
@@ -616,13 +611,17 @@ export default function PropertyDetailsPage() {
                 <input name="PhoneNumber" value={form.PhoneNumber} onChange={handleChange} placeholder="Mobile Number"
                   className="border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-blue-500" />
               </div>
+
+              <div className="grid grid-cols-1 gap-3">
+                <input name="property_id" value={form.budget} onChange={handleChange} placeholder="Budget" className="border border-gray-200 rounded-lg px-4 py-3 outline-none " />
+                </div>
               <textarea name="message" value={form.message} onChange={handleChange} rows={4}
                 placeholder="Tell us your requirement..."
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 outline-none resize-none focus:border-blue-500" />
+                className="w-full border border-gray-200 rounded-lg px-4 py-3 outline-none resize-none" />
               <div className="flex gap-3">
                 <button onClick={handleSubmit}
                   className="flex-1 bg-[#2F73D9] text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">
-                  Schedule a Visit
+                  Submit Now
                 </button>
                 <a href="tel:+919818764200"
                   className="flex-1 border border-[#2F73D9] text-[#2F73D9] font-semibold py-3 rounded-lg text-center hover:bg-blue-50 transition">
