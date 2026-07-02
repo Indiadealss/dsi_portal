@@ -6,7 +6,6 @@ const GAP = 16;
 
 const Newlaunch = ({ properties }) => {
     
-  console.log("properties in newlaunch", properties);
     const propertyes = properties.filter(
   (item) => item.availabestatus === "New Launch"
 );

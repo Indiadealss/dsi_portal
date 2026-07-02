@@ -148,6 +148,7 @@ const Home = () => {
       devloper: p.projectdeveloper || '',
       owner: p.owner || "Owner",
       hotScreen: p.hotScreen || false,
+      availabestatus: p.availabestatus || "N/A",
        };
     });
     console.log(formattedData, 'formattedData is myth');
