@@ -5,6 +5,7 @@ import experionSatori from "../Images/experionSatori.jpeg"
 import { Link } from "react-router-dom";
 import iNNERPAGE from "../Images/iNNERPAGE.png"
 import Neighbourhood from "../Images/Neighbourhood.png"
+import NCRPLOTS from "../Images/inner-image7.png"
 
 
 const heroPost = {
@@ -88,6 +89,16 @@ const allPosts = [
     avtar:"",
     date:"01-07-2026",
     link:'/blog/neighbourhood-watch-sector-150-noida-is-a-residential-oasis'
+  },
+  {
+    id:9,
+    title:"Greater Noida West: Affordable Suburb Turns Into Luxury Pin Code",
+    description:"For nearly a decade, Greater Noida West (popularly known as Noida Extension) held a very specific and reliable identity in the Delhi-NCR real estate market. It was the absolute go-to destination for middle-income families and first-time homebuyers looking for spacious, budget-friendly apartments. ",
+    image:NCRPLOTS,
+    author:"",
+    avtar:"",
+    date:"02-07-2026",
+    link:'/blog/greater-noida-west-affordable-suburb-turns-into-luxury-pin-code'
   }
   
 ];

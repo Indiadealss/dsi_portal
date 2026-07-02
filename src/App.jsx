@@ -84,6 +84,7 @@ import Buyingpropertyindelhi from "./component/Buyingpropertyindelhi.jsx";
 import Experionsaatori from "./component/Experionsaatori.jsx";
 import Ncrplots from "./component/Ncrplots.jsx";
 import Neighbourhood from "./component/Neighbourhood.jsx";
+import Affordablesuburb from "./component/Affordablesuburb.jsx";
 
 function App() {
 
@@ -186,7 +187,8 @@ useEffect(() => {
           element:<Experionsaatori />
         },
         {path:'the-ultimate-ncr-plot-buying-guide', element:<Ncrplots />},
-        {path:'neighbourhood-watch-sector-150-noida-is-a-residential-oasis', element: <Neighbourhood /> }
+        {path:'neighbourhood-watch-sector-150-noida-is-a-residential-oasis', element: <Neighbourhood /> },
+        {path:'greater-noida-west-affordable-suburb-turns-into-luxury-pin-code', element: <Affordablesuburb /> }
       ]
     },
     {
