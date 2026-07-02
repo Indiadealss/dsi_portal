@@ -6,13 +6,9 @@ const GAP = 16;
 
 const Newlaunch = ({ properties }) => {
     
-    let propertyes = []
-    if(properties.length < 5){
-        propertyes = properties.filter((item) => item.availabestatus === 'New Launch');
-    }
-    else{
-        propertyes = properties.filter((item) => item.availabestatus === 'New Launch');
-    }
+    const propertyes = properties.filter(
+  (item) => item.availabestatus === "New Launch"
+);
 
     const newCards = propertyes.map((item) => {
     const covers = item.images?.filter((img) => img.type === "cover") ?? [];
