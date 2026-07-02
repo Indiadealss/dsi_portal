@@ -524,6 +524,10 @@ const handleBuildPlotarea = (newUnit) => {
     {
       name: 'Under construction',
       label: 'Under construction'
+    },
+    {
+      name: 'New Launch',
+      label: 'New Launch'
     }
   ]
 
