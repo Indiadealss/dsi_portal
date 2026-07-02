@@ -8,10 +8,10 @@ const Newlaunch = ({ properties }) => {
     
     let propertyes = []
     if(properties.length < 5){
-        propertyes = properties.filter((item) => item.availabestatus === 'New Launch' || properties.filter((item) => item.hotScreen === true));
+        propertyes = properties.filter((item) => item.availabestatus === 'New Launch');
     }
     else{
-        propertyes = properties.filter((item) => item.hotScreen === false);
+        propertyes = properties.filter((item) => item.availabestatus === 'New Launch');
     }
 
     const newCards = propertyes.map((item) => {
