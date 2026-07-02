@@ -256,7 +256,8 @@ console.log(residential, 'residential');
           mx-auto'>
         {/* <Smallmain  title='GET STARTED WITH EXPLORING REAL ESTATE OPTIONS' data={data}/> */}
         <PropertyList properties={data} />
-        <Newlaunch properties={data} />
+        <Newlaunch properties={data}  availabestatus='New Launch' />
+        <Newlaunch properties={data}  availabestatus='Ready to move' />
         <CategoriesProperties />
         <div className='mt-[5vw] mb-[15vw]'>
         <Blogone />

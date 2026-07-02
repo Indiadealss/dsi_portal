@@ -4,10 +4,10 @@ import ProjectsCrousal from "./ProjectsCrousal";
 
 const GAP = 16;
 
-const Newlaunch = ({ properties }) => {
+const Newlaunch = ({ properties, availabestatus }) => {
     
     const propertyes = properties.filter(
-  (item) => item.availabestatus === "New Launch"
+  (item) => item.availabestatus === availabestatus
 );
 
     const newCards = propertyes.map((item) => {
@@ -140,7 +140,7 @@ const Newlaunch = ({ properties }) => {
     <div className="relative mt-[50px]">
       <div className="mb-[30px]">
         <h1 className="uppercase">
-          <span className="heading-h3">New Launch</span>
+          <span className="heading-h3">{availabestatus}</span>
         </h1>
       </div>
 
