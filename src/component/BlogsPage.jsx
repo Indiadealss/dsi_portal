@@ -1,12 +1,12 @@
 import { useState } from "react";
-import NoidaExtention from "../Images/noidavsnoidaextention.png"
-import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png"
-import experionSatori from "../Images/experionSatori.jpeg"
+import NoidaExtention from "../Images/noidavsnoidaextention.png";
+import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png";
+import experionSatori from "../Images/experionSatori.jpeg";
 import { Link } from "react-router-dom";
-import iNNERPAGE from "../Images/iNNERPAGE.png"
-import Neighbourhood from "../Images/Neighbourhood.png"
-import NCRPLOTS from "../Images/inner-image7.png"
-
+import iNNERPAGE from "../Images/iNNERPAGE.png";
+import Neighbourhood from "../Images/Neighbourhood.png";
+import NCRPLOTS from "../Images/inner-image7.png";
+import coverImage10Blog from "../Images/coverImage10Blog.png";
 
 const heroPost = {
   id: 0,
@@ -99,6 +99,16 @@ const allPosts = [
     avtar:"",
     date:"02-07-2026",
     link:'/blog/greater-noida-west-affordable-suburb-turns-into-luxury-pin-code'
+  },
+  {
+    id:10,
+    title: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
+    description:"The real estate corridor along the Noida-Greater Noida Expressway has fast become a darling of the market, as it offers prime lands, unbeatable connectivity, and buyers flocking to secure a property in the NCR.",
+    image:coverImage10Blog,
+    author:"",
+    avtar:"",
+    date:"03-07-2026",
+    link:'/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151'
   }
   
 ];

@@ -10,9 +10,9 @@ export default function Footer() {
     <footer className="relative bg-[#001B33] overflow-hidden">
       
       {/* TOP CONTENT */}
-      <div className="w-[-webkit-fill-available] mx-auto px-10 md:px-[135px]  pt-12 pb-30 relative z-10">
+      <div className="w-[-webkit-fill-available] mx-auto px-10 md:px-[135px]  pt-12 pb-[102px] relative z-10">
         
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           
           {/* ABOUT */}
          
@@ -68,19 +68,19 @@ export default function Footer() {
               </p>
 
               <div className="flex items-center gap-3 mt-2">
-                <div className="w-18 h-10   rounded-md flex items-center justify-center">
+                <div className="w-8 h-10   rounded-md flex items-center justify-center">
                   <a href="https://www.facebook.com/people/Indiadeals/61587222626520" target="_blank" ><img src={Facebook} alt="Facebook" /></a>
                 </div>
 
-                <div className="w-18 h-10   rounded-md flex items-center justify-center">
+                <div className="w-8 h-10   rounded-md flex items-center justify-center">
                   <a href="https://www.instagram.com/indiadeals_official?igsh=eGEwc2x0enJtaWk0" target="_blank" ><img src={Instagram} alt="Instagram" /></a>
                 </div>
 
-                <div className="w-18 h-10   rounded-md flex items-center justify-center">
+                <div className="w-8 h-10   rounded-md flex items-center justify-center">
                   <a href="https://www.linkedin.com/company/indiadeals-official/" target="_blank" ><img src={Linkedin} alt="Linkedin" /></a>
                 </div>
 
-                <div className="w-18 h-10   rounded-md flex items-center justify-center">
+                <div className="w-8 h-10   rounded-md flex items-center justify-center">
                   <a href="https://www.youtube.com/@indiadealss" target="_blank" ><img src={Youtube} alt="Youtube" /></a>
                 </div>
               </div>
@@ -101,11 +101,11 @@ export default function Footer() {
       </div>
 
       {/* BUILDINGS */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden h-[8vw]">
         <img
           src={FooterImage}
           alt="Footer Buildings"
-          className="w-[1300px] h-auto object-cover mx-auto"
+          className="w-[1300px] h-[8vw] object-cover mx-auto"
         />
       </div>
     </footer>

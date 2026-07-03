@@ -85,6 +85,7 @@ import Experionsaatori from "./component/Experionsaatori.jsx";
 import Ncrplots from "./component/Ncrplots.jsx";
 import Neighbourhood from "./component/Neighbourhood.jsx";
 import Affordablesuburb from "./component/Affordablesuburb.jsx";
+import Godrejproperties from "./component/Godrejproperties.jsx";
 
 function App() {
 
@@ -188,7 +189,8 @@ useEffect(() => {
         },
         {path:'the-ultimate-ncr-plot-buying-guide', element:<Ncrplots />},
         {path:'neighbourhood-watch-sector-150-noida-is-a-residential-oasis', element: <Neighbourhood /> },
-        {path:'greater-noida-west-affordable-suburb-turns-into-luxury-pin-code', element: <Affordablesuburb /> }
+        {path:'greater-noida-west-affordable-suburb-turns-into-luxury-pin-code', element: <Affordablesuburb /> },
+        {path:'news-godrej-properties-acquires-land-parcel-in-noida-sector-151', element: <Godrejproperties /> }
       ]
     },
     {

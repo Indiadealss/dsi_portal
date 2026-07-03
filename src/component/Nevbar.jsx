@@ -222,13 +222,13 @@ const Navbar = () => {
                                       ? "/our-blogs"
                                       : "/careers"
                         }
-                        className="flex items-center gap-1 py-2 hover:text-blue-400 text-white text-[larger]"
+                        className="flex items-center gap-1 py-2 hover:text-blue-400 text-white font-normal"
                       >
                         {menu}
                       </Link>
                     ) : (
                       <>
-                        <div className="flex items-center gap-1 py-2 cursor-pointer hover:text-blue-400 text-white text-[larger]">
+                        <div className="flex items-center gap-1 py-2 cursor-pointer hover:text-blue-400 text-white font-normal">
                           {menu}
                           <FaChevronDown size={12} />
                         </div>
