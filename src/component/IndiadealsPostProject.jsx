@@ -82,7 +82,7 @@ const benefits = [
   },
 ];
 
-export default function BrandsDoorPostProject() {
+export default function IndiadealsPostProject() {
   const [formData, setFormData] = useState({
     listingType: "",
     totalFloors: "",

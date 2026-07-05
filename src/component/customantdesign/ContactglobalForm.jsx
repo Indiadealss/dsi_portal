@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createLead, createLeadMessage, getAllProjectNames } from "../../api/api";
 import bgImage from "../../Images/contactbannerimage.jpg"; // background image
 import buildingImg from "../../Images/projectPhoto.jpg"; // small card image
+import logo from "../../Images/INDIADEALS_LOGO.svg"; // logo image
 
 const ContactglobalForm = () => {
 
@@ -176,164 +177,160 @@ const ContactglobalForm = () => {
 
         {/* Contact Form */}
         <form
-          onSubmit={handleSubmit}
-          className="w-[-webkit-fill-available] max-w-[560px] bg-white rounded-2xl shadow-2xl p-[12px] sm:p-[20px]"
-        >
-          <h2 className="heading-h3 sm:text-[48px] font-extrabold uppercase text-[#001b38] leading-none">
-            Contact Now
-          </h2>
+  onSubmit={handleSubmit}
+  className="w-full max-w-[900px] bg-white rounded-2xl shadow-2xl p-6"
+>
+  <h2 className="heading-h3 sm:text-[48px] font-extrabold uppercase text-[#001b38] leading-none mb-6">
+    Contact Now
+  </h2>
 
-          {/* Form Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2 mt-4">
+  <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
 
-            {/* Name */}
-            <div>
-              <label className="text-[#23364B]  text-md font-medium">
-                Name
-              </label>
-              {errors.Name && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.Name}
-                </p>
-              )}
-              <input
-                type="text"
-                name="Name"
-                value={formData.Name}
-                onChange={handleChange}
-                placeholder="Name"
-                className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
-              />
-            </div>
+    {/* LEFT SIDE - FORM */}
+    <div className="space-y-4">
 
-            {/* Contact */}
-            <div>
-              <label className="text-[#23364B] text-md font-medium">
-                Contact No.
-              </label>
-              {errors.PhoneNumber && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.PhoneNumber}
-                </p>
-              )}
-              <input
-                type="text"
-                name="PhoneNumber"
-                value={formData.PhoneNumber}
-                onChange={handleChange}
-                placeholder="Mobile Number"
-                className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
-              />
-            </div>
+      {/* Name */}
+      <div>
+        <label className="text-[#23364B] font-medium">Name</label>
+        {errors.Name && (
+          <p className="text-red-500 text-xs">{errors.Name}</p>
+        )}
+        <input
+          type="text"
+          name="Name"
+          value={formData.Name}
+          onChange={handleChange}
+          placeholder="Name"
+          className="w-full h-10 border border-gray-300 rounded-lg px-4 outline-none"
+        />
+      </div>
 
-            {/* Email */}
-            <div>
-              <label className="text-[#23364B] text-md font-medium">
-                Mail
-              </label>
-              {errors.email && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.email}
-                </p>
-              )}
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="E-Mail"
-                className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
-              />
-            </div>
+      {/* Email */}
+      <div>
+        <label className="text-[#23364B] font-medium">Mail</label>
+        {errors.email && (
+          <p className="text-red-500 text-xs">{errors.email}</p>
+        )}
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="E-Mail"
+          className="w-full h-10 border border-gray-300 rounded-lg px-4 outline-none"
+        />
+      </div>
 
-            {/* Side Image */}
-            <div className="row-span-3 order-last sm:order-none sm:row-span-3 col-span-1 sm:col-span-1">
-              <img
-                src={buildingImg}
-                alt="Building"
-                className="w-full h-[220px] sm:h-full object-cover rounded-2xl mt-2 sm:mt-0"
-              />
-            </div>
+      {/* Project */}
+      <div className="relative">
+        <label className="text-[#23364B] font-medium">Project</label>
 
-            {/* Project */}
-            <div className="relative">
-              <label className="text-[#23364B] text-md font-medium">
-                Project
-              </label>
+        <input
+          type="text"
+          name="projectname"
+          value={inputValue}
+          onChange={handleChange}
+          placeholder="Enter Project Name"
+          className="w-full h-10 border border-gray-300 rounded-lg px-4 outline-none"
+        />
 
-              <input
-                type="text"
-                name="projectname"
-                value={inputValue}
-                onChange={handleChange}
-                placeholder="Enter the Project Name"
-                className="w-full h-[40px] border border-gray-300 rounded-lg px-4 outline-none text-sm"
-              />
-
-              {showSuggestions && projectList.length > 0 && (
-                <div className="absolute top-full left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
-                  {projectList.map((project) => (
-                    <div
-                      key={project.npxid}
-                      onClick={() => handleSelectProject(project)}
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    >
-                      <div className="font-medium">
-                        {project.projectname}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {project.npxid}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div>
-              <label className="text-[#23364B] text-md font-medium">
-                Requriments
-              </label>
-              <select
-                name="requirement"
-                value={formData.requirement}
-                onChange={handleChange}
-                className="w-full h-[32px] border border-gray-300 rounded-lg px-4 mt-0 outline-none text-sm"
+        {showSuggestions && projectList.length > 0 && (
+          <div className="absolute top-full left-0 w-full bg-white border rounded-lg shadow-lg max-h-60 overflow-y-auto z-50">
+            {projectList.map((project) => (
+              <div
+                key={project.npxid}
+                onClick={() => handleSelectProject(project)}
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
               >
-                {requirements.map((req, index) => (
-                  <option key={index} value={req.value}>{req.name}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Message */}
-            <div>
-              <label className="text-[#23364B] text-md font-medium">
-                Message
-              </label>
-
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="What's on your mind"
-                className="w-full h-[50px] border border-gray-300 rounded-lg px-4 py-3 mt-0 outline-none text-sm resize-none"
-              ></textarea>
-            </div>
+                <div>{project.projectname}</div>
+                <div className="text-xs text-gray-500">{project.npxid}</div>
+              </div>
+            ))}
           </div>
+        )}
+      </div>
 
-          {/* Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full h-[58px] rounded-lg text-white text-xl font-bold uppercase mt-8 transition-all duration-300 ${loading
-                ? "bg-gray-400 cursor-not-allowed"
-                : "bg-[#3D7BC4] hover:bg-[#2d68ae]"
-              }`}
-          >
-            {loading ? "Submitting..." : "Submit Now"}
-          </button>
-        </form>
+      {/* Requirement */}
+      <div>
+        <label className="text-[#23364B] font-medium">Requirements</label>
+
+        <select
+          name="requirement"
+          value={formData.requirement}
+          onChange={handleChange}
+          className="w-full h-10 border border-gray-300 rounded-lg px-4 outline-none"
+        >
+          {requirements.map((req, index) => (
+            <option key={index} value={req.value}>
+              {req.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Phone */}
+      <div>
+        <label className="text-[#23364B] font-medium">Contact No.</label>
+        {errors.PhoneNumber && (
+          <p className="text-red-500 text-xs">{errors.PhoneNumber}</p>
+        )}
+        <input
+          type="text"
+          name="PhoneNumber"
+          value={formData.PhoneNumber}
+          onChange={handleChange}
+          placeholder="Mobile Number"
+          className="w-full h-10 border border-gray-300 rounded-lg px-4 outline-none"
+        />
+      </div>
+
+      {/* Message */}
+      <div>
+        <label className="text-[#23364B] font-medium">Message</label>
+
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          placeholder="What's on your mind"
+          className="w-full h-28 border border-gray-300 rounded-lg px-4 py-3 outline-none resize-none"
+        />
+      </div>
+
+      {/* Button */}
+      <button
+        type="submit"
+        disabled={loading}
+        className={`w-full h-14 rounded-lg text-white font-bold uppercase ${
+          loading
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-[#3D7BC4] hover:bg-[#2d68ae]"
+        }`}
+      >
+        {loading ? "Submitting..." : "Submit Now"}
+      </button>
+
+    </div>
+
+    {/* RIGHT SIDE - IMAGES */}
+    <div className="flex flex-col items-center justify-between">
+
+      <img
+        src={logo}
+        alt="Logo"
+        className="w-[140px] h-auto mb-6"
+      />
+
+      <img
+        src={buildingImg}
+        alt="Building"
+        className="w-full h-full max-h-[520px] object-cover rounded-2xl"
+      />
+
+    </div>
+
+  </div>
+</form>
       </div>
     </section>
   );

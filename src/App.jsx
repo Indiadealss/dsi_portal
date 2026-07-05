@@ -67,7 +67,7 @@ import AllProjects from "./component/AllProjects.jsx";
 import PropertyListingPage from "./component/PropertyListingPage.jsx"
 import PropertyDetailPage from "./component/Projectpagenew.jsx";
 import PropertyDetailsPage from "./component/PropertyDetailsPage.jsx";
-import BrandsDoorPostProject from "./component/BrandsDoorPostProject.jsx";
+import IndiadealsPostProject from "./component/IndiadealsPostProject.jsx";
 import ProjectListingStep1 from "./component/Projecttype.jsx";
 import Carrer from "./component/Carrer.jsx";
 import Hanumatviharawasiya from "./component/Hanumatviharawasiya.jsx";
@@ -164,7 +164,7 @@ useEffect(() => {
     { path: "/property",element:<Property />},
     { path:"/our-blogs", element:<BlogsPage />},
     { path: "/project",element:<AllProjects />},
-    {path:"/property-detail-page",element:<BrandsDoorPostProject />},
+    {path:"/property-detail-page",element:<IndiadealsPostProject />},
     {path:"/choose-listing-type", element:<ProjectListingStep1 /> },
     {path: "/Propertylistingpage", element:<PropertyListingPage />},
     {path: "/:slug",element:<Propertypageslug />},

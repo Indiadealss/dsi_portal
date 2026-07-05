@@ -9,7 +9,7 @@ const dealers = [
     reranumber:'',
     member:'Property Advisor',
     badges: ["RERA Registered", "Property Advisor"],
-    number: '+91-7906518272'
+    number: '+91-9818763100',
   },
 ];
 
