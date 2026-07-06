@@ -7,7 +7,7 @@ export const LocationProvider = ({ children }) => {
 
   useEffect(() => {
     const savedLocation = localStorage.getItem("userLocation");
-
+    updateLocation(savedLocation || "Noida"); // Set default location if none is saved
     if (savedLocation) {
       setLocation(savedLocation);
     }
