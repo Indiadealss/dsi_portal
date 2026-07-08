@@ -4,6 +4,9 @@ import { lead } from "../api/api";
 import { useSelector } from "react-redux";
 import MyListings from "./MyListings";
 import LeadsInquiries from "./LeadsInquiries";
+import NotificationsDashboard from "./Notifications";
+import SubscriptionPlanDashboard from "./SubscriptionPlanDashboard";
+import CampaignManagementDashboard from "./CampaignManagementDashboard";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -217,7 +220,10 @@ export default function Mydashboard() {
           {activeNav === "dashboard" && <Dashboard />}
           {activeNav === "listings" && <MyListings />}
           {activeNav === 'leads' && <LeadsInquiries />}
-        
+          {activeNav === "notifications" && <NotificationsDashboard />}
+          {activeNav === "subscription" && <SubscriptionPlanDashboard />}
+          {activeNav === 'campaign' && <CampaignManagementDashboard />}
+          
       </div>
     </>
   );

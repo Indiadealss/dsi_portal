@@ -53,7 +53,7 @@ const Dashboard = () => {
 
 
           setData({
-            userName: user.name,
+            userName: user.name, 
             stats: {
               totalListings: stats.totalListings ?? 0,
               activeListings: stats.activeListings ?? 0,

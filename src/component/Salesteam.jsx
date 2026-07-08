@@ -43,20 +43,6 @@ const Salesteam = () => {
 
         },
         {
-            id: 5,
-            name: "Puskar Sniha",
-            role: "Assistant Manager-sales",
-            image: pushkar,
-            linkedin: "#"
-        },
-        {
-            id: 11,
-            name: "Pankaj Panday",
-            role: "Assistant Manager-sales",
-            image: pankaj,
-            linkedin: "#"
-        },
-        {
             id: 7,
             name: "Anshika Rai",
             role: "Sales corrdinator",

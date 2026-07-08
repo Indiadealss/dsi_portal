@@ -2,6 +2,11 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import * as XLSX from "xlsx";
 import { lead } from "../api/api";
 import { useSelector } from "react-redux";
+import totalLeads from '../Images/totalLeads.png';
+import newLeadimage from '../Images/newLead.png';
+import converted from '../Images/converted.png';
+import connected from '../Images/connected.png';
+import qlaified from '../Images/qlaified.png';
 
 // ── Mock Backend Data ──────────────────────────────────────────────────────────
 const MOCK_LEADS = [
@@ -157,13 +162,7 @@ const MOCK_LEADS = [
   },
 ];
 
-const STATS = [
-  { label: "Total Leads", value: "362", sub: "All Time", iconBg: "#ECFDF3", iconColor: "#16A34A", subColor: "#16A34A", icon: "📋" },
-  { label: "New Leads", value: "85", sub: "75% of Total", iconBg: "#E8F1FF", iconColor: "#2563EB", subColor: "#2563EB", icon: "🔔" },
-  { label: "Contacted", value: "124", sub: "8% Total", iconBg: "#F4EFFF", iconColor: "#7C3AED", subColor: "#7C3AED", icon: "📞" },
-  { label: "Qualified", value: "98", sub: "This Month", iconBg: "#FFF7ED", iconColor: "#F97316", subColor: "#F97316", icon: "⭐" },
-  { label: "Converted", value: "55", sub: "This Month", iconBg: "#FDECEC", iconColor: "#DC2626", subColor: "#DC2626", icon: "✅" },
-];
+
 
 const STATUS_STYLES = {
   New: { bg: "#DCFCE7", text: "#16A34A" },
@@ -321,34 +320,128 @@ export default function LeadsInquiries() {
   const [pageSize, setPageSize] = useState(7);
   const [moreMenu, setMoreMenu] = useState(null);
   const [stats, setStats] = useState();
+  const [data, setData] = useState([]);
+  const [STATS, setSTATS] = useState([]);
 
-  
-  const user = useSelector((state) =>  state.user);
+
+  const user = useSelector((state) => state.user);
 
 
   useEffect(() => {
     featch()
-  },[user.id])
+  }, [user.id])
+
 
   const featch = async () => {
-    const res = await lead(user.id)
+    try {
+      const res = await lead(user.id);
 
-    console.log(res, "res data is comming from backend")
-  }
+      console.log(res.data.data[2], "res data is coming from backend");
+
+      const formattedData = res.data.data[2].map((item, index) => ({
+        id: item._id || index,
+        name: item.Name || "N/A",
+        property: item.projectname || item.property_id?.projectname || "N/A",
+        status: item.status || '', // or use item.status if your API provides one 
+        phone: item.PhoneNumber || "N/A",
+        date: new Date(item.createdAt).toLocaleDateString(),
+        time: new Date(item.createdAt).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        message: item.message || "-",
+        purpose: item.purpose || "-",
+        leadIdentity: item.leadIdentity,
+      }));
+
+      const statsData = await {
+        totalLeads: res.data.data[2].length,
+        newLeads: formattedData.filter(
+          (item) => item.status === "New"
+        ).length,
+        contacted: formattedData.filter(
+          (item) => item.status === "contatcted"
+        ),
+        qualified: formattedData.filter(
+          (item) => item.status === "qualified"
+        ),
+        converted: formattedData.filter(
+          (item) => item.status === "converted"
+        ),
+      }
+
+      const statsCard = [
+  {
+    label: "Total Leads",
+    value: res.data.data[2].length || 0,
+    sub: "All Time",
+    iconBg: "#ECFDF3",
+    subColor: "#16A34A",
+    icon: totalLeads,
+  },
+  {
+    label: "New Leads",
+    value: formattedData.filter(
+          (item) => item.status === "New"
+        ).length || 0,
+    sub: "New",
+    iconBg: "#E8F1FF",
+    subColor: "#2563EB",
+    icon: newLeadimage,
+  },
+  {
+    label: "Contacted",
+    value: formattedData.filter(
+          (item) => item.status === "contatcted"
+        ).length || 0,
+    sub: "Contacted",
+    iconBg: "#F4EFFF",
+    subColor: "#7C3AED",
+    icon: connected,
+  },
+  {
+    label: "Qualified",
+    value: formattedData.filter(
+          (item) => item.status === "qualified"
+        ).length || 0,
+    sub: "Qualified",
+    iconBg: "#FFF7ED",
+    subColor: "#F97316",
+    icon: qlaified,
+  },
+  {
+    label: "Converted",
+    value: formattedData.filter(
+          (item) => item.status === "converted"
+        ).length || 0,
+    sub: "Converted",
+    iconBg: "#FDECEC",
+    subColor: "#DC2626",
+    icon: converted,
+  },
+];
+      
+  setSTATS(statsCard);
+
+      setData(formattedData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   // Derived options
   const sources = useMemo(() => {
-    const s = [...new Set(MOCK_LEADS.map((l) => l.source))];
+    const s = [...new Set(data.map((l) => l.source))];
     return [{ value: "all", label: "All Sources" }, ...s.map((x) => ({ value: x, label: x }))];
-  }, []);
+  }, [data]);
   const properties = useMemo(() => {
-    const p = [...new Set(MOCK_LEADS.map((l) => l.property))];
+    const p = [...new Set(data.map((l) => l.property))];
     return [{ value: "all", label: "All Properties" }, ...p.map((x) => ({ value: x, label: x }))];
-  }, []);
+  }, [data]);
   const cities = useMemo(() => {
-    const c = [...new Set(MOCK_LEADS.map((l) => l.city))];
+    const c = [...new Set(data.map((l) => l.city))];
     return [{ value: "all", label: "All Cities" }, ...c.map((x) => ({ value: x, label: x }))];
-  }, []);
+  }, [data]);
   const statuses = [
     { value: "all", label: "All Status" },
     { value: "New", label: "New" },
@@ -365,15 +458,15 @@ export default function LeadsInquiries() {
 
   // Filter + sort
   const filtered = useMemo(() => {
-    let data = [...MOCK_LEADS];
-    if (statusFilter !== "all") data = data.filter((l) => l.status === statusFilter);
-    if (sourceFilter !== "all") data = data.filter((l) => l.source === sourceFilter);
-    if (propertyFilter !== "all") data = data.filter((l) => l.property === propertyFilter);
-    if (cityFilter !== "all") data = data.filter((l) => l.city === cityFilter);
-    if (sort === "oldest") data = data.reverse();
-    if (sort === "name") data = [...data].sort((a, b) => a.name.localeCompare(b.name));
-    return data;
-  }, [statusFilter, sourceFilter, propertyFilter, cityFilter, sort]);
+    let filteredData = [...data];
+    if (statusFilter !== "all") filteredData = filteredData.filter((l) => l.status === statusFilter);
+    // if (sourceFilter !== "all") filteredData = filteredData.filter((l) => l.source === sourceFilter);
+    if (propertyFilter !== "all") filteredData = filteredData.filter((l) => l.property === propertyFilter);
+    if (cityFilter !== "all") filteredData = filteredData.filter((l) => l.city === cityFilter);
+    if (sort === "oldest") filteredData = filteredData.reverse();
+    if (sort === "name") filteredData = [...filteredData].sort((a, b) => a.name.localeCompare(b.name));
+    return filteredData;
+  }, [statusFilter, sourceFilter, propertyFilter, cityFilter, sort, data]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
@@ -421,7 +514,7 @@ export default function LeadsInquiries() {
                 className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
                 style={{ backgroundColor: s.iconBg }}
               >
-                {s.icon}
+                <img src={s.icon} alt={s.icon} /> 
               </div>
               <div className="min-w-0">
                 <p className="text-sm text-slate-500 font-medium truncate">{s.label}</p>
@@ -461,7 +554,7 @@ export default function LeadsInquiries() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
-                  {["Leads", "Property", "Source", "Status", "Phone", "Date / Time", "Actions"].map((h) => (
+                  {["Leads", "Property", "Status", "Phone", "Date / Time", "Actions"].map((h) => (
                     <th
                       key={h}
                       className={`py-4 px-4 text-sm font-semibold text-slate-500 ${h === "Actions" ? "text-center" : "text-left"}`}
@@ -482,38 +575,21 @@ export default function LeadsInquiries() {
                   paginated.map((lead) => (
                     <tr key={lead.id} className="hover:bg-gray-50 transition-colors duration-100">
                       {/* Lead */}
-                      <td className="py-4 px-4">
-                        <div className="flex items-center gap-3">
-                          <Avatar src={lead.avatar} name={lead.name} />
-                          <div>
-                            <p className="text-sm font-bold text-slate-900">{lead.name}</p>
-                            <p className="text-sm text-slate-500">{lead.email}</p>
-                          </div>
-                        </div>
-                      </td>
-                      {/* Property */}
-                      <td className="py-4 px-4 max-w-[200px]">
-                        <p className="text-sm font-bold text-slate-900 leading-snug">{lead.property}</p>
-                        <p className="text-xs text-slate-500">{lead.address}</p>
-                        <p className="text-xs text-slate-600 font-medium mt-0.5">{lead.price}</p>
-                      </td>
-                      {/* Source */}
-                      <td className="py-4 px-4">
-                        <p className="text-sm text-slate-500">{lead.source}</p>
-                      </td>
-                      {/* Status */}
-                      <td className="py-4 px-4">
+                      <td className='text-center'>{lead.name}</td>
+
+                      <td>{lead.property}</td>
+
+                      <td>
                         <StatusBadge status={lead.status} />
                       </td>
-                      {/* Phone */}
-                      <td className="py-4 px-4">
-                        <p className="text-sm text-slate-500 whitespace-nowrap">{lead.phone}</p>
+
+                      <td>{lead.phone}</td>
+
+                      <td>
+                        <p>{lead.date}</p>
+                        <p>{lead.time}</p>
                       </td>
-                      {/* Date / Time */}
-                      <td className="py-4 px-4">
-                        <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{lead.date}</p>
-                        <p className="text-xs text-slate-500">{lead.time}</p>
-                      </td>
+
                       {/* Actions */}
                       <td className="py-4 px-4">
                         <div className="flex items-center justify-center gap-1 relative">
@@ -615,9 +691,8 @@ export default function LeadsInquiries() {
                   <button
                     key={btn}
                     onClick={() => setPage(btn)}
-                    className={`w-8 h-8 rounded-md text-sm font-medium transition-colors ${
-                      page === btn ? "bg-blue-600 text-white" : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-                    }`}
+                    className={`w-8 h-8 rounded-md text-sm font-medium transition-colors ${page === btn ? "bg-blue-600 text-white" : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+                      }`}
                   >
                     {btn}
                   </button>

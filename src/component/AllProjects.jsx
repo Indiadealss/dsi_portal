@@ -634,6 +634,11 @@ console.log(locationName);
 
       }));
 
+      const filteredProjects = allProjects.filter((item) => {
+        const numericBudget = Number(item.price?.split("-")[0]?.replace(/[^0-9.]/g, "")) || 0;
+        const minBudget = filters.budget.min;
+        
+      })
       setAllProjects(allProjects);
       // setProjects(res?.data?.data || []);
 

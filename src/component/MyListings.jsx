@@ -152,7 +152,6 @@ export default function MyListings() {
       .then(res => {
         if (res.status === 200) {
           const apiData = res.data.data;
-          console.log(apiData, 'api data is console')
 
           const formatData = apiData[0].map((item) => {
             // Handle location
@@ -225,11 +224,10 @@ export default function MyListings() {
             };
           });
 
-          console.log(formatData, 'hello Dear');
           setbACKEND_LISTINGS(formatData);
 
+          // setTimeout(() => setVisible(true), 60);
           setLoading(false);
-          setTimeout(() => setVisible(true), 60);
         }
       })
       .catch(err => {
@@ -239,13 +237,7 @@ export default function MyListings() {
       });
   }, [user.id]);
 
-  if (BACKEND_LISTINGS === []) {
-    return (
-      <div>
-        ....
-      </div>
-    )
-  }
+ 
 
   // Derived filter options
   const types = ["All Types", ...new Set(BACKEND_LISTINGS.map(l => l.type))];
@@ -260,7 +252,7 @@ export default function MyListings() {
     inactive: BACKEND_LISTINGS.filter(l => l.status === "Inactive").length,
     views: BACKEND_LISTINGS.reduce((s, l) => s + l.views, 0),
     leads: BACKEND_LISTINGS.reduce((s, l) => s + l.leads, 0),
-  }), []);
+  }), [BACKEND_LISTINGS]);
 
   // Filter + search + tab
   const filtered = useMemo(() => {
@@ -284,7 +276,7 @@ export default function MyListings() {
     else if (sortBy === "Most Views") data.sort((a, b) => b.views - a.views);
     else if (sortBy === "Most Leads") data.sort((a, b) => b.leads - a.leads);
     return data;
-  }, [activeTab, typeFilter, statusFilter, cityFilter, search, sortBy]);
+  }, [activeTab, typeFilter, statusFilter, cityFilter, search, sortBy, BACKEND_LISTINGS]);
 
   const totalPages = Math.ceil(filtered.length / pageSize);
   const paged = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -326,6 +318,14 @@ export default function MyListings() {
 
   const Dropdown = ({ id, value, options, onChange, width }) => {
     const isOpen = openDropdown === id;
+
+  if (BACKEND_LISTINGS === [] || filtered === []) {
+    return (
+      <div>
+        ....
+      </div>
+    )
+  }
     return (
       <div className="relative" ref={isOpen ? dropdownRef : null}>
         <button
