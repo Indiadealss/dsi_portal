@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import coverImage10Blog from "../Images/coverImage10Blog.png";
+import coverImage10Blog from "../Images/Blog14.png";
 import { Link } from "react-router-dom";
 import Seo from "../component/Seo";
 
@@ -7,100 +7,106 @@ import Seo from "../component/Seo";
 const blog = [
     {
     type: "h2",
-    id:"Godrej-Properties",
-    text: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
+    id:"exclusive-new-project-launched-in-greater-noida-by-irish-group",
+    text: "Exclusive: New Project Launched in Greater Noida by Irish Group",
   },
   {
     type: "p",
-    text: "The real estate corridor along the Noida-Greater Noida Expressway has fast become a darling of the market, as it offers prime lands, unbeatable connectivity, and buyers flocking to secure a property in the NCR.",
+    text: "Greater Noida's residential landscape is evolving rapidly, and its newest milestone is taking shape in the heart of Sector ETA-1. Building on their stellar track record of delivering successful landmarks in Greater Noida West, the renowned Irish Group is expanding its footprint.",
   },
   {
     type: "p",
-    text: "Noida Sector 150’s rise as prime real estate micro-market is well-known, and now, the spotlight has officially turned to Noida, Sector 151.",
+    text: "This upcoming, pre-launch development represents a rare window of opportunity for forward-thinking homeowners and astute investors to secure luxury real estate at an highly advantageous price point before the official launch.",
   },
   {
     type: "p",
-    text: `In a massive market move, Godrej Properties Ltd. has emerged as the highest bidder for a prime 4.95-acre residential group housing plot in Sector 151, Noida. Securing the land parcel for a staggering ₹331.75 crore via a highly competitive e-auction conducted by the Noida Authority, Godrej is sounding a clear whistle to the market that the Expressway’s growth corridor is transitioning into an upscale, premium real estate powerhouse.`,
+    text: "Spanning a sprawling 6-acre land parcel, this premium enclave is thoughtfully designed as a 3-side open layout. Featuring only four residential towers, the project emphasizes low-density living, expansive open spaces, and an uncluttered environment that serves as a prestigious sanctuary."
   },
   {
     type: "h2",
-    id:"Decoupling-the-Numbers",
-    text: "Decoupling the Numbers: A ₹2,000 Crore Lifestyle Vision",
+    id:"project-layout",
+    text: "Project Layout",
   },
   {
     type: "p",
-    text: "When an institutional giant like Godrej Properties underwriters a 4.95-acre parcel at over ₹331 crore, it isn't making a speculative bet. The company has explicitly projected an estimated revenue potential exceeding ₹2,000 crore from this upcoming development.",
+    text: "The architectural footprint of this development is defined by its soaring towers, rising to imposing heights of Stilt + 34 floors and Stilt + 29 floors. To address diverse privacy and spatial preferences, the residential blocks are structured into two distinct tower configurations:",
+  },
+  {
+    type: "p",
+    text: "●	The Standard Tower: Features an optimized layout of 8 apartments per floor, fully supported by 6 high-speed lifts to keep waiting times minimal."
+  },
+  {
+    type: "p",
+    text: "●	The Premium Tower: Offers heightened exclusivity and low-density serenity with only 4 apartments per floor, serviced seamlessly by 5 high-speed lifts."
   },
   {
     type: "h2",
-    id:"What-does-this-mean-for-future-homebuyers",
-    text:"What does this mean for future homebuyers?"
+    id:"versatile-living-spaces",
+    text:"Versatile Living Spaces"
   },
   {
     type: "p",
-    text: "This multi-fold revenue potential implies that the project will bypass basic residential configurations. Instead, Sector 151 is probably set to get a premium residential group housing community featuring luxury apartments across diverse configurations - primarily expected to be high-end 3 BHK and 4 BHK layouts."
+    text: "Once you step inside, the residences greet you with an unmatched sense of volume, courtesy of an impressive 12-foot ceiling height. Every square foot is meticulously optimized for a premium living experience, complete with centralized air conditioning operating throughout the units. The floor plans accommodate a wide variety of family requirements and offer homes in 3-BHK and 4-BHK configurations."
+  },
+  {
+    type: "h2",
+    id: "3-BHK-Configurations",
+    text: "3 BHK Configurations",
   },
   {
     type: "p",
-    text: "Buyers can expect world-class amenities, state-of-the-art clubhouses, smart-home systems, and the sustainable, green planning that has made Godrej a global benchmark in residential design."
-  },
-  {
-    type:"h2",
-    id:"Why-Noida-Sector-151?",
-    text:"Why Noida Sector 151?"
-  },
-  {
-    type:"p",
-    text:"Sector 151 is embracing its image as an emerging frontier and solidifying its identity as a self-contained, elite suburban pocket. Its geographic placement also gives it an undeniable competitive edge."
-  },
-  {
-    type:"h2",
-    id:"Expressway-Linkage",
-    text:"Expressway Linkage"
-  },
-  {
-    type:"p",
-    text:"Sitting directly along the Noida-Greater Noida Expressway, the sector provides effortless transit to corporate offices, commercial centers, and retail hubs across the region, while keeping daily commuters seamlessly connected via the Aqua Line metro network (via nearby stations like Sector 147 and 148)."
-  },
-  {
-    type:"h2",
-    id:"The-Global-Aviation-Premium",
-    text:"The Global Aviation Premium"
-  },
-  {
-    type:"p",
-    text:"The biggest value anchor for Sector 151 is its highly convenient access to the Noida International Airport at Jewar. As the airport moves deeper into its live, operational phases, properties along this exact corridor stand to capture immense capital appreciation."
-  },
-  {
-    type:"h2",
-    id:"Robust-Shared-Infrastructure",
-    text:"Robust Shared Infrastructure"
-  },
-  {
-    type:"p",
-    text:"Unlike pockets that require years to mature, the immediate neighborhood surrounding the plot is already backed by comprehensive planning, featuring wide roads, designated green zones, and top-tier educational institutions and healthcare facilities right around the corner."
-  },
-  {
-    type:"h2",
-    id:"Be-An-Early-Believer-Win-the-Best-Deals",
-    text:"Be An Early Believer - Win the Best Deals"
-  },
-  {
-    type:"p",
-    text:`The golden rule of Delhi-NCR real estate has always favored those who trust institutional underwriting before the brick-and-mortar structures peak. When major national developers anchor flagship portfolios in a specific sector, a ripple effect occurs: infrastructure speeds up, competing high-end brands enter the fray, and secondary market valuations reprice structurally.`
+    text: "●	1,450 sq. ft.: A perfectly proportioned 3-bedroom, 2-toilet layout."
   },
   {
     type: "p",
-    text: `As Gaurav Pandey, MD and CEO of Godrej Properties, noted following the win: "Building on the consistent demand witnessed for our existing developments in the region, we remain confident in the strength of this market. This project will further enhance our development portfolio in the National Capital Region and aligns seamlessly with our strategy of deepening our presence in key micro-markets."`
+    text: "●	1,750 sq. ft.: An expanded 3-bedroom, 3-toilet residence ideal for growing families."
+  },
+  {
+    type: "h2",
+    id: "4-bhk-configurations",
+    text: "4 BHK Configurations"
   },
   {
     type: "p",
-    text: "For smart homebuyers and forward-looking investors, the message is written plainly in the auction files. Sector 151 is paving the way for a highly secure, sophisticated, and green residential chapter. By keeping tabs on this micro-market now, as NOIDA finalizes the allotment letters and the project moves toward its formal RERA launch, you position yourself to secure premium, brand-backed inventory at an entry point designed for maximum future value."
+    text: "●	2,050 sq. ft.: A spacious 4-bedroom, 4-toilet unit offering immense spatial freedom.",
+  },
+  {
+    type: "●	2,450 sq. ft.: A sprawling palatial home featuring 4 bedrooms, an additional study room, a dedicated pooja room, and 5 toilets."
+  },
+  {
+    type: "h2",
+    id: "amenities-strategic-connectivity",
+    text: "Amenities & Strategic Connectivity"
   },
   {
     type: "p",
-    text: "The next flagship chapter of Expressway luxury is officially being written!"
-  }
+    text: "At the center of this vibrant community will stand a massive, grand clubhouse spanning approximately 62,000 sq. ft. This recreational and social epicentre offers an elite range of indoor and outdoor facilities designed to enrich daily living."
+  },
+  {
+    type: "p",
+    text: "Beyond the gates, Sector ETA-1 provides exceptional, future-ready infrastructure links that anchor you right in the middle of a major urban corridor:"
+  },
+  {
+    type: "p",
+    text: "●	Expressway Access: Just 300 meters from the critical 130-metre Expressway."
+  },
+  {
+    type: "p",
+    text: "●	Rapid Transit: Merely 2 km from both the nearest Aqua Line Metro Station and the upcoming Rapid Rail Transit System (RRTS) network."
+  },
+  {
+    type: "h2",
+    id: "the-window-of-opportunity",
+    text: "The Window of Opportunity"
+  },
+  {
+    type: "p",
+    text: "The most compelling aspect of this real estate evolution remains the finances. Because the region is still expanding its footprint, property valuations along the expressway offer an attractive entry point."
+  },
+  {
+    type: "p",
+    text: "Homebuyers can essentially acquire double the square footage and vastly superior amenity packages for a fraction of the cost of an apartment in older metropolitan pockets. As connectivity matures and major infrastructure milestones go live, this price gap will inevitably close, making the present moment the perfect time to secure a spacious, luxury estate."
+  },
 ];
 
 // ── SIDEBAR DYNAMIC CONTENT ───────────────────────────────────────────────────
@@ -143,9 +149,10 @@ const quickFacts = [
 ];
 
 const tableOfContents = [
-    { id: "Godrej-Properties", label: " Godrej Properties Acquires Land Parcel" },
-  { id: "Decoupling-the-Numbers", label: "Decoupling the Numbers" },
-  { id: "What-does-this-mean-for-future-homebuyers", label: "What does this mean for future homebuyers?" },
+    { id: "why-luxury-homebuyers-are-choosing-yamuna-expressway", label: "Why Luxury Homebuyers are Choosing Yamuna Expressway" },
+  { id: "space-and-novelty-the-true-assets", label: "Space and Novelty: The True Assets" },
+  { id: "key-project-launches-in-yamuna-expressway", label: "Key Project Launches in Yamuna Expressway" },
+  { id:"the-window-of-opportunity", label: "The Window of Opportunity"}
 ];
 
 // ── INLINE LINK MAP ───────────────────────────────────────────────────────────
@@ -153,9 +160,9 @@ const tableOfContents = [
 // Longer phrases are matched first ("Noida Extension" before "Noida").
 // Each keyword is linked only on its FIRST occurrence per text block.
 const LINK_MAP = [
-  { word: "IRISH PLATINUM", href: "/irish-platinum-greater-noida-npxid-87a7f",  title: "IRISH PLATINUM" },
-  { word: 'ACE TERRA', href:"/ace-terra-greater-noida-npxid-3c960", title: "ACE TERRA"},
-  { word: "Ace 153", href:"/ace-153-noida-npxid-8787d", title: "Ace 153"}
+  { word: "ARHIANT SEASONS", href: "/arihant-seasons-greater-noida-npxid-bb718",  title: "Arihant Seasons" },
+  { word: 'ACE ACREVILLE', href:"/ace-acreville-grater-noida-npxid-39ff3", title: "Ace Acreville"},
+  { word: "ELDECO ECHOES OF EDEN", href:"/eldeco-echoes-of-eden-yamuna-expressway-npxid-2f5ba", title: "Eldeco Echoes of Eden"}
 ];
 
 /**
@@ -565,7 +572,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Godrejproperties = () => {
+const Exclusivenew = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -596,9 +603,9 @@ const Godrejproperties = () => {
     <>
       
     <Seo
-              title='Godrej Acquires Massive Land Parcel in Greater Noida'
-              description="Godrej Acquires Massive Land Parcel in Greater Noida"
-              canonical={`https://www.indiadealsgroup.com/blog/godrej-acquires-massive-land-parcel-in-greater-noida`}
+              title='Neighborhood Watch: Sector 97, Noida for Low-Density Luxury'
+              description="Neighborhood Watch: Sector 97, Noida for Low-Density Luxury"
+              canonical={`https://www.indiadealsgroup.com/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151`}
             />
 
       <article
@@ -680,8 +687,7 @@ const Godrejproperties = () => {
                        <p style={{ fontSize: "14px", fontWeight: 600, color: "#0F172A" }}>
                          INDIADEALS GROUP TEAM
                        </p>
-                       <p style={{ fontSize: "13px", color: "#94A3B8" }}>
-                         Jun 25, 2026 &nbsp;·&nbsp; 6 min read
+                       <p style={{ fontSize: "13px", color: "#94A3B8" }}> 6 min read
                        </p>
                      </div>
                    </div>
@@ -960,4 +966,4 @@ const Godrejproperties = () => {
   );
 };
 
-export default Godrejproperties;
+export default Exclusivenew;

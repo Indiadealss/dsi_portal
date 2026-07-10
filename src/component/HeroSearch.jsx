@@ -5,9 +5,25 @@ import { useNavigate } from "react-router-dom";
 import { updateFilter } from "./Redux/filterSlice";
 import { useDispatch } from "react-redux";
 import Searchbar from "./Searchbar";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade, Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/effect-fade";
+
+import Banner1 from "../Images/Finalbanner.png";
+import Banner2 from "../Images/Godrejmayesxsty.jpg";
+import Banner3 from "../Images/Aceterra.png";
+import Banner4 from "../Images/Aceacerville.png";
+import Banner5 from "../Images/acehannie.png";
+import Banner6 from "../Images/Aceestatebanner.png";
+import Banner7 from "../Images/eldeco.png";
+
 
 const HeroSearch = () => {
 
+
+  const banners = [Banner1, Banner2, Banner3, Banner4, Banner5, Banner6, Banner7];
   const [projectname, setProjectName] = useState([])
   useEffect(() => {
     const featchAllProjectNames = async () => {
@@ -320,23 +336,39 @@ const HeroSearch = () => {
     setProjectInut(value)
   }
   return (
-    <div className="relative w-full h-[40vh] md:h-[52vh] ">
+   <div className="relative w-full h-[40vh] md:h-[52vh] overflow-hidden">
 
+  <Swiper
+  modules={[Autoplay ]}
+  slidesPerView={1}
+  loop={true}
+  speed={250}
+  autoplay={{
+    delay: 3000,
+    disableOnInteraction: false,
+  }}
+  className="w-full h-full"
+>
+  {banners.map((image, index) => (
+    <SwiperSlide key={index}>
       <img
-        src={Banner}
-        alt="property"
-        className="w-full h-full"
+        src={image}
+        alt={`Banner ${index + 1}`}
+        className="w-full h-full object-cover"
       />
+    </SwiperSlide>
+  ))}
+</Swiper>
 
-      <div className="absolute inset-0  flex flex-col items-center justify-center px-4 text-center pt-[30vh]">
+  {/* Dark Overlay */}
+  <div className="absolute inset-0 bg-black/30 z-10" />
 
-        {/* <p className="text-gray-200 mt-3 text-sm md:text-lg">
-          We have over million properties for you
-        </p> */}
+  {/* Searchbar */}
+  <div className="absolute inset-0 z-20 top-60 flex items-center justify-center px-4">
+    <Searchbar />
+  </div>
 
-        <Searchbar />
-      </div>
-    </div>
+</div>
   );
 };
 

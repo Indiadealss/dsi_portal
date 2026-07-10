@@ -7,6 +7,10 @@ import iNNERPAGE from "../Images/iNNERPAGE.png";
 import Neighbourhood from "../Images/Neighbourhood.png";
 import NCRPLOTS from "../Images/inner-image7.png";
 import coverImage10Blog from "../Images/coverImage10Blog.png";
+import Blog11Start from "../Images/Blog11Start.png";
+import Blogs12Str from "../Images/Blogs12Str.png";
+import Blogs13Str from "../Images/Blogs13Str.png";
+import Blogs14Str from "../Images/Blogs14Str.png";
 
 const heroPost = {
   id: 0,
@@ -109,7 +113,40 @@ const allPosts = [
     avtar:"",
     date:"03-07-2026",
     link:'/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151'
-  }
+  },
+  {
+    id:11,
+    title: "Godrej Acquires Massive Land Parcel in Greater Noida",
+    description: "In the same week, when Godrej Properties Limited made its prime acquisition of a 4.5-acre land parcel in Noida’s Sector 151, the real estate giant crossed the finish line on another monumental masterstroke, this one in the nearby Greater Noida pocket of NCR.",
+    image:Blog11Start,
+    author:"",
+    date:"10-07-2026",
+    link:'/blog/godrej-acquires-massive-land-parcel-in-greater-noida'
+  },
+  {
+    id:12,
+    title: "Neighborhood Watch: Sector 97, Noida for Low-Density Luxury",
+    description: "Welcome back to another edition of Neighborhood Watch, where IndiaDealss maps out the finest pockets of the National Capital Region (NCR) and tells you which neighbourhood is best for you.",
+    image: Blogs12Str,
+    date: "10-07-2026",
+    link: '/blog/neighborhood-watch-sector-97-noida-for-low-density-luxury'
+  },
+  {
+    id:13,
+    title: "Why Luxury Homebuyers are Choosing Yamuna Expressway",
+    description: "The definition of luxury real estate in the National Capital Region (NCR) has undergone a major transformation. For years, premium living was strictly tied to established, dense premium hubs.",
+    image:Blogs13Str,
+    date: "10-07-2026",
+    link: '/blog/why-luxury-homebuyers-are-choosing-yamuna-expressway'
+  },
+  // {
+  //   id:14,
+  //   title: "Exclusive: New Project Launched in Greater Noida by Irish Group",
+  //   description: "Greater Noida's residential landscape is evolving rapidly, and its newest milestone is taking shape in the heart of Sector ETA-1. Building on their stellar track record of delivering successful landmarks in Greater Noida West, the renowned Irish Group is expanding its footprint",
+  //   image:Blogs14Str,
+  //   link: '/blog/exclusive-new-project-launched-in-greater-noida-by-irish-group'
+  // },
+  
   
 ];
 

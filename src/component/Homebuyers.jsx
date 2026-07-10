@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import coverImage10Blog from "../Images/coverImage10Blog.png";
+import coverImage10Blog from "../Images/Blogs13.png";
 import { Link } from "react-router-dom";
 import Seo from "../component/Seo";
 
@@ -7,100 +7,91 @@ import Seo from "../component/Seo";
 const blog = [
     {
     type: "h2",
-    id:"Godrej-Properties",
-    text: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
+    id:"why-luxury-homebuyers-are-choosing-yamuna-expressway",
+    text: "Why Luxury Homebuyers are Choosing Yamuna Expressway",
   },
   {
     type: "p",
-    text: "The real estate corridor along the Noida-Greater Noida Expressway has fast become a darling of the market, as it offers prime lands, unbeatable connectivity, and buyers flocking to secure a property in the NCR.",
+    text: "The definition of luxury real estate in the National Capital Region (NCR) has undergone a major transformation. For years, premium living was strictly tied to established, dense premium hubs.",
   },
   {
     type: "p",
-    text: "Noida Sector 150’s rise as prime real estate micro-market is well-known, and now, the spotlight has officially turned to Noida, Sector 151.",
+    text: "However, as those central corridors have become increasingly congested, a new generation of homebuyers is prioritizing a different kind of luxury: open airspace, low-density living, and sprawling green footprints.",
   },
   {
     type: "p",
-    text: `In a massive market move, Godrej Properties Ltd. has emerged as the highest bidder for a prime 4.95-acre residential group housing plot in Sector 151, Noida. Securing the land parcel for a staggering ₹331.75 crore via a highly competitive e-auction conducted by the Noida Authority, Godrej is sounding a clear whistle to the market that the Expressway’s growth corridor is transitioning into an upscale, premium real estate powerhouse.`,
+    text: "This shifting preference has cast a bright spotlight on the Yamuna Expressway. Once viewed primarily as a long-term infrastructure play, this rapidly growing corridor has evolved into a premier destination for high-end residential real estate."
+  },
+  {
+    type: "p",
+    text: "Driven by its sheer novelty and generous master planning, the region now gives discerning buyers a rare window of opportunity - the chance to secure large, sophisticated homes paired with elite amenities at a remarkably accessible price point compared to older, saturated NCR markets!"
   },
   {
     type: "h2",
-    id:"Decoupling-the-Numbers",
-    text: "Decoupling the Numbers: A ₹2,000 Crore Lifestyle Vision",
+    id:"space-and-novelty-the-true-assets",
+    text: "Space and Novelty: The True Assets",
   },
   {
     type: "p",
-    text: "When an institutional giant like Godrej Properties underwriters a 4.95-acre parcel at over ₹331 crore, it isn't making a speculative bet. The company has explicitly projected an estimated revenue potential exceeding ₹2,000 crore from this upcoming development.",
+    text: "What makes the Yamuna Expressway corridor uniquely appealing is its clean slate.",
+  },
+  {
+    type: "p",
+    text: "Unlike traditional urban zones where developers have to squeeze high-rises into tight plots, this infrastructure-led corridor offers expansive acreage. This vast canvas allows for low-density master plans where open space is the central lifestyle feature."
+  },
+  {
+    type: "p",
+    text: "With mega-projects like the Noida International Airport at Jewar, the upcoming Film City, and major Olympic-themed sports complexes acting as anchors, the infrastructure surrounding these projects is entirely future-proofed."
+  },
+  {
+    type: "p",
+    text: "Buyers are buying much more than just four walls, they are investing in clean air, wide-open roads, and a beautifully organized ecosystem designed for the next century."
   },
   {
     type: "h2",
-    id:"What-does-this-mean-for-future-homebuyers",
-    text:"What does this mean for future homebuyers?"
+    id:"key-project-launches-in-yamuna-expressway",
+    text:"Key Project Launches in Yamuna Expressway"
+  },
+  {
+    type: "h2",
+    id: "arihant-seasons",
+    text: "Arihant Seasons",
   },
   {
     type: "p",
-    text: "This multi-fold revenue potential implies that the project will bypass basic residential configurations. Instead, Sector 151 is probably set to get a premium residential group housing community featuring luxury apartments across diverse configurations - primarily expected to be high-end 3 BHK and 4 BHK layouts."
+    text: "Located in Sector 22D, ARHIANT SEASONS captures the essence of low-density luxury. Offering expansive 3 and 4 BHK premium residences, the project stands out with an ultra-spacious architectural blueprint featuring just four apartments per floor. It delivers a resort-like lifestyle tailored for those who refuse to compromise on space."
+  },
+  {
+    type: "h2",
+    id: "ace-acreville",
+    text: "ACE Acreville"
   },
   {
     type: "p",
-    text: "Buyers can expect world-class amenities, state-of-the-art clubhouses, smart-home systems, and the sustainable, green planning that has made Godrej a global benchmark in residential design."
+    text: "For buyers seeking the ultimate sense of estate-style privacy, ACE ACREVILLE in Sector 22 presents a massive, master-planned township spanning 100 acres. Characterized by elegant, timeless neo-classical architecture, this premier plotted development allows homeowners to shape their own grand architectural legacies. Striking water elements, ecological gardens, and a grand clubhouse sit just a short walk from the Buddh International Circuit, offering an address that feels like a private sanctuary."
   },
   {
-    type:"h2",
-    id:"Why-Noida-Sector-151?",
-    text:"Why Noida Sector 151?"
-  },
-  {
-    type:"p",
-    text:"Sector 151 is embracing its image as an emerging frontier and solidifying its identity as a self-contained, elite suburban pocket. Its geographic placement also gives it an undeniable competitive edge."
-  },
-  {
-    type:"h2",
-    id:"Expressway-Linkage",
-    text:"Expressway Linkage"
-  },
-  {
-    type:"p",
-    text:"Sitting directly along the Noida-Greater Noida Expressway, the sector provides effortless transit to corporate offices, commercial centers, and retail hubs across the region, while keeping daily commuters seamlessly connected via the Aqua Line metro network (via nearby stations like Sector 147 and 148)."
-  },
-  {
-    type:"h2",
-    id:"The-Global-Aviation-Premium",
-    text:"The Global Aviation Premium"
-  },
-  {
-    type:"p",
-    text:"The biggest value anchor for Sector 151 is its highly convenient access to the Noida International Airport at Jewar. As the airport moves deeper into its live, operational phases, properties along this exact corridor stand to capture immense capital appreciation."
-  },
-  {
-    type:"h2",
-    id:"Robust-Shared-Infrastructure",
-    text:"Robust Shared Infrastructure"
-  },
-  {
-    type:"p",
-    text:"Unlike pockets that require years to mature, the immediate neighborhood surrounding the plot is already backed by comprehensive planning, featuring wide roads, designated green zones, and top-tier educational institutions and healthcare facilities right around the corner."
-  },
-  {
-    type:"h2",
-    id:"Be-An-Early-Believer-Win-the-Best-Deals",
-    text:"Be An Early Believer - Win the Best Deals"
-  },
-  {
-    type:"p",
-    text:`The golden rule of Delhi-NCR real estate has always favored those who trust institutional underwriting before the brick-and-mortar structures peak. When major national developers anchor flagship portfolios in a specific sector, a ripple effect occurs: infrastructure speeds up, competing high-end brands enter the fray, and secondary market valuations reprice structurally.`
+    type: "h2",
+    id: "eldeco-echoes-of-eden",
+    text: "Eldeco Echoes of Eden"
   },
   {
     type: "p",
-    text: `As Gaurav Pandey, MD and CEO of Godrej Properties, noted following the win: "Building on the consistent demand witnessed for our existing developments in the region, we remain confident in the strength of this market. This project will further enhance our development portfolio in the National Capital Region and aligns seamlessly with our strategy of deepening our presence in key micro-markets."`
+    text: "Emphasizing an eco-centric philosophy, ELDECO ECHOES OF EDEN redefines sophisticated green living in Sector 22D. Spanning five tranquil acres, this low-density development features three majestic high-rise towers enveloped by hundreds of trees and pocket parks. Anchored by an impressive luxury clubhouse, the project seamlessly integrates world-class fitness centers, wellness zones, and multi-tier security systems, ensuring an exceptionally secure and elevated community experience."
+  },
+  {
+    type: "h2",
+    id: "the-window-of-opportunity",
+    text: "The Window of Opportunity"
   },
   {
     type: "p",
-    text: "For smart homebuyers and forward-looking investors, the message is written plainly in the auction files. Sector 151 is paving the way for a highly secure, sophisticated, and green residential chapter. By keeping tabs on this micro-market now, as NOIDA finalizes the allotment letters and the project moves toward its formal RERA launch, you position yourself to secure premium, brand-backed inventory at an entry point designed for maximum future value."
+    text: "The most compelling aspect of this real estate evolution remains the finances. Because the region is still expanding its footprint, property valuations along the expressway offer an attractive entry point."
   },
   {
     type: "p",
-    text: "The next flagship chapter of Expressway luxury is officially being written!"
-  }
+    text: "Homebuyers can essentially acquire double the square footage and vastly superior amenity packages for a fraction of the cost of an apartment in older metropolitan pockets. As connectivity matures and major infrastructure milestones go live, this price gap will inevitably close, making the present moment the perfect time to secure a spacious, luxury estate."
+  },
 ];
 
 // ── SIDEBAR DYNAMIC CONTENT ───────────────────────────────────────────────────
@@ -143,9 +134,10 @@ const quickFacts = [
 ];
 
 const tableOfContents = [
-    { id: "Godrej-Properties", label: " Godrej Properties Acquires Land Parcel" },
-  { id: "Decoupling-the-Numbers", label: "Decoupling the Numbers" },
-  { id: "What-does-this-mean-for-future-homebuyers", label: "What does this mean for future homebuyers?" },
+    { id: "why-luxury-homebuyers-are-choosing-yamuna-expressway", label: "Why Luxury Homebuyers are Choosing Yamuna Expressway" },
+  { id: "space-and-novelty-the-true-assets", label: "Space and Novelty: The True Assets" },
+  { id: "key-project-launches-in-yamuna-expressway", label: "Key Project Launches in Yamuna Expressway" },
+  { id:"the-window-of-opportunity", label: "The Window of Opportunity"}
 ];
 
 // ── INLINE LINK MAP ───────────────────────────────────────────────────────────
@@ -153,9 +145,9 @@ const tableOfContents = [
 // Longer phrases are matched first ("Noida Extension" before "Noida").
 // Each keyword is linked only on its FIRST occurrence per text block.
 const LINK_MAP = [
-  { word: "IRISH PLATINUM", href: "/irish-platinum-greater-noida-npxid-87a7f",  title: "IRISH PLATINUM" },
-  { word: 'ACE TERRA', href:"/ace-terra-greater-noida-npxid-3c960", title: "ACE TERRA"},
-  { word: "Ace 153", href:"/ace-153-noida-npxid-8787d", title: "Ace 153"}
+  { word: "ARHIANT SEASONS", href: "/arihant-seasons-greater-noida-npxid-bb718",  title: "Arihant Seasons" },
+  { word: 'ACE ACREVILLE', href:"/ace-acreville-grater-noida-npxid-39ff3", title: "Ace Acreville"},
+  { word: "ELDECO ECHOES OF EDEN", href:"/eldeco-echoes-of-eden-yamuna-expressway-npxid-2f5ba", title: "Eldeco Echoes of Eden"}
 ];
 
 /**
@@ -565,7 +557,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Godrejproperties = () => {
+const Homebuyers = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -596,9 +588,9 @@ const Godrejproperties = () => {
     <>
       
     <Seo
-              title='Godrej Acquires Massive Land Parcel in Greater Noida'
-              description="Godrej Acquires Massive Land Parcel in Greater Noida"
-              canonical={`https://www.indiadealsgroup.com/blog/godrej-acquires-massive-land-parcel-in-greater-noida`}
+              title='Neighborhood Watch: Sector 97, Noida for Low-Density Luxury'
+              description="Neighborhood Watch: Sector 97, Noida for Low-Density Luxury"
+              canonical={`https://www.indiadealsgroup.com/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151`}
             />
 
       <article
@@ -680,8 +672,7 @@ const Godrejproperties = () => {
                        <p style={{ fontSize: "14px", fontWeight: 600, color: "#0F172A" }}>
                          INDIADEALS GROUP TEAM
                        </p>
-                       <p style={{ fontSize: "13px", color: "#94A3B8" }}>
-                         Jun 25, 2026 &nbsp;·&nbsp; 6 min read
+                       <p style={{ fontSize: "13px", color: "#94A3B8" }}> 6 min read
                        </p>
                      </div>
                    </div>
@@ -960,4 +951,4 @@ const Godrejproperties = () => {
   );
 };
 
-export default Godrejproperties;
+export default Homebuyers;

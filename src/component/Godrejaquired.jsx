@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import coverImage10Blog from "../Images/coverImage10Blog.png";
+import coverImage10Blog from "../Images/blogNo11.png";
 import { Link } from "react-router-dom";
 import Seo from "../component/Seo";
 
@@ -8,98 +8,74 @@ const blog = [
     {
     type: "h2",
     id:"Godrej-Properties",
-    text: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
+    text: "Godrej Acquires Massive Land Parcel in Greater Noida",
   },
   {
     type: "p",
-    text: "The real estate corridor along the Noida-Greater Noida Expressway has fast become a darling of the market, as it offers prime lands, unbeatable connectivity, and buyers flocking to secure a property in the NCR.",
+    text: "In the same week, when Godrej Properties Limited made its prime acquisition of a 4.5-acre land parcel in Noida’s Sector 151, the real estate giant crossed the finish line on another monumental masterstroke, this one in the nearby Greater Noida pocket of NCR.",
   },
   {
     type: "p",
-    text: "Noida Sector 150’s rise as prime real estate micro-market is well-known, and now, the spotlight has officially turned to Noida, Sector 151.",
-  },
-  {
-    type: "p",
-    text: `In a massive market move, Godrej Properties Ltd. has emerged as the highest bidder for a prime 4.95-acre residential group housing plot in Sector 151, Noida. Securing the land parcel for a staggering ₹331.75 crore via a highly competitive e-auction conducted by the Noida Authority, Godrej is sounding a clear whistle to the market that the Expressway’s growth corridor is transitioning into an upscale, premium real estate powerhouse.`,
+    text: "Through a competitive e-auction conducted by DMIC Integrated Industrial Township Greater Noida Limited, Godrej secured an expansive 23.2-acre (93,905 sq. m.) residential land parcel. With an estimated revenue potential shattering the ₹7,000 crore mark, it is a defining institutional anchor that signals a major upscale evolution for the Greater Noida real estate market.",
   },
   {
     type: "h2",
     id:"Decoupling-the-Numbers",
-    text: "Decoupling the Numbers: A ₹2,000 Crore Lifestyle Vision",
+    text: "DMIC: Living Inside a 750-Acre Smart Zone",
   },
   {
     type: "p",
-    text: "When an institutional giant like Godrej Properties underwriters a 4.95-acre parcel at over ₹331 crore, it isn't making a speculative bet. The company has explicitly projected an estimated revenue potential exceeding ₹2,000 crore from this upcoming development.",
+    text: "What makes this acquisition an absolute goldmine for future homebuyers and investors is its foundational blueprint. The land sits squarely within the DMIC Integrated Township, a state-of-the-art, 750-acre smart infrastructure zone.",
+  },
+  {
+    type: "p",
+    text: "Unlike standard residential pockets built around existing village boundaries, this township is engineered as a futuristic, highly balanced economic ecosystem. Managed jointly by the Greater Noida Authority and the National Industrial Corridor Trust, the zone features Next-Generation Utilities like underground cabling, automated waste management systems, and advanced, sustainable water treatment grids."
+  },
+  {
+    type: "p",
+    text: "The township is designed as a destination for global manufacturing, electronics, and tech giants, creating an immediate, high-earning tenant and buyer pool right next to residential sectors."
   },
   {
     type: "h2",
     id:"What-does-this-mean-for-future-homebuyers",
-    text:"What does this mean for future homebuyers?"
+    text:"The Triple-Expressway Advantage"
   },
   {
     type: "p",
-    text: "This multi-fold revenue potential implies that the project will bypass basic residential configurations. Instead, Sector 151 is probably set to get a premium residential group housing community featuring luxury apartments across diverse configurations - primarily expected to be high-end 3 BHK and 4 BHK layouts."
+    text: "While the township itself operates like a self-contained, green suburban sanctuary, its logistical positioning makes it one of the most accessible addresses in Northern India. Residents will enjoy seamless road connectivity to The Eastern Peripheral Expressway & Noida Expressway, allowing for traffic-free, rapid transit across the length and breadth of the National Capital Region."
   },
   {
     type: "p",
-    text: "Buyers can expect world-class amenities, state-of-the-art clubhouses, smart-home systems, and the sustainable, green planning that has made Godrej a global benchmark in residential design."
+    text: "The site is also perfectly positioned to capture the massive economic boom triggered by the Noida International Airport at Jewar. As the airport anchors global hospitality, logistics, and corporate hubs, local property valuations are set to see permanent structural appreciation."
   },
   {
     type:"h2",
-    id:"Why-Noida-Sector-151?",
-    text:"Why Noida Sector 151?"
+    id:"what-does-this-mean-for-you?",
+    text:"What Does This Mean For You?"
   },
   {
     type:"p",
-    text:"Sector 151 is embracing its image as an emerging frontier and solidifying its identity as a self-contained, elite suburban pocket. Its geographic placement also gives it an undeniable competitive edge."
-  },
-  {
-    type:"h2",
-    id:"Expressway-Linkage",
-    text:"Expressway Linkage"
-  },
-  {
-    type:"p",
-    text:"Sitting directly along the Noida-Greater Noida Expressway, the sector provides effortless transit to corporate offices, commercial centers, and retail hubs across the region, while keeping daily commuters seamlessly connected via the Aqua Line metro network (via nearby stations like Sector 147 and 148)."
-  },
-  {
-    type:"h2",
-    id:"The-Global-Aviation-Premium",
-    text:"The Global Aviation Premium"
-  },
-  {
-    type:"p",
-    text:"The biggest value anchor for Sector 151 is its highly convenient access to the Noida International Airport at Jewar. As the airport moves deeper into its live, operational phases, properties along this exact corridor stand to capture immense capital appreciation."
-  },
-  {
-    type:"h2",
-    id:"Robust-Shared-Infrastructure",
-    text:"Robust Shared Infrastructure"
-  },
-  {
-    type:"p",
-    text:"Unlike pockets that require years to mature, the immediate neighborhood surrounding the plot is already backed by comprehensive planning, featuring wide roads, designated green zones, and top-tier educational institutions and healthcare facilities right around the corner."
-  },
-  {
-    type:"h2",
-    id:"Be-An-Early-Believer-Win-the-Best-Deals",
-    text:"Be An Early Believer - Win the Best Deals"
-  },
-  {
-    type:"p",
-    text:`The golden rule of Delhi-NCR real estate has always favored those who trust institutional underwriting before the brick-and-mortar structures peak. When major national developers anchor flagship portfolios in a specific sector, a ripple effect occurs: infrastructure speeds up, competing high-end brands enter the fray, and secondary market valuations reprice structurally.`
+    text:"For those tracking the NCR property market, Godrej’s aggressive expansion comes as no surprise. The developer’s confidence is backed by massive, real-time market absorption."
   },
   {
     type: "p",
-    text: `As Gaurav Pandey, MD and CEO of Godrej Properties, noted following the win: "Building on the consistent demand witnessed for our existing developments in the region, we remain confident in the strength of this market. This project will further enhance our development portfolio in the National Capital Region and aligns seamlessly with our strategy of deepening our presence in key micro-markets."`
+    text: "During the current financial year, Godrej launched two back-to-back projects in Greater Noida, with each individual launch generating roughly ₹1,500 crore in sales almost instantly."
   },
   {
     type: "p",
-    text: "For smart homebuyers and forward-looking investors, the message is written plainly in the auction files. Sector 151 is paving the way for a highly secure, sophisticated, and green residential chapter. By keeping tabs on this micro-market now, as NOIDA finalizes the allotment letters and the project moves toward its formal RERA launch, you position yourself to secure premium, brand-backed inventory at an entry point designed for maximum future value."
+    text: "The market is devouring premium, branded inventories because today’s buyers are prioritizing execution trust, superior construction quality, and world-class, multi-generational clubhouses."
   },
   {
     type: "p",
-    text: "The next flagship chapter of Expressway luxury is officially being written!"
+    text: "As Gaurav Pandey, MD and CEO of Godrej Properties, stated regarding the acquisition, this strategic move directly deepens their presence in the NCR’s most promising infrastructure-led micro-markets."
+  },
+  {
+    type: "p",
+    text: "Furthermore, as a developer that ranks at the absolute top of the global Dow Jones Sustainability Indices, Godrej will be bringing an eco-conscious, low-density luxury design language to this massive 23-acre township."
+  },
+  {
+    type: "p",
+    text: "By anchoring a massive ₹7,000 crore residential vision in the DMIC zone, Godrej has effectively future-proofed this pocket. As the developer moves through the regulatory due-process and approaches the official state RERA launch, keeping this 23-acre township on your active radar is the smartest move you can make to secure a high-value, generation-defining piece of the NCR."
   }
 ];
 
@@ -565,7 +541,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Godrejproperties = () => {
+const Godrejaquired = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -596,9 +572,9 @@ const Godrejproperties = () => {
     <>
       
     <Seo
-              title='Godrej Acquires Massive Land Parcel in Greater Noida'
-              description="Godrej Acquires Massive Land Parcel in Greater Noida"
-              canonical={`https://www.indiadealsgroup.com/blog/godrej-acquires-massive-land-parcel-in-greater-noida`}
+              title='News: Godrej Properties Acquires Land Parcel in Noida, Sector 151'
+              description="News: Godrej Properties Acquires Land Parcel in Noida, Sector 151"
+              canonical={`https://www.indiadealsgroup.com/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151`}
             />
 
       <article
@@ -960,4 +936,4 @@ const Godrejproperties = () => {
   );
 };
 
-export default Godrejproperties;
+export default Godrejaquired;

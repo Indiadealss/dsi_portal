@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import coverImage10Blog from "../Images/coverImage10Blog.png";
+import coverImage10Blog from "../Images/Blogs12.png";
 import { Link } from "react-router-dom";
 import Seo from "../component/Seo";
 
@@ -7,99 +7,88 @@ import Seo from "../component/Seo";
 const blog = [
     {
     type: "h2",
-    id:"Godrej-Properties",
-    text: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
+    id:"Neighborhood-watch",
+    text: "Neighborhood Watch: Sector 97, Noida for Low-Density Luxury",
   },
   {
     type: "p",
-    text: "The real estate corridor along the Noida-Greater Noida Expressway has fast become a darling of the market, as it offers prime lands, unbeatable connectivity, and buyers flocking to secure a property in the NCR.",
+    text: "Welcome back to another edition of Neighborhood Watch, where IndiaDealss maps out the finest pockets of the National Capital Region (NCR) and tells you which neighbourhood is best for you.",
   },
   {
     type: "p",
-    text: "Noida Sector 150’s rise as prime real estate micro-market is well-known, and now, the spotlight has officially turned to Noida, Sector 151.",
+    text: "This week, we are shining the spotlight on an address that has quietly established itself as a premier enclave for affluent living: Sector 97, Noida.",
   },
   {
     type: "p",
-    text: `In a massive market move, Godrej Properties Ltd. has emerged as the highest bidder for a prime 4.95-acre residential group housing plot in Sector 151, Noida. Securing the land parcel for a staggering ₹331.75 crore via a highly competitive e-auction conducted by the Noida Authority, Godrej is sounding a clear whistle to the market that the Expressway’s growth corridor is transitioning into an upscale, premium real estate powerhouse.`,
+    text: "If you have been tracking the NCR real estate market, you know that the buyer focus has expanded from concrete square footage to a holistic demand for privacy, space, and prestige."
+  },
+  {
+    type: "p",
+    text: "Sector 97 of Noida delivers exactly that. Positioned perfectly along the high-growth corridor of the Noida-Greater Noida Expressway, it has become the definitive target for high-net-worth individuals eyeing an uncompromising lifestyle."
   },
   {
     type: "h2",
-    id:"Decoupling-the-Numbers",
-    text: "Decoupling the Numbers: A ₹2,000 Crore Lifestyle Vision",
+    id:"the-strategic-advantage:connectivity-reimagined",
+    text: "The Strategic Advantage: Connectivity Reimagined",
   },
   {
     type: "p",
-    text: "When an institutional giant like Godrej Properties underwriters a 4.95-acre parcel at over ₹331 crore, it isn't making a speculative bet. The company has explicitly projected an estimated revenue potential exceeding ₹2,000 crore from this upcoming development.",
+    text: "For the modern professional, luxury means saving time. Sector 97, Noida serves as a strategic gateway, offering fluid transit routes that put major commercial and cultural landmarks within arm's reach.",
+  },
+  {
+    type: "p",
+    text: "Commuters can reach South Delhi via the DND Flyway or the Kalindi Kunj Bridge in just 15 minutes. The sector sits at the intersection of primary transit networks, supported by rapid access to both the Botanical Garden Metro Station, a crucial interchange hub, and the Golf Course Metro Station."
+  },
+  {
+    type: "p",
+    text: "The nearby expressway routes connect seamlessly to the Yamuna Expressway, paving a direct line to the upcoming Noida International Airport in Jewar."
   },
   {
     type: "h2",
-    id:"What-does-this-mean-for-future-homebuyers",
-    text:"What does this mean for future homebuyers?"
+    id:"a-mature-social-infrastructure",
+    text:"A Mature Social Infrastructure"
   },
   {
     type: "p",
-    text: "This multi-fold revenue potential implies that the project will bypass basic residential configurations. Instead, Sector 151 is probably set to get a premium residential group housing community featuring luxury apartments across diverse configurations - primarily expected to be high-end 3 BHK and 4 BHK layouts."
+    text: "Living in Sector 97 means stepping into a completely established ecosystem. Instead of waiting for utility timelines to catch up, residents immediately benefit from premium schools, multi-specialty hospitals, and high-end commercial hubs just minutes from their gates."
   },
   {
     type: "p",
-    text: "Buyers can expect world-class amenities, state-of-the-art clubhouses, smart-home systems, and the sustainable, green planning that has made Godrej a global benchmark in residential design."
+    text: "Whether it is popping over to the high-street culinary spots and markets of Sector 104 or spending an evening browsing the global luxury retail storefronts of Sector 18, the balance between serene residential life and vibrant retail experiences is perfectly dialed in."
   },
   {
     type:"h2",
-    id:"Why-Noida-Sector-151?",
-    text:"Why Noida Sector 151?"
+    id:"landmark-luxury-projects",
+    text:"Landmark Luxury Projects"
   },
   {
     type:"p",
-    text:"Sector 151 is embracing its image as an emerging frontier and solidifying its identity as a self-contained, elite suburban pocket. Its geographic placement also gives it an undeniable competitive edge."
-  },
-  {
-    type:"h2",
-    id:"Expressway-Linkage",
-    text:"Expressway Linkage"
-  },
-  {
-    type:"p",
-    text:"Sitting directly along the Noida-Greater Noida Expressway, the sector provides effortless transit to corporate offices, commercial centers, and retail hubs across the region, while keeping daily commuters seamlessly connected via the Aqua Line metro network (via nearby stations like Sector 147 and 148)."
-  },
-  {
-    type:"h2",
-    id:"The-Global-Aviation-Premium",
-    text:"The Global Aviation Premium"
-  },
-  {
-    type:"p",
-    text:"The biggest value anchor for Sector 151 is its highly convenient access to the Noida International Airport at Jewar. As the airport moves deeper into its live, operational phases, properties along this exact corridor stand to capture immense capital appreciation."
-  },
-  {
-    type:"h2",
-    id:"Robust-Shared-Infrastructure",
-    text:"Robust Shared Infrastructure"
-  },
-  {
-    type:"p",
-    text:"Unlike pockets that require years to mature, the immediate neighborhood surrounding the plot is already backed by comprehensive planning, featuring wide roads, designated green zones, and top-tier educational institutions and healthcare facilities right around the corner."
-  },
-  {
-    type:"h2",
-    id:"Be-An-Early-Believer-Win-the-Best-Deals",
-    text:"Be An Early Believer - Win the Best Deals"
-  },
-  {
-    type:"p",
-    text:`The golden rule of Delhi-NCR real estate has always favored those who trust institutional underwriting before the brick-and-mortar structures peak. When major national developers anchor flagship portfolios in a specific sector, a ripple effect occurs: infrastructure speeds up, competing high-end brands enter the fray, and secondary market valuations reprice structurally.`
+    text:"You cannot talk about the premium appeal of Sector 97 without discussing its crown jewel, M3M Jacob & Co. Residences."
   },
   {
     type: "p",
-    text: `As Gaurav Pandey, MD and CEO of Godrej Properties, noted following the win: "Building on the consistent demand witnessed for our existing developments in the region, we remain confident in the strength of this market. This project will further enhance our development portfolio in the National Capital Region and aligns seamlessly with our strategy of deepening our presence in key micro-markets."`
+    text: "This ultra-luxury development marks India's first-ever branded residential partnership with the iconic New York-based luxury jewelry and horology house, Jacob & Co. It represents a collectible lifestyle rather than standard real estate. Rising across four grand towers, the project boasts an exceptionally low-density blueprint. It offers expansive 3, 4, and 5 BHK limited-edition residences designed with bespoke artisanal interiors, floor-to-ceiling glass facades, and wrap-around balconies that frame jaw-dropping views."
   },
   {
     type: "p",
-    text: "For smart homebuyers and forward-looking investors, the message is written plainly in the auction files. Sector 151 is paving the way for a highly secure, sophisticated, and green residential chapter. By keeping tabs on this micro-market now, as NOIDA finalizes the allotment letters and the project moves toward its formal RERA launch, you position yourself to secure premium, brand-backed inventory at an entry point designed for maximum future value."
+    text: 'Each tower is crowned by its own curated "Sky Lounge", giving residents private access to spaces like The Sky Cinema (an open-air theater with cabana seating), The Whiskey Bar, and The Conservatory Garden. Combined with an infinity pool and global concierge services, it completely redefines vertical estate living.'
+  },
+  {
+    type: "h2",
+    id: "low-density-and-greenery",
+    text: "Low Denisty and Greenery"
   },
   {
     type: "p",
-    text: "The next flagship chapter of Expressway luxury is officially being written!"
+    text: "What truly cements Sector 97 as a rare residential enclave is its layout. Unlike heavily congested urban clusters, this sector honors the concept of open space and privacy."
+  },
+  {
+    type: "p",
+    text: "Bordered by expansive green belts and the beautifully manicured expanses of the neighboring Noida Golf Course, the neighborhood acts as a natural buffer zone against the chaos of the metropolis. Residents enjoy clean air, lower ambient noise, and a tranquil atmosphere, all while staying firmly connected to the economic pulse of Delhi NCR."
+  },
+  {
+    type: "p",
+    text: "For buyers looking to build a legacy or simply experience urban tranquility at its peak, Sector 97 is a definitive destination."
   }
 ];
 
@@ -143,9 +132,10 @@ const quickFacts = [
 ];
 
 const tableOfContents = [
-    { id: "Godrej-Properties", label: " Godrej Properties Acquires Land Parcel" },
-  { id: "Decoupling-the-Numbers", label: "Decoupling the Numbers" },
-  { id: "What-does-this-mean-for-future-homebuyers", label: "What does this mean for future homebuyers?" },
+    { id: "Neighborhood-watch", label: "Neighborhood Watch: Sector 97" },
+  { id: "the-strategic-advantage:connectivity-reimagined", label: "The Strategic Advantage" },
+  { id: "a-mature-social-infrastructure", label: "A Mature Social Infrastructure" },
+  { id:"landmark-luxury-projects", label: "Landmark Luxury Projects"}
 ];
 
 // ── INLINE LINK MAP ───────────────────────────────────────────────────────────
@@ -565,7 +555,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Godrejproperties = () => {
+const Neighborhood = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -596,9 +586,9 @@ const Godrejproperties = () => {
     <>
       
     <Seo
-              title='Godrej Acquires Massive Land Parcel in Greater Noida'
-              description="Godrej Acquires Massive Land Parcel in Greater Noida"
-              canonical={`https://www.indiadealsgroup.com/blog/godrej-acquires-massive-land-parcel-in-greater-noida`}
+              title='Neighborhood Watch: Sector 97, Noida for Low-Density Luxury'
+              description="Neighborhood Watch: Sector 97, Noida for Low-Density Luxury"
+              canonical={`https://www.indiadealsgroup.com/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151`}
             />
 
       <article
@@ -680,8 +670,7 @@ const Godrejproperties = () => {
                        <p style={{ fontSize: "14px", fontWeight: 600, color: "#0F172A" }}>
                          INDIADEALS GROUP TEAM
                        </p>
-                       <p style={{ fontSize: "13px", color: "#94A3B8" }}>
-                         Jun 25, 2026 &nbsp;·&nbsp; 6 min read
+                       <p style={{ fontSize: "13px", color: "#94A3B8" }}> 6 min read
                        </p>
                      </div>
                    </div>
@@ -960,4 +949,4 @@ const Godrejproperties = () => {
   );
 };
 
-export default Godrejproperties;
+export default Neighborhood;

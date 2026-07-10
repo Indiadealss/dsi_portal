@@ -684,4 +684,59 @@ input[type="range"]::-moz-range-track{
   animation: dropdown 0.25s ease;
 }
 
+.bannerZoom {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: zoomEffect 8s ease-in-out infinite;
+}
+
+@keyframes zoomEffect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+.swiper,
+.swiper-wrapper,
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-fade .swiper-slide {
+  transition-timing-function: ease-in-out !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #ffffff;
+  color: #000;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 

@@ -86,6 +86,10 @@ import Ncrplots from "./component/Ncrplots.jsx";
 import Neighbourhood from "./component/Neighbourhood.jsx";
 import Affordablesuburb from "./component/Affordablesuburb.jsx";
 import Godrejproperties from "./component/Godrejproperties.jsx";
+import Godrejaquired from "./component/Godrejaquired.jsx";
+import Neighborhood from "./component/Neighborhood.jsx";
+import Homebuyers from "./component/Homebuyers.jsx";
+import Exclusivenew from "./component/Exclusivenew.jsx";
 
 function App() {
 
@@ -190,7 +194,11 @@ useEffect(() => {
         {path:'the-ultimate-ncr-plot-buying-guide', element:<Ncrplots />},
         {path:'neighbourhood-watch-sector-150-noida-is-a-residential-oasis', element: <Neighbourhood /> },
         {path:'greater-noida-west-affordable-suburb-turns-into-luxury-pin-code', element: <Affordablesuburb /> },
-        {path:'news-godrej-properties-acquires-land-parcel-in-noida-sector-151', element: <Godrejproperties /> }
+        {path:'news-godrej-properties-acquires-land-parcel-in-noida-sector-151', element: <Godrejproperties /> },
+        {path:'godrej-acquires-massive-land-parcel-in-greater-noida', element: <Godrejaquired />},
+        {path:'neighborhood-watch-sector-97-noida-for-low-density-luxury', element: <Neighborhood />},
+        {path:'why-luxury-homebuyers-are-choosing-yamuna-expressway', element: <Homebuyers />},
+        {path: 'exclusive-new-project-launched-in-greater-noida-by-irish-group', element: <Exclusivenew />}
       ]
     },
     {
