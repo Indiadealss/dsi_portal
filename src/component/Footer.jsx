@@ -54,7 +54,7 @@ export default function Footer() {
             </p>
 
             <div className="mt-2 space-y-1 text-[#d8d8d8] text-xs">
-              <p>+91 7906518272</p>
+              <p>+91 9818763100</p>
               <p>www.indiadealsgroup.com</p>
             </div>
 

@@ -4,8 +4,8 @@ import Footer from "./component/Footer";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 
 const Layout = () => {
-  const phoneNumber = " 7906518272";
-  const whatsappNumber = " 7906518272";
+  const phoneNumber = " 9818763100";
+  const whatsappNumber = " 9818763100";
 
   const location = useLocation();
 
