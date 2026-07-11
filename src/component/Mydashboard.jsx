@@ -7,6 +7,9 @@ import LeadsInquiries from "./LeadsInquiries";
 import NotificationsDashboard from "./Notifications";
 import SubscriptionPlanDashboard from "./SubscriptionPlanDashboard";
 import CampaignManagementDashboard from "./CampaignManagementDashboard";
+import CreateCampaignForm from "./CreateCampaignForm";
+import Settingdashboard from "./Settingdashboard";
+import Helpandsupport from "./Helpandsupport";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -222,7 +225,11 @@ export default function Mydashboard() {
           {activeNav === 'leads' && <LeadsInquiries />}
           {activeNav === "notifications" && <NotificationsDashboard />}
           {activeNav === "subscription" && <SubscriptionPlanDashboard />}
-          {activeNav === 'campaign' && <CampaignManagementDashboard />}
+          {activeNav === 'campaign' && <CampaignManagementDashboard  setActiveNav={setActiveNav} />}
+          {activeNav === 'createcampaign' && <CreateCampaignForm setActiveNav={setActiveNav}/>}
+          {activeNav === 'settings' && <Settingdashboard />}
+          {activeNav === 'help' && <Helpandsupport />}
+
           
       </div>
     </>

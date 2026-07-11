@@ -332,7 +332,6 @@ const HeroSearch = () => {
     );
 
     setProjectList(filtered);
-    console.log(filteredProjects);
     setProjectInut(value)
   }
   return (

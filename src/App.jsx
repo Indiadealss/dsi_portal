@@ -90,6 +90,9 @@ import Godrejaquired from "./component/Godrejaquired.jsx";
 import Neighborhood from "./component/Neighborhood.jsx";
 import Homebuyers from "./component/Homebuyers.jsx";
 import Exclusivenew from "./component/Exclusivenew.jsx";
+import Createcampaignform from "./component/CreateCampaignForm.jsx";
+import Unfurnishedsemifurnished from "./component/Unfurnishedsemifurnished.jsx";
+import PreviewCampain from "./component/PreviewCampain.jsx";
 
 function App() {
 
@@ -176,6 +179,8 @@ useEffect(() => {
        element:user.loggedIn ?  <Postpropertyform /> : <Postproperty />
     },
     { path:"/edit-property/:id", element:<EditPropertyStepper /> },
+    { path: "/create-campaign", element: <Createcampaignform /> },
+    { path: "/preview-campaign", element: <PreviewCampain />},
     
     {
       path:"/blog",
@@ -198,7 +203,8 @@ useEffect(() => {
         {path:'godrej-acquires-massive-land-parcel-in-greater-noida', element: <Godrejaquired />},
         {path:'neighborhood-watch-sector-97-noida-for-low-density-luxury', element: <Neighborhood />},
         {path:'why-luxury-homebuyers-are-choosing-yamuna-expressway', element: <Homebuyers />},
-        {path: 'exclusive-new-project-launched-in-greater-noida-by-irish-group', element: <Exclusivenew />}
+        {path: 'exclusive-new-project-launched-in-greater-noida-by-irish-group', element: <Exclusivenew />},
+        {path: 'unfurnished-semi-furnished-fully-furnished', element: <Unfurnishedsemifurnished /> }
       ]
     },
     {

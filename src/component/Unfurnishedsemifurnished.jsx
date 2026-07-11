@@ -1,128 +1,132 @@
 import React, { useState, useEffect, useRef } from "react";
 import coverImage10Blog from "../Images/Blog14.png";
 import { Link } from "react-router-dom";
-import Seo from "../component/Seo";
+import Seo from "./Seo";
 
 // ── BLOG CONTENT ─────────────────────────────────────────────────────────────
 const blog = [
     {
     type: "h2",
-    id:"exclusive-new-project-launched-in-greater-noida-by-irish-group",
-    text: "Exclusive: New Project Launched in Greater Noida by Irish Group",
+    id:"Unfurnished-Semi-Furnished-Fully-Furnished-Which-To-Choose",
+    text: "Unfurnished, Semi-Furnished, Fully Furnished: Which To Choose?",
   },
   {
     type: "p",
-    text: "Greater Noida's residential landscape is evolving rapidly, and its newest milestone is taking shape in the heart of Sector ETA-1. Building on their stellar track record of delivering successful landmarks in Greater Noida West, the renowned Irish Group is expanding its footprint.",
+    text: "The real estate market across Delhi-NCR is moving at an incredible pace.",
   },
   {
     type: "p",
-    text: "This upcoming, pre-launch development represents a rare window of opportunity for forward-thinking homeowners and astute investors to secure luxury real estate at an highly advantageous price point before the official launch.",
+    text: "Whether you are exploring the upscale high-rises of Noida, tracking the luxury evolution in Greater Noida West, looking into the smart infrastructure in Greater Noida, or eyeing long-term land investments near the upcoming Jewar Airport in the YEIDA region, a major milestone awaits after you select your location - deciding on the finishing status of your apartment.",
   },
   {
     type: "p",
-    text: "Spanning a sprawling 6-acre land parcel, this premium enclave is thoughtfully designed as a 3-side open layout. Featuring only four residential towers, the project emphasizes low-density living, expansive open spaces, and an uncluttered environment that serves as a prestigious sanctuary."
+    text: "When purchasing or leasing a property in these micro-markets, developers and sellers typically offer three distinct pathways: unfurnished, semi-furnished, and fully furnished."
+  },
+  {
+    type: "p",
+    text: "Rather than one being inherently superior, each choice aligns with distinct financial strategies, timelines, and personal lifestyles."
+  },
+  {
+    type: "p",
+    text: "Let us break down how they compare to help you find your ideal fit!"
   },
   {
     type: "h2",
-    id:"project-layout",
-    text: "Project Layout",
+    id:"unfurnished-apartments-the-pristine-blank-canvas",
+    text: "Unfurnished Apartments: The Pristine Blank Canvas",
   },
   {
     type: "p",
-    text: "The architectural footprint of this development is defined by its soaring towers, rising to imposing heights of Stilt + 34 floors and Stilt + 29 floors. To address diverse privacy and spatial preferences, the residential blocks are structured into two distinct tower configurations:",
-  },
-  {
-    type: "p",
-    text: "●	The Standard Tower: Features an optimized layout of 8 apartments per floor, fully supported by 6 high-speed lifts to keep waiting times minimal."
-  },
-  {
-    type: "p",
-    text: "●	The Premium Tower: Offers heightened exclusivity and low-density serenity with only 4 apartments per floor, serviced seamlessly by 5 high-speed lifts."
+    text: "An unfurnished apartment in the NCR market, means you receive the property with finished flooring, painted walls, basic window frames, and standard electrical wiring and plumbing lines intact, but completely devoid of any woodwork or appliances.",
   },
   {
     type: "h2",
-    id:"versatile-living-spaces",
-    text:"Versatile Living Spaces"
+    text: "The Appeal of Unfurnished Apartments"
   },
   {
     type: "p",
-    text: "Once you step inside, the residences greet you with an unmatched sense of volume, courtesy of an impressive 12-foot ceiling height. Every square foot is meticulously optimized for a premium living experience, complete with centralized air conditioning operating throughout the units. The floor plans accommodate a wide variety of family requirements and offer homes in 3-BHK and 4-BHK configurations."
+    text: "●	Total Creative Control: This option is the ultimate playground for design enthusiasts. It allows you to select every single element, from customized modular kitchen layouts to specific wardrobe materials, ensuring your home perfectly reflects your aesthetic vision."
+  },
+  {
+    type: "p",
+    text: "●	Lower Initial Purchase Price: Unfurnished units command the lowest upfront capital or rental deposit entry point, allowing you to allocate your financial resources into personalized interior execution over time."
+  },
+  {
+    type: "p",
+    text: "●	Ideal For: Long-term end-users who intend to settle down permanently along the Expressway or YEIDA sectors and want a home crafted entirely to their taste."
   },
   {
     type: "h2",
-    id: "3-BHK-Configurations",
-    text: "3 BHK Configurations",
+    id:"semi-furnished-apartments-the Balanced Option",
+    text:"Semi-Furnished Apartments: The Balanced Option"
   },
   {
     type: "p",
-    text: "●	1,450 sq. ft.: A perfectly proportioned 3-bedroom, 2-toilet layout."
+    text: "The semi-furnished apartment is structurally the most popular choice among property seekers in Noida and Greater Noida West. It strikes a pragmatic middle ground by taking care of major, labor-intensive architectural installations while leaving mobile décor choices entirely to you."
   },
   {
     type: "p",
-    text: "●	1,750 sq. ft.: An expanded 3-bedroom, 3-toilet residence ideal for growing families."
+    text: "Typically, a semi-furnished unit includes:"
+  },
+  {
+    type: "p",
+    text: "●	Built-in Woodwork: High-quality modular kitchen cabinetry and floor-to-ceiling wardrobes in the bedrooms."
+  },
+  {
+    type:"p",
+    text:"● 	Basic Fixtures: Ceiling fans, essential light installations, exhaust fans, and sometimes geysers in the bathrooms or basic air conditioning piping."
   },
   {
     type: "h2",
-    id: "4-bhk-configurations",
-    text: "4 BHK Configurations"
+    id: "the-appeal-of-semi-furnished-apartments",
+    text: "The Appeal of Semi-Furnished Apartments",
   },
   {
     type: "p",
-    text: "●	2,050 sq. ft.: A spacious 4-bedroom, 4-toilet unit offering immense spatial freedom.",
+    text: "●	Reduced Move-In Friction: You don’t have to deal with the logistical headache of hiring independent carpenters and supervising dusty construction work before moving in."
   },
   {
-    type: "●	2,450 sq. ft.: A sprawling palatial home featuring 4 bedrooms, an additional study room, a dedicated pooja room, and 5 toilets."
+    type: "p",
+    text: "●	Customization Buffer: While the heavy permanent fixtures are taken care of, you still retain absolute freedom to bring your own sofas, beds, dining sets, and electronic appliances."
+  },
+  {
+    type: "p",
+    text: "●	Ideal For: Working professionals and expanding families who want a quick, stress-free move-in timeline without losing the ability to personalize their living space."
   },
   {
     type: "h2",
-    id: "amenities-strategic-connectivity",
-    text: "Amenities & Strategic Connectivity"
+    id: "fully-furnished-apartments-the-turnkey-solution",
+    text: "Fully Furnished Apartments: The Turnkey Solution"
   },
   {
     type: "p",
-    text: "At the center of this vibrant community will stand a massive, grand clubhouse spanning approximately 62,000 sq. ft. This recreational and social epicentre offers an elite range of indoor and outdoor facilities designed to enrich daily living."
-  },
-  {
-    type: "p",
-    text: "Beyond the gates, Sector ETA-1 provides exceptional, future-ready infrastructure links that anchor you right in the middle of a major urban corridor:"
-  },
-  {
-    type: "p",
-    text: "●	Expressway Access: Just 300 meters from the critical 130-metre Expressway."
-  },
-  {
-    type: "p",
-    text: "●	Rapid Transit: Merely 2 km from both the nearest Aqua Line Metro Station and the upcoming Rapid Rail Transit System (RRTS) network."
-  },
-  {
-    type: "p",
-    text: "●	Conveniences: Local schools are within 2 km, prominent colleges/universities within 4 km, and trusted hospitals just 5 km away."
-  },
-  {
-    type: "p",
-    text: "●	Global Connectivity: Situated 5 km from the nearest Railway Station and 35 km from the upcoming Noida International Airport at Jewar."
+    text: "A fully furnished apartment represents absolute ready-to-move-in convenience. These properties are completely fitted out with permanent fixtures, large electronic appliances (refrigerators, televisions, microwave ovens, washing machines), and complete furniture packages including sofas, dining sets, and beds.",
   },
   {
     type: "h2",
-    id: "the-pre-launch-investment-advantage",
-    text: "The Pre-Launch Investment Advantage"
+    text: "The Appeal of Fully Furnished Apartments"
+  },
+  {
+    type:"p",
+    text: "●	Zero Asset Sourcing: You can literally walk into your new home with nothing but your personal luggage and immediately begin living. There is no coordinating with appliance deliveries or assembling furniture."
   },
   {
     type: "p",
-    text: "Securing your interest during this pre-launch phase unlocks a highly lucrative financial upside. Current competitive pricing ranges between ₹8,000 to ₹9,000 per sq. ft., which stands in highly rewarding contrast to the expected official launch price of ₹10,000 per sq. ft."
+    text: "●	Immediate Monetization: For real estate investors targeting the high-growth commercial hubs of Greater Noida and corporate zones along the Expressway, a fully furnished unit is a liquid asset that instantly appeals to corporate expats and premium renters."
   },
   {
     type: "p",
-    text: "To make the acquisition seamless, early buyers can take advantage of an accommodating 25:25:25:25 payment plan structured evenly across the development cycle."
+    text: "●	Ideal For: Frequent travelers, NRI investors, or busy professionals who prioritize absolute time-saving convenience over structural design freedom."
+  },
+  {
+    type: "h2",
+    id: "the-verdict",
+    text: "The Verdict"
   },
   {
     type: "p",
-    text: "Expressions of Interest (EOI) are officially open starting from ₹10 Lakhs. Booking your priority slot early ensures you lock in these entry-level prices and maximize your future capital appreciation."
+    text: "Your choice ultimately hinges on what you value most at this stage of your home-buying journey:"
   },
-  {
-    type: "p",
-    text: "Submitting an Expression of Interest starting from ₹10 Lakhs allows you to lock in the lower pre-launch rate of ₹8,000–₹9,000 per sq. ft. before the price climbs to the expected launch rate of ₹10,000 per sq. ft."
-  }
 ];
 
 // ── SIDEBAR DYNAMIC CONTENT ───────────────────────────────────────────────────
@@ -589,7 +593,7 @@ function RelatedArticles() {
 }
 
 // ── MAIN COMPONENT ────────────────────────────────────────────────────────────
-const Exclusivenew = () => {
+const Unfurnishedsemifurnished = () => {
   const [activeSection, setActiveSection] = useState("");
   const [shareTooltip, setShareTooltip] = useState(false);
   const contentRef = useRef(null);
@@ -983,4 +987,4 @@ const Exclusivenew = () => {
   );
 };
 
-export default Exclusivenew;
+export default Unfurnishedsemifurnished;

@@ -181,7 +181,7 @@ function ActivityItem({ title, subtitle, date }) {
   );
 }
 
-export default function CampaignManagementDashboard() {
+export default function CampaignManagementDashboard({setActiveNav}) {
   const [search, setSearch] = useState("");
 
   return (
@@ -200,6 +200,7 @@ export default function CampaignManagementDashboard() {
           <button
               type="button"
               className="flex h-12 items-center gap-2 rounded-lg bg-[#0F6CBD] px-5 text-[15px] font-medium text-white transition-colors hover:bg-[#0B5AA0]"
+              onClick={() => setActiveNav('createcampaign')}
             >
               <Plus className="h-4 w-4" />
               Create Campaign
