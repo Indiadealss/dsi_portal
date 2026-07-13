@@ -10,6 +10,7 @@ import CampaignManagementDashboard from "./CampaignManagementDashboard";
 import CreateCampaignForm from "./CreateCampaignForm";
 import Settingdashboard from "./Settingdashboard";
 import Helpandsupport from "./Helpandsupport";
+import Messagedashbord from "./Messagedashbord";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -229,6 +230,7 @@ export default function Mydashboard() {
           {activeNav === 'createcampaign' && <CreateCampaignForm setActiveNav={setActiveNav}/>}
           {activeNav === 'settings' && <Settingdashboard />}
           {activeNav === 'help' && <Helpandsupport />}
+          {activeNav === 'messages' && <Messagedashbord />}
 
           
       </div>

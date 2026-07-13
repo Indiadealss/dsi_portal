@@ -714,12 +714,94 @@ function UnitTable({ unitData, propertyData }) {
 
 // ── Lead Form Sidebar ─────────────────────────────────────────────────────────
 function LeadForm({ owner, propertyData }) {
-  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", email:"", Requirements:"", PhoneNumber: "", message: "" });
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", email:"", Requirement:"", PhoneNumber: "", message: "" });
+  
+  console.log(propertyData.projectname, 'PropertyData is see');
+  
+   const [errors, setErrors] = useState({});
+
+   console.log(form, errors);
+   
+   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only numbers for phone
+    if (name === "PhoneNumber") {
+      if (!/^\d*$/.test(value)) return;
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      ['property_id']: propertyData._id
+    }))
+
+    setForm((prev) => ({
+      ...prev,
+      ['projectname']: propertyData.projectname
+    }))
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Remove error while typing
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
+
+  const validate = () => {
+    const newErrors = {};
+
+    // Name
+    if (!form.Name.trim()) {
+      newErrors.Name = "Name is required";
+    } else if (form.Name.trim().length < 3) {
+      newErrors.Name = "Minimum 3 characters required";
+    }
+
+    // Phone
+    if (!form.PhoneNumber.trim()) {
+      newErrors.PhoneNumber = "Mobile number is required";
+    } else if (!/^[6-9]\d{9}$/.test(form.PhoneNumber)) {
+      newErrors.PhoneNumber = "Enter a valid 10-digit mobile number";
+    }
+
+    // Email
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(form.email)
+    ) {
+      newErrors.email = "Enter a valid email";
+    }
+
+    // Requirement
+    if (!form.Requirement.trim()) {
+      newErrors.Requirement = "Requirement is required";
+    }
+
+    // Message
+    if (!form.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (form.message.trim().length < 10) {
+      newErrors.message = "Message should be at least 10 characters";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+    
+    console.log(form, 'form is validation');
+    
+     if (!validate()) return;
     try {
       const res = await createLeadMessage(form);
       console.log(res.status, 'hee', res.status === 200);
@@ -738,10 +820,10 @@ function LeadForm({ owner, propertyData }) {
       //    setSubmitted(false);
       //  }, 2000);
 
-      setFormData({
+      setForm({
         projectname: "",
         Name: "",
-        requirement: "",
+        Requirement: "",
         PhoneNumber: "",
         email: "",
         message: "",
@@ -757,15 +839,29 @@ function LeadForm({ owner, propertyData }) {
       <p className="text-xs text-gray-500 mb-4">Fill in your details and our expert will get in touch with you shortly.</p>
       <div className="flex flex-col gap-3">
         <div className="flex flex-col md:flex-row gap-3">
+          <div>
+      <p className="text-xs text-gray-500 ">{errors.Name}</p>
           <input name="Name" value={form.Name} onChange={handleChange} placeholder="Name"
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 ">{errors.PhoneNumber}</p>
           <input name="PhoneNumber" value={form.PhoneNumber} onChange={handleChange} minLength={10} maxLength={10} placeholder="Mobile No."
             className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all" />
+            </div>
         </div>
+
         <div className="flex flex-col md:flex-row gap-3">
+          <div>
+            <p className="text-xs text-gray-500 ">{errors.email}</p>
           <input name="email" value={form.email} onChange={handleChange} placeholder="email Id" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
-          <input name="requirements" value={form.Requirement} onChange={handleChange} placeholder="Requirements" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+          </div>
+          <div>
+            <p className="text-xs text-gray-500 ">{errors.Requirement}</p>
+          <input name="Requirement" value={form.Requirement} onChange={handleChange} placeholder="Requirements" className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none transition-all" />
+          </div>
         </div>
+      <p className="text-xs text-gray-500 ">{errors.message}</p>
         <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"
           rows={3} className="bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all resize-none" />
         {/* <div className="flex gap-3 mt-1">
