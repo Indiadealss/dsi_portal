@@ -1,7 +1,6 @@
 
 import rohitBhia from '../Images/RohitSharma.jpg';
 import Ravie from '../Images/RAVIE-SIR.jpg';
-import Ajit from '../Images/AJIT-SIR.jpg'
 import Mehak from '../Images/MehakShukla.jpg';
 import saurabh from '../Images/saurabh-freelincer.jpg'
 import pushkar from '../Images/puskar.png';
@@ -18,13 +17,6 @@ const Salesteam = () => {
             name: "Ravie Mishraa",
             role: "Manager-sales",
             image: Ravie,
-            linkedin: "#"
-        },
-        {
-            id: 3,
-            name: "Ajit Kulshrestha",
-            role: "Manager Sales",
-            image: Ajit,
             linkedin: "#"
         },
         {
