@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { createBlogs } from "../api/api";
 
 export default function CreateBlog() {
   const [blogName, setBlogName] = useState("");
@@ -79,9 +80,7 @@ const removeLink = (index) => {
       if (thumbnail) formData.append("thumbnail", thumbnail);
       if (cover) formData.append("cover", cover);
 
-      const res = await axios.post("/api/blogs", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await createBlogs(formData)
 
       if(res.status === '200'){
         setBlogName("");

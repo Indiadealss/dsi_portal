@@ -32,8 +32,12 @@ export const getConvercation = (user_id) => {
 }
 
 export const createBlogs = (formData) => {
-  return API.get(`/blogs/?formdata=${formData}`)
-}
+  return API.post("/blogs", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
 
 export const getBlogs = () => {
