@@ -11,7 +11,6 @@ import CreateCampaignForm from "./CreateCampaignForm";
 import Settingdashboard from "./Settingdashboard";
 import Helpandsupport from "./Helpandsupport";
 import Messagedashbord from "./Messagedashbord";
-import Analyticsreports from "./AnalyticsReports";
 import ProfileVerificationPage from "./Profilevarification";
 import CreateBlog from "./Createblog";
 
