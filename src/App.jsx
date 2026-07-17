@@ -93,6 +93,7 @@ import Exclusivenew from "./component/Exclusivenew.jsx";
 import Createcampaignform from "./component/CreateCampaignForm.jsx";
 import Unfurnishedsemifurnished from "./component/Unfurnishedsemifurnished.jsx";
 import PreviewCampain from "./component/PreviewCampain.jsx";
+import Blogs from "./Blogs.jsx";
 
 function App() {
 
@@ -153,7 +154,7 @@ useEffect(() => {
     {path:'/ashtech-presidential-towers',element:<Ashtechpresidentialtowers />},
     {path:'/ace-acreville',element:<Aceacreville />},
     {path:'/sobha-rivana',element:<Sobharivana />},
-    {path:'/',},
+    // {path:'/',},
     {path:'/careers',element:<Carrer />},
     {path:'/hanumat-vihar-awasiya-yojna', element:<Hanumatviharawasiya />},
     {path:'/management-team', element:<Ourteam />},
@@ -204,7 +205,8 @@ useEffect(() => {
         {path:'neighborhood-watch-sector-97-noida-for-low-density-luxury', element: <Neighborhood />},
         {path:'why-luxury-homebuyers-are-choosing-yamuna-expressway', element: <Homebuyers />},
         {path: 'exclusive-new-project-launched-in-greater-noida-by-irish-group', element: <Exclusivenew />},
-        {path: 'unfurnished-semi-furnished-fully-furnished', element: <Unfurnishedsemifurnished /> }
+        {path: 'unfurnished-semi-furnished-fully-furnished', element: <Unfurnishedsemifurnished /> },
+        {path:':slug',element: <Blogs />}
       ]
     },
     {

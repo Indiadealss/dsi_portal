@@ -11,6 +11,9 @@ import CreateCampaignForm from "./CreateCampaignForm";
 import Settingdashboard from "./Settingdashboard";
 import Helpandsupport from "./Helpandsupport";
 import Messagedashbord from "./Messagedashbord";
+import Analyticsreports from "./AnalyticsReports";
+import ProfileVerificationPage from "./Profilevarification";
+import CreateBlog from "./Createblog";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -89,6 +92,8 @@ const Icon = ({ name, size = 20, color = "currentColor" }) => {
     menu:         <svg style={s} viewBox="0 0 24 24" {...p}><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>,
     close:        <svg style={s} viewBox="0 0 24 24" {...p}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
     dots:         <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>,
+    blog:         <svg style={s}  viewBox="0 0 40 40"  {...p}><circle cx="20"  cy="20"  r="18"  fill="white"  stroke="#B8B8B8"  /><line    x1="20"  y1="13"  x2="20"  y2="27" stroke="#4C555C" strokeWidth="2.5"  strokeLinecap="round"/><line x1="13"  y1="20" x2="27"  y2="20" stroke="#4C555C" strokeWidth="3.5" strokeLinecap="round"/>
+</svg>
   };
   return map[name] || null;
 };
@@ -101,12 +106,12 @@ const NAV = [
   { id: "leads",        label: "Leads & Inquiries",    icon: "users"        },
   { id: "messages",     label: "Messages",             icon: "message"      },
   { id: "notifications",label: "Notifications",        icon: "bell"         },
-  { id: "analytics",    label: "Analytics & Reports",  icon: "analytics"    },
   { id: "subscription", label: "Subscription & Plan",  icon: "subscription" },
   { id: "campaign",     label: "Campaign",             icon: "campaign"     },
   { id: "verification", label: "Profile Verification", icon: "shield"       },
   { id: "settings",     label: "Settings",             icon: "settings"     },
   { id: "help",         label: "Help & Support",       icon: "help"         },
+  { id: "blog",         label: "Create Blog",          icon: "blog"         }
 ];
 
 
@@ -231,6 +236,9 @@ export default function Mydashboard() {
           {activeNav === 'settings' && <Settingdashboard />}
           {activeNav === 'help' && <Helpandsupport />}
           {activeNav === 'messages' && <Messagedashbord />}
+          {activeNav === 'verification' && <ProfileVerificationPage />}
+          {activeNav === 'blog' && <CreateBlog />}
+          
 
           
       </div>

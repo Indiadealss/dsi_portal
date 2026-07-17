@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NoidaExtention from "../Images/noidavsnoidaextention.png";
 import PropertyGuideCoverImage from "../Images/PropertyGuideCoverImage.png";
 import experionSatori from "../Images/experionSatori.jpeg";
@@ -11,6 +11,7 @@ import Blog11Start from "../Images/Blog11Start.png";
 import Blogs12Str from "../Images/Blogs12Str.png";
 import Blogs13Str from "../Images/Blogs13Str.png";
 import Blogs14Str from "../Images/Blogs14Str.png";
+import { getBlogs } from "../api/api";
 
 const heroPost = {
   id: 0,
@@ -22,122 +23,125 @@ const heroPost = {
     "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=80",
 };
 
+
+    
+
 const allPosts = [
   {
     id: 1,
-    title: "Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow",
+    blogName: "Yamuna Expressway: Buy The Dream Today, Enjoy Gains Tomorrow",
     description:
       "When we look at the real estate landscape of the Delhi-NCR, it is impossible to ignore how the biggest and most expensive real estate markets of today, were once sparsely populated outskirts of the city. ",
-    image: "https://d3eoh63gynpjzh.cloudfront.net/1769256244053-Ace%20153%20imag.jpg",
+    thumbnail: "https://d3eoh63gynpjzh.cloudfront.net/1769256244053-Ace%20153%20imag.jpg",
     author: "",
     avatar: "",
     date: "12 Mar 2024",
-    link:'/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow'
+    slug:'/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow'
   },
   {
     id:2,
-    title: "Noida vs. Greater Noida: Which One is Right for You?",
+    blogName: "Noida vs. Greater Noida: Which One is Right for You?",
     description: "Choosing where to buy your dream home is a huge milestone, and naturally it feels like one of the biggest decisions you have ever made. Buying a home is a symbol of your hard work, dedication and success.",
-    image:"https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776427218293-amenities-external-1.jpg",
+    thumbnail:"https://d3eoh63gynpjzh.cloudfront.net/brandsdoor/1776427218293-amenities-external-1.jpg",
     author: "",
     avtar:"",
     date:"26 Jun 2026",
-    link:'/blog/noida-vs-greater-noida'
+    slug:'/blog/noida-vs-greater-noida'
   },
   {
     id:3,
-    title:"Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?",
+    blogName:"Noida vs. Noida Extension Comparison: Where Should You Get Your NCR Dream Home?",
     description: "Finding the perfect spot for your dream home in the Delhi-NCR region often comes down to a classic real estate dilemma: should you move into an established, bustling hub, or buy into a rapidly growing, modern destination?",
-    image:NoidaExtention,
+    thumbnail:NoidaExtention,
     author: "",
     avtar:"",
     date:"26 Jun 2026",
-    link:'/blog/noida-vs-noida-extension-comparison'
+    slug:'/blog/noida-vs-noida-extension-comparison'
   },
   {
     id:4,
-    title:"10-Step Guide to Buying A Property in NCR",
+    blogName:"10-Step Guide to Buying A Property in NCR",
     description:"Buying a property in Delhi-NCR is an incredible milestone! But let’s be honest, the buying process can feel completely overwhelming.",
-    image:PropertyGuideCoverImage,
+    thumbnail:PropertyGuideCoverImage,
     author:"",
     avtar:"",
     date:"27 Jun 2026",
-    link: '/blog/guide-to-buying-a-property-in-ncr'
+    slug: '/blog/guide-to-buying-a-property-in-ncr'
   },
   {
     id:5,
-    title:"Project Watch: Noida Sector 151’s Experion Saatori",
+    blogName:"Project Watch: Noida Sector 151’s Experion Saatori",
     description:"When one is looking for a dream home along the high-growth corridor of the Noida-Greater Noida Expressway, the standard checklist includes the connectivity, urban conveniences, and established communites.",
-    image:experionSatori,
+    thumbnail:experionSatori,
     author:"",
     avtar:"",
     date:"28-06-2026",
-    link:'/blog/project-watch-noida-sector-151-experion-saatori'
+    slug:'/blog/project-watch-noida-sector-151-experion-saatori'
   },
   {
     id:7,
-    title:"The Ultimate NCR Plot-Buying Guide",
+    blogName:"The Ultimate NCR Plot-Buying Guide",
     description:"When it comes to securing your own piece of land in the Delhi-NCR, the market shifts into a completely different gear compared to buying an apartment or a villa.",
-    image:iNNERPAGE,
+    thumbnail:iNNERPAGE,
     author:"",
     avtar:"",
     date:"29-06-2026",
-    link:'/blog/the-ultimate-ncr-plot-buying-guide'
+    slug:'/blog/the-ultimate-ncr-plot-buying-guide'
   },
   {
     id:8,
-    title:"Neighbourhood Watch: Sector 150, Noida is A Residential Oasis",
+    blogName:"Neighbourhood Watch: Sector 150, Noida is A Residential Oasis",
     description:"When people picture the Delhi-NCR skyline, they often think of towering concrete structures, packed lanes, and fast-paced commercial intersections.",
-    image:Neighbourhood,
+    thumbnail:Neighbourhood,
     author:"",
     avtar:"",
     date:"01-07-2026",
-    link:'/blog/neighbourhood-watch-sector-150-noida-is-a-residential-oasis'
+    slug:'/blog/neighbourhood-watch-sector-150-noida-is-a-residential-oasis'
   },
   {
     id:9,
-    title:"Greater Noida West: Affordable Suburb Turns Into Luxury Pin Code",
+    blogName:"Greater Noida West: Affordable Suburb Turns Into Luxury Pin Code",
     description:"For nearly a decade, Greater Noida West (popularly known as Noida Extension) held a very specific and reliable identity in the Delhi-NCR real estate market. It was the absolute go-to destination for middle-income families and first-time homebuyers looking for spacious, budget-friendly apartments. ",
-    image:NCRPLOTS,
+    thumbnail:NCRPLOTS,
     author:"",
     avtar:"",
     date:"02-07-2026",
-    link:'/blog/greater-noida-west-affordable-suburb-turns-into-luxury-pin-code'
+    slug:'/blog/greater-noida-west-affordable-suburb-turns-into-luxury-pin-code'
   },
   {
     id:10,
-    title: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
+    blogName: "News: Godrej Properties Acquires Land Parcel in Noida, Sector 151",
     description:"The real estate corridor along the Noida-Greater Noida Expressway has fast become a darling of the market, as it offers prime lands, unbeatable connectivity, and buyers flocking to secure a property in the NCR.",
-    image:coverImage10Blog,
+    thumbnail:coverImage10Blog,
     author:"",
     avtar:"",
     date:"03-07-2026",
-    link:'/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151'
+    slug:'/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151'
   },
   {
     id:11,
-    title: "Godrej Acquires Massive Land Parcel in Greater Noida",
+    blogName: "Godrej Acquires Massive Land Parcel in Greater Noida",
     description: "In the same week, when Godrej Properties Limited made its prime acquisition of a 4.5-acre land parcel in Noida’s Sector 151, the real estate giant crossed the finish line on another monumental masterstroke, this one in the nearby Greater Noida pocket of NCR.",
-    image:Blog11Start,
+    thumbnail:Blog11Start,
     author:"",
     date:"10-07-2026",
-    link:'/blog/godrej-acquires-massive-land-parcel-in-greater-noida'
+    slug:'/blog/godrej-acquires-massive-land-parcel-in-greater-noida'
   },
   {
     id:12,
-    title: "Neighborhood Watch: Sector 97, Noida for Low-Density Luxury",
+    blogName: "Neighborhood Watch: Sector 97, Noida for Low-Density Luxury",
     description: "Welcome back to another edition of Neighborhood Watch, where IndiaDealss maps out the finest pockets of the National Capital Region (NCR) and tells you which neighbourhood is best for you.",
-    image: Blogs12Str,
+    thumbnail: Blogs12Str,
     date: "10-07-2026",
-    link: '/blog/neighborhood-watch-sector-97-noida-for-low-density-luxury'
+    slug: '/blog/neighborhood-watch-sector-97-noida-for-low-density-luxury'
   },
   {
     id:13,
-    title: "Why Luxury Homebuyers are Choosing Yamuna Expressway",
+    blogName: "Why Luxury Homebuyers are Choosing Yamuna Expressway",
     description: "The definition of luxury real estate in the National Capital Region (NCR) has undergone a major transformation. For years, premium living was strictly tied to established, dense premium hubs.",
-    image:Blogs13Str,
+    thumbnail:Blogs13Str,
     date: "10-07-2026",
-    link: '/blog/why-luxury-homebuyers-are-choosing-yamuna-expressway'
+    slug: '/blog/why-luxury-homebuyers-are-choosing-yamuna-expressway'
   },
   // {
   //   id:14,
@@ -150,6 +154,10 @@ const allPosts = [
   
 ];
 
+  
+
+
+
 const INITIAL_VISIBLE = 6;
 const LOAD_MORE_COUNT = 3;
 
@@ -157,14 +165,32 @@ export default function BlogsPage() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
   const [loading, setLoading] = useState(false);
   const [heroLoaded, setHeroLoaded] = useState(false);
+  const  [blogAllpost, setAllPosts] = useState(allPosts);
 
-  const visiblePosts = allPosts.slice(0, visibleCount);
-  const hasMore = visibleCount < allPosts.length;
+  const visiblePosts = blogAllpost.slice(0, visibleCount);
+  const hasMore = visibleCount < blogAllpost.length;
+
+   useEffect(() => {
+    fetchBlogs()
+   },[])
+
+      const fetchBlogs =  async() => {
+    try{
+      const res = await getBlogs();
+
+      console.log(res.data.data, 'getBlogs res data');
+
+      setAllPosts((prev) => [...prev, ...res.data.data]);
+      
+    }catch(err){
+      console.log(err)
+    }
+   }
 
   const handleLoadMore = () => {
     setLoading(true);
     setTimeout(() => {
-      setVisibleCount((c) => Math.min(c + LOAD_MORE_COUNT, allPosts.length));
+      setVisibleCount((c) => Math.min(c + LOAD_MORE_COUNT, blogAllpost.length));
       setLoading(false);
     }, 600);
   };
@@ -295,9 +321,9 @@ function BlogCard({ post, animationDelay }) {
     >
       {/* Image */}
       <div className="w-full overflow-hidden rounded-2xl bg-[#F2F4F7]" style={{ aspectRatio: "16/10" }}>
-        <Link to={post.link} ><img
-          src={post.image}
-          alt={post.title}
+        <Link to={post.slug} ><img
+          src={post.thumbnail}
+          alt={post.blogName}
           onLoad={() => setImgLoaded(true)}
           className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-[1.04] ${
             imgLoaded ? "opacity-100" : "opacity-0"
@@ -307,11 +333,11 @@ function BlogCard({ post, animationDelay }) {
 
       {/* Content */}
       <div className="pt-4 flex flex-col flex-1">
-        <Link to={post.link} ><h3
+        <Link to={post.slug} ><h3
           className="text-[#101828] font-semibold leading-snug mb-3 line-clamp-2 group-hover:text-[#344054] transition-colors duration-200"
           style={{ fontSize: "clamp(16px, 1.4vw, 22px)" }}
         >
-          {post.title}
+          {post.blogName}
         </h3></Link>
         <p className="text-[#667085] text-[15px] leading-relaxed line-clamp-3 mb-3 flex-1 cursor-default">
           {post.description}

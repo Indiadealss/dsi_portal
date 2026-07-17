@@ -27,6 +27,38 @@ export const getAllpropertiesDetailsUser = async (id,page=1,limit=2,status='all'
   return API.get(`/mycrmhomepage/allListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
 }
 
+export const getConvercation = (user_id) => {
+  return API.get(`/chat/conversations/${user_id}`)
+}
+
+export const createBlogs = (formData) => {
+  return API.get(`/blogs/?formdata=${formData}`)
+}
+
+
+export const getBlogs = () => {
+    return API.get('/blogs/')
+}
+
+export const getBlog = (slug) => {
+  return API.get(`/blogs/${slug}`)
+}
+
+export const getMessage = (conversationId) => {
+  return API.get(`/chat/${conversationId}`)
+}
+
+export const sendMessage = async (conversationId, sender, senderIp, receiver, property_id, message, messageType, attachment) => {
+  return API.post(`/chat/send?conversationId=${conversationId}&sender=${sender}&receiver=${receiver}&property_id=${property_id}&message=${message}&messageType=${messageType}&attachment=${attachment}`)
+}
+
+export const reply = async (conversationId,sender,receiver,message) => {
+  return API.post(`/chat/reply?conversationId=${conversationId}&sender=${sender}&receiver=${receiver}&message=${message}`)
+}
+
+export const openConveration = async (conversationId) => {
+  return API.post(`/chat/read/${conversationId}`)
+}
 
 export const getPlainlistingWithleads = async (id,page=1,limit=2,status='all') => {
   return API.get(`/mycrmhomepage/PlanListing?id=${id}&page=${page}&limit=${limit}&status=${status}`)
