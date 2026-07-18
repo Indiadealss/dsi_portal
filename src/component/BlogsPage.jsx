@@ -159,7 +159,7 @@ const allPosts = [
 
 
 const INITIAL_VISIBLE = 6;
-const LOAD_MORE_COUNT = 3;
+const LOAD_MORE_COUNT = 6;
 
 export default function BlogsPage() {
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
