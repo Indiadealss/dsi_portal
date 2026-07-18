@@ -36,7 +36,7 @@ const allPosts = [
     author: "",
     avatar: "",
     date: "12 Mar 2024",
-    slug:'/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow'
+    slugLink:'/blog/yamuna-expressway-buy-the-dream-today-enjoy-gains-tomorrow'
   },
   {
     id:2,
@@ -46,7 +46,7 @@ const allPosts = [
     author: "",
     avtar:"",
     date:"26 Jun 2026",
-    slug:'/blog/noida-vs-greater-noida'
+    slugLink:'/blog/noida-vs-greater-noida'
   },
   {
     id:3,
@@ -56,7 +56,7 @@ const allPosts = [
     author: "",
     avtar:"",
     date:"26 Jun 2026",
-    slug:'/blog/noida-vs-noida-extension-comparison'
+    slugLink:'/blog/noida-vs-noida-extension-comparison'
   },
   {
     id:4,
@@ -66,7 +66,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"27 Jun 2026",
-    slug: '/blog/guide-to-buying-a-property-in-ncr'
+    slugLink: '/blog/guide-to-buying-a-property-in-ncr'
   },
   {
     id:5,
@@ -76,7 +76,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"28-06-2026",
-    slug:'/blog/project-watch-noida-sector-151-experion-saatori'
+    slugLink:'/blog/project-watch-noida-sector-151-experion-saatori'
   },
   {
     id:7,
@@ -86,7 +86,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"29-06-2026",
-    slug:'/blog/the-ultimate-ncr-plot-buying-guide'
+    slugLink:'/blog/the-ultimate-ncr-plot-buying-guide'
   },
   {
     id:8,
@@ -96,7 +96,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"01-07-2026",
-    slug:'/blog/neighbourhood-watch-sector-150-noida-is-a-residential-oasis'
+    slugLink:'/blog/neighbourhood-watch-sector-150-noida-is-a-residential-oasis'
   },
   {
     id:9,
@@ -106,7 +106,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"02-07-2026",
-    slug:'/blog/greater-noida-west-affordable-suburb-turns-into-luxury-pin-code'
+    slugLink:'/blog/greater-noida-west-affordable-suburb-turns-into-luxury-pin-code'
   },
   {
     id:10,
@@ -116,7 +116,7 @@ const allPosts = [
     author:"",
     avtar:"",
     date:"03-07-2026",
-    slug:'/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151'
+    slugLink:'/blog/news-godrej-properties-acquires-land-parcel-in-noida-sector-151'
   },
   {
     id:11,
@@ -125,7 +125,7 @@ const allPosts = [
     thumbnail:Blog11Start,
     author:"",
     date:"10-07-2026",
-    slug:'/blog/godrej-acquires-massive-land-parcel-in-greater-noida'
+    slugLink:'/blog/godrej-acquires-massive-land-parcel-in-greater-noida'
   },
   {
     id:12,
@@ -133,7 +133,7 @@ const allPosts = [
     description: "Welcome back to another edition of Neighborhood Watch, where IndiaDealss maps out the finest pockets of the National Capital Region (NCR) and tells you which neighbourhood is best for you.",
     thumbnail: Blogs12Str,
     date: "10-07-2026",
-    slug: '/blog/neighborhood-watch-sector-97-noida-for-low-density-luxury'
+    slugLink: '/blog/neighborhood-watch-sector-97-noida-for-low-density-luxury'
   },
   {
     id:13,
@@ -141,7 +141,7 @@ const allPosts = [
     description: "The definition of luxury real estate in the National Capital Region (NCR) has undergone a major transformation. For years, premium living was strictly tied to established, dense premium hubs.",
     thumbnail:Blogs13Str,
     date: "10-07-2026",
-    slug: '/blog/why-luxury-homebuyers-are-choosing-yamuna-expressway'
+    slugLink: '/blog/why-luxury-homebuyers-are-choosing-yamuna-expressway'
   },
   // {
   //   id:14,
@@ -321,7 +321,7 @@ function BlogCard({ post, animationDelay }) {
     >
       {/* Image */}
       <div className="w-full overflow-hidden rounded-2xl bg-[#F2F4F7]" style={{ aspectRatio: "16/10" }}>
-        <Link to={post.slug} ><img
+        <Link to={post.slugLink} ><img
           src={post.thumbnail}
           alt={post.blogName}
           onLoad={() => setImgLoaded(true)}
@@ -333,7 +333,7 @@ function BlogCard({ post, animationDelay }) {
 
       {/* Content */}
       <div className="pt-4 flex flex-col flex-1">
-        <Link to={post.slug} ><h3
+        <Link to={post.slugLink} ><h3
           className="text-[#101828] font-semibold leading-snug mb-3 line-clamp-2 group-hover:text-[#344054] transition-colors duration-200"
           style={{ fontSize: "clamp(16px, 1.4vw, 22px)" }}
         >
