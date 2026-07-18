@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { UploadCloud } from "lucide-react";
-import { getAllProjectNames } from "../api/api";
+import { createCampain, getAllProjectNames } from "../api/api";
 
 const STEPS = [1, 2, 3, 4];
 
@@ -117,21 +117,39 @@ export default function CreateCampaignForm({setActiveNav}) {
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [projectName, setProjectName] = useState([]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+const handleChange = (e) => {
+  const { name, value } = e.target;
 
-        if (name === 'projectName') {
-            console.log(value, 'value is')
+  if (name === "projectName") {
+    const selectedProject = projectName.find(
+      (item) => item.projectname === value
+    );
 
-            const output = projectName.filter((item) => {
-                return item.projectname === item.value;
-            })
+    if (selectedProject) {
+      setFormData((prev) => ({
+        ...prev,
+        projectName: value,
+        projectId: selectedProject.npxid || selectedProject._id,
+        projectType: selectedProject.property || "",
+        // Add more fields if available
+         campaignTitle: selectedProject.projectname || "",
+         campaignStatus: "active" || "",
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        projectName: value,
+      }));
+    }
 
-            console.log(output, 'output is this');
-            
-        }
-    };
+    return;
+  }
+
+  setFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
 
     useEffect(() => {
         featchAllProjectNames()
@@ -140,7 +158,8 @@ export default function CreateCampaignForm({setActiveNav}) {
     const featchAllProjectNames = async () => {
         const res = await getAllProjectNames()
         setProjectName(res.data.data);
-
+        console.log(res.data.data, 'Projects names and details are');
+        
     }
 
     const handleBack = () => {
@@ -161,10 +180,7 @@ export default function CreateCampaignForm({setActiveNav}) {
             if (brokerLogo) payload.append("brokerLogo", brokerLogo);
             if (promoVideo) payload.append("promotionalVideo", promoVideo);
 
-            const response = await fetch("/api/campaigns", {
-                method: "POST",
-                body: payload,
-            });
+            const response = await createCampain(payload);
 
             if (!response.ok) {
                 const errBody = await response.json().catch(() => ({}));
@@ -175,6 +191,7 @@ export default function CreateCampaignForm({setActiveNav}) {
             setFormData(INITIAL_FORM);
             setBrokerLogo(null);
             setPromoVideo(null);
+            alert("sucess")
         } catch (err) {
             setSubmitError(err.message || "Something went wrong");
         } finally {

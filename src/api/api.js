@@ -152,6 +152,14 @@ export const getAllProjectNames = async () => {
   return API.get(`/property/propertyName`);
 }
 
+export const createCampain = async (payload) => {
+  return API.post(`/campain/`, payload, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export const createPropertyBasic = (data) =>
   API.post("/property/createPropertyBasic", data);
 
@@ -270,13 +278,6 @@ export const createLeadMessage = async (formData) => {
   })
 }
 
-export const createCampain = async (formData) => {
-  return API.post(`/adddealer/adddelear`,formData,{
-    headers:{
-      "Content-Type": "multipart/form-data",
-    },
-  })
-}
 
 // upcoming projects Banners 
 
