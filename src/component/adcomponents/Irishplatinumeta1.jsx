@@ -315,7 +315,7 @@ const Irishplatinumeta1 = () => {
               {/* Left Side: Content */}
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold text-[#0f172a] mb-4">Irish Eta 1</h3>
+                  <h3 className="text-2xl font-bold text-[#0f172a] mb-4">Irish Eta 1,  Greater Noida</h3>
                   <p className="text-gray-600 leading-relaxed text-justify">
                   This is an exclusive pre-launch project by the Irish Group in ETA-1, Greater Noida. The Irish Group has delivered successful projects in Greater Noida West and is now expanding its footprint to the Greater Noida region. 
                   </p>
@@ -364,28 +364,23 @@ const Irishplatinumeta1 = () => {
                   </p>
 
                   <p className="text-gray-600 leading-relxed mt-3 text-justify">
-                      The project offers highly versatile living spaces divided carefully across its premium and standard towers. 
+                      The project offers highly versatile living spaces divided carefully across its premium and standard towers. The 3 BHK configurations are available in two sizes - a 1,450 sq. ft. layout which features 3 bedrooms and 2 toilets, and a 1,750 sq. ft. option layout with 3 bedrooms and 3 toilets.
+                  </p>
+
+                  
+
+                  <p className="text-gray-600 leading-relxed mt-3 text-justify">
+                    For larger families, the 4 BHK configurations provide ultimate spatial freedom. The 2,050 sq. ft. unit has 4 bedrooms and 4 toilets. The 2,450 sq. ft. residence option includes 4 bedrooms, a study room, a pooja room, and 5 toilets.  Each home is crafted to deliver an unmatched sense of comfort and luxury to you. The flats will have an impressive 12-foot ceiling height and centralized air conditioning systems operating throughout the units.                  
+                  </p>
+
+
+                  <p className="text-gray-600 leading-relxed mt-3 text-justify">
+                    The floor plans are meticulously optimized, and the individual configurations are designed to meet diverse family needs while ensuring a premium, uncluttered living experience. In this Irish Pre-Launch Project, residents will enjoy access to a massive, grand clubhouse spanning approximately 62,000 sq. ft., which will serve as the social and recreational heart of the community.
+                  
                   </p>
 
                   <p className="text-gray-600 leading-relxed mt-3 text-justify">
-                    The 3 BHK configurations are available in two sizes - a 1,450 sq. ft. layout which features 3 bedrooms and 2 toilets, and a 1,750 sq. ft. option layout with 3 bedrooms and 3 toilets.
-                  </p>
-
-                  <p className="text-gray-600 leading-relxed mt-3 text-justify">
-                    For larger families, the 4 BHK configurations provide ultimate spatial freedom. The 2,050 sq. ft. unit has 4 bedrooms and 4 toilets. The 2,450 sq. ft. residence option includes 4 bedrooms, a study room, a pooja room, and 5 toilets.
-                  </p>
-
-                  <p className="text-gray-600 leading-relxed mt-3 text-justify">
-                    Each home is crafted to deliver an unmatched sense of comfort and luxury to you. The flats will have an impressive 12-foot ceiling height and centralized air conditioning systems operating throughout the units.
-                  </p>
-
-                  <p className="text-gray-600 leading-relxed mt-3 text-justify">
-                    The floor plans are meticulously optimized, and the individual configurations are designed to meet diverse family needs while ensuring a premium, uncluttered living experience.
-                  </p>
-
-                  <p className="text-gray-600 leading-relxed mt-3 text-justify">
-                    In this Irish Pre-Launch Project, residents will enjoy access to a massive, grand clubhouse spanning approximately 62,000 sq. ft., which will serve as the social and recreational heart of the community.
-                  </p>
+                    </p>
 
                   <p className="text-gray-600 leading-relxed mt-3 text-justify">
                     Vertical movement across the towers is engineered for absolute convenience, featuring up to 6 high-speed lifts per tower to ensure minimal wait times and smooth transit for all residents.
