@@ -53,6 +53,7 @@ export const Profileproperty = ({ setValidator }) => {
   const [length, setLength] = useState('');
   const [Breadth, setBreadth] = useState('');
   const [availabestatus, setChoiseProperty] = useState(propertyData.availabestatus || '');
+  const [hotScreen, setHotScreen] = useState(propertyData.hotScreen || false);
   const [choiseWashroom, setChoiseWashroom] = useState('');
   const [choiseConfrance, setChoiseConfrance] = useState('');
   const [recptionarea, setRecptionArea] = useState('');
@@ -357,6 +358,7 @@ const handleBuildPlotarea = (newUnit) => {
     totalfloor: totalFloor,
     reraStatus,
     availabestatus,
+    hotScreen,
     numSets,
     maxnumSets,
     mettingRoom,
@@ -405,6 +407,7 @@ const handleBuildPlotarea = (newUnit) => {
     totalFloor,
     reraStatus,
     availabestatus,
+    hotScreen,
     numSets,
     maxnumSets,
     mettingRoom,
@@ -1541,6 +1544,15 @@ const handleBuildPlotarea = (newUnit) => {
             )
           })}
         </div>
+        <label className="flex items-center gap-2 cursor-pointer my-3">
+          <input
+            type="checkbox"
+            checked={hotScreen}
+            onChange={(e) => setHotScreen(e.target.checked)}
+            className="w-4 h-4 accent-blue-600"
+          />
+          <span className="text-sm font-medium text-gray-600">Mark as Hot Property</span>
+        </label>
       </div>
       <div className={`${propertyDataFirst.purpose === 'pg' ? 'block' : 'hidden'}`}>
         <p className='font-medium text-lg my-3'>Availability From</p>
