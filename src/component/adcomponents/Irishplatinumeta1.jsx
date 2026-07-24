@@ -186,9 +186,9 @@ const Irishplatinumeta1 = () => {
   return (
     <div>
          <Seo
-              title='Irish Eta 1, Sector Eta 1, Greater Noida, Uttar Pradesh'
-              description="Irish Eta 1 offers new-launch 3 & 4 BHK premium apartments at Eta 1, Greater Noida with a 62,000 sq.ft. clubhouse and central air-conditioning."
-              canonical={`https://www.indiadealsgroup.com/irish-eta-1`}
+              title='Irish Eta 1 Greater Noida | 3BHK/4BHK Premium Apartments'
+              description="Irish Eta 1 Greater Noida offers 3BHK and 4BHK Premium Apartments with all modern amenities, which is located at Eta 1 Greater Noida."
+              canonical={`https://www.indiadealsgroup.com/irish-eta-1-greater-noida`}
             />
       <section className="relative h-[90vh] min-h-[700px] w-full flex flex-col items-center justify-center text-white text-center px-4 overflow-hidden">
       {/* 1. Background Image with Dark Overlay */}
