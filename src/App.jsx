@@ -62,6 +62,7 @@ import Ashtechpresidentialtowers from "./component/adcomponents/Ashtechpresident
 import Aceacreville from "./component/adcomponents/Aceacreville.jsx";
 import Acehanei from "./component/adcomponents/Acehanei.jsx";
 import Sobharivana from "./component/adcomponents/Sobharivana.jsx";
+import Irishplatinumeta1 from "./component/adcomponents/Irishplatinumeta1.jsx";
 import Loginpage from "./component/Loginpage.jsx";
 import AllProjects from "./component/AllProjects.jsx";
 import PropertyListingPage from "./component/PropertyListingPage.jsx"
@@ -165,6 +166,7 @@ useEffect(() => {
     {path:'/it-team', element:<Itteam />},
     {path:'/sales-team', element:<Salesteam />},
     {path:'/ace-hanei',element:<Acehanei />},
+    {path:'/irish-eta-1-greater-noida',element:<Irishplatinumeta1 />},
     {path:'/recent-activity', element: <Recentactivity />},
     {path:"/emicomponent",element: <Emicomponent />},
     {path:"/user",element:<Userlogin />},

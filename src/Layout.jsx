@@ -20,7 +20,7 @@ const Layout = () => {
   console.log(page,'page is the',project);
 
   // 2. Define the paths where you want to hide the header/footer
-  const hiddenPaths = ["/irish-platinum", "/eldeco-eoe","/ace-estate","/crc-maesta","/ashtech-presidential-towers", "/ace-acreville", "/ace-hanei","/sobha-rivana"];
+  const hiddenPaths = ["/irish-platinum", "/eldeco-eoe","/ace-estate","/crc-maesta","/ashtech-presidential-towers", "/ace-acreville", "/ace-hanei","/sobha-rivana", "/irish-eta-1-greater-noida"];
   const hideLayout = hiddenPaths.includes(location.pathname);
 
   // The dashboard has its own Help & Support / Contact Support entry points,
