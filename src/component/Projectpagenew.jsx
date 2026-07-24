@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import Unitsavailble from "./customcomponent/Unitsavailble";
 import { useDispatch } from "react-redux";
 import { setProperty } from "./Redux/propertyidSlice";
+import MessageOwnerPanel from "./MessageOwnerPanel";
 import Seo from "./Seo";
 import Leadgentaionform from "./customcomponent/Leadgentaionform";
 
@@ -864,22 +865,32 @@ function LeadForm({ owner, propertyData }) {
       <p className="text-xs text-gray-500 ">{errors.message}</p>
         <textarea name="message" value={form.message} onChange={handleChange} placeholder="What's on your mind?"
           rows={3} className="bg-white border border-gray-200 rounded-md px-3 py-2.5 text-sm outline-none  transition-all resize-none" />
-        {/* <div className="flex gap-3 mt-1">
-          <button onClick={handleSubmit}
-            className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue .color-blue text-white text-sm font-semibold py-2.5 rounded-md transition-all">
-            <Calendar size={15} /> Schedule a Visit
-          </button>
-          <a href={`tel:+919818764200`}
-            className="cursor-pointer flex-1 flex items-center justify-center gap-2 text-white border-2 bg-blue text-blue-600 text-sm font-semibold py-2.5 rounded-md hover:bg-blue-50 transition-all">
-            <Phone size={15} /> Call Now
-          </a>
-        </div> */}
-
           <button onClick={handleSubmit}
             className="cursor-pointer flex-1 flex items-center justify-center gap-2 bg-blue  text-white text-sm font-semibold py-2.5 rounded-md transition-all">
             Submit
           </button>
 
+        {owner?.mobile && (
+          <div className="flex gap-3 mt-1">
+            <a href={`tel:${owner.mobile}`}
+              className="cursor-pointer flex-1 flex items-center justify-center gap-2 text-white bg-blue-600 text-sm font-semibold py-2.5 rounded-md transition-all">
+              <Phone size={15} /> Call Now
+            </a>
+            <a href={`https://wa.me/${owner.mobile}?text=`} target="_blank" rel="noopener noreferrer"
+              className="cursor-pointer flex-1 flex items-center justify-center gap-2 text-white bg-green-600 text-sm font-semibold py-2.5 rounded-md hover:bg-green-700 transition-all">
+              WhatsApp
+            </a>
+          </div>
+        )}
+        {owner?._id && (
+          <MessageOwnerPanel
+            propertyId={propertyData._id}
+            ownerId={owner._id}
+            ownerName={owner.name}
+            propertyLabel={propertyData.projectname}
+            className="cursor-pointer w-full flex items-center justify-center gap-2 text-white bg-[#001A2D] text-sm font-semibold py-2.5 rounded-md transition-all"
+          />
+        )}
       </div>
     </div>
   );

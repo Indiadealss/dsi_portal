@@ -338,7 +338,7 @@ export default function Aminitiesandfeatures() {
 
   const propertyFirstData = useSelector((state) => state.property.data);
 
-  const [selectedAmenities, setSelectedAmenities] = useState(propertyFirstData.amenitie);
+  const [selectedAmenities, setSelectedAmenities] = useState(new Set(propertyFirstData.amenitie || []));
   const [features, setFeatures] = useState(DEFAULT_FEATURES);
   const [newFeature, setNewFeature] = useState("");
   const [addingFeature, setAddingFeature] = useState(false);

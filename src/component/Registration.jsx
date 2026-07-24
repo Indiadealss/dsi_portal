@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from './Redux/userSlice';
 
 
-const Registration = ({ resMobile, closeModal }) => {
+const Registration = ({ resMobile, closeModal, youAre }) => {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -45,7 +45,7 @@ const Registration = ({ resMobile, closeModal }) => {
         return false;
       }
 
-      const res = await register(name, email, resMobile, closeModal);
+      const res = await register(name, email, resMobile, youAre);
       // console.log("otp sent:",res.status);
       if (res.status === 200) {
         // alert("You have Register Succesfully");
@@ -116,7 +116,7 @@ const Registration = ({ resMobile, closeModal }) => {
       {/* Email ID */}
       <div className="mt-5">
         <label className="block text-sm font-normal text-gray-500 ">City (optional)</label>
-        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className=" border border-gray-300 text-gray-900 text-sm rounded   block w-full p-2.5     outline-none" placeholder="Enter your full name" />
+        <input type="text" value={city} onChange={(e) => setCity(e.target.value)} className=" border border-gray-300 text-gray-900 text-sm rounded   block w-full p-2.5     outline-none" placeholder="Enter your City" />
       </div>
       <label className="block text-sm font-normal text-gray-500 mt-5">E-mail</label>
 

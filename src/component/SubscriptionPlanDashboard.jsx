@@ -239,20 +239,20 @@ export default function SubscriptionPlanDashboard() {
   const [billing, setBilling] = useState("monthly");
 
   return (
-    <div className="min-h-screen w-full bg-[#F8FAFC] p-6 lg:p-8">
+    <div className="min-h-screen w-full  p-6 lg:p-8">
       <div className="mx-auto max-w-[1400px]">
         {/* Header */}
         <div className="mb-5">
-          <h1 className="text-[36px] font-bold leading-tight text-[#0F172A] sm:text-[40px]">
+          <h1 className="text-[28px] font-bold leading-tight text-[#0F172A] sm:text-[36px] lg:text-[40px]">
             Subscription / Plan
           </h1>
-          <p className="mt-1 text-[16px] font-normal text-[#64748B]">
+          <p className="mt-1 text-[14px] font-normal text-[#64748B] sm:text-[16px]">
             Choose the perfect plan to grow your real estate business
           </p>
         </div>
 
         {/* Billing toggle */}
-        <div className="mb-6 flex items-center gap-6">
+        <div className="mb-6 flex flex-wrap items-center gap-4 sm:gap-6">
           <button
             type="button"
             onClick={() => setBilling("monthly")}
@@ -287,133 +287,15 @@ export default function SubscriptionPlanDashboard() {
         </div>
 
         {/* Main grid: pricing cards + sidebar */}
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
           {/* Pricing cards */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:col-span-3 xl:grid-cols-4">
             {PLANS.map((plan) => (
               <PlanCard key={plan.key} plan={plan} />
             ))}
           </div>
 
-          {/* Sidebar */}
-          <div className="flex flex-col gap-5 lg:col-span-1">
-            {/* Compare plans / current plan */}
-            <div
-              className="rounded-xl border border-[#E5E7EB] bg-white p-5"
-              style={{
-                boxShadow:
-                  "0 1px 3px rgba(0,0,0,.04), 0 6px 16px rgba(15,23,42,.05)",
-              }}
-            >
-              <h2 className="mb-3 text-[18px] font-semibold text-[#111827]">
-                Compare plans
-              </h2>
-              <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#DCFCE7]">
-                  <LayoutGrid className="h-5 w-5 text-[#16A34A]" />
-                </div>
-                <div>
-                  <p className="text-[15px] font-semibold text-[#0F172A]">
-                    Basic Plan
-                  </p>
-                  <p className="text-[15px] text-[#111827]">
-                    &#8377; 999{" "}
-                    <span className="text-[14px] text-[#6B7280]">/ month</span>
-                  </p>
-                  <p className="text-[13px] text-[#9CA3AF]">
-                    Renews on 20 Jun 2024
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="mt-4 flex h-11 w-full items-center justify-center rounded-lg border border-[#1677FF] bg-white text-[14px] font-semibold text-[#1677FF] hover:bg-[#EEF5FF]"
-              >
-                Manage Subscription
-              </button>
-            </div>
-
-            {/* Plan Benefits */}
-            <div
-              className="rounded-xl border border-[#E5E7EB] bg-white p-5"
-              style={{
-                boxShadow:
-                  "0 1px 3px rgba(0,0,0,.04), 0 6px 16px rgba(15,23,42,.05)",
-              }}
-            >
-              <h2 className="mb-2 text-[18px] font-semibold text-[#111827]">
-                Plan Benefits
-              </h2>
-              <div className="flex flex-col divide-y divide-[#F1F5F9]">
-                <BenefitRow icon={Eye} label="Increase your property visibility" />
-                <BenefitRow icon={Users} label="Get more qualified leads" />
-                <BenefitRow icon={Zap} label="Access Powerful Tools" />
-                <BenefitRow icon={TrendingUp} label="Grow your real estate business" />
-              </div>
-            </div>
-
-            {/* Payment Details */}
-            <div
-              className="rounded-xl border border-[#E5E7EB] bg-white p-5"
-              style={{
-                boxShadow:
-                  "0 1px 3px rgba(0,0,0,.04), 0 6px 16px rgba(15,23,42,.05)",
-              }}
-            >
-              <h2 className="mb-2 text-[18px] font-semibold text-[#111827]">
-                Payment Details
-              </h2>
-              <div className="flex flex-col divide-y divide-[#F1F5F9]">
-                <PaymentRow label="Last Payment" value="₹ 999" />
-                <PaymentRow label="Payment Date" value="20 May 2024" />
-                <PaymentRow label="Next Billing Date" value="20 Jun 2024" />
-                <PaymentRow label="Payment Method" value="******4242" isLast />
-              </div>
-              <button
-                type="button"
-                className="mt-4 flex h-11 w-full items-center justify-center rounded-lg border border-[#1677FF] bg-white text-[14px] font-semibold text-[#1677FF] hover:bg-[#EEF5FF]"
-              >
-                Manage Subscription
-              </button>
-            </div>
-
-            {/* Help Card */}
-            <div
-              className="rounded-xl border border-[#E5E7EB] bg-white p-5"
-              style={{
-                boxShadow:
-                  "0 1px 3px rgba(0,0,0,.04), 0 6px 16px rgba(15,23,42,.05)",
-              }}
-            >
-              <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#DCFCE7]">
-                  <Headphones className="h-5 w-5 text-[#16A34A]" />
-                </div>
-                <div>
-                  <p className="text-[16px] font-semibold text-[#111827]">
-                    Need Help?
-                  </p>
-                  <p className="mt-0.5 text-[13px] leading-relaxed text-[#6B7280]">
-                    Our support team in here to help you choose the right plan
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 flex gap-3">
-                <button
-                  type="button"
-                  className="h-10 flex-1 rounded-lg bg-[#1677FF] text-[14px] font-medium text-white hover:bg-[#0F66E8]"
-                >
-                  Contact Support
-                </button>
-                <button
-                  type="button"
-                  className="h-10 flex-1 rounded-lg border border-[#E5E7EB] bg-white text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC]"
-                >
-                  FAQs
-                </button>
-              </div>
-            </div>
-          </div>
+          
         </div>
 
         {/* Compare Plans Table */}

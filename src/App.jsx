@@ -94,6 +94,7 @@ import Createcampaignform from "./component/CreateCampaignForm.jsx";
 import Unfurnishedsemifurnished from "./component/Unfurnishedsemifurnished.jsx";
 import PreviewCampain from "./component/PreviewCampain.jsx";
 import Blogs from "./Blogs.jsx";
+import BusinessProfile from "./component/BusinessProfile.jsx";
 
 function App() {
 
@@ -126,6 +127,7 @@ function App() {
           you_are: usedetails.you_are,
           logo: usedetails.logo,
           profile_photo: usedetails.profile,
+          role: usedetails.role,
         }));
 
         dispatch(updateField({ owner: usedetails._id }));
@@ -182,6 +184,7 @@ useEffect(() => {
     { path:"/edit-property/:id", element:<EditPropertyStepper /> },
     { path: "/create-campaign", element: <Createcampaignform /> },
     { path: "/preview-campaign", element: <PreviewCampain />},
+    { path: "/bussinessProfile",element:<BusinessProfile />},
     
     {
       path:"/blog",

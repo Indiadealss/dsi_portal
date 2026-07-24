@@ -4,19 +4,34 @@ import Verify from "./Verify";
 import {sentOtp} from "../../src/api/api"
 import Registration from "./Registration";
 import Emailregistration from "./Emailregistration";
+import SelectUserRole from "./SelectUserRole";
 
 const Loginformmodi = ({ closeModal }) => {
-    
+
       const [mobile, setMobile] = useState('');
       const [password, setPassword] = useState("");
       const [regmobile,setRegmobile] = useState("");
       const [confirmPassword, setConfirmPassword] = useState("");
       const [name, setName] = useState("");
       const [emailreg,setEmailreg] = useState(false);
+      const [roleStep, setRoleStep] = useState(false);
       const [registration,setRegistration] = useState(false);
-      
+      const [userRole, setUserRole] = useState("");
+
       const [otpSent, setOtpSent] = useState(false);
       let mobileNo = `+91${mobile}`
+
+      const handleRoleContinue = (role) => {
+        setUserRole(role);
+        setRoleStep(false);
+        setRegistration(true);
+      };
+
+      const handleRoleSkip = () => {
+        setUserRole("");
+        setRoleStep(false);
+        setRegistration(true);
+      };
 
       const handleSend = async () => {
         try{
@@ -34,7 +49,7 @@ const Loginformmodi = ({ closeModal }) => {
       
   return (
     <>
-    <div className={`${otpSent || registration || emailreg ? 'hidden' : 'block'}`}>
+    <div className={`${otpSent || registration || emailreg || roleStep ? 'hidden' : 'block'}`}>
       <div className="flex">
         <h2><span className="text-2xl font-bold text-gray-700" style={{}}>Login/Register</span></h2>
       </div>
@@ -63,11 +78,14 @@ const Loginformmodi = ({ closeModal }) => {
           </button>
           </div>
           </div>
-          <div className={`${!otpSent || registration ? 'hidden': 'block'}`}>
-            <Verify mobile={mobile} changeotpsend={() => setOtpSent(false)} redirectTo={(e) => setRegistration(e)} resmobilef={(e) => setRegmobile(e)} closeModal={closeModal}/>
+          <div className={`${!otpSent || registration || roleStep ? 'hidden': 'block'}`}>
+            <Verify mobile={mobile} changeotpsend={() => setOtpSent(false)} redirectTo={(e) => e ? setRoleStep(true) : null} resmobilef={(e) => setRegmobile(e)} closeModal={closeModal}/>
+          </div>
+          <div className={`${roleStep ? 'block': 'hidden'}`}>
+              <SelectUserRole onContinue={handleRoleContinue} onSkip={handleRoleSkip} />
           </div>
           <div className={`${registration ? 'block': 'hidden'}`}>
-              <Registration resMobile={regmobile} closeModal={closeModal}/>
+              <Registration resMobile={regmobile} youAre={userRole} closeModal={closeModal}/>
           </div>
           <div className={`${emailreg  ? 'block' : 'hidden'}`}>
               <Emailregistration />

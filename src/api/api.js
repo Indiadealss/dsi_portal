@@ -31,6 +31,14 @@ export const getConvercation = (user_id) => {
   return API.get(`/chat/conversations/${user_id}`)
 }
 
+export const getNotifications = (userId) => {
+  return API.get(`/getAllnotification/getNotifications`, { params: { userId } })
+}
+
+export const markNotificationRead = (id) => {
+  return API.put(`/getAllnotification/${id}/read`)
+}
+
 export const createBlogs = (formData) => {
   return API.post("/blogs", formData, {
     headers: {
@@ -52,16 +60,38 @@ export const getMessage = (conversationId) => {
   return API.get(`/chat/${conversationId}`)
 }
 
-export const sendMessage = async (conversationId, sender, senderIp, receiver, property_id, message, messageType, attachment) => {
-  return API.post(`/chat/send?conversationId=${conversationId}&sender=${sender}&receiver=${receiver}&property_id=${property_id}&message=${message}&messageType=${messageType}&attachment=${attachment}`)
+export const sendMessage = async ({
+  conversationId,
+  sender,
+  senderName,
+  receiver,
+  property_id,
+  message,
+  messageType = "text",
+  attachment = "",
+  guestName,
+  guestPhone,
+}) => {
+  return API.post(`/chat/send`, {
+    conversationId,
+    sender,
+    senderName,
+    receiver,
+    property_id,
+    message,
+    messageType,
+    attachment,
+    guestName,
+    guestPhone,
+  });
 }
 
-export const reply = async (conversationId,sender,receiver,message) => {
-  return API.post(`/chat/reply?conversationId=${conversationId}&sender=${sender}&receiver=${receiver}&message=${message}`)
+export const reply = async ({ conversationId, sender, senderName, receiver, message }) => {
+  return API.post(`/chat/reply`, { conversationId, sender, senderName, receiver, message });
 }
 
-export const openConveration = async (conversationId) => {
-  return API.post(`/chat/read/${conversationId}`)
+export const openConveration = async (conversationId, userId) => {
+  return API.put(`/chat/read/${conversationId}`, {}, { params: { userId } })
 }
 
 export const getPlainlistingWithleads = async (id,page=1,limit=2,status='all') => {
@@ -93,8 +123,8 @@ export const verifyOtp = (mobile, otp) =>
   API.post("/auth/verify-otp", { mobile, otp });
 
 
-export const register = (name, email, mobile) =>
-  API.post("/auth/register", { name, email, mobile })
+export const register = (name, email, mobile, you_are) =>
+  API.post("/auth/register", { name, email, mobile, you_are })
 
 export const getUserDetatils = () =>
   API.get("/auth/me");
@@ -111,6 +141,32 @@ export const updateUser = async (formData) => {
 export const getLogout = async () => {
   return API.post("/auth/logout", {}, { withCredentials: true })
 }
+
+// ---- Profile verification / documents / bank details ----
+
+export const submitVerificationDoc = async (formData) => {
+  return API.post("/verification/submit", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
+export const addUserDocument = async (formData) => {
+  return API.post("/verification/documents", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
+export const removeUserDocument = async (userId, docId) => {
+  return API.delete(`/verification/documents/${docId}`, {
+    params: { userId },
+  });
+};
+
+export const updateBankDetailsApi = async (formData) => {
+  return API.put("/verification/bank", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
 
 export const getSearch = async (city) => {
   return API.get(`/cities/search?query=${city}`)
@@ -160,6 +216,106 @@ export const createCampain = async (payload) => {
   });
 };
 
+export const getAllCampains = async () => {
+  return API.get(`/campain/`);
+};
+
+
+// ---- Settings dashboard (Notifications, Privacy, Login, Subscription, ----
+// ---- Payment, Language, Appearance) ----
+// Convention matches businessProfileApi below: GET returns { data: { settings/... } },
+// PUT/POST persist and echo the updated resource back.
+export const settingsApi = {
+  getNotifications: (userId) =>
+    API.get("/settings/notifications", { params: { userId } }),
+  updateNotifications: (userId, data) =>
+    API.put("/settings/notifications", data, { params: { userId } }),
+
+  getPrivacy: (userId) =>
+    API.get("/settings/privacy", { params: { userId } }),
+  updatePrivacy: (userId, data) =>
+    API.put("/settings/privacy", data, { params: { userId } }),
+
+  getLoginSecurity: (userId) =>
+    API.get("/settings/login", { params: { userId } }),
+  updateLoginSecurity: (userId, data) =>
+    API.put("/settings/login", data, { params: { userId } }),
+  changePassword: (userId, data) =>
+    API.put("/settings/login/password", data, { params: { userId } }),
+  getSessions: (userId) =>
+    API.get("/settings/login/sessions", { params: { userId } }),
+  endSession: (userId, sessionId) =>
+    API.delete(`/settings/login/sessions/${sessionId}`, { params: { userId } }),
+  endOtherSessions: (userId) =>
+    API.delete("/settings/login/sessions", { params: { userId } }),
+
+  getSubscription: (userId) =>
+    API.get("/settings/subscription", { params: { userId } }),
+  updateSubscriptionPlan: (userId, plan) =>
+    API.put("/settings/subscription", { plan }, { params: { userId } }),
+  getBillingHistory: (userId) =>
+    API.get("/settings/subscription/billing-history", { params: { userId } }),
+
+  getPaymentMethods: (userId) =>
+    API.get("/settings/payment-methods", { params: { userId } }),
+  addPaymentMethod: (userId, data) =>
+    API.post("/settings/payment-methods", data, { params: { userId } }),
+  removePaymentMethod: (userId, id) =>
+    API.delete(`/settings/payment-methods/${id}`, { params: { userId } }),
+  setDefaultPaymentMethod: (userId, id) =>
+    API.put(`/settings/payment-methods/${id}/default`, {}, { params: { userId } }),
+
+  getLanguage: (userId) =>
+    API.get("/settings/language", { params: { userId } }),
+  updateLanguage: (userId, data) =>
+    API.put("/settings/language", data, { params: { userId } }),
+
+  getAppearance: (userId) =>
+    API.get("/settings/appearance", { params: { userId } }),
+  updateAppearance: (userId, data) =>
+    API.put("/settings/appearance", data, { params: { userId } }),
+};
+
+export const businessProfileApi = {
+  getAll: (userId) => {
+    const finalUserId =
+      userId || "69327267bacee75d921d485e";
+
+    return API.get("/business-profile", {
+      params: {
+        userId: finalUserId,
+      },
+    });
+  },
+
+   updateProfile: (userId, data) =>
+    API.put(
+      "/business-profile",
+      data,
+      {
+        params: { ownerId, userId },
+      }
+    ),
+
+  addTeamMember: (userId, data) =>
+    API.post(
+      "/team-members",
+      data,
+      {
+        params: { userId },
+      }
+    ),
+
+  removeTeamMember: (userId, id) =>
+    API.delete(
+      `/team-members/${id}`,
+      {
+        params: { userId },
+      }
+    ),
+}; 
+
+
 export const createPropertyBasic = (data) =>
   API.post("/property/createPropertyBasic", data);
 
@@ -198,6 +354,16 @@ export const uploadVideo = (id, formData) =>
 
   export const getOverlookingFeatureById = (id) =>
     API.get(`/overlookingfeature/getOverlookingFeatureById`)
+
+// Admin — property approval workflow
+export const getPendingProperties = (page = 1, limit = 10, status = "pending") =>
+  API.get(`/property/admin/pending?page=${page}&limit=${limit}&status=${status}`);
+
+export const approveProperty = (id) =>
+  API.put(`/property/admin/${id}/approve`);
+
+export const rejectProperty = (id, reason = "") =>
+  API.put(`/property/admin/${id}/reject`, { reason });
 
 // export const submitProperty = createAsyncThunk(
 //   "property/submitProperty",

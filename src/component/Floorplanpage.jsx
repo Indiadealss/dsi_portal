@@ -107,8 +107,8 @@ const transformApiData = (images = [], videos = []) => {
     "Floor Plan": [],
     "Master Plan": [],
     "Tower Plan": [],
-    "Photos": propertyFirstData.Photos,
-    "Videos": propertyFirstData.Videos,
+    "Photos": [],
+    "Videos": [],
     "Documents": [],
   };
 

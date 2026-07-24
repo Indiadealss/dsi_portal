@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Megaphone,
   Search,
@@ -7,82 +7,7 @@ import {
   Plus,
   MoreVertical,
 } from "lucide-react";
-
-const KPI_CARDS = [
-  { label: "Active Campaigns", value: "18" },
-  { label: "Total Brokers", value: "1,248" },
-  { label: "Campaign Leads", value: "3,562" },
-  { label: "Videos Uploaded", value: "326" },
-];
-
-const CAMPAIGNS = [
-  {
-    id: "Cmp-2025-0001",
-    projectId: "PRJ-2025-0001",
-    projectName: "CRC Maestas",
-    location: "Noida Extension",
-    brokerCount: 245,
-    status: "Active",
-    date: "20 May 2024",
-    time: "11:15 AM",
-    leads: 245,
-  },
-  {
-    id: "Cmp-2025-0002",
-    projectId: "PRJ-2025-0002",
-    projectName: "ACE Terra",
-    location: "Noida Extension",
-    brokerCount: 245,
-    status: "Active",
-    date: "20 May 2024",
-    time: "11:15 AM",
-    leads: 245,
-  },
-  {
-    id: "Cmp-2025-0003",
-    projectId: "PRJ-2025-0003",
-    projectName: "CRC Maestas",
-    location: "Noida Extension",
-    brokerCount: 245,
-    status: "Paused",
-    date: "20 May 2024",
-    time: "11:15 AM",
-    leads: 245,
-  },
-  {
-    id: "Cmp-2025-0004",
-    projectId: "PRJ-2025-0004",
-    projectName: "CRC Maestas",
-    location: "Noida Extension",
-    brokerCount: 245,
-    status: "Active",
-    date: "20 May 2024",
-    time: "11:15 AM",
-    leads: 245,
-  },
-  {
-    id: "Cmp-2025-0005",
-    projectId: "PRJ-2025-0005",
-    projectName: "CRC Maestas",
-    location: "Noida Extension",
-    brokerCount: 245,
-    status: "Active",
-    date: "20 May 2024",
-    time: "11:15 AM",
-    leads: 245,
-  },
-  {
-    id: "Cmp-2025-0006",
-    projectId: "PRJ-2025-0006",
-    projectName: "CRC Maestas",
-    location: "Noida Extension",
-    brokerCount: 245,
-    status: "Paused",
-    date: "20 May 2024",
-    time: "11:15 AM",
-    leads: 245,
-  },
-];
+import { getAllCampains } from "../api/api";
 
 const QUICK_ACTIONS = [
   { title: "Create Campaign", subtitle: "Launch a new campaign" },
@@ -92,34 +17,11 @@ const QUICK_ACTIONS = [
   { title: "Download Report", subtitle: "Export Campaign data" },
 ];
 
-const ACTIVITIES = [
-  {
-    title: 'Campaign "CRC Maesta"',
-    subtitle: "updated successfully",
-    date: "20 May 2025, 10:30 AM",
-  },
-  {
-    title: "45 New leads received in",
-    subtitle: "ACE Terra",
-    date: "19 May 2025, 04:15 PM",
-  },
-  {
-    title: 'Campaign "Bhutani City Center"',
-    subtitle: "ACE Terra",
-    date: "19 May 2025, 04:15 PM",
-  },
-  {
-    title: "Video uploaded in",
-    subtitle: "Purvanchal Sunbliss",
-    date: "19 May 2025, 04:15 PM",
-  },
-];
-
 function StatusBadge({ status }) {
-  const isActive = status === "Active";
+  const isActive = String(status).toLowerCase() === "active";
   return (
     <span
-      className={`inline-flex items-center rounded-[20px] px-3 py-1 text-[13px] font-medium ${
+      className={`inline-flex items-center rounded-[20px] px-3 py-1 text-[13px] font-medium capitalize ${
         isActive
           ? "bg-[#DCFCE7] text-[#16A34A]"
           : "bg-[#FDEBD3] text-[#F97316]"
@@ -128,6 +30,23 @@ function StatusBadge({ status }) {
       {status}
     </span>
   );
+}
+
+function formatDateTime(value) {
+  if (!value) return { date: "-", time: "-" };
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return { date: "-", time: "-" };
+  return {
+    date: d.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+    time: d.toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+  };
 }
 
 function KpiCard({ label, value }) {
@@ -142,6 +61,61 @@ function KpiCard({ label, value }) {
           {value}
         </p>
       </div>
+    </div>
+  );
+}
+
+function FilterDropdown({ label, options, value, onChange, isOpen, onToggle }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        onToggle(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen, onToggle]);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        aria-label={`Filter by ${label}`}
+        onClick={() => onToggle(!isOpen)}
+        className="flex h-12 w-[160px] items-center justify-between rounded-[10px] border border-[#D9D9D9] bg-white px-3 text-[14px] text-[#374151] hover:bg-[#F9FAFB]"
+      >
+        <span className="truncate">{value}</span>
+        <ChevronDown
+          className={`h-4 w-4 shrink-0 text-[#9CA3AF] transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 z-10 mt-1 w-[200px] rounded-[10px] border border-[#E5E7EB] bg-white py-1 shadow-lg">
+          {options.map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => {
+                onChange(option);
+                onToggle(false);
+              }}
+              className={`block w-full truncate px-3 py-2 text-left text-[14px] hover:bg-[#F9FAFB] ${
+                option === value
+                  ? "font-semibold text-[#1677FF]"
+                  : "text-[#374151]"
+              }`}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -164,25 +138,71 @@ function QuickActionItem({ title, subtitle }) {
   );
 }
 
-function ActivityItem({ title, subtitle, date }) {
-  return (
-    <div className="flex items-start gap-3 py-3">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFEDE0]">
-        <Megaphone className="h-[18px] w-[18px] text-[#FF6B00]" />
-      </div>
-      <div className="min-w-0 flex-1">
-        <p className="text-[14px] font-semibold leading-snug text-[#0B1F33]">
-          {title}
-        </p>
-        <p className="text-[13px] text-[#6B7280]">{subtitle}</p>
-        <p className="mt-0.5 text-[12px] text-[#9CA3AF]">{date}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function CampaignManagementDashboard({setActiveNav}) {
   const [search, setSearch] = useState("");
+  const [campaigns, setCampaigns] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedSource, setSelectedSource] = useState("All Sources");
+  const [selectedCity, setSelectedCity] = useState("All Cities");
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      try {
+        const res = await getAllCampains();
+        setCampaigns(res?.data?.data || []);
+      } catch (err) {
+        console.error("Failed to fetch campaigns", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCampaigns();
+  }, []);
+
+  const sourceOptions = useMemo(() => {
+    const unique = Array.from(
+      new Set(campaigns.map((row) => row.leadRouting).filter(Boolean))
+    );
+    return ["All Sources", ...unique];
+  }, [campaigns]);
+
+  const cityOptions = useMemo(() => {
+    const unique = Array.from(
+      new Set(campaigns.map((row) => row.city).filter(Boolean))
+    );
+    return ["All Cities", ...unique];
+  }, [campaigns]);
+
+  const filteredCampaigns = campaigns.filter((row) => {
+    const matchesSearch = `${row.campaignTitle || ""} ${row.projectName || ""}`
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    const matchesSource =
+      selectedSource === "All Sources" || row.leadRouting === selectedSource;
+    const matchesCity =
+      selectedCity === "All Cities" || row.city === selectedCity;
+    return matchesSearch && matchesSource && matchesCity;
+  });
+
+  const kpiCards = useMemo(() => {
+    const activeCampaigns = campaigns.filter(
+      (row) => String(row.campaignStatus).toLowerCase() === "active"
+    ).length;
+    const totalBrokers = new Set(
+      campaigns.map((row) => row.brokerName).filter(Boolean)
+    ).size;
+    const videosUploaded = campaigns.filter(
+      (row) => !!row.promotionalVideo
+    ).length;
+
+    return [
+      { label: "Active Campaigns", value: loading ? "-" : activeCampaigns },
+      { label: "Total Brokers", value: loading ? "-" : totalBrokers },
+      { label: "Campaign Leads", value: "-" },
+      { label: "Videos Uploaded", value: loading ? "-" : videosUploaded },
+    ];
+  }, [campaigns, loading]);
 
   return (
     <div className="min-h-screen w-full  p-6 lg:p-8">
@@ -223,30 +243,32 @@ export default function CampaignManagementDashboard({setActiveNav}) {
               />
             </div>
 
-            <button
-              type="button"
-              className="flex h-12 w-[140px] items-center justify-between rounded-[10px] border border-[#D9D9D9] bg-white px-3 text-[14px] text-[#374151] hover:bg-[#F9FAFB]"
-            >
-              All Sources
-              <ChevronDown className="h-4 w-4 text-[#9CA3AF]" />
-            </button>
+            <FilterDropdown
+              label="Sources"
+              options={sourceOptions}
+              value={selectedSource}
+              onChange={setSelectedSource}
+              isOpen={openDropdown === "source"}
+              onToggle={(next) => setOpenDropdown(next ? "source" : null)}
+            />
 
-            <button
-              type="button"
-              className="flex h-12 w-[140px] items-center justify-between rounded-[10px] border border-[#D9D9D9] bg-white px-3 text-[14px] text-[#374151] hover:bg-[#F9FAFB]"
-            >
-              All Cities
-              <ChevronDown className="h-4 w-4 text-[#9CA3AF]" />
-            </button>
+            <FilterDropdown
+              label="Cities"
+              options={cityOptions}
+              value={selectedCity}
+              onChange={setSelectedCity}
+              isOpen={openDropdown === "city"}
+              onToggle={(next) => setOpenDropdown(next ? "city" : null)}
+            />
 
-            
+
           </div>
           </div>
 
         {/* KPI cards + right column start */}
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-4">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-3 lg:grid-cols-4">
-            {KPI_CARDS.map((card) => (
+            {kpiCards.map((card) => (
               <KpiCard key={card.label} label={card.label} value={card.value} />
             ))}
           </div>
@@ -272,7 +294,7 @@ export default function CampaignManagementDashboard({setActiveNav}) {
                   <thead>
                     <tr className="bg-[#F8F9FB]">
                       <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
-                        Leads
+                        Campaign Title
                       </th>
                       <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
                         Project ID
@@ -280,8 +302,8 @@ export default function CampaignManagementDashboard({setActiveNav}) {
                       <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
                         Project Name
                       </th>
-                      <th className="px-5 py-3 text-center text-[14px] font-semibold text-[#374151]">
-                        Broker Count
+                      <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
+                        Broker Name
                       </th>
                       <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
                         Status
@@ -290,7 +312,7 @@ export default function CampaignManagementDashboard({setActiveNav}) {
                         Last Updated
                       </th>
                       <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
-                        Leads
+                        Lead Routing
                       </th>
                       <th className="px-5 py-3 text-[14px] font-semibold text-[#374151]">
                         <span className="sr-only">Actions</span>
@@ -298,50 +320,73 @@ export default function CampaignManagementDashboard({setActiveNav}) {
                     </tr>
                   </thead>
                   <tbody>
-                    {CAMPAIGNS.map((row) => (
-                      <tr
-                        key={row.id}
-                        className="border-t border-[#F1F5F9] hover:bg-[#FAFAFA]"
-                        style={{ height: "72px" }}
-                      >
-                        <td className="px-5 py-3 text-[14px] text-[#374151]">
-                          {row.id}
-                        </td>
-                        <td className="px-5 py-3 text-[14px] text-[#374151]">
-                          {row.projectId}
-                        </td>
-                        <td className="px-5 py-3">
-                          <p className="text-[14px] font-semibold text-[#0B1F33]">
-                            {row.projectName}
-                          </p>
-                          <p className="text-[13px] text-[#6B7280]">
-                            {row.location}
-                          </p>
-                        </td>
-                        <td className="px-5 py-3 text-center text-[14px] text-[#374151]">
-                          {row.brokerCount}
-                        </td>
-                        <td className="px-5 py-3">
-                          <StatusBadge status={row.status} />
-                        </td>
-                        <td className="px-5 py-3">
-                          <p className="text-[14px] text-[#374151]">{row.date}</p>
-                          <p className="text-[13px] text-[#6B7280]">{row.time}</p>
-                        </td>
-                        <td className="px-5 py-3 text-[14px] text-[#374151]">
-                          {row.leads}
-                        </td>
-                        <td className="px-5 py-3">
-                          <button
-                            type="button"
-                            aria-label="More actions"
-                            className="rounded p-1 text-[#9CA3AF] hover:bg-gray-100"
-                          >
-                            <MoreVertical className="h-5 w-5" />
-                          </button>
+                    {loading ? (
+                      <tr>
+                        <td
+                          colSpan={8}
+                          className="px-5 py-6 text-center text-[14px] text-[#6B7280]"
+                        >
+                          Loading campaigns...
                         </td>
                       </tr>
-                    ))}
+                    ) : filteredCampaigns.length === 0 ? (
+                      <tr>
+                        <td
+                          colSpan={8}
+                          className="px-5 py-6 text-center text-[14px] text-[#6B7280]"
+                        >
+                          No campaigns found.
+                        </td>
+                      </tr>
+                    ) : (
+                      filteredCampaigns.map((row) => {
+                        const { date, time } = formatDateTime(row.updatedAt);
+                        return (
+                          <tr
+                            key={row._id}
+                            className="border-t border-[#F1F5F9] hover:bg-[#FAFAFA]"
+                            style={{ height: "72px" }}
+                          >
+                            <td className="px-5 py-3 text-[14px] text-[#374151]">
+                              {row.campaignTitle}
+                            </td>
+                            <td className="px-5 py-3 text-[14px] text-[#374151]">
+                              {row.projectId}
+                            </td>
+                            <td className="px-5 py-3">
+                              <p className="text-[14px] font-semibold text-[#0B1F33]">
+                                {row.projectName}
+                              </p>
+                              <p className="text-[13px] text-[#6B7280]">
+                                {row.city}
+                              </p>
+                            </td>
+                            <td className="px-5 py-3 text-[14px] text-[#374151]">
+                              {row.brokerName}
+                            </td>
+                            <td className="px-5 py-3">
+                              <StatusBadge status={row.campaignStatus} />
+                            </td>
+                            <td className="px-5 py-3">
+                              <p className="text-[14px] text-[#374151]">{date}</p>
+                              <p className="text-[13px] text-[#6B7280]">{time}</p>
+                            </td>
+                            <td className="px-5 py-3 text-[14px] text-[#374151]">
+                              {row.leadRouting}
+                            </td>
+                            <td className="px-5 py-3">
+                              <button
+                                type="button"
+                                aria-label="More actions"
+                                className="rounded p-1 text-[#9CA3AF] hover:bg-gray-100"
+                              >
+                                <MoreVertical className="h-5 w-5" />
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -366,22 +411,7 @@ export default function CampaignManagementDashboard({setActiveNav}) {
               </div>
             </div>
 
-            {/* Recent Activities */}
-            <div className="rounded-xl border border-[#E5E7EB] bg-white p-5">
-              <h2 className="mb-1 text-[16px] font-semibold text-[#0B1F33]">
-                Profile Information
-              </h2>
-              <div className="flex flex-col divide-y divide-[#F1F5F9]">
-                {ACTIVITIES.map((activity, idx) => (
-                  <ActivityItem
-                    key={idx}
-                    title={activity.title}
-                    subtitle={activity.subtitle}
-                    date={activity.date}
-                  />
-                ))}
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

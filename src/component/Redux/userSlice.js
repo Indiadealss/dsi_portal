@@ -13,6 +13,7 @@ const initialState = {
   you_are: "",
   logo: "",
   profile_photo: "",
+  role: "user",
   loggedIn: false,
 };
 
@@ -35,6 +36,7 @@ const userSlice = createSlice({
       state.you_are = data.you_are || "";
       state.logo = data.logo || "";
       state.profile_photo = data.profile_photo || "";
+      state.role = data.role || "user";
       state.loggedIn = true;
     },
 

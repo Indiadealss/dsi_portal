@@ -1,9 +1,17 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import {
   Mail, Phone, MapPin, Briefcase, Camera, UploadCloud, CheckCircle2,
   Circle, ChevronRight, Bell, ShieldCheck, X, FileText, User,
-  Fingerprint, Lock, Trash2, Headphones
+  Fingerprint, Lock, Trash2, Headphones, Loader2
 } from "lucide-react";
+import {
+  getUserDetatils,
+  updateUser,
+  submitVerificationDoc,
+  addUserDocument,
+  removeUserDocument,
+  updateBankDetailsApi,
+} from "../api/api";
 
 /* ------------------------------------------------------------------ */
 /*  Static config                                                      */
@@ -39,12 +47,13 @@ const STATUS_LABEL = { verified: "Verified", pending: "Pending", not_started: "N
 /* ------------------------------------------------------------------ */
 
 function StatusBadge({ status }) {
+  const s = status || "not_started";
   return (
-    <span className={`status-badge status-${status}`}>
-      {status === "verified" && <CheckCircle2 size={13} />}
-      {status === "pending" && <Circle size={13} />}
-      {status === "not_started" && <Circle size={13} />}
-      {STATUS_LABEL[status]}
+    <span className={`status-badge status-${s}`}>
+      {s === "verified" && <CheckCircle2 size={13} />}
+      {s === "pending" && <Circle size={13} />}
+      {s === "not_started" && <Circle size={13} />}
+      {STATUS_LABEL[s]}
     </span>
   );
 }
@@ -71,7 +80,7 @@ function Dropzone({ file, onFile, onRemove, accept = ".pdf,.png,.jpg,.jpeg", max
       }
       const isImage = f.type.startsWith("image/");
       const preview = isImage ? URL.createObjectURL(f) : null;
-      onFile({ name: f.name, size: f.size, type: f.type, preview });
+      onFile({ file: f, name: f.name, size: f.size, type: f.type, preview });
     },
     [maxSizeMB, onFile]
   );
@@ -165,123 +174,280 @@ export default function ProfileVerificationPage() {
     showToast._t = window.setTimeout(() => setToast(null), 2600);
   }, []);
 
+  /* ---- backend user document (single source of truth) ---- */
+  const [userDoc, setUserDoc] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
+  const userId = userDoc?._id;
+
+  const loadUser = useCallback(() => {
+    setLoading(true);
+    setLoadError(null);
+    return getUserDetatils()
+      .then((res) => {
+        setUserDoc(res.data.usedetails);
+      })
+      .catch((err) => {
+        setLoadError(
+          err.response?.data?.message || "Couldn't load your profile. Please log in again."
+        );
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    loadUser();
+  }, [loadUser]);
+
   /* ---- profile ---- */
   const [editing, setEditing] = useState(false);
-  const [profile, setProfile] = useState({
-    fullName: "Rajat Sharma",
-    email: "rajat.sharma@email.com",
-    phone: "+91 12345 67890",
-    altPhone: "+91 12345 67890",
-    role: "Buyer / Investor",
-    location: "Gurgaon, Haryana",
-    bio: "Real estate enthusiast with 5+ years of experience in buying and investing in residential and commercial properties.",
-  });
-  const [draftProfile, setDraftProfile] = useState(profile);
-  const [avatar, setAvatar] = useState(null);
+  const [draftProfile, setDraftProfile] = useState(null);
+  const [savingProfile, setSavingProfile] = useState(false);
+  const [avatarUploading, setAvatarUploading] = useState(false);
   const avatarInputRef = useRef(null);
 
   const startEdit = () => {
-    setDraftProfile(profile);
+    setDraftProfile({
+      fullName: userDoc?.name || "",
+      email: userDoc?.email || "",
+      phone: userDoc?.phone || "",
+      altPhone: userDoc?.altPhone || "",
+      role: userDoc?.you_are || "",
+      location: userDoc?.location || "",
+      bio: userDoc?.bio || "",
+    });
     setEditing(true);
   };
   const cancelEdit = () => setEditing(false);
-  const saveEdit = () => {
-    setProfile(draftProfile);
-    setEditing(false);
-    showToast("Profile updated successfully");
+
+  const saveEdit = async () => {
+    if (!userId || !draftProfile) return;
+    setSavingProfile(true);
+    try {
+      const formData = new FormData();
+      formData.append("id", userId);
+      formData.append("name", draftProfile.fullName);
+      formData.append("email", draftProfile.email);
+      formData.append("phone", draftProfile.phone);
+      formData.append("altPhone", draftProfile.altPhone);
+      formData.append("you_are", draftProfile.role);
+      formData.append("location", draftProfile.location);
+      formData.append("bio", draftProfile.bio);
+
+      const res = await updateUser(formData);
+      setUserDoc(res.data.data);
+      setEditing(false);
+      showToast("Profile updated successfully");
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to update profile");
+    } finally {
+      setSavingProfile(false);
+    }
   };
 
-  /* ---- verification statuses (shared across tabs) ---- */
-  const [statuses, setStatuses] = useState({
-    email: "verified",
-    phone: "verified",
-    identity: "verified",
-    address: "pending",
-    business: "not_started",
-  });
+  const handleAvatarChange = async (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (!f || !userId) return;
+    setAvatarUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("id", userId);
+      formData.append("profile", f);
+      const res = await updateUser(formData);
+      setUserDoc(res.data.data);
+      showToast("Profile photo updated");
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to update photo");
+    } finally {
+      setAvatarUploading(false);
+      e.target.value = "";
+    }
+  };
+
+  const profileFieldsForCompletion = [
+    userDoc?.name, userDoc?.email, userDoc?.phone, userDoc?.you_are,
+    userDoc?.location, userDoc?.bio, userDoc?.profile,
+  ];
+  const profileCompletePercent = userDoc
+    ? Math.round(
+        (profileFieldsForCompletion.filter(Boolean).length / profileFieldsForCompletion.length) * 100
+      )
+    : 0;
+
+  /* ---- verification statuses (derived from userDoc) ---- */
+  const statuses = {
+    email: userDoc?.verification?.email?.status || "not_started",
+    phone: userDoc?.verification?.phone?.status || "not_started",
+    identity: userDoc?.verification?.identity?.status || "not_started",
+    address: userDoc?.verification?.address?.status || "not_started",
+    business: userDoc?.verification?.business?.status || "not_started",
+  };
   const verifiedCount = VERIFICATION_ORDER.filter((k) => statuses[k] === "verified").length;
   const percent = Math.round((verifiedCount / VERIFICATION_ORDER.length) * 100);
 
   const [selectedVerification, setSelectedVerification] = useState("address");
   const [verificationFiles, setVerificationFiles] = useState({});
   const [verificationDocType, setVerificationDocType] = useState({});
+  const [submittingVerification, setSubmittingVerification] = useState(false);
 
-  const submitVerification = (key) => {
+  const submitVerification = async (key) => {
     const file = verificationFiles[key];
     if (!file) {
       showToast("Please upload a document before submitting");
       return;
     }
-    setStatuses((s) => ({ ...s, [key]: "pending" }));
-    showToast(`${VERIFICATION_META[key].title} submitted for review`);
+    if (!userId) return;
+    setSubmittingVerification(true);
+    try {
+      const options = DOC_TYPE_OPTIONS[key] || DOC_TYPE_OPTIONS.address;
+      const docType = verificationDocType[key] || options[0];
+
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("type", key);
+      formData.append("docType", docType);
+      formData.append("document", file.file);
+
+      const res = await submitVerificationDoc(formData);
+      setUserDoc(res.data.data);
+      setVerificationFiles((v) => ({ ...v, [key]: null }));
+      showToast(`${VERIFICATION_META[key].title} submitted for review`);
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to submit document");
+    } finally {
+      setSubmittingVerification(false);
+    }
   };
 
-  /* ---- documents tab ---- */
-  const [documents, setDocuments] = useState([
-    { id: "aadhaar", name: "Aadhaar Card", type: "ID Proof", status: "verified", icon: User },
-    { id: "pan", name: "PAN Card", type: "ID Proof", status: "verified", icon: FileText },
-    { id: "address_proof", name: "Address Proof", type: "Utility Bill", status: "pending", icon: FileText },
-    { id: "photo", name: "Profile Photo", type: "Image", status: "verified", icon: User },
-  ]);
+  /* ---- documents tab (list on Profile tab) ---- */
+  const documents = userDoc?.documents || [];
 
-  const [docVerificationType, setDocVerificationType] = useState("address");
-  const [docType, setDocType] = useState(DOC_TYPE_OPTIONS.address[0]);
+  const [newDocFile, setNewDocFile] = useState(null);
+  const [addingDoc, setAddingDoc] = useState(false);
+  const addNewDocument = async () => {
+    if (!newDocFile || !userId) {
+      showToast("Choose a file to upload first");
+      return;
+    }
+    setAddingDoc(true);
+    try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("name", newDocFile.name);
+      formData.append("type", "Uploaded Document");
+      formData.append("document", newDocFile.file);
+
+      const res = await addUserDocument(formData);
+      setUserDoc(res.data.data);
+      setNewDocFile(null);
+      showToast("New document uploaded");
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to upload document");
+    } finally {
+      setAddingDoc(false);
+    }
+  };
+
+  const removeDocument = async (id) => {
+    if (!userId) return;
+    try {
+      const res = await removeUserDocument(userId, id);
+      setUserDoc(res.data.data);
+      showToast("Document removed");
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to remove document");
+    }
+  };
+
+  /* ---- documents tab (quick submit form) ---- */
+  const DOC_VERIFICATION_KEYS = VERIFICATION_ORDER.filter((k) => VERIFICATION_META[k].needsDoc);
+  const [docVerificationType, setDocVerificationType] = useState(DOC_VERIFICATION_KEYS[0] || "address");
+  const [docType, setDocType] = useState(DOC_TYPE_OPTIONS[DOC_VERIFICATION_KEYS[0] || "address"][0]);
   const [docFile, setDocFile] = useState(null);
+  const [submittingDocTab, setSubmittingDocTab] = useState(false);
 
-  const submitDocuments = () => {
+  const submitDocuments = async () => {
     if (!docFile) {
       showToast("Please upload a document before submitting");
       return;
     }
-    setStatuses((s) => ({ ...s, [docVerificationType]: "pending" }));
-    if (docVerificationType === "address") {
-      setDocuments((docs) => docs.map((d) => (d.id === "address_proof" ? { ...d, status: "pending" } : d)));
-    }
-    showToast("Document submitted for verification");
-    setDocFile(null);
-  };
+    if (!userId) return;
+    setSubmittingDocTab(true);
+    try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("type", docVerificationType);
+      formData.append("docType", docType);
+      formData.append("document", docFile.file);
 
-  const removeDocument = (id) => {
-    setDocuments((docs) => docs.filter((d) => d.id !== id));
-    showToast("Document removed");
-  };
-
-  const [newDocFile, setNewDocFile] = useState(null);
-  const addNewDocument = () => {
-    if (!newDocFile) {
-      showToast("Choose a file to upload first");
-      return;
+      const res = await submitVerificationDoc(formData);
+      setUserDoc(res.data.data);
+      showToast("Document submitted for verification");
+      setDocFile(null);
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to submit document");
+    } finally {
+      setSubmittingDocTab(false);
     }
-    setDocuments((docs) => [
-      ...docs,
-      { id: `doc_${Date.now()}`, name: newDocFile.name, type: "Uploaded Document", status: "pending", icon: FileText },
-    ]);
-    setNewDocFile(null);
-    showToast("New document uploaded");
   };
 
   /* ---- bank details tab ---- */
   const [bankForm, setBankForm] = useState({
-    accountHolder: "Rajat Sharma",
-    accountNumber: "5010 0002 0067 6969",
-    bankName: "HDFC Bank",
-    ifsc: "HDFC0001234",
-    accountType: "current",
-    branch: "Gurgaon Sushant lok Vihar",
+    accountHolder: "",
+    accountNumber: "",
+    bankName: "",
+    ifsc: "",
+    accountType: "saving",
+    branch: "",
   });
   const [bankFile, setBankFile] = useState(null);
+  const [savingBank, setSavingBank] = useState(false);
   const updateBankField = (field, value) => setBankForm((f) => ({ ...f, [field]: value }));
 
-  const submitBank = () => {
+  useEffect(() => {
+    if (userDoc?.bankDetails) {
+      setBankForm({
+        accountHolder: userDoc.bankDetails.accountHolder || "",
+        accountNumber: userDoc.bankDetails.accountNumber || "",
+        bankName: userDoc.bankDetails.bankName || "",
+        ifsc: userDoc.bankDetails.ifsc || "",
+        accountType: userDoc.bankDetails.accountType || "saving",
+        branch: userDoc.bankDetails.branch || "",
+      });
+    }
+  }, [userDoc?.bankDetails]);
+
+  const submitBank = async () => {
     if (!bankForm.accountHolder || !bankForm.accountNumber || !bankForm.ifsc) {
       showToast("Please fill all required bank fields");
       return;
     }
-    if (!bankFile) {
+    if (!userDoc?.bankDetails?.chequeUrl && !bankFile) {
       showToast("Please upload a cancelled cheque or passbook page");
       return;
     }
-    showToast("Bank details submitted for verification");
+    if (!userId) return;
+    setSavingBank(true);
+    try {
+      const formData = new FormData();
+      formData.append("userId", userId);
+      formData.append("accountHolder", bankForm.accountHolder);
+      formData.append("accountNumber", bankForm.accountNumber);
+      formData.append("bankName", bankForm.bankName);
+      formData.append("ifsc", bankForm.ifsc);
+      formData.append("accountType", bankForm.accountType);
+      formData.append("branch", bankForm.branch);
+      if (bankFile) formData.append("chequeFile", bankFile.file);
+
+      const res = await updateBankDetailsApi(formData);
+      setUserDoc(res.data.data);
+      setBankFile(null);
+      showToast("Bank details submitted for verification");
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to submit bank details");
+    } finally {
+      setSavingBank(false);
+    }
   };
 
   /* ---- quick actions ---- */
@@ -293,6 +459,30 @@ export default function ProfileVerificationPage() {
   ];
 
   /* ------------------------------------------------------------------ */
+
+  if (loading) {
+    return (
+      <div className="pv-root">
+        <style>{CSS}</style>
+        <div className="pv-state-screen">
+          <Loader2 size={28} className="pv-spinner" />
+          <p>Loading your profile…</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (loadError || !userDoc) {
+    return (
+      <div className="pv-root">
+        <style>{CSS}</style>
+        <div className="pv-state-screen">
+          <p className="pv-state-error">{loadError || "Couldn't load your profile."}</p>
+          <button className="btn btn-outline" onClick={loadUser}>Retry</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pv-root">
@@ -326,8 +516,8 @@ export default function ProfileVerificationPage() {
                   <div className="profile-grid">
                     <div className="avatar-col">
                       <div className="avatar-wrap">
-                        {avatar ? (
-                          <img src={avatar} className="avatar-img" alt="Profile" />
+                        {userDoc.profile ? (
+                          <img src={userDoc.profile} className="avatar-img" alt="Profile" />
                         ) : (
                           <div className="avatar-fallback"><User size={40} /></div>
                         )}
@@ -335,21 +525,19 @@ export default function ProfileVerificationPage() {
                           className="avatar-camera"
                           onClick={() => avatarInputRef.current && avatarInputRef.current.click()}
                           aria-label="Change photo"
+                          disabled={avatarUploading}
                         >
-                          <Camera size={14} />
+                          {avatarUploading ? <Loader2 size={14} className="pv-spinner" /> : <Camera size={14} />}
                         </button>
                         <input
                           ref={avatarInputRef}
                           type="file"
                           accept="image/*"
                           style={{ display: "none" }}
-                          onChange={(e) => {
-                            const f = e.target.files && e.target.files[0];
-                            if (f) setAvatar(URL.createObjectURL(f));
-                          }}
+                          onChange={handleAvatarChange}
                         />
                       </div>
-                      <span className="completion-badge">Profile Complete&nbsp;100%</span>
+                      <span className="completion-badge">Profile Complete&nbsp;{profileCompletePercent}%</span>
                     </div>
 
                     <div className="detail-col">
@@ -358,32 +546,32 @@ export default function ProfileVerificationPage() {
                           <div className="detail-grid">
                             <div className="detail-item">
                               <span className="detail-label">Full Name</span>
-                              <span className="detail-value">{profile.fullName}</span>
+                              <span className="detail-value">{userDoc.name || "—"}</span>
                             </div>
                             <div className="detail-item">
                               <span className="detail-label">E-mail Address</span>
-                              <span className="detail-value">{profile.email}</span>
+                              <span className="detail-value">{userDoc.email || "—"}</span>
                             </div>
                             <div className="detail-item">
                               <span className="detail-label">Phone Number</span>
-                              <span className="detail-value">{profile.phone}</span>
+                              <span className="detail-value">{userDoc.phone || userDoc.mobile || "—"}</span>
                             </div>
                             <div className="detail-item">
                               <span className="detail-label">Alternate Number</span>
-                              <span className="detail-value">{profile.altPhone}</span>
+                              <span className="detail-value">{userDoc.altPhone || "—"}</span>
                             </div>
                             <div className="detail-item">
                               <span className="detail-label">Role</span>
-                              <span className="detail-value">{profile.role}</span>
+                              <span className="detail-value">{userDoc.you_are || "—"}</span>
                             </div>
                             <div className="detail-item">
                               <span className="detail-label">Location</span>
-                              <span className="detail-value">{profile.location}</span>
+                              <span className="detail-value">{userDoc.location || "—"}</span>
                             </div>
                           </div>
                           <div className="field-group">
                             <span className="detail-label">Bio</span>
-                            <div className="bio-box">{profile.bio}</div>
+                            <div className="bio-box">{userDoc.bio || "No bio added yet."}</div>
                           </div>
                           <button className="btn btn-outline" onClick={startEdit}>Edit Profile</button>
                         </>
@@ -427,8 +615,10 @@ export default function ProfileVerificationPage() {
                               onChange={(e) => setDraftProfile((d) => ({ ...d, bio: e.target.value }))} />
                           </label>
                           <div className="btn-row">
-                            <button className="btn btn-primary" onClick={saveEdit}>Save Changes</button>
-                            <button className="btn btn-outline" onClick={cancelEdit}>Cancel</button>
+                            <button className="btn btn-primary" onClick={saveEdit} disabled={savingProfile}>
+                              {savingProfile ? "Saving…" : "Save Changes"}
+                            </button>
+                            <button className="btn btn-outline" onClick={cancelEdit} disabled={savingProfile}>Cancel</button>
                           </div>
                         </>
                       )}
@@ -439,22 +629,19 @@ export default function ProfileVerificationPage() {
                 <section className="card">
                   <h2 className="card-title">Documents</h2>
                   <div className="documents-grid">
-                    {documents.map((doc) => {
-                      const Icon = doc.icon;
-                      return (
-                        <div className="doc-card" key={doc.id}>
-                          <div className="doc-card-top">
-                            <div className="doc-icon"><Icon size={20} /></div>
-                            <button className="doc-menu-btn" onClick={() => removeDocument(doc.id)} aria-label="Remove document">
-                              <Trash2 size={15} />
-                            </button>
-                          </div>
-                          <div className="doc-name">{doc.name}</div>
-                          <div className="doc-type">{doc.type}</div>
-                          <StatusBadge status={doc.status} />
+                    {documents.map((doc) => (
+                      <div className="doc-card" key={doc._id}>
+                        <div className="doc-card-top">
+                          <div className="doc-icon"><FileText size={20} /></div>
+                          <button className="doc-menu-btn" onClick={() => removeDocument(doc._id)} aria-label="Remove document">
+                            <Trash2 size={15} />
+                          </button>
                         </div>
-                      );
-                    })}
+                        <div className="doc-name">{doc.name}</div>
+                        <div className="doc-type">{doc.type}</div>
+                        <StatusBadge status={doc.status} />
+                      </div>
+                    ))}
                     <div className="upload-card">
                       <Dropzone
                         file={newDocFile}
@@ -464,7 +651,9 @@ export default function ProfileVerificationPage() {
                         maxSizeMB={5}
                       />
                       {newDocFile && (
-                        <button className="btn btn-primary btn-sm" onClick={addNewDocument}>Upload New Document</button>
+                        <button className="btn btn-primary btn-sm" onClick={addNewDocument} disabled={addingDoc}>
+                          {addingDoc ? "Uploading…" : "Upload New Document"}
+                        </button>
                       )}
                       {!newDocFile && <div className="upload-card-label">Upload New Document</div>}
                     </div>
@@ -521,6 +710,21 @@ export default function ProfileVerificationPage() {
                       );
                     }
 
+                    if (!meta.needsDoc) {
+                      return (
+                        <div className="verified-panel">
+                          <div className="verified-icon"><meta.icon size={34} color="#0D6EFD" /></div>
+                          <h3 className="card-title" style={{ marginTop: 12 }}>{meta.title}</h3>
+                          <p className="muted-text">
+                            {key === "phone"
+                              ? "Your phone number is verified automatically the next time you sign in with an OTP."
+                              : "Email verification isn't available yet — no action is needed from you right now."}
+                          </p>
+                          <StatusBadge status={status} />
+                        </div>
+                      );
+                    }
+
                     return (
                       <>
                         <div className="detail-head">
@@ -568,7 +772,9 @@ export default function ProfileVerificationPage() {
 
                         <div className="btn-row btn-row-end">
                           <button className="btn btn-outline">Back</button>
-                          <button className="btn btn-primary" onClick={() => submitVerification(key)}>Submit for verification</button>
+                          <button className="btn btn-primary" onClick={() => submitVerification(key)} disabled={submittingVerification}>
+                            {submittingVerification ? "Submitting…" : "Submit for verification"}
+                          </button>
                         </div>
                       </>
                     );
@@ -592,7 +798,7 @@ export default function ProfileVerificationPage() {
                         setDocType(DOC_TYPE_OPTIONS[v][0]);
                       }}
                     >
-                      {VERIFICATION_ORDER.filter((k) => VERIFICATION_META[k].needsDoc).map((k) => (
+                      {DOC_VERIFICATION_KEYS.map((k) => (
                         <option key={k} value={k}>{VERIFICATION_META[k].title}</option>
                       ))}
                     </select>
@@ -627,7 +833,9 @@ export default function ProfileVerificationPage() {
 
                 <div className="btn-row btn-row-end">
                   <button className="btn btn-outline">Back</button>
-                  <button className="btn btn-primary" onClick={submitDocuments}>Submit for verification</button>
+                  <button className="btn btn-primary" onClick={submitDocuments} disabled={submittingDocTab}>
+                    {submittingDocTab ? "Submitting…" : "Submit for verification"}
+                  </button>
                 </div>
               </div>
             )}
@@ -635,7 +843,7 @@ export default function ProfileVerificationPage() {
             {/* ---------------- BANK DETAILS TAB ---------------- */}
             {activeTab === "bank" && (
               <div className="card bank-card">
-                <h2 className="card-title">Account holder name</h2>
+                <h2 className="card-title">Account holder name <StatusBadge status={userDoc.bankDetails?.status} /></h2>
                 <div className="form-grid">
                   <label className="field-group">
                     <span className="detail-label">Account holder name</span>
@@ -683,6 +891,9 @@ export default function ProfileVerificationPage() {
                   <span className="detail-label">Upload Cancelled Cheque / Passbook</span>
                   <span className="field-hint">Upload a clear image of cancelled cheque or first page of passbook</span>
                   <Dropzone file={bankFile} onFile={setBankFile} onRemove={() => setBankFile(null)} maxSizeMB={10} />
+                  {!bankFile && userDoc.bankDetails?.chequeUrl && (
+                    <div className="field-hint">A document is already on file. Upload a new one to replace it.</div>
+                  )}
                 </div>
 
                 <div className="secure-banner">
@@ -695,7 +906,9 @@ export default function ProfileVerificationPage() {
 
                 <div className="btn-row btn-row-end">
                   <button className="btn btn-outline">Back</button>
-                  <button className="btn btn-primary" onClick={submitBank}>Submit for verification</button>
+                  <button className="btn btn-primary" onClick={submitBank} disabled={savingBank}>
+                    {savingBank ? "Submitting…" : "Submit for verification"}
+                  </button>
                 </div>
               </div>
             )}
@@ -796,6 +1009,14 @@ const CSS = `
   width: 100%;
 }
 
+.pv-state-screen {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 60vh; gap: 12px; text-align: center; padding: 24px;
+}
+.pv-state-error { color: #E0563E; font-size: 15px; font-weight: 500; }
+.pv-spinner { animation: pv-spin 0.9s linear infinite; color: #0D6EFD; }
+@keyframes pv-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
 /* ---- layout ---- */
 .layout {
   display: grid;
@@ -872,6 +1093,7 @@ const CSS = `
   cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   border: 1px solid transparent;
 }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-outline { background: #fff; border: 1px solid #0D6EFD; color: #0D6EFD; }
 .btn-outline:hover { background: #F3F8FF; }
 .btn-primary { background: #0D6EFD; color: #fff; }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
-import { lead } from "../api/api";
+import { lead, getConvercation } from "../api/api";
 import { useSelector } from "react-redux";
 import MyListings from "./MyListings";
 import LeadsInquiries from "./LeadsInquiries";
@@ -13,6 +13,8 @@ import Helpandsupport from "./Helpandsupport";
 import Messagedashbord from "./Messagedashbord";
 import ProfileVerificationPage from "./Profilevarification";
 import CreateBlog from "./Createblog";
+import BusinessProfile from "./BusinessProfile";
+import PropertyApprovals from "./PropertyApprovals";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -92,13 +94,16 @@ const Icon = ({ name, size = 20, color = "currentColor" }) => {
     close:        <svg style={s} viewBox="0 0 24 24" {...p}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
     dots:         <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>,
     blog:         <svg style={s}  viewBox="0 0 40 40"  {...p}><circle cx="20"  cy="20"  r="18"  fill="white"  stroke="#B8B8B8"  /><line    x1="20"  y1="13"  x2="20"  y2="27" stroke="#4C555C" strokeWidth="2.5"  strokeLinecap="round"/><line x1="13"  y1="20" x2="27"  y2="20" stroke="#4C555C" strokeWidth="3.5" strokeLinecap="round"/>
-</svg>
+</svg>,
+    approve:      <svg style={s} viewBox="0 0 24 24" {...p}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
   };
   return map[name] || null;
 };
 
 // ─── Static sidebar nav (labels & icons never change) ─────────────────────────
-const NAV = [
+// Campaign / Create Blog / Property Approvals only show up for admins —
+// regular users manage their own listings, not marketing or platform-wide moderation.
+const BASE_NAV = [
   { id: "dashboard",    label: "Dashboard",            icon: "listing"      },
   { id: "listings",     label: "My Listings",          icon: "layers"       },
   // { id: "saved",        label: "Saved Properties",     icon: "bookmark"     },
@@ -106,11 +111,12 @@ const NAV = [
   { id: "messages",     label: "Messages",             icon: "message"      },
   { id: "notifications",label: "Notifications",        icon: "bell"         },
   { id: "subscription", label: "Subscription & Plan",  icon: "subscription" },
-  { id: "campaign",     label: "Campaign",             icon: "campaign"     },
+  { id: "campaign",     label: "Campaign",             icon: "campaign",    adminOnly: true },
+  { id: "approvals",    label: "Property Approvals",   icon: "approve",     adminOnly: true },
   { id: "verification", label: "Profile Verification", icon: "shield"       },
   { id: "settings",     label: "Settings",             icon: "settings"     },
   { id: "help",         label: "Help & Support",       icon: "help"         },
-  { id: "blog",         label: "Create Blog",          icon: "blog"         }
+  { id: "blog",         label: "Create Blog",          icon: "blog",        adminOnly: true }
 ];
 
 
@@ -121,11 +127,39 @@ const NAV = [
 export default function Mydashboard() {
 
 
- 
+
+  const user = useSelector((state) => state.user);
+  const isAdmin = user.role === "admin";
+
   const [activeNav,     setActiveNav]     = useState("dashboard");
   const [sidebarOpen,   setSidebarOpen]   = useState(false);
+const [settingsPage, setSettingsPage] = useState("main");
+  const [unreadMessages, setUnreadMessages] = useState(0);
 
+  useEffect(() => {
+    if (!user.id) return;
+    const loadUnread = () => {
+      getConvercation(user.id)
+        .then((res) => {
+          const total = (res.data.data || []).reduce((sum, c) => sum + (c.unread || 0), 0);
+          setUnreadMessages(total);
+        })
+        .catch(() => {});
+    };
+    loadUnread();
+    const t = window.setInterval(loadUnread, 20000);
+    return () => window.clearInterval(t);
+  }, [user.id]);
 
+  const NAV = BASE_NAV.filter((item) => !item.adminOnly || isAdmin);
+
+  // If the user's role changes (or an admin-only tab was left open) and the
+  // active tab is no longer available, fall back to the dashboard.
+  useEffect(() => {
+    if (!NAV.some((item) => item.id === activeNav)) {
+      setActiveNav("dashboard");
+    }
+  }, [isAdmin]);
 
   const nav = (
     <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -140,6 +174,15 @@ export default function Mydashboard() {
           >
             <Icon name={icon} size={18} color={active ? "#0D6EFD" : "#4B5563"} />
             {label}
+            {id === "messages" && unreadMessages > 0 && (
+              <span style={{
+                marginLeft: "auto", background: "#0D6EFD", color: "#fff", fontSize: 11, fontWeight: 700,
+                borderRadius: 999, minWidth: 18, height: 18, padding: "0 5px",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                {unreadMessages}
+              </span>
+            )}
           </button>
         );
       })}
@@ -230,14 +273,19 @@ export default function Mydashboard() {
           {activeNav === 'leads' && <LeadsInquiries />}
           {activeNav === "notifications" && <NotificationsDashboard />}
           {activeNav === "subscription" && <SubscriptionPlanDashboard />}
-          {activeNav === 'campaign' && <CampaignManagementDashboard  setActiveNav={setActiveNav} />}
-          {activeNav === 'createcampaign' && <CreateCampaignForm setActiveNav={setActiveNav}/>}
-          {activeNav === 'settings' && <Settingdashboard />}
+          {isAdmin && activeNav === 'campaign' && <CampaignManagementDashboard  setActiveNav={setActiveNav} />}
+          {isAdmin && activeNav === 'createcampaign' && <CreateCampaignForm setActiveNav={setActiveNav}/>}
+          {isAdmin && activeNav === 'approvals' && <PropertyApprovals />}
+          {/* {activeNav === 'settings' && <Settingdashboard />} */}
           {activeNav === 'help' && <Helpandsupport />}
           {activeNav === 'messages' && <Messagedashbord />}
           {activeNav === 'verification' && <ProfileVerificationPage />}
-          {activeNav === 'blog' && <CreateBlog />}
-          
+          {isAdmin && activeNav === 'blog' && <CreateBlog />}
+          {settingsPage === 'main' ? 
+            activeNav === 'settings' && <Settingdashboard setSettingsPage={setSettingsPage} /> 
+            : settingsPage === 'BusinessProfile' 
+            ? activeNav === 'settings' && <BusinessProfile setSettingsPage={setSettingsPage} /> 
+            : activeNav === 'settings' && <Settingdashboard setSettingsPage={setSettingsPage} /> }
 
           
       </div>
