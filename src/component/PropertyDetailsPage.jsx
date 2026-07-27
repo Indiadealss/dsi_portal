@@ -14,7 +14,6 @@ import { createLeadMessage, getPropertyByspid, getUserShortlist, toggleShortlist
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setProperty as setPropertyInStore } from "./Redux/propertyidSlice";
-import MessageOwnerPanel from "./MessageOwnerPanel";
 
 const SIMILAR = [
   { img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&auto=format&fit=crop", name: "Stellar IT Park", location: "Sector 62, Noida", price: "₹85 L", area: "1100 sq.ft", type: "Office Space", status: "FOR SALE" },
@@ -531,13 +530,6 @@ export default function PropertyDetailsPage() {
                     <img src={whatsapp} className="w-5 h-5" alt="WhatsApp" />
                     WhatsApp
                   </a>
-                  <MessageOwnerPanel
-                    propertyId={property?._id}
-                    ownerId={property?.owner?._id}
-                    ownerName={property?.owner?.name}
-                    propertyLabel={property?.projectname}
-                    className="w-full bg-[#001A2D] cursor-pointer text-white font-bold py-3.5 rounded-xl text-sm transition-all shadow-sm flex items-center justify-center gap-2"
-                  />
                   <button onClick={() => setOpenLeadModal(true)}
                     className="w-full border-2 border-[#2F73D9] text-[#2F73D9] cursor-pointer font-bold py-3.5 rounded-xl text-sm transition-all flex items-center justify-center gap-2">
                     <img src={calendar_month} className="w-5 h-5" alt="Schedule" /> Schedule Site Visit
@@ -582,15 +574,6 @@ export default function PropertyDetailsPage() {
                       <img src={whatsapp} className="w-5 h-5" alt="WhatsApp" />
                       WhatsApp
                     </a>
-                    <MessageOwnerPanel
-                      propertyId={property?._id}
-                      ownerId={property?.owner?._id}
-                      ownerName={property?.owner?.name}
-                      propertyLabel={property?.projectname}
-                      className="flex-1 bg-[#001A2D] text-white text-xs font-bold py-2.5 rounded-lg transition flex items-center justify-center gap-1"
-                    >
-                      Message
-                    </MessageOwnerPanel>
                   </div>
                 </div>
               )}

@@ -208,7 +208,7 @@ export default function MyListings() {
             }
 
             return {
-              id: item.npxid || item.spid,
+              id: item.npxid || item.spid || item._id || "",
               _id: item._id,
               npxid: item.npxid || null,
               spid: item.spid || null,
@@ -306,10 +306,10 @@ export default function MyListings() {
     if (search.trim()) {
       const q = search.toLowerCase();
       data = data.filter(l =>
-        l.title.toLowerCase().includes(q) ||
-        l.locationName.toLowerCase().includes(q) ||
-        l.city.toLowerCase().includes(q) ||
-        l.id.toLowerCase().includes(q)
+        (l.title || "").toLowerCase().includes(q) ||
+        (l.locationName || "").toLowerCase().includes(q) ||
+        (l.city || "").toLowerCase().includes(q) ||
+        (l.id || "").toLowerCase().includes(q)
       );
     }
     // Sort

@@ -21,7 +21,6 @@ import { useParams } from "react-router-dom";
 import Unitsavailble from "./customcomponent/Unitsavailble";
 import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./Redux/propertyidSlice";
-import MessageOwnerPanel from "./MessageOwnerPanel";
 import Seo from "./Seo";
 import Leadgentaionform from "./customcomponent/Leadgentaionform";
 
@@ -884,15 +883,6 @@ function LeadForm({ owner, propertyData, user }) {
               WhatsApp
             </a>
           </div>
-        )}
-        {owner?._id && (
-          <MessageOwnerPanel
-            propertyId={propertyData._id}
-            ownerId={owner._id}
-            ownerName={owner.name}
-            propertyLabel={propertyData.projectname}
-            className="cursor-pointer w-full flex items-center justify-center gap-2 text-white bg-[#001A2D] text-sm font-semibold py-2.5 rounded-md transition-all"
-          />
         )}
       </div>
     </div>
