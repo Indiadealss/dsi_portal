@@ -293,7 +293,8 @@ export const businessProfileApi = {
       "/business-profile",
       data,
       {
-        params: { ownerId, userId },
+        headers: { "Content-Type": "multipart/form-data" },
+        params: { userId },
       }
     ),
 
@@ -573,6 +574,10 @@ export const toggleShortlist = async (userId, propertyId) => {
 // ✅ Get User Shortlist
 export const getUserShortlist = async (userId) => {
   return API.get(`/shortlist/${userId}`);
+};
+
+export const getFeaturedProperties = async () => {
+  return API.get("/featured");
 };
 
 export const toggleViewed = async (userId, propertyId) => {

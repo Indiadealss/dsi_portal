@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { lead } from "../api/api";
 import { useSelector } from "react-redux";
@@ -79,16 +80,22 @@ function KPICard({ icon, iconBg, label, value, sub, subColor }) {
 }
 
 // ─── ACTION BUTTON ────────────────────────────────────────────────────────────
-function ActionBtn({ children, title }) {
+function ActionBtn({ children, title, onClick }) {
   return (
-    <button title={title} className="w-9 h-9 flex items-center justify-center rounded-lg text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30">
+    <button
+      type="button"
+      title={title}
+      onClick={onClick}
+      className="w-9 h-9 flex items-center justify-center rounded-lg text-[#6B7280] hover:bg-[#F3F4F6] hover:text-[#111827] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30"
+    >
       {children}
     </button>
   );
 }
 
 // ─── MOBILE LISTING CARD ──────────────────────────────────────────────────────
-function MobileCard({ listing }) {
+function MobileCard({ listing, onView, onEdit }) {
+  const [showMore, setShowMore] = useState(false);
   return (
     <div className="bg-white border border-[#E5E7EB] rounded-xl p-4 hover:bg-[#F8FAFC] transition-colors duration-150">
       <div className="flex gap-3 mb-3">
@@ -106,10 +113,28 @@ function MobileCard({ listing }) {
         <div><span className="font-semibold text-[#111827] text-sm">{listing.price}</span><br />{listing.area}</div>
         <div>Views: <span className="font-medium text-[#111827]">{listing.views.toLocaleString()}</span><br />Leads: <span className="font-medium text-[#111827]">{listing.leads}</span></div>
       </div>
-      <div className="flex gap-2 justify-end border-t border-[#E5E7EB] pt-3">
-        <ActionBtn title="View"><Icon.Eye /></ActionBtn>
-        <ActionBtn title="Edit"><Icon.Edit /></ActionBtn>
-        <ActionBtn title="More"><Icon.MoreVertical /></ActionBtn>
+      <div className="flex gap-2 justify-end border-t border-[#E5E7EB] pt-3 relative">
+        <ActionBtn title="View" onClick={() => onView(listing)}><Icon.Eye /></ActionBtn>
+        <ActionBtn title="Edit" onClick={() => onEdit(listing)}><Icon.Edit /></ActionBtn>
+        <div className="relative">
+          <ActionBtn title="More" onClick={() => setShowMore((v) => !v)}><Icon.MoreVertical /></ActionBtn>
+          {showMore && (
+            <div className="absolute right-0 top-10 z-20 bg-white border border-[#E5E7EB] rounded-lg shadow-lg py-1 w-40">
+              <button
+                onClick={() => { setShowMore(false); onView(listing); }}
+                className="block w-full text-left px-4 py-2 text-sm text-[#374151] hover:bg-[#F8FAFC]"
+              >
+                View Details
+              </button>
+              <button
+                onClick={() => { setShowMore(false); onEdit(listing); }}
+                className="block w-full text-left px-4 py-2 text-sm text-[#374151] hover:bg-[#F8FAFC]"
+              >
+                Edit Listing
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -132,6 +157,19 @@ export default function MyListings() {
   const [BACKEND_LISTINGS, setbACKEND_LISTINGS] = useState([])
 
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleView = (listing) => {
+    const viewSlug = listing.npxid
+      ? `view-property-npxid-${listing.npxid}`
+      : `view-property-spid-${listing.spid}`;
+    navigate(`/${viewSlug}`);
+  };
+
+  const handleEdit = (listing) => {
+    if (!listing._id) return;
+    navigate(`/edit-property/${listing._id}`);
+  };
 
   useEffect(() => {
     const handler = (e) => {
@@ -171,6 +209,9 @@ export default function MyListings() {
 
             return {
               id: item.npxid || item.spid,
+              _id: item._id,
+              npxid: item.npxid || null,
+              spid: item.spid || null,
               title:
                 item.projecttitle ||
                 item.projectname ||
@@ -475,10 +516,33 @@ export default function MyListings() {
               <div className="px-4 text-sm font-medium text-[#111827] text-center">{listing.leads}</div>
 
               {/* Actions */}
-              <div className="px-4 flex items-center gap-1">
-                <ActionBtn title="View"><Icon.Eye /></ActionBtn>
-                <ActionBtn title="Edit"><Icon.Edit /></ActionBtn>
-                <ActionBtn title="More"><Icon.MoreVertical /></ActionBtn>
+              <div className="px-4 flex items-center gap-1 relative">
+                <ActionBtn title="View" onClick={() => handleView(listing)}><Icon.Eye /></ActionBtn>
+                <ActionBtn title="Edit" onClick={() => handleEdit(listing)}><Icon.Edit /></ActionBtn>
+                <div className="relative">
+                  <ActionBtn
+                    title="More"
+                    onClick={() => setOpenDropdown(openDropdown === listing.id ? null : listing.id)}
+                  >
+                    <Icon.MoreVertical />
+                  </ActionBtn>
+                  {openDropdown === listing.id && (
+                    <div className="absolute right-0 top-10 z-20 bg-white border border-[#E5E7EB] rounded-lg shadow-lg py-1 w-40">
+                      <button
+                        onClick={() => { setOpenDropdown(null); handleView(listing); }}
+                        className="block w-full text-left px-4 py-2 text-sm text-[#374151] hover:bg-[#F8FAFC]"
+                      >
+                        View Details
+                      </button>
+                      <button
+                        onClick={() => { setOpenDropdown(null); handleEdit(listing); }}
+                        className="block w-full text-left px-4 py-2 text-sm text-[#374151] hover:bg-[#F8FAFC]"
+                      >
+                        Edit Listing
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -491,7 +555,9 @@ export default function MyListings() {
               <p className="font-medium">No listings found</p>
               <p className="text-sm mt-1">Try adjusting your search or filters</p>
             </div>
-          ) : paged.map(listing => <MobileCard key={listing.id} listing={listing} />)}
+          ) : paged.map(listing => (
+            <MobileCard key={listing.id} listing={listing} onView={handleView} onEdit={handleEdit} />
+          ))}
         </div>
 
         {/* ── PAGINATION ── */}

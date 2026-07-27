@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { lead } from '../api/api';
 
-const Dashboard = () => {
+const Dashboard = ({ setActiveNav }) => {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,16 +21,9 @@ const Dashboard = () => {
       .then(res => {
         if (res.status === 200) {
           const apiData = res.data.data;
-          console.log(apiData, 'dashboard api data');
 
-          // ─── FIX 2: Build dashboarddata AFTER the API resolves ──────────────
-          // Adjust apiData[0], apiData[1], apiData[2] to match your real API shape
-          const stats = apiData[2] ?? {};
           const leadsArr = apiData[1] ?? [];
           const listings = apiData[0] ?? [];
-
-          console.log(listings, 'check listings');
-
 
           const formattedListings = listings.map((listing) => ({
             id: listing.npxid || listing.spid,
@@ -51,16 +44,22 @@ const Dashboard = () => {
 
           setListings(formattedListings);
 
+          // The API has no pre-aggregated stats object — derive the counts
+          // from the listings/leads arrays, same as MyListings and LeadsInquiries do.
+          const totalListings = formattedListings.length;
+          const activeListings = formattedListings.filter((l) => l.status === "Active").length;
+          const activeListingsPct =
+            totalListings > 0 ? `${Math.round((activeListings / totalListings) * 100)}% of Total` : "—";
 
           setData({
-            userName: user.name, 
+            userName: user.name,
             stats: {
-              totalListings: stats.totalListings ?? 0,
-              activeListings: stats.activeListings ?? 0,
-              activeListingsPct: stats.activeListingsPct ?? "—",
-              totalLeads: stats.totalLeads ?? 0,
-              savedProperties: stats.savedProperties ?? 0,
-              unreadMessages: stats.unreadMessages ?? 0,
+              totalListings,
+              activeListings,
+              activeListingsPct,
+              totalLeads: leadsArr.length,
+              savedProperties: 0, // no saved-properties data source exists in the API yet
+              unreadMessages: 0,
             },
             leads: leadsArr,
             listings: formattedListings,
@@ -247,7 +246,7 @@ const Dashboard = () => {
             <div className={`card${visible ? " fade-up" : ""}`} style={{ overflow: "hidden" }}>
               <div className="section-header">
                 <h2 style={{ fontSize: 18, fontWeight: 600 }}>Recent Leads</h2>
-                <button className="view-btn">View all</button>
+                <button onClick={() => setActiveNav('leads')} className="view-btn">View all</button>
               </div>
               <div style={{ overflowX: "auto" }}>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -282,7 +281,7 @@ const Dashboard = () => {
                 </table>
               </div>
               <div style={{ padding: "12px 20px", borderTop: "1px solid #F1F5F9" }}>
-                <button className="full-btn">View all leads</button>
+                <button onClick={() => setActiveNav('leads')} className="full-btn">View all leads</button>
               </div>
             </div>
           </div>
@@ -292,7 +291,7 @@ const Dashboard = () => {
             <div className={`card${visible ? " fade-up" : ""}`} style={{ overflow: "hidden" }}>
               <div className="section-header">
                 <h2 style={{ fontSize: 18, fontWeight: 600 }}>Recent Listings</h2>
-                <button className="view-btn">View all</button>
+                <button onClick={() => setActiveNav('listings')} className="view-btn">View all</button>
               </div>
               <div>
                 {(data?.listings ?? [])

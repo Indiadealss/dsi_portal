@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { createLead } from "../../api/api";
+import { useSelector } from "react-redux";
+import { createLead, toggleConnected } from "../../api/api";
 import AlertBox from "../../component/customcomponent/AlertBox";
 import {Loader2, IndianRupee } from 'lucide-react';
 
 export default function CustomNameEnquiryform({ setCustomEnquiry, propertys }) {
+  const user = useSelector((state) => state.user);
 
     console.log(propertys._id, "owners in custom form");
     
@@ -63,6 +65,11 @@ export default function CustomNameEnquiryform({ setCustomEnquiry, propertys }) {
           if(res.status === 201){
             alert(' ✅ Enquiry submitted')
             setSubmitted(true);
+            if (user?.loggedIn && propertys?._id) {
+              toggleConnected(user.id, propertys._id).catch((err) =>
+                console.error(err.response?.data || err.message)
+              );
+            }
           }
         } catch (error) {
           console.log(error);

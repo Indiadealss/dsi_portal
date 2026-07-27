@@ -17,28 +17,28 @@ const Myindiadealss = () => {
     },[])
      const Listings = [
         {name:'All Listings', link:'/all_listings/ALL'},
-        {name:'Plan Listings',link:'/mybrandsdoor/LP-f'},
-        {name:'Basic Listings',link:'/mybrandsdoor/LP-B'},
-        {name:'Platinum Listings',link:'/mybrandsdoor/LP-P'},
-        {name:'Premimum Listings',link:'/mybrandsdoor/LP-R'},
-        {name:'Infinity Listings',link:'/mybrandsdoor/LP-I'},
-        // {name:'AI Listings',link:'/mybrandsdoor/LP-T'},
+        {name:'Plan Listings',link:'/myindiadeals/LP-f'},
+        {name:'Basic Listings',link:'/myindiadeals/LP-B'},
+        {name:'Platinum Listings',link:'/myindiadeals/LP-P'},
+        {name:'Premimum Listings',link:'/myindiadeals/LP-R'},
+        {name:'Infinity Listings',link:'/myindiadeals/LP-I'},
+        // {name:'AI Listings',link:'/myindiadeals/LP-T'},
     ]
 
     const Projects = [
         {name: 'All Products',link:'all_listings/ALL'},
-        {name:'Super Campaign',link:'/mybrandsdoor/all_listings/CMT'},
-        {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
-        {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
+        {name:'Super Campaign',link:'/myindiadeals/all_listings/CMT'},
+        {name:'E-Mailers',link:'/myindiadeals/all_listings/MM'},
+        {name:'Omni Ads',link:'/myindiadeals/all_listings/OA'},
     ]
 //   const Projects = [
 //         {name: 'All Products',link:'all_listings/ALL'},
-//         {name:'Super Campaign',link:'/mybrandsdoor/all_listings/CMT'},
-//         {name:'BBC',link:'/mybrandsdoor/all_listings/BBC'},
-//         {name:'SAB',link:'/mybrandsdoor/all_listings/SAB'},
-//         {name:'NP/FP/PG/AP/AS',link:'/mybrandsdoor/all_listings/ALLNP'},
-//         {name:'E-Mailers',link:'/mybrandsdoor/all_listings/MM'},
-//         {name:'Omni Ads',link:'/mybrandsdoor/all_listings/OA'},
+//         {name:'Super Campaign',link:'/myindiadeals/all_listings/CMT'},
+//         {name:'BBC',link:'/myindiadeals/all_listings/BBC'},
+//         {name:'SAB',link:'/myindiadeals/all_listings/SAB'},
+//         {name:'NP/FP/PG/AP/AS',link:'/myindiadeals/all_listings/ALLNP'},
+//         {name:'E-Mailers',link:'/myindiadeals/all_listings/MM'},
+//         {name:'Omni Ads',link:'/myindiadeals/all_listings/OA'},
 //     ]
     return (
         <div className='bg-gray-100 '>

@@ -4,61 +4,61 @@ import { ChevronLeft, ChevronRight } from "lucide-react"; // optional icons
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
+import { getFeaturedProperties } from "../../api/api";
+
+const mapPropertiesToCards = (properties) =>
+  (properties || []).map((item) => {
+    const covers = item.images?.filter((img) => img.type === "cover") ?? [];
+    const coverImages = covers.length
+      ? covers
+      : item.images?.filter((img) => img.type === "banner") ?? [];
+
+    const coverSrc =
+      coverImages.length > 0
+        ? coverImages[0].src
+        : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
+
+    return {
+      img: coverSrc,
+      label: item.title || item.projecttitle || item.projectname,
+      location: item.location,
+      city: item.city,
+      npxid: item.npxid,
+    };
+  });
 
 const Smallmain = ({ title, data }) => {
   const sliderRef = useRef(null);
   const [card, setCard] = useState([]);
-
-
-  const elCard = [
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bhutani.497cb9c2.png', label: "ATS Kingston Heath", description: "2, 3, 4 BHK Apartment in Sector 110, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Gaurs.85564924.png', label: "ATS Kingston Heath", description: "3, 4 BHK Apartment in Sector 150, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/m3m.aa9e165b.png', label: "ATS Kingston Heath", description: "3, 4, 5 BHK Apartment in Sector 168, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Prestige.76918ca7.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Irish.ac2de9f3.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Dlf.6cb4c42a.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Group108o.ee6a8587.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Bhutani.497cb9c2.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Gaurs.85564924.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/m3m.aa9e165b.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Prestige.76918ca7.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Irish.ac2de9f3.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-    { img: 'https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/Dlf.6cb4c42a.png', label: "ATS Kingston Heath", description: "2, 3 BHK Apartment in Sector 100, Noida", price: "₹ 36,000 onwards" },
-  ];
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!data || !data.length) {
-      setCard(elCard)
-    } else {
+    let cancelled = false;
 
-      console.log(data);
-      
-      const newCards = data.map((item) => {
-       const covers = item.images?.filter(img => img.type === "cover") ?? [];
-const coverImages = covers.length
-  ? covers
-  : item.images?.filter(img => img.type === "banner") ?? [];
+    const loadCards = async () => {
+      if (data && data.length) {
+        setCard(mapPropertiesToCards(data));
+        setLoading(false);
+        return;
+      }
 
-        const bannerImages = item.images?.filter((img) => img.type === "cover") || [];
+      setLoading(true);
+      try {
+        const { data: res } = await getFeaturedProperties();
+        if (!cancelled) setCard(mapPropertiesToCards(res?.data));
+      } catch (error) {
+        console.error("Failed to load featured properties", error);
+        if (!cancelled) setCard([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
 
-        const coverSrc =
-          coverImages.length > 0
-            ? coverImages[0].src
-            : "https://indiadealss.s3.eu-north-1.amazonaws.com/indiadealss/noImageBg.svg";
+    loadCards();
 
-        return {
-          img: coverSrc,
-          label: item.title,   // or item.title
-          location: item.location,
-          city: item.city,
-          npxid: item.npxid,
-        };
-      });
-
-      setCard(newCards);
-    }
-
-
+    return () => {
+      cancelled = true;
+    };
   }, [data]);
 
   const settings = {
@@ -87,31 +87,30 @@ const coverImages = covers.length
   const goPrev = () => sliderRef.current.slickPrev();
 
   const parseLocation = (location) => {
-  if (typeof location === "string") {
-    try {
-      return JSON.parse(location);
-    } catch {
-      return null;
+    if (typeof location === "string") {
+      try {
+        return JSON.parse(location);
+      } catch {
+        return null;
+      }
     }
-  }
-  return location;
-};
+    return location;
+  };
 
-const createSlug = (item) => {
-  if (!item?.npxid) return "";
+  const createSlug = (item) => {
+    if (!item?.npxid) return "";
 
-  const locationData = parseLocation(item.location);
-  const city = locationData?.[0]?.City || "";
+    const locationData = parseLocation(item.location);
+    const city = locationData?.[0]?.City || "";
 
-  return `${item.label}-${city}-npxid-${item.npxid}`
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)+/g, "");
-};
+    return `${item.label}-${city}-npxid-${item.npxid}`
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "");
+  };
 
-
-
-  if (!card.length) return <p className="text-center py-5">Loading...</p>;
+  if (loading) return <p className="text-center py-5">Loading...</p>;
+  if (!card.length) return null;
 
   return (
     <div className="relative w-[90%] mx-auto my-5">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import { lead, getConvercation } from "../api/api";
 import { useSelector } from "react-redux";
@@ -105,6 +106,7 @@ const Icon = ({ name, size = 20, color = "currentColor" }) => {
 // regular users manage their own listings, not marketing or platform-wide moderation.
 const BASE_NAV = [
   { id: "dashboard",    label: "Dashboard",            icon: "listing"      },
+  { id: "postProperty", label: "Post Property",        icon: "plus"         },
   { id: "listings",     label: "My Listings",          icon: "layers"       },
   // { id: "saved",        label: "Saved Properties",     icon: "bookmark"     },
   { id: "leads",        label: "Leads & Inquiries",    icon: "users"        },
@@ -130,8 +132,13 @@ export default function Mydashboard() {
 
   const user = useSelector((state) => state.user);
   const isAdmin = user.role === "admin";
+  const navigate = useNavigate();
+  const { tab } = useParams();
 
-  const [activeNav,     setActiveNav]     = useState("dashboard");
+  const activeNav = tab || "dashboard";
+  const setActiveNav = (id) => {
+    navigate(id === "dashboard" ? "/mydashboard" : `/mydashboard/${id}`);
+  };
   const [sidebarOpen,   setSidebarOpen]   = useState(false);
 const [settingsPage, setSettingsPage] = useState("main");
   const [unreadMessages, setUnreadMessages] = useState(0);
@@ -153,13 +160,17 @@ const [settingsPage, setSettingsPage] = useState("main");
 
   const NAV = BASE_NAV.filter((item) => !item.adminOnly || isAdmin);
 
-  // If the user's role changes (or an admin-only tab was left open) and the
-  // active tab is no longer available, fall back to the dashboard.
+  // "createcampaign" is a sub-view reached from inside the Campaign tab —
+  // it's a valid destination even though it has no entry in BASE_NAV.
+  const EXTRA_VALID_TABS = isAdmin ? ["createcampaign"] : [];
+
+  // If the user's role changes, an admin-only tab was left open, or someone
+  // deep-links to an unknown tab, fall back to the dashboard.
   useEffect(() => {
-    if (!NAV.some((item) => item.id === activeNav)) {
+    if (!NAV.some((item) => item.id === activeNav) && !EXTRA_VALID_TABS.includes(activeNav)) {
       setActiveNav("dashboard");
     }
-  }, [isAdmin]);
+  }, [isAdmin, activeNav]);
 
   const nav = (
     <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -167,7 +178,14 @@ const [settingsPage, setSettingsPage] = useState("main");
         const active = activeNav === id;
         return (
           <button key={id}
-            onClick={() => { setActiveNav(id); setSidebarOpen(false); }}
+            onClick={() => {
+              setSidebarOpen(false);
+              if (id === "postProperty") {
+                navigate("/post-property");
+              } else {
+                setActiveNav(id);
+              }
+            }}
             style={{ display: "flex", alignItems: "center", gap: 10, height: 48, padding: "0 12px", borderRadius: 8, border: active ? "1px solid #0D6EFD" : "1px solid transparent", background: active ? "#EAF5FF" : "transparent", color: active ? "#0D6EFD" : "#4B5563", cursor: "pointer", fontSize: 14, fontWeight: active ? 600 : 400, transition: "background 0.15s, color 0.15s", textAlign: "left", width: "100%" }}
             onMouseEnter={e => { if (!active) e.currentTarget.style.background = "#F5F7FA"; }}
             onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}
@@ -268,7 +286,7 @@ const [settingsPage, setSettingsPage] = useState("main");
           {nav}
         </aside>
 
-          {activeNav === "dashboard" && <Dashboard />}
+          {activeNav === "dashboard" && <Dashboard setActiveNav={setActiveNav} />}
           {activeNav === "listings" && <MyListings />}
           {activeNav === 'leads' && <LeadsInquiries />}
           {activeNav === "notifications" && <NotificationsDashboard />}

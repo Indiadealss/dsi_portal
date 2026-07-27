@@ -10,9 +10,9 @@ import whatsapp from "../Images/whatsapp.svg";
 import calendar_month from "../Images/calendar_month.svg";
 import bed from "../Images/bed.svg";
 import shower from "../Images/shower.svg";
-import { createLeadMessage, getPropertyByspid } from "../api/api";
+import { createLeadMessage, getPropertyByspid, getUserShortlist, toggleShortlist, toggleViewed, toggleConnected } from "../api/api";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProperty as setPropertyInStore } from "./Redux/propertyidSlice";
 import MessageOwnerPanel from "./MessageOwnerPanel";
 
@@ -141,6 +141,7 @@ export default function PropertyDetailsPage() {
   const { slug } = useParams();
   const spid = slug?.slice(-5);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     fetchproperty();
@@ -156,6 +157,33 @@ export default function PropertyDetailsPage() {
     }
   };
 
+  useEffect(() => {
+    if (!property?._id || !user?.id) return;
+
+    toggleViewed(user.id, property._id).catch((err) =>
+      console.error(err.response?.data || err.message)
+    );
+
+    getUserShortlist(user.id)
+      .then(({ data }) => {
+        if (data.success) {
+          setSaved(data.data.some((item) => item.propertyId?._id === property._id));
+        }
+      })
+      .catch((err) => console.error(err.response?.data || err.message));
+  }, [property?._id, user?.id]);
+
+  const handleToggleSaved = async () => {
+    if (!user?.loggedIn || !property?._id) return;
+
+    try {
+      const { data } = await toggleShortlist(user.id, property._id);
+      if (data.success) setSaved((prev) => !prev);
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+    }
+  };
+
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   // ── handleSubmit: just the async logic, no JSX inside ─────────────────
@@ -167,6 +195,11 @@ export default function PropertyDetailsPage() {
         alert("✅ Enquiry submitted");
         setSubmitted(true);
         setOpenLeadModal(false);
+        if (user?.loggedIn && property?._id) {
+          toggleConnected(user.id, property._id).catch((err) =>
+            console.error(err.response?.data || err.message)
+          );
+        }
       }
     } catch (error) {
       console.error(error);
@@ -274,7 +307,7 @@ export default function PropertyDetailsPage() {
                     </span>
                   </div>
                   <div className="absolute top-3 right-3 flex gap-2">
-                    <button onClick={() => setSaved(!saved)}
+                    <button onClick={handleToggleSaved}
                       className={`w-8 h-8 rounded-full flex items-center justify-center shadow text-sm transition-all cursor-pointer ${saved ? "bg-red-500 text-white scale-110" : "bg-white/90 text-gray-500 hover:bg-white"}`}>
                       {saved ? "♥" : "♡"}
                     </button>

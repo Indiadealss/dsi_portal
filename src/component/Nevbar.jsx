@@ -150,12 +150,12 @@ const Navbar = () => {
     { key: "shortlisted", label: <Link to='/recent-activity?type=shortlist'><span className="text-sm">Shortlisted</span></Link> },
     { key: "contacted", label: <Link to='/recent-activity?type=contacted'><span className="text-sm">Contacted</span></Link> },
     { type: "divider" },
-    { key: "mybrandsdoor", label: <Link to='/myindiadeals' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">My INDIADEALS</span></Link> },
-    { key: "", label: <Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link> },
-    { type: "View All Responses", label: <Link to='/responses' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link> },
-    { type: 'Manage Boss', label: <Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link> },
+    { key: "myindiadeals", label: <Link to='/mydashboard/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">My INDIADEALS</span></Link> },
+    { key: "", label: <Link to='/mydashboard/listings' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm" >Manage Listings</span></Link> },
+    { type: "View All Responses", label: <Link to='/mydashboard/leads' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">View All Resposes</span></Link> },
+    { type: 'Manage Boss', label: <Link to='/mydashboard/settings' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Manage BOSS</span></Link> },
     // {type:'leadsearch',label:<Link to='/' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Lead Search</span></Link>},
-    { type: 'modifyprofile', label: <Link to='/myindiadeals/editProfile' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Modify Profile</span></Link> },
+    { type: 'modifyprofile', label: <Link to='/mydashboard/verification' className={user.loggedIn ? '' : 'hidden'}><span className="text-sm">Modify Profile</span></Link> },
     { type: "divider" },
     { key: "logout", danger: true, label: logout }
   ];

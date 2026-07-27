@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { businessProfileApi } from "../api/api.js";
 import { useSelector } from "react-redux";
 
@@ -84,6 +84,8 @@ export default function BusinessProfile({ setSettingsPage }) {
   const [profile, setProfile] = useState(null);
   const [teamMembers, setTeamMembers] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [logoFile, setLogoFile] = useState(null);
+  const logoInputRef = useRef(null);
 
 
   const user = useSelector((state) => state.user);
@@ -118,8 +120,16 @@ export default function BusinessProfile({ setSettingsPage }) {
     setProfile((prev) => ({ ...prev, [name]: value }));
   }
 
+  function handleLogoPick(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setLogoFile(file);
+    setProfile((prev) => ({ ...prev, logoUrl: URL.createObjectURL(file) }));
+    e.target.value = "";
+  }
+
   async function handleSave() {
-   
+
     if (!userId) {
     setError("User ID not found");
     return;
@@ -133,15 +143,27 @@ export default function BusinessProfile({ setSettingsPage }) {
    setSaving(true);
     setError(null);
     try {
-      const { profile: saved } = await businessProfileApi.updateProfile(
-        userId,
-        profile
-      );
-      console.log(
-      "Updated profile:",
-      response.data
-    );
-      setProfile(saved);
+      const formData = new FormData();
+      formData.append("businessName", profile.businessName || "");
+      formData.append("businessType", profile.businessType || "");
+      formData.append("registrationNumber", profile.registrationNumber || "");
+      formData.append("yearOfEstablishment", profile.yearOfEstablishment || "");
+      formData.append("website", profile.website || "");
+      formData.append("businessEmail", profile.businessEmail || "");
+      formData.append("businessPhone", profile.businessPhone || "");
+      formData.append("alternatePhone", profile.alternatePhone || "");
+      formData.append("addressLine1", profile.addressLine1 || "");
+      formData.append("addressLine2", profile.addressLine2 || "");
+      formData.append("city", profile.city || "");
+      formData.append("state", profile.state || "");
+      formData.append("pinCode", profile.pinCode || "");
+      formData.append("country", profile.country || "");
+      formData.append("description", profile.description || "");
+      if (logoFile) formData.append("logo", logoFile);
+
+      const response = await businessProfileApi.updateProfile(userId, formData);
+      setProfile(response.data.profile);
+      setLogoFile(null);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -223,6 +245,7 @@ export default function BusinessProfile({ setSettingsPage }) {
                 <button
                   type="button"
                   aria-label="Change logo"
+                  onClick={() => logoInputRef.current?.click()}
                   className="absolute bottom-1 right-1 flex h-9 w-9 items-center justify-center rounded-full border border-[#D8DDE2] bg-white shadow-sm"
                 >
                   <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" fill="none">
@@ -239,10 +262,18 @@ export default function BusinessProfile({ setSettingsPage }) {
               <p className="mt-3 text-[13px] text-[#7A7A7A]">JPG, PNG (Max 5MB)</p>
               <button
                 type="button"
+                onClick={() => logoInputRef.current?.click()}
                 className="mt-2 h-[34px] rounded-md border border-[#0078F0] px-6 text-[13px] font-medium text-[#0078F0] transition hover:bg-[#0078F0]/5"
               >
                 Change Photo
               </button>
+              <input
+                ref={logoInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleLogoPick}
+              />
             </div>
 
             {/* Form grid */}

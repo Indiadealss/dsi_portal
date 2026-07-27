@@ -1003,7 +1003,7 @@ const CSS = `
 .pv-root, .pv-root * { box-sizing: border-box; }
 .pv-root {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #F8FAFC;
+  background: none;
   color: #4A5568;
   min-height: 100vh;
   width: 100%;

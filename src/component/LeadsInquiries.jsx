@@ -314,7 +314,9 @@ export default function LeadsInquiries() {
   const [sourceFilter, setSourceFilter] = useState("all");
   const [propertyFilter, setPropertyFilter] = useState("all");
   const [cityFilter, setCityFilter] = useState("all");
-  const [dateRange] = useState("01 May 2024 - 31 May 2024");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [calendarOpen, setCalendarOpen] = useState(false);
   const [sort, setSort] = useState("newest");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(7);
@@ -344,6 +346,7 @@ export default function LeadsInquiries() {
         property: item.projectname || item.property_id?.projectname || "N/A",
         status: item.status || '', // or use item.status if your API provides one 
         phone: item.PhoneNumber || "N/A",
+        createdAt: item.createdAt,
         date: new Date(item.createdAt).toLocaleDateString(),
         time: new Date(item.createdAt).toLocaleTimeString([], {
           hour: "2-digit",
@@ -463,10 +466,29 @@ export default function LeadsInquiries() {
     // if (sourceFilter !== "all") filteredData = filteredData.filter((l) => l.source === sourceFilter);
     if (propertyFilter !== "all") filteredData = filteredData.filter((l) => l.property === propertyFilter);
     if (cityFilter !== "all") filteredData = filteredData.filter((l) => l.city === cityFilter);
+    if (dateFrom) {
+      const from = new Date(dateFrom);
+      from.setHours(0, 0, 0, 0);
+      filteredData = filteredData.filter((l) => l.createdAt && new Date(l.createdAt) >= from);
+    }
+    if (dateTo) {
+      const to = new Date(dateTo);
+      to.setHours(23, 59, 59, 999);
+      filteredData = filteredData.filter((l) => l.createdAt && new Date(l.createdAt) <= to);
+    }
     if (sort === "oldest") filteredData = filteredData.reverse();
     if (sort === "name") filteredData = [...filteredData].sort((a, b) => a.name.localeCompare(b.name));
     return filteredData;
-  }, [statusFilter, sourceFilter, propertyFilter, cityFilter, sort, data]);
+  }, [statusFilter, sourceFilter, propertyFilter, cityFilter, dateFrom, dateTo, sort, data]);
+
+  const dateRangeLabel = (() => {
+    const fmt = (v) =>
+      new Date(v).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+    if (dateFrom && dateTo) return `${fmt(dateFrom)} - ${fmt(dateTo)}`;
+    if (dateFrom) return `From ${fmt(dateFrom)}`;
+    if (dateTo) return `Until ${fmt(dateTo)}`;
+    return "All Dates";
+  })();
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
   const paginated = filtered.slice((page - 1) * pageSize, page * pageSize);
@@ -484,7 +506,7 @@ export default function LeadsInquiries() {
     <div
       className="min-h-screen bg-white"
       style={{ fontFamily: "'Inter', 'Segoe UI', sans-serif" }}
-      onClick={() => setMoreMenu(null)}
+      onClick={() => { setMoreMenu(null); setCalendarOpen(false); }}
     >
       <div className="max-w-[1600px] mx-auto px-4 sm:px-8 py-6 space-y-6">
 
@@ -532,13 +554,63 @@ export default function LeadsInquiries() {
           <Select value={propertyFilter} onChange={(v) => { setPropertyFilter(v); resetPage(); }} options={properties} width="w-40" />
           <Select value={cityFilter} onChange={(v) => { setCityFilter(v); resetPage(); }} options={cities} width="w-36" />
 
-          {/* Date Range (display only) */}
+          {/* Date Range Filter */}
           <div className="relative flex-shrink-0">
-            <div className="flex items-center gap-2 h-12 px-4 border border-gray-300 rounded-lg bg-white text-sm text-gray-600 w-64 cursor-pointer hover:bg-gray-50 transition-colors">
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); setCalendarOpen((v) => !v); }}
+              className="flex items-center gap-2 h-12 px-4 border border-gray-300 rounded-lg bg-white text-sm text-gray-600 w-64 cursor-pointer hover:bg-gray-50 transition-colors"
+            >
               <CalendarIcon />
-              <span>{dateRange}</span>
+              <span className="truncate">{dateRangeLabel}</span>
               <span className="ml-auto text-gray-400"><ChevronDown /></span>
-            </div>
+            </button>
+            {calendarOpen && (
+              <div
+                className="absolute left-0 top-14 z-20 w-72 bg-white border border-gray-200 rounded-lg shadow-lg p-4"
+                style={{ animation: "fadeIn 0.15s ease-out" }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex flex-col gap-3">
+                  <label className="text-xs font-medium text-gray-500">
+                    From
+                    <input
+                      type="date"
+                      value={dateFrom}
+                      max={dateTo || undefined}
+                      onChange={(e) => { setDateFrom(e.target.value); resetPage(); }}
+                      className="mt-1 w-full h-10 px-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </label>
+                  <label className="text-xs font-medium text-gray-500">
+                    To
+                    <input
+                      type="date"
+                      value={dateTo}
+                      min={dateFrom || undefined}
+                      onChange={(e) => { setDateTo(e.target.value); resetPage(); }}
+                      className="mt-1 w-full h-10 px-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </label>
+                  <div className="flex items-center justify-between pt-1">
+                    <button
+                      type="button"
+                      onClick={() => { setDateFrom(""); setDateTo(""); resetPage(); }}
+                      className="text-xs font-medium text-gray-500 hover:text-gray-700"
+                    >
+                      Clear
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCalendarOpen(false)}
+                      className="text-xs font-semibold text-blue-600 hover:text-blue-700"
+                    >
+                      Done
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="ml-auto flex-shrink-0">
@@ -594,7 +666,6 @@ export default function LeadsInquiries() {
                       <td className="py-4 px-4">
                         <div className="flex items-center justify-center gap-1 relative">
                           <ActionBtn title="View"><EyeIcon /></ActionBtn>
-                          <ActionBtn title="Edit"><EditIcon /></ActionBtn>
                           <ActionBtn title="Message"><MessageIcon /></ActionBtn>
                           <div className="relative">
                             <ActionBtn

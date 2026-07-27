@@ -43,6 +43,7 @@ export default function PropertyApprovals() {
   const [busyId, setBusyId] = useState(null);
   const [rejectingId, setRejectingId] = useState(null);
   const [rejectReason, setRejectReason] = useState("");
+  const [viewingItem, setViewingItem] = useState(null);
 
   const load = () => {
     setLoading(true);
@@ -67,6 +68,7 @@ export default function PropertyApprovals() {
       .then(() => {
         setItems((prev) => prev.filter((p) => p._id !== id));
         setBusyId(null);
+        setViewingItem((prev) => (prev?._id === id ? null : prev));
       })
       .catch((err) => {
         console.error(err);
@@ -86,6 +88,7 @@ export default function PropertyApprovals() {
         setItems((prev) => prev.filter((p) => p._id !== id));
         setBusyId(null);
         setRejectingId(null);
+        setViewingItem((prev) => (prev?._id === id ? null : prev));
       })
       .catch((err) => {
         console.error(err);
@@ -143,18 +146,32 @@ export default function PropertyApprovals() {
               return (
                 <div key={item._id} className="bg-white border border-[#E5E7EB] rounded-xl p-4 sm:p-5">
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <div className="w-full sm:w-[180px] h-[120px] rounded-lg bg-[#F1F5F9] flex-shrink-0 overflow-hidden flex items-center justify-center">
+                    <button
+                      type="button"
+                      onClick={() => setViewingItem(item)}
+                      className="w-full sm:w-[180px] h-[120px] rounded-lg bg-[#F1F5F9] flex-shrink-0 overflow-hidden flex items-center justify-center cursor-pointer group relative"
+                      title="Open property"
+                    >
                       {image ? (
                         <img src={image} alt={title} className="w-full h-full object-cover" />
                       ) : (
                         <span className="text-xs text-[#9CA3AF]">No image</span>
                       )}
-                    </div>
+                      <span className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center text-white text-xs font-semibold opacity-0 group-hover:opacity-100">
+                        Open
+                      </span>
+                    </button>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-3 flex-wrap">
                         <div>
-                          <p className="font-semibold text-[#111827] text-lg leading-snug">{title}</p>
+                          <button
+                            type="button"
+                            onClick={() => setViewingItem(item)}
+                            className="font-semibold text-[#111827] text-lg leading-snug text-left hover:text-[#0D6EFD] hover:underline"
+                          >
+                            {title}
+                          </button>
                           <p className="text-xs text-[#6B7280] mt-0.5">
                             {location.City || location.Address || "Location not set"}
                           </p>
@@ -219,10 +236,10 @@ export default function PropertyApprovals() {
                             <div className="flex gap-2">
                               <button
                                 disabled={busyId === item._id}
-                                onClick={() => handleApprove(item._id)}
+                                onClick={() => setViewingItem(item)}
                                 className="px-4 h-10 rounded-lg bg-[#16A34A] text-white text-sm font-semibold hover:bg-[#15803D] transition-colors disabled:opacity-60"
                               >
-                                {busyId === item._id ? "Approving…" : "Approve"}
+                                Review Photos &amp; Approve
                               </button>
                               <button
                                 disabled={busyId === item._id}
@@ -242,6 +259,200 @@ export default function PropertyApprovals() {
             })}
           </div>
         )}
+      </div>
+
+      {viewingItem && (
+        <PropertyDetailModal
+          item={viewingItem}
+          activeTab={activeTab}
+          busyId={busyId}
+          rejectingId={rejectingId}
+          rejectReason={rejectReason}
+          setRejectReason={setRejectReason}
+          onClose={() => {
+            setViewingItem(null);
+            setRejectingId(null);
+          }}
+          onApprove={() => handleApprove(viewingItem._id)}
+          onOpenReject={() => openReject(viewingItem._id)}
+          onSubmitReject={() => submitReject(viewingItem._id)}
+          onCancelReject={() => setRejectingId(null)}
+        />
+      )}
+    </div>
+  );
+}
+
+function PropertyDetailModal({
+  item,
+  activeTab,
+  busyId,
+  rejectingId,
+  rejectReason,
+  setRejectReason,
+  onClose,
+  onApprove,
+  onOpenReject,
+  onSubmitReject,
+  onCancelReject,
+}) {
+  const location = parseLocation(item.location);
+  const title = item.projecttitle || item.projectname || item.property || item.propertyType || "Untitled property";
+  const owner = item.owner || {};
+  const photos = (item.images || []).filter((img) => img?.src && img.src !== "No image uploaded");
+  const isBusy = busyId === item._id;
+  const isRejecting = rejectingId === item._id;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-3 p-5 border-b border-[#E5E7EB] sticky top-0 bg-white z-10">
+          <div>
+            <p className="font-semibold text-[#111827] text-xl leading-snug">{title}</p>
+            <p className="text-sm text-[#6B7280] mt-0.5">
+              {location.City || location.Address || "Location not set"}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <StatusBadge status={item.approvalStatus || "pending"} />
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-[#9CA3AF] hover:text-[#374151] text-xl leading-none px-2"
+              aria-label="Close"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+
+        <div className="p-5 flex flex-col gap-5">
+          <div>
+            <p className="text-sm font-semibold text-[#111827] mb-2">Photos ({photos.length})</p>
+            {photos.length === 0 ? (
+              <div className="py-10 text-center text-sm text-[#9CA3AF] bg-[#F8FAFC] rounded-lg border border-dashed border-[#E5E7EB]">
+                No photos uploaded
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {photos.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img.src}
+                    alt={`${title} photo ${idx + 1}`}
+                    className="w-full h-36 object-cover rounded-lg bg-[#F1F5F9]"
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+            <div>
+              <p className="text-[#9CA3AF] text-xs">Posted by</p>
+              <p className="text-[#111827] font-medium">{owner.name || "—"}</p>
+            </div>
+            <div>
+              <p className="text-[#9CA3AF] text-xs">Contact</p>
+              <p className="text-[#111827] font-medium">{owner.mobile || owner.email || "—"}</p>
+            </div>
+            <div>
+              <p className="text-[#9CA3AF] text-xs">Purpose</p>
+              <p className="text-[#111827] font-medium">{item.purpose || "—"}</p>
+            </div>
+            <div>
+              <p className="text-[#9CA3AF] text-xs">Submitted</p>
+              <p className="text-[#111827] font-medium">
+                {item.createdAt ? new Date(item.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }) : "—"}
+              </p>
+            </div>
+            {item.price && (
+              <div>
+                <p className="text-[#9CA3AF] text-xs">Price</p>
+                <p className="text-[#111827] font-medium">{item.price}</p>
+              </div>
+            )}
+            {item.propertyType && (
+              <div>
+                <p className="text-[#9CA3AF] text-xs">Property type</p>
+                <p className="text-[#111827] font-medium">{Array.isArray(item.propertyType) ? item.propertyType.join(", ") : item.propertyType}</p>
+              </div>
+            )}
+          </div>
+
+          {location.Address && (
+            <div>
+              <p className="text-[#9CA3AF] text-xs">Address</p>
+              <p className="text-[#111827] text-sm mt-0.5">{location.Address}</p>
+            </div>
+          )}
+
+          {item.description && (
+            <div>
+              <p className="text-[#9CA3AF] text-xs">Description</p>
+              <p className="text-[#374151] text-sm mt-0.5 whitespace-pre-line">{item.description}</p>
+            </div>
+          )}
+
+          {item.approvalStatus === "rejected" && item.rejectionReason && (
+            <p className="text-sm text-[#DC2626]">Rejected: {item.rejectionReason}</p>
+          )}
+
+          {activeTab === "pending" && (
+            <div className="pt-2 border-t border-[#E5E7EB]">
+              {isRejecting ? (
+                <div className="flex flex-col sm:flex-row gap-2 mt-4">
+                  <input
+                    autoFocus
+                    value={rejectReason}
+                    onChange={(e) => setRejectReason(e.target.value)}
+                    placeholder="Reason for rejection (optional)"
+                    className="flex-1 border border-[#D1D5DB] rounded-lg px-3 text-sm text-[#111827] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30"
+                    style={{ height: 40 }}
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      disabled={isBusy}
+                      onClick={onSubmitReject}
+                      className="px-4 h-10 rounded-lg bg-[#DC2626] text-white text-sm font-semibold hover:bg-[#B91C1C] transition-colors disabled:opacity-60"
+                    >
+                      Confirm Reject
+                    </button>
+                    <button
+                      onClick={onCancelReject}
+                      className="px-4 h-10 rounded-lg border border-[#D1D5DB] text-sm font-medium text-[#374151] hover:bg-[#F8FAFC] transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex gap-2 mt-4">
+                  <button
+                    disabled={isBusy}
+                    onClick={onApprove}
+                    className="px-5 h-10 rounded-lg bg-[#16A34A] text-white text-sm font-semibold hover:bg-[#15803D] transition-colors disabled:opacity-60"
+                  >
+                    {isBusy ? "Approving…" : "Approve Property"}
+                  </button>
+                  <button
+                    disabled={isBusy}
+                    onClick={onOpenReject}
+                    className="px-5 h-10 rounded-lg border border-[#DC2626] text-[#DC2626] text-sm font-semibold hover:bg-[#FFECEC] transition-colors disabled:opacity-60"
+                  >
+                    Reject
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

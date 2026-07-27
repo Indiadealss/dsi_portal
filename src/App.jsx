@@ -25,15 +25,15 @@ import Propertypageslug from "./Propertypageslug";
 import Recentactivity from "./component/Recentactivity";
 import Adddelercard from "./component/customcomponent/Adddelercard";
 import UpcomingProjects from "./component/customcomponent/Upcomingprojects";
-import MyIndiadeals from "./component/mybrandsdoor/MyIndiadeals.jsx";
+import MyIndiadeals from "./component/myindiadeals/MyIndiadeals.jsx";
 import Leadsearch from "./component/lead/Leadsearch";
 import Allprojects from "./component/Projectslead/Allprojects";
-import Allproducts  from "./component/mybrandsdoor/Allproducts";
-import Homepage from "./component/mybrandsdoor/Homepage";
-import Banner from "./component/mybrandsdoor/Banner";
-import Fsllistings from "./component/mybrandsdoor/Fsllistings";
-import Manageboss from "./component/mybrandsdoor/Manageboss";
-import Modify from "./component/mybrandsdoor/Modify";
+import Allproducts  from "./component/myindiadeals/Allproducts";
+import Homepage from "./component/myindiadeals/Homepage";
+import Banner from "./component/myindiadeals/Banner";
+import Fsllistings from "./component/myindiadeals/Fsllistings";
+import Manageboss from "./component/myindiadeals/Manageboss";
+import Modify from "./component/myindiadeals/Modify";
 import Alllistings from "./component/Projectslead/Alllistings";
 import Plainlisting from "./component/Projectslead/Plainlisting";
 import Platinumlisting from "./component/Projectslead/Platinumlisting";
@@ -46,12 +46,12 @@ import Sab from "./component/Projectslead/Sab";
 import Emailers from "./component/Projectslead/Emailers";
 import Omniads from "./component/Projectslead/Omniads";
 import Allresponse from "./component/Manageresponse/Allresponse";
-import Editprojectdetails from "./component/mybrandsdoor/Editprojectdetails";
+import Editprojectdetails from "./component/myindiadeals/Editprojectdetails";
 import Thankyou from "./component/customcomponent/Thankyou";
 import DynamicresponseallListing from "./component/crmCustomcomponents/DynamicresponseallListing";
 import ShortList from "./component/MyProfile/ShortList";
-import Editprofileproject from "./component/mybrandsdoor/Editprofileproject";
-import EditPropertyStepper from "./component/mybrandsdoor/EditPropertyProject";
+import Editprofileproject from "./component/myindiadeals/Editprofileproject";
+import EditPropertyStepper from "./component/myindiadeals/EditPropertyProject";
 import NotFound from "./component/NotFound";
 import Layout from "./Layout";
 import Irishplatinum from './component/adcomponents/Irishplatinum.jsx'
@@ -162,7 +162,8 @@ useEffect(() => {
     {path:'/hanumat-vihar-awasiya-yojna', element:<Hanumatviharawasiya />},
     {path:'/management-team', element:<Ourteam />},
     {path:'/about-us', element:<About />},
-    {path:'/myDashboard',element:<Mydashboard />},
+    {path:'/mydashboard',element:<Mydashboard />},
+    {path:'/mydashboard/:tab',element:<Mydashboard />},
     {path:'/it-team', element:<Itteam />},
     {path:'/sales-team', element:<Salesteam />},
     {path:'/ace-hanei',element:<Acehanei />},

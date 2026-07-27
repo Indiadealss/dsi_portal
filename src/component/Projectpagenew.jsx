@@ -16,10 +16,10 @@ import {
   Bath,
   Compass,
 } from "lucide-react";
-import { createLead, createLeadMessage, getCampainbyId, getPropertyByRera } from "../api/api";
+import { createLead, createLeadMessage, getCampainbyId, getPropertyByRera, getUserShortlist, toggleShortlist, toggleViewed, toggleConnected } from "../api/api";
 import { useParams } from "react-router-dom";
 import Unitsavailble from "./customcomponent/Unitsavailble";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./Redux/propertyidSlice";
 import MessageOwnerPanel from "./MessageOwnerPanel";
 import Seo from "./Seo";
@@ -307,8 +307,7 @@ function Gallery({ images, propertyData }) {
 }
 
 // ── Property Info Card ────────────────────────────────────────────────────────
-function InfoCard({ data, propertyData  }) {
-  const [saved, setSaved] = useState(false);
+function InfoCard({ data, propertyData, saved, onToggleSaved }) {
   return (
     <div className=" border border-gray-200 rounded-md p-3 md:p-5  h-fit sticky top-4">
       <h1 className=" font-bold text-[#001A2D]"><span className="heading-h4 font-bold">{data.projectname}</span></h1>
@@ -350,7 +349,7 @@ function InfoCard({ data, propertyData  }) {
       </div>
 
       <div className="flex gap-3 mt-[35px]">
-        <button onClick={() => setSaved(!saved)}
+        <button onClick={onToggleSaved}
           className={`flex-1 flex items-center justify-center gap-2 border rounded-lg py-2.5 text-sm font-medium transition-all ${saved ? "bg-red-50 border-red-300 text-red-600" : "border-gray-300 text-gray-600 hover:border-gray-400"}`}>
           <Heart size={16} fill={saved ? "currentColor" : "none"} /> {saved ? "Saved" : "Save Property"}
         </button>
@@ -714,7 +713,7 @@ function UnitTable({ unitData, propertyData }) {
 }
 
 // ── Lead Form Sidebar ─────────────────────────────────────────────────────────
-function LeadForm({ owner, propertyData }) {
+function LeadForm({ owner, propertyData, user }) {
   const [form, setForm] = useState({ property_id: propertyData._id, projectname: propertyData.projectname, Name: "", email:"", Requirement:"", PhoneNumber: "", message: "" });
   
   console.log(propertyData.projectname, 'PropertyData is see');
@@ -808,7 +807,11 @@ function LeadForm({ owner, propertyData }) {
       console.log(res.status, 'hee', res.status === 200);
       if (res.status === 201) {
         alert(' ✅ Enquiry submitted')
-        setSubmitted(true);
+        if (user?.loggedIn) {
+          toggleConnected(user.id, propertyData._id).catch((err) =>
+            console.error(err.response?.data || err.message)
+          );
+        }
       }
     } catch (error) {
       console.log(error);
@@ -924,8 +927,10 @@ export default function PropertyDetailPage() {
   const [propertyData, setPropertyData] = useState(null);
   const [leadModel, setLeadModel] = useState(false);
   const [projectOwners,setprojectOwners] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
   const { slug } = useParams();
   const npxid = slug.split("npxid-")[1];
+  const user = useSelector((state) => state.user);
 
 
   const [cachedPdf, setCachedPdf] = useState(null);
@@ -994,6 +999,35 @@ useEffect(() => {
     }
   }
 
+  useEffect(() => {
+    if (!propertyData?._id || !user?.id) return;
+
+    toggleViewed(user.id, propertyData._id).catch((err) =>
+      console.error(err.response?.data || err.message)
+    );
+
+    getUserShortlist(user.id)
+      .then(({ data }) => {
+        if (data.success) {
+          setIsSaved(
+            data.data.some((item) => item.propertyId?._id === propertyData._id)
+          );
+        }
+      })
+      .catch((err) => console.error(err.response?.data || err.message));
+  }, [propertyData?._id, user?.id]);
+
+  const handleToggleSaved = async () => {
+    if (!user?.loggedIn || !propertyData?._id) return;
+
+    try {
+      const { data } = await toggleShortlist(user.id, propertyData._id);
+      if (data.success) setIsSaved((prev) => !prev);
+    } catch (err) {
+      console.error(err.response?.data || err.message);
+    }
+  };
+
 
   if (!propertyData) {
     return <div className="min-h-screen flex items-center justify-center">
@@ -1036,7 +1070,7 @@ useEffect(() => {
             <Gallery images={d.images} propertyData={d} />
           </div>
           <div className="w-full lg:w-[800px]">
-            <InfoCard data={d}  propertyData={d}/>
+            <InfoCard data={d} propertyData={d} saved={isSaved} onToggleSaved={handleToggleSaved} />
           </div>
         </div>
 
@@ -1080,7 +1114,7 @@ useEffect(() => {
           {/* Sticky Sidebar */}
           <div className="w-full lg:w-110 flex flex-col gap-4">
             <div className="sticky top-[115px]">
-              <LeadForm owner={d.owner} propertyData={d} />
+              <LeadForm owner={d.owner} propertyData={d} user={user} />
 
               {/* Quick Info */}
               <div className="mt-4 rounded-md p-5 border border-gray-200">
