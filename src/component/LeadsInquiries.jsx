@@ -626,7 +626,7 @@ export default function LeadsInquiries() {
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-50 border-b border-gray-200">
-                  {["Leads", "Property", "Status", "Phone", "Date / Time", "Actions"].map((h) => (
+                  {["Leads", "Property", "Phone", "Date / Time", "Actions"].map((h) => (
                     <th
                       key={h}
                       className={`py-4 px-4 text-sm font-semibold text-slate-500 ${h === "Actions" ? "text-center" : "text-left"}`}
@@ -651,9 +651,6 @@ export default function LeadsInquiries() {
 
                       <td>{lead.property}</td>
 
-                      <td>
-                        <StatusBadge status={lead.status} />
-                      </td>
 
                       <td>{lead.phone}</td>
 

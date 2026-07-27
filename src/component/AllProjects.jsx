@@ -951,7 +951,7 @@ console.log(locationName);
               </label>
 
               <div className="flex items-center border border-gray-300 rounded w-[130px] h-[31px] mt-1 p-[7.8px]">
-                <img src={apps} alt="INDIADEALSS" />
+                <img src={apps} alt="INDIADEALS" />
                 <select
                   value={filters.status}
                   onChange={(e) =>

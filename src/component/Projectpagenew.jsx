@@ -166,7 +166,7 @@ Purvanchal Royal Atlantis Phase 1 has a sprawling campus surrounded by lush, lan
     { id: 3, specs: { bhk: "Studio", areaMin: "373.41 sqft", priceMin: "8000000" } },
     { id: 4, specs: { bhk: "3 BHK", areaMin: "1670 sqft", areaMax: "1674 sqft", priceMin: "17535000", priceMax: "18000000" } },
   ],
-  owner: { name: "INDIADEALSS", mobile: "", email: "indiadealsgroup@gmail.com" },
+  owner: { name: "INDIADEALS", mobile: "", email: "indiadealsgroup@gmail.com" },
 };
 // ────────────────────────────────────────────────────────────────────────────
 

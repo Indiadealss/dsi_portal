@@ -5,10 +5,10 @@ const Cancellation = () => {
     <div>
       Refund & Cancellation Policy
 
-DSI INDIADEALSS PRIVATE LIMITED.
+DSI INDIADEALS PRIVATE LIMITED.
 
 
-This Refund & Cancellation Policy outlines the terms under which payments, bookings, or service charges made through DSI INDIADEALSS PRIVATE LIMITED. (“Company”, “we”, “our”, “us”) may be cancelled or refunded. By using our services, you agree to the conditions mentioned below.
+This Refund & Cancellation Policy outlines the terms under which payments, bookings, or service charges made through DSI INDIADEALS PRIVATE LIMITED. (“Company”, “we”, “our”, “us”) may be cancelled or refunded. By using our services, you agree to the conditions mentioned below.
 
 
 ---
@@ -191,7 +191,7 @@ Without required documents, refund cannot be initiated.
 
 11. Company Liability
 
-DSI INDIADEALSS PRIVATE LIMITED. acts as an intermediary between customers and developers.
+DSI INDIADEALS PRIVATE LIMITED. acts as an intermediary between customers and developers.
 Therefore:
 
 We do not hold responsibility for developer-approved deductions or refund delays.
@@ -212,7 +212,7 @@ Our liability is limited to the extent of services provided directly by us.
                             </span>
                             <br />
                         <span>
-                                DSI INDIADEALSS PRIVATE LIMITED.
+                                DSI INDIADEALS PRIVATE LIMITED.
                             </span>
                              <ul className="mt-2   pl-5 text-sm leading-8">
                             {/* <li>

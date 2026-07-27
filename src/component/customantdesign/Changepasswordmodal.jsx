@@ -49,7 +49,7 @@ const Changepasswordmodal = ({open , setOpen,currentbtn,setCurrentBtn}) => {
           </div>
           <div>
             <input type="checkbox" id='myindiadeals' />
-            <label for="myindiadeals" className='cursor-pointer'>MyINDIADEALSS</label>
+            <label for="myindiadeals" className='cursor-pointer'>MyINDIADEALS</label>
           </div>
         </div>
 

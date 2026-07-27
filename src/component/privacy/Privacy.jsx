@@ -155,7 +155,7 @@ const SECTIONS = [
     content: {
       items: [
         "Our website or promotional materials may include links to third-party websites.",
-        "DSI INDIADEALSS PRIVATE LIMITED is not responsible for the privacy practices, accuracy, or content of these external platforms.",
+        "DSI INDIADEALS PRIVATE LIMITED is not responsible for the privacy practices, accuracy, or content of these external platforms.",
       ],
       outro: "Please review their privacy policies before interacting with them.",
     },
@@ -187,7 +187,7 @@ const SECTIONS = [
       intro:
         "For any questions, requests, or concerns regarding this Privacy Policy, please contact:",
       contact: {
-        company: "DSI INDIADEALSS PRIVATE LIMITED",
+        company: "DSI INDIADEALS PRIVATE LIMITED",
         address: "Unit No. 337, TOWER C, GOLDEN I, TECHZONE 4, Greater Noida, 201009",
       },
     },

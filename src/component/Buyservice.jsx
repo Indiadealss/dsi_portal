@@ -226,7 +226,7 @@ const Buyservice = () => {
                     <p><span className="text-gray-400 text-xs font-bold">
                         WHY UPGRADE MY POSTING?    
                     </span></p>
-                    <h2 className='w-100 mx-auto'><span>Benefits of upgrading your posting on Indiadealss</span></h2>
+                    <h2 className='w-100 mx-auto'><span>Benefits of upgrading your posting on Indiadeals</span></h2>
                 </div>
 
                 <div className='mx-auto  absolute object-cover right-40'>

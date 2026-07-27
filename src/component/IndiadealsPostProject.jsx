@@ -200,7 +200,7 @@ export default function IndiadealsPostProject() {
 
                       <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                         <div className="w-[48px] h-[48px] rounded-md bg-[#EAF4FF] flex items-center justify-center shrink-0" style={{ width: 48, height: 48, borderRadius: "50%", background: "#EAF4FF", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                          <img src={type.icon} alt="INDIADEALSS Project Listings" />
+                          <img src={type.icon} alt="INDIADEALS Project Listings" />
                         </div>
                         <div style={{ minWidth: 0 }}>
                           <div style={{ fontSize: 15, fontWeight: 600, color: "#122033", marginBottom: 4 }}>{type.title}</div>

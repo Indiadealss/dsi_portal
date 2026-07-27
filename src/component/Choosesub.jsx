@@ -13,7 +13,7 @@ const Choosesub = () => {
     const propertyFirstData = useSelector((state) => state.property.data);
     
     const [activeCom,setActiveCom] = useState("Subscriptioncreadits")
-    const subDescription = 'By clicking on submit,I confirm that the property details including price, photos are correct And this property is available for sell/reNT. In case of any discreperncies Indiadealss can take strict action including deleting this listing. I also accept terms and conditions.';
+    const subDescription = 'By clicking on submit,I confirm that the property details including price, photos are correct And this property is available for sell/reNT. In case of any discreperncies Indiadeals can take strict action including deleting this listing. I also accept terms and conditions.';
     async function handleSumit() {
   if (activeCom === "Subscriptioncreadits") {
     setActiveCom("Listingboost");

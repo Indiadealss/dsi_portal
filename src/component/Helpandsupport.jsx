@@ -58,7 +58,7 @@ const HELP_CATEGORIES = [
     iconBg: "#DCFCE7",
     iconColor: "#16A34A",
     title: "Need Help?",
-    description: "New to Brandsdoor? Learn the basics and get started quickly",
+    description: "New to INDIADEALS? Learn the basics and get started quickly",
   },
   {
     key: "listings",
@@ -129,9 +129,9 @@ const HELP_CATEGORIES = [
 const FAQ_DATA = {
   "need-help": [
     {
-      question: "What is Brandsdoor and who can use it?",
+      question: "What is INDIADEALS and who can use it?",
       answer:
-        "Brandsdoor is a real estate platform where buyers, agents, developers and property managers can list, discover and manage properties. Anyone with a verified account can post listings, generate leads and manage their business from one dashboard.",
+        "INDIADEALS is a real estate platform where buyers, agents, developers and property managers can list, discover and manage properties. Anyone with a verified account can post listings, generate leads and manage their business from one dashboard.",
     },
     {
       question: "How do I set up my account for the first time?",
@@ -315,7 +315,7 @@ const FAQ_DATA = {
   ],
   policies: [
     {
-      question: "What is Brandsdoor's listing policy?",
+      question: "What is INDIADEALS's listing policy?",
       answer:
         "Listings must be accurate, owned or authorized by the person posting them, and free of misleading pricing or duplicate entries. Violations may lead to listing removal.",
     },
@@ -325,7 +325,7 @@ const FAQ_DATA = {
         "Be respectful and honest in messages and listings, avoid spam or repeated unsolicited contact, and never share another user's personal information without consent.",
     },
     {
-      question: "How does Brandsdoor handle disputes?",
+      question: "How does INDIADEALS handle disputes?",
       answer:
         "Report a dispute via Contact Support with relevant details (listing ID, conversation, screenshots). Our team reviews and responds within our standard support hours.",
     },

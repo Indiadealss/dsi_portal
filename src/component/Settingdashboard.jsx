@@ -20,7 +20,6 @@ import {
   BadgeCheck,
   Headphones,
   Gem,
-  LayoutGrid,
   Eye,
   EyeOff,
   Smartphone,
@@ -269,41 +268,6 @@ function TabSignedOut({ title }) {
     <TabPanel title={title}>
       <p className="text-sm text-[#6B7280]">Please log in to manage this section.</p>
     </TabPanel>
-  );
-}
-
-function tabButtonClass(active) {
-  return `flex shrink-0 items-center gap-2.5 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors lg:w-full ${
-    active ? "bg-[#EFF6FF] text-[#2563EB]" : "text-[#374151] hover:bg-[#F9FAFB]"
-  }`;
-}
-
-function TabNav({ activeKey, onSelect }) {
-  return (
-    <nav className="flex gap-1.5 overflow-x-auto rounded-xl border border-[#E5E7EB] bg-white p-2 lg:w-[240px] lg:shrink-0 lg:self-start lg:overflow-visible">
-      <button
-        type="button"
-        onClick={() => onSelect("overview")}
-        className={tabButtonClass(activeKey === "overview")}
-      >
-        <LayoutGrid size={18} />
-        Overview
-      </button>
-      {SETTINGS_CARDS.map((card) => {
-        const Icon = card.icon;
-        return (
-          <button
-            key={card.key}
-            type="button"
-            onClick={() => onSelect(card.key)}
-            className={tabButtonClass(activeKey === card.key)}
-          >
-            <Icon size={18} />
-            {card.title}
-          </button>
-        );
-      })}
-    </nav>
   );
 }
 
@@ -1898,10 +1862,7 @@ export default function Settingdashboard({ setSettingsPage, onNavigate, onUpgrad
               <span className="font-medium text-[#2563EB]">{activeCard?.title}</span>
             </nav>
 
-            <div className="grid grid-cols-1 gap-5 lg:grid-cols-[240px_minmax(0,1fr)] lg:items-start">
-              <TabNav activeKey={activeTab} onSelect={handleNavigate} />
-              <div className="min-w-0">{renderTabContent()}</div>
-            </div>
+            <div className="min-w-0">{renderTabContent()}</div>
           </>
         )}
       </div>

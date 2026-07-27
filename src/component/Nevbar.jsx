@@ -180,7 +180,7 @@ const Navbar = () => {
             >
               <img
                 src={logo_1}
-                alt="INDIADEALSS"
+                alt="INDIADEALS"
                 className="h-[50px] w-50 object-contain"
               />
             </a>
