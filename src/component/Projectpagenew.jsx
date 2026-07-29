@@ -178,6 +178,29 @@ const formatPrice = (val) => {
   return n.toLocaleString("en-IN");
 };
 
+const safeParseJSON = (val) => {
+  if (typeof val !== "string") return val;
+  try {
+    return JSON.parse(val);
+  } catch {
+    return val;
+  }
+};
+
+// The API sends `location` as a single JSON-stringified object and
+// `locatadvance` as an array of JSON-stringified objects instead of parsed
+// arrays/objects — normalize them here so the rest of the page can treat
+// them as plain data.
+const normalizePropertyData = (data) => {
+  if (!data) return data;
+  const location = safeParseJSON(data.location);
+  return {
+    ...data,
+    location: Array.isArray(location) ? location : location ? [location] : [],
+    locatadvance: Array.isArray(data.locatadvance) ? data.locatadvance.map(safeParseJSON) : data.locatadvance,
+  };
+};
+
 const renderDescription = (text) => {
   if (!text) return null;
   return text.split("\n").map((line, i) => {
@@ -306,7 +329,22 @@ function Gallery({ images, propertyData }) {
 }
 
 // ── Property Info Card ────────────────────────────────────────────────────────
+function parseOfficeUnits(officeUnits) {
+  try {
+    if (Array.isArray(officeUnits)) {
+      return officeUnits.map((u) => (typeof u === "string" ? JSON.parse(u) : u));
+    }
+    if (typeof officeUnits === "string") {
+      return [JSON.parse(officeUnits)];
+    }
+  } catch (error) {
+    console.error("Invalid officeUnits data", error);
+  }
+  return [];
+}
+
 function InfoCard({ data, propertyData, saved, onToggleSaved }) {
+  const officeUnits = parseOfficeUnits(data.officeUnits);
   return (
     <div className=" border border-gray-200 rounded-md p-3 md:p-5  h-fit sticky top-4">
       <h1 className=" font-bold text-[#001A2D]"><span className="heading-h4 font-bold">{data.projectname}</span></h1>
@@ -339,7 +377,7 @@ function InfoCard({ data, propertyData, saved, onToggleSaved }) {
         </div>
 
         <div className={ propertyData.property === "commercial" ? "flex flex-wrap gap-2 mt-[0.5px]" : "hidden"}>
-          {data.officeUnits?.map((u) => (
+          {officeUnits.map((u) => (
             <span key={u.name} className="text-center border border-gray-300 bg-[#E8F5FF] text-[#001A2D] text-sm font-bold px-3 py-1.5 rounded-md">
               {u.name} <br />
             </span>
@@ -370,7 +408,7 @@ function InfoCard({ data, propertyData, saved, onToggleSaved }) {
 // ── Highlight Cards ───────────────────────────────────────────────────────────
 function Highlights({ data }) {
   const items = [
-    { icon: <img src={dobuleBad} size={18} className="text-blue-600 w-10 h-10" />, label: "Configuration", value: data.unitData?.map((u) => u.specs.bhk).join(", ") || data.propertyType?.join(", ") },
+    { icon: <img src={dobuleBad} size={18} className="text-blue-600 w-10 h-10" />, label: "Configuration", value: data.unitData?.map((u) => u.specs.bhk).join(", ") || (Array.isArray(data.propertyType) ? data.propertyType.join(", ") : data.propertyType) },
     { icon: <img src={area} size={18} className="text-blue-600 w-10 h-10" />, label: "Area (Sq.Ft.)", value: data.unitData?.[0]?.specs?.areaMin ? `${data.unitData[0].specs.areaMin}+` : "—" },
     { icon: <img src={Status} size={18} className="text-blue-600 w-10 h-10" />, label: "Status", value: data.availabestatus },
     { icon: <img src={buldingIcon} size={18} className="text-blue-600 w-10 h-10" />, label: "Property Type", value: data.property ? data.property.charAt(0).toUpperCase() + data.property.slice(1) + " Apartment" : "Residential Apartment" },
@@ -689,7 +727,7 @@ function UnitTable({ unitData, propertyData }) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-            {unitData.map((u, i) => (
+            {unitData?.map((u, i) => (
               <tr key={i} className=" transition-colors">
                 <td className="px-4 py-3 font-medium text-gray-800">{u.specs.bhk}</td>
                 <td className="px-4 py-3 text-gray-600">
@@ -979,7 +1017,7 @@ useEffect(() => {
   const fetchproperty = async () => {
     try {
       const res = await getPropertyByRera(npxid)
-      const data = res.data
+      const data = normalizePropertyData(res.data)
       console.log(data, 'property details');
       setPropertyData(data);
       setprojectOwners(data.owner.mobile)
@@ -1118,7 +1156,7 @@ useEffect(() => {
                     ["Furnishing", d.furnishing],
                     ["Ownership", d.ownership],
                     ["Property Age", d.propertyage],
-                    ["Water Source", d.watersource?.join(", ")],
+                    ["Water Source", Array.isArray(d.watersource) ? d.watersource.join(", ") : d.watersource],
                   ].map(([label, value]) => value ? (
                     <div key={label} className="flex justify-between gap-2">
                       <span className="paragraph-color flex-shrink-0">{label}</span>

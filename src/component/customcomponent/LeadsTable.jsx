@@ -19,7 +19,7 @@ const LeadsTable = ({ data }) => {
   }));
 
    const handleResponse = (id, item) => {
-    navigate(`/mybrandsdoor/all_listings/responce/${id}`, {
+    navigate(`/myindiadeals/all_listings/responce/${id}`, {
       state: item
     });
     };
