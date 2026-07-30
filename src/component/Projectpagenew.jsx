@@ -16,9 +16,10 @@ import {
   Bath,
   Compass,
 } from "lucide-react";
-import { createLead, createLeadMessage, getCampainbyId, getPropertyByRera, getUserShortlist, toggleShortlist, toggleViewed, toggleConnected } from "../api/api";
+import { createLead, createLeadMessage, getCampainsByProjectId, getPropertyByRera, getUserShortlist, toggleShortlist, toggleViewed, toggleConnected } from "../api/api";
 import { useParams } from "react-router-dom";
 import Unitsavailble from "./customcomponent/Unitsavailble";
+import SellerCarousel from "./customcomponent/SellerCarousel";
 import { useDispatch, useSelector } from "react-redux";
 import { setProperty } from "./Redux/propertyidSlice";
 import Seo from "./Seo";
@@ -956,6 +957,7 @@ export default function PropertyDetailPage() {
   const [leadModel, setLeadModel] = useState(false);
   const [projectOwners,setprojectOwners] = useState('');
   const [isSaved, setIsSaved] = useState(false);
+  const [campainadd, setCampainadd] = useState([]);
   const { slug } = useParams();
   const npxid = slug.split("npxid-")[1];
   const user = useSelector((state) => state.user);
@@ -968,8 +970,12 @@ export default function PropertyDetailPage() {
 
   useEffect(() => {
     fetchproperty()
-    getcampaindetails(npxid)
   }, [npxid]);
+
+  useEffect(() => {
+    if (!propertyData?._id) return;
+    getcampaindetails(propertyData._id)
+  }, [propertyData?._id]);
 
 
 useEffect(() => {
@@ -997,15 +1003,10 @@ useEffect(() => {
 }, [propertyData]);
 
 
-  const getcampaindetails = async (npxid) => {
+  const getcampaindetails = async (projectId) => {
     try {
-      const res = await getCampainbyId(npxid);
-      //  console.log(res,'26');
-      //  const data = res.data.data[0];
-      //  console.log(data,'33');
-
-      console.log(res, 'campaign details');
-
+      const res = await getCampainsByProjectId(projectId);
+      setCampainadd(res.data?.data || []);
     } catch (err) {
       console.error(err);
 
@@ -1133,6 +1134,12 @@ useEffect(() => {
             <div className="py-6 border-b border-gray-200">
               <LocationSection locatadvance={d.locatadvance} address={d.location?.[0]?.Address} />
             </div>
+
+            {campainadd.length > 0 && (
+              <div className="py-6 border-b border-gray-200">
+                <SellerCarousel sellers={campainadd} />
+              </div>
+            )}
 
             <div className="py-6 border-b border-gray-200">
               <FAQSection faq={d.faq} />

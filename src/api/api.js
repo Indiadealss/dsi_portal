@@ -220,6 +220,11 @@ export const getAllCampains = async () => {
   return API.get(`/campain/`);
 };
 
+// projectId is the property's Mongo _id — returns every campaign/broker running for that project.
+export const getCampainsByProjectId = async (projectId) => {
+  return API.get(`/campain/${projectId}`);
+};
+
 
 // ---- Settings dashboard (Notifications, Privacy, Login, Subscription, ----
 // ---- Payment, Language, Appearance) ----
