@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import logo from "../Images/logo.svg";
 import { useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
@@ -45,6 +45,18 @@ const Navbar = () => {
     "Contact Us",
   ];
   const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  useEffect(() => {
+    if (!profileOpen) return;
+    const handleClickOutside = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [profileOpen]);
 
   const { location } = useLocationContext();
 
@@ -278,7 +290,7 @@ const Navbar = () => {
               </div>
             </div>
             {user.loggedIn ? (
-              <div className="relative">
+              <div className="relative" ref={profileRef}>
                 <div
                   className="flex items-center gap-1 cursor-pointer"
                   onClick={() => setProfileOpen(!profileOpen)}
@@ -320,6 +332,7 @@ const Navbar = () => {
                           key={item.key || index}
                           className={`px-4 py-2 hover:bg-gray-100 text-sm ${item.danger ? "text-red-500" : "text-gray-700"
                             }`}
+                          onClick={() => setProfileOpen(false)}
                         >
                           {item.label}
                         </div>

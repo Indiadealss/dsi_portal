@@ -1245,13 +1245,13 @@ const CSS = `
 /* ------------------------------------------------------------------ */
 
 @media (max-width: 1280px) {
-  .layout { grid-template-columns: 240px 1fr 320px; }
+  .layout { grid-template-columns: 1fr 320px; }
   .documents-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 1100px) {
-  .layout { grid-template-columns: 220px 1fr; }
-  .right-sidebar { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; position: static; }
+  .layout { grid-template-columns: 1fr; }
+  .right-sidebar { flex-direction: row; flex-wrap: wrap; position: static; }
   .right-sidebar > .card { flex: 1 1 260px; }
   .verification-layout { grid-template-columns: 260px 1fr; }
 }
