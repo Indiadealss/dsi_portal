@@ -5,27 +5,20 @@ import Aanand from '../Images/Ananad.jpg'
 
 const Itteam = () => {
     const teamData = [
-        {
-            id: 1,
-            name: "Jwala Prasad Dubey",
-            role: "IT Head",
-            image: JwalaPrasadDubey,
-            linkedin: "#"
-        },
-        {
-            id: 3,
-            name: "Aanand Singh",
-            role: "Graphics Designer",
-            image: Aanand,
-            linkedin: "#"
-        },
-        {
-            id: 4,
-            name: "Keshav Yadav",
-            role: "Full Stack Devloper (IT)",
-            image: Keshav,
-            linkedin: "#"
-        }
+        // {
+        //     id: 1,
+        //     name: "Jwala Prasad Dubey",
+        //     role: "IT Head",
+        //     image: JwalaPrasadDubey,
+        //     linkedin: "#"
+        // // },
+        // {
+        //     id: 1,
+        //     name: "Keshav Yadav",
+        //     role: "Full Stack Devloper",
+        //     image: Keshav,
+        //     linkedin: "#"
+        // }
     ];
   return (
     <div>

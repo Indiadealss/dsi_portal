@@ -19,47 +19,19 @@ const Salesteam = () => {
             image: Ravie,
             linkedin: "#"
         },
-        {
-            id: 5,
-            name: "Rohit Sharma",
-            role: "Assistant Manager-sales",
-            image: rohitBhia,
-            linkedin: "#"
-        },
 
         {
-            id: 6,
+            id: 2,
             name: "Saurabh Kumar",
             role: "Assistant Manager-Sales",
             image: saurabh,
 
         },
         {
-            id: 7,
-            name: "Anshika Rai",
-            role: "Sales corrdinator",
-            image: Anshika,
-            linkedin: "#"
-        },
-        {
-            id: 8,
-            name: "Mahak Shukla",
-            role: "Sales coordinator",
-            image: Mehak,
-            linkedin: "#"
-        },
-        {
-            id: 9,
+            id: 3,
             name: "Gulnar Farheen",
             role: "Sales coordinator",
             image: Gulnar,
-            linkedin: "#"
-        },
-        {
-            id: 10,
-            name: "Shilpy",
-            role: "Sales coordinator",
-            image: Shilpy,
             linkedin: "#"
         },
     ];
