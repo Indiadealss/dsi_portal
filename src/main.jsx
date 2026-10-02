@@ -11,6 +11,9 @@ import '@fontsource/manrope'; // Default weight 400
 import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/700.css';
 import { LocationProvider } from "./component/LocationContext";
+import { initImageBlurLoader } from "./utils/imageBlurLoader";
+
+initImageBlurLoader();
 
 // window.onerror = function (msg, url, line, col, error) {
 //   document.body.innerHTML = `

@@ -1,5 +1,29 @@
 @import "tailwindcss";
 
+/* Blur-up placeholder for images still loading (toggled by utils/imageBlurLoader.js) */
+/* base layer so Tailwind transition-* / hover utilities on images still win */
+@layer base {
+  img {
+    transition: filter 0.45s ease;
+  }
+}
+
+img.img-loading {
+  filter: blur(14px);
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: img-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes img-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  img.img-loading { animation: none; }
+}
+
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
