@@ -1,27 +1,32 @@
 @import "tailwindcss";
 
-/* Blur-up placeholder for images still loading (toggled by utils/imageBlurLoader.js) */
-/* base layer so Tailwind transition-* / hover utilities on images still win */
-@layer base {
-  img {
-    transition: filter 0.45s ease;
-  }
+/* Image loading states (toggled by utils/imageBlurLoader.js):
+   img-loading -> soft shimmer placeholder while downloading
+   img-reveal  -> gentle fade + de-blur once the image has arrived */
+img.img-loading {
+  background-color: #eef0f3;
+  background-image: linear-gradient(90deg, #eef0f3 0%, #f7f8fa 50%, #eef0f3 100%);
+  background-size: 200% 100%;
+  animation: img-shimmer 1.6s ease-in-out infinite;
 }
 
-img.img-loading {
-  filter: blur(14px);
-  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-  background-size: 200% 100%;
-  animation: img-shimmer 1.2s ease-in-out infinite;
+img.img-reveal {
+  animation: img-reveal 0.7s ease-out both;
 }
 
 @keyframes img-shimmer {
-  from { background-position: 200% 0; }
-  to { background-position: -200% 0; }
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@keyframes img-reveal {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   img.img-loading { animation: none; }
+  img.img-reveal { animation-duration: 0.01ms; }
 }
 
 

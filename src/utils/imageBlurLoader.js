@@ -1,13 +1,14 @@
-// Site-wide blur-up for images: every <img> that is still downloading gets the
-// `img-loading` class (blurred + shimmer placeholder, see index.css) and loses it
-// once it has loaded, so nothing ever shows up as an empty box.
-// Opt out on a specific image with `data-no-blur`.
+// Site-wide image loading states: every <img> that is still downloading gets the
+// `img-loading` class (soft shimmer placeholder, see index.css) so nothing shows up
+// as an empty box; once it loads it swaps to `img-reveal` (gentle fade + de-blur).
+// Cached images skip both. Opt out on a specific image with `data-no-blur`.
 
 const mark = (img) => {
   if (img.hasAttribute("data-no-blur")) return;
   if (img.complete && img.naturalWidth > 0) {
     img.classList.remove("img-loading");
   } else {
+    img.classList.remove("img-reveal");
     img.classList.add("img-loading");
   }
 };
@@ -23,11 +24,22 @@ export const initImageBlurLoader = () => {
   window.__imgBlurLoader = true;
 
   // load/error don't bubble, so listen in the capture phase
-  const done = (e) => {
+  const loaded = (e) => {
+    const img = e.target;
+    if (img?.tagName !== "IMG" || !img.classList.contains("img-loading")) return;
+    img.classList.remove("img-loading");
+    img.classList.add("img-reveal");
+  };
+  const failed = (e) => {
     if (e.target?.tagName === "IMG") e.target.classList.remove("img-loading");
   };
-  document.addEventListener("load", done, true);
-  document.addEventListener("error", done, true);
+  // drop the reveal class afterwards so it can't clash with the image's own animations
+  const revealed = (e) => {
+    if (e.animationName === "img-reveal") e.target.classList.remove("img-reveal");
+  };
+  document.addEventListener("load", loaded, true);
+  document.addEventListener("error", failed, true);
+  document.addEventListener("animationend", revealed, true);
 
   new MutationObserver((mutations) => {
     for (const m of mutations) {
