@@ -371,6 +371,17 @@ export const approveProperty = (id) =>
 export const rejectProperty = (id, reason = "") =>
   API.put(`/property/admin/${id}/reject`, { reason });
 
+// Admin panel — platform-wide data (admin role only, enforced by the backend)
+export const adminApi = {
+  getStats: () => API.get("/admin/stats"),
+  getProperties: (params) => API.get("/admin/properties", { params }),
+  setPropertyStatus: (id, status) => API.put(`/admin/properties/${id}/status`, { status }),
+  deleteProperty: (id) => API.delete(`/admin/properties/${id}`),
+  getLeads: (params) => API.get("/admin/leads", { params }),
+  getUsers: (params) => API.get("/admin/users", { params }),
+  setUserRole: (id, role) => API.put(`/admin/users/${id}/role`, { role }),
+};
+
 // export const submitProperty = createAsyncThunk(
 //   "property/submitProperty",
 //   async (propertyData, { rejectWithValue }) => {

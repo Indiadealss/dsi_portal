@@ -16,6 +16,7 @@ import ProfileVerificationPage from "./Profilevarification";
 import CreateBlog from "./Createblog";
 import BusinessProfile from "./BusinessProfile";
 import PropertyApprovals from "./PropertyApprovals";
+import AdminPanel from "./AdminPanel";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -105,6 +106,7 @@ const Icon = ({ name, size = 20, color = "currentColor" }) => {
 // Campaign / Create Blog / Property Approvals only show up for admins —
 // regular users manage their own listings, not marketing or platform-wide moderation.
 const BASE_NAV = [
+  { id: "admin",        label: "Admin Panel",          icon: "shield",      adminOnly: true },
   { id: "dashboard",    label: "Dashboard",            icon: "listing"      },
   { id: "postProperty", label: "Post Property",        icon: "plus"         },
   { id: "listings",     label: "My Listings",          icon: "layers"       },
@@ -294,6 +296,7 @@ const [settingsPage, setSettingsPage] = useState("main");
           {isAdmin && activeNav === 'campaign' && <CampaignManagementDashboard  setActiveNav={setActiveNav} />}
           {isAdmin && activeNav === 'createcampaign' && <CreateCampaignForm setActiveNav={setActiveNav}/>}
           {isAdmin && activeNav === 'approvals' && <PropertyApprovals />}
+          {isAdmin && activeNav === 'admin' && <AdminPanel setActiveNav={setActiveNav} />}
           {/* {activeNav === 'settings' && <Settingdashboard />} */}
           {activeNav === 'help' && <Helpandsupport />}
           {activeNav === 'messages' && <Messagedashbord />}
