@@ -12,8 +12,10 @@ import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/700.css';
 import { LocationProvider } from "./component/LocationContext";
 import { initImageBlurLoader } from "./utils/imageBlurLoader";
+import { initContentReveal } from "./utils/contentReveal";
 
 initImageBlurLoader();
+initContentReveal();
 
 // window.onerror = function (msg, url, line, col, error) {
 //   document.body.innerHTML = `

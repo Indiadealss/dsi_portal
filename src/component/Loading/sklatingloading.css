@@ -3,10 +3,12 @@
   height: 1em;
   position: relative;
   overflow: hidden;
-  background-color: #dddbdd;
+  /* plain white placeholder: keeps the layout's space while data loads, no grey boxes */
+  background-color: transparent;
 }
 
 .skeleton-box::after {
+  display: none;
   position: absolute;
   top: 0;
   left: 0;

@@ -1,6 +1,6 @@
 // Site-wide image loading states: every <img> that is still downloading gets the
-// `img-loading` class (soft shimmer placeholder, see index.css) so nothing shows up
-// as an empty box; once it loads it swaps to `img-reveal` (gentle fade + de-blur).
+// `img-loading` class (kept invisible, see index.css) so no half-drawn image shows;
+// once it loads it swaps to `img-reveal` (gentle fade + de-blur).
 // Cached images skip both. Opt out on a specific image with `data-no-blur`.
 
 const mark = (img) => {
