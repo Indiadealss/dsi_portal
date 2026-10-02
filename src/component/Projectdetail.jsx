@@ -694,7 +694,7 @@ try {
                 <IoIosInformationCircle className='text-3xl text-gray-500' />
               </div>
             </div>
-            <PdfSlider pdfUrl={brochurePdf} />
+            <PdfSlider pdfUrl={brochurePdf} onDownload={() => setLeadModel(true)} />
           </div>
         </div>
 

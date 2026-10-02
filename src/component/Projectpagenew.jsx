@@ -641,15 +641,9 @@ function FloorPlanBrochure({ images, propertyData,setLeadModel, cachedPdf}) {
       )}
 
       {tab === "brochure" && (
-        <div className="flex flex-col items-start gap-4 ml-[auto] mr-[auto]">
+        <div className="w-full">
           {cachedPdf ? (
-            <div className="relative w-full max-w-2xl  rounded-xl p-8 flex flex-col items-center gap-4">
-              <PdfSlider pdfUrl={cachedPdf} />
-              <button onClick={() => setLeadModel(true)}
-                className="absolute z-21 top-100 left-10 flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-3 py-3 rounded-full hover:bg-blue-700 transition-all">
-                <Download size={24} />
-              </button>
-            </div>
+            <PdfSlider pdfUrl={cachedPdf} onDownload={() => setLeadModel(true)} />
           ) : (
             <p className="text-gray-500 text-sm">No brochure available.</p>
           )}
@@ -1111,7 +1105,7 @@ useEffect(() => {
         {/* Two-column: Main Content + Sidebar */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Main Content */}
-          <div className="flex-1 flex flex-col gap-2">
+          <div className="flex-1 min-w-0 flex flex-col gap-2">
             <div className="mb-6">
               <Highlights data={d} />
             </div>
