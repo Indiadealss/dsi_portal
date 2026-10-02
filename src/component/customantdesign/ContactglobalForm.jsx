@@ -46,6 +46,9 @@ const ContactglobalForm = () => {
     if (!formData.Name.trim())
       newErrors.Name = "Name is required";
 
+    if (!formData.property_id)
+      newErrors.projectname = "Select a project from the list";
+
     if (!formData.PhoneNumber) newErrors.PhoneNumber = "PhoneNumber is required";
     else if (!/^\d{10}$/.test(formData.PhoneNumber))
       newErrors.PhoneNumber = "Enter valid 10-digit PhoneNumber";
@@ -67,6 +70,8 @@ const ContactglobalForm = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+      // typing a new name invalidates the previously selected project
+      ...(name === "projectname" && { property_id: "" }),
     }));
 
     if (name === "projectname") {
@@ -93,6 +98,7 @@ const ContactglobalForm = () => {
     setFormData((prev) => ({
       ...prev,
       projectname: project.projectname,
+      property_id: project._id,
     }));
 
     setShowSuggestions(false);
@@ -224,6 +230,9 @@ const ContactglobalForm = () => {
       {/* Project */}
       <div className="relative">
         <label className="text-[#23364B] font-medium">Project</label>
+        {errors.projectname && (
+          <p className="text-red-500 text-xs">{errors.projectname}</p>
+        )}
 
         <input
           type="text"
