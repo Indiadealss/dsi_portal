@@ -64,8 +64,7 @@ export const Postbasicdetailsform = ({ setValidator }) => {
         ]
 
         const projectAllowedMobiles = [
-            '+916299443754',
-            '+919069032378'
+            '7906518272'
         ];
     
         const commercialButton = [
