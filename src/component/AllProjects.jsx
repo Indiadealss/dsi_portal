@@ -15,6 +15,7 @@ import refresh from '../Images/refresh.svg';
 import { getAlltyprojects, searchaddress } from "../api/api";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
+import { toPlainText } from "../utils/markdownText";
 
 const AllProjects = () => {
 
@@ -1111,7 +1112,7 @@ console.log(locationName);
                   </p>
 
                   <p className="text-gray-600 text-xs leading-4 mt-[10px] line-clamp-2">
-                    {project.description}
+                    {toPlainText(project.description)}
                   </p>
 
                   <div className="flex flex-wrap gap-1 lg:gap-4 mt-4 lg:mt-auto">

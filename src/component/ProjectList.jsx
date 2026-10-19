@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Construction,
 } from "lucide-react";
+import { toPlainText } from "../utils/markdownText";
 
 const ProjectList = () => {
   const projects = [
@@ -89,7 +90,7 @@ const ProjectList = () => {
 
               {/* Description */}
               <p className="text-gray-600 text-[15px] leading-7 mt-3 max-w-[650px]">
-                {project.description}
+                {toPlainText(project.description)}
               </p>
 
               {/* Tags */}

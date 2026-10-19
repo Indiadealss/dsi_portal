@@ -12,6 +12,7 @@ import { GrSubtractCircle } from 'react-icons/gr';
 import computerTable from '../Images/computerTable.avif';
 import { MdEdit } from "react-icons/md";
 import shop from '../Images/shop.jpeg'
+import { parseProjectDoc } from '../utils/parseProjectDoc';
 const onChange = (date, dateString) => {
   // console.log(date, dateString);
 };
@@ -64,6 +65,8 @@ export const Profileproperty = ({ setValidator }) => {
   const [saftyFeature, setSaftyFeature] = useState([])
 
   const [faqText, setFaqText] = useState(propertyData.faqText || "");
+  // FAQ question from Word (or an earlier custom one); "" = the default "Why you should consider <name>?"
+  const [faqQuestion, setFaqQuestion] = useState("");
 
   const [unitType, setUnitType] = useState("");  // Office / Shop / etc.
   const [entries, setEntries] = useState([]);    // stores size + price pairs
@@ -116,12 +119,60 @@ export const Profileproperty = ({ setValidator }) => {
         Array.isArray(answer) ? answer.join("\n") : answer || ""
       );
     }
+    // keep a custom question (e.g. imported from Word); the default one is rebuilt from the name
+    const savedQuestion = propertyData?.faq?.[0]?.question || "";
+    if (!faqQuestion && savedQuestion && savedQuestion.trim().toLowerCase() !== defaultFaqQuestion(propertyData.projectname).toLowerCase()) {
+      setFaqQuestion(savedQuestion);
+    }
   }, [propertyData]);
 
 
   useEffect(() => {
     console.log("Redux Updated Data:", propertyData.availabestatus);
   }, [propertyData]);
+
+  // ── Import description + FAQ from a Word file (projects only) ──
+  const [docImporting, setDocImporting] = useState(false);
+  const [docImportMsg, setDocImportMsg] = useState(null);
+
+  const handleDocImport = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+
+    setDocImporting(true);
+    setDocImportMsg(null);
+    try {
+      const parsed = await parseProjectDoc(file);
+      if (!parsed.description && !parsed.faqText) {
+        setDocImportMsg({ type: 'error', text: 'No text found in this file.' });
+        return;
+      }
+      if ((description || faqText) && !window.confirm('Replace the current description and FAQ with the content from this file?')) {
+        return;
+      }
+      if (parsed.description) setDescription(parsed.description);
+      if (parsed.faqText) setFaqText(parsed.faqText);
+      if (parsed.faqQuestion) setFaqQuestion(parsed.faqQuestion);
+
+      const points = parsed.faqText ? parsed.faqText.split('\n').length : 0;
+      setDocImportMsg(
+        parsed.foundFaqHeading
+          ? { type: 'ok', text: `Imported description and ${points} FAQ point${points === 1 ? '' : 's'} from ${file.name}. Check and edit below if needed.` }
+          : parsed.foundFaqSection
+            ? { type: 'warn', text: `Imported the description (up to the FAQ section). No "Why you should consider …" question found in the FAQs — add the FAQ points manually.` }
+            : { type: 'warn', text: `No "Why you should consider …" heading found, so the whole file went into the description. Add the FAQ points manually.` }
+      );
+    } catch (err) {
+      setDocImportMsg({ type: 'error', text: err.message || 'Could not read this file.' });
+    } finally {
+      setDocImporting(false);
+    }
+  };
+
+  function defaultFaqQuestion(projectname) {
+    return `Why you should consider ${projectname}?`;
+  }
 
   const buildFaqFromTextarea = (projectname, faqText) => {
 
@@ -132,7 +183,7 @@ export const Profileproperty = ({ setValidator }) => {
 
     return [
       {
-        question: `Why you should consider ${projectname}?`,
+        question: faqQuestion.trim() || defaultFaqQuestion(projectname),
         answer: points
       }
     ];
@@ -417,6 +468,7 @@ const handleBuildPlotarea = (newUnit) => {
     coverdParking,
     uncoverdParking,
     faqText,
+    faqQuestion,
     description,
     possession,
     numCabin,
@@ -732,7 +784,7 @@ const handleBuildPlotarea = (newUnit) => {
     if (setValidator) {
       setValidator(validateForm);
     }
-  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, availabestatus, description, numFlats, projectTotalFloor, faqText]);
+  }, [noBedroom, noBalconies, noBathroom, ageProperty, ownership, availabestatus, description, numFlats, projectTotalFloor, faqText, faqQuestion]);
 
   function validateForm() {
     if (propertyDataFirst.purpose != 'Project' && propertyDataFirst.property != 'commercial' && propertyDataFirst.propertyType != 'plotLand' && !noBedroom) {
@@ -2073,7 +2125,33 @@ const handleBuildPlotarea = (newUnit) => {
         )}
       </div>
       <div className={propertyDataFirst.purpose === 'Project' ? '' : 'hidden'}>
+        {/* Fill "What makes your property unique" + FAQ points from a Word file */}
+        <div className='my-5 rounded-lg border border-dashed border-gray-300 bg-gray-50 p-4'>
+          <p className='text-sm font-medium text-gray-800'>Import content from Word</p>
+          <p className='mt-1 text-xs text-gray-500'>
+            Upload a .docx — text above the "Why you should consider …" heading (numbered like "1. Why…" is fine)
+            goes to the description with its formatting, the heading becomes the FAQ question and each line below it an FAQ point.
+          </p>
+          <label className={`mt-3 inline-flex h-9 cursor-pointer items-center rounded-lg border border-blue-500 px-3 text-sm font-semibold text-blue-600 hover:bg-blue-50 ${docImporting ? 'pointer-events-none opacity-50' : ''}`}>
+            <input type='file' accept='.docx' className='hidden' onChange={handleDocImport} disabled={docImporting} />
+            {docImporting ? 'Reading…' : 'Upload Word file'}
+          </label>
+          {docImportMsg && (
+            <p className={`mt-2 text-xs ${docImportMsg.type === 'error' ? 'text-red-600' : docImportMsg.type === 'warn' ? 'text-amber-700' : 'text-green-600'}`}>
+              {docImportMsg.text}
+            </p>
+          )}
+        </div>
+
         <h3><span className='text-xl font-medium'>Why You Should Consider {propertyDataFirst.projectname}</span></h3>
+        <label className='mt-3 block text-xs font-medium text-gray-500'>FAQ question</label>
+        <input
+          type='text'
+          value={faqQuestion}
+          onChange={(e) => setFaqQuestion(e.target.value)}
+          placeholder={defaultFaqQuestion(propertyDataFirst.projectname)}
+          className='mt-1 w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 outline-none focus:border-blue-500'
+        />
         <div>
           <textarea id="message" rows="5" value={faqText} onInput={(e) => setFaqText(e.currentTarget.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500     my-5" placeholder={`Enter FAQ points (one per line)
             Example:

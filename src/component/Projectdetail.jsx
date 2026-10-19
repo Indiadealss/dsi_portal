@@ -30,6 +30,7 @@ import Seo from './Seo';
 import { setTitle } from './Redux/titleSlice';
 import MobileGallery from './customcomponent/MobileGallery';
 import Customenquiryform from './customcomponent/Customenquiryform';
+import InlineMarkdown from './customcomponent/InlineMarkdown';
 
 
 
@@ -707,7 +708,7 @@ try {
 
             <ul className="list-disc list-inside text-gray-600 space-y-1">
               {firstThree.map((point, i) => (
-                <li key={i}>{point}</li>
+                <li key={i}><InlineMarkdown text={point} /></li>
               ))}
             </ul>
 
@@ -757,12 +758,12 @@ try {
                 <span onClick={() => setOpen(false)} className='cursor-pointer text-xl'><RxCross2 /></span>
               </div>
               <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                {propertys.faq.question}
+                {propertys?.faq?.[0]?.question}
               </h3>
 
               <ul className="list-disc list-inside text-gray-600 space-y-1 max-h-80 overflow-y-auto">
                 {remaining.map((point, index) => (
-                  <li key={index}>{point}</li>
+                  <li key={index}><InlineMarkdown text={point} /></li>
                 ))}
               </ul>
 
@@ -782,7 +783,7 @@ try {
 
             <ul className="list-disc list-inside text-gray-600 space-y-1 max-h-80 overflow-y-auto">
               {remaining.map((point, index) => (
-                <li key={index}>{point}</li>
+                <li key={index}><InlineMarkdown text={point} /></li>
               ))}
             </ul>
 
