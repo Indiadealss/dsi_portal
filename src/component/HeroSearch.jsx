@@ -335,7 +335,10 @@ const HeroSearch = () => {
     setProjectInut(value)
   }
   return (
-   <div className="relative w-full h-[40vh] md:h-[52vh] overflow-hidden">
+   // No overflow-hidden here: it clipped the search suggestions dropdown, which opens
+   // below the search bar near the bottom of the hero (Swiper already clips the slides).
+   // z-40 keeps the dropdown above the sections below, but under the sticky navbar (z-50).
+   <div className="relative z-40 w-full h-[40vh] md:h-[52vh]">
 
   <Swiper
   modules={[Autoplay ]}
