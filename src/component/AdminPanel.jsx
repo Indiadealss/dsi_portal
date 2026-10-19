@@ -219,7 +219,13 @@ function Properties({ initialFilters, goTo }) {
   };
 
   const onReject = (p) => {
-    const reason = window.prompt(`Reason for rejecting "${p.projectname}"?`, "");
+    // bulk-uploaded projects are deleted by the backend on reject
+    const reason = window.prompt(
+      p.bulkUploaded
+        ? `"${p.projectname}" was bulk uploaded — rejecting will DELETE it permanently.\nReason (optional):`
+        : `Reason for rejecting "${p.projectname}"?`,
+      ""
+    );
     if (reason === null) return;
     run(p._id, () => rejectProperty(p._id, reason));
   };

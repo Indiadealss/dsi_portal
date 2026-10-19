@@ -354,6 +354,14 @@ export const uploadVideo = (id, formData) =>
 
 
 
+// Bulk project upload (basic details only — media/content are added later via edit)
+// dryRun = true checks every row on the server without saving anything
+export const bulkCreateProjects = (rows, dryRun = false) =>
+  API.post(`/property/bulk/projects`, { rows, dryRun });
+
+export const getBulkProjects = (page = 1, limit = 20, status = "all", search = "") =>
+  API.get(`/property/bulk/projects`, { params: { page, limit, status, search } });
+
   export const publishProperty = (id,purpose) =>
   API.put(`/property/publishProperty/${id}`,{ purpose });
 

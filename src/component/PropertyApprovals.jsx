@@ -220,9 +220,10 @@ export default function PropertyApprovals() {
                                 <button
                                   disabled={busyId === item._id}
                                   onClick={() => submitReject(item._id)}
+                                  title={item.bulkUploaded ? "Bulk-uploaded projects are deleted when rejected" : undefined}
                                   className="px-4 h-10 rounded-lg bg-[#DC2626] text-white text-sm font-semibold hover:bg-[#B91C1C] transition-colors disabled:opacity-60"
                                 >
-                                  Confirm Reject
+                                  {item.bulkUploaded ? "Reject & Delete" : "Confirm Reject"}
                                 </button>
                                 <button
                                   onClick={() => setRejectingId(null)}
@@ -420,9 +421,10 @@ function PropertyDetailModal({
                     <button
                       disabled={isBusy}
                       onClick={onSubmitReject}
+                      title={item.bulkUploaded ? "Bulk-uploaded projects are deleted when rejected" : undefined}
                       className="px-4 h-10 rounded-lg bg-[#DC2626] text-white text-sm font-semibold hover:bg-[#B91C1C] transition-colors disabled:opacity-60"
                     >
-                      Confirm Reject
+                      {item.bulkUploaded ? "Reject & Delete" : "Confirm Reject"}
                     </button>
                     <button
                       onClick={onCancelReject}

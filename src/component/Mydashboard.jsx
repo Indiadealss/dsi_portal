@@ -17,6 +17,8 @@ import CreateBlog from "./Createblog";
 import BusinessProfile from "./BusinessProfile";
 import PropertyApprovals from "./PropertyApprovals";
 import AdminPanel from "./AdminPanel";
+import BulkProjectUpload from "./BulkProjectUpload";
+import { isProjectAdmin } from "../utils/permissions";
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  API  — replace the URL with your real endpoint.
@@ -97,6 +99,7 @@ const Icon = ({ name, size = 20, color = "currentColor" }) => {
     dots:         <svg style={s} viewBox="0 0 24 24" {...p}><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>,
     blog:         <svg style={s}  viewBox="0 0 40 40"  {...p}><circle cx="20"  cy="20"  r="18"  fill="white"  stroke="#B8B8B8"  /><line    x1="20"  y1="13"  x2="20"  y2="27" stroke="#4C555C" strokeWidth="2.5"  strokeLinecap="round"/><line x1="13"  y1="20" x2="27"  y2="20" stroke="#4C555C" strokeWidth="3.5" strokeLinecap="round"/>
 </svg>,
+    upload:       <svg style={s} viewBox="0 0 24 24" {...p}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>,
     approve:      <svg style={s} viewBox="0 0 24 24" {...p}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
   };
   return map[name] || null;
@@ -109,6 +112,7 @@ const BASE_NAV = [
   { id: "admin",        label: "Admin Panel",          icon: "shield",      adminOnly: true },
   { id: "dashboard",    label: "Dashboard",            icon: "listing"      },
   { id: "postProperty", label: "Post Property",        icon: "plus"         },
+  { id: "bulkupload",   label: "Bulk Project Upload",  icon: "upload",      projectAdminOnly: true },
   { id: "listings",     label: "My Listings",          icon: "layers"       },
   // { id: "saved",        label: "Saved Properties",     icon: "bookmark"     },
   { id: "leads",        label: "Leads & Inquiries",    icon: "users"        },
@@ -160,7 +164,8 @@ const [settingsPage, setSettingsPage] = useState("main");
     return () => window.clearInterval(t);
   }, [user.id]);
 
-  const NAV = BASE_NAV.filter((item) => !item.adminOnly || isAdmin);
+  const canBulkUpload = isProjectAdmin(user.mobile);
+  const NAV = BASE_NAV.filter((item) => (!item.adminOnly || isAdmin) && (!item.projectAdminOnly || canBulkUpload));
 
   // "createcampaign" is a sub-view reached from inside the Campaign tab —
   // it's a valid destination even though it has no entry in BASE_NAV.
@@ -172,7 +177,7 @@ const [settingsPage, setSettingsPage] = useState("main");
     if (!NAV.some((item) => item.id === activeNav) && !EXTRA_VALID_TABS.includes(activeNav)) {
       setActiveNav("dashboard");
     }
-  }, [isAdmin, activeNav]);
+  }, [isAdmin, canBulkUpload, activeNav]);
 
   const nav = (
     <nav style={{ display: "flex", flexDirection: "column", gap: 3 }}>
@@ -297,6 +302,7 @@ const [settingsPage, setSettingsPage] = useState("main");
           {isAdmin && activeNav === 'createcampaign' && <CreateCampaignForm setActiveNav={setActiveNav}/>}
           {isAdmin && activeNav === 'approvals' && <PropertyApprovals />}
           {isAdmin && activeNav === 'admin' && <AdminPanel setActiveNav={setActiveNav} />}
+          {canBulkUpload && activeNav === 'bulkupload' && <BulkProjectUpload />}
           {/* {activeNav === 'settings' && <Settingdashboard />} */}
           {activeNav === 'help' && <Helpandsupport />}
           {activeNav === 'messages' && <Messagedashbord />}
