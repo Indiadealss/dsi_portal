@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 import Oppenings from './Opennings.jsx';
 import { useState } from 'react';
 import carrer from '../Images/carrers.jpg';
+import { HR_PHONE, HR_PHONE_DISPLAY } from '../utils/contact';
 
 const Carrer = () => {
 
@@ -174,6 +175,11 @@ const Carrer = () => {
 
                 <span className='font-medium text-[#313036] leading-6 text-justify'>Industry Exposure</span><br />
                 <span className='text-gray-600 leading-6 text-justify'>We maintain a collaborative, ethical, and professional work culture that encourages innovation and teamwork.</span><br /><br />
+                <span className='font-medium text-[#313036] leading-6'>Contact HR</span><br />
+                <span className='text-gray-600 leading-6'>
+                  For job openings and applications, call our HR team at{' '}
+                  <a href={`tel:${HR_PHONE}`} className='font-semibold text-[#313036] hover:underline whitespace-nowrap'>{HR_PHONE_DISPLAY}</a>
+                </span><br /><br />
                 <span className='font-bold text-xl text-[#313036] leading-6 '>Current Openings</span><br />
 
 

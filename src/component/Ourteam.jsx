@@ -3,6 +3,7 @@ import soniMam from '../Images/Soni-mam.webp';
 import saurabh from '../Images/saurabhYadav.jpg';
 import Deepusir from '../Images/DeepuSir.webp';
 import RichaMam from '../Images/richmam.webp';
+import { HR_PHONE, HR_PHONE_DISPLAY } from '../utils/contact';
 
 
 
@@ -99,7 +100,7 @@ const Ourteam = () => {
           
           <div className='shadow-xl md:mx-10 mt-10 py-3 my-10    bg-white flex flex-col md:flex-row'>
             <div>
-              <div className='   overflow-hidden ms-4'>
+              <div className='    overflow-hidden ms-4'>
                 <img src={RichaMam} alt='...' className='w-80  rounded-t-full' />
               </div>
 
@@ -107,7 +108,10 @@ const Ourteam = () => {
             </div>
 
             <div className='mt-10 ms-10'>
-              <h1 className='font-bold text-[#313036] text-xl uppercase'>HR Manager</h1><br />
+              <h1 className='font-bold text-[#313036] text-xl uppercase'>HR Manager</h1>
+              <a href={`tel:${HR_PHONE}`} className='mt-1 inline-block text-sm font-semibold text-gray-600 hover:text-[#313036] hover:underline'>
+                {HR_PHONE_DISPLAY}
+              </a><br />
               <div className='w-[85vw] lg:w-[60vw] ms-2 pe-10'>
                 <p className='text-justify text-gray-600'>
                   <span className='text-justify text-gray-600 leading-6'>
