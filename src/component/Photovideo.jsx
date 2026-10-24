@@ -4,6 +4,18 @@ import { Uploadphots } from "./Uploadphots";
 import { useDispatch, useSelector } from "react-redux";
 import { updateField } from "./Redux/propertySlice";
 import { deleteImage, deleteVideo, updateImageMeta, uploadImage, uploadVideo } from "../api/api";
+import * as XLSX from "xlsx";
+
+// "brandsdoor/1772189452456-3bhk-1500sq.ft.jpeg" -> "3bhk-1500sq.ft.jpeg" (the backend prefixes a timestamp)
+const originalName = (src = "") => {
+  const last = src.split("/").pop() || "";
+  let name = last;
+  try { name = decodeURIComponent(last); } catch { /* keep raw name */ }
+  return name.replace(/^\d+-/, "");
+};
+
+// "Floor_Plan*" / "floor plan" / "FloorPlan" all become "floorplan"
+const normHeader = (h) => String(h).toLowerCase().replace(/[^a-z0-9]/g, "");
 
 export const Photovideo = ({ propertyId }) => {
 
@@ -12,11 +24,13 @@ export const Photovideo = ({ propertyId }) => {
 
   const [videoFile, setVideoFile] = useState(propertyData.video || []);
   const [images, setImages] = useState(propertyData.images || []);
+  const [bulkResult, setBulkResult] = useState(null);
 
   const dispatch = useDispatch();
 
   const videoInputRef = useRef(null);
   const imageInputRef = useRef(null);
+  const layoutSheetRef = useRef(null);
 
   const pdfFieldOptions = [
     "Floor_Plan",
@@ -190,6 +204,104 @@ console.log("DATA:", res.data);
     }
   }
 
+  // ---------------- BULK LAYOUT FIELDS ----------------
+  // Download a sheet with one row per image (prefilled with saved values),
+  // fill it in Excel, upload it back — every matched image is saved at once.
+
+  function downloadLayoutSheet() {
+    const rows = images.map((img) => {
+      const row = { "Image ID": img._id || "", "File Name": originalName(img.src), Type: img.type || "" };
+      pdfFieldOptions.forEach((key) => {
+        row[key] = (img.fields || []).find((f) => f.key === key)?.value || "";
+      });
+      return row;
+    });
+
+    const ws = XLSX.utils.json_to_sheet(rows, { header: ["Image ID", "File Name", "Type", ...pdfFieldOptions] });
+    ws["!cols"] = [{ wch: 26 }, { wch: 36 }, { wch: 12 }, ...pdfFieldOptions.map(() => ({ wch: 18 }))];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Layouts");
+    XLSX.writeFile(wb, `layouts-${propertyData.projectname || propertyId || "project"}.xlsx`);
+  }
+
+  async function uploadLayoutSheet(e) {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+
+    setLoading(true);
+    setBulkResult(null);
+    try {
+      const wb = XLSX.read(await file.arrayBuffer());
+      const ws = wb.Sheets[wb.SheetNames[0]];
+      // raw:false keeps everything as text (Projectdetail expects string values)
+      const rawRows = XLSX.utils.sheet_to_json(ws, { defval: "", raw: false });
+
+      const fieldByHeader = Object.fromEntries(pdfFieldOptions.map((k) => [normHeader(k), k]));
+      const rows = rawRows.map((r) => {
+        const row = { fields: {} };
+        Object.entries(r).forEach(([h, v]) => {
+          const n = normHeader(h);
+          const val = String(v ?? "").trim();
+          if (n === "imageid") row.id = val;
+          else if (n === "filename") row.name = val.toLowerCase();
+          else if (n === "type") row.type = val;
+          else if (fieldByHeader[n]) row.fields[fieldByHeader[n]] = val;
+        });
+        return row;
+      });
+
+      const updated = [...images];
+      const unmatched = [];
+      const failed = [];
+      let saved = 0;
+
+      for (const [i, row] of rows.entries()) {
+        if (!row.id && !row.name) continue; // blank line
+
+        const idx = row.id
+          ? updated.findIndex((img) => img._id === row.id)
+          : updated.findIndex((img) => originalName(img.src).toLowerCase() === row.name);
+        if (idx === -1) {
+          unmatched.push(`Row ${i + 2}: ${row.id || row.name}`);
+          continue;
+        }
+
+        const img = updated[idx];
+        const hasValues = Object.values(row.fields).some(Boolean);
+        if (!hasValues && !row.type) continue; // nothing to change for this image
+
+        // sheet columns replace their keys (blank cell clears it); other keys are kept
+        const fields = [
+          ...(img.fields || [])
+            .filter((f) => f.key && !(f.key in row.fields))
+            .map((f) => ({ key: f.key, value: f.value })),
+          ...Object.entries(row.fields)
+            .filter(([, v]) => v)
+            .map(([key, value]) => ({ key, value })),
+        ];
+        const type = row.type || (hasValues ? "layout" : img.type);
+
+        try {
+          if (img._id) await updateImageMeta(propertyId, img._id, { type, fields });
+          updated[idx] = { ...img, type, fields };
+          saved++;
+        } catch (err) {
+          console.log(err);
+          failed.push(`Row ${i + 2}: ${row.id || row.name}`);
+        }
+      }
+
+      setImages(updated);
+      setBulkResult({ saved, unmatched, failed });
+    } catch (err) {
+      console.log(err);
+      setBulkResult({ saved: 0, unmatched: [], failed: [], error: "Could not read the file. Upload the .xlsx/.csv sheet downloaded above." });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // ---------------- UI ----------------
 
   return (
@@ -250,6 +362,55 @@ console.log("DATA:", res.data);
         accept="image/*,application/pdf"
         multiple
       />
+
+      {propertyData.purpose === "Project" && images.length > 0 && (
+        <div className="mt-4 mb-3 border rounded-lg p-3 bg-blue-50">
+          <p className="text-sm font-medium">Bulk layout details</p>
+          <p className="text-xs text-gray-600 mt-1">
+            Download the sheet, fill Floor_Plan, Price, super_build_area and carpet_area for each layout image,
+            then upload it. Keep the Image ID column — rows without it are matched by file name.
+          </p>
+          <div className="flex gap-2 mt-2">
+            <button
+              type="button"
+              onClick={downloadLayoutSheet}
+              className="text-xs border border-blue-500 text-blue-600 rounded px-3 py-1 bg-white"
+            >
+              Download sheet
+            </button>
+            <button
+              type="button"
+              onClick={() => layoutSheetRef.current?.click()}
+              className="text-xs bg-blue-500 text-white rounded px-3 py-1"
+            >
+              Upload filled sheet
+            </button>
+            <input
+              ref={layoutSheetRef}
+              type="file"
+              accept=".xlsx,.xls,.csv"
+              onChange={uploadLayoutSheet}
+              className="hidden"
+            />
+          </div>
+
+          {bulkResult && (
+            <div className="text-xs mt-2 space-y-1">
+              {bulkResult.error ? (
+                <p className="text-red-600">{bulkResult.error}</p>
+              ) : (
+                <p className="text-green-700">Saved layout details for {bulkResult.saved} image(s).</p>
+              )}
+              {bulkResult.unmatched.length > 0 && (
+                <p className="text-orange-600">No matching image for: {bulkResult.unmatched.join(", ")}</p>
+              )}
+              {bulkResult.failed.length > 0 && (
+                <p className="text-red-600">Failed to save: {bulkResult.failed.join(", ")}</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {images.map((img, idx) => (
 
