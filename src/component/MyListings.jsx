@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { lead } from "../api/api";
 import { useSelector } from "react-redux";
+import ExportStatusMenu from "./ExportStatusMenu";
 
 // ─── MOCK BACKEND DATA ────────────────────────────────────────────────────────
 
@@ -243,10 +244,8 @@ export default function MyListings() {
                     ? `${item.plotarea} Sq.Ft`
                     : "",
 
-              status:
-                item.availabestatus === "Ready to move"
-                  ? "Active"
-                  : "Inactive",
+              // set by the admin Activate / Deactivate action; unset means inactive
+              status: item.status === "active" ? "Active" : "Inactive",
 
               views: item.views || 0,
               leads: item.leads || 0,
@@ -325,9 +324,12 @@ export default function MyListings() {
   // Reset page on filter change
   useEffect(() => { setCurrentPage(1); }, [activeTab, typeFilter, statusFilter, cityFilter, search, sortBy, pageSize]);
 
-  // Export to Excel
-  const handleExport = () => {
-    const rows = filtered.map(l => ({
+  // Export to Excel — all of the user's listings, narrowed to the picked status
+  const handleExport = (exportStatus) => {
+    const label = { active: "Active", inactive: "Inactive" }[exportStatus];
+    const data = label ? BACKEND_LISTINGS.filter(l => l.status === label) : BACKEND_LISTINGS;
+    if (!data.length) return alert(`No ${label ? label.toLowerCase() + " " : ""}listings to export.`);
+    const rows = data.map(l => ({
       "Property ID": l.id,
       "Title": l.title,
       "Type": l.type,
@@ -346,7 +348,7 @@ export default function MyListings() {
     ws["!cols"] = colWidths.map(w => ({ wch: w }));
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "My Listings");
-    XLSX.writeFile(wb, `my-listings-${new Date().toISOString().slice(0, 10)}.xlsx`);
+    XLSX.writeFile(wb, `my-listings-${exportStatus}-${new Date().toISOString().slice(0, 10)}.xlsx`);
   };
 
   // Pagination pages array
@@ -401,11 +403,13 @@ export default function MyListings() {
             <h1 className="text-3xl sm:text-[40px] font-bold text-[#0F172A] leading-tight">My Listings</h1>
             <p className="text-base text-[#64748B] mt-1">Manage all Your properties all at one place</p>
           </div>
-          <button onClick={handleExport}
-            className="flex items-center gap-2 bg-white border border-[#D1D5DB] rounded-lg px-5 text-sm font-medium text-[#374151] hover:bg-[#F8FAFC] active:scale-95 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30 flex-shrink-0"
-            style={{ height: 48 }}>
-            <Icon.Download /> Export Report
-          </button>
+          <ExportStatusMenu
+            onExport={handleExport}
+            label="Export Report"
+            icon={<Icon.Download />}
+            buttonClassName="flex items-center gap-2 bg-white border border-[#D1D5DB] rounded-lg px-5 text-sm font-medium text-[#374151] hover:bg-[#F8FAFC] active:scale-95 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#0D6EFD]/30"
+            buttonStyle={{ height: 48 }}
+          />
         </div>
 
         {/* ── KPI CARDS ── */}

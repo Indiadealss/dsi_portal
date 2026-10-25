@@ -383,6 +383,7 @@ export const rejectProperty = (id, reason = "") =>
 export const adminApi = {
   getStats: () => API.get("/admin/stats"),
   getProperties: (params) => API.get("/admin/properties", { params }),
+  exportProperties: (params) => API.get("/admin/properties/export", { params }),
   setPropertyStatus: (id, status) => API.put(`/admin/properties/${id}/status`, { status }),
   deleteProperty: (id) => API.delete(`/admin/properties/${id}`),
   getLeads: (params) => API.get("/admin/leads", { params }),

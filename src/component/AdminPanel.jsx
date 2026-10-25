@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import * as XLSX from "xlsx";
 import { adminApi, approveProperty, rejectProperty } from "../api/api";
+import ExportStatusMenu from "./ExportStatusMenu";
 
 // Admin-only control room: platform-wide stats, every property, every lead, every user.
 // The backend (/api/admin/*) re-checks the admin role on every request.
@@ -235,6 +237,42 @@ function Properties({ initialFilters, goTo }) {
     run(p._id, () => adminApi.deleteProperty(p._id));
   };
 
+  // exports every match (not just this page); search / approval / owner filters still apply
+  const onExport = async (exportStatus) => {
+    try {
+      const res = await adminApi.exportProperties({ status: exportStatus, search: q, approvalStatus, owner });
+      const rows = res.data.data.map((p) => {
+        const loc = Array.isArray(p.location) ? p.location[0] : p.location;
+        return {
+          "Project Name": p.projectname || "",
+          "NPX ID": p.npxid || "",
+          "SPID": p.spid || "",
+          "Purpose": p.purpose || "",
+          "Property Type": p.property || "",
+          "Price": p.price || "",
+          "RERA": p.rera || "",
+          "City": loc?.City || "",
+          "Address": loc?.Address || "",
+          "Owner": p.owner?.name || "",
+          "Owner Mobile": p.owner?.mobile || "",
+          "Owner Email": p.owner?.email || "",
+          "Approval": p.approvalStatus || "",
+          "Status": p.status === "active" ? "Active" : "Inactive",
+          "Leads": p.leadCount,
+          "Added On": fmtDate(p.createdAt),
+        };
+      });
+      if (!rows.length) return alert("No properties match this export.");
+      const ws = XLSX.utils.json_to_sheet(rows);
+      ws["!cols"] = [28, 12, 12, 12, 14, 14, 18, 14, 36, 20, 14, 26, 12, 10, 8, 20].map((wch) => ({ wch }));
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Properties");
+      XLSX.writeFile(wb, `properties-${exportStatus}-${new Date().toISOString().slice(0, 10)}.xlsx`);
+    } catch (err) {
+      alert(errMsg(err, "Export failed"));
+    }
+  };
+
   return (
     <div>
       <Toolbar>
@@ -246,6 +284,10 @@ function Properties({ initialFilters, goTo }) {
             One user's properties ✕
           </button>
         )}
+        <ExportStatusMenu
+          onExport={onExport}
+          buttonClassName="h-10 rounded-lg border border-gray-200 bg-white px-4 text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+        />
       </Toolbar>
 
       <div className="overflow-x-auto">
