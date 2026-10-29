@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MapPin, Heart, Share2, ChevronLeft, ChevronRight,
   Download, Phone, Calendar, CheckCircle, Home, Info,
@@ -450,6 +450,29 @@ function AboutSection({ data }) {
 function FloorPlanBrochure({ images, propertyData,setLeadModel, cachedPdf}) {
   const [tab, setTab] = useState("floorplan");
   const [activeLayout, setActiveLayout] = useState(0);
+  const tabsRef = useRef(null);
+  const [tabScroll, setTabScroll] = useState({ left: false, right: false });
+
+  // show the arrow buttons only when the floor plan tabs overflow
+  const updateTabScroll = () => {
+    const el = tabsRef.current;
+    if (!el) return;
+    setTabScroll({
+      left: el.scrollLeft > 0,
+      right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
+    });
+  };
+
+  const scrollTabs = (dir) => {
+    const el = tabsRef.current;
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.7, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    updateTabScroll();
+    window.addEventListener("resize", updateTabScroll);
+    return () => window.removeEventListener("resize", updateTabScroll);
+  }, [tab, images]);
 
 
 
@@ -499,7 +522,13 @@ function FloorPlanBrochure({ images, propertyData,setLeadModel, cachedPdf}) {
         <div className="border border-gray-300 rounded-xl overflow-hidden bg-white">
 
           {/* BHK Tabs */}
-          <div className="flex items-center gap-6 border-b border-gray-200 px-4 py-3">
+          <div className="flex items-center border-b border-gray-200">
+          {tabScroll.left && (
+            <button onClick={() => scrollTabs(-1)} aria-label="Previous floor plans" className="shrink-0 cursor-pointer px-2 py-3 text-gray-600 hover:text-[#1D85DB]">
+              <ChevronLeft size={20} />
+            </button>
+          )}
+          <div ref={tabsRef} onScroll={updateTabScroll} className="flex flex-1 items-center gap-6 overflow-x-auto px-4 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {layouts.map((l, i) => {
               const label =
                 l.fields?.find((f) => f.key === "Floor_Plan")?.value ||
@@ -509,7 +538,7 @@ function FloorPlanBrochure({ images, propertyData,setLeadModel, cachedPdf}) {
                 <button
                   key={i}
                   onClick={() => setActiveLayout(i)}
-                  className={`text-[18px] font-medium pb-1 transition-all ${activeLayout === i
+                  className={`shrink-0 whitespace-nowrap text-[18px] font-medium pb-1 transition-all ${activeLayout === i
                       ? "text-[#1D85DB] border-b-2 border-[#1D85DB]"
                       : "text-gray-700"
                     }`}
@@ -518,6 +547,12 @@ function FloorPlanBrochure({ images, propertyData,setLeadModel, cachedPdf}) {
                 </button>
               );
             })}
+          </div>
+          {tabScroll.right && (
+            <button onClick={() => scrollTabs(1)} aria-label="Next floor plans" className="shrink-0 cursor-pointer px-2 py-3 text-gray-600 hover:text-[#1D85DB]">
+              <ChevronRight size={20} />
+            </button>
+          )}
           </div>
 
           {/* Main Layout */}
@@ -726,10 +761,10 @@ function UnitTable({ unitData, propertyData }) {
               <tr key={i} className=" transition-colors">
                 <td className="px-4 py-3 font-medium text-gray-800">{u.specs.bhk}</td>
                 <td className="px-4 py-3 text-gray-600">
-                  {u.specs.areaMin}{u.specs.areaMax ? ` – ${u.specs.areaMax}` : ""}
+                  {[u.specs.areaMin, u.specs.areaMax].filter(Boolean).join(" – ")}
                 </td>
                 <td className="px-4 py-3 text-blue-600 font-semibold">
-                  {formatPrice(u.specs.priceMin)}{u.specs.priceMax ? ` – ${formatPrice(u.specs.priceMax)}` : ""}
+                  {[formatPrice(u.specs.priceMin), formatPrice(u.specs.priceMax)].filter(Boolean).join(" – ")}
                 </td>
               </tr>
             ))}
