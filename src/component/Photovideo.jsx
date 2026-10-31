@@ -144,8 +144,13 @@ console.log("DATA:", res.data);
 
     const image = images[index];
 
+    // only one cover image: the old cover becomes "general" (the server does the same)
     const updated = images.map((img, i) =>
-      i === index ? { ...img, type: newType } : img
+      i === index
+        ? { ...img, type: newType }
+        : newType === "cover" && img.type === "cover"
+          ? { ...img, type: "general" }
+          : img
     );
 
     setImages(updated);
@@ -284,6 +289,11 @@ console.log("DATA:", res.data);
 
         try {
           if (img._id) await updateImageMeta(propertyId, img._id, { type, fields });
+          if (type === "cover") {
+            updated.forEach((other, j) => {
+              if (j !== idx && other.type === "cover") updated[j] = { ...other, type: "general" };
+            });
+          }
           updated[idx] = { ...img, type, fields };
           saved++;
         } catch (err) {
