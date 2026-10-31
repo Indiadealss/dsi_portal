@@ -214,7 +214,9 @@ const renderDescription = (text) => {
 
 // ── Gallery Component ─────────────────────────────────────────────────────────
 function Gallery({ images, propertyData }) {
-  const galleryImgs = images.filter((i) => ["cover", "general", "banner"].includes(i.type));
+  // the cover image always opens the gallery; the rest keep their upload order
+  const shown = images.filter((i) => ["cover", "general", "banner"].includes(i.type));
+  const galleryImgs = [...shown.filter((i) => i.type === "cover"), ...shown.filter((i) => i.type !== "cover")];
   const [active, setActive] = useState(0);
   const [lightbox, setLightbox] = useState(false);
   const [reraModal, setReraModal] = useState(false);
